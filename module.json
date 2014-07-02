@@ -1,9 +1,9 @@
 {
     "id": "tasks",
     "name": "Tasks",
-    "description": "Adds a taskmanager to your spaces. With this module you can create and assign tasks to users in spaces.",
+    "description": "Simple taskmanager for your spaces.",
     "keywords": ["task", "todo"],
-    "version": "0.9",
+    "version": "0.9.1",
     "humhub": {
         "minVersion": "0.5",
         "maxVersion": "0.7"
