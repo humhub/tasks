@@ -82,9 +82,6 @@ class TaskController extends Controller {
         $task->deathline = Yii::app()->request->getParam('deathline');
         $task->preassignedUsers = Yii::app()->request->getParam('preassignedUsers');
 
-        // get user guids from notify input
-        $task->userToNotify = Yii::app()->request->getParam('notifiyUserInput');
-
         $task->status = Task::STATUS_OPEN;
 
         if ($task->validate()) {

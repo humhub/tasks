@@ -19,7 +19,6 @@ class Task extends HActiveRecordContent
 {
 
     public $preassignedUsers;
-    public $userToNotify = "";
 
     // Status
     const STATUS_OPEN = 1;
@@ -121,18 +120,6 @@ class Task extends HActiveRecordContent
                 $user = User::model()->findByAttributes(array('guid' => $guid));
                 if ($user != null) {
                     $this->assignUser($user);
-                }
-            }
-
-            // notify assigned Users
-            if ($this->userToNotify != "") {
-                $guids_nofify = explode(",", $this->userToNotify);
-                foreach ($guids_nofify as $guid_notify) {
-                    $guid_notify = trim($guid_notify);
-                    $user = User::model()->findByAttributes(array('guid' => $guid_notify));
-                    if ($user != null) {
-                        $this->notifyUser($user);
-                    }
                 }
             }
         }
@@ -333,28 +320,6 @@ class Task extends HActiveRecordContent
     public function getContentTitle()
     {
         return "\"" . Helpers::truncateText($this->title, 25) . "\"";
-    }
-
-    /**
-     * Assign user to this task
-     */
-    public function notifyUser($user = "")
-    {
-
-        if ($user == "") {
-            $user = Yii::app()->user->getModel();
-        }
-
-        // Fire Notification to user
-        $notification = new Notification();
-        $notification->class = "TaskCreatedNotification";
-        $notification->user_id = $user->id; // Assigned User
-        $notification->space_id = $this->content->space_id;
-        $notification->source_object_model = 'Task';
-        $notification->source_object_id = $this->id;
-        $notification->target_object_model = 'Task';
-        $notification->target_object_id = $this->id;
-        $notification->save();
     }
 
 }
