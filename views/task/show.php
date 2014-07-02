@@ -1,0 +1,2 @@
+<?php $this->widget('application.modules.tasks.widgets.TaskFormWidget', array('contentContainer' => $this->getSpace())); ?>
+<?php $this->widget('application.modules.tasks.widgets.TasksStreamWidget', array('contentContainer' => $this->getSpace())); ?>
