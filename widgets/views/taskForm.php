@@ -5,7 +5,7 @@ Yii::app()->clientScript->registerScriptFile(
 );
 ?>
 
-<?php echo CHtml::textArea("title", "", array('id' => 'contentForm_title', 'class' => 'form-control autosize contentForm', 'rows' => '1', "tabindex" => "1", "placeholder" => Yii::t('PollsModule.base', "Ask something..."))); ?>
+<?php echo CHtml::textArea("title", "", array('id' => 'contentForm_title', 'class' => 'form-control autosize contentForm', 'rows' => '1', "tabindex" => "1", "placeholder" => Yii::t('TasksModule.base', "What to do?"))); ?>
 
 <div class="contentForm_options">
     <?php echo CHtml::textField('preassignedUsers', ''); ?>

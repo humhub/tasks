@@ -21,7 +21,7 @@ class TasksModule extends HWebModule
 
         return array(
             'SpaceModuleBehavior' => array(
-                'class' => 'application.modules_core.space.SpaceModuleBehavior',
+                'class' => 'application.modules_core.space.behaviors.SpaceModuleBehavior',
             ),
         );
     }

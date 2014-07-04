@@ -51,7 +51,7 @@ class TaskController extends Controller {
     public function behaviors() {
         return array(
             'SpaceControllerBehavior' => array(
-                'class' => 'application.modules_core.space.SpaceControllerBehavior',
+                'class' => 'application.modules_core.space.behaviors.SpaceControllerBehavior',
             ),
         );
     }
