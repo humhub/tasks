@@ -12,7 +12,6 @@ class TasksModule extends HWebModule
             'tasks.*',
             'tasks.models.*',
             'tasks.behaviors.*',
-            'wall.*',
         ));
     }
 

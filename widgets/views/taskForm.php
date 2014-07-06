@@ -6,9 +6,8 @@ Yii::app()->clientScript->registerScriptFile(
 ?>
 
 <?php echo CHtml::textArea("title", "", array('id' => 'contentForm_title', 'class' => 'form-control autosize contentForm', 'rows' => '1', "tabindex" => "1", "placeholder" => Yii::t('TasksModule.base', "What to do?"))); ?>
-
 <div class="contentForm_options">
-    <?php echo CHtml::textField('preassignedUsers', ''); ?>
+    <?php echo CHtml::textField('preassignedUsers', '', array('placeholder' =>  Yii::t('TaskModule.base', 'Preassign user(s) for this task.'))); ?>
     <?php
     $this->widget('application.modules_core.user.widgets.UserPickerWidget', array(
         'inputId' => 'preassignedUsers',
@@ -16,41 +15,6 @@ Yii::app()->clientScript->registerScriptFile(
         'maxUsers' => 10,
     ));
     ?>
-
-    <?php echo CHtml::hiddenField('deathline', '', array('class' => '', 'data-date-format' => 'dd.mm.yyyy', 'placeholder' => Yii::t('TaskModule.base', 'Deadline?'))); ?>
-    <div class="form-group">
-        <input class="form-control contentForm" id="dateinput" size="16" type="text" value="" readonly=""
-               placeholder="Deadline">
-    </div>    
-
-    <?php echo CHtml::hiddenField('max_user', 1); ?>
+    <?php echo HHtml::dateTimeField('deathline', '', array('class' => 'form-control', 'placeholder' => Yii::t('TaskModule.base', 'Deadline for this task?'))); ?>
 
 </div>
-
-
-<script type="text/javascript">
-    $(function() {
-
-        // setup datepicker
-        $('#dateinput').datepicker({
-            format: 'dd.mm.yyyy',
-            weekStart: 1
-        }).on('changeDate', function(event) {
-
-            // hide calendar
-            $('.datepicker').hide();
-
-            // formating date
-            var _date = event.date.getFullYear() + "-" + (event.date.getMonth() + 1) + "-" + event.date.getDate();
-
-            // set date to form input
-            $('#deathline').val(_date);
-        });
-
-        // handle tabindex
-        $('#contentForm_title').focusout(function() {
-            $('#preassignedUsers_tag_input_field').focus();
-        })
-
-    })
-</script>

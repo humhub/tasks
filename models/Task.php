@@ -52,9 +52,10 @@ class Task extends HActiveRecordContent
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('title,  created_at, created_by, updated_at, updated_by', 'required'),
-            array('max_users, percent, created_by, updated_by', 'numerical', 'integerOnly' => true),
-            array('preassignedUsers, deathline, max_users, min_users', 'safe'),
+        array('title,  created_at, created_by, updated_at, updated_by', 'required'),
+        array('max_users, percent, created_by, updated_by', 'numerical', 'integerOnly' => true),
+        array('deathline', 'date', 'format' => 'yyyy-MM-dd hh:mm:ss'),
+        array('preassignedUsers, deathline, max_users, min_users', 'safe'),
         );
     }
 

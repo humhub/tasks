@@ -78,7 +78,7 @@ class TaskController extends Controller {
         $task = new Task();
         $task->content->populateByForm();
         $task->title = Yii::app()->request->getParam('title');
-        $task->max_users = Yii::app()->request->getParam('max_users');
+        $task->max_users = Yii::app()->request->getParam('max_users',1);
         $task->deathline = Yii::app()->request->getParam('deathline');
         $task->preassignedUsers = Yii::app()->request->getParam('preassignedUsers');
 
