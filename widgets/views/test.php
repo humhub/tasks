@@ -107,7 +107,7 @@
             <?php if (count($assignedUsers) != 0) : ?>
                 <?php foreach ($assignedUsers as $user): ?>
                     <a href="<?php echo $user->getProfileUrl(); ?>" >
-                        <img src="<?php echo $user->getProfileImage()->getUrl(); ?>" class="img-rounded tt img_margin" height="24" width="24" data-toggle="tooltip" data-placement="top" title="" data-original-title="<h1><?php echo $user->displayName; ?></h1><?php echo $user->title; ?>">
+                        <img src="<?php echo $user->getProfileImage()->getUrl(); ?>" class="img-rounded tt img_margin" height="24" width="24" data-toggle="tooltip" data-placement="top" title="" data-original-title="<h1><?php echo $user->displayName; ?></h1><?php echo $user->profile->title; ?>">
                     </a>
 
                 <?php endforeach; ?>
