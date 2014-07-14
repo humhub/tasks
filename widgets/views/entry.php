@@ -37,7 +37,7 @@
                         <?php
 
                         echo HHtml::ajaxLink(
-                            '<span class="tasks-check tt" data-toggle="tooltip" data-placement="top" data-original-title="' . Yii::t("TasksModule.base", "Click, to finish this task") . '"><i class="fa fa-check-empty"> </i></span>', CHtml::normalizeUrl(array('/tasks/task/changeStatus', 'guid' => $space->guid, 'taskId' => $task->id, 'status' => Task::STATUS_FINISHED)), array(
+                            '<span class="tasks-check tt" data-toggle="tooltip" data-placement="top" data-original-title="' . Yii::t("TasksModule.base", "Click, to finish this task") . '"><i class="fa fa-square-o"> </i></span>', CHtml::normalizeUrl(array('/tasks/task/changeStatus', 'guid' => $space->guid, 'taskId' => $task->id, 'status' => Task::STATUS_FINISHED)), array(
                                 'dataType' => "json",
                                 'success' => "function(json) {  $('#wallEntry_'+json.wallEntryId).html(parseHtml(json.output)); }",
                             ), array('id' => "TaskFinishLink_" . $task->id)
