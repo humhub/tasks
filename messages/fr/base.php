@@ -17,24 +17,5 @@
  * NOTE, this file must be saved in UTF-8 encoding.
  */
 return array (
-  'Adds a taskmanager to your spaces. With this module you can create and assign tasks to users in spaces.' => '',
-  'Assigned to me' => '',
-  'Click, to finish this task' => '',
-  'Could not access task!' => '',
-  'Created by me' => '',
-  'Do you want to handle this task?' => '',
-  'I do it!' => '',
-  'My tasks' => '',
-  'No tasks found which matches your current filter(s)!' => '',
-  'Nobody assigned' => '',
-  'State is finished' => '',
-  'State is open' => '',
   'Tasks' => '',
-  'There are no tasks yet!' => '',
-  'This task is already done' => '',
-  'This task is already done. Click to reopen.' => '',
-  'You\'re not assigned to this task' => '',
-  'assigned you to' => '',
-  'finished' => '',
-  'go to task' => '',
 );

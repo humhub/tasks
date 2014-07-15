@@ -74,10 +74,10 @@
                 <?php if (count($assignedUsers) < $task->max_users) : ?>
 
                 <div><span
-                        class="note hide"><?php echo Yii::t('TasksModule.base', 'Do you want to handle this task?'); ?> </span>
+                        class="note hide"><?php echo Yii::t('TasksModule.widgets_views_test', 'Do you want to handle this task?'); ?> </span>
                     <?php
                     echo HHtml::ajaxLink(
-                        Yii::t('TasksModule.base', 'I do it!'), CHtml::normalizeUrl(array('/tasks/task/assign', 'guid' => $space->guid, 'taskId' => $task->id)), array(
+                        Yii::t('TasksModule.widgets_views_test', 'I do it!'), CHtml::normalizeUrl(array('/tasks/task/assign', 'guid' => $space->guid, 'taskId' => $task->id)), array(
                             'dataType' => 'json',
                             'success' => "function(json) { $('#wallEntry_'+json.wallEntryId).html(parseHtml(json.output)); }",
                         ), array('id' => "TaskAssignLink_" . $task->id, 'class' => 'button pt2')

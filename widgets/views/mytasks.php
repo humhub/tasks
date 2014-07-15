@@ -1,6 +1,6 @@
 <div class="panel_right">
     <div class="panel_right_header">
-        <div class="title"><?php echo Yii::t('TasksModule.base', 'My tasks'); ?></div>
+        <div class="title"><?php echo Yii::t('TasksModule.widgets_views_mytasks', 'My tasks'); ?></div>
     </div>
     <div id="taskOverview" class="content">
         <ul class="ws_list">

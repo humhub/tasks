@@ -17,5 +17,8 @@
  * NOTE, this file must be saved in UTF-8 encoding.
  */
 return array (
-  'Tasks' => '',
+  'Click, to finish this task' => '',
+  'This task is already done' => '',
+  'This task is already done. Click to reopen.' => '',
+  'You\'re not assigned to this task' => '',
 );

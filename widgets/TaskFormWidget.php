@@ -12,7 +12,7 @@ class TaskFormWidget extends ContentFormWidget {
     public function renderForm() {
 
         $this->submitUrl = 'tasks/task/create';
-        $this->submitButtonText = Yii::t('TasksModule.base', 'Create');
+        $this->submitButtonText = Yii::t('TasksModule.widgets_TaskFormWidget', 'Create');
 
         $this->form = $this->render('taskForm', array('contentContainer'=>$this->contentContainer), true);
     }

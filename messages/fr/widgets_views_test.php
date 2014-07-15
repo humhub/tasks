@@ -17,5 +17,6 @@
  * NOTE, this file must be saved in UTF-8 encoding.
  */
 return array (
-  'Tasks' => '',
+  'Do you want to handle this task?' => '',
+  'I do it!' => '',
 );

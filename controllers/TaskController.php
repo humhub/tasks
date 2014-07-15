@@ -137,7 +137,7 @@ class TaskController extends Controller {
             $task->changePercent($percent);
             $this->printTask($task);
         } else {
-            throw new CHttpException(401, Yii::t('TasksModule.base', 'Could not access task!'));
+            throw new CHttpException(401, Yii::t('TasksModule.controllers_TaskController', 'Could not access task!'));
         }
         Yii::app()->end();
     }
