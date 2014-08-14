@@ -11,6 +11,7 @@ Yii::app()->moduleManager->register(array(
     // Events to Catch 
     'events' => array(
         array('class' => 'SpaceMenuWidget', 'event' => 'onInit', 'callback' => array('TasksModule', 'onSpaceMenuInit')),
+        array('class' => 'DashboardSidebarWidget', 'event' => 'onInit', 'callback' => array('TasksModule', 'onDashboardSidebarInit')),
         array('class' => 'User', 'event' => 'onBeforeDelete', 'callback' => array('TasksModule', 'onUserDelete')),
     ),
 ));

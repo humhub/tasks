@@ -94,4 +94,12 @@ class TasksModule extends HWebModule
         }
     }
 
+
+
+    public static function onDashboardSidebarInit($event)
+    {
+
+        $event->sender->addWidget('application.modules.tasks.widgets.MyTasksWidget', array(), array('sortOrder' => 600));
+
+    }
 }

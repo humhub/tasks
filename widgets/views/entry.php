@@ -30,57 +30,59 @@
             }
         }
         ?>
-        <div class="task">
-            <h5>
-                <?php if ($task->status == Task::STATUS_OPEN) : ?>
-                    <?php if ($currentUserAssigned || (count($assignedUsers) < $task->max_users)) { ?>
-                        <?php
 
-                        echo HHtml::ajaxLink(
-                            '<span class="tasks-check tt" data-toggle="tooltip" data-placement="top" data-original-title="' . Yii::t("TasksModule.widgets_views_entry", "Click, to finish this task") . '"><i class="fa fa-square-o"> </i></span>', CHtml::normalizeUrl(array('/tasks/task/changeStatus', 'guid' => $space->guid, 'taskId' => $task->id, 'status' => Task::STATUS_FINISHED)), array(
-                                'dataType' => "json",
-                                'success' => "function(json) {  $('#wallEntry_'+json.wallEntryId).html(parseHtml(json.output)); }",
-                            ), array('id' => "TaskFinishLink_" . $task->id)
-                        );
-                        ?>
-                    <?php } else { ?>
-                        <span class="tasks-check disabled tt" data-toggle="tooltip" data-placement="top"
-                              data-original-title="<?php echo Yii::t("TasksModule.widgets_views_entry", "You're not assigned to this task"); ?>"><i
-                                class="fa fa-square-o"> </i></span>
-                    <?php } ?>
-                <?php elseif ($task->status == Task::STATUS_FINISHED) : ?>
-                    <?php if ($currentUserAssigned || (count($assignedUsers) < $task->max_users)) { ?>
-                        <?php
-                        echo HHtml::ajaxLink(
-                            '<span class="tasks-check tt"  data-toggle="tooltip" data-placement="top" data-original-title="' . Yii::t("TasksModule.widgets_views_entry", "This task is already done. Click to reopen.") . '"><i class="fa fa-check-square-o"> </i></span>', CHtml::normalizeUrl(array('/tasks/task/changeStatus', 'guid' => $space->guid, 'taskId' => $task->id, 'status' => Task::STATUS_OPEN)), array(
-                                'dataType' => "json",
-                                'success' => "function(json) {  $('#wallEntry_'+json.wallEntryId).html(parseHtml(json.output));}",
-                            ), array('id' => "TaskOpenLink_" . $task->id)
-                        );
-                        ?>
-                    <?php } else { ?>
-                        <span class="tasks-check disabled tt" data-toggle="tooltip" data-placement="top"
-                              data-original-title="<?php echo Yii::t("TasksModule.widgets_views_entry", "This task is already done"); ?>"><i
-                                class="fa fa-check-square-o"> </i></span>
-                    <?php } ?>
+        <div class="media task" id="task_<?php echo $task->id; ?>">
+            <?php if ($task->status == Task::STATUS_OPEN) : ?>
+                <?php if ($currentUserAssigned || (count($assignedUsers) < $task->max_users)) { ?>
+                    <?php
 
-                <?php endif; ?>
+                    echo HHtml::ajaxLink(
+                        '<div class="tasks-check tt pull-left" style="margin-right: 0;" data-toggle="tooltip" data-placement="top" data-original-title="' . Yii::t("TasksModule.widgets_views_entry", "Click, to finish this task") . '"><i class="fa fa-square-o"> </i></div>', CHtml::normalizeUrl(array('/tasks/task/changeStatus', 'guid' => $space->guid, 'taskId' => $task->id, 'status' => Task::STATUS_FINISHED)), array(
+                            'dataType' => "json",
+                            'success' => "function(json) {  $('#wallEntry_'+json.wallEntryId).html(parseHtml(json.output)); $('#task_" . $task->id . " .task-title').addClass('task-completed'); $('#task_" . $task->id . " .label').css('opacity', '0.3'); $('#task_" . $task->id . " .tasks-check .fa').removeClass('fa-square-o'); $('#task_" . $task->id . " .tasks-check .fa').addClass('fa-check-square-o'); $('.panel-mytasks #task_" . $task->id . "').delay(500).fadeOut('slow');}",
+                        ), array('id' => "TaskFinishLink_" . $task->id)
+                    );
+                    ?>
+                <?php } else { ?>
+                    <div class="tasks-check disabled tt pull-left" style="margin-right: 0;" data-toggle="tooltip" data-placement="top"
+                         data-original-title="<?php echo Yii::t("TasksModule.widgets_views_entry", "You're not assigned to this task"); ?>">
+                        <i
+                            class="fa fa-square-o"> </i></div>
+                <?php } ?>
+            <?php elseif ($task->status == Task::STATUS_FINISHED) : ?>
+                <?php if ($currentUserAssigned || (count($assignedUsers) < $task->max_users)) { ?>
+                    <?php
+                    echo HHtml::ajaxLink(
+                        '<div class="tasks-check tt pull-left" style="margin-right: 0;" data-toggle="tooltip" data-placement="top" data-original-title="' . Yii::t("TasksModule.widgets_views_entry", "This task is already done. Click to reopen.") . '"><i class="fa fa-check-square-o"> </i></div>', CHtml::normalizeUrl(array('/tasks/task/changeStatus', 'guid' => $space->guid, 'taskId' => $task->id, 'status' => Task::STATUS_OPEN)), array(
+                            'dataType' => "json",
+                            'success' => "function(json) {  $('#wallEntry_'+json.wallEntryId).html(parseHtml(json.output));}",
+                        ), array('id' => "TaskOpenLink_" . $task->id)
+                    );
+                    ?>
+                <?php } else { ?>
+                    <div class="tasks-check disabled tt pull-left" style="margin-right: 0;" data-toggle="tooltip" data-placement="top"
+                         data-original-title="<?php echo Yii::t("TasksModule.widgets_views_entry", "This task is already done"); ?>">
+                        <i
+                            class="fa fa-check-square-o"> </i></div>
+                <?php } ?>
 
-                <?php echo $task->title; ?>
+            <?php endif; ?>
+            <div class="media-body">
+                <span class="task-title <?php if ($task->status == Task::STATUS_FINISHED): ?>task-completed<?php endif; ?>pull-left"><?php echo $task->title; ?></span>
                 <small>
                     <!-- Show deadline -->
 
-                    <?php if ($task->deathline != "") : ?>
+                    <?php if ($task->deadline != '0000-00-00 00:00:00') : ?>
                         <?php
-                        $timestamp = strtotime($task->deathline);
-                        $class = "label";
+                        $timestamp = strtotime($task->deadline);
+                        $class = "label label-default";
 
                         if (date("d.m.yy", $timestamp) <= date("d.m.yy", time())) {
                             $class = "label label-danger";
                         }
                         ?>
-                        <span class="<?php echo $class; ?>"><i
-                                class="fa fa-clock-o"> </i> <?php echo date("d. M", $timestamp); ?></span>
+                        <span class="<?php echo $class; ?>"
+                              style="<?php if ($task->status == Task::STATUS_FINISHED): ?>opacity: 0.3;<?php endif; ?>"><?php echo date("d. M", $timestamp); ?></span>
                     <?php endif; ?>
 
                 </small>
@@ -102,24 +104,11 @@
 
                 </div>
                 <div class="clearfix"></div>
-            </h5>
+
+            </div>
         </div>
+
 
         <?php $this->endContent(); ?>
     </div>
 </div>
-
-<!-- Show progress of the task -->
-<!--    <?php /*if ($currentUserAssigned) { */?>
-        <?php
-/*        echo HHtml::dropDownList('percent_ddl_' . $task->id, $task->percent, array(
-                '0' => '0%', '10' => '10%', '20' => '20%', '30' => '30%', '40' => '40%', '50' => '50%', '60' => '60%', '70' => '70%', '80' => '80%', '90' => '90%', '100' => '100%'), array('class' => 'percent_dropdown', 'id' => 'percent_ddl_' . $task->id)
-        );
-        */?>
-
-    <?php /*} else { */?>
-        <span class="label label-success"><?php /*echo $task->percent; */?>%</span>
-    --><?php //} ?>
-
-
-

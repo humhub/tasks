@@ -6,7 +6,7 @@
  * The followings are the available columns in table 'task':
  * @property integer $id
  * @property string $title
- * @property string $deathline
+ * @property string $deadline
  * @property integer $max_users
  * @property integer $min_users
  * @property integer $precent
@@ -54,8 +54,8 @@ class Task extends HActiveRecordContent
         return array(
         array('title,  created_at, created_by, updated_at, updated_by', 'required'),
         array('max_users, percent, created_by, updated_by', 'numerical', 'integerOnly' => true),
-        array('deathline', 'date', 'format' => 'yyyy-MM-dd hh:mm:ss'),
-        array('preassignedUsers, deathline, max_users, min_users', 'safe'),
+        array('deadline', 'date', 'format' => 'yyyy-MM-dd hh:mm:ss'),
+        array('preassignedUsers, deadline, max_users, min_users', 'safe'),
         );
     }
 
