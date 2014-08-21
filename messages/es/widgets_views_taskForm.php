@@ -17,6 +17,5 @@
  * NOTE, this file must be saved in UTF-8 encoding.
  */
 return array (
-  '<strong>My</strong> tasks' => '',
-  'From space: ' => '',
+  'What to do?' => '',
 );

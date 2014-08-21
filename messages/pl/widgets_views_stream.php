@@ -17,6 +17,14 @@
  * NOTE, this file must be saved in UTF-8 encoding.
  */
 return array (
-  '<strong>My</strong> tasks' => '',
-  'From space: ' => '',
+  '<b>There are no tasks yet!</b><br>Be the first and create one...' => '',
+  'Assigned to me' => '',
+  'Back to stream' => '',
+  'Created by me' => '',
+  'Creation time' => '',
+  'Last update' => '',
+  'No tasks found which matches your current filter(s)!' => '',
+  'Nobody assigned' => '',
+  'State is finished' => '',
+  'State is open' => '',
 );
