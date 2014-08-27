@@ -22,9 +22,11 @@ return array (
   'Back to stream' => '',
   'Created by me' => '',
   'Creation time' => '',
+  'Filter' => '',
   'Last update' => '',
   'No tasks found which matches your current filter(s)!' => '',
   'Nobody assigned' => '',
+  'Sorting' => '',
   'State is finished' => '',
   'State is open' => '',
 );

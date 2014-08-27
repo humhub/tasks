@@ -1,5 +1,5 @@
 <ul class="nav nav-tabs wallFilterPanel" id="filter" style="display: none;">
-    <li class=" dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo Yii::t('WallModule.base', 'Filter'); ?> <b class="caret"></b></a>
+    <li class=" dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo Yii::t('TasksModule.widgets_views_stream', 'Filter'); ?> <b class="caret"></b></a>
         <ul class="dropdown-menu">
             <li><a href="#" class="wallFilter" id="filter_tasks_meAssigned"><i class="fa fa-square-o"></i> <?php echo Yii::t('TasksModule.widgets_views_stream', 'Assigned to me'); ?></a></li>
             <li><a href="#" class="wallFilter" id="filter_entry_mine"><i class="fa fa-square-o"></i> <?php echo Yii::t('TasksModule.widgets_views_stream', 'Created by me'); ?></a></li>
@@ -9,12 +9,12 @@
         </ul>
     </li>
     <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo Yii::t('WallModule.base', 'Sorting'); ?> <b class="caret"></b></a>
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo Yii::t('TasksModule.widgets_views_stream', 'Sorting'); ?> <b class="caret"></b></a>
         <ul class="dropdown-menu">
             <li><a href="#" class="wallSorting" id="sorting_c"><i class="fa fa-check-square-o"></i> <?php echo Yii::t('TasksModule.widgets_views_stream', 'Creation time'); ?></a></li>
             <li><a href="#" class="wallSorting" id="sorting_u"><i class="fa fa-square-o"></i> <?php echo Yii::t('TasksModule.widgets_views_stream', 'Last update'); ?></a></li>
         </ul>
-    </li>        
+    </li>
 </ul>
 
 
