@@ -72,7 +72,7 @@
                 <small>
                     <!-- Show deadline -->
 
-                    <?php if ($task->deadline != '0000-00-00 00:00:00') : ?>
+                    <?php if ($task->deadline != '0000-00-00 00:00:00' && $task->deadline != '') : ?>
                         <?php
                         $timestamp = strtotime($task->deadline);
                         $class = "label label-default";
