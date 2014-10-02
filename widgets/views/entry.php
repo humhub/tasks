@@ -35,12 +35,11 @@
             <?php if ($task->status == Task::STATUS_OPEN) : ?>
                 <?php if ($currentUserAssigned || (count($assignedUsers) < $task->max_users)) { ?>
                     <?php
-
                     echo HHtml::ajaxLink(
-                        '<div class="tasks-check tt pull-left" style="margin-right: 0;" data-toggle="tooltip" data-placement="top" data-original-title="' . Yii::t("TasksModule.widgets_views_entry", "Click, to finish this task") . '"><i class="fa fa-square-o"> </i></div>', CHtml::normalizeUrl(array('/tasks/task/changeStatus', 'guid' => $space->guid, 'taskId' => $task->id, 'status' => Task::STATUS_FINISHED)), array(
-                            'dataType' => "json",
-                            'success' => "function(json) {  $('#wallEntry_'+json.wallEntryId).html(parseHtml(json.output)); $('#task_" . $task->id . " .task-title').addClass('task-completed'); $('#task_" . $task->id . " .label').css('opacity', '0.3'); $('#task_" . $task->id . " .tasks-check .fa').removeClass('fa-square-o'); $('#task_" . $task->id . " .tasks-check .fa').addClass('fa-check-square-o'); $('.panel-mytasks #task_" . $task->id . "').delay(500).fadeOut('slow');}",
-                        ), array('id' => "TaskFinishLink_" . $task->id)
+                            '<div class="tasks-check tt pull-left" style="margin-right: 0;" data-toggle="tooltip" data-placement="top" data-original-title="' . Yii::t("TasksModule.widgets_views_entry", "Click, to finish this task") . '"><i class="fa fa-square-o"> </i></div>', CHtml::normalizeUrl(array('/tasks/task/changeStatus', 'guid' => $space->guid, 'taskId' => $task->id, 'status' => Task::STATUS_FINISHED)), array(
+                        'dataType' => "json",
+                        'success' => "function(json) {  $('#wallEntry_'+json.wallEntryId).html(parseHtml(json.output)); $('#task_" . $task->id . " .task-title').addClass('task-completed'); $('#task_" . $task->id . " .label').css('opacity', '0.3'); $('#task_" . $task->id . " .tasks-check .fa').removeClass('fa-square-o'); $('#task_" . $task->id . " .tasks-check .fa').addClass('fa-check-square-o'); $('.panel-mytasks #task_" . $task->id . "').delay(500).fadeOut('slow');}",
+                            ), array('id' => "TaskFinishLink_" . $task->id)
                     );
                     ?>
                 <?php } else { ?>
@@ -48,23 +47,23 @@
                          data-original-title="<?php echo Yii::t("TasksModule.widgets_views_entry", "You're not assigned to this task"); ?>">
                         <i
                             class="fa fa-square-o"> </i></div>
-                <?php } ?>
-            <?php elseif ($task->status == Task::STATUS_FINISHED) : ?>
-                <?php if ($currentUserAssigned || (count($assignedUsers) < $task->max_users)) { ?>
-                    <?php
-                    echo HHtml::ajaxLink(
-                        '<div class="tasks-check tt pull-left" style="margin-right: 0;" data-toggle="tooltip" data-placement="top" data-original-title="' . Yii::t("TasksModule.widgets_views_entry", "This task is already done. Click to reopen.") . '"><i class="fa fa-check-square-o"> </i></div>', CHtml::normalizeUrl(array('/tasks/task/changeStatus', 'guid' => $space->guid, 'taskId' => $task->id, 'status' => Task::STATUS_OPEN)), array(
+                    <?php } ?>
+                <?php elseif ($task->status == Task::STATUS_FINISHED) : ?>
+                    <?php if ($currentUserAssigned || (count($assignedUsers) < $task->max_users)) { ?>
+                        <?php
+                        echo HHtml::ajaxLink(
+                                '<div class="tasks-check tt pull-left" style="margin-right: 0;" data-toggle="tooltip" data-placement="top" data-original-title="' . Yii::t("TasksModule.widgets_views_entry", "This task is already done. Click to reopen.") . '"><i class="fa fa-check-square-o"> </i></div>', CHtml::normalizeUrl(array('/tasks/task/changeStatus', 'guid' => $space->guid, 'taskId' => $task->id, 'status' => Task::STATUS_OPEN)), array(
                             'dataType' => "json",
                             'success' => "function(json) {  $('#wallEntry_'+json.wallEntryId).html(parseHtml(json.output));}",
-                        ), array('id' => "TaskOpenLink_" . $task->id)
-                    );
-                    ?>
-                <?php } else { ?>
+                                ), array('id' => "TaskOpenLink_" . $task->id)
+                        );
+                        ?>
+                    <?php } else { ?>
                     <div class="tasks-check disabled tt pull-left" style="margin-right: 0;" data-toggle="tooltip" data-placement="top"
                          data-original-title="<?php echo Yii::t("TasksModule.widgets_views_entry", "This task is already done"); ?>">
                         <i
                             class="fa fa-check-square-o"> </i></div>
-                <?php } ?>
+                    <?php } ?>
 
             <?php endif; ?>
             <div class="media-body">
@@ -72,7 +71,7 @@
                 <small>
                     <!-- Show deadline -->
 
-                    <?php if ($task->deadline != '0000-00-00 00:00:00' && $task->deadline != '') : ?>
+                    <?php if ($task->hasDeadline()) : ?>
                         <?php
                         $timestamp = strtotime($task->deadline);
                         $class = "label label-default";
@@ -83,7 +82,7 @@
                         ?>
                         <span class="<?php echo $class; ?>"
                               style="<?php if ($task->status == Task::STATUS_FINISHED): ?>opacity: 0.3;<?php endif; ?>"><?php echo date("d. M", $timestamp); ?></span>
-                    <?php endif; ?>
+                          <?php endif; ?>
 
                 </small>
 

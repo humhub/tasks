@@ -294,6 +294,14 @@ class Task extends HActiveRecordContent
         return true;
     }
 
+    public function hasDeadline()
+    {
+        if ($this->deadline != '0000-00-00 00:00:00' && $this->deadline != '' && $this->deadline != 'NULL') {
+            return true;
+        }
+        return false;
+    }
+
     public static function GetUsersOpenTasks()
     {
 
