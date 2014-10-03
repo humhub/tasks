@@ -52,10 +52,10 @@ class Task extends HActiveRecordContent
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-        array('title,  created_at, created_by, updated_at, updated_by', 'required'),
-        array('max_users, percent, created_by, updated_by', 'numerical', 'integerOnly' => true),
-        array('deadline', 'date', 'format' => 'yyyy-MM-dd hh:mm:ss'),
-        array('preassignedUsers, deadline, max_users, min_users', 'safe'),
+            array('title,  created_at, created_by, updated_at, updated_by', 'required'),
+            array('max_users, percent, created_by, updated_by', 'numerical', 'integerOnly' => true),
+            array('deadline', 'date', 'format' => 'yyyy-MM-dd hh:mm:ss', 'allowEmpty' => true),
+            array('preassignedUsers, deadline, max_users, min_users', 'safe'),
         );
     }
 
@@ -95,6 +95,15 @@ class Task extends HActiveRecordContent
     public function getWallOut()
     {
         return Yii::app()->getController()->widget('application.modules.tasks.widgets.TaskWallEntryWidget', array('task' => $this), true);
+    }
+
+    public function beforeSave()
+    {
+        if ($this->deadline == '') {
+            $this->deadline = new CDbExpression('NULL');
+        }
+
+        return parent::beforeSave();
     }
 
     /**
@@ -236,9 +245,7 @@ class Task extends HActiveRecordContent
 
     public function changeStatus($newStatus)
     {
-
         $this->status = $newStatus;
-        $this->save();
 
         // Try to delete Old Finished Activity Activity
         $activity = Activity::model()->findByAttributes(array(
@@ -247,9 +254,9 @@ class Task extends HActiveRecordContent
             'object_model' => "Task",
             'object_id' => $this->id
         ));
-        if ($activity)
+        if ($activity) {
             $activity->delete();
-
+        }
 
         if ($newStatus == Task::STATUS_FINISHED) {
 
@@ -274,25 +281,25 @@ class Task extends HActiveRecordContent
                 $notification->save();
             }
 
-            # Causes Double Usage of Task
-            #if ($this->percent != 100) {
-            #    $this->changePercent(100);
-            #}
+            $this->percent = 100;
         } else {
-
             // Try to delete TaskFinishedNotification if exists
             foreach (Notification::model()->findAllByAttributes(array('class' => 'TaskFinishedNotification', 'target_object_model' => 'Task', 'target_object_id' => $this->id)) as $notification) {
                 $notification->delete();
             }
-
-
-            // Reset Percentage
-            #if ($this->percent == 100) {
-            #    $this->changePercent(0);
-            #}
         }
 
+        $this->save();
+
         return true;
+    }
+
+    public function hasDeadline()
+    {
+        if ($this->deadline != '0000-00-00 00:00:00' && $this->deadline != '' && $this->deadline != 'NULL') {
+            return true;
+        }
+        return false;
     }
 
     public static function GetUsersOpenTasks()
