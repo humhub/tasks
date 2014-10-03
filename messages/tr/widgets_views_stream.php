@@ -10,6 +10,6 @@ return array (
   'No tasks found which matches your current filter(s)!' => 'Filtrenize uygun görev bulunamadı!',
   'Nobody assigned' => 'Hiç kimseye atanan',
   'Sorting' => 'Sıralama',
-  'State is finished' => '',
-  'State is open' => '',
+  'State is finished' => 'Durum sona erdi',
+  'State is open' => 'Durum açık',
 );
