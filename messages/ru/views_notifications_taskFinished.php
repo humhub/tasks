@@ -1,4 +1,4 @@
 <?php
 return array (
-  '{userName} finished task {task}.' => '{userName} выполнил задачу {task}.',
+  '{userName} finished task {task}.' => '{userName} завершил задачу {task}.',
 );
