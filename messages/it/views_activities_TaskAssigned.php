@@ -1,4 +1,4 @@
 <?php
 return array (
-  '{userName} assigned to task {task}.' => '{userName} ha assegnato l\'attività {task}.',
+  '{userName} assigned to task {task}.' => '{userName} ha assegnato il task {task}.',
 );
