@@ -1,6 +1,6 @@
 <?php
 return array (
-  '<b>There are no tasks yet!</b><br>Be the first and create one...' => '<b>Задач пока нет!</b><br>Будьте первым в ее создании...',
+  '<b>There are no tasks yet!</b><br>Be the first and create one...' => '<b>Задач пока нет!</b><br>Будьте первым в создании...',
   'Assigned to me' => 'Назначенное для меня',
   'Back to stream' => 'Вернуться в поток',
   'Created by me' => 'Создано мной',
