@@ -17,8 +17,8 @@
  * NOTE, this file must be saved in UTF-8 encoding.
  */
 return array (
+  'Assign users to this task' => '@@为此任务分配用户@@',
+  'Deadline for this task?' => '@@此任务的最后期限？@@',
+  'Preassign user(s) for this task.' => '@@预先为这项任务指定用户.@@',
   'What to do?' => '创建任务?',
-  'Deadline for this task?' =>'此任务的最后期限？',
-  'Preassign user(s) for this task.' => '预先为这项任务指定用户.',
-  'Assign users to this task' => '为此任务分配用户',
 );
