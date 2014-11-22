@@ -6,7 +6,7 @@ return array (
   'Created by me' => 'Von mir erstellt',
   'Creation time' => 'Erstellungsdatum',
   'Filter' => 'Filter',
-  'Last update' => 'letzte Aktualisierung',
+  'Last update' => 'Letzte Aktualisierung',
   'No tasks found which matches your current filter(s)!' => 'Keine Aufgaben zu den gewählten Filtereinstellungen gefunden!',
   'Nobody assigned' => 'Niemand zugeordnet',
   'Sorting' => 'Sortierung',

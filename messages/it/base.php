@@ -1,4 +1,4 @@
 <?php
 return array (
-  'Tasks' => 'Task',
+  'Tasks' => 'Attività',
 );
