@@ -1,4 +1,4 @@
 <?php
 return array (
-  '{userName} assigned to task {task}.' => '{userName} přiřazen(a) k úkolu {task}.',
+  '{userName} assigned to task {task}.' => 'Uživateli {userName} byl přiřazen úkol {task}.',
 );
