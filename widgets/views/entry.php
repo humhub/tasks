@@ -67,7 +67,7 @@
 
             <?php endif; ?>
             <div class="media-body">
-                <span class="task-title <?php if ($task->status == Task::STATUS_FINISHED): ?>task-completed<?php endif; ?>pull-left"><?php echo $task->title; ?></span>
+                <span class="task-title <?php if ($task->status == Task::STATUS_FINISHED): ?>task-completed<?php endif; ?>pull-left"><?php echo CHtml::encode($task->title); ?></span>
                 <small>
                     <!-- Show deadline -->
 
@@ -95,7 +95,7 @@
                                      height="24" width="24" alt="24x24" data-src="holder.js/24x24"
                                      style="width: 24px; height: 24px;" data-toggle="tooltip" data-placement="top"
                                      title=""
-                                     data-original-title="<strong><?php echo $user->displayName; ?></strong><br><?php echo $user->profile->title; ?>">
+                                     data-original-title="<strong><?php echo CHtml::encode($user->displayName); ?></strong><br><?php echo CHtml::encode($user->profile->title); ?>">
                             </a>
 
                         <?php endforeach; ?>

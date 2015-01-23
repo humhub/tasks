@@ -16,7 +16,7 @@
                     );
                     ?>
                     <div class="media-body">
-                        <span class="task-title pull-left"><?php echo $task->title; ?></span>
+                        <span class="task-title pull-left"><?php echo CHtml::encode($task->title); ?></span>
                         <small >
                             <!-- Show deadline -->
 
@@ -43,7 +43,7 @@
                                      height="24" width="24" alt="24x24" data-src="holder.js/24x24"
                                      style="width: 24px; height: 24px;" data-toggle="tooltip" data-placement="top"
                                      title=""
-                                     data-original-title="<?php echo Yii::t('TasksModule.widgets_views_mytasks', 'From space: ')?><br><strong><?php echo $task->content->container->name; ?></strong>">
+                                     data-original-title="<?php echo Yii::t('TasksModule.widgets_views_mytasks', 'From space: ')?><br><strong><?php echo CHtml::encode($task->content->container->name); ?></strong>">
                             </a>
 
                         </div>
