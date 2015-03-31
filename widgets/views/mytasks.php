@@ -9,7 +9,7 @@
                     <?php
 
                     echo HHtml::ajaxLink(
-                        '<div class="tasks-check tt pull-left" data-toggle="tooltip" data-placement="top" data-original-title="' . Yii::t("TasksModule.widgets_views_entry", "Click, to finish this task") . '"><i class="fa fa-square-o"> </i></div>', CHtml::normalizeUrl(array('/tasks/task/changeStatus', 'taskId' => $task->id, 'status' => Task::STATUS_FINISHED)), array(
+                        '<div class="tasks-check tt pull-left" data-toggle="tooltip" data-placement="top" data-original-title="' . Yii::t("TasksModule.widgets_views_entry", "Click, to finish this task") . '"><i class="fa fa-square-o"> </i></div>', $task->content->container->createUrl('/tasks/task/changeStatus', array('taskId' => $task->id, 'status' => Task::STATUS_FINISHED)), array(
                             'dataType' => "json",
                             'success' => "function(json) {  $('#wallEntry_'+json.wallEntryId).html(parseHtml(json.output)); $('#task_" . $task->id . " .task-title').addClass('task-completed'); $('#task_" . $task->id . " .label').css('opacity', '0.3'); $('#task_" . $task->id . " .tasks-check .fa').removeClass('fa-square-o'); $('#task_" . $task->id . " .tasks-check .fa').addClass('fa-check-square-o');}",
                         ), array('id' => "TaskFinishLink_" . $task->id)

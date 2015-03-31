@@ -1,6 +1,6 @@
 <?php
 
-class TasksStreamWidget extends WallStreamWidget {
+class TasksStreamWidget extends StreamWidget {
 
     public $streamAction = "//tasks/task/stream";
     

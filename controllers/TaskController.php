@@ -1,57 +1,29 @@
 <?php
 
-class TaskController extends Controller {
+class TaskController extends ContentContainerController
+{
 
-    public $subLayout = "application.modules_core.space.views.space._layout";
+    public function init()
+    {
 
-    /**
-     * @return array action filters
-     */
-    public function filters() {
-        return array(
-            'accessControl', // perform access control for CRUD operations
-        );
+        /**
+         * Fallback for older versions
+         */
+        if (Yii::app()->request->getParam('containerClass') == 'Space') {
+            $_GET['sguid'] = Yii::app()->request->getParam('containerGuid');
+        } elseif (Yii::app()->request->getParam('containerClass') == 'User') {
+            $_GET['uguid'] = Yii::app()->request->getParam('containerGuid');
+        }
+
+        return parent::init();
     }
 
-    /**
-     * Specifies the access control rules.
-     * This method is used by the 'accessControl' filter.
-     * @return array access control rules
-     */
-    public function accessRules() {
-        return array(
-            array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'users' => array('@'),
-            ),
-            array('deny', // deny all users
-                'users' => array('*'),
-            ),
-        );
-    }
-
-    /**
-     * Actions
-     *
-     * @return type
-     */
-    public function actions() {
+    public function actions()
+    {
         return array(
             'stream' => array(
-                'class' => 'application.modules.tasks.TasksStreamAction',
-                'mode' => 'normal',
-            ),
-        );
-    }
-
-    /**
-     * Add mix-ins to this model
-     *
-     * @return type
-     */
-    public function behaviors() {
-        return array(
-            'SpaceControllerBehavior' => array(
-                'class' => 'application.modules_core.space.behaviors.SpaceControllerBehavior',
+                'class' => 'TasksStreamAction',
+                'contentContainer' => $this->contentContainer
             ),
         );
     }
@@ -59,10 +31,9 @@ class TaskController extends Controller {
     /**
      * Shows the Tasks tab
      */
-    public function actionShow() {
-
-        $workspace = $this->getSpace();
-        $this->render('show', array('workspace' => $workspace));
+    public function actionShow()
+    {
+        $this->render('show');
     }
 
     /**
@@ -70,7 +41,8 @@ class TaskController extends Controller {
      *
      * @return type
      */
-    public function actionCreate() {
+    public function actionCreate()
+    {
 
         $this->forcePostRequest();
         $_POST = Yii::app()->input->stripClean($_POST);
@@ -78,7 +50,7 @@ class TaskController extends Controller {
         $task = new Task();
         $task->content->populateByForm();
         $task->title = Yii::app()->request->getParam('title');
-        $task->max_users = Yii::app()->request->getParam('max_users',1);
+        $task->max_users = Yii::app()->request->getParam('max_users', 1);
         $task->deadline = Yii::app()->request->getParam('deadline');
         $task->preassignedUsers = Yii::app()->request->getParam('preassignedUsers');
 
@@ -92,12 +64,10 @@ class TaskController extends Controller {
         }
     }
 
-    public function actionAssign() {
-
-        $workspace = $this->getSpace();
-
-        $taskId = Yii::app()->request->getParam('taskId');
-        $task = Task::model()->findByPk($taskId);
+    public function actionAssign()
+    {
+        $taskId = (int) Yii::app()->request->getParam('taskId');
+        $task = Task::model()->contentContainer($this->contentContainer)->findByPk($taskId);
 
         if ($task->content->canRead()) {
             $task->assignUser();
@@ -108,12 +78,10 @@ class TaskController extends Controller {
         Yii::app()->end();
     }
 
-    public function actionUnAssign() {
-
-        $workspace = $this->getSpace();
-
+    public function actionUnAssign()
+    {
         $taskId = Yii::app()->request->getParam('taskId');
-        $task = Task::model()->findByPk($taskId);
+        $task = Task::model()->contentContainer($this->contentContainer)->findByPk($taskId);
 
         if ($task->content->canRead()) {
             $task->unassignUser();
@@ -124,14 +92,12 @@ class TaskController extends Controller {
         Yii::app()->end();
     }
 
-    public function actionChangePercent() {
-
-        $workspace = $this->getSpace();
+    public function actionChangePercent()
+    {
 
         $taskId = (int) Yii::app()->request->getParam('taskId');
         $percent = (int) Yii::app()->request->getParam('percent');
-        $task = Task::model()->findByPk($taskId);
-
+        $task = Task::model()->contentContainer($this->contentContainer)->findByPk($taskId);
 
         if ($task->content->canRead()) {
             $task->changePercent($percent);
@@ -142,13 +108,11 @@ class TaskController extends Controller {
         Yii::app()->end();
     }
 
-    public function actionChangeStatus() {
-
-        $space = $this->getSpace();
-
+    public function actionChangeStatus()
+    {
         $taskId = (int) Yii::app()->request->getParam('taskId');
         $status = (int) Yii::app()->request->getParam('status');
-        $task = Task::model()->findByPk($taskId);
+        $task = Task::model()->contentContainer($this->contentContainer)->findByPk($taskId);
 
         if ($task->content->canRead()) {
 
@@ -165,7 +129,8 @@ class TaskController extends Controller {
      *
      * @param Task $task
      */
-    protected function printTask($task) {
+    protected function printTask($task)
+    {
 
         $output = $task->getWallOut();
         Yii::app()->clientScript->render($output);

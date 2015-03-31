@@ -11,7 +11,7 @@ Yii::app()->clientScript->registerScriptFile(
     <?php
     $this->widget('application.modules_core.user.widgets.UserPickerWidget', array(
         'inputId' => 'preassignedUsers',
-        'userSearchUrl' => $this->createUrl('//space/space/searchMemberJson', array('sguid' => $contentContainer->guid, 'keyword' => '-keywordPlaceholder-')),
+        'userSearchUrl' => $contentContainer->createUrl('//space/space/searchMemberJson', array('keyword' => '-keywordPlaceholder-')),
         'maxUsers' => 10,
         'placeholderText' => Yii::t('TasksModule.widgets_views_taskForm', 'Assign users to this task')
     ));

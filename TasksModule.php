@@ -98,7 +98,10 @@ class TasksModule extends HWebModule
 
     public static function onDashboardSidebarInit($event)
     {
-
+        if (Yii::app()->user->isGuest) {
+            return;
+        }
+        
         $event->sender->addWidget('application.modules.tasks.widgets.MyTasksWidget', array(), array('sortOrder' => 600));
 
     }
