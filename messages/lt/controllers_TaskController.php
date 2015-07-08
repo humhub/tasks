@@ -1,4 +1,4 @@
 <?php
 return array (
-  'Could not access task!' => '',
+  'Could not access task!' => 'Negalima užduoties prieiga!',
 );
