@@ -1,5 +1,12 @@
 <?php
 
+namespace module\tasks\models;
+
+use Yii;
+use humhub\modules\user\models\User;
+use humhub\modules\content\components\ContentActiveRecord;
+use module\tasks\models\TaskUser;
+
 /**
  * This is the model class for table "task".
  *
@@ -8,14 +15,13 @@
  * @property string $title
  * @property string $deadline
  * @property integer $max_users
- * @property integer $min_users
  * @property integer $precent
  * @property string $created_at
  * @property integer $created_by
  * @property string $updated_at
  * @property integer $updated_by
  */
-class Task extends HActiveRecordContent
+class Task extends ContentActiveRecord
 {
 
     public $preassignedUsers;
@@ -26,142 +32,77 @@ class Task extends HActiveRecordContent
 
     public $autoAddToWall = true;
 
-    /**
-     * Returns the static model of the specified AR class.
-     * @param string $className active record class name.
-     * @return Task the static model class
-     */
-    public static function model($className = __CLASS__)
-    {
-        return parent::model($className);
-    }
-
-    /**
-     * @return string the associated database table name
-     */
-    public function tableName()
+    public static function tableName()
     {
         return 'task';
     }
 
-    /**
-     * @return array validation rules for model attributes.
-     */
     public function rules()
     {
-        // NOTE: you should only define rules for those attributes that
-        // will receive user inputs.
         return array(
-            array('title,  created_at, created_by, updated_at, updated_by', 'required'),
-            array('max_users, percent, created_by, updated_by', 'numerical', 'integerOnly' => true),
-            array('deadline', 'date', 'format' => 'yyyy-MM-dd hh:mm:ss', 'allowEmpty' => true),
-            array('preassignedUsers, deadline, max_users, min_users', 'safe'),
+            array(['title'], 'required'),
+            array(['max_users', 'percent'], 'integer'),
+            array(['preassignedUsers', 'deadline', 'max_users'], 'safe'),
         );
     }
 
-    /**
-     * @return array relational rules.
-     */
-    public function relations()
+    public function getTaskUsers()
     {
-        // NOTE: you may need to adjust the relation name and the related
-        // class name for the relations automatically generated below.
-        return array(
-            'users' => array(self::HAS_MANY, 'TaskUser', 'task_id'),
-            'creator' => array(self::BELONGS_TO, 'User', 'created_by'),
-        );
+        $query = $this->hasMany(TaskUser::className(), ['task_id' => 'id']);
+        return $query;
     }
 
-    /**
-     * Deletes a Task including its dependencies.
-     */
-    public function delete()
+    public function getAssignedUsers()
     {
+        return $this->hasMany(User::className(), ['id' => 'user_id'])
+                        ->viaTable('task_user', ['task_id' => 'id']);
+    }
 
-        // delete all tasks user assignments
-        $taskUser = TaskUser::model()->findAllByAttributes(array('task_id' => $this->id));
-        foreach ($taskUser as $tu) {
-            $tu->delete();
+    public function beforeDelete()
+    {
+        foreach ($this->taskUsers as $taskUser) {
+            $taskUser->delete();
         }
 
-        Notification::remove('Task', $this->id);
-
-        return parent::delete();
+        return parent::beforeDelete();
     }
 
-    /**
-     * Returns the Wall Output
-     */
     public function getWallOut()
     {
-        return Yii::app()->getController()->widget('application.modules.tasks.widgets.TaskWallEntryWidget', array('task' => $this), true);
+        return \module\tasks\widgets\WallEntry::widget(array('task' => $this));
     }
 
-    public function beforeSave()
+    public function beforeSave($insert)
     {
         if ($this->deadline == '') {
-            $this->deadline = new CDbExpression('NULL');
+            $this->deadline = new \yii\db\Expression('NULL');
         }
 
-        return parent::beforeSave();
+        return parent::beforeSave($insert);
     }
 
-    /**
-     * Before Save Addons
-     *
-     * @return type
-     */
-    public function afterSave()
+    public function afterSave($insert, $changedAttributes)
     {
+        parent::afterSave($insert, $changedAttributes);
 
-        parent::afterSave();
-
-        if ($this->isNewRecord) {
-            $activity = Activity::CreateForContent($this);
-            $activity->type = "TaskCreated";
-            $activity->module = "tasks";
-            $activity->save();
-            $activity->fire();
-
-            // Attach Preassigned Users
+        if ($insert) {
             $guids = explode(",", $this->preassignedUsers);
             foreach ($guids as $guid) {
                 $guid = trim($guid);
-                $user = User::model()->findByAttributes(array('guid' => $guid));
+                $user = User::findOne(array('guid' => $guid));
                 if ($user != null) {
                     $this->assignUser($user);
                 }
             }
         }
-
-        return true;
     }
 
-    /**
-     * Returns assigned users to this task
-     */
-    public function getAssignedUsers()
-    {
-        $users = array();
-        $tus = TaskUser::model()->findAllByAttributes(array('task_id' => $this->id));
-        foreach ($tus as $tu) {
-            $user = User::model()->findByPk($tu->user_id);
-            if ($user != null)
-                $users[] = $user;
-        }
-        return $users;
-    }
-
-    /**
-     * Assign user to this task
-     */
     public function assignUser($user = "")
     {
-
         if ($user == "")
-            $user = Yii::app()->user->getModel();
+            $user = Yii::$app->user->getIdentity();
 
-        $au = TaskUser::model()->findByAttributes(array('task_id' => $this->id, 'user_id' => $user->id));
+        $au = TaskUser::findOne(array('task_id' => $this->id, 'user_id' => $user->id));
         if ($au == null) {
 
             $au = new TaskUser;
@@ -169,56 +110,18 @@ class Task extends HActiveRecordContent
             $au->user_id = $user->id;
             $au->save();
 
-            # Handled by Notification now
-            #$activity = Activity::CreateForContent($this);
-            #$activity->type = "TaskAssigned";
-            #$activity->module = "tasks";
-            #$activity->content->user_id = $user->id;
-            #$activity->save();
-            #$activity->fire();
-            // Fire Notification to creator
-            $notification = new Notification();
-            $notification->class = "TaskAssignedNotification";
-            $notification->user_id = $au->user_id; // Assigned User
-            $notification->space_id = $this->content->space_id;
-            $notification->source_object_model = 'Task';
-            $notification->source_object_id = $this->id;
-            $notification->target_object_model = 'Task';
-            $notification->target_object_id = $this->id;
-            $notification->save();
-
             return true;
         }
         return false;
     }
 
-    /**
-     * UnAssign user to this task
-     */
     public function unassignUser($user = "")
     {
         if ($user == "")
-            $user = Yii::app()->user->getModel();
+            $user = Yii::$app->user->getIdentity();
 
-        $au = TaskUser::model()->findByAttributes(array('task_id' => $this->id, 'user_id' => $user->id));
-        if ($au != null) {
-            $au->delete();
-
-            // Delete Activity for Task Assigned
-            $activity = Activity::model()->findByAttributes(array(
-                'type' => 'TaskAssigned',
-                'object_model' => "Task",
-                'user_id' => $user->id,
-                'object_id' => $this->id
-            ));
-            if ($activity)
-                $activity->delete();
-
-            // Try to delete TaskAssignedNotification if exists
-            foreach (Notification::model()->findAllByAttributes(array('class' => 'TaskAssignedNotification', 'target_object_model' => 'Task', 'target_object_id' => $this->id)) as $notification) {
-                $notification->delete();
-            }
-
+        $au = TaskUser::findOne(array('task_id' => $this->id, 'user_id' => $user->id));
+        if ($au != null && $au->delete()) {
             return true;
         }
         return false;
@@ -226,7 +129,6 @@ class Task extends HActiveRecordContent
 
     public function changePercent($newPercent)
     {
-
         if ($this->percent != $newPercent) {
             $this->percent = $newPercent;
             $this->save();
@@ -247,46 +149,26 @@ class Task extends HActiveRecordContent
     {
         $this->status = $newStatus;
 
-        // Try to delete Old Finished Activity Activity
-        $activity = Activity::model()->findByAttributes(array(
-            'type' => 'TaskFinished',
-            'module' => 'tasks',
-            'object_model' => "Task",
-            'object_id' => $this->id
-        ));
-        if ($activity) {
-            $activity->delete();
-        }
-
         if ($newStatus == Task::STATUS_FINISHED) {
 
-            // Fire Activity for that
-            $activity = Activity::CreateForContent($this);
-            $activity->type = "TaskFinished";
-            $activity->module = "tasks";
-            $activity->content->user_id = Yii::app()->user->id;
-            $activity->save();
-            $activity->fire();
+            $activity = new \module\tasks\activities\Finished();
+            $activity->source = $this;
+            $activity->originator = Yii::$app->user->getIdentity();
+            $activity->create();
 
-            // Fire Notification to creator
-            if ($this->created_by != Yii::app()->user->id) {
-                $notification = new Notification();
-                $notification->class = "TaskFinishedNotification";
-                $notification->user_id = $this->created_by; // To Creator
-                $notification->space_id = $this->content->space_id;
-                $notification->source_object_model = 'Task';
-                $notification->source_object_id = $this->id;
-                $notification->target_object_model = 'Task';
-                $notification->target_object_id = $this->id;
-                $notification->save();
+            if ($this->created_by != Yii::$app->user->id) {
+                $notification = new \module\tasks\notifications\Finished();
+                $notification->source = $this;
+                $notification->originator = Yii::$app->user->getIdentity();
+                $notification->send($this->content->user);
             }
 
             $this->percent = 100;
         } else {
             // Try to delete TaskFinishedNotification if exists
-            foreach (Notification::model()->findAllByAttributes(array('class' => 'TaskFinishedNotification', 'target_object_model' => 'Task', 'target_object_id' => $this->id)) as $notification) {
-                $notification->delete();
-            }
+            $notification = new \module\tasks\notifications\Finished();
+            $notification->source = $this;
+            $notification->delete($this->content->user);
         }
 
         $this->save();
@@ -304,30 +186,31 @@ class Task extends HActiveRecordContent
 
     public static function GetUsersOpenTasks()
     {
+        $query = self::find();
+        $query->leftJoin('task_user', 'task.id=task_user.task_id');
+        $query->where(['task_user.user_id' => Yii::$app->user->id, 'task.status' => self::STATUS_OPEN]);
 
-        $sql = " SELECT task.* FROM task_user " .
-                " LEFT JOIN task ON task.id = task_user.task_id " .
-                " WHERE task_user.user_id=:userId AND task.status=:status";
-
-        $params = array();
-        $params[':userId'] = Yii::app()->user->id;
-        $params[':status'] = Task::STATUS_OPEN;
-
-        $tasks = Task::model()->findAllBySql($sql, $params);
-
-        return $tasks;
+        return $query->all();
     }
 
     /**
-     * Returns a title/text which identifies this IContent.
-     *
-     * e.g. Task: foo bar 123...
-     *
-     * @return String
+     * @inheritdoc
      */
     public function getContentTitle()
     {
-        return "\"" . Helpers::truncateText($this->title, 25) . "\"";
+        return Yii::t('TasksModule.models_Task', "Task");
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getContentPreview($maxLength = 0)
+    {
+        if ($maxLength == 0) {
+            return $this->title;
+        }
+
+        return \humhub\libs\Helpers::truncateText($this->title, $maxLength);
     }
 
 }

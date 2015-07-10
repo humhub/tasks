@@ -1,5 +1,12 @@
 <?php
 
+namespace module\tasks\models;
+
+use Yii;
+use humhub\components\ActiveRecord;
+use humhub\modules\user\models\User;
+use module\tasks\models\Task;
+
 /**
  * This is the model class for table "task_user".
  *
@@ -12,48 +19,57 @@
  * @property string $updated_at
  * @property integer $updated_by
  */
-class TaskUser extends HActiveRecord
+class TaskUser extends ActiveRecord
 {
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @param string $className active record class name.
-	 * @return TaskUser the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
 
-	/**
-	 * @return string the associated database table name
-	 */
-	public function tableName()
-	{
-		return 'task_user';
-	}
+    /**
+     * @return string the associated database table name
+     */
+    public static function tableName()
+    {
+        return 'task_user';
+    }
 
-	/**
-	 * @return array validation rules for model attributes.
-	 */
-	public function rules()
-	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
-		return array(
-			array('created_at, created_by, updated_at, updated_by, task_id, user_id', 'required'),
-			array('created_by, updated_by, task_id, user_id', 'numerical', 'integerOnly'=>true),
-		);
-	}
+    /**
+     * @return array validation rules for model attributes.
+     */
+    public function rules()
+    {
+        return array(
+            array(['task_id', 'user_id'], 'required'),
+            array(['task_id', 'user_id'], 'integer'),
+        );
+    }
 
-	/**
-	 * @return array relational rules.
-	 */
-	public function relations()
-	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return array(
-		);
-	}
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    public function getTask()
+    {
+        return $this->hasOne(Task::className(), ['id' => 'task_id']);
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        if ($insert) {
+            $notification = new \module\tasks\notifications\Assigned();
+            $notification->source = $this->task;
+            $notification->originator = Yii::$app->user->getIdentity();
+            $notification->send($this->user);
+        }
+
+        return parent::afterSave($insert, $changedAttributes);
+    }
+
+    public function beforeDelete()
+    {
+        $notification = new \module\tasks\notifications\Assigned();
+        $notification->source = $this->task;
+        $notification->send($this->user);
+
+        return parent::beforeDelete();
+    }
 
 }

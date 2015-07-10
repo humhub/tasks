@@ -1,145 +1,92 @@
 <?php
 
+namespace module\tasks\controllers;
+
+use Yii;
+use yii\web\HttpException;
+use humhub\modules\content\components\ContentContainerController;
+use module\tasks\models\Task;
+
 class TaskController extends ContentContainerController
 {
-
-    public function init()
-    {
-
-        /**
-         * Fallback for older versions
-         */
-        if (Yii::app()->request->getParam('containerClass') == 'Space') {
-            $_GET['sguid'] = Yii::app()->request->getParam('containerGuid');
-        } elseif (Yii::app()->request->getParam('containerClass') == 'User') {
-            $_GET['uguid'] = Yii::app()->request->getParam('containerGuid');
-        }
-
-        return parent::init();
-    }
 
     public function actions()
     {
         return array(
             'stream' => array(
-                'class' => 'TasksStreamAction',
+                'class' => \module\tasks\components\StreamAction::className(),
+                'mode' => \module\tasks\components\StreamAction::MODE_NORMAL,
                 'contentContainer' => $this->contentContainer
             ),
         );
     }
 
-    /**
-     * Shows the Tasks tab
-     */
     public function actionShow()
     {
-        $this->render('show');
+        return $this->render('show', ['contentContainer' => $this->contentContainer]);
     }
 
-    /**
-     * Posts a new tasks
-     *
-     * @return type
-     */
     public function actionCreate()
     {
-
-        $this->forcePostRequest();
-        $_POST = Yii::app()->input->stripClean($_POST);
-
         $task = new Task();
-        $task->content->populateByForm();
-        $task->title = Yii::app()->request->getParam('title');
-        $task->max_users = Yii::app()->request->getParam('max_users', 1);
-        $task->deadline = Yii::app()->request->getParam('deadline');
-        $task->preassignedUsers = Yii::app()->request->getParam('preassignedUsers');
-
+        $task->title = Yii::$app->request->post('title');
+        $task->max_users = Yii::$app->request->post('max_users', 1);
+        $deadline = Yii::$app->request->post('deadline');
+        if ($deadline != "") {
+            $deadline = Yii::$app->formatter->asDateTime($deadline, 'php:Y-m-d H:i:s');
+        }
+        $task->deadline = $deadline;
+        $task->preassignedUsers = Yii::$app->request->post('preassignedUsers');
         $task->status = Task::STATUS_OPEN;
 
-        if ($task->validate()) {
-            $task->save();
-            $this->renderJson(array('wallEntryId' => $task->content->getFirstWallEntryId()));
-        } else {
-            $this->renderJson(array('errors' => $task->getErrors()), false);
-        }
+        return \module\tasks\widgets\WallCreateForm::create($task);
     }
 
     public function actionAssign()
     {
-        $taskId = (int) Yii::app()->request->getParam('taskId');
-        $task = Task::model()->contentContainer($this->contentContainer)->findByPk($taskId);
-
-        if ($task->content->canRead()) {
-            $task->assignUser();
-            $this->printTask($task);
-        } else {
-            throw new CHttpException(401, 'Could not access task!');
-        }
-        Yii::app()->end();
+        $task = $this->getTaskById((int) Yii::$app->request->get('taskId'));
+        $task->assignUser();
+        return $this->renderTask($task);
     }
 
     public function actionUnAssign()
     {
-        $taskId = Yii::app()->request->getParam('taskId');
-        $task = Task::model()->contentContainer($this->contentContainer)->findByPk($taskId);
-
-        if ($task->content->canRead()) {
-            $task->unassignUser();
-            $this->printTask($task);
-        } else {
-            throw new CHttpException(401, 'Could not access task!');
-        }
-        Yii::app()->end();
+        $task = $this->getTaskById((int) Yii::$app->request->get('taskId'));
+        $task->unassignUser();
+        return $this->renderTask($task);
     }
 
     public function actionChangePercent()
     {
-
-        $taskId = (int) Yii::app()->request->getParam('taskId');
-        $percent = (int) Yii::app()->request->getParam('percent');
-        $task = Task::model()->contentContainer($this->contentContainer)->findByPk($taskId);
-
-        if ($task->content->canRead()) {
-            $task->changePercent($percent);
-            $this->printTask($task);
-        } else {
-            throw new CHttpException(401, Yii::t('TasksModule.controllers_TaskController', 'Could not access task!'));
-        }
-        Yii::app()->end();
+        $task = $this->getTaskById((int) Yii::$app->request->get('taskId'));
+        $task->changePercent((int) Yii::$app->request->get('percent'));
+        return $this->renderTask($task);
     }
 
     public function actionChangeStatus()
     {
-        $taskId = (int) Yii::app()->request->getParam('taskId');
-        $status = (int) Yii::app()->request->getParam('status');
-        $task = Task::model()->contentContainer($this->contentContainer)->findByPk($taskId);
-
-        if ($task->content->canRead()) {
-
-            $task->changeStatus($status);
-            $this->printTask($task);
-        } else {
-            throw new CHttpException(401, 'Could not access task!');
-        }
-        Yii::app()->end();
+        $task = $this->getTaskById((int) Yii::$app->request->get('taskId'));
+        $status = (int) Yii::$app->request->get('status');
+        $task->changeStatus($status);
+        return $this->renderTask($task);
     }
 
-    /**
-     * Prints the given task wall output include the affected wall entry id
-     *
-     * @param Task $task
-     */
-    protected function printTask($task)
+    protected function renderTask($task)
     {
-
-        $output = $task->getWallOut();
-        Yii::app()->clientScript->render($output);
-
+        Yii::$app->response->format = 'json';
         $json = array();
-        $json['output'] = $output;
-        $json['wallEntryId'] = $task->content->getFirstWallEntryId(); // there should be only one
-        echo CJSON::encode($json);
-        Yii::app()->end();
+        $json['output'] = $this->renderAjaxContent($task->getWallOut());
+        $json['wallEntryId'] = $task->content->getFirstWallEntryId();
+        return $json;
+    }
+
+    protected function getTaskById($id)
+    {
+        $task = Task::find()->contentContainer($this->contentContainer)->readable()->where(['task.id' => $id])->one();
+        if ($task === null) {
+            throw new HttpException(404, "Could not load task!");
+        }
+        return $task;
     }
 
 }

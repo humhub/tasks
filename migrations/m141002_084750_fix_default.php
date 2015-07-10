@@ -1,6 +1,8 @@
 <?php
 
-class m141002_084750_fix_default extends EDbMigration
+use yii\db\Migration;
+
+class m141002_084750_fix_default extends Migration
 {
 
     public function up()
