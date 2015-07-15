@@ -4,6 +4,7 @@ namespace module\tasks;
 
 use Yii;
 use humhub\modules\user\models\User;
+use humhub\modules\space\models\Space;
 use module\tasks\models\Task;
 use yii\helpers\Url;
 
