@@ -10,6 +10,8 @@ use module\tasks\models\Task;
 class TaskController extends ContentContainerController
 {
 
+    public $hideSidebar = true;
+
     public function actions()
     {
         return array(
@@ -23,10 +25,16 @@ class TaskController extends ContentContainerController
 
     public function actionShow()
     {
-        return $this->render('show', ['contentContainer' => $this->contentContainer]);
+        //return $this->render('show', ['contentContainer' => $this->contentContainer]);
+
+        $tasks = Task::find()->contentContainer($this->contentContainer)->readable()->all();
+
+        return $this->render('show', ['tasks' => $tasks, 'contentContainer' => $this->contentContainer]);
+
+
     }
 
-    public function actionCreate()
+/*    public function actionCreate()
     {
         $task = new Task();
         $task->title = Yii::$app->request->post('title');
@@ -40,7 +48,33 @@ class TaskController extends ContentContainerController
         $task->status = Task::STATUS_OPEN;
 
         return \module\tasks\widgets\WallCreateForm::create($task);
+    }*/
+
+
+    public function actionEdit() {
+
+        $id = (int) Yii::$app->request->get('id');
+        $task = Task::find()->contentContainer($this->contentContainer)->readable()->where(['task.id' => $id])->one();
+
+        if ($task === null) {
+            $task = new Task();
+            $task->content->container = $this->contentContainer;
+        }
+
+        if ($task->load(Yii::$app->request->post())) {
+            if ($task->validate()) {
+                if ($task->save()) {
+                    return $this->htmlRedirect($this->contentContainer->createUrl('show'));
+                }
+            }
+        }
+
+        return $this->renderAjax('edit', ['task'=>$task]);
+
     }
+
+
+
 
     public function actionAssign()
     {

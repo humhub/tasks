@@ -24,13 +24,13 @@ use module\tasks\models\TaskUser;
 class Task extends ContentActiveRecord
 {
 
-    public $preassignedUsers;
+    public $assignedUserGuids = "";
 
     // Status
     const STATUS_OPEN = 1;
     const STATUS_FINISHED = 5;
 
-    public $autoAddToWall = true;
+    public $autoAddToWall = false;
 
     public static function tableName()
     {
@@ -42,7 +42,7 @@ class Task extends ContentActiveRecord
         return array(
             array(['title'], 'required'),
             array(['max_users', 'percent'], 'integer'),
-            array(['preassignedUsers', 'deadline', 'max_users'], 'safe'),
+            array(['deadline', 'max_users', 'assignedUserGuids'], 'safe'),
         );
     }
 
@@ -55,7 +55,7 @@ class Task extends ContentActiveRecord
     public function getAssignedUsers()
     {
         return $this->hasMany(User::className(), ['id' => 'user_id'])
-                        ->viaTable('task_user', ['task_id' => 'id']);
+            ->viaTable('task_user', ['task_id' => 'id']);
     }
 
     public function beforeDelete()
@@ -67,15 +67,12 @@ class Task extends ContentActiveRecord
         return parent::beforeDelete();
     }
 
-    public function getWallOut()
-    {
-        return \module\tasks\widgets\WallEntry::widget(array('task' => $this));
-    }
-
     public function beforeSave($insert)
     {
         if ($this->deadline == '') {
             $this->deadline = new \yii\db\Expression('NULL');
+        } else {
+            $this->deadline = Yii::$app->formatter->asDateTime($this->deadline, 'php:Y-m-d H:i:s');
         }
 
         return parent::beforeSave($insert);
@@ -85,16 +82,39 @@ class Task extends ContentActiveRecord
     {
         parent::afterSave($insert, $changedAttributes);
 
-        if ($insert) {
-            $guids = explode(",", $this->preassignedUsers);
-            foreach ($guids as $guid) {
-                $guid = trim($guid);
-                $user = User::findOne(array('guid' => $guid));
-                if ($user != null) {
-                    $this->assignUser($user);
+
+        foreach (explode(",", $this->assignedUserGuids) as $userGuid) {
+            $f = false;
+            foreach ($this->assignedUsers as $user) {
+                if ($user->guid == trim($userGuid)) {
+                    $f = true;
                 }
             }
+
+            if ($f == false) {
+                $this->assignUser(User::findOne(['guid' => trim($userGuid)]));
+            }
         }
+
+
+        foreach ($this->assignedUsers as $user) {
+            if (strpos($this->assignedUserGuids, $user->guid) === false) {
+                $this->unassignUser($user);
+            }
+        }
+
+    }
+
+
+    public function afterFind()
+    {
+
+        foreach ($this->assignedUsers as $user) {
+            $this->assignedUserGuids .= $user->guid . ",";
+        }
+
+
+        return parent::afterFind();
     }
 
     public function assignUser($user = "")
@@ -114,6 +134,7 @@ class Task extends ContentActiveRecord
         }
         return false;
     }
+
 
     public function unassignUser($user = "")
     {

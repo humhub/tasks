@@ -1,16 +1,34 @@
 .task {
-    border: 1px solid #dadada;
-    padding: 7px 10px 5px 10px;
+
+    padding-top: 3px;
+    padding-left: 3px;
     border-radius: 3px;
-    margin-top: 10px;
-    margin-bottom: 5px;
+
 }
 
-.task .fa {
+.task .task-check {
     font-size: 24px;
     font-weight: normal;
     color: #dadada;
     width: 24px;
+}
+
+.task .task-controls {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.task .task-controls .fa {
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+.task .task-controls a {
+    color: #999;
+}
+
+.task .task-controls a:hover {
+    color: #3b4854;
 }
 
 .task .task-title {
@@ -20,10 +38,6 @@
 .task-completed {
     color: #bebebe;
     text-decoration: line-through;
-}
-
-.task a {
-    color: #3b4854 !important;
 }
 
 .task .label {
