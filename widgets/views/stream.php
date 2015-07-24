@@ -4,7 +4,7 @@
             <ul class="dropdown-menu">
                 <li><a href="#" class="wallFilter" id="filter_tasks_meAssigned"><i class="fa fa-square-o"></i> <?php echo Yii::t('TasksModule.widgets_views_stream', 'Assigned to me'); ?></a></li>
                 <li><a href="#" class="wallFilter" id="filter_entry_mine"><i class="fa fa-square-o"></i> <?php echo Yii::t('TasksModule.widgets_views_stream', 'Created by me'); ?></a></li>
-                <li><a href="#" class="wallFilter" id="filter_tasks_open"><i class="fa fa-square-oy"></i> <?php echo Yii::t('TasksModule.widgets_views_stream', 'State is open'); ?></a></li>
+                <li><a href="#" class="wallFilter" id="filter_tasks_open"><i class="fa fa-square-o"></i> <?php echo Yii::t('TasksModule.widgets_views_stream', 'State is open'); ?></a></li>
                 <li><a href="#" class="wallFilter" id="filter_tasks_finished"><i class="fa fa-square-o"></i> <?php echo Yii::t('TasksModule.widgets_views_stream', 'State is finished'); ?></a></li>
                 <li><a href="#" class="wallFilter" id="filter_tasks_notassigned"><i class="fa fa-square-o"></i> <?php echo Yii::t('TasksModule.widgets_views_stream', 'Nobody assigned'); ?></a></li>
             </ul>
