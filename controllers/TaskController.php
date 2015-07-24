@@ -115,8 +115,8 @@ class TaskController extends ContentContainerController
         $task = Task::model()->contentContainer($this->contentContainer)->findByPk($taskId);
 
         if ($task->content->canRead()) {
-
             $task->changeStatus($status);
+            $task = Task::model()->contentContainer($this->contentContainer)->findByPk($taskId);
             $this->printTask($task);
         } else {
             throw new CHttpException(401, 'Could not access task!');
