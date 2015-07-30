@@ -1,11 +1,11 @@
 <?php
 
-namespace module\tasks\models;
+namespace humhub\modules\tasks\models;
 
 use Yii;
 use humhub\modules\user\models\User;
 use humhub\modules\content\components\ContentActiveRecord;
-use module\tasks\models\TaskUser;
+use humhub\modules\tasks\models\TaskUser;
 
 /**
  * This is the model class for table "task".
@@ -172,13 +172,13 @@ class Task extends ContentActiveRecord
 
         if ($newStatus == Task::STATUS_FINISHED) {
 
-            $activity = new \module\tasks\activities\Finished();
+            $activity = new \humhub\modules\tasks\activities\Finished();
             $activity->source = $this;
             $activity->originator = Yii::$app->user->getIdentity();
             $activity->create();
 
             if ($this->created_by != Yii::$app->user->id) {
-                $notification = new \module\tasks\notifications\Finished();
+                $notification = new \humhub\modules\tasks\notifications\Finished();
                 $notification->source = $this;
                 $notification->originator = Yii::$app->user->getIdentity();
                 $notification->send($this->content->user);
@@ -187,7 +187,7 @@ class Task extends ContentActiveRecord
             $this->percent = 100;
         } else {
             // Try to delete TaskFinishedNotification if exists
-            $notification = new \module\tasks\notifications\Finished();
+            $notification = new \humhub\modules\tasks\notifications\Finished();
             $notification->source = $this;
             $notification->delete($this->content->user);
         }

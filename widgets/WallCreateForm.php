@@ -1,6 +1,6 @@
 <?php
 
-namespace module\tasks\widgets;
+namespace humhub\modules\tasks\widgets;
 
 class WallCreateForm extends \humhub\modules\content\widgets\WallCreateContentForm
 {

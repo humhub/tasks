@@ -1,10 +1,10 @@
 <?php
 
-namespace module\tasks\widgets;
+namespace humhub\modules\tasks\widgets;
 
 use Yii;
 use humhub\components\Widget;
-use module\tasks\models\Task;
+use humhub\modules\tasks\models\Task;
 
 class MyTasks extends Widget
 {

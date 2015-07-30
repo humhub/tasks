@@ -1,10 +1,10 @@
 <?php
 
-namespace module\tasks\components;
+namespace humhub\modules\tasks\components;
 
 use Yii;
 use humhub\modules\content\components\actions\ContentContainerStream;
-use module\tasks\models\Task;
+use humhub\modules\tasks\models\Task;
 
 class StreamAction extends ContentContainerStream
 {

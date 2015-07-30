@@ -1,6 +1,6 @@
 <?php
 
-namespace module\tasks\activities;
+namespace humhub\modules\tasks\activities;
 
 use humhub\modules\activity\components\BaseActivity;
 

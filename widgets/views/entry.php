@@ -1,9 +1,9 @@
 <?php
 
 use yii\helpers\Html;
-use module\tasks\models\Task;
+use humhub\modules\tasks\models\Task;
 
-module\tasks\Assets::register($this);
+humhub\modules\tasks\Assets::register($this);
 ?>
 
 <?php $this->beginContent('@humhub/modules/content/views/layouts/wallLayout.php', array('object' => $task)); ?>

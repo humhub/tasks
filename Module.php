@@ -1,40 +1,48 @@
 <?php
 
-namespace module\tasks;
+namespace humhub\modules\tasks;
 
 use Yii;
+use yii\helpers\Url;
 use humhub\modules\user\models\User;
 use humhub\modules\space\models\Space;
-use module\tasks\models\Task;
-use yii\helpers\Url;
+use humhub\modules\tasks\models\Task;
+use humhub\modules\content\components\ContentContainerActiveRecord;
+use humhub\modules\content\components\ContentContainerModule;
 
-class Module extends \humhub\components\Module
+class Module extends ContentContainerModule
 {
 
-    public function behaviors()
+    /**
+     * @inheritdoc
+     */
+    public function getContentContainerTypes()
     {
         return [
-            \humhub\modules\space\behaviors\SpaceModule::className(),
+            Space::className(),
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function disable()
     {
-        if (parent::disable()) {
+        parent::disable();
 
-            foreach (Task::find()->all() as $task) {
-                $task->delete();
-            }
-
-            return true;
+        foreach (Task::find()->all() as $task) {
+            $task->delete();
         }
-
-        return false;
     }
 
-    public function disableSpaceModule(Space $space)
+    /**
+     * @inheritdoc
+     */
+    public function disableContentContainer(ContentContainerActiveRecord $container)
     {
-        foreach (Task::find()->contentContainer($space)->all() as $task) {
+        parent::disableContentContainer($container);
+
+        foreach (Task::find()->contentContainer($container)->all() as $task) {
             $task->delete();
         }
     }

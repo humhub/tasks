@@ -1,11 +1,11 @@
 <?php
 
-namespace module\tasks\controllers;
+namespace humhub\modules\tasks\controllers;
 
 use Yii;
 use yii\web\HttpException;
 use humhub\modules\content\components\ContentContainerController;
-use module\tasks\models\Task;
+use humhub\modules\tasks\models\Task;
 
 class TaskController extends ContentContainerController
 {
@@ -16,8 +16,8 @@ class TaskController extends ContentContainerController
     {
         return array(
             'stream' => array(
-                'class' => \module\tasks\components\StreamAction::className(),
-                'mode' => \module\tasks\components\StreamAction::MODE_NORMAL,
+                'class' => \humhub\modules\tasks\components\StreamAction::className(),
+                'mode' => \humhub\modules\tasks\components\StreamAction::MODE_NORMAL,
                 'contentContainer' => $this->contentContainer
             ),
         );
@@ -47,7 +47,7 @@ class TaskController extends ContentContainerController
         $task->preassignedUsers = Yii::$app->request->post('preassignedUsers');
         $task->status = Task::STATUS_OPEN;
 
-        return \module\tasks\widgets\WallCreateForm::create($task);
+        return \humhub\modules\tasks\widgets\WallCreateForm::create($task);
     }*/
 
 

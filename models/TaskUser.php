@@ -1,11 +1,11 @@
 <?php
 
-namespace module\tasks\models;
+namespace humhub\modules\tasks\models;
 
 use Yii;
 use humhub\components\ActiveRecord;
 use humhub\modules\user\models\User;
-use module\tasks\models\Task;
+use humhub\modules\tasks\models\Task;
 
 /**
  * This is the model class for table "task_user".
@@ -54,7 +54,7 @@ class TaskUser extends ActiveRecord
     public function afterSave($insert, $changedAttributes)
     {
         if ($insert) {
-            $notification = new \module\tasks\notifications\Assigned();
+            $notification = new \humhub\modules\tasks\notifications\Assigned();
             $notification->source = $this->task;
             $notification->originator = Yii::$app->user->getIdentity();
             $notification->send($this->user);
@@ -65,7 +65,7 @@ class TaskUser extends ActiveRecord
 
     public function beforeDelete()
     {
-        $notification = new \module\tasks\notifications\Assigned();
+        $notification = new \humhub\modules\tasks\notifications\Assigned();
         $notification->source = $this->task;
         $notification->send($this->user);
 

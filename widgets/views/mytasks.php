@@ -1,8 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use module\tasks\models\Task;
-use module\tasks\Assets;
+use humhub\modules\tasks\models\Task;
+use humhub\modules\tasks\Assets;
 
 Assets::register($this);
 ?>

@@ -1,16 +1,16 @@
 <?php
 
 use yii\helpers\Html;
-use module\tasks\models\Task;
+use humhub\modules\tasks\models\Task;
 
-module\tasks\Assets::register($this);
+humhub\modules\tasks\Assets::register($this);
 ?>
 
 <?php
 
 
 
-//echo \module\tasks\widgets\TaskCreateForm::widget([]);
+//echo \humhub\modules\tasks\widgets\TaskCreateForm::widget([]);
 
 ?>
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace module\tasks\widgets;
+namespace humhub\modules\tasks\widgets;
 
 use Yii;
 use humhub\components\Widget;
