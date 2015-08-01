@@ -1,1 +1,6 @@
-/nbproject/private/
+.htaccess
+nbproject
+.idea/*
+.gitmodules
+/composer.lock
+
