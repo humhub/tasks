@@ -28,11 +28,11 @@ class Module extends ContentContainerModule
      */
     public function disable()
     {
-        parent::disable();
-
         foreach (Task::find()->all() as $task) {
             $task->delete();
         }
+
+        parent::disable();
     }
 
     /**
