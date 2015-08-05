@@ -21,7 +21,7 @@ use humhub\modules\tasks\models\TaskUser;
  * @property string $updated_at
  * @property integer $updated_by
  */
-class Task extends ContentActiveRecord
+class Task extends ContentActiveRecord implements \humhub\modules\search\interfaces\Searchable
 {
 
     public $assignedUserGuids = "";
@@ -226,6 +226,16 @@ class Task extends ContentActiveRecord
     public function getContentDescription()
     {
         return $this->title;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSearchAttributes()
+    {
+        return array(
+            'title' => $this->title,
+        );
     }
 
 }
