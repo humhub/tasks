@@ -7,6 +7,7 @@ use yii\helpers\Url;
 use humhub\modules\user\models\User;
 use humhub\modules\space\models\Space;
 use humhub\modules\tasks\models\Task;
+use humhub\modules\tasks\models\TaskUser;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\content\components\ContentContainerModule;
 

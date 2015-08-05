@@ -3,24 +3,23 @@
 namespace humhub\modules\tasks\widgets;
 
 use Yii;
-use humhub\components\Widget;
 
 /**
  * Shows a Task Wall Entry
  */
-class WallEntry extends Widget
+class WallEntry extends \humhub\modules\content\widgets\WallEntry
 {
 
     public $task;
 
     public function run()
     {
-        $user = $this->task->content->user;
+        $user = $this->contentObject->content->user;
 
         $currentUserAssigned = false;
 
         // Check if current user is assigned to this task
-        foreach ($this->task->assignedUsers as $au) {
+        foreach ($this->contentObject->assignedUsers as $au) {
             if ($au->id == Yii::$app->user->id) {
                 $currentUserAssigned = true;
                 break;
@@ -28,10 +27,10 @@ class WallEntry extends Widget
         }
 
         return $this->render('entry', array(
-                    'task' => $this->task,
+                    'task' => $this->contentObject,
                     'user' => $user,
-                    'contentContainer' => $this->task->content->container,
-                    'assignedUsers' => $this->task->assignedUsers,
+                    'contentContainer' => $this->contentObject->content->container,
+                    'assignedUsers' => $this->contentObject->assignedUsers,
                     'currentUserAssigned' => $currentUserAssigned
         ));
     }

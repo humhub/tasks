@@ -6,8 +6,6 @@ use humhub\modules\tasks\models\Task;
 humhub\modules\tasks\Assets::register($this);
 ?>
 
-<?php $this->beginContent('@humhub/modules/content/views/layouts/wallLayout.php', array('object' => $task)); ?>
-
 <div class="media task" id="task_<?php echo $task->id; ?>">
     <?php if (Yii::$app->user->isGuest): ?>
 
@@ -97,5 +95,3 @@ humhub\modules\tasks\Assets::register($this);
 
     </div>
 </div>
-
-<?php $this->endContent(); ?>

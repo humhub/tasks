@@ -30,6 +30,7 @@ class Task extends ContentActiveRecord
     const STATUS_OPEN = 1;
     const STATUS_FINISHED = 5;
 
+    public $wallEntryClass = 'humhub\modules\tasks\widgets\WallEntry';
     public $autoAddToWall = false;
 
     public static function tableName()
@@ -55,7 +56,7 @@ class Task extends ContentActiveRecord
     public function getAssignedUsers()
     {
         return $this->hasMany(User::className(), ['id' => 'user_id'])
-            ->viaTable('task_user', ['task_id' => 'id']);
+                        ->viaTable('task_user', ['task_id' => 'id']);
     }
 
     public function beforeDelete()
@@ -102,9 +103,7 @@ class Task extends ContentActiveRecord
                 $this->unassignUser($user);
             }
         }
-
     }
-
 
     public function afterFind()
     {
@@ -134,7 +133,6 @@ class Task extends ContentActiveRecord
         }
         return false;
     }
-
 
     public function unassignUser($user = "")
     {
@@ -217,7 +215,7 @@ class Task extends ContentActiveRecord
     /**
      * @inheritdoc
      */
-    public function getContentTitle()
+    public function getContentName()
     {
         return Yii::t('TasksModule.models_Task', "Task");
     }
@@ -225,13 +223,9 @@ class Task extends ContentActiveRecord
     /**
      * @inheritdoc
      */
-    public function getContentPreview($maxLength = 0)
+    public function getContentDescription()
     {
-        if ($maxLength == 0) {
-            return $this->title;
-        }
-
-        return \humhub\libs\Helpers::truncateText($this->title, $maxLength);
+        return $this->title;
     }
 
 }
