@@ -25,11 +25,14 @@ class TaskController extends ContentContainerController
 
     public function actionShow()
     {
-        //return $this->render('show', ['contentContainer' => $this->contentContainer]);
 
         $tasks = Task::find()->contentContainer($this->contentContainer)->readable()->all();
 
-        return $this->render('show', ['tasks' => $tasks, 'contentContainer' => $this->contentContainer]);
+        return $this->render('show', [
+            'tasks' => $tasks,
+            'contentContainer' => $this->contentContainer
+
+        ]);
 
 
     }
@@ -58,6 +61,7 @@ class TaskController extends ContentContainerController
 
         if ($task === null) {
             $task = new Task();
+            $task->status = 1;
             $task->content->container = $this->contentContainer;
         }
 
@@ -71,6 +75,22 @@ class TaskController extends ContentContainerController
 
         return $this->renderAjax('edit', ['task'=>$task]);
 
+    }
+
+
+    public function actionDelete() {
+
+        $id = (int) Yii::$app->request->get('id');
+
+        if ($id != 0) {
+            $task = Task::find()->contentContainer($this->contentContainer)->where(['task.id' => $id])->one();
+            if ($task) {
+                $task->delete();
+            }
+        }
+
+        Yii::$app->response->format='json';
+        return ['status'=>'ok'];
     }
 
 

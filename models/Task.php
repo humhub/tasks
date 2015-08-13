@@ -31,7 +31,7 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
     const STATUS_FINISHED = 5;
 
     public $wallEntryClass = 'humhub\modules\tasks\widgets\WallEntry';
-    public $autoAddToWall = false;
+    public $autoAddToWall = true;
 
     public static function tableName()
     {
@@ -77,6 +77,11 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
         }
 
         return parent::beforeSave($insert);
+    }
+
+    public function getUrl()
+    {
+        return $this->content->container->createUrl('/tasks/task/show', array('id' => $this->id));
     }
 
     public function afterSave($insert, $changedAttributes)
