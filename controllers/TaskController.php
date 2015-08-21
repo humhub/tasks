@@ -37,23 +37,6 @@ class TaskController extends ContentContainerController
 
     }
 
-/*    public function actionCreate()
-    {
-        $task = new Task();
-        $task->title = Yii::$app->request->post('title');
-        $task->max_users = Yii::$app->request->post('max_users', 1);
-        $deadline = Yii::$app->request->post('deadline');
-        if ($deadline != "") {
-            $deadline = Yii::$app->formatter->asDateTime($deadline, 'php:Y-m-d H:i:s');
-        }
-        $task->deadline = $deadline;
-        $task->preassignedUsers = Yii::$app->request->post('preassignedUsers');
-        $task->status = Task::STATUS_OPEN;
-
-        return \humhub\modules\tasks\widgets\WallCreateForm::create($task);
-    }*/
-
-
     public function actionEdit() {
 
         $id = (int) Yii::$app->request->get('id');

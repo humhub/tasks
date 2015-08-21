@@ -56,7 +56,7 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
     public function getAssignedUsers()
     {
         return $this->hasMany(User::className(), ['id' => 'user_id'])
-                        ->viaTable('task_user', ['task_id' => 'id']);
+            ->viaTable('task_user', ['task_id' => 'id']);
     }
 
     public function beforeDelete()
@@ -123,18 +123,18 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
 
     public function assignUser($user = "")
     {
-        if ($user == "")
-            $user = Yii::$app->user->getIdentity();
+        if ($user != "") {
 
-        $au = TaskUser::findOne(array('task_id' => $this->id, 'user_id' => $user->id));
-        if ($au == null) {
+            $au = TaskUser::findOne(array('task_id' => $this->id, 'user_id' => $user->id));
+            if ($au == null) {
 
-            $au = new TaskUser;
-            $au->task_id = $this->id;
-            $au->user_id = $user->id;
-            $au->save();
+                $au = new TaskUser;
+                $au->task_id = $this->id;
+                $au->user_id = $user->id;
+                $au->save();
 
-            return true;
+                return true;
+            }
         }
         return false;
     }

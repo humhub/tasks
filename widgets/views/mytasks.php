@@ -15,39 +15,28 @@ Assets::register($this);
         <?php foreach ($tasks as $task): ?>
 
             <div class="media task" id="task_<?php echo $task->id; ?>">
-                <?php
-                echo \humhub\widgets\AjaxButton::widget([
-                    'label' => '<div class="tasks-check tt pull-left" data-toggle="tooltip" data-placement="top" data-original-title="' . Yii::t("TasksModule.widgets_views_entry", "Click, to finish this task") . '"><i class="fa fa-square-o"> </i></div>',
-                    'ajaxOptions' => [
-                        'dataType' => 'json',
-                        'beforeSend' => new yii\web\JsExpression('function(){ setModalLoader(); }'),
-                        'success' => "function(json) {  $('#wallEntry_'+json.wallEntryId).html(parseHtml(json.output)); $('#task_" . $task->id . " .task-title').addClass('task-completed'); $('#task_" . $task->id . " .label').css('opacity', '0.3'); $('#task_" . $task->id . " .tasks-check .fa').removeClass('fa-square-o'); $('#task_" . $task->id . " .tasks-check .fa').addClass('fa-check-square-o');}",
-                        'url' => $task->content->container->createUrl('/tasks/task/changeStatus', array('taskId' => $task->id, 'status' => Task::STATUS_FINISHED)),
-                    ],
-                    'htmlOptions' => [
-                        'id' => "TaskFinishLink_" . $task->id
-                    ]
-                ]);
-                ?>
+                <a id="TaskFinishLink_<?php echo $task->id; ?>" href="<?php echo $task->getUrl(); ?><?php if ($task->status == Task::STATUS_FINISHED): ?>&completed=true<?php endif; ?>">
+                    <div class="tasks-check tt pull-left" style="margin-right: 0;"><i class="fa fa-square-o task-check"> </i>
+                    </div>
+                </a>
                 <div class="media-body">
-                    <span class="task-title pull-left"><?php echo Html::encode($task->title); ?></span>
-                    <small >
-                        <!-- Show deadline -->
+                    <span
+                        class="task-title <?php if ($task->status == Task::STATUS_FINISHED): ?>task-completed<?php endif; ?> pull-left"> <a
+                            href="<?php echo $task->getUrl(); ?><?php if ($task->status == Task::STATUS_FINISHED): ?>&completed=true<?php endif; ?>"
+                            class="colorFont3"><?php echo Html::encode($task->title); ?></a></span>
 
-                        <?php if ($task->deadline != '0000-00-00 00:00:00') : ?>
+
+                        <?php if ($task->hasDeadline()) : ?>
                             <?php
                             $timestamp = strtotime($task->deadline);
                             $class = "label label-default";
-
                             if (date("d.m.yy", $timestamp) <= date("d.m.yy", time())) {
                                 $class = "label label-danger";
                             }
                             ?>
-                            <span class="<?php echo $class; ?>"
-                                  style="<?php if ($task->status == Task::STATUS_FINISHED): ?>opacity: 0.3;<?php endif; ?>"><?php echo date("d. M", $timestamp); ?></span>
-                              <?php endif; ?>
+                            <span class="<?php echo $class; ?>"><?php echo date("d. M", $timestamp); ?></span>
+                        <?php endif; ?>
 
-                    </small>
 
                     <div class="user pull-right" style="display: inline;">
                         <!-- Show space  -->
