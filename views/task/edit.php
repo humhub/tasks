@@ -12,8 +12,13 @@ use yii\jui\DatePicker;
 
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <?php if (Yii::$app->request->get('id') != null) : ?>
+            <h4 class="modal-title"
+                id="myModalLabel"><?php echo Yii::t('TasksModule.views_task_edit', '<strong>Edit</strong> task'); ?></h4>
+            <?php else :?>
             <h4 class="modal-title"
                 id="myModalLabel"><?php echo Yii::t('TasksModule.views_task_edit', '<strong>Create</strong> new task'); ?></h4>
+            <?php endif; ?>
         </div>
 
 
