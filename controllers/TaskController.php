@@ -27,9 +27,11 @@ class TaskController extends ContentContainerController
     {
 
         $tasks = Task::find()->contentContainer($this->contentContainer)->readable()->all();
+        $completedTaskCount = Task::find()->contentContainer($this->contentContainer)->readable()->where(['task.status' => 5])->count();
 
         return $this->render('show', [
             'tasks' => $tasks,
+            'completedTaskCount' => $completedTaskCount,
             'contentContainer' => $this->contentContainer
 
         ]);

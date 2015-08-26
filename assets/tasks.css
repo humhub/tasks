@@ -73,3 +73,7 @@
 .panel-mytasks {
     display: block !important;
 }
+
+#completed-tasks .task:last-child {
+    border: none;
+}
