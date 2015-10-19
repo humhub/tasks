@@ -46,7 +46,7 @@ Assets::register($this);
                                  height="24" width="24" alt="24x24" data-src="holder.js/24x24"
                                  style="width: 24px; height: 24px;" data-toggle="tooltip" data-placement="top"
                                  title=""
-                                 data-original-title="<?php echo Yii::t('TasksModule.widgets_views_mytasks', 'From space: ') ?><br><strong><?php echo Html::encode($task->content->container->name); ?></strong>">
+                                 data-original-title="<?php echo Yii::t('TasksModule.widgets_views_mytasks', 'From space: ') ?> <?php echo Html::encode($task->content->container->name); ?>">
                         </a>
 
                     </div>
