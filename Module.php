@@ -64,7 +64,7 @@ class Module extends ContentContainerModule
     public static function onSpaceMenuInit($event)
     {
         $space = $event->sender->space;
-        if ($space->isModuleEnabled('tasks')) {
+        if ($space->isModuleEnabled('tasks') && $space->isMember()) {
             $event->sender->addItem(array(
                 'label' => Yii::t('TasksModule.base', 'Tasks'),
                 'group' => 'modules',
