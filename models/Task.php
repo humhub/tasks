@@ -55,8 +55,13 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
 
     public function getAssignedUsers()
     {
-        return $this->hasMany(User::className(), ['id' => 'user_id'])
-            ->viaTable('task_user', ['task_id' => 'id']);
+    	return $this->hasMany(User::className(), ['id' => 'user_id'])
+    	->viaTable('task_user', ['task_id' => 'id']);
+    }
+
+    public function getCreator()
+    {
+    	return $this->hasOne(User::className(), ['id' => 'created_by']);
     }
 
     public function beforeDelete()
