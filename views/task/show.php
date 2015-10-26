@@ -77,6 +77,7 @@ humhub\modules\tasks\Assets::register($this);
 			url: "<?php echo $contentContainer->createUrl('show-completed'); ?>",
 			success: function(response){
 				$('#completed-tasks').html(response);
+				$('#completed-task-link').off('click');
 			}
 		});
     });
