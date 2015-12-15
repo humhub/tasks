@@ -1,4 +1,4 @@
 <?php
 return array (
-  'Could not access task!' => 'Non posso accedere al task!',
+  'Could not access task!' => 'Non posso accedere all\'attività!',
 );
