@@ -25,20 +25,24 @@ class TaskController extends ContentContainerController
 
     public function actionShow()
     {
-
-        $tasks = Task::find()->contentContainer($this->contentContainer)->readable()->all();
+        $tasks = Task::find()->contentContainer($this->contentContainer)->readable()->where(['!=', 'task.status' , 5])->all();
         $completedTaskCount = Task::find()->contentContainer($this->contentContainer)->readable()->where(['task.status' => 5])->count();
-
         return $this->render('show', [
             'tasks' => $tasks,
             'completedTaskCount' => $completedTaskCount,
             'contentContainer' => $this->contentContainer
-
         ]);
-
-
     }
-
+    
+    public function actionShowCompleted()
+    {
+    	$tasks = Task::find()->contentContainer($this->contentContainer)->readable()->where(['task.status' => 5])->all();
+    	return $this->renderPartial('_task_list', [
+    			'tasks' => $tasks,
+    			'contentContainer' => $this->contentContainer
+    	]);
+    }
+    
     public function actionEdit() {
 
         $id = (int) Yii::$app->request->get('id');
