@@ -41,9 +41,10 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
     public function rules()
     {
         return array(
-            array(['title'], 'required'),
-            array(['max_users', 'percent'], 'integer'),
-            array(['deadline', 'max_users', 'assignedUserGuids'], 'safe'),
+            [['title'], 'required'],
+            [['max_users', 'percent'], 'integer'],
+            [['deadline'], \humhub\libs\DbDateValidator::className(), 'format' => 'short'],
+            [['max_users', 'assignedUserGuids'], 'safe'],
         );
     }
 
@@ -68,17 +69,7 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
         return parent::beforeDelete();
     }
 
-    public function beforeSave($insert)
-    {
-        if ($this->deadline == '') {
-            $this->deadline = new \yii\db\Expression('NULL');
-        } else {
-            $this->deadline = Yii::$app->formatter->asDateTime($this->deadline, 'php:Y-m-d H:i:s');
-        }
-
-        return parent::beforeSave($insert);
-    }
-
+   
     public function getUrl()
     {
         return $this->content->container->createUrl('/tasks/task/show', array('id' => $this->id));
@@ -243,4 +234,12 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
         );
     }
 
+    public function isOverdue() {
+        if (!$this->hasDeadline()) {
+            return false;
+        }
+        
+        return (strtotime($this->deadline) < time());
+    }
+    
 }
