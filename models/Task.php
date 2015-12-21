@@ -43,7 +43,7 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
         return array(
             [['title'], 'required'],
             [['max_users', 'percent'], 'integer'],
-            [['deadline'], \humhub\libs\DbDateValidator::className(), 'format' => 'short'],
+            [['deadline'], \humhub\libs\DbDateValidator::className(), 'format' => Yii::$app->params['formatter']['defaultDateFormat']],
             [['max_users', 'assignedUserGuids'], 'safe'],
         );
     }

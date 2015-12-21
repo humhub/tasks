@@ -45,7 +45,7 @@ use yii\helpers\Html;
                 <div class="col-md-4">
 
                     <div class="form-group">
-                        <?php echo $form->field($task, 'deadline')->widget(yii\jui\DatePicker::className(), ['dateFormat' => 'short', 'clientOptions' => [], 'options' => ['class' => 'form-control', 'placeholder' => Yii::t('TasksModule.views_task_edit', 'Deadline')]]); ?>
+                        <?php echo $form->field($task, 'deadline')->widget(yii\jui\DatePicker::className(), ['dateFormat' => Yii::$app->params['formatter']['defaultDateFormat'], 'clientOptions' => [], 'options' => ['class' => 'form-control', 'placeholder' => Yii::t('TasksModule.views_task_edit', 'Deadline')]]); ?>
                     </div>
 
                 </div>
