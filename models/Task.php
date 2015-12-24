@@ -48,6 +48,18 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
         );
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return array(
+            'title' => Yii::t('TasksModule.base','Title'),
+            'assignedUserGuids' => Yii::t('TasksModule.base','Assigned user(s)'),
+            'deadline' => Yii::t('TasksModule.base','Deadline'),
+        );
+    }
+
     public function getTaskUsers()
     {
         $query = $this->hasMany(TaskUser::className(), ['task_id' => 'id']);
@@ -57,7 +69,7 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
     public function getAssignedUsers()
     {
         return $this->hasMany(User::className(), ['id' => 'user_id'])
-            ->viaTable('task_user', ['task_id' => 'id']);
+                        ->viaTable('task_user', ['task_id' => 'id']);
     }
 
     public function beforeDelete()
@@ -69,7 +81,6 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
         return parent::beforeDelete();
     }
 
-   
     public function getUrl()
     {
         return $this->content->container->createUrl('/tasks/task/show', array('id' => $this->id));
@@ -234,12 +245,13 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
         );
     }
 
-    public function isOverdue() {
+    public function isOverdue()
+    {
         if (!$this->hasDeadline()) {
             return false;
         }
-        
+
         return (strtotime($this->deadline) < time());
     }
-    
+
 }
