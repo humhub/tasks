@@ -17,8 +17,6 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'This task is already done' => 'Ha aquesta tasca ja està acabada',
-    'You\'re not assigned to this task' => 'No estàs assignat a aquesta tasca.',
     'Click, to finish this task' => 'Fes clic, per finalitzar la tasca',
     'This task is already done. Click to reopen.' => 'Ha aquesta tasca ja està acabada. Clica per reobrir.',
 ];

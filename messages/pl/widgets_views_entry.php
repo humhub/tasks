@@ -17,8 +17,6 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'This task is already done' => 'To zadanie już jest wykonane',
-    'You\'re not assigned to this task' => 'Nie zostałeś dołączony do zadania ',
     'Click, to finish this task' => 'Kliknij, aby zakończyć zadanie',
     'This task is already done. Click to reopen.' => 'To zadanie jest już wykonane. Kliknij w celu ponowienia. ',
 ];

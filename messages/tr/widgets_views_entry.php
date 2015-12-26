@@ -17,8 +17,6 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'This task is already done' => 'Görev zaten yapıldı',
-    'You\'re not assigned to this task' => 'Bu göreve atanmadınız.',
     'Click, to finish this task' => 'Görevi tamamlamak için tıklayın',
     'This task is already done. Click to reopen.' => 'Görev zaten yapıldı. Yeniden aç.',
 ];

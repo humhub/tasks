@@ -17,8 +17,6 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'This task is already done' => 'Tento úkol je již dokončen',
-    'You\'re not assigned to this task' => 'Nejste přiřazen(a) k tomuto úkolu',
     'Click, to finish this task' => 'Klikněte pro dokončení úkolu',
     'This task is already done. Click to reopen.' => 'Tento úkol je již dokončen. Klikněte pro znovuotevření úkolu.',
 ];

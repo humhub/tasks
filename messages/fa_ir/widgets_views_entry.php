@@ -17,8 +17,6 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'This task is already done' => 'این کار به پایان رسیده‌است.',
-    'You\'re not assigned to this task' => 'این کار به شما سپرده‌نشده‌است',
     'Click, to finish this task' => 'برای اتمام کار کلیک کنید.',
     'This task is already done. Click to reopen.' => 'این کار به پایان رسیده‌است. برای باز کردن مجدد، کلیک کنید.',
 ];

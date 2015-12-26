@@ -17,8 +17,6 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'This task is already done' => 'Ši užduotis jau atlikta',
-    'You\'re not assigned to this task' => 'Jūs esate priskirtas šiai užduočiai',
     'Click, to finish this task' => 'Paspauskite, norint įvykdyti užduotį',
     'This task is already done. Click to reopen.' => 'Ši užduotis jau atlikta. Paspauskite, norint atidaryti iš naujo.',
 ];

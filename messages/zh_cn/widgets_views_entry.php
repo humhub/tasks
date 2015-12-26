@@ -17,8 +17,6 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'This task is already done' => '该任务已完成',
-    'You\'re not assigned to this task' => '该任务未分配给你',
     'Click, to finish this task' => '点击，完成该任务',
     'This task is already done. Click to reopen.' => '该任务已完成,点击重新打开',
 ];

@@ -19,6 +19,4 @@
 return [
     'Click, to finish this task' => '',
     'This task is already done. Click to reopen.' => '',
-    'This task is already done' => '@@@@',
-    'You\'re not assigned to this task' => '@@@@',
 ];
