@@ -12,28 +12,19 @@ class TaskController extends ContentContainerController
 
     public $hideSidebar = true;
 
-    public function actions()
-    {
-        return array(
-            'stream' => array(
-                'class' => \humhub\modules\tasks\components\StreamAction::className(),
-                'mode' => \humhub\modules\tasks\components\StreamAction::MODE_NORMAL,
-                'contentContainer' => $this->contentContainer
-            ),
-        );
-    }
-
     public function actionShow()
     {
 
         $tasks = Task::find()->contentContainer($this->contentContainer)->readable()->all();
         $completedTaskCount = Task::find()->contentContainer($this->contentContainer)->readable()->where(['task.status' => 5])->count();
-
+        $canCreateNewTasks = $this->contentContainer->permissionManager->can(new \humhub\modules\tasks\permissions\CreateTask());
+        
+        
         return $this->render('show', [
             'tasks' => $tasks,
             'completedTaskCount' => $completedTaskCount,
-            'contentContainer' => $this->contentContainer
-
+            'contentContainer' => $this->contentContainer,
+            'canCreateNewTasks' => $canCreateNewTasks
         ]);
 
 
@@ -45,6 +36,11 @@ class TaskController extends ContentContainerController
         $task = Task::find()->contentContainer($this->contentContainer)->readable()->where(['task.id' => $id])->one();
 
         if ($task === null) {
+            // Check permission to create new task
+            if (!$this->contentContainer->permissionManager->can(new \humhub\modules\tasks\permissions\CreateTask())) {
+                throw new HttpException(400, 'Access denied!');
+            }
+
             $task = new Task();
             $task->status = 1;
             $task->content->container = $this->contentContainer;

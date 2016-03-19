@@ -80,4 +80,18 @@ class Module extends ContentContainerModule
         $event->sender->addWidget(widgets\MyTasks::className(), array(), array('sortOrder' => 600));
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function getPermissions($contentContainer = null)
+    {
+        if ($contentContainer instanceof \humhub\modules\space\models\Space) {
+            return [
+                new permissions\CreateTask(),
+            ];
+        }
+
+        return [];
+    }
+
 }
