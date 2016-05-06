@@ -11,8 +11,6 @@ humhub\modules\tasks\Assets::register($this);
     <div class="panel-body">
         <div class="collapse <?php if (Yii::$app->request->get('completed') != null) : ?>in<?php endif; ?>"
              id="completed-tasks">
-            <br>
-            <br>
             <?php foreach ($tasks as $task) : ?>
 
                 <?php if ($task->status == Task::STATUS_FINISHED) : ?>
