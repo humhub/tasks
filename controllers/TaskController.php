@@ -20,7 +20,7 @@ class TaskController extends ContentContainerController
         $canCreateNewTasks = $this->contentContainer->permissionManager->can(new \humhub\modules\tasks\permissions\CreateTask());
         
         
-        return $this->render('show', [
+        return $this->render(Yii::$app->request->get('completed') != null?'show_done':'show', [
             'tasks' => $tasks,
             'completedTaskCount' => $completedTaskCount,
             'contentContainer' => $this->contentContainer,
