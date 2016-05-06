@@ -69,6 +69,11 @@ humhub\modules\tasks\Assets::register($this);
 
 
                         <div class="media-body">
+                            <span class="pull-left">
+                                <a href="<?php echo $task->creator->getUrl(); ?>" id="user_<?php echo $task->id; ?>"> 
+                                    <img src="<?php echo $task->creator->getProfileImage()->getUrl(); ?>" class="img-rounded tt" height="24" width="24" alt="24x24" style="width: 24px; height: 24px;" data-toggle="tooltip" data-placement="top" title="" data-original-title="<?php echo Html::encode($task->creator->displayName); ?>">
+                                </a>
+                            </span>                        
                             <span class="task-title task-completed pull-left"><?php echo $task->title; ?></span>
 
                             <?php if ($task->hasDeadline()) : ?>
