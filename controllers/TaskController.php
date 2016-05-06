@@ -15,8 +15,8 @@ class TaskController extends ContentContainerController
     public function actionShow()
     {
 
-        $tasks = Task::find()->contentContainer($this->contentContainer)->readable()->all();
-        $completedTaskCount = Task::find()->contentContainer($this->contentContainer)->readable()->where(['task.status' => 5])->count();
+        $tasks = Task::find()->contentContainer($this->contentContainer)->andWhere(['task.status'=>Yii::$app->request->get('completed') != null?Task::STATUS_FINISHED:Task::STATUS_OPEN])->readable()->all();
+        $completedTaskCount = Task::find()->contentContainer($this->contentContainer)->readable()->where(['task.status' => Task::STATUS_FINISHED])->count();
         $canCreateNewTasks = $this->contentContainer->permissionManager->can(new \humhub\modules\tasks\permissions\CreateTask());
         
         
