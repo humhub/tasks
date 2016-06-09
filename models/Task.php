@@ -43,7 +43,11 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
         return array(
             [['title'], 'required'],
             [['max_users', 'percent'], 'integer'],
+            
+            // ensure empty dates are NULL in the database
+            [['deadline'], 'default', 'value' => null],
             [['deadline'], \humhub\libs\DbDateValidator::className(), 'format' => Yii::$app->params['formatter']['defaultDateFormat']],
+            
             [['max_users', 'assignedUserGuids'], 'safe'],
         );
     }
