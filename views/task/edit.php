@@ -141,7 +141,7 @@ use yii\helpers\Html;
         id = "assignedUserGuids";
 
         console.log("assign self");
-        if ($('#assignedUserGuids_invite_tags').find('li#assignedUserGuids_<?= Yii::$app->user->getIdentity()->guid; ?>').size() == 0) {
+        if (!$('#assignedUserGuids_invite_tags').find('li#assignedUserGuids_<?= Yii::$app->user->getIdentity()->guid; ?>').length) {
             $.fn.userpicker.addUserTag(guid, imageUrl, name, id);
         } else {
             console.log("already assigned");

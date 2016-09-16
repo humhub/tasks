@@ -204,14 +204,14 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
             $activity->create();
 
             /*
-            if ($this->created_by != Yii::$app->user->id) {
-                $notification = new \humhub\modules\tasks\notifications\Finished();
-                $notification->source = $this;
-                $notification->originator = Yii::$app->user->getIdentity();
-                $notification->send($this->content->user);
-            }
-            */
-            
+              if ($this->created_by != Yii::$app->user->id) {
+              $notification = new \humhub\modules\tasks\notifications\Finished();
+              $notification->source = $this;
+              $notification->originator = Yii::$app->user->getIdentity();
+              $notification->send($this->content->user);
+              }
+             */
+
             $this->percent = 100;
         } else {
             // Try to delete TaskFinishedNotification if exists
@@ -270,6 +270,10 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
 
     public function isOverdue()
     {
+        if ($this->status != self::STATUS_ACTIVE) {
+            return false;
+        }
+
         if (!$this->hasDeadline()) {
             return false;
         }

@@ -21,14 +21,15 @@ use humhub\modules\tasks\models\Task;
     </div>
 
     <div class="media-body">
-
         <span class="task-title pull-left"><?php echo $task->title; ?></span>
 
         <?php if ($task->hasDeadline()) : ?>
+            <?php $labelClass = ($task->isOverdue()) ? 'danger' : 'default'; ?>
+
             <?php if ($task->duration_days == 1): ?>
-                <span class="label label-default"><?= Yii::$app->formatter->asDate($task->deadline, 'short'); ?></span>
+                <span class="label label-<?= $labelClass ?>"><?= Yii::$app->formatter->asDate($task->deadline, 'short'); ?></span>
             <?php else: ?>
-                <span class="label label-default">
+                <span class="label label-<?= $labelClass ?>">
                     <?= Yii::$app->formatter->asDate($task->start_date, 'short'); ?> - 
                     <?= Yii::$app->formatter->asDate($task->deadline, 'short'); ?>
                 </span>
@@ -60,15 +61,14 @@ use humhub\modules\tasks\models\Task;
         <?php if ($showCommentsColumn) : ?>
             <div class="task-controls comments-link pull-right">
                 <a data-toggle="collapse"
-                   href="#task-comment-<?php echo $task->id; ?>"
-                   onclick="$('#comment_humhubmodulestasksmodelsTask_<?php echo $task->id; ?>').show();return false;"
+                   href=".task[data-task-id=<?= $task->id; ?>] .comments"
+                   onclick="$('#comment_<?php echo $task->getUniqueId(); ?>').show();return false;"
                    aria-expanded="false"
                    aria-controls="collapseTaskComments"><i
                         class="fa fa-comment-o"></i> <?php echo Comment::GetCommentCount($task->className(), $task->id); ?>
                 </a>
             </div>
         <?php endif; ?>
-
 
         <div class="task-controls assigned-users pull-right">
             <!-- Show assigned user -->
@@ -91,8 +91,7 @@ use humhub\modules\tasks\models\Task;
     </div>
 
     <?php if ($showCommentsColumn) : ?>
-        <div class="wall-entry collapse">
-            <div class="wall-entry-controls"></div>
+        <div class="collapse comments">
             <?php echo \humhub\modules\comment\widgets\Comments::widget(array('object' => $task)); ?>
         </div>
     <?php endif; ?>
