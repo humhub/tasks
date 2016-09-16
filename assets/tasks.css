@@ -56,24 +56,54 @@
     margin: 2px 7px 0 7px;
 }
 
-.task-completed, .task-completed a {
-    color: #bebebe !important;
-    text-decoration: line-through;
-}
-
-.show-completed-tasks-link {
-    margin-left: 15px;
-    color: #bebebe !important;
-}
-
-.task-completed-controls {
-    opacity: 0.3;
-}
-
 .panel-mytasks {
     display: block !important;
 }
 
-#completed-tasks .task:last-child {
+#tasksList .task:last-child {
     border: none;
+}
+
+/**
+ * Cases for task states
+ */
+.task[data-task-status="active"] .completed-check,
+.task[data-task-status="cancelled"] .completed-check,
+.task[data-task-status="deferred"] .completed-check
+{
+    display:none;
+}
+
+.task[data-task-status="completed"] .open-check {
+    display:none;
+}
+
+.task[data-task-status="cancelled"] .task-title {
+    color: #bebebe !important;
+    text-decoration: line-through;
+}
+
+/**
+ * MyTasks Snippets
+ */
+#tasksList.myTasksSnippet .edit-link,
+#tasksList.myTasksSnippet .comments-link,
+#tasksList.myTasksSnippet .assigned-users {
+    display:none;
+}
+#tasksList.myTasksSnippet .assigned-space {
+    margin-right: 0px;
+    border-right: none;
+    padding-right: 0px;
+}
+
+/**
+ * MyTasks WallEntry
+ */
+.wall-entry .comments-link {
+    display:none;
+}
+
+.wall-entry .task .media-body {
+    padding-right: 15px;
 }

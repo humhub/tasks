@@ -6,6 +6,7 @@ use Yii;
 use humhub\modules\user\models\User;
 use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\tasks\models\TaskUser;
+use humhub\modules\tasks\components\ActiveQueryTask;
 
 /**
  * This is the model class for table "task".
@@ -16,23 +17,30 @@ use humhub\modules\tasks\models\TaskUser;
  * @property string $deadline
  * @property integer $max_users
  * @property integer $precent
- * @property string $created_at
- * @property integer $created_by
- * @property string $updated_at
- * @property integer $updated_by
  */
 class Task extends ContentActiveRecord implements \humhub\modules\search\interfaces\Searchable
 {
 
     public $assignedUserGuids = "";
 
-    // Status
-    const STATUS_OPEN = 1;
-    const STATUS_FINISHED = 5;
+    const STATUS_ACTIVE = 1;
+    const STATUS_DEFERRED = 4;
+    const STATUS_COMPLETED = 5;
+    const STATUS_CANCELLED = 10;
 
+    /**
+     * @inheritdoc
+     */
     public $wallEntryClass = 'humhub\modules\tasks\widgets\WallEntry';
+
+    /**
+     * @inheritdoc
+     */
     public $autoAddToWall = true;
 
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'task';
@@ -42,7 +50,7 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
     {
         return array(
             [['title'], 'required'],
-            [['max_users', 'percent'], 'integer'],
+            [['max_users', 'percent', 'status', 'duration_days'], 'integer'],
             [['deadline'], \humhub\libs\DbDateValidator::className(), 'format' => Yii::$app->params['formatter']['defaultDateFormat']],
             [['max_users', 'assignedUserGuids'], 'safe'],
         );
@@ -54,9 +62,10 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
     public function attributeLabels()
     {
         return array(
-            'title' => Yii::t('TasksModule.base','Title'),
-            'assignedUserGuids' => Yii::t('TasksModule.base','Assigned user(s)'),
-            'deadline' => Yii::t('TasksModule.base','Deadline'),
+            'title' => Yii::t('TasksModule.base', 'Title'),
+            'assignedUserGuids' => Yii::t('TasksModule.base', 'Assigned user(s)'),
+            'deadline' => Yii::t('TasksModule.base', 'Deadline'),
+            'duration_days' => Yii::t('TasksModule.base', 'Duration'),
         );
     }
 
@@ -70,6 +79,18 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
     {
         return $this->hasMany(User::className(), ['id' => 'user_id'])
                         ->viaTable('task_user', ['task_id' => 'id']);
+    }
+
+    public function beforeSave($insert)
+    {
+        $this->start_date = $this->getStartDate();
+        if ($this->deadline != '' && $this->duration_days == '') {
+            $this->duration_days = 1;
+        } elseif ($this->duration_days < 1) {
+            $this->duration_days = 1;
+        }
+
+        return parent::beforeSave($insert);
     }
 
     public function beforeDelete()
@@ -161,11 +182,11 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
         }
 
         if ($newPercent == 100) {
-            $this->changeStatus(Task::STATUS_FINISHED);
+            $this->changeStatus(Task::STATUS_COMPLETED);
         }
 
-        if ($this->percent != 100 && $this->status == Task::STATUS_FINISHED) {
-            $this->changeStatus(Task::STATUS_OPEN);
+        if ($this->percent != 100 && $this->status == Task::STATUS_COMPLETED) {
+            $this->changeStatus(Task::STATUS_ACTIVE);
         }
 
         return true;
@@ -175,20 +196,22 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
     {
         $this->status = $newStatus;
 
-        if ($newStatus == Task::STATUS_FINISHED) {
+        if ($newStatus == Task::STATUS_COMPLETED) {
 
             $activity = new \humhub\modules\tasks\activities\Finished();
             $activity->source = $this;
             $activity->originator = Yii::$app->user->getIdentity();
             $activity->create();
 
+            /*
             if ($this->created_by != Yii::$app->user->id) {
                 $notification = new \humhub\modules\tasks\notifications\Finished();
                 $notification->source = $this;
                 $notification->originator = Yii::$app->user->getIdentity();
                 $notification->send($this->content->user);
             }
-
+            */
+            
             $this->percent = 100;
         } else {
             // Try to delete TaskFinishedNotification if exists
@@ -214,7 +237,7 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
     {
         $query = self::find();
         $query->leftJoin('task_user', 'task.id=task_user.task_id');
-        $query->where(['task_user.user_id' => Yii::$app->user->id, 'task.status' => self::STATUS_OPEN]);
+        $query->where(['task_user.user_id' => Yii::$app->user->id, 'task.status' => self::STATUS_ACTIVE]);
 
         return $query->all();
     }
@@ -252,6 +275,46 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
         }
 
         return (strtotime($this->deadline) < time());
+    }
+
+    /**
+     * @inheritdoc
+     * 
+     * @return ActiveQueryTask the tasks active query
+     */
+    public static function find()
+    {
+        return Yii::createObject(ActiveQueryTask::className(), [get_called_class()]);
+    }
+
+    /**
+     * Returns the status texts
+     * 
+     * @return array of available status
+     */
+    public static function getStatusTexts()
+    {
+        return [
+            self::STATUS_ACTIVE => 'Active',
+            self::STATUS_DEFERRED => 'Deferred',
+            self::STATUS_CANCELLED => 'Cancelled',
+            self::STATUS_COMPLETED => 'Finished'
+        ];
+    }
+
+    public function getStartDate()
+    {
+        if ($this->deadline == '') {
+            return;
+        }
+
+        if ($this->duration_days < 1) {
+            return $this->deadline;
+        }
+
+        $date = new \DateTime($this->deadline);
+        $date->sub(new \DateInterval('P' . (int) ($this->duration_days - 1) . 'D'));
+        return $date->format('Y-m-d');
     }
 
 }

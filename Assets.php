@@ -7,6 +7,10 @@ use yii\web\AssetBundle;
 class Assets extends AssetBundle
 {
 
+    public $js = [
+        'tasks.js',
+        'tasks.filter.js',
+    ];
     public $css = [
         'tasks.css',
     ];

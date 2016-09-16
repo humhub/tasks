@@ -1,33 +1,35 @@
 <?php
-use yii\bootstrap\ActiveForm;
+
+use humhub\modules\tasks\models\Task;
+use humhub\widgets\ActiveForm;
 use yii\helpers\Html;
 ?>
 
 <div class="modal-dialog modal-dialog-normal animated fadeIn">
     <div class="modal-content">
 
-        <?php $form = ActiveForm::begin(); ?>
+        <?php $form = ActiveForm::begin(['id' => 'tasksEditForm']); ?>
 
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <?php if (Yii::$app->request->get('id') != null) : ?>
-            <h4 class="modal-title"
-                id="myModalLabel"><?php echo Yii::t('TasksModule.views_task_edit', '<strong>Edit</strong> task'); ?></h4>
-            <?php else :?>
-            <h4 class="modal-title"
-                id="myModalLabel"><?php echo Yii::t('TasksModule.views_task_edit', '<strong>Create</strong> new task'); ?></h4>
-            <?php endif; ?>
+                <h4 class="modal-title"
+                    id="myModalLabel"><?php echo Yii::t('TasksModule.views_task_edit', '<strong>Edit</strong> task'); ?></h4>
+                <?php else : ?>
+                <h4 class="modal-title"
+                    id="myModalLabel"><?php echo Yii::t('TasksModule.views_task_edit', '<strong>Create</strong> new task'); ?></h4>
+                <?php endif; ?>
         </div>
-
 
         <div class="modal-body">
 
-                <?php echo $form->field($task, 'title')->textarea(['id' => 'itemTask', 'class' => 'form-control autosize', 'rows' => '1', 'placeholder' => Yii::t('TasksModule.views_task_edit', 'What is to do?')]); ?>
+            <?php echo $form->field($task, 'title')->textarea(['id' => 'taskTitleInput', 'class' => 'form-control autosize', 'rows' => '1', 'placeholder' => Yii::t('TasksModule.views_task_edit', 'What is to do?')]); ?>
 
             <div class="row">
                 <div class="col-md-8">
 
                     <?php echo $form->field($task, 'assignedUserGuids')->textInput(['id' => 'assignedUserGuids']); ?>
+                    <a id="ancSelfAssign" href="#" class="pull-right" style="margin-top:-10px"><small >Assign me</small></a>
 
                     <?php
                     // attach mention widget to it
@@ -41,6 +43,9 @@ use yii\helpers\Html;
                     ));
                     ?>
 
+                    <?php echo $form->field($task, 'status')->dropDownList(Task::getStatusTexts()); ?>
+
+
                 </div>
                 <div class="col-md-4">
 
@@ -48,31 +53,50 @@ use yii\helpers\Html;
                         <?php echo $form->field($task, 'deadline')->widget(yii\jui\DatePicker::className(), ['dateFormat' => Yii::$app->params['formatter']['defaultDateFormat'], 'clientOptions' => [], 'options' => ['class' => 'form-control', 'placeholder' => Yii::t('TasksModule.views_task_edit', 'Deadline')]]); ?>
                     </div>
 
+                    <div class="form-group">
+                        <?php echo $form->field($task, 'duration_days')->textInput(['class' => 'form-control', 'placeholder' => Yii::t('TasksModule.views_task_edit', 'Duration (days)')]); ?>
+                    </div>
+
+
                 </div>
             </div>
             <br>
+        </div>
+        <div class="modal-footer">
 
-            <div class="row">
-                <div class="col-md-12">
-                    <?php
-                    echo \humhub\widgets\AjaxButton::widget([
-                        'label' => Yii::t('TasksModule.views_task_edit', 'Save'),
-                        'ajaxOptions' => [
-                            'type' => 'POST',
-                            'beforeSend' => new yii\web\JsExpression('function(){ setModalLoader(); }'),
-                            'success' => new yii\web\JsExpression('function(html){ $("#globalModal").html(html); }'),
-                            'url' => $task->content->container->createUrl('/tasks/task/edit', ['id' => $task->id]),
-                        ],
-                        'htmlOptions' => [
-                            'class' => 'btn btn-primary'
-                        ]
-                    ]);
-                    ?>
+            <?php
+            echo \humhub\widgets\AjaxButton::widget([
+                'label' => Yii::t('TasksModule.views_task_edit', 'Save'),
+                'ajaxOptions' => [
+                    'type' => 'POST',
+                    'dataType' => 'json',
+                    'beforeSend' => new yii\web\JsExpression('function(){ setModalLoader(); }'),
+                    'success' => new yii\web\JsExpression('function(json) { handleTaskEditSubmit(json) }'),
+                    'url' => $task->content->container->createUrl('/tasks/task/edit', ['id' => $task->id]),
+                ],
+                'htmlOptions' => [
+                    'class' => 'btn btn-success pull-left'
+                ]
+            ]);
+            ?>
 
-                    <button type="button" class="btn btn-primary"
-                            data-dismiss="modal"><?php echo Yii::t('TasksModule.views_task_edit', 'Cancel'); ?></button>
-                </div>
-            </div>
+            <?php
+            echo \humhub\widgets\AjaxButton::widget([
+                'label' => Yii::t('TasksModule.views_task_edit', 'Delete'),
+                'ajaxOptions' => [
+                    'type' => 'POST',
+                    'dataType' => 'json',
+                    'beforeSend' => new yii\web\JsExpression('function(){ setModalLoader(); }'),
+                    'success' => new yii\web\JsExpression('function(json) { handleTaskDeleteSubmit(json) }'),
+                    'url' => $task->content->container->createUrl('/tasks/task/delete', ['id' => $task->id]),
+                ],
+                'htmlOptions' => [
+                    'class' => 'btn btn-danger pull-right'
+                ]
+            ]);
+            ?>            
+
+            <?php echo \humhub\widgets\LoaderWidget::widget(['id' => 'default-loader', 'cssClass' => 'loader-modal hidden']); ?>                    
 
         </div>
     </div>
@@ -85,11 +109,45 @@ use yii\helpers\Html;
 
     $('.autosize').autosize();
 
+    /**
+     * Focus on title field
+     */
     $(document).ready(function () {
         var myInterval = setInterval(function () {
-            $('#itemTask').focus();
+            $('#taskTitleInput').focus();
             clearInterval(myInterval);
         }, 100);
     });
+
+    /**
+     * Add current filters as hidden field to form - required for response handling
+     */
+    $('#filterEditSubmit').remove();
+    $('<input />').attr('type', 'hidden')
+            .attr('name', "filters")
+            .attr('id', "filterEditSubmit")
+            .attr('value', JSON.stringify($('#tasksList').data('filters')))
+            .prependTo('#tasksEditForm');
+
+
+    /**
+     * Anchor self assign
+     */
+    $('#ancSelfAssign').on('click', function () {
+
+        guid = "<?= Yii::$app->user->getIdentity()->guid; ?>";
+        imageUrl = "<?= Yii::$app->user->getIdentity()->getProfileImage()->getUrl(); ?>";
+        name = "<?= Html::encode(Yii::$app->user->getIdentity()->displayName); ?>";
+        id = "assignedUserGuids";
+
+        console.log("assign self");
+        if ($('#assignedUserGuids_invite_tags').find('li#assignedUserGuids_<?= Yii::$app->user->getIdentity()->guid; ?>').size() == 0) {
+            $.fn.userpicker.addUserTag(guid, imageUrl, name, id);
+        } else {
+            console.log("already assigned");
+        }
+    });
+
+
 
 </script>

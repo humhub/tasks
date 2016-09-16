@@ -5,35 +5,47 @@ namespace humhub\modules\tasks\controllers;
 use Yii;
 use yii\web\HttpException;
 use humhub\modules\content\components\ContentContainerController;
+use humhub\modules\tasks\components\ActiveQueryTask;
 use humhub\modules\tasks\models\Task;
 
 class TaskController extends ContentContainerController
 {
-
     public $hideSidebar = true;
 
     public function actionShow()
     {
+        $this->subLayout = '@tasks/views/task/showLayout.php';
 
-        $tasks = Task::find()->contentContainer($this->contentContainer)->readable()->all();
-        $completedTaskCount = Task::find()->contentContainer($this->contentContainer)->readable()->where(['task.status' => 5])->count();
-        $canCreateNewTasks = $this->contentContainer->permissionManager->can(new \humhub\modules\tasks\permissions\CreateTask());
-        
-        
+        $filters = self::getFiltersByRequest(true);
+        if (empty($filters)) {
+            $filters = \humhub\modules\tasks\widgets\FilterSnippet::getDefaultFilter();
+        }
+
+        $tasks = Task::find()->readable();
+        $tasks->applyTaskFilters($filters);
+
+        $countQuery = clone $tasks;
+        $pagination = new \yii\data\Pagination(['totalCount' => $countQuery->count(), 'pageSize' => $this->module->paginationSize]);
+        $tasks->offset($pagination->offset)->limit($pagination->limit);
+
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('showAjax', [
+                        'tasks' => $tasks->all(),
+                        'pagination' => $pagination,
+            ]);
+        }
+
         return $this->render('show', [
-            'tasks' => $tasks,
-            'completedTaskCount' => $completedTaskCount,
-            'contentContainer' => $this->contentContainer,
-            'canCreateNewTasks' => $canCreateNewTasks
+                    'tasks' => $tasks->all(),
+                    'pagination' => $pagination,
         ]);
-
-
     }
 
-    public function actionEdit() {
+    public function actionEdit()
+    {
 
         $id = (int) Yii::$app->request->get('id');
-        $task = Task::find()->contentContainer($this->contentContainer)->readable()->where(['task.id' => $id])->one();
+        $task = $this->getTaskById($id);
 
         if ($task === null) {
             // Check permission to create new task
@@ -47,63 +59,55 @@ class TaskController extends ContentContainerController
         }
 
         if ($task->load(Yii::$app->request->post())) {
-            if ($task->validate()) {
-                if ($task->save()) {
-                    return $this->htmlRedirect($this->contentContainer->createUrl('show'));
-                }
+            Yii::$app->response->format = 'json';
+            $result = [];
+            if ($task->save()) {
+                $result['success'] = true;
+                $result['task'] = $this->getTaskArrayByFilter($task, Yii::$app->request->post('filters'));
+            } else {
+                $result['success'] = false;
+                $result['output'] = $this->renderAjax('edit', ['task' => $task]);
             }
+
+            return $result;
         }
 
-        return $this->renderAjax('edit', ['task'=>$task]);
-
+        return $this->renderAjax('edit', ['task' => $task]);
     }
 
-
-    public function actionDelete() {
-
+    public function actionDelete()
+    {
+        Yii::$app->response->format = 'json';
+        $success = false;
         $id = (int) Yii::$app->request->get('id');
 
-        if ($id != 0) {
-            $task = Task::find()->contentContainer($this->contentContainer)->where(['task.id' => $id])->one();
-            if ($task) {
-                $task->delete();
-            }
+        $task = $this->getTaskById($id);
+        if ($task && $task->delete()) {
+            $success = true;
         }
 
-        Yii::$app->response->format='json';
-        return ['status'=>'ok'];
-    }
-
-
-
-
-    public function actionAssign()
-    {
-        $task = $this->getTaskById((int) Yii::$app->request->get('taskId'));
-        $task->assignUser();
-        return $this->renderTask($task);
-    }
-
-    public function actionUnAssign()
-    {
-        $task = $this->getTaskById((int) Yii::$app->request->get('taskId'));
-        $task->unassignUser();
-        return $this->renderTask($task);
-    }
-
-    public function actionChangePercent()
-    {
-        $task = $this->getTaskById((int) Yii::$app->request->get('taskId'));
-        $task->changePercent((int) Yii::$app->request->get('percent'));
-        return $this->renderTask($task);
+        return [
+            'success' => $success,
+            'id' => $task->id
+        ];
     }
 
     public function actionChangeStatus()
     {
+        Yii::$app->response->format = 'json';
+
         $task = $this->getTaskById((int) Yii::$app->request->get('taskId'));
+        if ($task === null) {
+            throw new HttpException(404, "Could not load task!");
+        }
+
         $status = (int) Yii::$app->request->get('status');
         $task->changeStatus($status);
-        return $this->renderTask($task);
+
+        $result = $this->getTaskArrayByFilter($task, Yii::$app->request->get('filters'));
+        $result['success'] = true;
+
+        return $result;
     }
 
     protected function renderTask($task)
@@ -115,13 +119,52 @@ class TaskController extends ContentContainerController
         return $json;
     }
 
-    protected function getTaskById($id)
+    protected function getTaskById($id, $filters = null)
     {
-        $task = Task::find()->contentContainer($this->contentContainer)->readable()->where(['task.id' => $id])->one();
-        if ($task === null) {
-            throw new HttpException(404, "Could not load task!");
-        }
+        $task = Task::find()->userRelated([ActiveQueryTask::USER_RELATED_SCOPE_SPACES])->readable()->where(['task.id' => $id])->one();
         return $task;
+    }
+
+    protected function getTaskArrayByFilter($task, $filters = [])
+    {
+        if (!is_array($filters)) {
+            try {
+                $filters = \yii\helpers\Json::decode($filters);
+            } catch (Exception $ex) {
+                $filters = [];
+            }
+        }
+
+        $taskReloaded = Task::find()->where(['task.id' => $task->id])->applyTaskFilters($filters)->one();
+        if ($taskReloaded !== null) {
+            return [
+                'id' => $taskReloaded->id,
+                'output' => \humhub\modules\tasks\widgets\Task::widget(['model' => $taskReloaded])
+            ];
+        }
+
+        return [
+            'id' => $task->id,
+        ];
+    }
+
+    protected static function getFiltersByRequest($store = false)
+    {
+        $filters = [];
+
+        $reqFilters = Yii::$app->request->post('filters', Yii::$app->request->get('filters'));
+        if ($reqFilters != '') {
+            try {
+                $filters = \yii\helpers\Json::decode($reqFilters);
+                if ($store) {
+                    Yii::$app->getModule('tasks')->settings->user()->set('filters', $reqFilters);
+                }
+            } catch (\Exception $ex) {
+                $filters = [];
+            }
+        }
+
+        return $filters;
     }
 
 }
