@@ -42,7 +42,7 @@ $this->registerJsVar('tasksCurrentUserDisplayName', Html::encode(Yii::$app->user
         ?>
         <a href="#" class="pull-right" id='ancShowMyTasks'><small>Show my tasks</small></a><br />
         <br />
-        <?= Html::checkbox('userFilterUnassigned', $defaultFilter['showUnassigned'], ['label' => 'Show unassigned tasks only']); ?>
+        <?= Html::checkbox('userFilterUnassigned', $defaultFilter['showUnassigned'], ['label' => 'Show unassigned only']); ?>
         <hr />
         <p><strong>By status</strong></p>
         <?php
@@ -55,7 +55,7 @@ $this->registerJsVar('tasksCurrentUserDisplayName', Html::encode(Yii::$app->user
         <hr />
 
         <p><strong>By space</strong></p>
-        <?= Html::checkbox('tasksShowFromOtherSpaces', $defaultFilter['showFromOtherSpaces'], ['label' => 'Show tasks from all my spaces']); ?>
+        <?= Html::checkbox('tasksShowFromOtherSpaces', $defaultFilter['showFromOtherSpaces'], ['label' => 'Include all my spaces']); ?>
     </div>
 </div>
 

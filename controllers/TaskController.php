@@ -11,12 +11,18 @@ use humhub\modules\tasks\models\Task;
 class TaskController extends ContentContainerController
 {
 
+    /**
+     * @inheritdoc
+     */
     public $hideSidebar = true;
 
+    /**
+     * Shows tasks
+     * 
+     * @return type
+     */
     public function actionShow()
     {
-        $this->subLayout = '@tasks/views/task/showLayout.php';
-
         $filters = self::getFiltersByRequest(true);
         if (empty($filters)) {
             $filters = \humhub\modules\tasks\widgets\FilterSnippet::getDefaultFilter();
