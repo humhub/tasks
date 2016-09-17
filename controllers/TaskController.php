@@ -10,6 +10,7 @@ use humhub\modules\tasks\models\Task;
 
 class TaskController extends ContentContainerController
 {
+
     public $hideSidebar = true;
 
     public function actionShow()
@@ -29,10 +30,12 @@ class TaskController extends ContentContainerController
         $tasks->offset($pagination->offset)->limit($pagination->limit);
 
         if (Yii::$app->request->isAjax) {
-            return $this->renderAjax('showAjax', [
-                        'tasks' => $tasks->all(),
-                        'pagination' => $pagination,
-            ]);
+            $output = '';
+            foreach ($tasks->all() as $task) {
+                $output .= \humhub\modules\tasks\widgets\Task::widget(['model' => $task]);
+            }
+            $output .= \humhub\modules\tasks\widgets\MoreButton::widget(['pagination' => $pagination]);
+            return $output;
         }
 
         return $this->render('show', [
