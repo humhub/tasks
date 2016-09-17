@@ -13,11 +13,11 @@ use humhub\modules\tasks\models\Task;
      data-task-start-date='<?= ($task->start_date === null) ? '' : Yii::$app->formatter->asTimestamp($task->start_date); ?>'>
 
     <div class="open-check task-status-check">
-        <div class="tasks-check tt pull-left" style="margin-right: 0;" data-toggle="tooltip" data-placement="top" data-original-title="<?= Yii::t("TasksModule.widgets_views_entry", "Click, to finish this task"); ?>"><i class="fa fa-square-o task-check"> </i></div>
+        <div class="tasks-check tt pull-left" style="margin-right: 0;" data-toggle="tooltip" data-placement="top" data-original-title="<?= Yii::t("TasksModule.base", "Click, to finish this task"); ?>"><i class="fa fa-square-o task-check"> </i></div>
     </div>
 
     <div class="completed-check task-status-check">
-        <div class="tasks-check tt pull-left" style="margin-right: 0;" data-toggle="tooltip" data-placement="top" data-original-title="<?= Yii::t("TasksModule.widgets_views_entry", "This task is already done. Click to reopen.") ?>"><i class="fa fa-check-square-o task-check"> </i></div>
+        <div class="tasks-check tt pull-left" style="margin-right: 0;" data-toggle="tooltip" data-placement="top" data-original-title="<?= Yii::t("TasksModule.base", "This task is already done. Click to reopen.") ?>"><i class="fa fa-check-square-o task-check"> </i></div>
     </div>
 
     <div class="media-body">
@@ -41,7 +41,7 @@ use humhub\modules\tasks\models\Task;
             <a href="<?php echo $task->content->container->createUrl('/tasks/task/edit', ['id' => $task->id]); ?>"
                class="tt"
                data-target="#globalModal" data-toggle="tooltip"
-               data-placement="top" data-original-title="Edit Task"><i class="fa fa-pencil"></i></a>
+               data-placement="top" data-original-title="<?= Yii::t('TasksModule.base', 'Edit Task'); ?>"><i class="fa fa-pencil"></i></a>
         </div>
 
         <div class="task-controls assigned-space pull-right hidden" style="display: inline;">
@@ -84,7 +84,7 @@ use humhub\modules\tasks\models\Task;
         </div>
 
         <?php if ($task->status !== Task::STATUS_ACTIVE && $task->status !== Task::STATUS_COMPLETED): ?>
-            <div class="pull-right task-controls"><span class='label label-default'>Status: <?php echo $statusTexts[$task->status]; ?></span></div>
+            <div class="pull-right task-controls"><span class='label label-default'><?php echo $statusTexts[$task->status]; ?></span></div>
         <?php endif; ?>
 
         <div class="clearfix"></div>

@@ -7,6 +7,7 @@ use yii\web\HttpException;
 use humhub\modules\content\components\ContentContainerController;
 use humhub\modules\tasks\components\ActiveQueryTask;
 use humhub\modules\tasks\models\Task;
+use humhub\modules\tasks\permissions\CreateTask;
 
 class TaskController extends ContentContainerController
 {
@@ -43,8 +44,10 @@ class TaskController extends ContentContainerController
             $output .= \humhub\modules\tasks\widgets\MoreButton::widget(['pagination' => $pagination]);
             return $output;
         }
+        $canCreateNewTasks = $this->contentContainer->permissionManager->can(new CreateTask());
 
         return $this->render('show', [
+                    'canCreateNewTasks' => $canCreateNewTasks,
                     'tasks' => $tasks->all(),
                     'pagination' => $pagination,
         ]);

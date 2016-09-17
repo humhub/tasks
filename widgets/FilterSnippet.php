@@ -31,10 +31,10 @@ class FilterSnippet extends \humhub\components\Widget
         $timeFilters['unscheduled'] = Yii::t('TasksModule.filters', 'Unscheduled');
 
         $statusFilters = [];
-        $statusFilters['active'] = 'Active';
-        $statusFilters['completed'] = 'Completed';
-        $statusFilters['deferred'] = 'Deferred';
-        $statusFilters['cancelled'] = 'Cancelled';
+        $statusFilters['active'] = Yii::t('TasksModule.filters', 'Active');
+        $statusFilters['completed'] = Yii::t('TasksModule.filters', 'Completed');
+        $statusFilters['deferred'] = Yii::t('TasksModule.filters', 'Deferred');
+        $statusFilters['cancelled'] = Yii::t('TasksModule.filters', 'Cancelled');
 
         return $this->render('filterSnippet', [
                     'defaultFilter' => self::getDefaultFilter(),

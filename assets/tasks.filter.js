@@ -27,6 +27,7 @@ $(document).ready(function () {
         if ($('#tf_userFilter_invite_tags').find('li#tf_userFilter_' + tasksCurrentUserGuid).size() == 0) {
             $.fn.userpicker.addUserTag(tasksCurrentUserGuid, tasksCurrentUserImage, tasksCurrentUserDisplayName, 'tf_userFilter');
         }
+        return false;
     });
 
     $('input[type=checkbox][name=userFilterUnassigned]').change(function () {
