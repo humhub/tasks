@@ -23,8 +23,23 @@ class FilterSnippet extends \humhub\components\Widget
      */
     public function run()
     {
+        $timeFilters = [];
+        $timeFilters['all'] = Yii::t('TasksModule.filters', 'All');
+        $timeFilters['today'] = Yii::t('TasksModule.filters', 'Today');
+        $timeFilters['week'] = Yii::t('TasksModule.filters', 'This week');
+        $timeFilters['month'] = Yii::t('TasksModule.filters', 'This month');
+        $timeFilters['unscheduled'] = Yii::t('TasksModule.filters', 'Unscheduled');
+
+        $statusFilters = [];
+        $statusFilters['active'] = 'Active';
+        $statusFilters['completed'] = 'Completed';
+        $statusFilters['deferred'] = 'Deferred';
+        $statusFilters['cancelled'] = 'Cancelled';
+
         return $this->render('filterSnippet', [
-                    'defaultFilter' => self::getDefaultFilter()
+                    'defaultFilter' => self::getDefaultFilter(),
+                    'timeFilters' => $timeFilters,
+                    'statusFilters' => $statusFilters,
         ]);
     }
 
