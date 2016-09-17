@@ -9,13 +9,14 @@
 namespace humhub\modules\tasks\widgets;
 
 use Yii;
+use humhub\widgets\BaseSidebarItem;
 
 /**
  * Description of Task
  *
  * @author Luke
  */
-class FilterSnippet extends \humhub\components\Widget
+class FilterSnippet extends BaseSidebarItem
 {
 
     /**
@@ -23,6 +24,8 @@ class FilterSnippet extends \humhub\components\Widget
      */
     public function run()
     {
+        $this->title = Yii::t('TasksModule.filters', '<strong>Filter</strong> tasks');
+
         $timeFilters = [];
         $timeFilters['all'] = Yii::t('TasksModule.filters', 'All');
         $timeFilters['today'] = Yii::t('TasksModule.filters', 'Today');

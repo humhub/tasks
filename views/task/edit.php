@@ -14,22 +14,21 @@ use yii\helpers\Html;
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <?php if (Yii::$app->request->get('id') != null) : ?>
                 <h4 class="modal-title"
-                    id="myModalLabel"><?php echo Yii::t('TasksModule.views_task_edit', '<strong>Edit</strong> task'); ?></h4>
+                    id="myModalLabel"><?php echo Yii::t('TasksModule.base', '<strong>Edit</strong> task'); ?></h4>
                 <?php else : ?>
                 <h4 class="modal-title"
-                    id="myModalLabel"><?php echo Yii::t('TasksModule.views_task_edit', '<strong>Create</strong> new task'); ?></h4>
+                    id="myModalLabel"><?php echo Yii::t('TasksModule.base', '<strong>Create</strong> new task'); ?></h4>
                 <?php endif; ?>
         </div>
 
         <div class="modal-body">
 
-            <?php echo $form->field($task, 'title')->textarea(['id' => 'taskTitleInput', 'class' => 'form-control autosize', 'rows' => '1', 'placeholder' => Yii::t('TasksModule.views_task_edit', 'What is to do?')]); ?>
+            <?php echo $form->field($task, 'title')->textarea(['id' => 'taskTitleInput', 'class' => 'form-control autosize', 'rows' => '1', 'placeholder' => Yii::t('TasksModule.base', 'What is to do?')]); ?>
 
             <div class="row">
                 <div class="col-md-8">
 
-                    <?php echo $form->field($task, 'assignedUserGuids')->textInput(['id' => 'assignedUserGuids']); ?>
-                    <a id="ancSelfAssign" href="#" class="pull-right" style="margin-top:-10px"><small >Assign me</small></a>
+                    <?php echo $form->field($task, 'assignedUserGuids')->textInput(['id' => 'assignedUserGuids'])->hint(Html::a(Yii::t('TasksModule.base', 'Assign myself'), null, ['id' => 'ancSelfAssign', 'class' => 'pull-right'])); ?>
 
                     <?php
                     // attach mention widget to it
@@ -39,7 +38,7 @@ use yii\helpers\Html;
                         'attribute' => 'assignedUserGuids',
                         'userSearchUrl' => $this->context->contentContainer->createUrl('/space/membership/search', array('keyword' => '-keywordPlaceholder-')),
                         'maxUsers' => 10,
-                        'placeholderText' => Yii::t('TasksModule.views_task_edit', 'Assign users'),
+                        'placeholderText' => Yii::t('TasksModule.base', 'Assign users'),
                     ));
                     ?>
 
@@ -50,11 +49,11 @@ use yii\helpers\Html;
                 <div class="col-md-4">
 
                     <div class="form-group">
-                        <?php echo $form->field($task, 'deadline')->widget(yii\jui\DatePicker::className(), ['dateFormat' => Yii::$app->params['formatter']['defaultDateFormat'], 'clientOptions' => [], 'options' => ['class' => 'form-control', 'placeholder' => Yii::t('TasksModule.views_task_edit', 'Deadline')]]); ?>
+                        <?php echo $form->field($task, 'deadline')->widget(yii\jui\DatePicker::className(), ['dateFormat' => Yii::$app->params['formatter']['defaultDateFormat'], 'clientOptions' => [], 'options' => ['class' => 'form-control', 'placeholder' => Yii::t('TasksModule.base', 'Deadline')]]); ?>
                     </div>
 
                     <div class="form-group">
-                        <?php echo $form->field($task, 'duration_days')->textInput(['class' => 'form-control', 'placeholder' => Yii::t('TasksModule.views_task_edit', 'Duration (days)')]); ?>
+                        <?php echo $form->field($task, 'duration_days')->textInput(['class' => 'form-control', 'placeholder' => Yii::t('TasksModule.base', 'Duration (days)')])->hint(Yii::t('TasksModule.base', 'The number of planned days.')); ?>
                     </div>
 
 
@@ -66,7 +65,7 @@ use yii\helpers\Html;
 
             <?php
             echo \humhub\widgets\AjaxButton::widget([
-                'label' => Yii::t('TasksModule.views_task_edit', 'Save'),
+                'label' => Yii::t('TasksModule.base', 'Save'),
                 'ajaxOptions' => [
                     'type' => 'POST',
                     'dataType' => 'json',
@@ -82,7 +81,7 @@ use yii\helpers\Html;
 
             <?php
             echo \humhub\widgets\AjaxButton::widget([
-                'label' => Yii::t('TasksModule.views_task_edit', 'Delete'),
+                'label' => Yii::t('TasksModule.base', 'Delete'),
                 'ajaxOptions' => [
                     'type' => 'POST',
                     'dataType' => 'json',
@@ -139,12 +138,8 @@ use yii\helpers\Html;
         imageUrl = "<?= Yii::$app->user->getIdentity()->getProfileImage()->getUrl(); ?>";
         name = "<?= Html::encode(Yii::$app->user->getIdentity()->displayName); ?>";
         id = "assignedUserGuids";
-
-        console.log("assign self");
         if (!$('#assignedUserGuids_invite_tags').find('li#assignedUserGuids_<?= Yii::$app->user->getIdentity()->guid; ?>').length) {
             $.fn.userpicker.addUserTag(guid, imageUrl, name, id);
-        } else {
-            console.log("already assigned");
         }
     });
 

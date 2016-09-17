@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use humhub\modules\comment\models\Comment;
 use humhub\modules\tasks\models\Task;
+
+humhub\modules\tasks\Assets::register($this);
+$this->registerJsVar('tasksStatusUpdateUrl', $task->content->container->createUrl('/tasks/task/change-status'));
 ?>
 
 <div class="media task" 

@@ -9,22 +9,13 @@ use Yii;
  */
 class WallEntry extends \humhub\modules\content\widgets\WallEntry
 {
-    
-    /**
-     * @var type 
-     */
-    public $task;
 
     /**
      * @inheritdoc
      */
     public function run()
     {
-        $user = $this->contentObject->content->user;
-
-        return $this->render('entry', array(
-                    'task' => $this->contentObject,
-        ));
+        return Task::widget(['model' => $this->contentObject, 'showCommentsColumn' => false]);
     }
 
 }

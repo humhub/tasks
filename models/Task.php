@@ -299,10 +299,10 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
     public static function getStatusTexts()
     {
         return [
-            self::STATUS_ACTIVE => 'Active',
-            self::STATUS_DEFERRED => 'Deferred',
-            self::STATUS_CANCELLED => 'Cancelled',
-            self::STATUS_COMPLETED => 'Finished'
+            self::STATUS_ACTIVE => Yii::t('TasksModule.base', 'Active'),
+            self::STATUS_DEFERRED => Yii::t('TasksModule.base', 'Deferred'),
+            self::STATUS_CANCELLED => Yii::t('TasksModule.base', 'Cancelled'),
+            self::STATUS_COMPLETED => Yii::t('TasksModule.base', 'Finished'),
         ];
     }
 

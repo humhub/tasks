@@ -3,14 +3,15 @@
 namespace humhub\modules\tasks\widgets;
 
 use Yii;
-use humhub\components\Widget;
-use humhub\modules\tasks\models\Task;
 use yii\helpers\Json;
+use humhub\modules\tasks\models\Task;
+use humhub\components\View;
+use humhub\widgets\BaseSidebarItem;
 
 /**
  * Widget for dashboard which shows todays user tasks
  */
-class MyTasks extends Widget
+class MyTasks extends BaseSidebarItem
 {
 
     /**
@@ -23,6 +24,8 @@ class MyTasks extends Widget
      */
     public function run()
     {
+        $this->title = Yii::t('TasksModule.base', '<strong>My</strong> tasks');
+
         if (Yii::$app->user->isGuest) {
             return;
         }
@@ -40,6 +43,7 @@ class MyTasks extends Widget
         }
 
         $showAllUrl = $tasks[0]->content->container->createUrl('/tasks/task/show', ['filters' => Json::encode($filters)]);
+        $this->view->registerJs('$("#tasksList").data("filters", ' . Json::encode($filters) . ');', View::POS_END);
 
         return $this->render('mytasks', [
                     'tasks' => $tasks,
