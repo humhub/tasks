@@ -278,7 +278,9 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
             return false;
         }
 
-        return (strtotime($this->deadline) < time());
+        if ($this->deadline < date('Y-m-d', time())) {
+            return true;
+        }
     }
 
     /**

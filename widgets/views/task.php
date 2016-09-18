@@ -13,7 +13,7 @@ $this->registerJsVar('tasksStatusUpdateUrl', $task->content->container->createUr
      data-task-status='<?= $statusFlags[$task->status]; ?>' 
      data-task-status-id='<?= $task->status; ?>' 
      data-task-title='<?= Html::encode($task->title); ?>' 
-     data-task-start-date='<?= ($task->start_date === null) ? '' : Yii::$app->formatter->asTimestamp($task->start_date); ?>'>
+     data-task-start-date='<?= $task->start_date; ?>'>
 
     <div class="open-check task-status-check">
         <div class="tasks-check tt pull-left" style="margin-right: 0;" data-toggle="tooltip" data-placement="top" data-original-title="<?= Yii::t("TasksModule.base", "Click, to finish this task"); ?>"><i class="fa fa-square-o task-check"> </i></div>
