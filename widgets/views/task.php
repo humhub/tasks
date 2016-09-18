@@ -39,13 +39,14 @@ $this->registerJsVar('tasksStatusUpdateUrl', $task->content->container->createUr
             <?php endif; ?>
         <?php endif; ?>
 
-
-        <div class="task-controls end edit-link pull-right">
-            <a href="<?php echo $task->content->container->createUrl('/tasks/task/edit', ['id' => $task->id]); ?>"
-               class="tt"
-               data-target="#globalModal" data-toggle="tooltip"
-               data-placement="top" data-original-title="<?= Yii::t('TasksModule.base', 'Edit Task'); ?>"><i class="fa fa-pencil"></i></a>
-        </div>
+        <?php if ($task->content->canEdit()): ?>
+            <div class="task-controls admin pull-right">
+                <a href="<?php echo $task->content->container->createUrl('/tasks/task/edit', ['id' => $task->id]); ?>"
+                   class="tt"
+                   data-target="#globalModal" data-toggle="tooltip"
+                   data-placement="top" data-original-title="<?= Yii::t('TasksModule.base', 'Edit Task'); ?>"><i class="fa fa-pencil"></i></a>
+            </div>
+        <?php endif; ?>
 
         <div class="task-controls assigned-space pull-right hidden" style="display: inline;">
             <?=

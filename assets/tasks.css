@@ -31,7 +31,7 @@
     padding-right: 10px;
 }
 
-.task .task-controls.end {
+.task .task-controls:first-of-type{
     font-size: 12px;
     margin-right: 0px;
     border-right: none;
@@ -86,7 +86,7 @@
 /**
  * MyTasks Snippets
  */
-#tasksList.myTasksSnippet .edit-link,
+#tasksList.myTasksSnippet .admin,
 #tasksList.myTasksSnippet .comments-link,
 #tasksList.myTasksSnippet .assigned-users {
     display:none;
