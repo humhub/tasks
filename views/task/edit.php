@@ -27,7 +27,6 @@ use yii\helpers\Html;
 
             <div class="row">
                 <div class="col-md-8">
-
                     <?php echo $form->field($task, 'assignedUserGuids')->textInput(['id' => 'assignedUserGuids'])->hint(Html::a(Yii::t('TasksModule.base', 'Assign myself'), null, ['id' => 'ancSelfAssign', 'class' => 'pull-right'])); ?>
 
                     <?php
@@ -43,8 +42,6 @@ use yii\helpers\Html;
                     ?>
 
                     <?php echo $form->field($task, 'status')->dropDownList(Task::getStatusTexts()); ?>
-
-
                 </div>
                 <div class="col-md-4">
 

@@ -9,7 +9,7 @@ $this->registerJsVar('tasksStatusUpdateUrl', $task->content->container->createUr
 ?>
 
 <div class="media task" 
-     id="task_<?php echo $task->id; ?>" data-task-id="<?= $task->id; ?>" 
+     data-task-id="<?= $task->id; ?>" 
      data-task-status='<?= $statusFlags[$task->status]; ?>' 
      data-task-status-id='<?= $task->status; ?>' 
      data-task-title='<?= Html::encode($task->title); ?>' 
@@ -24,7 +24,7 @@ $this->registerJsVar('tasksStatusUpdateUrl', $task->content->container->createUr
     </div>
 
     <div class="media-body">
-        <span class="task-title pull-left"><?php echo $task->title; ?></span>
+        <span class="task-title pull-left"><?php echo Html::encode($task->title); ?></span>
 
         <?php if ($task->hasDeadline()) : ?>
             <?php $labelClass = ($task->isOverdue()) ? 'danger' : 'default'; ?>

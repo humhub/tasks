@@ -12,7 +12,7 @@ use humhub\modules\content\components\ContentContainerModule;
 class Module extends ContentContainerModule
 {
 
-    public $paginationSize = 5;
+    public $paginationSize = 20;
 
     /**
      * @inheritdoc
