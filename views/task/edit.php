@@ -50,7 +50,7 @@ use yii\helpers\Html;
                     </div>
 
                     <div class="form-group">
-                        <?php echo $form->field($task, 'duration_days')->textInput(['class' => 'form-control', 'placeholder' => Yii::t('TasksModule.base', 'Duration (days)')])->hint(Yii::t('TasksModule.base', 'The number of planned days.')); ?>
+                        <?php echo $form->field($task, 'duration_days')->textInput(['type' => 'number', 'min' => '1', 'class' => 'form-control', 'placeholder' => Yii::t('TasksModule.base', 'Duration (days)')])->hint(Yii::t('TasksModule.base', 'The number of planned days.')); ?>
                     </div>
 
 

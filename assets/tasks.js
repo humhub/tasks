@@ -10,13 +10,13 @@ $(document).ready(function () {
  * Handles check item
  */
 $('body').on('click', '.task-status-check', function () {
-    newStatus = taskStatusCompleted;
+    var newStatus = taskStatusCompleted;
     if ($(this).hasClass('completed-check')) {
         newStatus = taskStatusActive;
     }
 
-    $task = $(this).closest('.task');
-    $taskList = $task.closest('#tasksList');
+    var $task = $(this).closest('.task');
+    var $taskList = $task.closest('#tasksList');
 
     $.ajax({
         url: tasksStatusUpdateUrl,
