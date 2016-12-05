@@ -17,11 +17,12 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    '<strong>Confirm</strong> deleting' => '',
-    'Add Task' => '',
-    'Cancel' => '',
-    'Delete' => '',
-    'Do you really want to delete this task?' => '',
-    'No open tasks...' => '',
-    'completed tasks' => '',
+    '<strong>Confirm</strong> deleting' => '<strong>确认</strong> 删除',
+    'Add Task' => '增加任务',
+    'Cancel' => '取消',
+    'Delete' => '删除',
+    'Do you really want to delete this task?' => '你真的要删除此任务吗？',
+    'No open tasks...' => '没有打开的任务...',
+    'completed tasks' => '完成任务',
+    'Edit Task' => '编辑任务',
 ];

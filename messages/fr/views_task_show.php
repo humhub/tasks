@@ -7,4 +7,5 @@ return array (
   'Do you really want to delete this task?' => 'Vouhaitez-vous vraiment supprimer cette tâche ?',
   'No open tasks...' => 'Pas de tâche ouverte...',
   'completed tasks' => 'tâche(s) terminée(s)',
+  'Edit Task' => '',
 );

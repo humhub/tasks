@@ -24,4 +24,5 @@ return [
     'Do you really want to delete this task?' => '',
     'No open tasks...' => '',
     'completed tasks' => '',
+    'Edit Task' => '',
 ];

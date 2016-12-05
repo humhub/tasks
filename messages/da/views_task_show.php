@@ -7,4 +7,5 @@ return array (
   'Do you really want to delete this task?' => 'Vil du virkelig slette denne opgave?',
   'No open tasks...' => 'Ingen åbne opgaver...',
   'completed tasks' => 'udførte opgaver',
+  'Edit Task' => '',
 );

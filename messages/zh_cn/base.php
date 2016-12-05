@@ -17,8 +17,8 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Assigned user(s)' => '',
-    'Deadline' => '',
-    'Title' => '',
+    'Assigned user(s)' => '分配用户',
+    'Deadline' => '截止时间',
+    'Title' => '标题',
     'Tasks' => '任务',
 ];

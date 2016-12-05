@@ -17,11 +17,11 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    '<strong>Create</strong> new task' => '',
-    '<strong>Edit</strong> task' => '',
-    'Assign users' => '',
-    'Cancel' => '',
-    'Deadline' => '',
-    'Save' => '',
-    'What is to do?' => '',
+    '<strong>Create</strong> new task' => '<strong>创建</strong> 新任务',
+    '<strong>Edit</strong> task' => '<strong>编辑</strong> 任务',
+    'Assign users' => '分配用户',
+    'Cancel' => '取消',
+    'Deadline' => '截止日期',
+    'Save' => '保存',
+    'What is to do?' => '要做什么？',
 ];

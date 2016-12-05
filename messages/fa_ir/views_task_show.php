@@ -7,4 +7,5 @@ return array (
   'Do you really want to delete this task?' => 'وظيفه حذف شود؟',
   'No open tasks...' => 'هيچ وظيف بازي نيست',
   'completed tasks' => 'وظايف به اتمام رسيده',
+  'Edit Task' => '',
 );

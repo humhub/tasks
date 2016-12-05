@@ -86,7 +86,7 @@ humhub\modules\tasks\Assets::register($this);
                                 <a href="<?php echo $contentContainer->createUrl('edit', ['id' => $task->id]); ?>"
                                    class="tt"
                                    data-target="#globalModal" data-toggle="tooltip"
-                                   data-placement="top" data-original-title="Edit Task"><i class="fa fa-pencil"></i></a>
+                                   data-placement="top" data-original-title="<?php echo Yii::t('TasksModule.views_task_show', 'Edit Task'); ?>"><i class="fa fa-pencil"></i></a>
 
 
                                 <?php
@@ -254,7 +254,7 @@ humhub\modules\tasks\Assets::register($this);
                                 <a href="<?php echo $contentContainer->createUrl('edit', ['id' => $task->id]); ?>"
                                    class="tt"
                                    data-target="#globalModal" data-toggle="tooltip"
-                                   data-placement="top" data-original-title="Edit Task"><i class="fa fa-pencil"></i></a>
+                                   data-placement="top" data-original-title="<?php echo Yii::t('TasksModule.views_task_show', 'Edit Task'); ?>"><i class="fa fa-pencil"></i></a>
 
 
                                 <?php

@@ -1,6 +1,6 @@
 <?php
 return array (
-  '<b>There are no tasks yet!</b>' => '',
+  '<b>There are no tasks yet!</b>' => '<b>还没有任务!</b>',
   'Back to stream' => '@@返回动态@@',
   'No tasks found which matches your current filter(s)!' => '@@没有符合条件的记录!@@',
   '<b>There are no tasks yet!</b><br>Be the first and create one...' => '<b>还没有任务!</b><br>创建第一个任务...',
