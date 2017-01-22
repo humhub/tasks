@@ -7,7 +7,6 @@ class m170122_091531_missingdefault extends Migration
     public function up()
     {
         $this->alterColumn('task', 'max_users', $this->integer()->null());
-        die();
     }
 
     public function down()
