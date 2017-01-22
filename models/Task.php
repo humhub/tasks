@@ -54,9 +54,9 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
     public function attributeLabels()
     {
         return array(
-            'title' => Yii::t('TasksModule.base','Title'),
-            'assignedUserGuids' => Yii::t('TasksModule.base','Assigned user(s)'),
-            'deadline' => Yii::t('TasksModule.base','Deadline'),
+            'title' => Yii::t('TasksModule.base', 'Title'),
+            'assignedUserGuids' => Yii::t('TasksModule.base', 'Assigned user(s)'),
+            'deadline' => Yii::t('TasksModule.base', 'Deadline'),
         );
     }
 
@@ -91,6 +91,13 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
         parent::afterSave($insert, $changedAttributes);
 
 
+        /**
+         * Fix me, since 1.2 assignedUserGuids is an array
+         */
+        if (is_array($this->assignedUserGuids)) {
+            $this->assignedUserGuids = implode(',', $this->assignedUserGuids);
+        }
+
         foreach (explode(",", $this->assignedUserGuids) as $userGuid) {
             $f = false;
             foreach ($this->assignedUsers as $user) {
@@ -118,8 +125,7 @@ class Task extends ContentActiveRecord implements \humhub\modules\search\interfa
         foreach ($this->assignedUsers as $user) {
             $this->assignedUserGuids .= $user->guid . ",";
         }
-
-
+        
         return parent::afterFind();
     }
 

@@ -18,19 +18,18 @@ class TaskController extends ContentContainerController
         $tasks = Task::find()->contentContainer($this->contentContainer)->readable()->all();
         $completedTaskCount = Task::find()->contentContainer($this->contentContainer)->readable()->where(['task.status' => 5])->count();
         $canCreateNewTasks = $this->contentContainer->permissionManager->can(new \humhub\modules\tasks\permissions\CreateTask());
-        
-        
+
+
         return $this->render('show', [
-            'tasks' => $tasks,
-            'completedTaskCount' => $completedTaskCount,
-            'contentContainer' => $this->contentContainer,
-            'canCreateNewTasks' => $canCreateNewTasks
+                    'tasks' => $tasks,
+                    'completedTaskCount' => $completedTaskCount,
+                    'contentContainer' => $this->contentContainer,
+                    'canCreateNewTasks' => $canCreateNewTasks
         ]);
-
-
     }
 
-    public function actionEdit() {
+    public function actionEdit()
+    {
 
         $id = (int) Yii::$app->request->get('id');
         $task = Task::find()->contentContainer($this->contentContainer)->readable()->where(['task.id' => $id])->one();
@@ -54,12 +53,11 @@ class TaskController extends ContentContainerController
             }
         }
 
-        return $this->renderAjax('edit', ['task'=>$task]);
-
+        return $this->renderAjax('edit', ['task' => $task]);
     }
 
-
-    public function actionDelete() {
+    public function actionDelete()
+    {
 
         $id = (int) Yii::$app->request->get('id');
 
@@ -70,12 +68,9 @@ class TaskController extends ContentContainerController
             }
         }
 
-        Yii::$app->response->format='json';
-        return ['status'=>'ok'];
+        Yii::$app->response->format = 'json';
+        return ['status' => 'ok'];
     }
-
-
-
 
     public function actionAssign()
     {
@@ -111,7 +106,9 @@ class TaskController extends ContentContainerController
         Yii::$app->response->format = 'json';
         $json = array();
         $json['output'] = $this->renderAjaxContent($task->getWallOut());
-        $json['wallEntryId'] = $task->content->getFirstWallEntryId();
+        if (version_compare(Yii::$app->version, '1.2', '<')) {
+            $json['wallEntryId'] = $task->content->getFirstWallEntryId();
+        }
         return $json;
     }
 

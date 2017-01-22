@@ -12,7 +12,7 @@ class m131023_165214_initial extends Migration
             'id' => 'pk',
             'title' => 'text NOT NULL',
             'deathline' => 'datetime DEFAULT NULL',
-            'max_users' => 'int(11) NOT NULL',
+            'max_users' => 'int(11) DEFAULT NULL',
             'status' => 'int(11) NOT NULL',
             'percent' => 'smallint(6) NOT NULL',
             'created_at' => 'datetime NOT NULL',
