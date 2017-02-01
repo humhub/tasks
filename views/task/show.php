@@ -67,7 +67,7 @@ humhub\modules\tasks\Assets::register($this);
 
 
                         <div class="media-body">
-                            <span class="task-title pull-left"><?php echo $task->title; ?></span>
+                            <span class="task-title pull-left"><?= Html::encode($task->title); ?></span>
 
                             <?php if ($task->hasDeadline()) : ?>
                                 <?php
@@ -234,7 +234,7 @@ humhub\modules\tasks\Assets::register($this);
 
 
                         <div class="media-body">
-                            <span class="task-title task-completed pull-left"><?php echo $task->title; ?></span>
+                            <span class="task-title task-completed pull-left"><? Html::encode($task->title); ?></span>
 
                             <?php if ($task->hasDeadline()) : ?>
                                 <?php
