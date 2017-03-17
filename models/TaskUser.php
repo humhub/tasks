@@ -54,10 +54,7 @@ class TaskUser extends ActiveRecord
     public function afterSave($insert, $changedAttributes)
     {
         if ($insert) {
-            $notification = new \humhub\modules\tasks\notifications\Assigned();
-            $notification->source = $this->task;
-            $notification->originator = Yii::$app->user->getIdentity();
-            $notification->send($this->user);
+            \humhub\modules\tasks\notifications\Assigned::instance()->from(Yii::$app->user->getIdentity())->about($this->task)->send($this->user);
         }
 
         return parent::afterSave($insert, $changedAttributes);
