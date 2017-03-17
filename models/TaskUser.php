@@ -63,13 +63,4 @@ class TaskUser extends ActiveRecord
         return parent::afterSave($insert, $changedAttributes);
     }
 
-    public function beforeDelete()
-    {
-        $notification = new \humhub\modules\tasks\notifications\Assigned();
-        $notification->source = $this->task;
-        $notification->send($this->user);
-
-        return parent::beforeDelete();
-    }
-
 }
