@@ -7,7 +7,11 @@ class m141002_092800_fix_deadline extends Migration
 
     public function up()
     {
-        $this->update('task', array('deadline' => new \yii\db\Expression('NULL')), 'deadline = "" OR deadline = "0000-00-00 00:00:00"');
+        try {
+            $this->update('task', array('deadline' => new \yii\db\Expression('NULL')), 'deadline = "" OR deadline = "0000-00-00 00:00:00"');
+        } catch (\Exception $ex) {
+
+        }
     }
 
     public function down()
