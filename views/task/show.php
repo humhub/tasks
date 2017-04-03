@@ -14,7 +14,7 @@ humhub\modules\tasks\Assets::register($this);
             <?php foreach ($tasks as $task) : ?>
 
                 <?php if ($task->status == Task::STATUS_OPEN) : ?>
-                    <div class="media task" id="task_<?php echo $task->id; ?>">
+                    <div class="media task" id="task_<?= $task->id; ?>">
 
                         <?php
                         $currentUserAssigned = false;
@@ -28,17 +28,16 @@ humhub\modules\tasks\Assets::register($this);
                         }
                         ?>
 
-
                         <div class="open-check">
-                            <?php
-                            echo \humhub\widgets\AjaxButton::widget([
+                            <?=
+                            humhub\widgets\AjaxButton::widget([
                                 'label' => '<div class="tasks-check tt pull-left" style="margin-right: 0;" data-toggle="tooltip" data-placement="top" data-original-title="' . Yii::t("TasksModule.widgets_views_entry", "Click, to finish this task") . '"><i class="fa fa-square-o task-check"> </i></div>',
                                 'tag' => 'a',
                                 'ajaxOptions' => [
                                     'dataType' => "json",
                                     'beforeSend' => "completeTask(" . $task->id . ")",
                                     'success' => "function(json) {  $('#wallEntry_'+json.wallEntryId).html(parseHtml(json.output)); }",
-                                    'url' => $contentContainer->createUrl('/tasks/task/change-status', array('taskId' => $task->id, 'status' => Task::STATUS_FINISHED)),
+                                    'url' => $contentContainer->createUrl('/tasks/task/change-status', ['taskId' => $task->id, 'status' => Task::STATUS_FINISHED]),
                                 ],
                                 'htmlOptions' => [
                                     'id' => "TaskFinishLink_" . $task->id
@@ -48,15 +47,15 @@ humhub\modules\tasks\Assets::register($this);
                         </div>
 
                         <div class="completed-check hidden">
-                            <?php
-                            echo \humhub\widgets\AjaxButton::widget([
+                            <?=
+                            humhub\widgets\AjaxButton::widget([
                                 'label' => '<div class="tasks-check tt pull-left" style="margin-right: 0;" data-toggle="tooltip" data-placement="top" data-original-title="' . Yii::t("TasksModule.widgets_views_entry", "This task is already done. Click to reopen.") . '"><i class="fa fa-check-square-o task-check"> </i></div>',
                                 'tag' => 'a',
                                 'ajaxOptions' => [
                                     'dataType' => "json",
                                     'beforeSend' => "reopenTask(" . $task->id . ")",
                                     'success' => "function(json) {  $('#wallEntry_'+json.wallEntryId).html(parseHtml(json.output));}",
-                                    'url' => $contentContainer->createUrl('/tasks/task/change-status', array('taskId' => $task->id, 'status' => Task::STATUS_OPEN)),
+                                    'url' => $contentContainer->createUrl('/tasks/task/change-status', ['taskId' => $task->id, 'status' => Task::STATUS_OPEN]),
                                 ],
                                 'htmlOptions' => [
                                     'id' => "TaskOpenLink_" . $task->id
@@ -77,20 +76,20 @@ humhub\modules\tasks\Assets::register($this);
                                     $class = "label label-danger";
                                 }
                                 ?>
-                                <span class="<?php echo $class; ?>"><?php echo date("d. M", $timestamp); ?></span>
+                                <span class="<?= $class; ?>"><?= date("d. M", $timestamp); ?></span>
                             <?php endif; ?>
-
 
                             <div class="task-controls end pull-right">
 
-                                <a href="<?php echo $contentContainer->createUrl('edit', ['id' => $task->id]); ?>"
+                                <a href="<?= $contentContainer->createUrl('edit', ['id' => $task->id]); ?>"
                                    class="tt"
                                    data-target="#globalModal" data-toggle="tooltip"
-                                   data-placement="top" data-original-title="Edit Task"><i class="fa fa-pencil"></i></a>
+                                   data-placement="top" data-original-title="Edit Task">
+                                       <i class="fa fa-pencil"></i>
+                                </a>
 
-
-                                <?php
-                                echo humhub\widgets\ModalConfirm::widget(array(
+                                <?=
+                                humhub\widgets\ModalConfirm::widget([
                                     'uniqueID' => 'modal_delete_task_' . $task->id,
                                     'linkOutput' => 'a',
                                     'title' => Yii::t('TasksModule.views_task_show', '<strong>Confirm</strong> deleting'),
@@ -98,9 +97,9 @@ humhub\modules\tasks\Assets::register($this);
                                     'buttonTrue' => Yii::t('TasksModule.views_task_show', 'Delete'),
                                     'buttonFalse' => Yii::t('TasksModule.views_task_show', 'Cancel'),
                                     'linkContent' => '<i class="fa fa-times-circle-o colorDanger"></i>',
-                                    'linkHref' => $contentContainer->createUrl('delete', array('id' => $task->id)),
+                                    'linkHref' => $contentContainer->createUrl('delete', ['id' => $task->id]),
                                     'confirmJS' => "$('#task_" . $task->id . "').fadeOut('fast')",
-                                ));
+                                ]);
                                 ?>
 
                             </div>
@@ -108,25 +107,25 @@ humhub\modules\tasks\Assets::register($this);
                             <div class="task-controls pull-right">
 
                                 <a data-toggle="collapse"
-                                   href="#task-comment-<?php echo $task->id; ?>"
-                                   onclick="$('#comment_humhubmodulestasksmodelsTask_<?php echo $task->id; ?>').show();return false;"
+                                   href="#task-comment-<?= $task->id; ?>"
+                                   onclick="$('#comment_humhubmodulestasksmodelsTask_<?= $task->id; ?>').show();return false;"
                                    aria-expanded="false"
-                                   aria-controls="collapseTaskComments"><i
-                                        class="fa fa-comment-o"></i> <?php echo $count = Comment::GetCommentCount($task->className(), $task->id); ?>
+                                   aria-controls="collapseTaskComments">
+                                       <i class="fa fa-comment-o"></i>
+                                       <?= $count = Comment::GetCommentCount($task->className(), $task->id); ?>
                                 </a>
 
                             </div>
 
-
                             <div class="task-controls assigned-users pull-right" style="display: inline;">
                                 <!-- Show assigned user -->
                                 <?php foreach ($task->assignedUsers as $user): ?>
-                                    <a href="<?php echo $user->getUrl(); ?>" id="user_<?php echo $task->id; ?>">
-                                        <img src="<?php echo $user->getProfileImage()->getUrl(); ?>" class="img-rounded tt"
+                                    <a href="<?= $user->getUrl(); ?>" id="user_<?= $task->id; ?>">
+                                        <img src="<?= $user->getProfileImage()->getUrl(); ?>" class="img-rounded tt"
                                              height="24" width="24" alt="24x24"
                                              style="width: 24px; height: 24px;" data-toggle="tooltip" data-placement="top"
                                              title=""
-                                             data-original-title="<?php echo Html::encode($user->displayName); ?>">
+                                             data-original-title="<?= Html::encode($user->displayName); ?>">
                                     </a>
 
                                 <?php endforeach; ?>
@@ -136,52 +135,49 @@ humhub\modules\tasks\Assets::register($this);
 
                         </div>
 
-                        <div class="wall-entry collapse" id="task-comment-<?php echo $task->id; ?>">
+                        <div class="wall-entry collapse" id="task-comment-<?= $task->id; ?>">
                             <div class="wall-entry-controls">
-                                <?php //echo \humhub\modules\comment\widgets\CommentLink::widget(array('object' => $task)); ?>
+                                <?php //echo humhub\modules\comment\widgets\CommentLink::widget(['object' => $task]); ?>
                             </div>
-                            <?php echo \humhub\modules\comment\widgets\Comments::widget(array('object' => $task)); ?>
+                            <?= humhub\modules\comment\widgets\Comments::widget(['object' => $task]); ?>
                         </div>
 
-                        <script type="text/javascript">
-                            $('#task-comment-<?php echo $task->id; ?>').on('shown.bs.collapse', function () {
-                                $('#newCommentForm_humhubmodulestasksmodelsTask_<?php echo $task->id; ?>_contenteditable').focus();
+                        <script>
+                            $('#task-comment-<?= $task->id; ?>').on('shown.bs.collapse', function () {
+                                $('#newCommentForm_humhubmodulestasksmodelsTask_<?= $task->id; ?>_contenteditable').focus();
                             })
                         </script>
-
 
                     </div>
                 <?php endif; ?>
             <?php endforeach; ?>
             <?php if (count($tasks) == 0 || count($tasks) == $completedTaskCount) : ?>
-                <em><?php echo Yii::t('TasksModule.views_task_show', 'No open tasks...'); ?></em>
+                <em><?= Yii::t('TasksModule.views_task_show', 'No open tasks...'); ?></em>
             <?php endif; ?>
         </div>
 
-
         <br>
 
-
         <?php if ($canCreateNewTasks): ?>
-            <a href="<?php echo $contentContainer->createUrl('edit'); ?>" class="btn btn-primary"
-               data-target="#globalModal"><i
-                    class="fa fa-plus"></i> <?php echo Yii::t('TasksModule.views_task_show', 'Add Task'); ?></a>
-            <?php endif; ?>
-
+            <a href="<?= $contentContainer->createUrl('edit'); ?>" class="btn btn-primary"
+               data-target="#globalModal">
+                   <i class="fa fa-plus"></i>
+                   <?= Yii::t('TasksModule.views_task_show', 'Add Task'); ?>
+            </a>
+        <?php endif; ?>
 
         <a data-toggle="collapse" id="completed-task-link" href="#completed-tasks" class="show-completed-tasks-link"
-           style="display: none;"><i
-                class="fa fa-check"></i>
+           style="display: none;">
+               <i class="fa fa-check"></i>
         </a>
 
-        <div class="collapse <?php if (Yii::$app->request->get('completed') != null) : ?>in<?php endif; ?>"
-             id="completed-tasks">
+        <div class="collapse <?php if (Yii::$app->request->get('completed') != null) : ?>in<?php endif; ?>" id="completed-tasks">
             <br>
             <br>
             <?php foreach ($tasks as $task) : ?>
 
                 <?php if ($task->status == Task::STATUS_FINISHED) : ?>
-                    <div class="media task" id="task_<?php echo $task->id; ?>">
+                    <div class="media task" id="task_<?= $task->id; ?>">
 
                         <?php
                         $currentUserAssigned = false;
@@ -195,17 +191,16 @@ humhub\modules\tasks\Assets::register($this);
                         }
                         ?>
 
-
                         <div class="open-check hidden">
-                            <?php
-                            echo \humhub\widgets\AjaxButton::widget([
+                            <?=
+                            humhub\widgets\AjaxButton::widget([
                                 'label' => '<div class="tasks-check tt pull-left" style="margin-right: 0;" data-toggle="tooltip" data-placement="top" data-original-title="' . Yii::t("TasksModule.widgets_views_entry", "Click, to finish this task") . '"><i class="fa fa-square-o task-check"> </i></div>',
                                 'tag' => 'a',
                                 'ajaxOptions' => [
                                     'dataType' => "json",
                                     'beforeSend' => "completeTask(" . $task->id . ")",
                                     'success' => "function(json) {  $('#wallEntry_'+json.wallEntryId).html(parseHtml(json.output)); }",
-                                    'url' => $contentContainer->createUrl('/tasks/task/change-status', array('taskId' => $task->id, 'status' => Task::STATUS_FINISHED)),
+                                    'url' => $contentContainer->createUrl('/tasks/task/change-status', ['taskId' => $task->id, 'status' => Task::STATUS_FINISHED]),
                                 ],
                                 'htmlOptions' => [
                                     'id' => "TaskFinishLink_" . $task->id
@@ -215,15 +210,15 @@ humhub\modules\tasks\Assets::register($this);
                         </div>
 
                         <div class="completed-check">
-                            <?php
-                            echo \humhub\widgets\AjaxButton::widget([
+                            <?=
+                            humhub\widgets\AjaxButton::widget([
                                 'label' => '<div class="tasks-check tt pull-left" style="margin-right: 0;" data-toggle="tooltip" data-placement="top" data-original-title="' . Yii::t("TasksModule.widgets_views_entry", "This task is already done. Click to reopen.") . '"><i class="fa fa-check-square-o task-check"> </i></div>',
                                 'tag' => 'a',
                                 'ajaxOptions' => [
                                     'dataType' => "json",
                                     'beforeSend' => "reopenTask(" . $task->id . ")",
                                     'success' => "function(json) {  $('#wallEntry_'+json.wallEntryId).html(parseHtml(json.output));}",
-                                    'url' => $contentContainer->createUrl('/tasks/task/change-status', array('taskId' => $task->id, 'status' => Task::STATUS_OPEN)),
+                                    'url' => $contentContainer->createUrl('/tasks/task/change-status', ['taskId' => $task->id, 'status' => Task::STATUS_OPEN]),
                                 ],
                                 'htmlOptions' => [
                                     'id' => "TaskOpenLink_" . $task->id
@@ -232,9 +227,8 @@ humhub\modules\tasks\Assets::register($this);
                             ?>
                         </div>
 
-
                         <div class="media-body">
-                            <span class="task-title task-completed pull-left"><? Html::encode($task->title); ?></span>
+                            <span class="task-title task-completed pull-left"><?= Html::encode($task->title); ?></span>
 
                             <?php if ($task->hasDeadline()) : ?>
                                 <?php
@@ -244,21 +238,20 @@ humhub\modules\tasks\Assets::register($this);
                                     $class = "label label-danger";
                                 }
                                 ?>
-                                <span
-                                    class="<?php echo $class; ?> task-completed-controls"><?php echo date("d. M", $timestamp); ?></span>
+                                <span class="<?= $class; ?> task-completed-controls"><?= date("d. M", $timestamp); ?></span>
                                 <?php endif; ?>
-
 
                             <div class="task-controls end pull-right">
 
-                                <a href="<?php echo $contentContainer->createUrl('edit', ['id' => $task->id]); ?>"
+                                <a href="<?= $contentContainer->createUrl('edit', ['id' => $task->id]); ?>"
                                    class="tt"
                                    data-target="#globalModal" data-toggle="tooltip"
-                                   data-placement="top" data-original-title="Edit Task"><i class="fa fa-pencil"></i></a>
+                                   data-placement="top" data-original-title="Edit Task">
+                                       <i class="fa fa-pencil"></i>
+                                </a>
 
-
-                                <?php
-                                echo humhub\widgets\ModalConfirm::widget(array(
+                                <?=
+                                humhub\widgets\ModalConfirm::widget([
                                     'uniqueID' => 'modal_delete_task_' . $task->id,
                                     'linkOutput' => 'a',
                                     'title' => Yii::t('TasksModule.views_task_show', '<strong>Confirm</strong> deleting'),
@@ -266,9 +259,9 @@ humhub\modules\tasks\Assets::register($this);
                                     'buttonTrue' => Yii::t('TasksModule.views_task_show', 'Delete'),
                                     'buttonFalse' => Yii::t('TasksModule.views_task_show', 'Cancel'),
                                     'linkContent' => '<i class="fa fa-times-circle-o colorDanger"></i>',
-                                    'linkHref' => $contentContainer->createUrl('delete', array('id' => $task->id)),
+                                    'linkHref' => $contentContainer->createUrl('delete', ['id' => $task->id]),
                                     'confirmJS' => "$('#task_" . $task->id . "').fadeOut('fast')",
-                                ));
+                                ]);
                                 ?>
 
                             </div>
@@ -276,28 +269,27 @@ humhub\modules\tasks\Assets::register($this);
                             <div class="task-controls pull-right">
 
                                 <a data-toggle="collapse"
-                                   href="#task-comment-<?php echo $task->id; ?>"
-                                   onclick="$('#comment_humhubmodulestasksmodelsTask_<?php echo $task->id; ?>').show();return false;"
+                                   href="#task-comment-<?= $task->id; ?>"
+                                   onclick="$('#comment_humhubmodulestasksmodelsTask_<?= $task->id; ?>').show();return false;"
                                    aria-expanded="false"
-                                   aria-controls="collapseTaskComments"><i
-                                        class="fa fa-comment-o"></i> <?php echo $count = Comment::GetCommentCount($task->className(), $task->id); ?>
+                                   aria-controls="collapseTaskComments">
+                                       <i class="fa fa-comment-o"></i>
+                                       <?= $count = Comment::GetCommentCount($task->className(), $task->id); ?>
                                 </a>
 
                             </div>
-
 
                             <div class="task-controls pull-right assigned-users task-completed-controls"
                                  style="display: inline;">
                                 <!-- Show assigned user -->
                                 <?php foreach ($task->assignedUsers as $user): ?>
-                                    <a href="<?php echo $user->getUrl(); ?>" id="user_<?php echo $task->id; ?>">
-                                        <img src="<?php echo $user->getProfileImage()->getUrl(); ?>" class="img-rounded tt"
+                                    <a href="<?= $user->getUrl(); ?>" id="user_<?= $task->id; ?>">
+                                        <img src="<?= $user->getProfileImage()->getUrl(); ?>" class="img-rounded tt"
                                              height="24" width="24" alt="24x24"
                                              style="width: 24px; height: 24px;" data-toggle="tooltip" data-placement="top"
                                              title=""
-                                             data-original-title="<?php echo Html::encode($user->displayName); ?>">
+                                             data-original-title="<?= Html::encode($user->displayName); ?>">
                                     </a>
-
                                 <?php endforeach; ?>
                             </div>
 
@@ -305,19 +297,18 @@ humhub\modules\tasks\Assets::register($this);
 
                         </div>
 
-                        <div class="wall-entry collapse " id="task-comment-<?php echo $task->id; ?>">
+                        <div class="wall-entry collapse " id="task-comment-<?= $task->id; ?>">
                             <div class="wall-entry-controls">
-                                <?php //echo \humhub\modules\comment\widgets\CommentLink::widget(array('object' => $task)); ?>
+                                <?php //echo humhub\modules\comment\widgets\CommentLink::widget(['object' => $task]); ?>
                             </div>
-                            <?php echo \humhub\modules\comment\widgets\Comments::widget(array('object' => $task)); ?>
+                            <?= humhub\modules\comment\widgets\Comments::widget(['object' => $task]); ?>
                         </div>
 
-                        <script type="text/javascript">
-                            $('#task-comment-<?php echo $task->id; ?>').on('shown.bs.collapse', function () {
-                                $('#newCommentForm_humhubmodulestasksmodelsTask_<?php echo $task->id; ?>_contenteditable').focus();
+                        <script>
+                            $('#task-comment-<?= $task->id; ?>').on('shown.bs.collapse', function () {
+                                $('#newCommentForm_humhubmodulestasksmodelsTask_<?= $task->id; ?>_contenteditable').focus();
                             })
                         </script>
-
 
                     </div>
                 <?php endif; ?>
@@ -326,11 +317,11 @@ humhub\modules\tasks\Assets::register($this);
     </div>
 </div>
 
-<script type="text/javascript">
+<script>
 
-    var _id = <?php echo (int) Yii::$app->request->get('id'); ?>;
-    var _completedTaskCount = <?php echo $completedTaskCount; ?>;
-    var _completedTaskButtonText = "<?php echo Yii::t('TasksModule.views_task_show', 'completed tasks'); ?>";
+    var _id = <?= (int) Yii::$app->request->get('id'); ?>;
+    var _completedTaskCount = <?= $completedTaskCount; ?>;
+    var _completedTaskButtonText = "<?= Yii::t('TasksModule.views_task_show', 'completed tasks'); ?>";
 
     if (_id > 0) {
         $('#task_' + _id).addClass('highlight');
@@ -338,7 +329,6 @@ humhub\modules\tasks\Assets::register($this);
             backgroundColor: "#fff"
         }, 2000);
     }
-
 
     function completeTask(id) {
         $('#task_' + id + ' .open-check').addClass('hidden');
@@ -349,7 +339,6 @@ humhub\modules\tasks\Assets::register($this);
         $('#task_' + id).appendTo('#completed-tasks');
         _completedTaskCount++;
         handleCompletedTasks();
-
     }
 
     function reopenTask(id) {
@@ -372,16 +361,10 @@ humhub\modules\tasks\Assets::register($this);
             $('#completed-task-link').fadeOut('fast');
             $('#completed-tasks').removeClass('in');
         }
-
     }
 
     $(document).ready(function () {
         handleCompletedTasks();
     });
 
-
 </script>
-
-
-
-
