@@ -1,7 +1,7 @@
 <?php
 return array (
-  'Assigned user(s)' => '',
-  'Deadline' => '',
-  'Tasks' => '',
-  'Title' => 'Naslov',
+  'Assigned user(s)' => 'Hozzárendelt felhasználó(k)',
+  'Deadline' => 'Határidő',
+  'Tasks' => 'Feladatok',
+  'Title' => 'Cím',
 );
