@@ -1,7 +1,7 @@
 <?php
 return array (
-  'Assigned user(s)' => '',
-  'Deadline' => '',
+  'Assigned user(s)' => 'Přiřazený uživatel/é',
+  'Deadline' => 'Lhůta',
   'Tasks' => 'Úkoly',
   'Title' => 'Název',
 );
