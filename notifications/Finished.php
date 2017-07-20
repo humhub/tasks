@@ -3,7 +3,7 @@
 namespace humhub\modules\tasks\notifications;
 
 use Yii;
-use humhub\libs\Html;
+use yii\bootstrap\Html;
 use humhub\modules\notification\components\BaseNotification;
 
 class Finished extends BaseNotification
@@ -17,7 +17,7 @@ class Finished extends BaseNotification
     /**
      * @inheritdoc
      */
-    public function html()
+    public function getAsHtml()
     {
         return Yii::t('TasksModule.views_notifications_taskFinished', '{userName} finished task {task}.', array(
                     '{userName}' => Html::tag('strong', Html::encode($this->originator->displayName)),
