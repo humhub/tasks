@@ -2,7 +2,7 @@
 
 /**
  * @link https://www.humhub.org/
- * @copyright Copyright (c) 2015 HumHub GmbH & Co. KG
+ * @copyright Copyright (c) 2017 HumHub GmbH & Co. KG
  * @license https://www.humhub.com/licences
  */
 
@@ -36,12 +36,12 @@ class CreateTask extends \humhub\libs\BasePermission
     /**
      * @inheritdoc
      */
-    protected $title = "Create tasks";
+    protected $title = Yii::t('TasksModule.permissions', 'Create tasks');
 
     /**
      * @inheritdoc
      */
-    protected $description = "Allows the user to create new tasks";
+    protected $description = Yii::t('TasksModule.permissions', 'Allows the user to create new tasks');
 
     /**
      * @inheritdoc
