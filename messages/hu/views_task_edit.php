@@ -4,7 +4,7 @@ return array (
   '<strong>Edit</strong> task' => '',
   'Assign users' => '',
   'Cancel' => 'Mégsem',
-  'Deadline' => '',
+  'Deadline' => 'Határidő',
   'Save' => 'Mentés',
   'What is to do?' => '',
 );
