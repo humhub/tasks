@@ -67,7 +67,8 @@ use yii\helpers\Html;
                             'url' => $task->content->container->createUrl('/tasks/task/edit', ['id' => $task->id]),
                         ],
                         'htmlOptions' => [
-                            'class' => 'btn btn-primary'
+                            'class' => 'btn btn-primary',
+                            'data-ui-loader' => ''
                         ]
                     ]);
                     ?>

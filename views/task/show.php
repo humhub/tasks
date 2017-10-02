@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\comment\models\Comment;
+use humhub\modules\tasks\components\TaskHelper;
 
 humhub\modules\tasks\Assets::register($this);
 ?>
@@ -71,13 +72,12 @@ humhub\modules\tasks\Assets::register($this);
 
                             <?php if ($task->hasDeadline()) : ?>
                                 <?php
-                                $timestamp = strtotime($task->deadline);
                                 $class = "label label-default";
-                                if (date("d.m.yy", $timestamp) <= date("d.m.yy", time())) {
+                                if (TaskHelper::isOverdue($task)) {
                                     $class = "label label-danger";
                                 }
                                 ?>
-                                <span class="<?php echo $class; ?>"><?php echo date("d. M", $timestamp); ?></span>
+                                <span class="<?php echo $class; ?>"><?= Yii::$app->formatter->asDate($task->deadline, 'short'); ?></span>
                             <?php endif; ?>
 
 
@@ -238,15 +238,13 @@ humhub\modules\tasks\Assets::register($this);
 
                             <?php if ($task->hasDeadline()) : ?>
                                 <?php
-                                $timestamp = strtotime($task->deadline);
                                 $class = "label label-default";
-                                if (date("d.m.yy", $timestamp) <= date("d.m.yy", time())) {
+                                if (TaskHelper::isOverdue($task)) {
                                     $class = "label label-danger";
                                 }
                                 ?>
-                                <span
-                                    class="<?php echo $class; ?> task-completed-controls"><?php echo date("d. M", $timestamp); ?></span>
-                                <?php endif; ?>
+                                <span class="<?php echo $class; ?> task-completed-controls"><?= Yii::$app->formatter->asDate($task->deadline, 'short'); ?></span>
+                            <?php endif; ?>
 
 
                             <div class="task-controls end pull-right">
