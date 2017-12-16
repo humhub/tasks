@@ -7,8 +7,8 @@ use humhub\modules\tasks\Assets;
 Assets::register($this);
 ?>
 
-
-<div class="panel panel-default panel-mytasks" style="display:none;">
+<div class="panel panel-default panel-mytasks" id="panel-mytasks" style="display:none;">
+    <?= \humhub\widgets\PanelMenu::widget(['id' => 'panel-mytasks']); ?>
     <div
         class="panel-heading"><?php echo Yii::t('TasksModule.widgets_views_mytasks', '<strong>My</strong> tasks'); ?></div>
     <div class="panel-body">
@@ -25,7 +25,6 @@ Assets::register($this);
                             href="<?php echo $task->getUrl(); ?><?php if ($task->status == Task::STATUS_FINISHED): ?>&completed=true<?php endif; ?>"
                             class="colorFont3"><?php echo Html::encode($task->title); ?></a></span>
 
-
                         <?php if ($task->hasDeadline()) : ?>
                             <?php
                             $timestamp = strtotime($task->deadline);
@@ -36,7 +35,6 @@ Assets::register($this);
                             ?>
                             <span class="<?php echo $class; ?>"><?php echo date("d. M", $timestamp); ?></span>
                         <?php endif; ?>
-
 
                     <div class="user pull-right" style="display: inline;">
                         <!-- Show space  -->
@@ -55,7 +53,6 @@ Assets::register($this);
 
                 </div>
             </div>
-
 
         <?php endforeach; ?>
 
