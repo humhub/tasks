@@ -1,5 +1,5 @@
 <?php
 return array (
-  '<strong>My</strong> tasks' => '',
-  'From space: ' => '',
+  '<strong>My</strong> tasks' => '<strong>Moji</strong> zadaci',
+  'From space: ' => 'Iz prostora:',
 );
