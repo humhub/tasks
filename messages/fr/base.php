@@ -1,7 +1,7 @@
 <?php
 return array (
   'Assigned user(s)' => 'Utilisateur(s) affecté(s)',
-  'Deadline' => 'Date limite',
+  'Deadline' => 'Échéance',
   'Tasks' => 'Tâches',
   'Title' => 'Titre',
 );
