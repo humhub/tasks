@@ -1,10 +1,10 @@
 <?php
 return array (
-  '<strong>Confirm</strong> deleting' => '<strong>Löschen</strong> bestätigen',
+  '<strong>Confirm</strong> deleting' => 'Löschen <strong>bestätigen</strong> ',
   'Add Task' => 'Aufgabe erstellen',
   'Cancel' => 'Abbrechen',
   'Delete' => 'Löschen',
-  'Do you really want to delete this task?' => 'Möchtest Du diese Aufgabe wirklich löschen?',
+  'Do you really want to delete this task?' => 'Möchtest du diese Aufgabe wirklich löschen?',
   'No open tasks...' => 'Keine offenen Aufgaben...',
   'completed tasks' => 'abgeschlossene Aufgaben',
 );

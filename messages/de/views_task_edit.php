@@ -1,8 +1,8 @@
 <?php
 return array (
-  '<strong>Create</strong> new task' => '<strong>Neue Aufgabe</strong> erstellen',
-  '<strong>Edit</strong> task' => '<strong>Aufgabe</strong> bearbeiten',
-  'Assign users' => 'Zugewiesene Benutzer',
+  '<strong>Create</strong> new task' => 'Neue Aufgabe <strong>erstellen</strong>',
+  '<strong>Edit</strong> task' => 'Aufgabe <strong>bearbeiten</strong> ',
+  'Assign users' => 'Benutzer zuordnen',
   'Cancel' => 'Abbrechen',
   'Deadline' => 'Frist',
   'Save' => 'Speichern',
