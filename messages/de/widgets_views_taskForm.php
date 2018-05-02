@@ -1,7 +1,7 @@
 <?php
 return array (
-  'Assign users to this task' => 'Dieser Aufgabe Benutzer zuordnen',
-  'Deadline for this task?' => 'Frist für die Erledigung dieser Aufgabe?',
-  'Preassign user(s) for this task.' => 'Benutzer für diese Aufgabe vorauswählen',
+  'Assign users to this task' => 'Benutzer dieser Aufgabe zuordnen',
+  'Deadline for this task?' => 'Frist für diese Aufgabe?',
+  'Preassign user(s) for this task.' => 'Benutzer für diese Aufgabe vorbelegen.',
   'What to do?' => 'Was ist zu tun?',
 );

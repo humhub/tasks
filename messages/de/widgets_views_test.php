@@ -1,5 +1,5 @@
 <?php
 return array (
-  'Do you want to handle this task?' => 'Willst Du diese Aufgabe übernehmen?',
-  'I do it!' => 'Ich mach es!',
+  'Do you want to handle this task?' => 'Willst du diese Aufgabe übernehmen?',
+  'I do it!' => 'Ich mache es!',
 );

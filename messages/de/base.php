@@ -1,6 +1,6 @@
 <?php
 return array (
-  'Assigned user(s)' => 'Zugewiesene Benutzer',
+  'Assigned user(s)' => 'Zugewiesene(r) Benutzer',
   'Deadline' => 'Termin',
   'Tasks' => 'Aufgaben',
   'Title' => 'Titel',
