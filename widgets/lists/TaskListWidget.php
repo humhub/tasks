@@ -59,7 +59,8 @@ class TaskListWidget extends JsWidget
         $countQuery = clone $completedTasksQuery;
         $tasks = $this->getNonCompletedTasks();
 
-        return $this->render('taskList', ['title' => $this->list->getTitle(),
+        return $this->render('taskList', [
+            'title' => $this->getTitle(),
             'tasks' => $tasks,
             'completedTasks' => $completedTasksQuery->limit(3)->all(),
             'completedTasksCount' => $countQuery->count(),
@@ -95,6 +96,11 @@ class TaskListWidget extends JsWidget
     protected function getAddTaskUrl()
     {
         return $this->contentContainer->createUrl('/tasks/task/edit', ['listId' => $this->list->getId()]);
+    }
+
+    protected function getTitle()
+    {
+        return $this->list->getTitle();
     }
 
     public function getData()

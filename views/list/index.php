@@ -46,16 +46,9 @@ $dropListUrl = $contentContainer->createUrl('/tasks/list/drop-task-list');
                 <?php endforeach; ?>
             </div>
 
-            <?php if(empty($taskList)) : ?>
-                <div class="task-empty-list-alert alert alert-info">
-                    <?= Yii::t('TasksModule.base', 'There are currently no lists available, add task lists in order to categorize and sort your tasks'); ?>
-                </div>
-
-            <?php endif; ?>
-
             <div class="task-list-ul task-list-unsorted">
                 <div class="task-list-li">
-                    <?= UnsortedTaskListWidget::widget() ?>
+                    <?= UnsortedTaskListWidget::widget(['hasOtherLists' => !empty($taskLists)]) ?>
                 </div>
             </div>
         </div>

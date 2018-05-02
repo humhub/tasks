@@ -126,6 +126,10 @@ class Task extends ContentActiveRecord implements Searchable
         }
         $this->updateState();
 
+        if(!$this->all_day) {
+            $this->all_day = 1;
+        }
+
         parent::init();
 
     }
@@ -250,7 +254,7 @@ class Task extends ContentActiveRecord implements Searchable
             'start_datetime' => Yii::t('TasksModule.models_task', 'Start'),
             'end_datetime' => Yii::t('TasksModule.models_task', 'End'),
             'status' => Yii::t('TasksModule.models_task', 'Status'),
-            'cal_mode' => Yii::t('TasksModule.models_task', 'Calendar Mode'),
+            'cal_mode' => Yii::t('TasksModule.models_task', 'Add schedule to the space calendar'),
             'parent_task_id' => Yii::t('TasksModule.models_task', 'Parent Task'),
             'newItems' => Yii::t('TasksModule.models_task', 'Checklist Items'),
             'editItems' => Yii::t('TasksModule.models_task', 'Checklist Items'),
@@ -510,6 +514,18 @@ class Task extends ContentActiveRecord implements Searchable
         });
 
         return !empty($taskResponsible);
+    }
+
+    public function isOwner($user = null)
+    {
+        if (!$user && !Yii::$app->user->isGuest) {
+            $user = Yii::$app->user->getIdentity();
+        } else if (!$user) {
+            return false;
+        }
+
+        return $this->content->created_by === $user->getId();
+
     }
 
     public function addTaskResponsible($user)

@@ -16,6 +16,8 @@ class UnsortedTaskListWidget extends TaskListWidget
 
     public $renderIfEmpty = true;
 
+    public $hasOtherLists = false;
+
     public function init()
     {
         parent::init();
@@ -24,7 +26,7 @@ class UnsortedTaskListWidget extends TaskListWidget
 
     public function getTitle()
     {
-        return Yii::t('TasksModule.base', 'Unsorted');
+        return ($this->hasOtherLists) ? $this->list->getTitle() : Yii::t('TasksModule.base', 'Tasks');
     }
 
     public function getData()

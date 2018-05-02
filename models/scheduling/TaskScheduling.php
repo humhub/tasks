@@ -40,7 +40,6 @@ class TaskScheduling extends Object
      */
     public $task;
 
-
     /**
      * @return boolean weather or not this item spans exactly over a whole day
      */
