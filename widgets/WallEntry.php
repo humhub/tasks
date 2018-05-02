@@ -1,40 +1,66 @@
 <?php
 
+/**
+ * @link https://www.humhub.org/
+ * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
+ * @license https://www.humhub.com/licences
+ *
+ */
+
 namespace humhub\modules\tasks\widgets;
 
+use humhub\modules\content\widgets\WallEntryControlLink;
+use humhub\modules\tasks\assets\Assets;
+use humhub\modules\content\widgets\EditLink;
+use humhub\modules\content\widgets\DeleteLink;
 use Yii;
 
 /**
- * Shows a Task Wall Entry
+ * @inheritdoc
  */
 class WallEntry extends \humhub\modules\content\widgets\WallEntry
 {
+    public $editMode = self::EDIT_MODE_MODAL;
 
-    public $task;
+    public function getEditUrl()
+    {
+        return $this->contentObject->content->container->createUrl('/tasks/task/edit', ['id' => $this->contentObject->id, 'redirect' => 1]);
+    }
 
+    public function isInModal()
+    {
+        return Yii::$app->request->get('cal');
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function run()
     {
-        $user = $this->contentObject->content->user;
+        Assets::register($this->view);
+        return $this->render('wallEntry', ['task' => $this->contentObject, 'justEdited' => $this->justEdited]);
+    }
 
-        $currentUserAssigned = false;
-
-        // Check if current user is assigned to this task
-        foreach ($this->contentObject->assignedUsers as $au) {
-            if ($au->id == Yii::$app->user->id) {
-                $currentUserAssigned = true;
-                break;
-            }
+    public function getContextMenu()
+    {
+        if(!$this->isInModal() || !$this->contentObject->content->canEdit()) {
+            return parent::getContextMenu();
         }
 
-        return $this->render('entry', array(
-                    'task' => $this->contentObject,
-                    'user' => $user,
-                    'contentContainer' => $this->contentObject->content->container,
-                    'assignedUsers' => $this->contentObject->assignedUsers,
-                    'currentUserAssigned' => $currentUserAssigned
-        ));
+        // TODO: remove this after simplestream modal edit/delete runs as expected
+        $this->controlsOptions['prevent'] = [EditLink::class , DeleteLink::class];
+        $result = parent::getContextMenu();
+
+        return $result;
+    }
+
+    public function getWallEntryViewParams()
+    {
+        $params = parent::getWallEntryViewParams();
+        if($this->isInModal()) {
+            $params['showContentContainer'] = true;
+        }
+        return $params;
     }
 
 }
-
-?>

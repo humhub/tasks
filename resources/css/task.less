@@ -1,0 +1,403 @@
+/*
+ * @link https://www.humhub.org/
+ * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
+ * @license https://www.humhub.com/licences
+ *
+ */
+
+@colorInfo: #6fdbe8;
+
+#task-container {
+  .panel-heading {
+    background-color: #f7f7f7;
+
+    .task-header-panel {
+      padding-right: 10px;
+      float:left;
+
+      border-right:2px solid #ededed;
+      padding-left:10px;
+
+      strong {
+        font-size: 13px;
+      }
+    }
+
+    .task-header-panel:last-child {
+      border-right:0;
+    }
+
+    .task-header-panel:first-child {
+      padding-left:0;
+    }
+
+    .col-sm-12 {
+      overflow:visible;
+    }
+
+    .task-change-state-button {
+      margin-top:20px;
+    }
+
+    .assigned-anyone {
+      font-size: 14px;
+      font-style: italic;
+      margin: 2px;
+      color: #7a7a7a;
+    }
+  }
+
+  .panel-heading .media {
+    .updated {
+      color: #bebebe;
+      font-size: 11px;
+      font-weight: bold;
+    }
+    .author a {
+      color: #bebebe;
+      font-size: 11px;
+    }
+  }
+}
+
+.task-overview {
+  li {
+    cursor: pointer;
+  }
+
+  li:last-child {
+    border-bottom: 0;
+  }
+
+  .panel-body {
+    padding: 10px 0 !important;
+  }
+
+  .media-list {
+
+    .progress {
+      margin-top: 2px;
+      margin-bottom: 3px;
+    }
+
+    .summary, .empty {
+      font-size: 12px;
+      color: #bac2c7;
+      padding-left: 10px;
+    }
+
+    .pagination {
+      margin-bottom: 0;
+      li {
+        border: 0;
+        padding: 0;
+      }
+
+      li:hover {
+        border: 0;
+      }
+    }
+  }
+
+  .task-filter {
+    background-color: #f7f7f7;
+    padding: 10px 10px 0 10px;
+    margin-top:-10px;
+
+    #task-filter-loader {
+      padding-top: 12px;
+    }
+
+    .row {
+      padding-left: 10px;
+      //display: inline-flex;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .dropdown-filter {
+      display:inline-block;
+
+      .form-group {
+        margin: -7px;
+        .form-control {
+          //display: initial !important;
+          //line-height: 16px;
+          //height: auto;
+          //width: 140px;
+          //max-width: 200px;
+          padding: 0 20px 0 8px;
+          margin-left: 12px;
+        }
+      }
+    }
+
+    .checkbox-filter {
+      display:inline-block;
+
+      .regular-checkbox:not(:checked) + .regular-checkbox-box {
+        background-color: #fff;
+      }
+
+      .form-group {
+        margin: 0;
+        .checkbox {
+          margin: 0 !important;
+        }
+      }
+    }
+  }
+}
+
+#task-list-loader {
+  float: right;
+}
+
+#task-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  //.task-item {
+  //  .regular-checkbox:checked + span {
+  //    text-decoration: line-through;
+  //  }
+  //}
+}
+
+.task-details {
+  h1 {
+    font-size: 22px;
+    margin-bottom: 5px;
+  }
+
+  h2 {
+    font-size: 17px;
+    color: #919191;
+    font-weight: 300;
+    margin-top: 0;
+  }
+
+  h1.task-item-title {
+    font-size: 20px;
+  }
+
+  .task-item:hover {
+    background: #f7f7f7;
+  }
+
+  .task-item-content {
+    margin-left: 8px;
+  }
+
+  label.item-finished {
+    text-decoration: line-through;
+    font-style: italic;
+
+    .regular-checkbox:checked+.regular-checkbox-box {
+      border: 2px solid #bdbdbd;
+      background: #bdbdbd;
+    }
+
+  }
+
+  .markdown-render {
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.wall-entry .media .task {
+
+  .progress {
+    margin-top: 2px;
+    margin-bottom: 3px;
+  }
+}
+
+.task-info {
+  display:inline-block;
+  margin-right:10px;
+
+  .task-info-text {
+    font-style: italic; font-size: 13px;
+  }
+
+  div {
+    font-style: italic;
+    padding-bottom: 2px;
+    font-size: 13px;
+  }
+}
+
+.wall-entry-controls, .wall-entry-controls a {
+  font-size: 11px;
+  color: #aeaeae !important;
+}
+
+@media (max-width: 991px) {
+  .agenda-point {
+    display: none !important;
+  }
+
+  .edit-link {
+    display: inline-block !important;
+  }
+
+  //.task-item-container:before {
+  //  display: none !important;
+  //}
+}
+
+@media (max-width: 1119px) {
+  //.task-item-container:before {
+  //  //left: 5% !important;
+  //  display: none !important;
+  //}
+}
+
+
+
+.field-task-all_day label {
+  padding:0 !important;
+}
+
+// LIST VIEW
+.task-list-container {
+  border-left: 3px solid;
+  border-right: 1px solid;
+  border-right-color: #ddd !important;
+  border-radius: 4px;
+  margin-bottom:10px;
+}
+
+
+.task-list-title-bar {
+  border-bottom: 0;
+  border-top: 2px solid #ddd;
+  background-color: #f7f7f7;
+  padding:5px;
+
+  button {
+    margin-left:5px;
+  }
+}
+
+.task-list-ul {
+  margin: 0;
+  padding: 0;
+}
+
+.ui-sortable-helper {
+  background-color:white;
+  border: 1px solid #ddd;
+}
+
+.task-checklist {
+  ul {
+    margin-left:10px;
+  }
+}
+
+.task-list-items {
+
+  min-height:20px;
+  border-bottom: 1px solid #ddd;
+
+  .task-list-item {
+
+    .task-list-task-details {
+      border-top: 1px dashed #ddd;
+
+      .task-list-task-details-body {
+        padding:10px;
+      }
+
+      .task-list-task-infos {
+        margin-bottom:10px;
+      }
+    }
+
+    .task-list-task-title-bar, .task-list-task-details {
+      padding:10px;
+      cursor:pointer;
+    }
+
+    .task-list-task-title-bar:hover {
+      background-color: #fff8e0;
+    }
+
+    border-bottom: 1px solid #ddd;
+  }
+
+  .task-list-item:last-child {
+    border-bottom:0;
+  }
+
+  .task-list-task-completed-show-more {
+    text-align: center;
+    background-color: #f7f7f7;
+  }
+
+
+}
+
+.tasks-completed {
+  min-height:0 !important;
+}
+
+.task-list-state-highlight  {
+  height: 60px !important;
+  line-height: 1.2em;
+  background-color:#fff8e0;
+  margin:10px 0;
+}
+
+.task-state-highlight {
+  height: 30px;
+  line-height: 1.2em;
+  background-color:#fff8e0
+}
+
+.task-list-color {
+  display:inline-block;
+  width:1.2em;
+  height:1.2em;
+  border-radius:4px;
+  margin:-2px 2px 0 0;
+  vertical-align:middle;
+  box-shadow: 0.2px 0.2px 1px;
+}
+
+.task-controls {
+  font-size: 12px;
+  margin-right: 10px;
+  border-right: 1px solid #eee;
+  padding-right: 10px;
+}
+
+.task-controls.end {
+  font-size: 12px;
+  margin-right: 0;
+  border-right: none;
+  padding-right: 0;
+}
+
+.task-controls .fa {
+  font-size: 14px;
+  margin-right: 5px;
+  margin-top: 4px;
+}
+
+.task-controls a {
+  color: #999;
+}
+
+.task-controls a:hover {
+  color: #3b4854;
+}
+
+.task-empty-list-alert {
+  margin-bottom:10px;
+}

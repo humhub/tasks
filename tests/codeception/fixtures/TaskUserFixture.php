@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @link https://www.humhub.org/
+ * @copyright Copyright (c) 2017 HumHub GmbH & Co. KG
+ * @license https://www.humhub.com/licences
+ *
+ */
+
+namespace humhub\modules\tasks\tests\codeception\fixtures;
+
+use humhub\modules\tasks\models\user\TaskUser;
+use yii\test\ActiveFixture;
+
+class TaskUserFixture extends ActiveFixture
+{
+    public $modelClass = TaskUser::class;
+    public $dataFile = '@tasks/tests/codeception/fixtures/data/taskUser.php';
+}

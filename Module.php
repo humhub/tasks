@@ -2,17 +2,22 @@
 
 namespace humhub\modules\tasks;
 
+use humhub\modules\tasks\models\lists\TaskList;
 use Yii;
 use yii\helpers\Url;
 use humhub\modules\user\models\User;
 use humhub\modules\space\models\Space;
 use humhub\modules\tasks\models\Task;
-use humhub\modules\tasks\models\TaskUser;
+use humhub\modules\tasks\models\user\TaskUser;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\content\components\ContentContainerModule;
 
 class Module extends ContentContainerModule
 {
+    /**
+     * @inheritdoc
+     */
+    public $resourcesPath = 'resources';
 
     /**
      * @inheritdoc
@@ -33,6 +38,10 @@ class Module extends ContentContainerModule
             $task->delete();
         }
 
+        foreach (TaskList::find()->all() as $taskList) {
+            $taskList->delete();
+        }
+
         parent::disable();
     }
 
@@ -46,33 +55,23 @@ class Module extends ContentContainerModule
         foreach (Task::find()->contentContainer($container)->all() as $task) {
             $task->delete();
         }
+
+        foreach (TaskList::find()->contentContainer($container)->all() as $taskList) {
+            $taskList->delete();
+        }
     }
 
     public static function onUserDelete($event)
     {
-
-        foreach (TaskUser::findAll(array('created_by' => $event->sender->id)) as $task) {
+        foreach (TaskUser::findAll(['created_by' => $event->sender->id]) as $task) {
             $task->delete();
         }
-        foreach (TaskUser::findAll(array('user_id' => $event->sender->id)) as $task) {
+
+        foreach (TaskUser::findAll(['user_id' => $event->sender->id]) as $task) {
             $task->delete();
         }
 
         return true;
-    }
-
-    public static function onSpaceMenuInit($event)
-    {
-        $space = $event->sender->space;
-        if ($space->isModuleEnabled('tasks') && $space->isMember()) {
-            $event->sender->addItem(array(
-                'label' => Yii::t('TasksModule.base', 'Tasks'),
-                'group' => 'modules',
-                'url' => $space->createUrl('/tasks/task/show'),
-                'icon' => '<i class="fa fa-check-square"></i>',
-                'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'tasks'),
-            ));
-        }
     }
 
     public static function onDashboardSidebarInit($event)
@@ -85,7 +84,7 @@ class Module extends ContentContainerModule
      */
     public function getPermissions($contentContainer = null)
     {
-        if ($contentContainer instanceof \humhub\modules\space\models\Space) {
+        if ($contentContainer instanceof Space) {
             return [
                 new permissions\CreateTask(),
             ];

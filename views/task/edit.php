@@ -1,99 +1,63 @@
 <?php
+/**
+ * @link https://www.humhub.org/
+ * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
+ * @license https://www.humhub.com/licences
+ *
+ */
 
-use yii\bootstrap\ActiveForm;
-use yii\helpers\Html;
+use humhub\widgets\Button;
+
+use humhub\widgets\ModalDialog;
+use humhub\widgets\ModalButton;
+use humhub\widgets\ActiveForm;
+use humhub\widgets\Tabs;
+
+/* @var $taskForm \humhub\modules\tasks\models\forms\TaskForm */
+
+\humhub\modules\tasks\assets\Assets::register($this);
+
+$task = $taskForm->task;
+
 ?>
 
-<div class="modal-dialog modal-dialog-normal animated fadeIn">
-    <div class="modal-content">
+<?php ModalDialog::begin(['header' => $taskForm->getTitle(), 'closable' => false]) ?>
 
-        <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['enableClientValidation' => false]); ?>
 
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <?php if (Yii::$app->request->get('id') != null) : ?>
-                <h4 class="modal-title"
-                    id="myModalLabel"><?php echo Yii::t('TasksModule.views_task_edit', '<strong>Edit</strong> task'); ?></h4>
-                <?php else : ?>
-                <h4 class="modal-title"
-                    id="myModalLabel"><?php echo Yii::t('TasksModule.views_task_edit', '<strong>Create</strong> new task'); ?></h4>
-                <?php endif; ?>
-        </div>
+        <div id="task-form" data-ui-widget="task.Form" data-ui-init>
 
-
-        <div class="modal-body">
-
-            <?php echo $form->field($task, 'title')->textarea(['id' => 'itemTask', 'class' => 'form-control autosize', 'rows' => '1', 'placeholder' => Yii::t('TasksModule.views_task_edit', 'What is to do?')]); ?>
-
-            <div class="row">
-                <div class="col-md-8">
-                    <?php if (version_compare(Yii::$app->version, '1.2', '<')): ?>
-                        <?php echo $form->field($task, 'assignedUserGuids')->textInput(['id' => 'assignedUserGuids']); ?>
-
-                        <?php
-                        // attach mention widget to it
-                        echo humhub\modules\user\widgets\UserPicker::widget(array(
-                            'model' => $task,
-                            'inputId' => 'assignedUserGuids',
-                            'attribute' => 'assignedUserGuids',
-                            'userSearchUrl' => $this->context->contentContainer->createUrl('/space/membership/search', array('keyword' => '-keywordPlaceholder-')),
-                            'maxUsers' => 10,
-                            'placeholderText' => Yii::t('TasksModule.views_task_edit', 'Assign users'),
-                        ));
-                        ?>
-                    <?php else: ?>
-                        <?= $form->field($task, 'assignedUserGuids')->widget(\humhub\modules\user\widgets\UserPickerField::class, ['url' => $this->context->contentContainer->createUrl('/space/membership/search')]); ?>
-                    <?php endif; ?>
-                </div>
-                <div class="col-md-4">
-
-                    <div class="form-group">
-                        <?php echo $form->field($task, 'deadline')->widget(yii\jui\DatePicker::className(), ['dateFormat' => Yii::$app->params['formatter']['defaultDateFormat'], 'clientOptions' => [], 'options' => ['class' => 'form-control', 'placeholder' => Yii::t('TasksModule.views_task_edit', 'Deadline')]]); ?>
-                    </div>
-
-                </div>
-            </div>
-            <br>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <?php
-                    echo \humhub\widgets\AjaxButton::widget([
-                        'label' => Yii::t('TasksModule.views_task_edit', 'Save'),
-                        'ajaxOptions' => [
-                            'type' => 'POST',
-                            'beforeSend' => new yii\web\JsExpression('function(){ setModalLoader(); }'),
-                            'success' => new yii\web\JsExpression('function(html){ $("#globalModal").html(html); }'),
-                            'url' => $task->content->container->createUrl('/tasks/task/edit', ['id' => $task->id]),
-                        ],
-                        'htmlOptions' => [
-                            'class' => 'btn btn-primary',
-                            'data-ui-loader' => ''
-                        ]
-                    ]);
-                    ?>
-
-                    <button type="button" class="btn btn-primary"
-                            data-dismiss="modal"><?php echo Yii::t('TasksModule.views_task_edit', 'Cancel'); ?></button>
-                </div>
-            </div>
+            <?= Tabs::widget([
+                'viewPath' => '@tasks/views/task',
+                'params' => ['form' => $form, 'taskForm' => $taskForm],
+                'items' => [
+                    ['label' => Yii::t('TasksModule.views_index_edit', 'Basic'), 'view' => 'edit-basic', 'linkOptions' => ['class' => 'tab-basic']],
+                    ['label' => Yii::t('TasksModule.views_index_edit', 'Scheduling'), 'view' => 'edit-scheduling', 'linkOptions' => ['class' => 'tab-scheduling']],
+                    ['label' => Yii::t('TasksModule.views_index_edit', 'Assignment'), 'view' => 'edit-assignment', 'linkOptions' => ['class' => 'tab-assignment']],
+                    ['label' => Yii::t('TasksModule.views_index_edit', 'Checklist'), 'view' => 'edit-checklist', 'linkOptions' => ['class' => 'tab-checklist']],
+                    ['label' => Yii::t('TasksModule.views_index_edit', 'Files'), 'view' => 'edit-files', 'linkOptions' => ['class' => 'tab-files']]
+                ]
+            ]); ?>
 
         </div>
-    </div>
-</div>
 
-<?php ActiveForm::end(); ?>
+        <hr>
 
+        <div class="modal-footer">
+            <div class="col-md-<?= !$taskForm->task->isNewRecord ? '8 text-left': '12 text-center' ?>">
+                <?= ModalButton::submitModal($taskForm->getSubmitUrl()); ?>
+                <?= ModalButton::cancel(); ?>
+            </div>
+            <?php if (!$taskForm->task->isNewRecord): ?>
+                <div class="col-md-4 text-right">
+                    <?= Button::danger(Yii::t('TasksModule.base', 'Delete'))->confirm(
+                        Yii::t('TasksModule.views_index_edit', '<strong>Confirm</strong> task deletion'),
+                        Yii::t('TasksModule.views_index_edit', 'Do you really want to delete this task?'),
+                        Yii::t('TasksModule.base', 'Delete'))->action('ui.modal.post', $taskForm->getDeleteUrl()); ?>
+                </div>
+            <?php endif; ?>
+        </div>
 
-<script type="text/javascript">
+    <?php ActiveForm::end(); ?>
 
-    $('.autosize').autosize();
-
-    $(document).ready(function () {
-        var myInterval = setInterval(function () {
-            $('#itemTask').focus();
-            clearInterval(myInterval);
-        }, 100);
-    });
-
-</script>
+<?php ModalDialog::end() ?>
