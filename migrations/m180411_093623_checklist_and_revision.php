@@ -70,9 +70,6 @@ class m180411_093623_checklist_and_revision extends Migration
 
         $this->addForeignKey('fk-task-list-setting-task-id', 'task_list_setting', 'tag_id', 'content_tag', 'id', 'CASCADE');
 
-        $this->renameClass('humhub\modules\tasks\notifications\Assigned', AssignedNotification::class);
-        $this->renameClass('humhub\modules\tasks\notifications\Finished', TaskCompletedNotification::class);
-        $this->renameClass('humhub\modules\tasks\activities\Finished', TaskCompletedActivity::class);
     }
 
     public function safeDown()
