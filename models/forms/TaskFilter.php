@@ -47,7 +47,7 @@ class TaskFilter extends Model
     /**
      * @var int
      */
-    public $taskAssigned;
+    public $taskAssigned = 1;
 
     /**
      * @var int

@@ -8,25 +8,28 @@
 
 /**
  * Created by PhpStorm.
- * User: Buddha
- * Date: 21.06.2017
- * Time: 13:59
+ * User: davidborn
  */
 
-namespace humhub\modules\tasks\widgets;
+namespace humhub\modules\tasks\widgets\checklist;
 
 
+use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\Task;
-use humhub\modules\tasks\models\checklist\TaskItem;
-use humhub\modules\user\models\fieldtype\DateTime;
 use humhub\widgets\JsWidget;
+use yii\helpers\Url;
 
-class TaskItemWidget extends JsWidget
+class TaskChecklist extends JsWidget
 {
     /**
      * @inheritdoc
      */
-    public $jsWidget = 'task.Item';
+    public $jsWidget = 'task.checklist.ItemList';
+
+    /**
+     * @inheritdoc
+     */
+    public $id = 'task-items';
 
     /**
      * @inheritdoc
@@ -39,32 +42,39 @@ class TaskItemWidget extends JsWidget
     public $task;
 
     /**
-     * @var TaskItemWidget
+     * @var Task
      */
-    public $item;
+    public $canEdit;
 
     /**
      * @inheritdoc
      */
     public function run()
     {
-        return $this->render('_item', [
+        if(!count($this->task->items)) {
+            return '';
+        }
+
+        return $this->render('taskChecklist', [
             'options' => $this->getOptions(),
+            'items' => $this->task->items,
             'task' => $this->task,
-            'item' => $this->item,
         ]);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getData()
     {
         $contentContainer = $this->task->content->container;
-
         return [
             'task-id' => $this->task->id,
-            'item-id' => $this->item->id,
-            'sort-order' => $this->item->sort_order,
-            'can-resort' => $this->task->canResortItems(),
-            'check-url' => $contentContainer->createUrl('/tasks/checklist/check-item', ['id' => $this->item->id, 'taskId' => $this->task->id]),
+            'drop-url' =>  TaskUrl::dropChecklistItem($this->task),
+            'can-edit' => $this->canEdit,
+            'can-resort' => $this->task->canResortItems()
         ];
     }
+
+
 }

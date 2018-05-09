@@ -9,6 +9,8 @@
 namespace humhub\modules\tasks\controllers;
 
 use humhub\modules\content\components\ContentContainerController;
+use humhub\modules\content\components\ContentContainerControllerAccess;
+use humhub\modules\space\models\Space;
 use humhub\modules\tasks\models\forms\TaskFilter;
 use humhub\modules\tasks\permissions\ManageTasks;
 use humhub\modules\tasks\widgets\search\TaskSearchList;
@@ -26,17 +28,12 @@ use yii\web\Controller;
 class SearchController extends ContentContainerController
 {
 
-    /**
-     * @inheritdoc
-     */
-//    public function behaviors()
-//    {
-//        return [
-//            'acl' => [
-//                'class' => \humhub\components\behaviors\AccessControl::className(),
-//            ]
-//        ];
-//    }
+    public function getAccessRules()
+    {
+        return [
+            [ContentContainerControllerAccess::RULE_USER_GROUP_ONLY => [Space::USERGROUP_MEMBER]]
+        ];
+    }
 
     public function actionIndex()
     {
@@ -73,8 +70,6 @@ class SearchController extends ContentContainerController
         
         return TaskPicker::filter([
             'keyword' => Yii::$app->request->get('keyword'),
-//            'fillUser' => true,
-//            'disableFillUser' => false
         ]);
     }
 

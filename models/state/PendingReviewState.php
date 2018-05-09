@@ -52,6 +52,8 @@ class PendingReviewState extends TaskState
     public function afterProceed(TaskState $oldState)
     {
         $this->notifyPendingReview();
+        $this->task->checklist->checkAll();
+        $this->task->updateAttributes(['request_sent' => 0]);
     }
 
     /**

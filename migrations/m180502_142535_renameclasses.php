@@ -20,7 +20,7 @@ class m180502_142535_renameclasses extends Migration
         $this->updateSilent('notification', ['class' => AssignedNotification::class], ['class' => 'humhub\modules\tasks\notifications\Assigned']);
         $this->updateSilent('notification', ['class' => TaskCompletedNotification::class], ['class' => 'humhub\modules\tasks\notifications\Finished']);
         $this->updateSilent('notification', ['class' => TaskCompletedActivity::class], ['class' => 'humhub\modules\tasks\activities\Finished']);
-        
+
 
     }
 

@@ -4,6 +4,7 @@
 namespace humhub\modules\tasks\widgets\lists;
 
 
+use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\tasks\models\lists\UnsortedTaskList;
 use Yii;
 
@@ -18,9 +19,16 @@ class UnsortedTaskListWidget extends TaskListWidget
 
     public $hasOtherLists = false;
 
+    /**
+     * @var ContentContainerActiveRecord
+     */
+    public $contentContainer;
+
     public function init()
     {
-        parent::init();
+        if(!$this->contentContainer) {
+            $this->contentContainer = Yii::$app->controller->contentContainer;
+        }
         $this->list = new UnsortedTaskList(['contentContainer' => $this->contentContainer]);
     }
 
@@ -34,11 +42,6 @@ class UnsortedTaskListWidget extends TaskListWidget
         $result = parent::getData();
         $result['task-list-unsored'] = true;
         return $result;
-    }
-
-    protected function getEditListUrl()
-    {
-        return null;
     }
 
     protected  function getColor()

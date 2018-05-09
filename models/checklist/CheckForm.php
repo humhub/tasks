@@ -6,6 +6,7 @@ namespace humhub\modules\tasks\models\checklist;
 
 use humhub\modules\tasks\models\Task;
 use yii\base\Model;
+use yii\web\HttpException;
 
 class CheckForm extends Model
 {
@@ -47,7 +48,7 @@ class CheckForm extends Model
     public function validateCanCheck($attribute, $params)
     {
         if(!$this->item || !$this->item->task->canCheckItems()) {
-            $this->addError('item', 'Not allowed to check item');
+            throw new HttpException(403);
         }
     }
 

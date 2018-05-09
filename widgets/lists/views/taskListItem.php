@@ -8,7 +8,9 @@
 
 use humhub\modules\comment\models\Comment;
 
+use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\widgets\TaskBadge;
+use humhub\modules\tasks\widgets\TaskUserList;
 use humhub\modules\user\widgets\Image;
 use humhub\widgets\Button;
 use humhub\modules\tasks\models\Task;
@@ -19,8 +21,6 @@ use yii\helpers\Html;
 /* @var $options array */
 /* @var $contentContainer \humhub\modules\content\components\ContentActiveRecord */
 
-$editUrl = $contentContainer->createUrl('/tasks/task/edit', ['id' => $task->id]);
-$deleteUrl = $contentContainer->createUrl('/tasks/task/delete', ['id' => $task->id]);
 $checkUrl = $task->state->getCheckUrl();
 
 ?>
@@ -29,27 +29,37 @@ $checkUrl = $task->state->getCheckUrl();
 
 <div class="task-list-task-title-bar">
     <span class="task-list-item-title">
-        <?= Html::checkBox('item[' . $task->id . ']', $task->isCompleted(), ['label' => Html::encode($task->title), 'data-action-change' => 'changeState', 'data-action-url' => $checkUrl, 'disabled' => empty($checkUrl)]); ?>
+
+        <?= Html::checkBox('item[' . $task->id . ']', $task->isCompleted(), [
+                'label' => Html::encode($task->title),
+                'data-action-change' => 'changeState',
+                'data-action-url' => $checkUrl,
+                'disabled' => empty($checkUrl)
+        ]); ?>
+
         <?= TaskBadge::widget(['task' => $task, 'includePending' => false, 'includeCompleted' => false]) ?>
 
         <?php if (!$task->isCompleted()) : ?>
-            <span class="task-drag-icon tt" title="<?= Yii::t('TasksModule.views_index_index', 'Drag entry') ?>"  style="display:none">
+            <span class="task-drag-icon tt" title="<?= Yii::t('TasksModule.views_index_index', 'Drag task') ?>"  style="display:none">
                 <i class="fa fa-arrows"></i>&nbsp;
             </span>
         <?php endif; ?>
 
     </span>
 
-    <div class="task-controls end pull-right">
-        <?= Button::asLink()->action('task.list.editTask', $editUrl)->icon('fa-pencil'); ?>
-        <?= Button::asLink()->action('task.list.deleteTask', $deleteUrl)->icon('fa-times')->confirm()->cssClass('colorDanger'); ?>
-    </div>
+    <?php if($task->content->canEdit()) : ?>
+        <div class="task-controls end pull-right">
+            <?= Button::asLink()->action('task.list.editTask', TaskUrl::editTask($task))->icon('fa-pencil')->cssClass('tt')->options(['title' => Yii::t('TasksModule.base', 'Edit task')]); ?>
+            <?= Button::asLink()->action('task.deleteTask', TaskUrl::deleteTask($task))->icon('fa-trash')->confirm()->cssClass('tt')->options(['title' => Yii::t('TasksModule.base', 'Delete task')]); ?>
+        </div>
+    <?php endif; ?>
 
-    <div class="task-controls pull-right toggleTaskDetails">
+    <div class="task-controls pull-right toggleTaskDetails" style="<?= (!$task->content->canEdit()) ? 'border-right:0;margin-right:0' : '' ?>">
         <?= Button::asLink()->icon('fa-comment-o') ?> <?= Comment::getCommentCount(Task::class, $task->id); ?>
     </div>
 
    <?php  if($task->scheduling) : ?>
+
        <?php
        $daysRemaining = $task->schedule->getDaysRemaining();
        if ($task->schedule->isOverdue()) {
@@ -68,6 +78,7 @@ $checkUrl = $task->state->getCheckUrl();
        <div class="task-controls pull-right toggleTaskDetails">
            <?= Button::asLink()->icon('fa-clock-o')->cssClass($schedulingColor)->cssClass('tt')->options(['title' => $schedulingTitle]) ?> <?= $daysRemaining ?>
        </div>
+
     <?php endif; ?>
 
     <?php  if($task->review) : ?>
@@ -78,32 +89,10 @@ $checkUrl = $task->state->getCheckUrl();
 
     <?php if($task->hasTaskAssigned() || $task->hasTaskResponsible()) : ?>
         <div class="task-controls assigned-users pull-right" style="display: inline;">
-            <?php if($task->hasTaskResponsible()) : ?>
-                <?php foreach ($task->taskResponsibleUsers as $user): ?>
-                    <?= Image::widget([
-                        'user' => $user,
-                        'width' => '24',
-                        'showTooltip' => true,
-                        'imageOptions' => ['style' => 'border:2px solid '.$this->theme->variable('info')],
-                        'tooltipText' =>  Yii::t('TasksModule.base', '{displayName} is responsible for this task', ['displayName' => Html::encode($user->displayName)])
-                    ])?>
-                <?php endforeach; ?>
-            <?php endif; ?>
-            <?php if($task->hasTaskAssigned()) : ?>
-                <!-- Show assigned user -->
-                <?php foreach ($task->taskAssignedUsers as $user): ?>
-                    <?= Image::widget([
-                        'user' => $user,
-                        'width' => '24',
-                        'showTooltip' => true,
-                        'tooltipText' =>  Yii::t('TasksModule.base', '{displayName} is assigned to this task', ['displayName' => Html::encode($user->displayName)])
-                    ])?>
-                <?php endforeach; ?>
-            <?php endif ?>
+            <?= TaskUserList::widget(['users' => $task->taskResponsibleUsers, 'style' =>  'border:2px solid '.$this->theme->variable('info')])?>
+            <?= TaskUserList::widget(['users' => $task->taskAssignedUsers])?>
         </div>
     <?php endif; ?>
-
-
 </div>
 <?= Html::endTag('div') ?>
 

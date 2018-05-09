@@ -8,13 +8,19 @@
 
 namespace humhub\modules\tasks\permissions;
 
+use Yii;
+use humhub\libs\BasePermission;
 use humhub\modules\space\models\Space;
 
 /**
  * CreateTask Permission
  */
-class CreateTask extends \humhub\libs\BasePermission
+class CreateTask extends BasePermission
 {
+    /**
+     * @inheritdoc
+     */
+    protected $moduleId = 'tasks';
 
     /**
      * @inheritdoc
@@ -33,19 +39,20 @@ class CreateTask extends \humhub\libs\BasePermission
         Space::USERGROUP_USER
     ];
 
-    /**
-     * @inheritdoc
-     */
-    protected $title = "Create tasks";
 
     /**
      * @inheritdoc
      */
-    protected $description = "Allows the user to create new tasks";
+    public function getTitle()
+    {
+        return Yii::t('TasksModule.base', 'Create tasks');
+    }
 
     /**
      * @inheritdoc
      */
-    protected $moduleId = 'tasks';
-
+    public function getDescription()
+    {
+        return Yii::t('TasksModule.base', 'Allows the user to create new tasks, the user will only be able to edit and delete own tasks');
+    }
 }

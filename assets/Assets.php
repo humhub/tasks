@@ -15,7 +15,7 @@ class Assets extends AssetBundle
 {
 
     public $publishOptions = [
-        'forceCopy' => false
+        'forceCopy' => true
     ];
 
     public $sourcePath = '@tasks/resources';
@@ -29,5 +29,7 @@ class Assets extends AssetBundle
         'js/jquery.ui.touch-punch.min.js',  // Add jQuery fix for using sortable() on mobile devices - Homepage: http://touchpunch.furf.com/
         'js/humhub.task.js',
         'js/humhub.task.list.js',
+        'js/humhub.task.checklist.js',
+        'js/humhub.task.search.js',
     ];
 }

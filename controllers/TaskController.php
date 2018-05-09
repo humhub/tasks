@@ -2,8 +2,11 @@
 
 namespace humhub\modules\tasks\controllers;
 
+use humhub\modules\tasks\helpers\TaskUrl;
 use Yii;
 use yii\web\HttpException;
+use humhub\modules\content\components\ContentContainerControllerAccess;
+use humhub\modules\space\models\Space;
 use humhub\modules\tasks\models\forms\ItemDrop;
 use humhub\modules\tasks\models\forms\TaskForm;
 use humhub\modules\tasks\models\user\TaskUser;
@@ -21,70 +24,8 @@ class TaskController extends AbstractTaskController
     public function getAccessRules()
     {
         return [
-            ['permissions' => [ManageTasks::class, CreateTask::class], 'actions' => ['edit', 'delete']]
+            [ContentContainerControllerAccess::RULE_USER_GROUP_ONLY => [Space::USERGROUP_MEMBER]]
         ];
-    }
-
-    public function actionProceed($id, $status)
-    {
-        $this->forcePostRequest();
-        $task = $this->getTaskById($id);
-
-        if(!$task->state->canProceed($status)) {
-            throw new HttpException(403);
-        }
-
-        return $this->asJson([
-            'success' => $task->state->proceed($status)
-        ]);
-    }
-
-    public function actionRevert($id, $status)
-    {
-        $this->forcePostRequest();
-        $task = $this->getTaskById($id);
-
-        if(!$task->state->canRevert($status)) {
-            throw new HttpException(403);
-        }
-
-        return $this->asJson([
-            'success' => $task->state->revert($status)
-        ]);
-    }
-
-    public function actionTaskAssignedPicker($id = null, $keyword)
-    {
-        if($id) {
-            $subQuery = TaskUser::find()->where(['task_user.task_id' => $id, 'task_user.user_type' => Task::USER_ASSIGNED])
-                ->andWhere('task_user.user_id=user.id');
-            $query = $this->getSpace()->getMembershipUser()->where(['not exists', $subQuery]);
-        } else {
-            $query = $this->getSpace()->getMembershipUser();
-        }
-
-        return $this->asJson(UserPicker::filter([
-            'keyword' => $keyword,
-            'query' => $query,
-            'fillUser' => true
-        ]));
-    }
-
-    public function actionTaskResponsiblePicker($id = null, $keyword)
-    {
-        if($id) {
-            $subQuery = TaskUser::find()->where(['task_user.task_id' => $id, 'task_user.user_type' => Task::USER_RESPONSIBLE])
-                ->andWhere('task_user.user_id=user.id');
-            $query = $this->getSpace()->getMembershipUser()->where(['not exists', $subQuery]);
-        } else {
-            $query = $this->getSpace()->getMembershipUser();
-        }
-
-        return $this->asJson(UserPicker::filter([
-            'keyword' => $keyword,
-            'query' => $query,
-            'fillUser' => true
-        ]));
     }
 
     /**
@@ -97,6 +38,10 @@ class TaskController extends AbstractTaskController
     public function actionEdit($id = null, $cal = false, $redirect = false, $listId = null)
     {
         $isNewTask = empty($id);
+
+        if($isNewTask && !$this->contentContainer->can([CreateTask::class, ManageTasks::class])) {
+            throw new HttpException(403);
+        }
 
         if ($isNewTask) {
             $taskForm = new TaskForm(['cal' => $cal, 'taskListId' =>  $listId]);
@@ -112,13 +57,15 @@ class TaskController extends AbstractTaskController
 
         if(!$taskForm->task) {
             throw new HttpException(404);
+        } else if(!$taskForm->task->content->canEdit()) {
+            throw new HttpException(403);
         }
 
         if ($taskForm->load(Yii::$app->request->post()) && $taskForm->save()) {
             if($cal) {
                 return ModalClose::widget(['saved' => true]);
             } else if($redirect) {
-                return $this->htmlRedirect($this->contentContainer->createUrl('view', ['id' => $taskForm->task->id]));
+                return $this->htmlRedirect(TaskUrl::viewTask($taskForm->task));
             }
 
             return $this->asJson([
@@ -131,6 +78,52 @@ class TaskController extends AbstractTaskController
         return $this->renderAjax('edit', ['taskForm' => $taskForm]);
     }
 
+    public function actionProceed($id, $status)
+    {
+        $this->forcePostRequest();
+        $task = $this->getTaskById($id);
+
+        if(!$task->state->canProceed($status)) {
+            throw new HttpException(403);
+        }
+
+        return $this->asJson(['success' => $task->state->proceed($status)]);
+    }
+
+    public function actionRevert($id, $status)
+    {
+        $this->forcePostRequest();
+        $task = $this->getTaskById($id);
+
+        if(!$task->state->canRevert($status)) {
+            throw new HttpException(403);
+        }
+
+        return $this->asJson(['success' => $task->state->revert($status)]);
+    }
+
+    public function actionTaskAssignedPicker($id = null, $keyword)
+    {
+        $query = $this->getSpace()->getMembershipUser();
+
+        return $this->asJson(UserPicker::filter([
+            'query' => $query,
+            'keyword' => $keyword,
+            'fillUser' => true
+        ]));
+    }
+
+    public function actionTaskResponsiblePicker($id = null, $keyword)
+    {
+        $query = $this->getSpace()->getMembershipUser();
+
+        return $this->asJson(UserPicker::filter([
+            'keyword' => $keyword,
+            'query' => $query,
+            'fillUser' => true
+        ]));
+    }
+
     public function actionView($id)
     {
         $task = Task::find()->contentContainer($this->contentContainer)->where(['task.id' => $id])->one();
@@ -139,7 +132,7 @@ class TaskController extends AbstractTaskController
             throw new HttpException(404);
         }
 
-        if( !$task->content->canView() && !($task->isTaskAssigned() || $task->isTaskResponsible()) ) {
+        if(!$task->content->canView()) {
             throw new HttpException(403);
         }
 
@@ -159,24 +152,25 @@ class TaskController extends AbstractTaskController
 
         return $this->renderAjax('modal', [
             'task' => $task,
-            'editUrl' => $this->contentContainer->createUrl('/tasks/task/edit', ['id' => $task->id, 'cal' => $cal]),
+            'editUrl' => TaskUrl::editTask($task, $cal),
             'canManageEntries' => $task->content->canEdit()
         ]);
     }
 
-    public function actionDelete()
+    public function actionDelete($id)
     {
-        $id = (int) Yii::$app->request->get('id');
+        $this->forcePostRequest();
+        $task = $this->getTaskById($id);
 
-        if ($id != 0) {
-            $task = Task::find()->contentContainer($this->contentContainer)->where(['task.id' => $id])->one();
-            if ($task) {
-                $task->delete();
-            }
+        if(!$task->content->canEdit()) {
+            throw new HttpException(403);
         }
 
-        Yii::$app->response->format = 'json';
-        return ['status' => 'ok'];
+        $task->delete();
+
+        return $this->asJson([
+            'success' => true
+        ]);
     }
 
     /**
@@ -187,16 +181,7 @@ class TaskController extends AbstractTaskController
      */
     public function actionExtend($id)
     {
-        $task = Task::find()->contentContainer($this->contentContainer)->where(['task.id' => $id])->one();
-
-        if(!$task) {
-            throw new HttpException(404);
-        }
-
-        $taskAssigned = $task->getAssignedTaskUsers()->where(['task_user.user_id' => Yii::$app->user->id])->one();
-        if(!$taskAssigned) {
-            throw new HttpException(404);
-        }
+        $task = $this->getTaskById($id);
 
         if( !$task->content->canView() && !$task->schedule->canRequestExtension() ) {
             throw new HttpException(401, Yii::t('TasksModule.controller', 'You have insufficient permissions to perform that operation!'));
@@ -204,17 +189,13 @@ class TaskController extends AbstractTaskController
 
         if ($task->schedule->hasRequestedExtension()) {
             $this->view->error(Yii::t('TasksModule.controller', 'Already requested'));
-        }
-        else {
+        } else {
             $task->schedule->sendExtensionRequest();
             $task->updateAttributes(['request_sent' => 1]);
             $this->view->success(Yii::t('TasksModule.controller', 'Request sent'));
         }
 
-        return $this->htmlRedirect($this->contentContainer->createUrl('view', [
-            'id' => $task->id,
-        ]));
-
+        return $this->htmlRedirect(TaskUrl::viewTask($task));
     }
 
     public function actionDrop($taskId)
@@ -231,10 +212,7 @@ class TaskController extends AbstractTaskController
                 ];
             }
 
-            return $this->asJson([
-                'success' => true,
-                'items' => $result
-            ]);
+            return $this->asJson(['success' => true, 'items' => $result]);
         }
 
         return $this->asJson(['success' => false]);

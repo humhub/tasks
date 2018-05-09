@@ -8,6 +8,7 @@
 
 namespace humhub\modules\tasks;
 
+use humhub\modules\tasks\helpers\TaskListUrl;
 use Yii;
 use yii\base\Object;
 use humhub\modules\notification\models\Notification;
@@ -96,7 +97,7 @@ class Events extends Object
             $event->sender->addItem([
                 'label' => Yii::t('TasksModule.base', 'Tasks'),
                 'group' => 'modules',
-                'url' => $space->createUrl('/tasks/list'),
+                'url' => TaskListUrl::taskListRoot($space),
                 'icon' => '<i class="fa fa-tasks"></i>',
                 'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'tasks'),
             ]);

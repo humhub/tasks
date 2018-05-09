@@ -11,7 +11,6 @@ namespace humhub\modules\tasks\widgets;
 use Yii;
 use yii\helpers\Html;
 use \yii\helpers\Url;
-use humhub\modules\tasks\models\search\TaskFilter;
 
 /**
  * TaskPickerWidget displays a task picker instead of an input field.

@@ -3,6 +3,9 @@
 namespace humhub\modules\tasks;
 
 use humhub\modules\tasks\models\lists\TaskList;
+use humhub\modules\tasks\permissions\ProcessUnassignedTasks;
+use humhub\modules\tasks\permissions\CreateTask;
+use humhub\modules\tasks\permissions\ManageTasks;
 use Yii;
 use yii\helpers\Url;
 use humhub\modules\user\models\User;
@@ -56,7 +59,7 @@ class Module extends ContentContainerModule
             $task->delete();
         }
 
-        foreach (TaskList::find()->contentContainer($container)->all() as $taskList) {
+        foreach (TaskList::findByContainer($container)->all() as $taskList) {
             $taskList->delete();
         }
     }
@@ -86,7 +89,9 @@ class Module extends ContentContainerModule
     {
         if ($contentContainer instanceof Space) {
             return [
-                new permissions\CreateTask(),
+                new CreateTask(),
+                new ManageTasks(),
+                new ProcessUnassignedTasks(),
             ];
         }
 

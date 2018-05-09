@@ -25,6 +25,11 @@ class TaskCheckList extends Object implements Sortable
         TaskItem::updateAll(['completed' => 0], ['task_id' => $this->task->id]);
     }
 
+    public function checkAll()
+    {
+        TaskItem::updateAll(['completed' => 1], ['task_id' => $this->task->id]);
+    }
+
     public function moveItemIndex($itemId, $newIndex)
     {
         $moveItem = TaskItem::findOne(['id' => $itemId]);
@@ -75,7 +80,7 @@ class TaskCheckList extends Object implements Sortable
 
     public function canCheckItem($user = null)
     {
-        return $this->task->isTaskResponsible($user) || $this->task->isTaskAssigned($user) || $this->task->canAnyoneProcessTask($user);
+        return $this->task->isTaskResponsible($user) || $this->task->isTaskAssigned($user) || $this->task->canProcess($user);
     }
 
 }

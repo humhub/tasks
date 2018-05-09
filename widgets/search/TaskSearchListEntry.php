@@ -27,9 +27,6 @@ class TaskSearchListEntry extends Widget
     {
         return $this->render('taskSearchListEntry', [
             'task' => $this->task,
-            'url' => $this->contentContainer->createUrl('/tasks/task/view', ['id' => $this->task->id]),
-            'editUrl' => $this->contentContainer->createUrl('/tasks/task/edit', ['id' => $this->task->id]),
-            'canEdit' => $this->canEdit,
             'filterResult' => $this->filterResult
         ]);
     }

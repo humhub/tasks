@@ -7,9 +7,11 @@
  */
 
 use humhub\libs\Html;
+use humhub\modules\tasks\helpers\TaskListUrl;
 use humhub\modules\tasks\widgets\ChangeStatusButton;
 use humhub\modules\tasks\widgets\TaskBadge;
 use humhub\modules\tasks\widgets\TaskContextMenu;
+use humhub\modules\tasks\widgets\TaskUserList;
 use humhub\modules\user\widgets\Image;
 use humhub\widgets\Button;
 use humhub\widgets\TimeAgo;
@@ -20,8 +22,6 @@ use humhub\widgets\TimeAgo;
 /* @var $collapse boolean */
 
 $icon = 'fa-tasks';
-$backUrl = $this->context->contentContainer->createUrl('/tasks/list');
-
 $participantStyle = 'display:inline-block;';
 $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
 
@@ -33,9 +33,7 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
         </div>
     </div>
 
-    <?= TaskContextMenu::widget(['task' => $task,
-        'canEdit' => $canEdit,
-        'contentContainer' => $contentContainer]); ?>
+    <?= TaskContextMenu::widget(['task' => $task, 'contentContainer' => $contentContainer]); ?>
 
     <div class="row clearfix">
         <div class="col-sm-12 media">
@@ -62,7 +60,7 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
                     <span class="label label-info"><?= Yii::t('SpaceModule.base', 'Public'); ?></span>
                 <?php endif; ?>
 
-                <?= Button::back($backUrl, Yii::t('TasksModule.base', 'Back to overview'))->sm()->loader(true); ?>
+                <?= Button::back(TaskListUrl::taskListRoot($contentContainer), Yii::t('TasksModule.base', 'Back to overview'))->sm()->loader(true); ?>
 
             </div>
 
@@ -70,17 +68,12 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
 
             <div class="task-header-panel-container clearfix">
 
-
                 <!--        Assigned Task User-->
                 <?php if ($task->hasTaskAssigned()) : ?>
                     <div class="task-header-panel">
                         <div>
                             <em><strong><?= Yii::t('TasksModule.views_index_index', 'Assigned') ?>:</strong></em><br>
-                            <?php foreach ($task->taskAssignedUsers as $user) : ?>
-                                <a href="<?= $user->getUrl(); ?>">
-                                    <?= Image::widget(['user' => $user, 'width' => 24, 'showTooltip' => true]) ?>
-                                </a>
-                            <?php endforeach; ?>
+                            <?= TaskUserList::widget(['users' => $task->taskAssignedUsers])?>
                         </div>
                     </div>
                 <?php else : ?>
@@ -99,15 +92,11 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
                     <div class="task-header-panel">
                         <div style="<?= $participantStyle ?>">
                             <em><strong><?= Yii::t('TasksModule.views_index_index', 'Responsible') ?>:</strong></em><br>
-                            <?php foreach ($task->taskResponsibleUsers as $user) : ?>
-                                <a href="<?= $user->getUrl(); ?>">
-                                    <?= Image::widget(['user' => $user, 'width' => 24, 'showTooltip' => true]) ?>
-                                </a>
-                            <?php endforeach; ?>
+                            <?= TaskUserList::widget(['users' => $task->taskResponsibleUsers])?>
                         </div>
                     </div>
                 <?php endif ?>
-                <?= ChangeStatusButton::widget(['task' => $task]); ?>
+
             </div>
         </div>
     </div>

@@ -48,4 +48,5 @@ interface TaskListInterface
 
     public function getTitle();
     public function getColor();
+    public function getContainer();
 }

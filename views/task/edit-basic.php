@@ -13,25 +13,20 @@ use humhub\widgets\MarkdownField;
 /* @var $form \humhub\widgets\ActiveForm */
 /* @var $taskForm \humhub\modules\tasks\models\forms\TaskForm */
 
-
-if ($taskForm->task->color == null && isset($taskForm->contentContainer->color)) {
-    $taskForm->task->color = $taskForm->contentContainer->color;
-} elseif ($taskForm->task->color == null) {
-    $taskForm->tasks->color = '#d1d1d1';
-}
-
 ?>
 
 <div class="modal-body">
 
     <?= $form->field($taskForm->task, 'title')->textInput(); ?>
 
-    <?= $form->field($taskForm->task, 'task_list_id')->widget(ContentTagDropDown::class, [
-        'prompt' => Yii::t('TasksModule.base', 'Unsorted'),
-        'contentContainer' => $taskForm->contentContainer,
-        'options' => ['data-ui-select2' => true],
-        'tagClass' => TaskList::class
-    ]); ?>
+    <?php if(TaskList::findByContainer($taskForm->contentContainer)->count()) : ?>
+        <?= $form->field($taskForm->task, 'task_list_id')->widget(ContentTagDropDown::class, [
+            'prompt' => Yii::t('TasksModule.base', 'Unsorted'),
+            'contentContainer' => $taskForm->contentContainer,
+            'options' => ['data-ui-select2' => true],
+            'tagClass' => TaskList::class
+        ]); ?>
+    <?php endif; ?>
 
     <?= $form->field($taskForm->task, 'description')->widget(MarkdownField::class, ['fileModel' => $taskForm->task, 'fileAttribute' => 'files']) ?>
 

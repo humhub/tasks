@@ -11,6 +11,9 @@ namespace humhub\modules\tasks\controllers;
 
 use humhub\modules\content\components\ContentContainerController;
 
+use humhub\modules\content\components\ContentContainerControllerAccess;
+use humhub\modules\content\models\ContentTag;
+use humhub\modules\space\models\Space;
 use humhub\modules\tasks\models\lists\TaskListItemDrop;
 use humhub\modules\tasks\models\lists\TaskListRootItemDrop;
 use humhub\modules\tasks\models\Task;
@@ -19,20 +22,25 @@ use humhub\modules\tasks\models\lists\TaskListInterface;
 use humhub\modules\tasks\models\lists\UnsortedTaskList;
 use humhub\modules\tasks\permissions\CreateTask;
 use humhub\modules\tasks\permissions\ManageTasks;
+use humhub\modules\tasks\widgets\lists\CompletedTaskListItem;
+use humhub\modules\tasks\widgets\lists\CompletedTaskListView;
 use humhub\modules\tasks\widgets\lists\TaskListDetails;
 use humhub\modules\tasks\widgets\lists\TaskListItem;
 use humhub\modules\tasks\widgets\lists\TaskListWidget;
 use humhub\modules\tasks\widgets\lists\UnsortedTaskListWidget;
 use humhub\widgets\ModalClose;
 use Yii;
+use yii\data\ActiveDataProvider;
+use yii\data\Pagination;
 use yii\web\HttpException;
 
-class ListController extends ContentContainerController
+class ListController extends AbstractTaskController
 {
     public function getAccessRules()
     {
         return [
-            ['permission' => CreateTask::class, 'actions' => ['edit']],
+            [ContentContainerControllerAccess::RULE_USER_GROUP_ONLY => [Space::USERGROUP_MEMBER]],
+            ['permission' => ManageTasks::class, 'actions' => ['edit', 'delete', 'drop-task', 'drop-task-list']],
         ];
     }
 
@@ -40,13 +48,14 @@ class ListController extends ContentContainerController
     {
         return $this->render('index', [
             'contentContainer' => $this->contentContainer,
-            'canEdit' =>  $this->contentContainer->can(ManageTasks::class),
+            'canManage' =>  $this->contentContainer->can(ManageTasks::class),
+            'canCreate' => $this->contentContainer->can(CreateTask::class),
             'taskLists' => TaskList::findOverviewLists($this->contentContainer)->all()]);
     }
 
     public function actionEdit($id = null)
     {
-        $taskList = ($id) ? TaskList::findById($id, $this->contentContainer) : new TaskList($this->contentContainer);
+        $taskList = ($id) ? $this->getTaskListById($id) : new TaskList($this->contentContainer);
 
         if(!$taskList) {
             throw new HttpException(404);
@@ -59,6 +68,34 @@ class ListController extends ContentContainerController
         return $this->renderAjax('edit', [
             'model' => $taskList,
         ]);
+    }
+
+    public function actionDelete($id)
+    {
+        $this->forcePostRequest();
+        $this->getTaskListById($id)->delete();
+        return $this->asJson(['success' => true]);
+    }
+
+    public function actionLoadClosedLists()
+    {
+        return CompletedTaskListView::widget(['contentContainer' => $this->contentContainer]);
+    }
+
+    public function actionLoadCompleted($id)
+    {
+        return CompletedTaskListItem::widget(['contentContainer' => $this->contentContainer, 'taskList' =>  $this->getTaskListById($id)]);
+    }
+
+    public function getTaskListById($id)
+    {
+        $taskList = TaskList::findById($id, $this->contentContainer);
+
+        if(!$taskList) {
+            throw new HttpException(404);
+        }
+
+        return $taskList;
     }
 
     public function actionLoadTaskDetails($id)
@@ -128,20 +165,11 @@ class ListController extends ContentContainerController
             throw new HttpException(404);
         }
 
-        return TaskListWidget::widget(['list' => $taskList, 'contentContainer' => $this->contentContainer]);
+        return TaskListWidget::widget(['list' => $taskList]);
     }
 
     public function actionLoadAjaxTask($id)
     {
         return TaskListItem::widget(['task' => $this->getTaskById($id)]);
-    }
-
-    protected function getTaskById($id)
-    {
-        $task = Task::find()->contentContainer($this->contentContainer)->readable()->where(['task.id' => $id])->one();
-        if ($task === null) {
-            throw new HttpException(404, "Could not load task!");
-        }
-        return $task;
     }
 }

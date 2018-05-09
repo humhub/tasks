@@ -15,13 +15,13 @@ use humhub\modules\tasks\models\Task;
 
 ?>
 <?php if ($task->status == Task::STATUS_PENDING && $includePending) : ?>
-    <div id="taskStatus" class="label label-default <?= $right ? 'pull-right' : '' ?>"><?= '<i class="fa fa-info-circle"></i> ' . Yii::t('TasksModule.views_index_index', 'Pending'); ?></div>
+    <div class="label label-default <?= $right ? 'pull-right' : '' ?>"><?= '<i class="fa fa-info-circle"></i> ' . Yii::t('TasksModule.views_index_index', 'Pending'); ?></div>
 <?php elseif ($task->status == Task::STATUS_IN_PROGRESS) : ?>
-    <div id="taskStatus" class="label label-info <?= $right ? 'pull-right' : '' ?>"><?= '<i class="fa fa-edit"></i> ' . Yii::t('TasksModule.views_index_index', 'In Progress'); ?></div>
+    <div class="label label-info <?= $right ? 'pull-right' : '' ?>"><?= '<i class="fa fa-edit"></i> ' . Yii::t('TasksModule.views_index_index', 'In Progress'); ?></div>
 <?php elseif ($task->status == Task::STATUS_PENDING_REVIEW) : ?>
-    <div id="taskStatus" class="label label-warning <?= $right ? 'pull-right' : '' ?>"><?= '<i class="fa fa-eye"></i> ' . Yii::t('TasksModule.views_index_index', 'Pending Review'); ?></div>
+    <div class="label label-warning <?= $right ? 'pull-right' : '' ?>"><?= '<i class="fa fa-eye"></i> ' . Yii::t('TasksModule.views_index_index', 'Pending Review'); ?></div>
 <?php elseif ($task->status == Task::STATUS_COMPLETED  && $includeCompleted) : ?>
-    <div id="taskStatus" class="label label-success <?= $right ? 'pull-right' : '' ?>"><?= '<i class="fa fa-check-square"></i> ' . Yii::t('TasksModule.views_index_index', 'Completed'); ?></div>
+    <div class="label label-success <?= $right ? 'pull-right' : '' ?>"><?= '<i class="fa fa-check-square"></i> ' . Yii::t('TasksModule.views_index_index', 'Completed'); ?></div>
 <?php endif; ?>
 
 <?php if ($task->isOverdue()) : ?>

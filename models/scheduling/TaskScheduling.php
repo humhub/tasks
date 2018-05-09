@@ -11,6 +11,7 @@ namespace humhub\modules\tasks\models\scheduling;
 use DateTime;
 use DateTimeZone;
 use humhub\modules\tasks\CalendarUtils;
+use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\notifications\ChangedDateTimeNotification;
 use humhub\modules\tasks\notifications\ExtensionRequestNotification;
@@ -222,9 +223,19 @@ class TaskScheduling extends Object
      */
     public function canRequestExtension()
     {
-        if (!$this->task->scheduling)
+        if (!$this->task->scheduling || $this->task->isTaskResponsible() || !$this->task->hasTaskResponsible()) {
             return false;
-        return ((!$this->task->isTaskResponsible() && $this->task->hasTaskResponsible() && ($this->task->isTaskAssigned() || $this->task->canAnyoneProcessTask()) && (!($this->task->isCompleted() || $this->task->isPending() || $this->task->isPendingReview())) && (!$this->hasRequestedExtension())));
+        }
+
+        if($this->task->isCompleted() || $this->task->isPendingReview()) {
+            return false;
+        }
+
+        if($this->hasRequestedExtension()) {
+            return false;
+        }
+
+        return $this->task->isTaskAssigned() || $this->task->canProcess();
     }
 
     public function hasRequestedExtension()
@@ -327,9 +338,9 @@ class TaskScheduling extends Object
             'editable' => false,
             'color' => Html::encode($this->task->getColor()),
             'allDay' => $this->task->all_day,
-            'updateUrl' => $this->task->content->container->createUrl('/tasks/task/edit-ajax', ['id' => $this->task->id]),
-            'viewUrl' => $this->task->content->container->createUrl('/tasks/task/modal', ['id' => $this->task->id, 'cal' => '1']),
-            'openUrl' => $this->task->content->container->createUrl('/tasks/task/view', ['id' => $this->task->id]),
+            //'updateUrl' => $this->task->content->container->createUrl('/tasks/task/edit-ajax', ['id' => $this->task->id]),
+            'viewUrl' => TaskUrl::viewTaskModal($this->task, 1),
+            'openUrl' => TaskUrl::viewTask($this->task),
             'start' => $end,
             'end' => $end,
         ];

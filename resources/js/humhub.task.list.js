@@ -32,6 +32,8 @@ humhub.module('task.list', function (module, require, $) {
             placeholder: "task-list-state-highlight",
             update: $.proxy(this.dropItem, this)
         });
+
+
     };
 
     Root.prototype.dropItem = function (event, ui) {
@@ -56,6 +58,14 @@ humhub.module('task.list', function (module, require, $) {
         });
     };
 
+    Root.prototype.loadClosed = function(evt) {
+        client.html(evt).then(function(response) {
+
+        }).catch(function(e) {
+            module.log.error(e, true);
+        })
+    };
+
     var TaskList = function (node, options) {
         Widget.call(this, node, options);
     };
@@ -73,6 +83,8 @@ humhub.module('task.list', function (module, require, $) {
         this.$.find('.task-list-title-bar')
             .off('click').on('click', $.proxy(this.toggleItems, this))
             .hover($.proxy(this.mouseOver, this), $.proxy(this.mouseOut, this)).disableSelection();
+
+        this.updated();
     };
 
     TaskList.prototype.mouseOver = function (event, ui) {
@@ -105,6 +117,8 @@ humhub.module('task.list', function (module, require, $) {
                 that.getItemsRoot().sortable('cancel');
                 module.log.error('', true);
             }
+            that.updated();
+            targetList.updated();
         }).catch(function(e) {
             module.log.error(e, true);
             that.getItemsRoot().sortable('cancel');
@@ -182,6 +196,15 @@ humhub.module('task.list', function (module, require, $) {
         });
     };
 
+    TaskList.prototype.prependPending = function (task) {
+        var $task = task instanceof $ ? task : task.$;
+        $task.hide();
+        var $pendingContainer = this.getItemsRoot();
+        $pendingContainer.prepend($task);
+        $pendingContainer.show();
+        $task.fadeIn();
+    };
+
     TaskList.prototype.prependCompleted = function (task) {
         var $task = task instanceof $ ? task : task.$;
         $task.hide();
@@ -208,6 +231,37 @@ humhub.module('task.list', function (module, require, $) {
         $task.fadeIn();
     };
 
+    TaskList.prototype.deleteList = function(evt) {
+        var that = this;
+        this.loader();
+        client.post(evt).then(function(response) {
+            if(response.success) {
+                that.remove();
+            } else {
+                module.log.error(null, true);
+            }
+        }).catch(function(e) {
+            module.log.error(e, true);
+        }).finally(function() {
+            that.loader(false);
+        });
+    };
+
+    TaskList.prototype.updated = function() {
+        var $itemRoot = this.getItemsRoot();
+        if(!$itemRoot.find('.task-list-item, .task-list-empty').length) {
+            var $empty = $('.task-list-empty:first').clone().show();
+            $itemRoot.append($empty);
+        } else if($itemRoot.find('.task-list-item').length) {
+            $itemRoot.find('.task-list-empty').remove();
+        }
+    };
+
+    TaskList.prototype.remove = function(evt) {
+        var that = this;
+        this.$.closest('.task-list-li').fadeOut('fast', function() {$(this).remove()});
+    };
+
     var Task = function (node, options) {
         Widget.call(this, node, options);
     };
@@ -216,7 +270,8 @@ humhub.module('task.list', function (module, require, $) {
 
     Task.prototype.init = function (evt) {
         this.$.find('.task-list-task-title-bar').on('click', $.proxy(this.toggleDetails, this));
-        this.$.find('.task-list-task-title-bar').hover( $.proxy(this.mouseOver, this),  $.proxy(this.mouseOut, this))
+        this.$.find('.task-list-task-title-bar').hover( $.proxy(this.mouseOver, this),  $.proxy(this.mouseOut, this));
+        this.updated();
     };
 
     Task.prototype.mouseOver = function(evt) {
@@ -241,6 +296,13 @@ humhub.module('task.list', function (module, require, $) {
             that.loader(false);
             module.log.error(e, true);
         });
+    };
+
+    Task.prototype.updated = function(evt) {
+        var parent = this.parent();
+        if(parent && parent.updated) {
+            parent.updated();
+        }
     };
 
     Task.prototype.toggleDetails = function (evt) {
@@ -294,15 +356,19 @@ humhub.module('task.list', function (module, require, $) {
                 var $newRoot = $(response.html).hide();
                 that.$.replaceWith($newRoot);
                 that.$ = $newRoot;
+
                 if (that.isCompleted()) {
                     that.parent().prependCompleted(that);
-                } else {
+                } else if(that.$.closest('.tasks-completed')) {
+                    that.parent().prependPending(that);
+                }  else {
                     that.$.fadeIn();
                 }
                 that.init();
             }
         }).finally(function () {
             that.loader(false);
+            that.updated();
         });
     };
 
@@ -312,6 +378,46 @@ humhub.module('task.list', function (module, require, $) {
 
     Task.prototype.isStatus = function (status) {
         return this.$.is('[data-task-status="' + status + '"]')
+    };
+
+    var CompletedTaskListView = function (node, options) {
+        Widget.call(this, node, options);
+    };
+
+    object.inherits(CompletedTaskListView, Widget);
+
+    CompletedTaskListView.prototype.init = function() {
+        var that = this;
+        $('.closed-task-lists-container').on('click', '.pagination-container a', function (evt) {
+            evt.preventDefault();
+            that.changePage($(this).attr('href'));
+        });
+    };
+
+    CompletedTaskListView.prototype.changePage = function (url) {
+        var that = this;
+        url = url || this.$.attr('action');
+
+        // Note: the additional empty objects are given due an bug in v1.2.1 fixed in v1.2.2
+        client.html(url).then(function (response) {
+            that.$.find('.closed-task-list-view').html(response.html);
+        }).catch(function (err) {
+            module.log.error(err, true);
+        }).finally(function () {
+            //that.loader(false);
+        });
+
+    };
+
+    var CompletedTaskListViewItem = function (node, options) {
+        Task.call(this, node, options);
+    };
+
+    object.inherits(CompletedTaskListViewItem, TaskList);
+
+    CompletedTaskListViewItem.prototype.remove = function(evt) {
+        var that = this;
+        this.$.closest('li').fadeOut('fast', function() {$(this).remove()});
     };
 
     var create = function (evt) {
@@ -327,18 +433,14 @@ humhub.module('task.list', function (module, require, $) {
             modal.global.$.one('hidden.bs.modal', function() {
                 Widget.closest(evt.$trigger).reload();
             });
+        }).catch(function(e) {
+            module.log.error(e,true);
         });
     };
 
     var editTask = function (evt) {
         modal.load(evt).then(function () {
             modal.global.$.one('submitted', onEditTaskSubmitted);
-        });
-    };
-
-    var deleteTask = function (evt) {
-        client.post(evt).then(function () {
-            Widget.closest(evt.$trigger).$.remove();
         });
     };
 
@@ -369,12 +471,13 @@ humhub.module('task.list', function (module, require, $) {
 
     module.export({
         TaskList: TaskList,
+        CompletedTaskListView: CompletedTaskListView,
+        CompletedTaskListViewItem: CompletedTaskListViewItem,
         Task: Task,
         Root: Root,
         edit: edit,
         create: create,
-        editTask: editTask,
-        deleteTask: deleteTask
+        editTask: editTask
     });
 })
 ;

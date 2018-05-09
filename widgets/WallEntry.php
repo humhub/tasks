@@ -13,6 +13,7 @@ use humhub\modules\content\widgets\WallEntryControlLink;
 use humhub\modules\tasks\assets\Assets;
 use humhub\modules\content\widgets\EditLink;
 use humhub\modules\content\widgets\DeleteLink;
+use humhub\modules\tasks\helpers\TaskUrl;
 use Yii;
 
 /**
@@ -24,7 +25,7 @@ class WallEntry extends \humhub\modules\content\widgets\WallEntry
 
     public function getEditUrl()
     {
-        return $this->contentObject->content->container->createUrl('/tasks/task/edit', ['id' => $this->contentObject->id, 'redirect' => 1]);
+        return TaskUrl::editTask($this->contentObject, 0, 1);
     }
 
     public function isInModal()

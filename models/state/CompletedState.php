@@ -54,7 +54,7 @@ class CompletedState extends TaskState
         if($this->task->isTaskResponsible($user) || $this->task->isOwner($user)) {
             return true;
         } else if(!$this->task->review) {
-            return $this->task->isTaskAssigned($user) || $this->task->canAnyoneProcessTask($user);
+            return $this->task->isTaskAssigned($user) || $this->task->canProcess($user);
         }
 
         return false;

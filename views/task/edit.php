@@ -44,18 +44,10 @@ $task = $taskForm->task;
         <hr>
 
         <div class="modal-footer">
-            <div class="col-md-<?= !$taskForm->task->isNewRecord ? '8 text-left': '12 text-center' ?>">
+            <div class="col-md-12 text-center ?>">
                 <?= ModalButton::submitModal($taskForm->getSubmitUrl()); ?>
                 <?= ModalButton::cancel(); ?>
             </div>
-            <?php if (!$taskForm->task->isNewRecord): ?>
-                <div class="col-md-4 text-right">
-                    <?= Button::danger(Yii::t('TasksModule.base', 'Delete'))->confirm(
-                        Yii::t('TasksModule.views_index_edit', '<strong>Confirm</strong> task deletion'),
-                        Yii::t('TasksModule.views_index_edit', 'Do you really want to delete this task?'),
-                        Yii::t('TasksModule.base', 'Delete'))->action('ui.modal.post', $taskForm->getDeleteUrl()); ?>
-                </div>
-            <?php endif; ?>
         </div>
 
     <?php ActiveForm::end(); ?>

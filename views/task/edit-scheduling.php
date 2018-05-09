@@ -7,6 +7,7 @@
  */
 
 use humhub\modules\tasks\models\scheduling\TaskScheduling;
+use humhub\widgets\MultiSelectField;
 use humhub\widgets\TimePicker;
 use humhub\widgets\TimeZoneDropdownAddition;
 use yii\jui\DatePicker;
@@ -52,7 +53,7 @@ $taskReminder = ArrayHelper::map($taskForm->task->getTaskReminder()->all(),'id',
     <br>
 
     <div>
-        <?= $form->field($taskForm->task, 'selectedReminders')->widget( \humhub\widgets\MultiSelectField::className(), [
+        <?= $form->field($taskForm->task, 'selectedReminders')->widget( MultiSelectField::className(), [
                 'selection' => $taskReminder,
                 'placeholder' => Yii::t('TasksModule.views_index_edit', 'Add reminder'),
                 'items' => $taskForm->getRemindModeItems(),
@@ -62,7 +63,9 @@ $taskReminder = ArrayHelper::map($taskForm->task->getTaskReminder()->all(),'id',
         ?>
     </div>
 
-    <br>
-    <?= $form->field($taskForm->task, 'cal_mode')->checkbox() ?>
+    <?php if($taskForm->getContentContainer()->isModuleEnabled('calendar')) : ?>
+        <br>
+        <?= $form->field($taskForm->task, 'cal_mode')->checkbox() ?>
+    <?php endif; ?>
 
 </div>

@@ -11,6 +11,7 @@ namespace humhub\modules\tasks\models\lists;
 
 use humhub\modules\content\components\ActiveQueryContent;
 use humhub\modules\content\components\ContentContainerActiveRecord;
+use humhub\modules\content\models\ContentContainer;
 use humhub\modules\content\models\ContentTag;
 use humhub\modules\tasks\models\Sortable;
 use humhub\modules\tasks\models\Task;
@@ -141,14 +142,13 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
      * @param $container
      * @return ActiveQuery
      */
-    public static function findOverviewLists($container)
+    public static function findOverviewLists(ContentContainerActiveRecord $container)
     {
         $query = static::findByContainer($container);
         $query->leftJoin('task', 'task.task_list_id=content_tag.id');
         $query->leftJoin('task_list_setting', 'task_list_setting.tag_id=content_tag.id');
 
-        $includes =  Task::$statuses;
-        unset($includes[TASK::STATUS_COMPLETED]);
+        $includes =  [Task::STATUS_IN_PROGRESS, Task::STATUS_PENDING_REVIEW, Task::STATUS_PENDING];
 
         $query->andWhere(
             ['OR',
@@ -160,6 +160,26 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
 
         $query->orderBy(['task_list_setting.sort_order' => SORT_ASC]);
 
+        return $query;
+    }
+
+    public static function findHiddenLists(ContentContainerActiveRecord $container)
+    {
+        $query = static::findByContainer($container);
+        $query->leftJoin('task', 'task.task_list_id=content_tag.id');
+        $query->leftJoin('task_list_setting', 'task_list_setting.tag_id=content_tag.id');
+
+        $includes =  [Task::STATUS_IN_PROGRESS, Task::STATUS_PENDING_REVIEW, Task::STATUS_PENDING];
+
+        $query->andWhere(
+            ['AND',
+                ['NOT IN', 'task.status', $includes],
+                ['IS NOT', 'task.id', new Expression("NULL")],
+                ['task_list_setting.hide_if_completed' => '1']
+            ]
+        );
+
+        $query->orderBy(['task_list_setting.updated_at' => SORT_ASC]);
         return $query;
     }
 

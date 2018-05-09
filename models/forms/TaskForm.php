@@ -13,6 +13,7 @@
 
 namespace humhub\modules\tasks\models\forms;
 
+use humhub\modules\tasks\helpers\TaskUrl;
 use Yii;
 use yii\base\Model;
 use DateInterval;
@@ -24,6 +25,7 @@ use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\content\models\Content;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\CalendarUtils;
+use yii\web\HttpException;
 
 class TaskForm extends Model
 {
@@ -92,6 +94,11 @@ class TaskForm extends Model
      * @var
      */
     public $reloadListId;
+
+    /**
+     * @var string
+     */
+    public $submitUrl;
 
     /**
      * @inheritdoc
@@ -255,6 +262,11 @@ class TaskForm extends Model
             return false;
         }
 
+        if(!$this->task->content->canEdit())
+        {
+            throw new HttpException(403);
+        }
+
         // After validation the date was translated to system time zone, which we expect in the database.
         $this->task->start_datetime = $this->start_date;
         $this->task->end_datetime = $this->end_date;
@@ -330,44 +342,27 @@ class TaskForm extends Model
 
     public function getSubmitUrl()
     {
-        return $this->task->content->container->createUrl('edit', [
-            'id' => $this->task->id,
-            'cal' => $this->cal,
-            'redirect' => $this->redirect,
-            'listId' => $this->taskListId
-        ]);
+        return ($this->submitUrl) ? $this->submitUrl : TaskUrl::editTask($this->task, $this->cal, $this->redirect, $this->taskListId);
     }
 
     public function getDeleteUrl()
     {
-        return $this->task->content->container->createUrl('delete', [
-            'id' => $this->task->id,
-            'cal' => $this->cal,
-            'redirect' => $this->redirect
-        ]);
+        return TaskUrl::deleteTask($this->task, $this->cal, $this->redirect);
     }
 
     public function getTaskAssignedPickerUrl()
     {
-        return $this->task->content->container->createUrl('/tasks/task/task-assigned-picker', ['id' => $this->task->id]);
+        return TaskUrl::pickerAssigned($this->task);
     }
 
     public function getTaskResponsiblePickerUrl()
     {
-        return $this->task->content->container->createUrl('/tasks/task/task-assigned-picker', ['id' => $this->task->id]);
+        return TaskUrl::pickerResponsible($this->task);
     }
 
-    public function updateTime($start = null, $end = null)
-    {
-        $this->task->time_zone = Yii::$app->formatter->timeZone;
-        $this->translateDateTimes($start, $end, null, null, 'php:Y-m-d H:i:s');
-
-        $this->task->start_datetime = $this->start_date;
-        $this->task->end_datetime = $this->end_date;
-
-        return $this->task->updateAttributes(['start_datetime' => $this->task->start_datetime, 'end_datetime' => $this->task->end_datetime]);
-    }
-
+    /**
+     * @return ContentContainerActiveRecord
+     */
     public function getContentContainer()
     {
         return $this->task->content->container;

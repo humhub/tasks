@@ -12,7 +12,7 @@
 /* @var $options array */
 
 use humhub\libs\Html;
-use humhub\modules\tasks\widgets\TaskItemWidget;
+use humhub\modules\tasks\widgets\checklist\TaskChecklistItem;
 
 ?>
 
@@ -20,7 +20,7 @@ use humhub\modules\tasks\widgets\TaskItemWidget;
     <label><strong><i class="fa fa-check-square-o"></i> <?= Yii::t('TasksModule.base', 'Checklist:') ?></strong></label>
     <?= Html::beginTag('ul', $options) ?>
         <?php foreach ($items as $item): ?>
-            <?= TaskItemWidget::widget(['item' => $item, 'task' => $task]); ?>
+            <?= TaskChecklistItem::widget(['item' => $item, 'task' => $task]); ?>
         <?php endforeach; ?>
     <?= Html::endTag('ul') ?>
 </div>

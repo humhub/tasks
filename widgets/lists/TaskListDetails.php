@@ -16,9 +16,7 @@ class TaskListDetails extends Widget
 
     public function run()
     {
-        return $this->render('taskDetails', [
-            'task' => $this->task
-        ]);
+        return $this->render('taskDetails', ['task' => $this->task]);
     }
 
 }

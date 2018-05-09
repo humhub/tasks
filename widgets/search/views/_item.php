@@ -8,5 +8,5 @@
 use humhub\modules\tasks\widgets\search\TaskSearchListEntry;
 
 ?>
-<?= TaskSearchListEntry::widget(['task' => $model, 'contentContainer' => $contentContainer, 'canEdit' => $canEdit, 'filterResult' => true])?>
+<?= TaskSearchListEntry::widget(['task' => $model, 'contentContainer' => $contentContainer, 'filterResult' => true])?>
 

@@ -9,6 +9,7 @@
 namespace humhub\modules\tasks\widgets\lists;
 
 use humhub\modules\content\components\ContentContainerActiveRecord;
+use humhub\modules\tasks\helpers\TaskListUrl;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\models\lists\TaskListInterface;
 use humhub\widgets\JsWidget;
@@ -36,19 +37,9 @@ class TaskListWidget extends JsWidget
      */
     public $tasks;
 
-    /**
-     * @var ContentContainerActiveRecord
-     */
-    public $contentContainer;
+    public $canManage = false;
 
-    /**
-     * @inheritdocs
-     */
-    public function init()
-    {
-        $this->contentContainer = Yii::$app->controller->contentContainer;
-        parent::init();
-    }
+    public $canCreate = false;
 
     /**
      * @inheritdocs
@@ -60,15 +51,15 @@ class TaskListWidget extends JsWidget
         $tasks = $this->getNonCompletedTasks();
 
         return $this->render('taskList', [
+            'list' => $this->list,
             'title' => $this->getTitle(),
             'tasks' => $tasks,
+            'canManage' => $this->canManage,
+            'canCreate' => $this->canCreate,
             'completedTasks' => $completedTasksQuery->limit(3)->all(),
             'completedTasksCount' => $countQuery->count(),
             'options' => $this->getOptions(),
             'color' => $this->list->getColor(),
-            'editListUrl' => $this->getEditListUrl(),
-            'addTaskUrl'  => $this->getAddTaskUrl(),
-            'showMoreCompletedUrl'  => $this->getShowMoreCompletedUrl(),
         ]);
     }
 
@@ -83,21 +74,6 @@ class TaskListWidget extends JsWidget
         return $this->list->getCompletedTasks();
     }
 
-    protected function getEditListUrl()
-    {
-        return $this->contentContainer->createUrl('/tasks/list/edit', ['id' => $this->list->getId()]);
-    }
-
-    protected function getShowMoreCompletedUrl()
-    {
-        return $this->contentContainer->createUrl('/tasks/list/show-more-completed', ['id' => $this->list->getId()]);
-    }
-
-    protected function getAddTaskUrl()
-    {
-        return $this->contentContainer->createUrl('/tasks/task/edit', ['listId' => $this->list->getId()]);
-    }
-
     protected function getTitle()
     {
         return $this->list->getTitle();
@@ -107,8 +83,9 @@ class TaskListWidget extends JsWidget
     {
         return [
             'task-list-id' => $this->list->getId(),
-            'reload-url' => $this->contentContainer->createUrl('/tasks/list/load-ajax', ['id' =>  $this->list->getId()]),
-            'drop-task-url' => $this->contentContainer->createUrl('/tasks/list/drop-task')
+            'can-manage' => $this->canManage,
+            'reload-url' => TaskListUrl::reloadTaskList($this->list),
+            'drop-task-url' => TaskListUrl::dropTaskListTask($this->list)
         ];
     }
 }

@@ -4,6 +4,7 @@
 namespace humhub\modules\tasks\models\state;
 
 
+use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\Task;
 use Yii;
 use yii\base\Object;
@@ -253,12 +254,12 @@ abstract class TaskState extends Object
 
     public function getProceedUrl()
     {
-        return $this->task->content->container->createUrl('/tasks/task/proceed', ['id' => $this->task->id, 'status' => static::$status]);
+        return TaskUrl::proceedTask($this->task, static::$status);
     }
 
     public function getRevertUrl()
     {
-        return $this->task->content->container->createUrl('/tasks/task/revert', ['id' => $this->task->id, 'status' => static::$status]);
+        return TaskUrl::revertTask($this->task, static::$status);
     }
 
     public function isPending()

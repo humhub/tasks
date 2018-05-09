@@ -43,12 +43,12 @@ class InProgressState extends TaskState
 
     public function checkProceedRules($newStatus = null, $user = null)
     {
-        return $this->task->isTaskResponsible($user) || $this->task->isTaskAssigned($user) || $this->task->canAnyoneProcessTask($user);
+        return $this->task->isTaskResponsible($user) || $this->task->isTaskAssigned($user) || $this->task->canProcess($user);
     }
 
     public function checkRevertRules($newStatus = null, $user = null)
     {
-        return $this->task->isTaskResponsible($user) || $this->task->isTaskAssigned($user) || $this->task->canAnyoneProcessTask($user);
+        return $this->task->isTaskResponsible($user) || $this->task->isTaskAssigned($user) || $this->task->canProcess($user);
     }
 
     public function afterProceed(TaskState $oldState)

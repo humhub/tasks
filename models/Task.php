@@ -8,10 +8,13 @@
 
 namespace humhub\modules\tasks\models;
 
+use humhub\modules\content\components\ContentContainerPermissionManager;
+use humhub\modules\tasks\helpers\TaskUrl;
+use humhub\modules\tasks\permissions\CreateTask;
+use humhub\modules\tasks\permissions\ProcessUnassignedTasks;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\Expression;
-use humhub\libs\Html;
 use humhub\modules\notification\models\Notification;
 use humhub\modules\tasks\models\checklist\TaskCheckList;
 use humhub\modules\tasks\models\checklist\TaskItem;
@@ -53,16 +56,12 @@ use humhub\modules\tasks\permissions\ManageTasks;
  * @property TaskItem[] $items
  * @property TaskList $list
  * @property User[] $taskResponsibleUsers
+ * @property User[] $taskAssignedUsers
  */
 class Task extends ContentActiveRecord implements Searchable
 {
 
     const SCENARIO_EDIT = 'edit';
-
-    /**
-     * @inheritdocs
-     */
-    protected $managePermission = ManageTasks::class;
 
     /**
      * @inheritdocs
@@ -83,6 +82,11 @@ class Task extends ContentActiveRecord implements Searchable
     const STATUS_PENDING_REVIEW = 3;
     const STATUS_COMPLETED = 5;
     const STATUS_ALL = 4;
+
+    /**
+     * @deprecated
+     */
+    const STATUS_OPEN = 1;
 
     /**
      * @var array all given statuses as array
@@ -270,7 +274,7 @@ class Task extends ContentActiveRecord implements Searchable
      */
     public function getUrl()
     {
-        return $this->content->container->createUrl('/tasks/task/view', ['id' => $this->id]);
+        return TaskUrl::viewTask($this);
     }
 
     public function getList()
@@ -390,7 +394,23 @@ class Task extends ContentActiveRecord implements Searchable
             parent::afterSave($insert, $changedAttributes);
         }
 
+        if($this->list) {
+            $this->list->setAttributes(['updated_at' => new Expression('NOW()')]);
+        }
+
         parent::afterSave($insert, $changedAttributes);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function afterDelete()
+    {
+        if($this->list) {
+            $this->list->setAttributes(['updated_at' => new Expression('NOW()')]);
+        }
+
+        parent::afterDelete();
     }
 
 
@@ -655,11 +675,6 @@ class Task extends ContentActiveRecord implements Searchable
     public function completeItems()
     {
         TaskItem::updateAll(['completed' => 1], ['task_id' => $this->id]);
-        /*Yii::$app->db->createCommand()->update(
-                TaskItem::tableName(),
-                ['completed' => 1], //columns and values
-                ['task_id' => $this->id] //condition, similar to where()
-            )->execute();*/
     }
 
     /**
@@ -695,6 +710,20 @@ class Task extends ContentActiveRecord implements Searchable
     public function canReview($user = null)
     {
         return $this->review && $this->isTaskResponsible($user);
+    }
+
+    /**
+     * Additional canEdit check for responsible users.
+     * @return bool
+     * @see Content::canEdit()
+     */
+    public function canEdit()
+    {
+        if($this->isNewRecord) {
+            return  $this->content->container->can([CreateTask::class, ManageTasks::class]);
+        }
+
+        return  $this->isTaskResponsible();
     }
 
     // ###########  handle notifications  ###########
@@ -780,10 +809,22 @@ class Task extends ContentActiveRecord implements Searchable
      * handle task specific permissions
      * @return bool
      */
-    public function canAnyoneProcessTask($user = null)
+    public function canProcess($user = null)
     {
-        $userId = $user ? $user->id : null;
-        return (!$this->hasTaskAssigned() && $this->content->container->isMember($userId));
+        if(!$user && Yii::$app->user->isGuest) {
+            return false;
+        }
+
+        if(!$user) {
+            $user = Yii::$app->user->getIdentity();
+        }
+
+        $permissionManager = new ContentContainerPermissionManager([
+            'contentContainer' => $this->content->container,
+            'subject' => $user
+        ]);
+
+        return (!$this->hasTaskAssigned() && $permissionManager->can(ProcessUnassignedTasks::class));
     }
 
     /**
@@ -792,7 +833,7 @@ class Task extends ContentActiveRecord implements Searchable
      */
     public function canCheckItems()
     {
-        return (($this->isTaskResponsible() || $this->isTaskAssigned() || $this->canAnyoneProcessTask()) && (!($this->isCompleted() || $this->isPending())));
+        return (($this->isTaskResponsible() || $this->isTaskAssigned() || $this->canProcess()) && (!($this->isCompleted() || $this->isPending())));
     }
 
     /**

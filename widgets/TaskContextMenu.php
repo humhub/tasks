@@ -8,16 +8,15 @@
 
 namespace humhub\modules\tasks\widgets;
 
-use Yii;
-use humhub\modules\file\handler\FileHandlerCollection;
+use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\Task;
-use humhub\modules\tasks\models\checklist\TaskItem;
+use yii\base\Widget;
 
 /**
  * Widget for rendering the menue buttons for a Task.
  * @author davidborn
  */
-class TaskContextMenu extends \yii\base\Widget
+class TaskContextMenu extends Widget
 {
 
     /**
@@ -40,19 +39,17 @@ class TaskContextMenu extends \yii\base\Widget
      */
     public function run()
     {
-
-        $deleteUrl = $this->contentContainer->createUrl('/tasks/task/delete', ['id' => $this->task->id, 'redirect' => 1]);
-        $editUrl = $this->contentContainer->createUrl('/tasks/task/edit', ['id' => $this->task->id, 'redirect' => 1]);
-        $extensionRequestUrl = $this->contentContainer->createUrl('/tasks/task/extend', ['id' => $this->task->id]);
-        $resetUrl = $this->contentContainer->createUrl('/tasks/task/reset', ['id' => $this->task->id]);
+        if(!$this->task->content->canEdit()) {
+            return '';
+        }
 
         return $this->render('taskMenuDropdown', [
-                    'deleteUrl' => $deleteUrl,
-                    'editUrl' => $editUrl,
-                    'canEdit' => $this->canEdit,
-                    'extensionRequestUrl' => $extensionRequestUrl,
+                    'deleteUrl' => TaskUrl::deleteTask($this->task, null, 1),
+                    'editUrl' =>  TaskUrl::editTask($this->task, null, 1),
+                    'extensionRequestUrl' => TaskUrl::requestExtension($this->task),
+                    'resetUrl' => TaskUrl::resetTask($this->task),
+                    'canEdit' => $this->task->content->canEdit(),
                     'canRequestExtension' => ( $this->task->schedule->canRequestExtension()),
-                    'resetUrl' => $resetUrl,
                     'canReset' => $this->task->canResetTask()
         ]);
     }

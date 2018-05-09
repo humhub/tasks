@@ -10,7 +10,9 @@ namespace humhub\modules\tasks\widgets\lists;
 
 
 use humhub\modules\content\components\ContentActiveRecord;
+use humhub\modules\tasks\helpers\TaskListUrl;
 use humhub\modules\tasks\models\Task;
+use humhub\modules\tasks\permissions\ManageTasks;
 use humhub\widgets\JsWidget;
 use Yii;
 
@@ -52,8 +54,7 @@ class TaskListItem extends JsWidget
     {
         return $this->render('taskListItem', [
             'task' => $this->task,
-            'options' => $this->getOptions(),
-            'contentContainer' =>  $this->contentContainer,
+            'options' => $this->getOptions()
         ]);
     }
 
@@ -74,8 +75,8 @@ class TaskListItem extends JsWidget
     {
         return [
             'task-id' =>  $this->task->id,
-            'reload-url' => $this->contentContainer->createUrl('/tasks/list/load-ajax-task', ['id' => $this->task->id]),
-            'load-details-url' =>  $this->contentContainer->createUrl('/tasks/list/load-task-details', ['id' => $this->task->id]),
+            'reload-url' => TaskListUrl::reloadTaskListTask($this->task),
+            'load-details-url' =>  TaskListUrl::loadTaskDetails($this->task),
             'task-status' => $this->task->status
         ];
     }
