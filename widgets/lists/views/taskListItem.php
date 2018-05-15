@@ -38,7 +38,7 @@ $checkUrl = $task->state->getCheckUrl();
                 'disabled' => empty($checkUrl)
         ]); ?>
 
-        <label><?= Html::encode($task->title) ?></label>
+        <span class="toggleTaskDetails"><?= Html::encode($task->title) ?></span>
 
         <?= TaskBadge::widget(['task' => $task, 'includePending' => false, 'includeCompleted' => false]) ?>
 

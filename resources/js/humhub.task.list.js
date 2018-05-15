@@ -306,7 +306,7 @@ humhub.module('task.list', function (module, require, $) {
 
     Task.prototype.toggleDetails = function (evt) {
         var $target = $(evt.target);
-        if(!$target.is('.task-list-task-title-bar') && !$target.closest('.toggleTaskDetails').length) {
+        if((!$target.is('.task-list-task-title-bar') && !$target.closest('.toggleTaskDetails').length)) {
             return;
         }
 
