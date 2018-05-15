@@ -35,14 +35,13 @@ class TaskSearchList extends Widget
         $tasksProvider = new ActiveDataProvider([
             'query' => $this->filter->query(),
             'pagination' => [
-                'pageSize' => 5,
+                'pageSize' => 30,
                 'route' => '/tasks/search/filter-tasks'
             ],
         ]);
 
         return  ListView::widget([
             'dataProvider' => $tasksProvider,
-//            'itemView' => '@tasks/widgets/views/taskListEntry',
             'itemView' => '@tasks/widgets/search/views/_item',
             'viewParams' => [
                 'contentContainer' => $this->filter->contentContainer,
