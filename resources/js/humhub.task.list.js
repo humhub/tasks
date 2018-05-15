@@ -32,8 +32,6 @@ humhub.module('task.list', function (module, require, $) {
             placeholder: "task-list-state-highlight",
             update: $.proxy(this.dropItem, this)
         });
-
-
     };
 
     Root.prototype.dropItem = function (event, ui) {
@@ -237,6 +235,7 @@ humhub.module('task.list', function (module, require, $) {
         client.post(evt).then(function(response) {
             if(response.success) {
                 that.remove();
+                reloadList(); // reload unsorted
             } else {
                 module.log.error(null, true);
             }
@@ -465,9 +464,10 @@ humhub.module('task.list', function (module, require, $) {
     };
 
     var getListById = function (id) {
-        $node = id ? $('[data-task-list-id="' + id + '"]') : $('[data-task-list-unsored]');
+        var $node = id ? $('[data-task-list-id="' + id + '"]') : $('[data-task-list-unsored]');
         return Widget.instance($node);
     };
+
 
     module.export({
         TaskList: TaskList,

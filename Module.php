@@ -62,6 +62,8 @@ class Module extends ContentContainerModule
         foreach (TaskList::findByContainer($container)->all() as $taskList) {
             $taskList->delete();
         }
+
+        parent::disableContentContainer($container);
     }
 
     public static function onUserDelete($event)

@@ -30,12 +30,15 @@ $checkUrl = $task->state->getCheckUrl();
 <div class="task-list-task-title-bar">
     <span class="task-list-item-title">
 
+        <?php // We use an extra label in order to prevent click events on the actual label otherwise tasks could be accidentally finished ?>
         <?= Html::checkBox('item[' . $task->id . ']', $task->isCompleted(), [
-                'label' => Html::encode($task->title),
+                'label' => '&nbsp;',
                 'data-action-change' => 'changeState',
                 'data-action-url' => $checkUrl,
                 'disabled' => empty($checkUrl)
         ]); ?>
+
+        <label><?= Html::encode($task->title) ?></label>
 
         <?= TaskBadge::widget(['task' => $task, 'includePending' => false, 'includeCompleted' => false]) ?>
 

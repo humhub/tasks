@@ -116,6 +116,8 @@ class TaskFilter extends Model
             $query->andWhere(['content.created_by' => $user->contentcontainer_id]);
         }
 
+        $query->orderBy(['task.status' => SORT_ASC, 'task.scheduling' => SORT_DESC, 'task.end_datetime' => SORT_ASC]);
+
         return $query;
     }
 }
