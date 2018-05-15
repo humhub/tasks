@@ -70,6 +70,7 @@ class TaskController extends AbstractTaskController
 
             return $this->asJson([
                 'reloadLists' => $taskForm->reloadListId,
+                'reloadTask' => empty($taskForm->reloadListId) ? $taskForm->task->id : false,
                 // Workaround for humhub modal bug in v1.2.5
                 'output' => '<div class="modal-dialog"><div class="modal-content"></div></div></div>'
             ]);

@@ -9,6 +9,7 @@
 use humhub\modules\comment\models\Comment;
 
 use humhub\modules\tasks\helpers\TaskUrl;
+use humhub\modules\tasks\widgets\lists\TaskListDetails;
 use humhub\modules\tasks\widgets\TaskBadge;
 use humhub\modules\tasks\widgets\TaskUserList;
 use humhub\modules\user\widgets\Image;
@@ -19,6 +20,7 @@ use yii\helpers\Html;
 /* @var $this \humhub\components\View */
 /* @var $task \humhub\modules\tasks\models\Task */
 /* @var $options array */
+/* @var $details boolean */
 /* @var $contentContainer \humhub\modules\content\components\ContentActiveRecord */
 
 $checkUrl = $task->state->getCheckUrl();
@@ -97,6 +99,9 @@ $checkUrl = $task->state->getCheckUrl();
         </div>
     <?php endif; ?>
 </div>
+<?php if($details) : ?>
+    <?= TaskListDetails::widget(['task' => $task])?>
+<?php endif; ?>
 <?= Html::endTag('div') ?>
 
 

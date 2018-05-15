@@ -27,7 +27,7 @@ class ChecklistController extends AbstractTaskController
                 'success' => true,
                 'item' => [
                     'checked' => $model->checked,
-                    'statChanged' => $model->statusChanged,
+                    'statusChanged' => $model->statusChanged,
                     'sortOrder' => $model->item->sort_order
                 ]
             ]);

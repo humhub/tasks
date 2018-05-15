@@ -36,4 +36,5 @@ $disabled = ($task->canCheckItems()) ? false : 'true';
     </div>
 
 </div>
+
 <?= Html::endTag('li') ?>

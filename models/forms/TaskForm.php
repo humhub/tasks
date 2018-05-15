@@ -291,8 +291,9 @@ class TaskForm extends Model
 
     private function getListIdsToReload()
     {
-        $result = [$this->task->task_list_id];
-        if(!$this->task->isNewRecord && $this->task->isAttributeChanged('task_list_id')) {
+        $result = false;
+        if(!$this->task->isNewRecord && $this->task->isAttributeChanged('task_list_id', false)) {
+            $result = [$this->task->task_list_id];
             $result[] = $this->task->getOldAttribute('task_list_id');
         }
         return $result;

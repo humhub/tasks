@@ -12,6 +12,7 @@ humhub.module('task', function (module, require, $) {
     var object = require('util.object');
     var event = require('event');
     var action = require('action');
+    var loader = require('ui.loader');
 
     var Form = function (node, options) {
         Widget.call(this, node, options);

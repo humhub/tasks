@@ -163,6 +163,6 @@ class ListController extends AbstractTaskController
 
     public function actionLoadAjaxTask($id)
     {
-        return TaskListItem::widget(['task' => $this->getTaskById($id)]);
+        return TaskListItem::widget(['task' => $this->getTaskById($id), 'details' => true]);
     }
 }

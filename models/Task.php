@@ -833,7 +833,7 @@ class Task extends ContentActiveRecord implements Searchable
      */
     public function canCheckItems()
     {
-        return (($this->isTaskResponsible() || $this->isTaskAssigned() || $this->canProcess()) && (!($this->isCompleted() || $this->isPending())));
+        return (($this->isTaskResponsible() || $this->isTaskAssigned() || $this->canProcess()) && (!($this->isCompleted())));
     }
 
     /**
