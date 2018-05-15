@@ -274,11 +274,11 @@ humhub.module('task.list', function (module, require, $) {
     };
 
     Task.prototype.mouseOver = function(evt) {
-        this.$.find('.task-drag-icon').show();
+        this.$.find('.task-list-task-title-bar .task-drag-icon').show();
     };
 
     Task.prototype.mouseOut = function(evt) {
-        this.$.find('.task-drag-icon').hide();
+        this.$.find('.task-list-task-title-bar .task-drag-icon').hide();
     };
 
     Task.prototype.changeState = function(evt) {
