@@ -12,6 +12,7 @@ use DateTime;
 use DateTimeZone;
 use humhub\modules\tasks\CalendarUtils;
 use humhub\modules\tasks\helpers\TaskUrl;
+use humhub\modules\tasks\integration\calendar\TaskCalendar;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\notifications\ChangedDateTimeNotification;
 use humhub\modules\tasks\notifications\ExtensionRequestNotification;
@@ -331,12 +332,13 @@ class TaskScheduling extends Object
 
         $title = Yii::t('TasksModule.models_task', 'Deadline: ') . Html::encode($this->task->title);
 
-        return [
+
+        $result = [
 //            'id' => $this->id,
             'title' => $title,
 //            'editable' => ($this->content->canEdit() || self::isTaskResponsible()),
             'editable' => false,
-            'color' => Html::encode($this->task->getColor()),
+            //'color' => $color ? $color : TaskCalendar::DEFAULT_COLOR,
             'allDay' => $this->task->all_day,
             //'updateUrl' => $this->task->content->container->createUrl('/tasks/task/edit-ajax', ['id' => $this->task->id]),
             'viewUrl' => TaskUrl::viewTaskModal($this->task, 1),
@@ -344,5 +346,13 @@ class TaskScheduling extends Object
             'start' => $end,
             'end' => $end,
         ];
+
+        $color = Html::encode($this->task->getColor());
+
+        if($color) {
+            $result['color'] = $color;
+        }
+
+        return $result;
     }
 }
