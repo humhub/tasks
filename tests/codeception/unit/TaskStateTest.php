@@ -35,7 +35,7 @@ class TaskStateTest extends TaskTestCase
     {
         $user1 = User::findOne(2);
         $user2 = User::findOne(3);
-        $this->becomeUser('User1');
+        $this->becomeUser('User2');
         $space4 = Space::findOne(4);
 
         $task = $this->createTask($space4, 'Task1',null,['review' => 1, 'status' => Task::STATUS_COMPLETED]);
@@ -44,6 +44,8 @@ class TaskStateTest extends TaskTestCase
         $task->addTaskResponsible($user2);
         $task->addTaskAssigned($user1);
         $task->refresh();
+
+        $this->becomeUser('User1');
 
         $this->assertEquals(Task::STATUS_COMPLETED, $task->status);
         $this->assertEquals(CompletedState::class, get_class($task->state));
@@ -135,7 +137,7 @@ class TaskStateTest extends TaskTestCase
     public function testPendingTaskChangePermissions()
     {
         $user1 = User::findOne(['id' => 2]);
-        $this->becomeUser('User1');
+        $this->becomeUser('User2');
         $space4 = Space::findOne(4);
 
         // Create Pending Task
