@@ -295,6 +295,8 @@ class TaskForm extends Model
         if(!$this->task->isNewRecord && $this->task->isAttributeChanged('task_list_id', false)) {
             $result = [$this->task->task_list_id];
             $result[] = $this->task->getOldAttribute('task_list_id');
+        } else if($this->task->isNewRecord) {
+            $result = [$this->task->task_list_id];
         }
         return $result;
     }
