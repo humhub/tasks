@@ -12,6 +12,7 @@ humhub.module('task.list', function (module, require, $) {
     var loader = require('ui.loader');
     var modal = require('ui.modal');
     var additions = require('ui.additions');
+    var event = require('event');
 
     var STATUS_PENDING = 1;
     var STATUS_IN_PROGRESS = 2;
@@ -32,8 +33,6 @@ humhub.module('task.list', function (module, require, $) {
             placeholder: "task-list-state-highlight",
             update: $.proxy(this.dropItem, this)
         });
-
-
     };
 
     Root.prototype.dropItem = function (event, ui) {
@@ -237,6 +236,7 @@ humhub.module('task.list', function (module, require, $) {
         client.post(evt).then(function(response) {
             if(response.success) {
                 that.remove();
+                reloadList(); // reload unsorted
             } else {
                 module.log.error(null, true);
             }
@@ -269,17 +269,17 @@ humhub.module('task.list', function (module, require, $) {
     object.inherits(Task, Widget);
 
     Task.prototype.init = function (evt) {
-        this.$.find('.task-list-task-title-bar').on('click', $.proxy(this.toggleDetails, this));
+        this.$.find('.task-list-task-title-bar').off('click').on('click', $.proxy(this.toggleDetails, this));
         this.$.find('.task-list-task-title-bar').hover( $.proxy(this.mouseOver, this),  $.proxy(this.mouseOut, this));
         this.updated();
     };
 
     Task.prototype.mouseOver = function(evt) {
-        this.$.find('.task-drag-icon').show();
+        this.$.find('.task-list-task-title-bar .task-drag-icon').show();
     };
 
     Task.prototype.mouseOut = function(evt) {
-        this.$.find('.task-drag-icon').hide();
+        this.$.find('.task-list-task-title-bar .task-drag-icon').hide();
     };
 
     Task.prototype.changeState = function(evt) {
@@ -306,18 +306,26 @@ humhub.module('task.list', function (module, require, $) {
     };
 
     Task.prototype.toggleDetails = function (evt) {
+        var that = this;
+
         var $target = $(evt.target);
-        if(!$target.is('.task-list-task-title-bar') && !$target.closest('.toggleTaskDetails').length) {
+        if((!$target.is('.task-list-task-title-bar') && !$target.closest('.toggleTaskDetails').length)) {
             return;
         }
 
-        var $details = this.$.find('.task-list-task-details');
-        if(!$details.length && !this.loadDetailsBlock) {
+        var $details = that.$.find('.task-list-task-details');
+        if(!$details.length && !that.loadDetailsBlock) {
             // Prevent double click events
-            this.loadDetailsBlock = true;
-            this.loadDetails();
+            that.loadDetailsBlock = true;
+            that.loadDetails();
         } else if($details.length) {
-            $details.slideToggle();
+            $details.slideToggle('fast', function() {
+                // This is required when reloading a task with hidden details.
+                var instance = Widget.instance(that.$.find('.task-items'));
+                if(instance) {
+                    instance.refresh();
+                }
+            });
         }
     };
 
@@ -350,12 +358,18 @@ humhub.module('task.list', function (module, require, $) {
     Task.prototype.reload = function (evt) {
         var that = this;
         this.loader();
+        var detailsVisible = this.$.find('.task-list-task-details:visible').length;
+
         client.html(this.options.reloadUrl).then(function (response) {
             if (response.html) {
                 that.$.fadeOut();
                 var $newRoot = $(response.html).hide();
                 that.$.replaceWith($newRoot);
                 that.$ = $newRoot;
+
+                if(!detailsVisible) {
+                    that.$.find('.task-list-task-details').hide();
+                }
 
                 if (that.isCompleted()) {
                     that.parent().prependCompleted(that);
@@ -445,7 +459,13 @@ humhub.module('task.list', function (module, require, $) {
     };
 
     var onEditTaskSubmitted = function (evt, response) {
-        if (response.reloadLists) {
+        if(response.reloadTask) {
+            modal.global.close(true);
+            var task = getTaskById(response.reloadTask);
+            if(task) {
+                task.reload();
+            }
+        } else if (response.reloadLists) {
             modal.global.close(true);
             response.reloadLists.forEach(function (listId) {
                 reloadList(listId)
@@ -465,9 +485,15 @@ humhub.module('task.list', function (module, require, $) {
     };
 
     var getListById = function (id) {
-        $node = id ? $('[data-task-list-id="' + id + '"]') : $('[data-task-list-unsored]');
+        var $node = id ? $('[data-task-list-id="' + id + '"]') : $('[data-task-list-unsored]');
         return Widget.instance($node);
     };
+
+    var getTaskById = function (id) {
+        var $node = $('[data-task-id="' + id + '"]');
+        return $node.length ? Widget.instance($node) : null;
+    };
+
 
     module.export({
         TaskList: TaskList,

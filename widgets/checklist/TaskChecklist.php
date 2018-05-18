@@ -29,11 +29,6 @@ class TaskChecklist extends JsWidget
     /**
      * @inheritdoc
      */
-    public $id = 'task-items';
-
-    /**
-     * @inheritdoc
-     */
     public $init = true;
 
     /**
@@ -62,12 +57,18 @@ class TaskChecklist extends JsWidget
         ]);
     }
 
+    public function getAttributes()
+    {
+        return [
+            'class' => 'task-items'
+        ];
+    }
+
     /**
      * @inheritdoc
      */
     public function getData()
     {
-        $contentContainer = $this->task->content->container;
         return [
             'task-id' => $this->task->id,
             'drop-url' =>  TaskUrl::dropChecklistItem($this->task),

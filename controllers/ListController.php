@@ -9,18 +9,13 @@
 namespace humhub\modules\tasks\controllers;
 
 
-use humhub\modules\content\components\ContentContainerController;
-
 use humhub\modules\content\components\ContentContainerControllerAccess;
-use humhub\modules\content\models\ContentTag;
 use humhub\modules\space\models\Space;
 use humhub\modules\tasks\models\lists\TaskListItemDrop;
 use humhub\modules\tasks\models\lists\TaskListRootItemDrop;
-use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\models\lists\TaskList;
 use humhub\modules\tasks\models\lists\TaskListInterface;
 use humhub\modules\tasks\models\lists\UnsortedTaskList;
-use humhub\modules\tasks\permissions\CreateTask;
 use humhub\modules\tasks\permissions\ManageTasks;
 use humhub\modules\tasks\widgets\lists\CompletedTaskListItem;
 use humhub\modules\tasks\widgets\lists\CompletedTaskListView;
@@ -30,8 +25,6 @@ use humhub\modules\tasks\widgets\lists\TaskListWidget;
 use humhub\modules\tasks\widgets\lists\UnsortedTaskListWidget;
 use humhub\widgets\ModalClose;
 use Yii;
-use yii\data\ActiveDataProvider;
-use yii\data\Pagination;
 use yii\web\HttpException;
 
 class ListController extends AbstractTaskController
@@ -48,8 +41,8 @@ class ListController extends AbstractTaskController
     {
         return $this->render('index', [
             'contentContainer' => $this->contentContainer,
-            'canManage' =>  $this->contentContainer->can(ManageTasks::class),
-            'canCreate' => $this->contentContainer->can(CreateTask::class),
+            'canManage' =>  $this->canManageTasks(),
+            'canCreate' => $this->canCreateTask(),
             'taskLists' => TaskList::findOverviewLists($this->contentContainer)->all()]);
     }
 
@@ -157,7 +150,7 @@ class ListController extends AbstractTaskController
     public function actionLoadAjax($id = null)
     {
         if(!$id) {
-            return UnsortedTaskListWidget::widget();
+            return UnsortedTaskListWidget::widget(['canManage' =>  $this->canManageTasks(), 'canCreate' => $this->canCreateTask()]);
         }
 
         $taskList = TaskList::findById($id, $this->contentContainer);
@@ -165,11 +158,11 @@ class ListController extends AbstractTaskController
             throw new HttpException(404);
         }
 
-        return TaskListWidget::widget(['list' => $taskList]);
+        return TaskListWidget::widget(['list' => $taskList, 'canManage' =>  $this->canManageTasks(), 'canCreate' => $this->canCreateTask()]);
     }
 
     public function actionLoadAjaxTask($id)
     {
-        return TaskListItem::widget(['task' => $this->getTaskById($id)]);
+        return TaskListItem::widget(['task' => $this->getTaskById($id), 'details' => true]);
     }
 }

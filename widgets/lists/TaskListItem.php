@@ -39,6 +39,11 @@ class TaskListItem extends JsWidget
     private $contentContainer;
 
     /**
+     * @var bool wheather or not to eager load the detail view
+     */
+    public $details = false;
+
+    /**
      * @inheritdoc
      */
     public function init()
@@ -54,6 +59,7 @@ class TaskListItem extends JsWidget
     {
         return $this->render('taskListItem', [
             'task' => $this->task,
+            'details' => $this->details,
             'options' => $this->getOptions()
         ]);
     }

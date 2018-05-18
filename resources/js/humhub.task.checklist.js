@@ -2,7 +2,6 @@ humhub.module('task.checklist', function (module, require, $) {
     var Widget = require('ui.widget').Widget;
     var object = require('util').object;
     var client = require('client');
-    var action = require('action');
 
     var Item = function (node, options) {
         Widget.call(this, node, options);
@@ -50,11 +49,11 @@ humhub.module('task.checklist', function (module, require, $) {
         var that = this;
 
         var checked = that.$.find('input[type="checkbox"]').prop('checked') ? 1 : 0;
+
         var data = {
             'CheckForm[checked]': checked
         };
 
-        this.loader();
         client.post(that.options.checkUrl, {data: data}).then(function (response) {
             if (response.success) {
                 that.setData(response.item);
@@ -63,8 +62,6 @@ humhub.module('task.checklist', function (module, require, $) {
             }
         }).catch(function (err) {
             module.log.error(err, true);
-        }).finally(function () {
-            that.loader();
         });
     };
 
@@ -75,8 +72,8 @@ humhub.module('task.checklist', function (module, require, $) {
             this.$.find('label').removeClass("item-finished");
         }
 
-        if(itemData.statChanged) {
-            client.reload();
+        if(itemData.statusChanged) {
+            this.parent().reload();
         }
 
         this.options.sortOrder = itemData.sortOrder;
@@ -97,6 +94,20 @@ humhub.module('task.checklist', function (module, require, $) {
             });
         }
     };
+
+    ItemList.prototype.reload = function () {
+        var parent = this.parent();
+        if(parent && parent.reload) {
+            parent.reload();
+        } else {
+            client.reload();
+        }
+    };
+
+    ItemList.prototype.refresh = function() {
+        this.$.sortable('refresh');
+    };
+
 
     ItemList.prototype.initSortableList = function (evt) {
         var that = this;

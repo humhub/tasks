@@ -41,7 +41,7 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
 
     <div class="row">
         <div class="col-md-12" style="margin-top: 10px;">
-            <?= ModalButton::primary(Yii::t('TasksModule.widgets_views_wallentry', 'Open Task'))->close()->link($task->getUrl())->sm() ?>
+            <?= ModalButton::primary(Yii::t('TasksModule.widgets_views_wallentry', 'Open Task'))->icon('fa-eye')->close()->link($task->getUrl())->sm() ?>
         </div>
     </div>
 

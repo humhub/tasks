@@ -25,7 +25,7 @@ use yii\web\Controller;
  *
  * @author davidborn
  */
-class SearchController extends ContentContainerController
+class SearchController extends AbstractTaskController
 {
 
     public function getAccessRules()
@@ -38,7 +38,7 @@ class SearchController extends ContentContainerController
     public function actionIndex()
     {
         return $this->render("index", [
-            'canEdit' => $this->contentContainer->getPermissionManager()->can(new ManageTasks()),
+            'canEdit' =>$this->canManageTasks(),
             'contentContainer' => $this->contentContainer,
             'filter' => new TaskFilter(['contentContainer' => $this->contentContainer])
         ]);
@@ -51,7 +51,7 @@ class SearchController extends ContentContainerController
 
         return $this->asJson([
             'success' => true,
-            'output' => TaskSearchList::widget(['filter' => $filter])
+            'output' => TaskSearchList::widget(['filter' => $filter, 'canEdit' => $this->canManageTasks()])
         ]);
     }
 
@@ -66,11 +66,9 @@ class SearchController extends ContentContainerController
      */
     public function actionJson()
     {
-        Yii::$app->response->format = 'json';
-        
-        return TaskPicker::filter([
+        return $this->asJson(TaskPicker::filter([
             'keyword' => Yii::$app->request->get('keyword'),
-        ]);
+        ]));
     }
 
 }

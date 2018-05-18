@@ -9,6 +9,7 @@
 use humhub\modules\comment\models\Comment;
 
 use humhub\modules\tasks\helpers\TaskUrl;
+use humhub\modules\tasks\widgets\lists\TaskListDetails;
 use humhub\modules\tasks\widgets\TaskBadge;
 use humhub\modules\tasks\widgets\TaskUserList;
 use humhub\modules\user\widgets\Image;
@@ -19,6 +20,7 @@ use yii\helpers\Html;
 /* @var $this \humhub\components\View */
 /* @var $task \humhub\modules\tasks\models\Task */
 /* @var $options array */
+/* @var $details boolean */
 /* @var $contentContainer \humhub\modules\content\components\ContentActiveRecord */
 
 $checkUrl = $task->state->getCheckUrl();
@@ -30,12 +32,15 @@ $checkUrl = $task->state->getCheckUrl();
 <div class="task-list-task-title-bar">
     <span class="task-list-item-title">
 
+        <?php // We use an extra label in order to prevent click events on the actual label otherwise tasks could be accidentally finished ?>
         <?= Html::checkBox('item[' . $task->id . ']', $task->isCompleted(), [
-                'label' => Html::encode($task->title),
+                'label' => '&nbsp;',
                 'data-action-change' => 'changeState',
                 'data-action-url' => $checkUrl,
                 'disabled' => empty($checkUrl)
         ]); ?>
+
+        <span class="toggleTaskDetails"><?= Html::encode($task->title) ?></span>
 
         <?= TaskBadge::widget(['task' => $task, 'includePending' => false, 'includeCompleted' => false]) ?>
 
@@ -94,6 +99,9 @@ $checkUrl = $task->state->getCheckUrl();
         </div>
     <?php endif; ?>
 </div>
+<?php if($details) : ?>
+    <?= TaskListDetails::widget(['task' => $task])?>
+<?php endif; ?>
 <?= Html::endTag('div') ?>
 
 
