@@ -30,6 +30,7 @@ humhub.module('task.list', function (module, require, $) {
     Root.prototype.init = function () {
         $('.task-list-ul:not(.task-list-unsorted)').sortable({
             handle: '.task-list-title-bar',
+            helper: 'clone',
             placeholder: "task-list-state-highlight",
             update: $.proxy(this.dropItem, this)
         });
@@ -74,6 +75,7 @@ humhub.module('task.list', function (module, require, $) {
     TaskList.prototype.init = function () {
         this.getItemsRoot().sortable({
             handle: '.task-list-task-title-bar',
+            helper: 'clone',
             connectWith: '.task-list-items',
             placeholder: "task-state-highlight",
             update: $.proxy(this.dropItem, this)
@@ -306,6 +308,7 @@ humhub.module('task.list', function (module, require, $) {
     };
 
     Task.prototype.toggleDetails = function (evt) {
+        debugger;
         var that = this;
 
         var $target = $(evt.target);
