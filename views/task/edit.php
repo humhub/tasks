@@ -44,7 +44,7 @@ $task = $taskForm->task;
         <hr>
 
         <div class="modal-footer">
-            <div class="col-md-12 text-center ?>">
+            <div class="col-md-12 text-center">
                 <?= ModalButton::submitModal($taskForm->getSubmitUrl()); ?>
                 <?= ModalButton::cancel(); ?>
             </div>
