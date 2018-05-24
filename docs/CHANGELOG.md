@@ -1,5 +1,9 @@
 Changelog
 =========
+1.1.4 (May 24, 2018)
+-----------------------
+- Fix removed invalid full day span check
+
 1.1.3 (May 24, 2018)
 -----------------------
 - Fix user list tooltip on task list items
