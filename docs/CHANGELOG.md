@@ -19,11 +19,11 @@ Changelog
 1.1.0 (May 23, 2018))
 -----------------------
 - Enh: Added sortable Task lists
-- Enh: Added Task review
-- Enh: Added sortable Task checklist
-- Enh: Added Task responsible user
-- Enh: Extended Permission System
+- Enh: Added Task review (staxDB)
+- Enh: Added sortable Task checklist (staxDB)
+- Enh: Added Task responsible user (staxDB)
+- Enh: Extended Permission System 
 - Enh: Added Search view
-- Enh: Added calendar export
-- Enh: Added extended scheduling
+- Enh: Added calendar export (staxDB)
+- Enh: Added extended scheduling (staxDB)
 - Chg: Major refactoring + redesign
