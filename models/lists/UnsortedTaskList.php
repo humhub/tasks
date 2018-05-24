@@ -27,7 +27,7 @@ class UnsortedTaskList extends Model implements TaskListInterface, Sortable
      */
     public function getNonCompletedTasks()
     {
-        return $this->getTasks()->where(['!=', 'task.status', Task::STATUS_COMPLETED])->orderBy(['sort_order' => SORT_ASC, 'updated_at' => SORT_DESC]);
+        return $this->getTasks()->where(['!=', 'task.status', Task::STATUS_COMPLETED])->orderBy(['sort_order' => SORT_ASC, 'task.updated_at' => SORT_DESC]);
     }
 
     /**
@@ -37,7 +37,7 @@ class UnsortedTaskList extends Model implements TaskListInterface, Sortable
      */
     public function getShowMoreCompletedTasks($offset, $limit)
     {
-        return $this->getCompletedTasks()->orderBy(['updated_at' => SORT_DESC])->offset($offset)->limit($limit)->all();
+        return $this->getCompletedTasks()->orderBy(['task.updated_at' => SORT_DESC])->offset($offset)->limit($limit)->all();
     }
 
     /**
@@ -45,7 +45,7 @@ class UnsortedTaskList extends Model implements TaskListInterface, Sortable
      */
     public function getCompletedTasks()
     {
-        return $this->getTasksByStatus(Task::STATUS_COMPLETED)->orderBy(['updated_at' => SORT_DESC]);
+        return $this->getTasksByStatus(Task::STATUS_COMPLETED)->orderBy(['task.updated_at' => SORT_DESC]);
     }
 
     public function moveItemIndex($taskId, $newIndex)

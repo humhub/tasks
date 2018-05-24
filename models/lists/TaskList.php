@@ -75,7 +75,7 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
      */
     public function getShowMoreCompletedTasks($offset, $limit)
     {
-        return $this->getCompletedTasks()->orderBy(['updated_at' => SORT_DESC])->offset($offset)->limit($limit)->all();
+        return $this->getCompletedTasks()->orderBy(['task.updated_at' => SORT_DESC])->offset($offset)->limit($limit)->all();
     }
 
     /**
@@ -83,7 +83,7 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
      */
     public function getCompletedTasks()
     {
-        return $this->getTasksByStatus(Task::STATUS_COMPLETED)->orderBy(['updated_at' => SORT_DESC]);
+        return $this->getTasksByStatus(Task::STATUS_COMPLETED)->orderBy(['task.updated_at' => SORT_DESC]);
     }
 
     /**
