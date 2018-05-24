@@ -1,5 +1,12 @@
 Changelog
 =========
+1.1.3 (May 24, 2018)
+-----------------------
+- Fix user list tooltip on task list items
+
+1.1.2 (May 24, 2018)
+-----------------------
+- Fix user list tooltip on task list items
 
 1.1.1 (May 24, 2018)
 -----------------------

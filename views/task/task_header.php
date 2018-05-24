@@ -8,6 +8,7 @@
 
 use humhub\libs\Html;
 use humhub\modules\tasks\helpers\TaskListUrl;
+use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\widgets\ChangeStatusButton;
 use humhub\modules\tasks\widgets\TaskBadge;
 use humhub\modules\tasks\widgets\TaskContextMenu;
@@ -67,6 +68,15 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
             <hr>
 
             <div class="task-header-panel-container clearfix">
+                <!--        Responsible Task User-->
+                <?php if ($task->hasTaskResponsible()) : ?>
+                    <div class="task-header-panel">
+                        <div style="<?= $participantStyle ?>">
+                            <em><strong><?= Yii::t('TasksModule.views_index_index', 'Responsible') ?>:</strong></em><br>
+                            <?= TaskUserList::widget(['users' => $task->taskResponsibleUsers, 'type' => Task::USER_RESPONSIBLE])?>
+                        </div>
+                    </div>
+                <?php endif ?>
 
                 <!--        Assigned Task User-->
                 <?php if ($task->hasTaskAssigned()) : ?>
@@ -81,21 +91,13 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
                         <div style="<?= $participantStyle ?>">
                             <em><strong><?= Yii::t('TasksModule.views_index_index', 'Assigned') ?>:</strong></em><br>
                             <div class="assigned-anyone">
-                                <?= Yii::t('TasksModule.views_index_index', 'Anyone can work on this task') ?>
+                                <?= Yii::t('TasksModule.views_index_index', 'Any user with a "Process unassigned tasks" permission can work on this task') ?>
                             </div>
                         </div>
                     </div>
                 <?php endif ?>
 
-                <!--        Responsible Task User-->
-                <?php if ($task->hasTaskResponsible()) : ?>
-                    <div class="task-header-panel">
-                        <div style="<?= $participantStyle ?>">
-                            <em><strong><?= Yii::t('TasksModule.views_index_index', 'Responsible') ?>:</strong></em><br>
-                            <?= TaskUserList::widget(['users' => $task->taskResponsibleUsers])?>
-                        </div>
-                    </div>
-                <?php endif ?>
+
 
             </div>
         </div>

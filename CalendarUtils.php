@@ -27,6 +27,8 @@ class CalendarUtils
      */
     public static function isFullDaySpan(DateTime $date1, DateTime $date2, $endDateMomentAfter = false)
     {
+
+        $date1->format('H') == '0' && $date;
         $dateInterval = $date1->diff($date2, true);
 
         if ($endDateMomentAfter) {

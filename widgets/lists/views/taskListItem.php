@@ -94,7 +94,7 @@ $checkUrl = $task->state->getCheckUrl();
 
     <?php if($task->hasTaskAssigned() || $task->hasTaskResponsible()) : ?>
         <div class="task-controls assigned-users pull-right" style="display: inline;">
-            <?= TaskUserList::widget(['users' => $task->taskResponsibleUsers, 'style' =>  'border:2px solid '.$this->theme->variable('info')])?>
+            <?= TaskUserList::widget(['users' => $task->taskResponsibleUsers, 'style' =>  'border:2px solid '.$this->theme->variable('info'), 'type' => Task::USER_RESPONSIBLE])?>
             <?= TaskUserList::widget(['users' => $task->taskAssignedUsers])?>
         </div>
     <?php endif; ?>

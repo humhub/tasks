@@ -79,9 +79,9 @@ class TaskScheduling extends Object
             if (!$this->task->scheduling) {
                 $this->task->start_datetime = null;
                 $this->task->end_datetime = null;
-            } else if (CalendarUtils::isFullDaySpan(new DateTime($this->task->start_datetime), new DateTime($this->task->end_datetime))) {
+            }/* else if (CalendarUtils::isFullDaySpan(new DateTime($this->task->start_datetime), new DateTime($this->task->end_datetime))) {
                 $this->task->all_day = 1;
-            }
+            }*/
         }
 
         // Reset deadline extension requests
@@ -97,8 +97,8 @@ class TaskScheduling extends Object
         if($this->task->scenario === Task::SCENARIO_EDIT) {
             TaskReminder::deleteAll(['task_id' => $this->task->id]);
 
-            if (!empty($this->selectedReminders)) {
-                foreach ($this->selectedReminders as $remind_mode) {
+            if (!empty($this->task->selectedReminders)) {
+                foreach ($this->task->selectedReminders as $remind_mode) {
                     $this->addTaskReminder($remind_mode);
                 }
             }
@@ -119,7 +119,7 @@ class TaskScheduling extends Object
 
         if (!$this->isTaskReminder($remind_mode)) {
             $taskReminder = new TaskReminder([
-                'task_id' => $this->id,
+                'task_id' => $this->task->id,
                 'remind_mode' => $remind_mode,
             ]);
             return $taskReminder->save();
