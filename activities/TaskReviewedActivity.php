@@ -14,7 +14,7 @@ use humhub\modules\activity\components\BaseActivity;
 class TaskReviewedActivity extends BaseActivity
 {
 
-    public $moduleId = 'task';
+    public $moduleId = 'tasks';
     public $viewName = "taskReviewed";
 
 }

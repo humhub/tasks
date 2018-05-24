@@ -29,7 +29,7 @@ class TaskResetNotification extends BaseNotification
     /**
      * @inheritdoc
      */
-    public $moduleId = 'task';
+    public $moduleId = 'tasks';
 
     /**
      * @inheritdoc

@@ -94,7 +94,7 @@ class SnippetModuleSettings extends Model
             return false;
         }
 
-        $module = Yii::$app->getModule('task');
+        $module = Yii::$app->getModule('tasks');
         $module->settings->set('myTasksSnippetShow', $this->myTasksSnippetShow);
         $module->settings->set('myTasksSnippetShowSpace', $this->myTasksSnippetShowSpace);
         $module->settings->set('myTasksSnippetMaxItems', $this->myTasksSnippetMaxItems);

@@ -14,7 +14,7 @@ use humhub\modules\activity\components\BaseActivity;
 class TaskCompletedActivity extends BaseActivity
 {
 
-    public $moduleId = 'task';
+    public $moduleId = 'tasks';
     public $viewName = "taskCompleted";
 
 }

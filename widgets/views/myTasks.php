@@ -13,7 +13,7 @@ use humhub\libs\Helpers;
 /* @var $taskEntries \humhub\modules\tasks\models\Task[] */
 
 ?>
-<div class="panel calendar-upcoming-snippet" id="task-my-tasks-snippet">
+<div class="panel task-upcoming-snippet" id="task-my-tasks-snippet">
 
     <div class="panel-heading">
         <i class="fa fa-tasks"></i> <?= Yii::t('TasksModule.widgets_views_myTasks', '<strong>Your</strong> tasks'); ?>

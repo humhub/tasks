@@ -19,7 +19,7 @@ use humhub\modules\file\widgets\UploadButton;
     <div class="row">
         <div class="col-md-2">
             <?= UploadButton::widget([
-                'id' => 'calendar_upload_button',
+                'id' => 'task_upload_button',
                 'label' => true,
                 'tooltip' => false,
                 'cssButtonClass' => 'btn-default btn-sm',
