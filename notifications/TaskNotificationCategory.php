@@ -50,10 +50,10 @@ class TaskNotificationCategory extends NotificationCategory
      */
     public function getDefaultSetting(BaseTarget $target)
     {
-        if($target instanceof MailTarget) {
-            return false;
-        }  else if ($target instanceof WebTarget || $target instanceof MobileTarget) {
+        if($target instanceof WebTarget || $target instanceof MailTarget) {
             return true;
+        }  else if ($target instanceof MobileTarget) {
+            return false;
         }
 
         return $target->defaultSetting;

@@ -374,16 +374,40 @@ class Task extends ContentActiveRecord implements Searchable
     public function afterSave($insert, $changedAttributes)
     {
         if($this->scenario === self::SCENARIO_EDIT) {
+            $oldTaskUsers = $this->taskUsers;
+
             TaskUser::deleteAll(['task_id' => $this->id]);
 
             if (!empty($this->assignedUsers)) {
                 foreach ($this->assignedUsers as $guid) {
-                    $this->addTaskAssigned($guid);
+                    $user = User::findOne(['guid' => $guid]);
+
+                    if(!$user) {
+                        continue;
+                    }
+
+                    $oldAssigned = array_filter($oldTaskUsers, function($taskUser) use ($user) {
+                        /** @var $taskUser TaskUser */
+                        return $taskUser->user_id === $user->id && $taskUser->user_type === Task::USER_ASSIGNED;
+                    });
+
+                    $this->addTaskAssigned($guid, empty($oldAssigned));
                 }
             }
             if (!empty($this->responsibleUsers)) {
                 foreach ($this->responsibleUsers as $guid) {
-                    $this->addTaskResponsible($guid);
+                    $user = User::findOne(['guid' => $guid]);
+
+                    if(!$user) {
+                        continue;
+                    }
+
+                    $oldResponsible = array_filter($oldTaskUsers, function($taskUser) use ($user) {
+                        /** @var $taskUser TaskUser */
+                        return $taskUser->user_id === $user->id && $taskUser->user_type === Task::USER_RESPONSIBLE;
+                    });
+
+                    $this->addTaskResponsible($guid, empty($oldResponsible));
                 }
             }
 
@@ -399,6 +423,59 @@ class Task extends ContentActiveRecord implements Searchable
         }
 
         parent::afterSave($insert, $changedAttributes);
+    }
+
+    /**
+     * Returns an ActiveQuery for all assigned user models of this task.
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTaskAssignedUsers($filterOutResponsibleUsers = false)
+    {
+        $query = $this->hasMany(User::class, ['id' => 'user_id'])->via('assignedTaskUsers');
+
+        if($filterOutResponsibleUsers) {
+            $responsible = $this->getTaskResponsibleUsers()->select(['id']);
+            $query->where(['not in', 'user.id', $responsible]);
+        }
+
+        return $query;
+    }
+
+    public function isTaskAssigned($user = null)
+    {
+        if (!$user && !Yii::$app->user->isGuest) {
+            $user = Yii::$app->user->getIdentity();
+        } else if (!$user) {
+            return false;
+        }
+
+        $taskAssigned = array_filter($this->assignedTaskUsers, function (TaskUser $p) use ($user) {
+            return $p->user_id == $user->id;
+        });
+
+        return !empty($taskAssigned);
+    }
+
+    public function addTaskAssigned($user, $sendNotification = true)
+    {
+        $user = (is_string($user)) ? User::findOne(['guid' => $user]) : $user;
+
+        if (!$user) {
+            return false;
+        }
+
+        if (!$this->isTaskAssigned($user)) {
+            $taskAssigned = new TaskUser([
+                'task_id' => $this->id,
+                'user_id' => $user->id,
+                'user_type' => self::USER_ASSIGNED,
+                'sendNotificationOnCreation' => $sendNotification,
+            ]);
+            return $taskAssigned->save();
+        }
+
+        return false;
     }
 
     /**
@@ -441,57 +518,7 @@ class Task extends ContentActiveRecord implements Searchable
         return $this->hasMany(User::class, ['id' => 'user_id'])->via('taskUsers');
     }
 
-    /**
-     * Returns an ActiveQuery for all assigned user models of this task.
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTaskAssignedUsers($filterOutResponsibleUsers = false)
-    {
-        $query = $this->hasMany(User::class, ['id' => 'user_id'])->via('assignedTaskUsers');
 
-        if($filterOutResponsibleUsers) {
-            $responsible = $this->getTaskResponsibleUsers()->select(['id']);
-            $query->where(['not in', 'user.id', $responsible]);
-        }
-
-        return $query;
-    }
-
-    public function isTaskAssigned($user = null)
-    {
-        if (!$user && !Yii::$app->user->isGuest) {
-            $user = Yii::$app->user->getIdentity();
-        } else if (!$user) {
-            return false;
-        }
-
-        $taskAssigned = array_filter($this->assignedTaskUsers, function (TaskUser $p) use ($user) {
-            return $p->user_id == $user->id;
-        });
-
-        return !empty($taskAssigned);
-    }
-
-    public function addTaskAssigned($user)
-    {
-        $user = (is_string($user)) ? User::findOne(['guid' => $user]) : $user;
-
-        if (!$user) {
-            return false;
-        }
-
-        if (!$this->isTaskAssigned($user)) {
-            $taskAssigned = new TaskUser([
-                'task_id' => $this->id,
-                'user_id' => $user->id,
-                'user_type' => self::USER_ASSIGNED
-            ]);
-            return $taskAssigned->save();
-        }
-
-        return false;
-    }
 
 
     // ###########  handle responsible users  ###########
@@ -503,7 +530,7 @@ class Task extends ContentActiveRecord implements Searchable
      */
     public function getTaskResponsible()
     {
-        return $this->hasMany(TaskUser::className(), ['task_id' => 'id'])->andOnCondition(['user_type' => self::USER_RESPONSIBLE]);
+        return $this->hasMany(TaskUser::class, ['task_id' => 'id'])->andOnCondition(['user_type' => self::USER_RESPONSIBLE]);
     }
 
     public function hasTaskResponsible()
@@ -548,7 +575,7 @@ class Task extends ContentActiveRecord implements Searchable
 
     }
 
-    public function addTaskResponsible($user)
+    public function addTaskResponsible($user, $sendNotification = true)
     {
         $user = (is_string($user)) ? User::findOne(['guid' => $user]) : $user;
 
@@ -560,7 +587,8 @@ class Task extends ContentActiveRecord implements Searchable
             $taskResponsible = new TaskUser([
                 'task_id' => $this->id,
                 'user_id' => $user->id,
-                'user_type' => self::USER_RESPONSIBLE
+                'user_type' => self::USER_RESPONSIBLE,
+                'sendNotificationOnCreation' => $sendNotification
             ]);
             return $taskResponsible->save();
         }
@@ -719,7 +747,7 @@ class Task extends ContentActiveRecord implements Searchable
      */
     public function canEdit()
     {
-        if($this->isNewRecord) {
+        if($this->isNewRecord || !$this->hasTaskResponsible()) {
             return  $this->content->container->can([CreateTask::class, ManageTasks::class]);
         }
 

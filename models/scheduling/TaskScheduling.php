@@ -86,9 +86,7 @@ class TaskScheduling extends Object
 
         // Reset deadline extension requests
         if ($this->task->isAttributeChanged('start_datetime', true) || $this->task->isAttributeChanged('end_datetime', true)) {
-            if ($this->task->request_sent) {
-                $this->task->request_sent = 0;
-            }
+            $this->task->request_sent = 0;
         }
     }
 
@@ -104,10 +102,8 @@ class TaskScheduling extends Object
             }
         }
 
-        if(!$insert) {
-            if (array_key_exists('start_datetime', $changedAttributes) || array_key_exists('end_datetime', $changedAttributes)) {
-                self::notifyDateTimeChanged();
-            }
+        if (!$insert && (array_key_exists('start_datetime', $changedAttributes) || array_key_exists('end_datetime', $changedAttributes))) {
+            self::notifyDateTimeChanged();
         }
     }
 
@@ -141,7 +137,7 @@ class TaskScheduling extends Object
 
     public function hasTaskReminder()
     {
-        return !empty($this->taskReminder);
+        return !empty($this->task->taskReminder);
     }
 
     public function getFormattedEndDateTime($timeZone = null, $format = 'short')

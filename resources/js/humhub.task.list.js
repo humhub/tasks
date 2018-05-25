@@ -308,7 +308,6 @@ humhub.module('task.list', function (module, require, $) {
     };
 
     Task.prototype.toggleDetails = function (evt) {
-        debugger;
         var that = this;
 
         var $target = $(evt.target);

@@ -15,7 +15,7 @@ use yii\helpers\Html;
 /* @var $source \humhub\modules\tasks\models\Task */
 /* @var $module \humhub\modules\content\components\ContentContainerModule */
 
-$module = Yii::$app->getModule('task');
+$module = Yii::$app->moduleManager->getModule('tasks');
 
 ?>
 <table width="100%" style="table-layout:fixed;" border="0" cellspacing="0" cellpadding="0" align="left">

@@ -7,6 +7,7 @@
  */
 
 use humhub\modules\tasks\widgets\MailContentEntry;
+use humhub\widgets\mails\MailHeadline;
 
 
 /**
@@ -17,17 +18,17 @@ use humhub\modules\tasks\widgets\MailContentEntry;
  */
 
 /* @var $this yii\web\View */
-/* @var $viewable humhub\modules\user\notifications\Mentioned */
+/* @var $viewable \humhub\modules\notification\components\BaseNotification */
 /* @var $url string */
 /* @var $date string */
 /* @var $isNew boolean */
 /* @var $originator \humhub\modules\user\models\User */
-/* @var source yii\db\ActiveRecord */
-/* @var contentContainer \humhub\modules\content\components\ContentContainerActiveRecord */
-/* @var space humhub\modules\space\models\Space */
-/* @var record \humhub\modules\notification\models\Notification */
-/* @var html string */
-/* @var text string */
+/* @var $source yii\db\ActiveRecord */
+/* @var $contentContainer \humhub\modules\content\components\ContentContainerActiveRecord */
+/* @var $space humhub\modules\space\models\Space */
+/* @var $record \humhub\modules\notification\models\Notification */
+/* @var $html string */
+/* @var $text string */
 ?>
 <?php $this->beginContent('@notification/views/layouts/mail.php', $_params_); ?>
 
@@ -36,13 +37,11 @@ use humhub\modules\tasks\widgets\MailContentEntry;
     <table width="100%" border="0" cellspacing="0" cellpadding="0" align="left">
         <tr>
             <td>
-                <?=
-                humhub\widgets\mails\MailHeadline::widget([
+                <?= MailHeadline::widget([
                     'level' => 3,
                     'text' => $contentRecord->getContentName().':',
                     'style' => 'text-transform:capitalize;'
-                ])
-                ?>
+                ]) ?>
             </td>
         </tr>
         <tr>

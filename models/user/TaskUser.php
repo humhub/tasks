@@ -28,6 +28,8 @@ use humhub\components\ActiveRecord;
 class TaskUser extends ActiveRecord
 {
 
+    public $sendNotificationOnCreation = true;
+
     /**
      * @return string the associated database table name
      */
@@ -88,13 +90,19 @@ class TaskUser extends ActiveRecord
      */
     public function notifyCreated()
     {
+        if(!$this->sendNotificationOnCreation) {
+            return;
+        }
+
         $source = $this->task;
         $target = $this->user;
         $from = Yii::$app->user->getIdentity();
 
         if($this->user_type === Task::USER_ASSIGNED) {
+            AssignedNotification::instance()->about($source)->delete($target);
             AssignedNotification::instance()->from($from)->about($source)->send($target);
         } else if($this->user_type === Task::USER_RESPONSIBLE) {
+            AddResponsibleNotification::instance()->about($source)->delete($target);
             AddResponsibleNotification::instance()->from($from)->about($source)->send($target);
         }
     }

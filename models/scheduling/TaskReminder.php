@@ -221,7 +221,7 @@ class TaskReminder extends ActiveRecord
     public function remindUserOfStart()
     {
         $this->deleteOldReminder();
-        RemindStart::instance()->from($this->task->content->user)->about($this)->sendBulk($this->task->users);
+        RemindStart::instance()->from($this->task->content->createdBy)->about($this->task)->sendBulk($this->task->users);
     }
 
     /**
@@ -230,18 +230,18 @@ class TaskReminder extends ActiveRecord
     public function remindUserOfEnd()
     {
         $this->deleteOldReminder();
-        RemindEnd::instance()->from($this->content->user)->about($this->task)->sendBulk($this->task->users);
+        RemindEnd::instance()->from($this->task->content->createdBy)->about($this->task)->sendBulk($this->task->users);
     }
 
     public function deleteOldReminder()
     {
         // delete old reminder
-        $startNotifications = Notification::find()->where(['class' => RemindStart::class, 'source_class' => self::className(), 'source_pk' => $this->id, 'space_id' => $this->content->container->id])->all();
+        $startNotifications = Notification::find()->where(['class' => RemindStart::class, 'source_class' => Task::class, 'source_pk' => $this->task->id, 'space_id' => $this->task->content->container->id])->all();
         foreach ($startNotifications as $notification) {
             $notification->delete();
         }
 
-        $endNotifications = Notification::find()->where(['class' => RemindEnd::class, 'source_class' => self::className(), 'source_pk' => $this->id, 'space_id' => $this->content->container->id])->all();
+        $endNotifications = Notification::find()->where(['class' => RemindEnd::class, 'source_class' => Task::class, 'source_pk' => $this->task->id, 'space_id' => $this->task->content->container->id])->all();
         foreach ($endNotifications as $notification) {
             $notification->delete();
         }
@@ -260,7 +260,7 @@ class TaskReminder extends ActiveRecord
         }
 
         if ($task->schedule->getStartDateTime() < $now) {
-            $this->updateAttributes(['start_reminder_sent' => 1]);
+            //$this->updateAttributes(['start_reminder_sent' => 1]);
         }
 
         if (!$this->end_reminder_sent) {
@@ -272,7 +272,7 @@ class TaskReminder extends ActiveRecord
         }
 
         if ($task->schedule->getEndDateTime() < $now) {
-            $this->updateAttributes(['end_reminder_sent' => 1]);
+            //$this->updateAttributes(['end_reminder_sent' => 1]);
         }
 
         return false;

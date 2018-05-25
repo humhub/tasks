@@ -10,6 +10,7 @@
 namespace humhub\modules\tasks\notifications;
 
 use Yii;
+use humhub\modules\tasks\models\Task;
 use humhub\modules\notification\components\BaseNotification;
 use humhub\modules\space\models\Space;
 use yii\helpers\Html;
@@ -37,6 +38,11 @@ class RemindEnd extends BaseNotification
     public $viewName = "remind.php";
 
     /**
+     * @var Task
+     */
+    public $source;
+
+    /**
      * @inheritdoc
      */
     public function category()
@@ -49,7 +55,7 @@ class RemindEnd extends BaseNotification
         return Yii::t('TasksModule.notifications', 'Task {task} in space {spaceName} ends at {dateTime}.', [
             '{task}' => Html::tag('strong', Html::encode($this->getContentInfo($this->source, false))),
             '{spaceName}' => Html::tag('strong', Html::encode($this->source->content->container->displayName)),
-            '{dateTime}' => Html::encode($this->source->formattedEndDateTime)
+            '{dateTime}' => Html::encode($this->source->schedule->getFormattedStartDateTime())
         ]);
 
     }
@@ -62,7 +68,7 @@ class RemindEnd extends BaseNotification
         return Yii::t('TasksModule.notifications', 'Task {task} in space {spaceName} ends at {dateTime}.', [
             '{task}' => Html::encode($this->getContentInfo($this->source, false)),
             '{spaceName}' => Html::encode($this->source->content->container->displayName),
-            '{dateTime}' => Html::encode($this->source->formattedEndDateTime)
+            '{dateTime}' => Html::encode($this->source->schedule->getFormattedStartDateTime())
         ]);
     }
 }

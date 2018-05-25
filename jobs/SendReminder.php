@@ -20,16 +20,19 @@ class SendReminder extends ActiveJob
 
         /** @var $tasks Task[] */
         $tasks = Task::find()
+            ->innerJoinWith('taskReminder')
             ->where(['task.scheduling' => 1])
             ->andWhere(['!=', 'task.status', Task::STATUS_COMPLETED])
+
             ->all();
 
         foreach ($tasks as $task) {
             if ($task->schedule->hasTaskReminder()) {
                 $reminderSent = false;  // only send one reminder per run per task
                 foreach ($task->taskReminder as $reminder) {
-                    if ($reminderSent)
+                    if ($reminderSent) {
                         continue;
+                    }
                     $reminderSent = $reminder->handleRemind($now);
                 }
             }
