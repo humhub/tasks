@@ -105,7 +105,7 @@ humhub.module('task.checklist', function (module, require, $) {
     };
 
     ItemList.prototype.refresh = function() {
-        this.$.sortable('refresh');
+        //this.$.sortable('refresh');
     };
 
 
