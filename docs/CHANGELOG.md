@@ -1,6 +1,6 @@
 Changelog
 =========
-1.1.5 (May 25, 2018)
+1.1.6 (May 25, 2018)
 -----------------------
 - Fix reminder not sent
 - Fix assignment notifications are sent for already existing assignments
