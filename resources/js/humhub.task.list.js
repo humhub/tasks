@@ -321,13 +321,7 @@ humhub.module('task.list', function (module, require, $) {
             that.loadDetailsBlock = true;
             that.loadDetails();
         } else if($details.length) {
-            $details.slideToggle('fast', function() {
-                // This is required when reloading a task with hidden details.
-                var instance = Widget.instance(that.$.find('.task-items'));
-                if(instance) {
-                    instance.refresh();
-                }
-            });
+            $details.slideToggle('fast');
         }
     };
 
