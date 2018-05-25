@@ -13,4 +13,7 @@ return array (
   'Sorting' => 'Sortierung',
   'State is finished' => 'Status: abgeschlossen',
   'State is open' => 'Status: offen',
+    'Assignment' => 'Zuweisung',
+
+
 );

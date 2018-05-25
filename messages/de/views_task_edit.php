@@ -7,4 +7,7 @@ return array (
   'Deadline' => 'Frist',
   'Save' => 'Speichern',
   'What is to do?' => 'Was ist zu tun?',
+    'Assignment' => 'Zuweisung',
+
+
 );
