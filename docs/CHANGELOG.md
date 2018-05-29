@@ -1,5 +1,9 @@
 Changelog
 =========
+1.1.7 (May 29, 2018)
+-----------------------
+- Fix # 69 removed invalid message source
+
 1.1.6 (May 25, 2018)
 -----------------------
 - Fix reminder not sent

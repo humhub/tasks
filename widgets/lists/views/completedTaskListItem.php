@@ -18,10 +18,10 @@ use yii\helpers\Html;
         </span>
         <div class="pull-right task-controls end">
             <?= Button::asLink()
-                ->options(['class' => 'tt', 'title' => Yii::t('MeetingModule.base', 'Delete')]
+                ->options(['class' => 'tt', 'title' => Yii::t('TasksModule.base', 'Delete')]
                 )->icon('fa-trash')->right()->xs()->action('deleteList', TaskListUrl::deleteTaskList($taskList))->loader(false)->visible($canEdit)->confirm() ?>
             <?= Button::asLink()
-                ->options(['class' => 'tt', 'title' => Yii::t('MeetingModule.views_index_index', 'Edit'), 'style' => 'margin-left:2px']
+                ->options(['class' => 'tt', 'title' => Yii::t('TasksModule.views_index_index', 'Edit'), 'style' => 'margin-left:2px']
                 )->icon('fa-pencil')->right()->xs()->action('task.list.edit', TaskListUrl::editTaskList($taskList))->loader(false)->visible($canEdit) ?>
         </div>
     </div>
