@@ -1,5 +1,12 @@
 Changelog
 =========
+1.1.8 (June 13, 2018)
+- Fix #70 Task with no responsible user can be edited by each member
+- Chng: Disallow default Managetask permission for Usergrup Members
+
+-----------------------
+- Fix # 69 removed invalid message source
+
 1.1.7 (May 29, 2018)
 -----------------------
 - Fix # 69 removed invalid message source

@@ -33,8 +33,7 @@ class ManageTasks extends BasePermission
         Space::USERGROUP_OWNER,
         Space::USERGROUP_ADMIN,
         Space::USERGROUP_MODERATOR,
-        User::USERGROUP_SELF,
-        Space::USERGROUP_MEMBER,
+        User::USERGROUP_SELF
     ];
 
     /**
@@ -62,6 +61,6 @@ class ManageTasks extends BasePermission
      */
     public function getDescription()
     {
-        return Yii::t('TasksModule.task', 'Allows the user to create and delete new tasks and lists and also sort tasks and lists');
+        return Yii::t('TasksModule.task', 'Allows the user to create, delete and edit tasks and lists and also sort tasks and lists');
     }
 }
