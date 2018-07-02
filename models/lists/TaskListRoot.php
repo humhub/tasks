@@ -6,9 +6,14 @@ namespace humhub\modules\tasks\models\lists;
 
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\tasks\models\Sortable;
-use yii\base\Object;
+use yii\base\Component;
 
-class TaskListRoot extends Object implements Sortable
+/**
+ * Class TaskListRoot
+ * @todo change base class back to BaseObject after v1.3 stable
+ * @package humhub\modules\tasks\models\lists
+ */
+class TaskListRoot extends Component implements Sortable
 {
     /**
      * @var ContentContainerActiveRecord

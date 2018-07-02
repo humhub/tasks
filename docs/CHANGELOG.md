@@ -1,24 +1,33 @@
 Changelog
 =========
+
+1.1.9 (July 2, 2018)
+--------------------
+- Fix: PHP 7.2 compatibility issues
+
+
 1.1.8 (June 13, 2018)
+----------------------
 - Fix #70 Task with no responsible user can be edited by each member
 - Chng: Disallow default Managetask permission for Usergrup Members
-
------------------------
 - Fix # 69 removed invalid message source
+
 
 1.1.7 (May 29, 2018)
 -----------------------
 - Fix # 69 removed invalid message source
+
 
 1.1.6 (May 25, 2018)
 -----------------------
 - Fix reminder not sent
 - Fix assignment notifications are sent for already existing assignments
 
+
 1.1.4 (May 24, 2018)
 -----------------------
 - Fix removed invalid full day span check
+
 
 1.1.3 (May 24, 2018)
 -----------------------

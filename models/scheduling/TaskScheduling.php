@@ -17,10 +17,16 @@ use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\notifications\ChangedDateTimeNotification;
 use humhub\modules\tasks\notifications\ExtensionRequestNotification;
 use Yii;
-use yii\base\Object;
+use yii\base\Component;
 use yii\helpers\Html;
 
-class TaskScheduling extends Object
+/**
+ * Class TaskScheduling
+ *
+ * @todo change base class back to BaseObject after v1.3 stable
+ * @package humhub\modules\tasks\models\scheduling
+ */
+class TaskScheduling extends Component
 {
 
     /**

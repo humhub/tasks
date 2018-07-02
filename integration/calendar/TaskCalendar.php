@@ -12,7 +12,7 @@ use DateTime;
 use humhub\modules\tasks\models\Task;
 use humhub\widgets\Label;
 use Yii;
-use yii\base\Object;
+use yii\base\Component;
 use yii\helpers\Url;
 
 /**
@@ -20,7 +20,7 @@ use yii\helpers\Url;
  * User: davidborn
  */
 
-class TaskCalendar extends Object
+class TaskCalendar extends Component
 {
     /**
      * Default color of task type calendar items.

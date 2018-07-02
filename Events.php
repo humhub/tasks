@@ -10,7 +10,6 @@ namespace humhub\modules\tasks;
 
 use humhub\modules\tasks\helpers\TaskListUrl;
 use Yii;
-use yii\base\Object;
 use humhub\modules\notification\models\Notification;
 use humhub\modules\tasks\jobs\SendReminder;
 use humhub\modules\tasks\models\SnippetModuleSettings;
@@ -30,7 +29,7 @@ use humhub\modules\tasks\models\user\TaskUser;
  * Date: 14.09.2017
  * Time: 12:12
  */
-class Events extends Object
+class Events
 {
     /**
      * @param $event \humhub\modules\calendar\interfaces\CalendarItemTypesEvent

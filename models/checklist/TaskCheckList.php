@@ -3,11 +3,17 @@
 namespace humhub\modules\tasks\models\checklist;
 
 use Yii;
-use yii\base\Object;
+use yii\base\Component;
 use humhub\modules\tasks\models\Sortable;
 use humhub\modules\tasks\models\Task;
 
-class TaskCheckList extends Object implements Sortable
+/**
+ * Class TaskCheckList
+ *
+ * @todo change base class back to BaseObject after v1.3 stable
+ * @package humhub\modules\tasks\models\checklist
+ */
+class TaskCheckList extends Component implements Sortable
 {
 
     /**

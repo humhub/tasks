@@ -7,9 +7,15 @@ namespace humhub\modules\tasks\models\state;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\Task;
 use Yii;
-use yii\base\Object;
+use yii\base\Component;
 
-abstract class TaskState extends Object
+
+/**
+ * Class TaskState
+ * @todo change base class back to BaseObject after v1.3 stable
+ * @package humhub\modules\tasks\models\state
+ */
+abstract class TaskState extends Component
 {
     const STATES = [
         Task::STATUS_PENDING => PendingState::class,
