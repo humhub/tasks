@@ -1,7 +1,5 @@
 <?php
 return array (
-  '{userName} assigned to task {task}.' => '{userName} wurde Aufgabe »{task}« zugeordnet.',
-    'Assignment' => 'Zuweisung',
-
-
+  'Assignment' => 'Zuweisung',
+  '{userName} assigned to task {task}.' => '{userName} wurde Aufgabe »{task}« zugewiesen.',
 );

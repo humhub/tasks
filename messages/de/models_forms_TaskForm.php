@@ -1,15 +1,11 @@
 <?php
 return array (
-  'End time must be after start time!' => 'Das Fristende muss vor dem Start liegen.',
-  'Start Date' => 'Startdatum',
-  'Event Type' => 'Typ',  
-  'End Date' => 'Enddatum',  
-  'Start Time' => 'Startzeit',  
+  'End Date' => 'Enddatum',
   'End Time' => 'Endzeit',
-  'Time Zone' => 'Zeitzone',  
-  'Public' => 'Öffentlich',  
-  
-  
-    
+  'End time must be after start time!' => 'Die Endzeit muss nach der Startzeit liegen!',
+  'Event Type' => 'Ereignistyp',
+  'Public' => 'Öffentlich',
+  'Start Date' => 'Startdatum',
+  'Start Time' => 'Startzeit',
+  'Time Zone' => 'Zeitzone',
 );
-   
