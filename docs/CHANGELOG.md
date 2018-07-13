@@ -1,5 +1,8 @@
 Changelog
 =========
+1.1.10 (July 13, 2018)
+--------------------
+- Fix #71 german translation error
 
 1.1.9 (July 2, 2018)
 --------------------
