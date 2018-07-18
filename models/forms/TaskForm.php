@@ -278,6 +278,7 @@ class TaskForm extends Model
         $this->reloadListId = $this->getListIdsToReload();
 
         if($this->task->save()) {
+            $this->task->fileManager->attach(Yii::$app->request->post('fileList'));
             return true;
         }
 

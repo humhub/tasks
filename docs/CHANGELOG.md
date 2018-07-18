@@ -1,5 +1,10 @@
 Changelog
 =========
+
+1.1.11 (July 18, 2018)
+--------------------
+- Fix #72 File attachment on task creation not working
+
 1.1.10 (July 13, 2018)
 --------------------
 - Fix #71 german translation error

@@ -23,8 +23,6 @@ use humhub\modules\file\widgets\UploadButton;
                 'label' => true,
                 'tooltip' => false,
                 'cssButtonClass' => 'btn-default btn-sm',
-                'model' => $taskForm->task,
-                'attribute' => 'files',
                 'dropZone' => '#task-form',
                 'preview' => '#task_upload_preview',
                 'progress' => '#task_upload_progress',
