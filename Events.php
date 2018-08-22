@@ -19,6 +19,7 @@ use humhub\modules\tasks\models\scheduling\TaskReminder;
 use humhub\modules\tasks\integration\calendar\TaskCalendar;
 use humhub\modules\tasks\widgets\MyTasks;
 use humhub\modules\tasks\models\user\TaskUser;
+use yii\db\Expression;
 
 
 /* @var $user \humhub\modules\user\models\User */
@@ -133,6 +134,16 @@ class Events
             if ($taskUser->user === null) {
                 if ($integrityController->showFix("Deleting task user user id " . $taskUser->id . " without existing user!")) {
                     $taskUser->delete();
+                }
+            }
+        }
+
+        $integrityController->showTestHeadline("Tasks Module (" . Task::find()->count() . " entries)");
+
+        foreach (Task::find()->all() as $task) {
+            if ($task->task_list_id != null && !$task->list) {
+                if ($integrityController->showFix("Reset task list for task" . $task->id . " with invalid task_list_setting!")) {
+                    $task->updateAttributes(['task_list_id' => new Expression('NULL')]);
                 }
             }
         }

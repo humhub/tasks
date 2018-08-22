@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.1.12 (August 22, 2018)
+--------------------
+- Fix #76 Error when deleting task list for MyISAM based db
+
 1.1.11 (July 18, 2018)
 --------------------
 - Fix #72 File attachment on task creation not working

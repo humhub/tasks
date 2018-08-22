@@ -215,6 +215,16 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
         }
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function afterDelete()
+    {
+        // Workaround for non foreign key support
+        Task::updateAll(['task_list_id' => new Expression('NULL')], ['task_list_id' => $this->id]);
+        parent::afterDelete();
+    }
+
     public function moveItemIndex($taskId, $newIndex)
     {
         /** @var $task Task */

@@ -987,8 +987,9 @@ class Task extends ContentActiveRecord implements Searchable
      */
     public function removeUser($userId)
     {
-        if (empty($userId) || !isset($userId))
+        if (empty($userId) || !isset($userId)) {
             return false;
+        }
 
         $taskAssigned = $this->getAssignedTaskUsers()->where(['task_user.user_id' => $userId])->all();
         foreach ($taskAssigned as $assigned) {
@@ -1002,7 +1003,7 @@ class Task extends ContentActiveRecord implements Searchable
 
     public function getColor()
     {
-        if($this->task_list_id) {
+        if($this->task_list_id && $this->list) {
             return $this->list->getColor();
         }
     }
