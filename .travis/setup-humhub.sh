@@ -12,7 +12,10 @@ git clone --branch ${HUMHUB_VERSION} --depth 1 https://github.com/humhub/humhub.
 composer install --prefer-dist --no-interaction
 
 npm install
-grunt build-assets
+
+if [ "${HUMHUB_PATH}" != 'v1.2.4' ] ; then
+  grunt build-assets
+fi
 
 cd ${HUMHUB_PATH}/protected/humhub/tests
 
