@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.1.14 (August 22, 2018)
+--------------------
+- Fix: TaskList not dropped for deinstalled container and module deinstallation
+
 1.1.13 (August 22, 2018)
 --------------------
 - Fix Use of save drop function in uninstall.php

@@ -28,7 +28,7 @@ class Module extends ContentContainerModule
     public function getContentContainerTypes()
     {
         return [
-            Space::className(),
+            Space::class,
         ];
     }
 
@@ -45,11 +45,13 @@ class Module extends ContentContainerModule
             $taskList->delete();
         }
 
+        TaskList::deleteByModule();
         parent::disable();
     }
 
     /**
      * @inheritdoc
+     * @throws \yii\base\Exception
      */
     public function disableContentContainer(ContentContainerActiveRecord $container)
     {
@@ -63,6 +65,7 @@ class Module extends ContentContainerModule
             $taskList->delete();
         }
 
+        TaskList::deleteByModule($container);
         parent::disableContentContainer($container);
     }
 
@@ -81,7 +84,7 @@ class Module extends ContentContainerModule
 
     public static function onDashboardSidebarInit($event)
     {
-        $event->sender->addWidget(widgets\MyTasks::className(), array(), array('sortOrder' => 600));
+        $event->sender->addWidget(widgets\MyTasks::class, [], ['sortOrder' => 600]);
     }
 
     /**
