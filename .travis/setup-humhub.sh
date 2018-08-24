@@ -13,14 +13,13 @@ composer install --prefer-dist --no-interaction
 
 npm install
 
-if [ "${HUMHUB_VERSION}" != 'v1.2.4' ] ; then
+if [ "${HUMHUB_VERSION}" != 'v1.2.5' ] ; then
   grunt build-assets
 fi
 
 cd ${HUMHUB_PATH}/protected/humhub/tests
 
 sed -i -e "s|'installed' => true,|'installed' => true,\n\t'moduleAutoloadPaths' => ['$(dirname $old)']|g" config/common.php
-#cat config/common.php
 
 mysql -e 'CREATE DATABASE humhub_test;'
 php codeception/bin/yii migrate/up --includeModuleMigrations=1 --interactive=0

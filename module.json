@@ -5,7 +5,7 @@
     "keywords": ["task", "todo"],
     "version": "1.1.13",
     "humhub": {
-        "minVersion": "1.2.4"
+        "minVersion": "1.2.5"
     },
     "screenshots": ["assets/screen1.jpg", "assets/screen2.jpg"]
 }
