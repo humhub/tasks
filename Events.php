@@ -220,7 +220,7 @@ class Events
 
     public static function onCronRun($event)
     {
-        if (Yii::$app->controller->action->id == 'hourly') {
+        if (Yii::$app->controller->action->id == 'run') {
             Yii::$app->queue->push( new SendReminder());
         }
     }
