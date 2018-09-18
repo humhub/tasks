@@ -81,7 +81,7 @@ class CompletedState extends TaskState
 
         if ($this->task->review) {
             if ($this->task->hasTaskAssigned()) {
-                ReviewSuccessNotification::instance()->from($user)->about($this->task)->sendBulk($this->task->getTaskAssignedUsers(true));
+                ReviewSuccessNotification::instance()->from($user)->about($this->task)->sendBulk($this->task->filterResponsibleAssigned());
             }
 
             if ($this->task->hasTaskResponsible()) {
