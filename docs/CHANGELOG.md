@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.2.0 (September 19, 2018)
+--------------------
+- Fix: Reminder queue logic not compatible with v1.3
+- Chng: Changed min HumHub Version to v1.3
+
 1.1.15 (September 19, 2018)
 --------------------
 - Fix: TaskAssigned notification not sent when creating a task
