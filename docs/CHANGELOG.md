@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.1.15 (September 19, 2018)
+--------------------
+- Fix: TaskAssigned notification not sent when creating a task
+
 1.1.14 (August 22, 2018)
 --------------------
 - Fix: TaskList not dropped for deinstalled container and module deinstallation

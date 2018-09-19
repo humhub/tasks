@@ -12,6 +12,7 @@ use humhub\modules\content\components\ContentContainerPermissionManager;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\permissions\CreateTask;
 use humhub\modules\tasks\permissions\ProcessUnassignedTasks;
+use humhub\modules\user\components\ActiveQueryUser;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\Expression;
@@ -373,6 +374,8 @@ class Task extends ContentActiveRecord implements Searchable
      */
     public function afterSave($insert, $changedAttributes)
     {
+        parent::afterSave($insert, $changedAttributes);
+
         if($this->scenario === self::SCENARIO_EDIT) {
             $oldTaskUsers = $this->taskUsers;
 
@@ -415,14 +418,12 @@ class Task extends ContentActiveRecord implements Searchable
             $this->schedule->afterSave($insert, $changedAttributes);
 
             $this->saveNewItems();
-            parent::afterSave($insert, $changedAttributes);
+
         }
 
         if($this->list) {
             $this->list->setAttributes(['updated_at' => new Expression('NOW()')]);
         }
-
-        parent::afterSave($insert, $changedAttributes);
     }
 
     /**
