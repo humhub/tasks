@@ -237,7 +237,7 @@ class Task extends ContentActiveRecord implements Searchable
         if($this->task_list_id) {
             $taskList = TaskList::findByContainer($this->content->container)->where(['id' => $this->task_list_id]);
             if(!$taskList) {
-                $this->addError('task_list_id',  Yii::t('TaskModule.base', 'Invalid task list selection.'));
+                $this->addError('task_list_id',  Yii::t('TasksModule.base', 'Invalid task list selection.'));
             }
         }
     }
