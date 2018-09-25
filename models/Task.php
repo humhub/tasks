@@ -778,14 +778,14 @@ class Task extends ContentActiveRecord implements Searchable
     {
         if (!$notificationClassName) {
             // delete all old notifications - used for reset
-            $notifications = Notification::find()->where(['source_class' => self::className(), 'source_pk' => $this->id, 'space_id' => $this->content->container->id])->all();
+            $notifications = Notification::find()->where(['source_class' => self::class, 'source_pk' => $this->id, 'space_id' => $this->content->container->id])->all();
             foreach ($notifications as $notification) {
                 $notification->delete();
             }
         }
         else {
             // delete specific old notifications
-            $notifications = Notification::find()->where(['class' => $notificationClassName, 'source_class' => self::className(), 'source_pk' => $this->id, 'space_id' => $this->content->container->id])->all();
+            $notifications = Notification::find()->where(['class' => $notificationClassName, 'source_class' => self::class, 'source_pk' => $this->id, 'space_id' => $this->content->container->id])->all();
             foreach ($notifications as $notification) {
                 $notification->delete();
             }

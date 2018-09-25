@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.2.1 (September 19, 2018)
+--------------------
+- Fix: Finished Task List contains unfinished list
+
 1.2.0 (September 19, 2018)
 --------------------
 - Fix: Reminder queue logic not compatible with v1.3

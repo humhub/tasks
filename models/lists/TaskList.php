@@ -160,26 +160,30 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
 
         $query->orderBy(['task_list_setting.sort_order' => SORT_ASC]);
 
+
         return $query;
     }
 
     public static function findHiddenLists(ContentContainerActiveRecord $container)
     {
         $query = static::findByContainer($container);
-        $query->leftJoin('task', 'task.task_list_id=content_tag.id');
+        $query->leftJoin('task t', 't.task_list_id=content_tag.id');
         $query->leftJoin('task_list_setting', 'task_list_setting.tag_id=content_tag.id');
 
         $includes =  [Task::STATUS_IN_PROGRESS, Task::STATUS_PENDING_REVIEW, Task::STATUS_PENDING];
 
+        $subQuery = Task::find()->where(['task_list_id' => new Expression('content_tag.id')])->andWhere(['IN', 'task.status', $includes]);
+
         $query->andWhere(
             ['AND',
-                ['NOT IN', 'task.status', $includes],
-                ['IS NOT', 'task.id', new Expression("NULL")],
+                ['NOT EXISTS', $subQuery],
+                ['IS NOT', 't.id', new Expression("NULL")],
                 ['task_list_setting.hide_if_completed' => '1']
             ]
         );
 
         $query->orderBy(['task_list_setting.updated_at' => SORT_ASC]);
+
         return $query;
     }
 
