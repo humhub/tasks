@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.2.2 
+--------------------
+- Fix: Reminder mail link broken
+
 1.2.1 (September 19, 2018)
 --------------------
 - Fix: Finished Task List contains unfinished list
