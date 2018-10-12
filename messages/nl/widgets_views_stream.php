@@ -2,7 +2,7 @@
 return array (
   '<b>There are no tasks yet!</b>' => '<b>Er zijn nog geen taken!</b>',
   '<b>There are no tasks yet!</b><br>Be the first and create one...' => '<b>Er zijn nog geen taken!</b><br>Wees de eerste en maak er een...',
-  'Assigned to me' => 'Gekoppeld aan mij',
+  'Assigned to me' => 'Toegewezen aan mij',
   'Back to stream' => 'Terug naar stream',
   'Created by me' => 'Gemaakt door mij',
   'Creation time' => 'Aanmaak datum',

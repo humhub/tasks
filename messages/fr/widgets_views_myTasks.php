@@ -1,5 +1,4 @@
 <?php
-
-return [
-    '<strong>Your</strong> tasks' => '',
-];
+return array (
+  '<strong>Your</strong> tasks' => 'Mes <strong>tâches</strong>',
+);

@@ -1,5 +1,4 @@
 <?php
-
-return [
-    'Drag list' => '',
-];
+return array (
+  'Drag list' => 'Trascina lista',
+);

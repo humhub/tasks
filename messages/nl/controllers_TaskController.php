@@ -1,4 +1,4 @@
 <?php
 return array (
-  'Could not access task!' => 'Kon taak niet bereiken!',
+  'Could not access task!' => 'Geen toegang tot de taak!',
 );

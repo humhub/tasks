@@ -4,7 +4,7 @@ return array (
   '<strong>Edit</strong> task' => '<strong>Bewerk</strong> taak',
   'Assign users' => 'Gebruikers koppelen',
   'Cancel' => 'Annuleren',
-  'Deadline' => 'Deadline',
+  'Deadline' => 'Uiterste datum',
   'Save' => 'Opslaan',
-  'What is to do?' => 'Wat moet er gedaan worden?',
+  'What is to do?' => 'Wat is er te doen?',
 );

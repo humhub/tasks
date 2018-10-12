@@ -1,4 +1,4 @@
 <?php
 return array (
-  '{userName} assigned to task {task}.' => '{userName} gekoppeld aan taak {task}.',
+  '{userName} assigned to task {task}.' => '{userName} toegewezen aan taak {task}.',
 );

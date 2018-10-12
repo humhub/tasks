@@ -1,10 +1,9 @@
 <?php
-
-return [
-    'Created by me' => '',
-    'Filter tasks' => '',
-    'I\'m assigned' => '',
-    'I\'m responsible' => '',
-    'Overdue' => '',
-    'Status' => '',
-];
+return array (
+  'Created by me' => 'Creato da me',
+  'Filter tasks' => 'Filtra attività',
+  'I\'m assigned' => 'Assegnato a me',
+  'I\'m responsible' => 'Sono il responsabile',
+  'Overdue' => 'Scaduta',
+  'Status' => 'Stato',
+);
