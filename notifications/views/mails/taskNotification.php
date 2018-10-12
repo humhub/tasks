@@ -7,7 +7,7 @@
  */
 
 use humhub\modules\tasks\widgets\MailContentEntry;
-
+use yii\helpers\Url;
 
 /**
  * @link https://www.humhub.org/
