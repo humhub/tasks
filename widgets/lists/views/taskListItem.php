@@ -54,12 +54,14 @@ $checkUrl = $task->state->getCheckUrl();
 
     <?php if($task->content->canEdit()) : ?>
         <div class="task-controls end pull-right">
-            <?= Button::asLink()->action('task.list.editTask', TaskUrl::editTask($task))->icon('fa-pencil')->cssClass('tt')->options(['title' => Yii::t('TasksModule.base', 'Edit task')]); ?>
-            <?= Button::asLink()->action('task.deleteTask', TaskUrl::deleteTask($task))->icon('fa-trash')->confirm()->cssClass('tt')->options(['title' => Yii::t('TasksModule.base', 'Delete task')]); ?>
+            <?= Button::asLink()->action('task.list.editTask', TaskUrl::editTask($task))
+                ->icon('fa-pencil')->cssClass('tt')->options(['title' => Yii::t('TasksModule.base', 'Edit task')]); ?>
+            <?= Button::asLink()->action('task.deleteTask', TaskUrl::deleteTask($task))
+                ->icon('fa-trash')->confirm()->cssClass('tt')->options(['title' => Yii::t('TasksModule.base', 'Delete task')]); ?>
         </div>
     <?php endif; ?>
 
-    <div class="task-controls pull-right toggleTaskDetails" style="<?= (!$task->content->canEdit()) ? 'border-right:0;margin-right:0' : '' ?>">
+    <div class="task-controls pull-right toggleTaskDetails hidden-xs" style="<?= (!$task->content->canEdit()) ? 'border-right:0;margin-right:0' : '' ?>">
         <?= Button::asLink()->icon('fa-comment-o') ?> <?= Comment::getCommentCount(Task::class, $task->id); ?>
     </div>
 
@@ -80,7 +82,7 @@ $checkUrl = $task->state->getCheckUrl();
        }
        ?>
 
-       <div class="task-controls pull-right toggleTaskDetails">
+       <div class="task-controls pull-right toggleTaskDetails hidden-xs">
            <?= Button::asLink()->icon('fa-clock-o')->cssClass($schedulingColor)->cssClass('tt')->options(['title' => $schedulingTitle]) ?> <?= $daysRemaining ?>
        </div>
 
@@ -88,12 +90,12 @@ $checkUrl = $task->state->getCheckUrl();
 
     <?php  if($task->review) : ?>
         <div class="task-controls pull-right toggleTaskDetails">
-            <?= Button::asLink()->icon('fa-eye')->cssClass('tt')->options(['title' => Yii::t('TasksModule.base', 'This task requires to be reviewed by a responsible')]) ?>
+            <?= Button::asLink()->icon('fa-eye')->cssClass('hidden-xs tt')->options(['title' => Yii::t('TasksModule.base', 'This task requires to be reviewed by a responsible')]) ?>
         </div>
     <?php endif; ?>
 
     <?php if($task->hasTaskAssigned() || $task->hasTaskResponsible()) : ?>
-        <div class="task-controls assigned-users pull-right" style="display: inline;">
+        <div class="task-controls assigned-users pull-right hidden-xs" style="display: inline;">
             <?= TaskUserList::widget(['users' => $task->taskResponsibleUsers, 'style' =>  'border:2px solid '.$this->theme->variable('info'), 'type' => Task::USER_RESPONSIBLE])?>
             <?= TaskUserList::widget(['users' => $task->taskAssignedUsers])?>
         </div>

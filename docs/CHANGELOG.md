@@ -1,9 +1,10 @@
 Changelog
 =========
 
-1.2.2 
+1.2.2 (October 15, 2018)
 --------------------
 - Fix: Reminder mail link broken
+- Fix: Broken mobile view
 
 1.2.1 (September 19, 2018)
 --------------------
