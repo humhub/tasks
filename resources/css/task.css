@@ -1,0 +1,320 @@
+/*
+ * @link https://www.humhub.org/
+ * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
+ * @license https://www.humhub.com/licences
+ *
+ */
+#task-container .panel-heading {
+  background-color: #f7f7f7;
+}
+#task-container .panel-heading .task-header-panel {
+  padding-right: 10px;
+  float: left;
+  border-right: 2px solid #ededed;
+  padding-left: 10px;
+}
+#task-container .panel-heading .task-header-panel strong {
+  font-size: 13px;
+}
+#task-container .panel-heading .task-header-panel:last-child {
+  border-right: 0;
+}
+#task-container .panel-heading .task-header-panel:first-child {
+  padding-left: 0;
+}
+#task-container .panel-heading .col-sm-12 {
+  overflow: visible;
+}
+#task-container .panel-heading .task-change-state-button {
+  margin-top: 20px;
+}
+#task-container .panel-heading .assigned-anyone {
+  font-size: 14px;
+  font-style: italic;
+  margin: 2px;
+  color: #7a7a7a;
+}
+#task-container .panel-heading .media .updated {
+  color: #bebebe;
+  font-size: 11px;
+  font-weight: bold;
+}
+#task-container .panel-heading .media .author a {
+  color: #bebebe;
+  font-size: 11px;
+}
+.task-overview li {
+  cursor: pointer;
+}
+.task-overview li:last-child {
+  border-bottom: 0;
+}
+.task-overview .panel-body {
+  padding: 10px 0 !important;
+}
+.task-overview .media-list .progress {
+  margin-top: 2px;
+  margin-bottom: 3px;
+}
+.task-overview .media-list .summary,
+.task-overview .media-list .empty {
+  font-size: 12px;
+  color: #bac2c7;
+  padding-left: 10px;
+}
+.task-overview .media-list .pagination {
+  margin-bottom: 0;
+}
+.task-overview .media-list .pagination li {
+  border: 0;
+  padding: 0;
+}
+.task-overview .media-list .pagination li:hover {
+  border: 0;
+}
+.task-overview .task-filter {
+  background-color: #f7f7f7;
+  padding: 10px 10px 0 10px;
+  margin-top: -10px;
+}
+.task-overview .task-filter #task-filter-loader {
+  padding-top: 12px;
+}
+.task-overview .task-filter .row {
+  padding-left: 10px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.task-overview .task-filter .dropdown-filter {
+  display: inline-block;
+}
+.task-overview .task-filter .dropdown-filter .form-group {
+  margin: -7px;
+}
+.task-overview .task-filter .dropdown-filter .form-group .form-control {
+  padding: 0 20px 0 8px;
+  margin-left: 12px;
+}
+.task-overview .task-filter .checkbox-filter {
+  display: inline-block;
+}
+.task-overview .task-filter .checkbox-filter .regular-checkbox:not(:checked) + .regular-checkbox-box {
+  background-color: #fff;
+}
+.task-overview .task-filter .checkbox-filter .form-group {
+  margin: 0;
+}
+.task-overview .task-filter .checkbox-filter .form-group .checkbox {
+  margin: 0 !important;
+}
+#task-list-loader {
+  float: right;
+}
+.task-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  height: auto !important;
+}
+.task-details h1 {
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+.task-details h2 {
+  font-size: 17px;
+  color: #919191;
+  font-weight: 300;
+  margin-top: 0;
+}
+.task-details h1.task-item-title {
+  font-size: 20px;
+}
+.task-details .task-item:hover {
+  background: #f7f7f7;
+}
+.task-details .task-item-content {
+  margin-left: 8px;
+}
+.task-details label.item-finished {
+  text-decoration: line-through;
+  font-style: italic;
+}
+.task-details label.item-finished .regular-checkbox:checked + .regular-checkbox-box {
+  border: 2px solid #bdbdbd;
+  background: #bdbdbd;
+}
+.wall-entry .media .task .progress {
+  margin-top: 2px;
+  margin-bottom: 3px;
+}
+.task-info {
+  display: inline-block;
+  margin-right: 10px;
+}
+.task-info .task-info-text {
+  font-style: italic;
+  font-size: 13px;
+}
+.task-info div {
+  font-style: italic;
+  padding-bottom: 2px;
+  font-size: 13px;
+}
+.wall-entry-controls,
+.wall-entry-controls a {
+  font-size: 11px;
+  color: #aeaeae !important;
+}
+@media (max-width: 991px) {
+  .agenda-point {
+    display: none !important;
+  }
+  .edit-link {
+    display: inline-block !important;
+  }
+}
+@media (max-width: 1119px) {
+}
+.field-task-all_day label {
+  padding: 0 !important;
+}
+.closed-task-list-view li {
+  border-left: 0 !important;
+}
+.closed-task-list-view li:hover {
+  background-color: #fff8e0 !important;
+  border-left: 0 !important;
+}
+.task-list .empty {
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+  background-color: #ddd;
+}
+.task-list .pagination-container {
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #ddd;
+  border-radius: 4px;
+}
+.task-list .pagination-container li {
+  border: 0 !important;
+}
+.task-list .pagination-container li:hover {
+  background: transparent;
+}
+.task-list-container {
+  border-left: 3px solid;
+  border-right: 1px solid;
+  border-right-color: #ddd !important;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+.task-list-title-bar {
+  border-bottom: 0;
+  border-top: 2px solid #ddd;
+  background-color: #f7f7f7;
+  padding: 5px;
+}
+.task-list-title-bar button {
+  margin-left: 5px;
+}
+.task-list-ul {
+  margin: 0;
+  padding: 0;
+}
+.task-list-item-title label {
+  margin: 5px;
+}
+.ui-sortable-helper {
+  background-color: white;
+  border: 1px solid #ddd;
+}
+.task-checklist ul {
+  margin-left: 10px;
+}
+#task-container .task-list-task-details {
+  border: 0;
+}
+#task-container .task-list-task-details-body {
+  padding: 0;
+}
+.task-list-items {
+  min-height: 20px;
+  border-bottom: 1px solid #ddd;
+}
+.task-list-items .task-list-item {
+  border-bottom: 1px solid #ddd;
+}
+.task-list-items .task-list-item .task-list-task-details {
+  border-top: 1px dashed #ddd;
+}
+.task-list-items .task-list-item .task-list-task-details .task-list-task-details-body {
+  padding: 10px;
+}
+.task-list-items .task-list-item .task-list-task-details .task-list-task-infos {
+  margin-bottom: 10px;
+}
+.task-list-items .task-list-item .task-list-task-title-bar,
+.task-list-items .task-list-item .task-list-task-details {
+  padding: 10px;
+  cursor: pointer;
+}
+.task-list-items .task-list-item .task-list-task-title-bar:hover {
+  background-color: #fff8e0;
+}
+.task-list-items .task-list-item:last-child {
+  border-bottom: 0;
+}
+.task-list-items .task-list-task-completed-show-more {
+  text-align: center;
+  background-color: #f7f7f7;
+}
+.tasks-completed {
+  min-height: 0 !important;
+}
+.task-list-state-highlight {
+  height: 60px !important;
+  line-height: 1.2em;
+  background-color: #fff8e0;
+  margin: 10px 0;
+}
+.task-state-highlight {
+  height: 30px;
+  line-height: 1.2em;
+  background-color: #fff8e0;
+}
+.task-list-color {
+  display: inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  border-radius: 4px;
+  margin: -2px 2px 0 0;
+  vertical-align: middle;
+  box-shadow: 0.2px 0.2px 1px;
+}
+.task-controls {
+  font-size: 12px;
+  margin-right: 10px;
+  margin-top: 2px;
+  border-right: 1px solid #eee;
+  padding-right: 10px;
+}
+.task-controls.end {
+  font-size: 12px;
+  margin-right: 0;
+  border-right: none;
+  padding-right: 0;
+}
+.task-controls .fa {
+  font-size: 14px;
+  margin-right: 5px;
+  margin-top: 4px;
+}
+.task-controls a {
+  color: #999 !important;
+}
+.task-controls a:hover {
+  color: #3b4854;
+}
+.task-empty-list-alert {
+  margin-bottom: 10px;
+}
