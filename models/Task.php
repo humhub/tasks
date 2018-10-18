@@ -301,7 +301,15 @@ class Task extends ContentActiveRecord implements Searchable
         return static::findUnsorted($contentContainer)->andWhere(['task.status' => Task::STATUS_COMPLETED]);
     }
 
-    public static function findUserTasks(User $user = null, $limit = 5)
+    /**
+     * @param User|null $user
+     * @param ContentActiveRecord|null $container
+     * @param int $limit
+     * @return array|Notification[]|Task[]|\yii\db\ActiveRecord[]
+     * @throws \Throwable
+     * @throws \yii\base\Exception
+     */
+    public static function findUserTasks(User $user = null, $container = null, $limit = 5)
     {
         if (!$user && !Yii::$app->user->isGuest) {
             $user = Yii::$app->user->getIdentity();
@@ -309,7 +317,9 @@ class Task extends ContentActiveRecord implements Searchable
             return [];
         }
 
-        return self::find()
+        $query = ($container) ? self::find()->contentContainer($container) : self::find();
+
+        return $query
             ->leftJoin('task_user', 'task.id=task_user.task_id', [])
             ->where(['task_user.user_id' => $user->id])
             ->andWhere(['!=', 'task.status', Task::STATUS_COMPLETED])

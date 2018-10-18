@@ -1,5 +1,8 @@
 Changelog
 =========
+1.2.3
+--------------------
+- Enh: Filter by cotnainer related tasks in "Your tasks" snippet.
 
 1.2.2 (October 15, 2018)
 --------------------

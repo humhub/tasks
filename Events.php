@@ -66,7 +66,7 @@ class Events
         $settings = SnippetModuleSettings::instantiate();
 
         if ($settings->showMyTasksSnippet()) {
-            $event->sender->addWidget(MyTasks::className(), ['limit' => $settings->myTasksSnippetMaxItems], ['sortOrder' => $settings->myTasksSnippetSortOrder]);
+            $event->sender->addWidget(MyTasks::class, ['limit' => $settings->myTasksSnippetMaxItems], ['sortOrder' => $settings->myTasksSnippetSortOrder]);
         }
     }
 
@@ -81,7 +81,9 @@ class Events
 
         if ($space->isModuleEnabled('tasks')) {
             if ($settings->showMyTasksSnippetSpace()) {
-                $event->sender->addWidget(MyTasks::className(), ['limit' => $settings->myTasksSnippetMaxItems], ['sortOrder' => $settings->myTasksSnippetSortOrder]);
+                $event->sender->addWidget(MyTasks::class, [
+                    'contentContainer' => $space,
+                    'limit' => $settings->myTasksSnippetMaxItems], ['sortOrder' => $settings->myTasksSnippetSortOrder]);
             }
         }
     }
@@ -93,7 +95,6 @@ class Events
         $space = $event->sender->space;
 
         if ($space->isModuleEnabled('tasks') && $space->isMember()) {
-
             $event->sender->addItem([
                 'label' => Yii::t('TasksModule.base', 'Tasks'),
                 'group' => 'modules',
@@ -109,6 +110,7 @@ class Events
      *
      * @param Event $event
      * @throws \Exception
+     * @throws \Throwable
      */
     public static function onIntegrityCheck($event)
     {
