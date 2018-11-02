@@ -1,11 +1,10 @@
 <?php
-
-return [
-    'End Date' => '',
-    'End Time' => '',
-    'End time must be after start time!' => '',
-    'Public' => '',
-    'Start Date' => '',
-    'Start Time' => '',
-    'Time Zone' => '',
-];
+return array (
+  'End Date' => 'Date de fin',
+  'End Time' => 'Heure de fin',
+  'End time must be after start time!' => 'L\'heure de fin doit être après l\'heure de départ.',
+  'Public' => 'Public',
+  'Start Date' => 'Date de départ',
+  'Start Time' => 'Heure de départ',
+  'Time Zone' => 'Fuseau horaire',
+);

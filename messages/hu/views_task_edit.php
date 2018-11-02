@@ -1,10 +1,10 @@
 <?php
 return array (
-  '<strong>Create</strong> new task' => '',
-  '<strong>Edit</strong> task' => '',
-  'Assign users' => '',
+  '<strong>Create</strong> new task' => '<strong>Új</strong> feladat létrehozása',
+  '<strong>Edit</strong> task' => 'Feladat <strong>szerkesztése</strong>',
+  'Assign users' => 'Hozzárendelt tagok',
   'Cancel' => 'Mégsem',
   'Deadline' => 'Határidő',
   'Save' => 'Mentés',
-  'What is to do?' => '',
+  'What is to do?' => 'Mi legyen a feladat?',
 );

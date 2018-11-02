@@ -1,6 +1,6 @@
 <?php
 return array (
-  '<strong>Task</strong> module configuration' => 'Configurazione modulo <strong>Task</strong> ',
+  '<strong>Task</strong> module configuration' => 'Configurazione modulo <strong>Task</strong>',
   'Max tasks items' => 'Attività massime',
   'Show snippet' => 'Mostra snippet',
   'Show snippet in Space' => 'Mostra snippet nello spazio',

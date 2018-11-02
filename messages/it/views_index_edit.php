@@ -3,7 +3,7 @@ return array (
   '<strong>Confirm</strong> task deletion' => '<strong>Conferma</strong> eliminazione attività',
   '<strong>Create</strong> new task' => '<strong>Crea</strong> nuova attività',
   '<strong>Edit</strong> task' => '<strong>Modifica</strong> attività',
-  'Add checkpoint...' => 'Aggiungi intervallo...',
+  'Add checkpoint...' => 'Aggiungi a checklist...',
   'Add reminder' => 'Aggiungi promemoria',
   'Add responsible users' => 'Aggiungi responsabili',
   'Assign users' => 'Assegna utenti',
