@@ -9,6 +9,7 @@ use humhub\modules\tasks\models\Sortable;
 use humhub\modules\tasks\models\Task;
 use Yii;
 use yii\base\Model;
+use yii\helpers\Html;
 
 class UnsortedTaskList extends Model implements TaskListInterface, Sortable
 {
