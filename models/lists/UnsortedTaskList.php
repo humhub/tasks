@@ -112,7 +112,7 @@ class UnsortedTaskList extends Model implements TaskListInterface, Sortable
 
     public function getColor()
     {
-        return '#708fa0';
+        return $this->theme->variable('primary');
     }
 
     public function getContainer()
