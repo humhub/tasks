@@ -9,8 +9,9 @@ use humhub\modules\tasks\models\checklist\TaskItem;
 use humhub\modules\tasks\models\lists\TaskListInterface;
 use humhub\modules\tasks\models\Task;
 use Yii;
+use yii\helpers\Url;
 
-class TaskUrl
+class TaskUrl extends Url
 {
     const ROUTE_VIEW_TASK = '/tasks/task/view';
     const ROUTE_VIEW_TASK_MODAL = '/tasks/task/modal';
@@ -34,6 +35,19 @@ class TaskUrl
 
     const ROUTE_DROP_CHECKLIST_ITEM = '/tasks/task/drop';
     const ROUTE_CHECK_CHECKLIST_ITEM = '/tasks/checklist/check-item';
+
+    const ROUTE_GLOBAL = '/tasks/global';
+    const ROUTE_GLOBAL_FILTER = '/tasks/global/filter';
+
+    public static function globalView()
+    {
+        return static::toRoute(static::ROUTE_GLOBAL);
+    }
+
+    public static function globalFilter($container = null)
+    {
+        return static::toRoute([static::ROUTE_GLOBAL_FILTER, 'container' => $container]);
+    }
 
     public static function viewTask(Task $task)
     {

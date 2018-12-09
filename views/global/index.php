@@ -1,0 +1,23 @@
+<?php
+
+use humhub\modules\tasks\widgets\search\TaskSearchList;
+use humhub\modules\tasks\widgets\search\TaskFilterNavigation;
+use humhub\modules\tasks\models\forms\TaskFilter;
+
+/* @var $this \humhub\modules\ui\view\components\View */
+/* @var $dataProvider \yii\data\ActiveDataProvider */
+
+\humhub\modules\tasks\assets\Assets::register($this);
+
+?>
+
+<div class="container">
+    <div class="panel panel-default task-overview">
+        <?= TaskFilterNavigation::widget(['options' => ['style' => 'border-radius:4px;background-color:'.$this->theme->variable('background-color-secondary')]]) ?>
+
+        <div id="filter-tasks-list" class="panel-body">
+            <?= TaskSearchList::widget(['filter' => new TaskFilter()]) ?>
+        </div>
+    </div>
+</div>
+

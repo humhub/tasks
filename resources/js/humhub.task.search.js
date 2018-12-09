@@ -1,15 +1,12 @@
 humhub.module('task.search', function (module, require, $) {
     var Widget = require('ui.widget').Widget;
+    var Filter = require('ui.filter').Filter;
     var object = require('util').object;
     var client = require('client');
     var loader = require('ui.loader');
 
 
-    var TaskFilter = function (node, options) {
-        Widget.call(this, node, options);
-    };
-
-    object.inherits(TaskFilter, Widget);
+    var TaskFilter = Filter.extend();
 
     TaskFilter.prototype.getDefaultOptions = function () {
         return {
@@ -18,7 +15,18 @@ humhub.module('task.search', function (module, require, $) {
     };
 
     TaskFilter.prototype.init = function () {
-        this.$titleFilter = this.$.find('#taskfilter-title');
+        var that = this;
+        this.on('afterChange', function() {
+            that.loadUpdate();
+        });
+
+        $('#filter-tasks-list').on('click', '.pagination-container a', function (evt) {
+            evt.preventDefault();
+
+            that.loadUpdate($(this).attr('href'), {});
+        });
+
+        /*this.$titleFilter = this.$.find('#taskfilter-title');
         this.$entryContainer = $('#filter-tasks-list');
         var that = this;
 
@@ -46,7 +54,45 @@ humhub.module('task.search', function (module, require, $) {
         this.$entryContainer.on('click', '.pagination-container a', function (evt) {
             evt.preventDefault();
             that.filterCall($(this).attr('href'));
+        });*/
+    };
+
+    TaskFilter.prototype.loadUpdate = function (url, data) {
+        var that = this;
+
+        url = url || this.options.filterUrl;
+        data = data || this.buildRequestFilterData();
+        data.beforeSend = function(xhr) {
+            debugger;
+            that.currentXhr = xhr;
+        };
+
+        if (this.currentXhr) {
+            this.currentXhr.abort();
+        }
+
+        client.get(url, data).then(function(response) {
+            if(response.result) {
+                $('#filter-tasks-list').html(response.result);
+            }
+        }).catch(function(e) {
+            if(e.errorThrown !== 'abort') {
+                module.log.error(e, true);
+            }
         });
+    };
+
+    TaskFilter.prototype.buildRequestFilterData = function(key) {
+        var that = this;
+        var data = {};
+        $.each(this.getFilterMap(), function(key, value) {
+            data[that.buildRequestDataKey(key)] = value;
+        });
+
+        return {data: data};
+    }
+    TaskFilter.prototype.buildRequestDataKey = function(key) {
+        return 'TaskFilter['+key+']';
     };
 
     TaskFilter.prototype.filterCall = function (url) {

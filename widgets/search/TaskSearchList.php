@@ -36,7 +36,7 @@ class TaskSearchList extends Widget
             'query' => $this->filter->query(),
             'pagination' => [
                 'pageSize' => 30,
-                'route' => '/tasks/search/filter-tasks'
+                'route' => '/tasks/global/filter'
             ],
         ]);
 

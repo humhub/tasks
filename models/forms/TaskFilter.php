@@ -16,14 +16,28 @@
 namespace humhub\modules\tasks\models\forms;
 
 
-use humhub\modules\content\components\ContentContainerActiveRecord;
-use humhub\modules\tasks\models\Task;
-use humhub\modules\tasks\models\user\TaskUser;
 use Yii;
+use humhub\modules\tasks\models\Task;
+use humhub\modules\content\components\ContentContainerActiveRecord;
+use humhub\modules\tasks\models\user\TaskUser;
 use yii\base\Model;
 
 class TaskFilter extends Model
 {
+    const FILTER_TITLE = 'title';
+    const FILTER_OVERDUE = 'overdue';
+    const FILTER_ASSIGNED = 'assigned';
+    const FILTER_RESPONSIBLE = 'responsible';
+    const FILTER_MINE = 'mine';
+    const FILTER_STATE = 'state';
+    const FILTER_SPACE = 'spaces';
+
+    public $filters = [];
+
+    public $states = [];
+
+    public $spaces = [];
+
     /**
      * @var ContentContainerActiveRecord
      */
@@ -37,32 +51,13 @@ class TaskFilter extends Model
     /**
      * @var int
      */
-    public $status = Task::STATUS_ALL;
-
-    /**
-     * @var int
-     */
-    public $overdue = false;
-
-    /**
-     * @var int
-     */
-    public $taskAssigned = 1;
-
-    /**
-     * @var int
-     */
-    public $taskResponsible;
-
-    /**
-     * @var int
-     */
     public $own;
 
     public function rules()
     {
         return [
             ['title', 'string'],
+            [['filters', 'states', 'spaces'], 'safe'],
             [['taskAssigned', 'taskResponsible', 'own', 'status', 'overdue'], 'integer']
         ];
     }
@@ -81,43 +76,53 @@ class TaskFilter extends Model
 
     public function query()
     {
-        $user = Yii::$app->user->getIdentity();
+        $query = Task::find()->readable();
 
-        $query = Task::find()->contentContainer($this->contentContainer);
+        if($this->contentContainer) {
+            $query->contentContainer($this->contentContainer);
+        } else if (!empty($this->spaces)) {
+            $query->joinWith(['content', 'content.contentContainer', 'content.createdBy']);
+            $query->andWhere( ['IN', 'contentcontainer.guid', $this->spaces]);
+        }
 
-        if($this->overdue) {
+        if($this->isFilterActive(static::FILTER_OVERDUE)) {
             $query->andWhere('task.end_datetime < DATE(NOW())');
             $query->andWhere(['!=', 'task.status', Task::STATUS_COMPLETED]);
         }
 
-        if($this->status != Task::STATUS_ALL) {
-            $query->andWhere(['task.status' => $this->status]);
+        if(!empty($this->states)) {
+             $query->andWhere(['in', 'task.status', $this->states]);
         }
 
         if(!empty($this->title)) {
             $query->andWhere(['like', 'title', $this->title]);
         }
 
-        if ($this->taskAssigned) {
+        if ($this->isFilterActive(static::FILTER_ASSIGNED)) {
             $subQuery = TaskUser::find()
                 ->where('task_user.task_id=task.id')
-                ->andWhere(['task_user.user_id' => $user->id, 'task_user.user_type' => Task::USER_ASSIGNED]);
+                ->andWhere(['task_user.user_id' => Yii::$app->user->id, 'task_user.user_type' => Task::USER_ASSIGNED]);
             $query->andWhere(['exists', $subQuery]);
         }
 
-        if ($this->taskResponsible) {
+        if ($this->isFilterActive(static::FILTER_RESPONSIBLE)) {
             $subQuery = TaskUser::find()
                 ->where('task_user.task_id=task.id')
-                ->andWhere(['task_user.user_id' => $user->id, 'task_user.user_type' => Task::USER_RESPONSIBLE]);
+                ->andWhere(['task_user.user_id' => Yii::$app->user->id, 'task_user.user_type' => Task::USER_RESPONSIBLE]);
             $query->andWhere(['exists', $subQuery]);
         }
 
-        if($this->own) {
-            $query->andWhere(['content.created_by' => $user->contentcontainer_id]);
+        if($this->isFilterActive(static::FILTER_MINE)) {
+            $query->andWhere(['content.created_by' => Yii::$app->user->identity->contentcontainer_id]);
         }
 
         $query->orderBy(['task.status' => SORT_ASC, 'task.scheduling' => SORT_DESC, 'task.end_datetime' => SORT_ASC]);
 
         return $query;
+    }
+
+    public function isFilterActive($filter)
+    {
+        return in_array($filter, $this->filters);
     }
 }
