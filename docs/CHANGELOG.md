@@ -1,8 +1,14 @@
 Changelog
 =========
+
 1.2.3
 --------------------
 - Enh: Filter by cotnainer related tasks in "Your tasks" snippet.
+- Enh: Global overview
+- Enh: Added move content feature
+- Enh: Added Tabbed Menu to single task view
+- Enh: Added `searchPaginationSize` module configuration 
+- Enh: Added `showTopMenuItem` and `topMenuSort` module configuration
 
 1.2.2 (October 15, 2018)
 --------------------

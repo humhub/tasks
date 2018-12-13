@@ -8,6 +8,8 @@
 
 namespace humhub\modules\tasks\widgets\search;
 
+use humhub\modules\space\models\Space;
+use humhub\modules\space\modules\manage\models\MembershipSearch;
 use humhub\modules\space\widgets\SpacePickerField;
 use Yii;
 use humhub\modules\tasks\helpers\TaskUrl;
@@ -82,17 +84,36 @@ class TaskFilterNavigation extends FilterNavigation
             $this->filter = new TaskFilter();
         }
 
-        $this->addFilter([
-            'id' => TaskFilter::FILTER_TITLE,
-            //'value' => $this->filter->isFilterActive(TaskFilter::FILTER_OVERDUE),
-            'category' => 'title',
-            'title' => Yii::t('TasksModule.models_forms_TaskFilter', 'Title'),
-            'class' => TextFilterInput::class,
-            'options' => [
-                'style' => 'width:100%',
-                'placeholder' =>   Yii::t('TasksModule.views_index_index', 'Filter tasks by title')
-            ],
-            'sortOrder' => 100], static::FILTER_BLOCK_TITLE);
+        /**
+         * Patches an textfilter issue with HumHub < 1.3.9 which uses keypress instead of keydown
+         */
+        if (version_compare(Yii::$app->version, '1.3.9', 'lt')) {
+            $this->addFilter([
+                'id' => TaskFilter::FILTER_TITLE,
+                'category' => 'title',
+                'title' => Yii::t('TasksModule.models_forms_TaskFilter', 'Title'),
+                'class' => TextFilterInput::class,
+                'changeAction' => null,
+                'options' => [
+                    'style' => 'width:100%',
+                    'data-action-keydown' => 'inputChange',
+                    'data-action-keypress' => null,
+                    'placeholder' =>   Yii::t('TasksModule.views_index_index', 'Filter tasks by title')
+                ],
+                'sortOrder' => 100], static::FILTER_BLOCK_TITLE);
+        } else {
+            $this->addFilter([
+                'id' => TaskFilter::FILTER_TITLE,
+                'category' => 'title',
+                'title' => Yii::t('TasksModule.models_forms_TaskFilter', 'Title'),
+                'class' => TextFilterInput::class,
+                'options' => [
+                    'style' => 'width:100%',
+                    'placeholder' =>   Yii::t('TasksModule.views_index_index', 'Filter tasks by title')
+                ],
+                'sortOrder' => 100], static::FILTER_BLOCK_TITLE);
+        }
+
 
         $this->addFilter([
             'id' => TaskFilter::FILTER_OVERDUE,
@@ -133,6 +154,16 @@ class TaskFilterNavigation extends FilterNavigation
 
 
         if(!$this->filter->contentContainer) {
+            $memberships = MembershipSearch::findByUser(Yii::$app->user->identity)->all();
+
+            $spaces = [];
+            foreach ($memberships as $membership) {
+                if($membership->space->isModuleEnabled('tasks')) {
+                    $spaces[] = $membership->space;
+                }
+            }
+
+
             $this->addFilter([
                 'id' => TaskFilter::FILTER_SPACE,
                 'category' => 'spaces',
@@ -140,7 +171,8 @@ class TaskFilterNavigation extends FilterNavigation
                 'class' => PickerFilterInput::class,
                 'picker' => SpacePickerField::class,
                 'pickerOptions' => [
-                    'name' => 'task-filter-spaces'
+                    'name' => 'task-filter-spaces',
+                    'defaultResults' => $spaces,
                 ]], static::FILTER_BLOCK_PICKER);
         }
     }

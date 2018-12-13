@@ -39,6 +39,13 @@ class TaskUrl extends Url
     const ROUTE_GLOBAL = '/tasks/global';
     const ROUTE_GLOBAL_FILTER = '/tasks/global/filter';
 
+    const ROUTE_CONFIG = '/tasks/config';
+
+    public static function toConfig()
+    {
+        return static::toRoute(static::ROUTE_CONFIG);
+    }
+
     public static function globalView()
     {
         return static::toRoute(static::ROUTE_GLOBAL);

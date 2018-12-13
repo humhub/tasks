@@ -1,5 +1,6 @@
 <?php
 
+use humhub\widgets\TopMenu;
 use humhub\modules\space\widgets\Menu;
 use humhub\commands\IntegrityController;
 use humhub\commands\CronController;
@@ -12,6 +13,7 @@ return array(
     'class' => 'humhub\modules\tasks\Module',
     'namespace' => 'humhub\modules\tasks',
     'events' => [
+        ['class' => TopMenu::className(), 'event' => TopMenu::EVENT_INIT, 'callback' => ['humhub\modules\tasks\Events', 'onTopMenuInit']],
         ['class' => Menu::class, 'event' => Menu::EVENT_INIT, 'callback' => ['humhub\modules\tasks\Events', 'onSpaceMenuInit']],
         ['class' => IntegrityController::class, 'event' => IntegrityController::EVENT_ON_RUN, 'callback' => ['humhub\modules\tasks\Events', 'onIntegrityCheck']],
         ['class' => CronController::class, 'event' => CronController::EVENT_ON_HOURLY_RUN, 'callback' => ['humhub\modules\tasks\Events', 'onCronRun']],

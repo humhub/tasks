@@ -4,6 +4,7 @@ humhub.module('task.search', function (module, require, $) {
     var object = require('util').object;
     var client = require('client');
     var loader = require('ui.loader');
+    var additions = require('ui.additions');
 
 
     var TaskFilter = Filter.extend();
@@ -15,6 +16,9 @@ humhub.module('task.search', function (module, require, $) {
     };
 
     TaskFilter.prototype.init = function () {
+
+        additions.observe($('#filter-tasks-list'));
+
         var that = this;
         this.on('afterChange', function() {
             that.loadUpdate();
@@ -26,44 +30,18 @@ humhub.module('task.search', function (module, require, $) {
             that.loadUpdate($(this).attr('href'), {});
         });
 
-        /*this.$titleFilter = this.$.find('#taskfilter-title');
-        this.$entryContainer = $('#filter-tasks-list');
-        var that = this;
-
-        this.$titleFilter.on('keypress', function (evt) {
-            if (evt.keyCode == 13) {
-                evt.preventDefault();
-            }
-            if (that.title() !== that.lastTitleSearch) {
-                if (that.request) {
-                    clearTimeout(that.request);
-                }
-
-                that.request = setTimeout($.proxy(that.filterCall, that), that.options.delay);
+        $('#filter-tasks-list').on('click', '[data-key]', function (evt) {
+            if(!$(evt.target).closest('a').length) {
+                client.pjax.redirect($(this).find('[data-task-url]').attr('data-task-url'));
             }
         });
-
-        this.$.find('.checkbox').on('change', function () {
-            that.filterCall();
-        });
-
-        this.$.find('.field-taskfilter-status').on('change', function () {
-            that.filterCall();
-        });
-
-        this.$entryContainer.on('click', '.pagination-container a', function (evt) {
-            evt.preventDefault();
-            that.filterCall($(this).attr('href'));
-        });*/
     };
 
     TaskFilter.prototype.loadUpdate = function (url, data) {
         var that = this;
-
         url = url || this.options.filterUrl;
         data = data || this.buildRequestFilterData();
         data.beforeSend = function(xhr) {
-            debugger;
             that.currentXhr = xhr;
         };
 
@@ -71,6 +49,7 @@ humhub.module('task.search', function (module, require, $) {
             this.currentXhr.abort();
         }
 
+        that.loader();
         client.get(url, data).then(function(response) {
             if(response.result) {
                 $('#filter-tasks-list').html(response.result);
@@ -79,6 +58,8 @@ humhub.module('task.search', function (module, require, $) {
             if(e.errorThrown !== 'abort') {
                 module.log.error(e, true);
             }
+        }).finally(function() {
+            that.loader(false);
         });
     };
 
@@ -90,7 +71,8 @@ humhub.module('task.search', function (module, require, $) {
         });
 
         return {data: data};
-    }
+    };
+
     TaskFilter.prototype.buildRequestDataKey = function(key) {
         return 'TaskFilter['+key+']';
     };
@@ -116,7 +98,7 @@ humhub.module('task.search', function (module, require, $) {
     };
 
     TaskFilter.prototype.loader = function (show) {
-        var $node = $('#task-filter-loader');
+        var $node = $('#task-search-loader');
 
         if (show === false) {
             loader.reset($node);

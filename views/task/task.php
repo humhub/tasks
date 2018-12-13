@@ -13,6 +13,7 @@
 
 use humhub\modules\tasks\widgets\ChangeStatusButton;
 use humhub\modules\tasks\widgets\lists\TaskListDetails;
+use humhub\modules\tasks\widgets\TaskSubMenu;
 use humhub\widgets\MarkdownView;
 use humhub\modules\content\widgets\WallEntryAddons;
 use humhub\modules\tasks\widgets\checklist\TaskChecklist;
@@ -30,7 +31,7 @@ $this->registerJsConfig('task', [
 ]);
 
 ?>
-
+<?= TaskSubMenu::widget() ?>
 <div id="task-container" class="panel panel-default task-details">
 
     <?= $this->render('task_header', [
@@ -40,7 +41,6 @@ $this->registerJsConfig('task', [
     ]); ?>
 
     <div class="panel-body task-list-items">
-
         <div class="cleafix task-list-item">
             <?= TaskListDetails::widget(['task' => $task])?>
         </div>
