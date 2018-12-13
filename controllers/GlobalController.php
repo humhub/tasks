@@ -28,7 +28,9 @@ class GlobalController extends ContentContainerController
 
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->render('index', [
+            'filter' =>  new TaskFilter(['filters' => [TaskFilter::FILTER_ASSIGNED]])
+        ]);
     }
 
     public function actionFilter()

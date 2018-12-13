@@ -35,7 +35,7 @@ class RemindEnd extends BaseNotification
     /**
      * @inheritdoc
      */
-    public $viewName = "remind.php";
+    public $viewName = "remind";
 
     /**
      * @var Task

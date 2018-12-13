@@ -6,6 +6,7 @@ use humhub\modules\tasks\models\forms\TaskFilter;
 
 /* @var $this \humhub\modules\ui\view\components\View */
 /* @var $dataProvider \yii\data\ActiveDataProvider */
+/* @var $filter TaskFilter */
 
 \humhub\modules\tasks\assets\Assets::register($this);
 
@@ -21,10 +22,10 @@ use humhub\modules\tasks\models\forms\TaskFilter;
 
         <div class="task-overview">
 
-            <?= TaskFilterNavigation::widget(['options' => ['style' => 'border-radius:4px;background-color:' . $this->theme->variable('background-color-secondary')]]) ?>
+            <?= TaskFilterNavigation::widget(['filter' => $filter, 'options' => ['style' => 'border-radius:4px;background-color:' . $this->theme->variable('background-color-secondary')]]) ?>
 
             <div id="filter-tasks-list" class="panel-body">
-                <?= TaskSearchList::widget(['filter' => new TaskFilter()]) ?>
+                <?= TaskSearchList::widget(['filter' => $filter]) ?>
             </div>
         </div>
     </div>

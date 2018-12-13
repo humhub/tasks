@@ -46,6 +46,7 @@ class TaskSearchList extends Widget
 
         return  ListView::widget([
             'dataProvider' => $tasksProvider,
+            'emptyText' => Yii::t('TasksModule.base', 'No results found for the given filter.'),
             'itemView' => '@tasks/widgets/search/views/_item',
             'viewParams' => [
                 'contentContainer' => $this->filter->contentContainer,
