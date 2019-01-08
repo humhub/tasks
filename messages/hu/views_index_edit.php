@@ -3,7 +3,7 @@ return array (
   '<strong>Confirm</strong> task deletion' => '<strong>Erősítsd meg</strong> a feladat törlését',
   '<strong>Create</strong> new task' => 'Új feladat <strong>létrehozása</strong>',
   '<strong>Edit</strong> task' => 'Feladat <strong>szerkesztése</strong>',
-  'Add checkpoint...' => 'Ellenőrző pont hozzáadása',
+  'Add checkpoint...' => 'Ellenőrző pont hozzáadása...',
   'Add reminder' => 'Emlékeztető hozzáadása',
   'Add responsible users' => 'Felelős felhasználók hozzáadása',
   'Assign users' => 'Felhasználók kijelölése',

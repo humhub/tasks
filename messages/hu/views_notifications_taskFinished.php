@@ -1,4 +1,4 @@
 <?php
 return array (
-  '{userName} finished task {task}.' => '{userName} befejezte a feladatot: {task}',
+  '{userName} finished task {task}.' => '{userName} befejezte ezt a feladatot: {task}',
 );

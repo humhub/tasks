@@ -6,5 +6,5 @@ return array (
   'Cancel' => 'Mégsem',
   'Deadline' => 'Határidő',
   'Save' => 'Mentés',
-  'What is to do?' => 'Mi legyen a feladat?',
+  'What is to do?' => 'Mit kell csinálni?',
 );

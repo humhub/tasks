@@ -2,7 +2,7 @@
 return array (
   'Add Deadline to space calendar' => 'Határidő hozzáadása a közösség naptárához',
   'Add schedule to the space calendar' => 'Ütemezés hozzáadása a közösség naptárához',
-  'Add to space calendar' => 'Hozzáadása a közösség naptárához',
+  'Add to space calendar' => 'Hozzáadás a közösség naptárához',
   'All Day' => 'Egész napos',
   'Assigned user(s)' => 'Kijelölt felhasználó(k)',
   'Checklist Items' => 'Ellenőrző lista elemei',

@@ -1,10 +1,10 @@
 <?php
 return array (
   'All' => 'Az összes',
-  'Any user with a "Process unassigned tasks" permission can work on this task' => 'Ezen a feladaton bárki dolgozhat, aki "Nem kiadott feladatok" engedéllyel rendelkezik',
+  'Any user with a "Process unassigned tasks" permission can work on this task' => 'Ezen a feladaton bárki dolgozhat, aki "Ki nem adott feladatok feldolgozása" engedéllyel rendelkezik',
   'Assigned' => 'Kijelölve',
   'Completed' => 'Befejezve',
-  'Deadline at' => 'Határidő itt',
+  'Deadline at' => 'Határidő:',
   'Drag entry' => 'Bejegyzés mozgatása',
   'Drag task' => 'Feladat mozgatása',
   'Edit' => 'Szerkesztés',

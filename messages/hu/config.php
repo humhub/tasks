@@ -1,11 +1,11 @@
 <?php
 return array (
   '<strong>Task</strong> module configuration' => '<strong>Feladat</strong> modul konfigurációja',
-  'Max tasks items' => '',
-  'Show snippet' => 'Snippet mutatása',
-  'Show snippet in Space' => 'Snippet mutatása a közösségben',
-  'Shows a widget with tasks on the dashboard where you are assigned/responsible.' => 'Ahol te vagy kijelölve egy feladatra/te vagy a felelős, megjelenít egy widgetet feladatokkal az áttekintésben.',
+  'Max tasks items' => 'Max feladat elemek',
+  'Show snippet' => 'Kódrészlet (snippet) mutatása',
+  'Show snippet in Space' => 'Kódrészlet (snippet) mutatása a közösségben',
+  'Shows a widget with tasks on the dashboard where you are assigned/responsible.' => 'Mmegjelenít egy widgetet az áttekintésben azokkal a feladatokkal, amelyekre te vagy kijelölve/amelyekért te vagy a felelős.',
   'Shows the widget also on the dashboard of spaces.' => 'A közösségek áttekintéseiben is megjeleníti a widgetet.',
-  'Sort order' => '',
+  'Sort order' => 'Sorrend beállítása',
   'Your tasks snippet' => 'A te feladat-snippeted',
 );
