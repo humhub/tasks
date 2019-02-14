@@ -6,6 +6,7 @@
  *
  */
 
+use humhub\modules\admin\widgets\ExportButton;
 use humhub\modules\tasks\widgets\search\TaskFilterNavigation;
 use yii\helpers\Html;
 use humhub\modules\ui\filter\widgets\FilterPanel;
@@ -38,6 +39,9 @@ $titleFilter = $title[0];
 
     </div>
     <div id="task-search-loader" style="position:absolute;bottom:0;right:0"></div>
+    <div id="task-export-button" style="position:absolute;top:0;right:0;">
+        <?= ExportButton::widget(['filter' => 'TaskFilter']) ?>
+    </div>
 </div>
 
 
