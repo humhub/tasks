@@ -34,7 +34,9 @@ use yii\helpers\Html;
     <div class="task-list-container" style="border-color:<?= $color ?>">
         <div class="task-list-title-bar clearfix">
             <i class="fa fa-minus-square toggleItems"></i>
-
+            <?php if($canManage) : ?>
+                <i class="fa fa-bars task-moving-handler"></i>
+            <?php endif; ?>
             <?= Button::asLink(Html::encode($title))->cssClass('task-list-title') ?>
 
             <?php if($list instanceof TaskList) : ?>
