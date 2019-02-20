@@ -16,6 +16,7 @@
 namespace humhub\modules\tasks\models\forms;
 
 
+use humhub\libs\DbDateValidator;
 use humhub\modules\tasks\CalendarUtils;
 use Yii;
 use humhub\modules\tasks\models\Task;
@@ -66,7 +67,8 @@ class TaskFilter extends Model
         return [
             [['title', 'date_start', 'date_end'], 'string'],
             [['filters', 'states', 'spaces'], 'safe'],
-            [['taskAssigned', 'taskResponsible', 'own', 'status', 'overdue'], 'integer']
+            [['date_start'], DbDateValidator::class],
+            [['date_end'], DbDateValidator::class],
         ];
     }
 
@@ -84,6 +86,8 @@ class TaskFilter extends Model
 
     public function query()
     {
+        $this->validate();
+
         $query = Task::find()->readable();
 
         if($this->contentContainer) {
@@ -129,10 +133,10 @@ class TaskFilter extends Model
                 ['or',
                     ['and',
                         CalendarUtils::getStartCriteria($this->date_start, 'start_datetime', '>='),
-                        CalendarUtils::getStartCriteria($this->date_end, 'end_datetime', '<=')
+                        CalendarUtils::getStartCriteria($this->date_end, 'start_datetime', '<=')
                     ],
                     ['and',
-                        CalendarUtils::getEndCriteria($this->date_start, 'start_datetime', '>='),
+                        CalendarUtils::getEndCriteria($this->date_start, 'end_datetime', '>='),
                         CalendarUtils::getEndCriteria($this->date_end, 'end_datetime', '<=')
                     ]
                 ]
