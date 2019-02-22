@@ -70,9 +70,9 @@ $checkUrl = $task->state->getCheckUrl();
                             ->icon('fa-pencil'); ?>
                     </li>
                     <li>
-                    <?= Button::asLink( Yii::t('TasksModule.base', 'Delete task'))
-                        ->action('task.deleteTask', TaskUrl::deleteTask($task))
-                        ->icon('fa-trash')->confirm(); ?>
+                        <?= Button::asLink(Yii::t('TasksModule.base', 'Delete task'))
+                            ->action('task.deleteTask', TaskUrl::deleteTask($task))
+                            ->icon('fa-trash')->confirm(); ?>
                     </li>
                 </ul>
             </div>
@@ -81,7 +81,8 @@ $checkUrl = $task->state->getCheckUrl();
         </div>
     <?php endif; ?>
 
-    <div class="task-controls pull-right toggleTaskDetails hidden-xs" style="<?= (!$task->content->canEdit()) ? 'border-right:0;margin-right:0' : '' ?>">
+    <div class="task-controls pull-right toggleTaskDetails hidden-xs"
+         style="<?= (!$task->content->canEdit()) ? 'border-right:0;margin-right:0' : '' ?>">
         <i class="fa fa-comment-o"></i> <?= Comment::getCommentCount(Task::class, $task->id); ?>
     </div>
 
@@ -110,7 +111,8 @@ $checkUrl = $task->state->getCheckUrl();
 
     <?php if ($task->review) : ?>
         <div class="task-controls pull-right toggleTaskDetails">
-            <i class="fa fa-eye tt hidden-xs tt" title="<?= Yii::t('TasksModule.base', 'This task requires to be reviewed by a responsible') ?>"></i>
+            <i class="fa fa-eye tt hidden-xs tt"
+               title="<?= Yii::t('TasksModule.base', 'This task requires to be reviewed by a responsible') ?>"></i>
         </div>
     <?php endif; ?>
 

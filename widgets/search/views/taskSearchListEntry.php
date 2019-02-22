@@ -18,6 +18,7 @@ use humhub\widgets\Button;
 /* @var $task \humhub\modules\tasks\models\Task */
 /* @var $canEdit boolean */
 /* @var $filterResult boolean */
+/* @var $contentContainer \humhub\modules\content\components\ContentContainerActiveRecord */
 
 $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
 
@@ -28,14 +29,19 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
 <div class="media task" data-task-url="<?= TaskUrl::viewTask($task) ?>">
     <div class="task-head">
         <div class="media-body clearfix">
-            <div class="task-controls" style="display:inline">
-                <?= Image::widget([
-                    'space' => $task->content->container,
-                    'width' => '24',
-                    'showTooltip' => true,
-                    'link' => true
-                ]) ?>
-            </div>
+
+            <?php if(!$contentContainer) : ?>
+
+                <div class="task-controls" style="display:inline">
+                    <?= Image::widget([
+                        'space' => $task->content->container,
+                        'width' => '24',
+                        'showTooltip' => true,
+                        'link' => true
+                    ]) ?>
+                </div>
+
+            <?php endif ?>
 
             <div style="margin-right:2px;display:inline-block">
                 <h4 class="media-heading" style="display:inline-block">
