@@ -57,7 +57,6 @@ abstract class TaskState extends Component
             Task::STATUS_IN_PROGRESS => Yii::t('TasksModule.views_index_index', 'In Progress'),
             Task::STATUS_PENDING_REVIEW => Yii::t('TasksModule.views_index_index', 'In Review'),
             Task::STATUS_COMPLETED => Yii::t('TasksModule.views_index_index', 'Completed'),
-            Task::STATUS_ALL => Yii::t('TasksModule.views_index_index', 'All'),
         ];
     }
 

@@ -5,7 +5,17 @@
  *
  */
 
+#task-assignment-info {
+  margin: 5px 0px 0px;
+}
+
+
 #task-container {
+
+  .task-head {
+    padding-left:5px;
+  }
+
   .panel-heading {
     background-color: #f7f7f7;
 
@@ -59,16 +69,22 @@
 }
 
 .task-overview {
+
+  #filter-tasks-list .empty {
+    margin-top:15px;
+  }
+
+  border-top:1px solid #ddd;
+
   li {
     cursor: pointer;
   }
-
   li:last-child {
     border-bottom: 0;
   }
 
   .panel-body {
-    padding: 10px 0 !important;
+    padding: 0 0 10px 0 !important;
   }
 
   .media-list {
@@ -97,20 +113,48 @@
     }
   }
 
-  .task-filter {
-    background-color: #f7f7f7;
-    padding: 10px 10px 0 10px;
-    margin-top:-10px;
+  #task-filter-nav {
+
+    padding:10px;
+
+    .task-title-filter {
+      .form-group {
+        margin-bottom:5px;
+      }
+    }
+
+    .filter-root {
+      margin:0;
+      padding:5px;
+
+      .filterInput {
+        font-size:13px;
+        margin:5px;
+      }
+    }
+
+    .filter-panel {
+      vertical-align: top;
+      width: auto !important;
+    }
+
+    .task-filter-picker-container {
+      width:200px;
+    }
 
     #task-filter-loader {
       padding-top: 12px;
     }
 
-    .row {
-      padding-left: 10px;
-      //display: inline-flex;
+    .task-bottom-panel {
+      .filterInput {
+        margin: 5px;
+      }
+    }
+
+    .select2 {
+      width: 260px !important;
       display: inline-block;
-      margin-bottom: 10px;
     }
 
     .dropdown-filter {
@@ -315,12 +359,6 @@
   padding: 0;
 }
 
-.task-list-item-title {
-  label {
-    margin:5px;
-  }
-}
-
 .ui-sortable-helper {
   background-color:white;
   border: 1px solid #ddd;
@@ -414,7 +452,6 @@
 .task-controls {
   font-size: 12px;
   margin-right: 10px;
-  margin-top:2px;
   border-right: 1px solid #eee;
   padding-right: 10px;
 }

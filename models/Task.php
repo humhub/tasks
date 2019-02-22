@@ -9,6 +9,7 @@
 namespace humhub\modules\tasks\models;
 
 use humhub\modules\content\components\ContentContainerPermissionManager;
+use humhub\modules\space\modules\manage\models\MembershipSearch;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\permissions\CreateTask;
 use humhub\modules\tasks\permissions\ProcessUnassignedTasks;
@@ -63,6 +64,16 @@ class Task extends ContentActiveRecord implements Searchable
 {
 
     const SCENARIO_EDIT = 'edit';
+
+    /**
+     * @inheritdocs
+     */
+    public $canMove = true;
+
+    /**
+     * @inheritdocs
+     */
+    public $moduleId = 'tasks';
 
     /**
      * @inheritdocs
@@ -436,6 +447,18 @@ class Task extends ContentActiveRecord implements Searchable
         }
     }
 
+    public function afterMove(ContentContainerActiveRecord $container = null)
+    {
+
+        foreach ($this->taskUsers as $taskUser) {
+            if(!$container->isMember($taskUser->user_id)) {
+                $taskUser->delete();
+            }
+        }
+
+        $this->updateAttributes(['task_list_id' => null]);
+    }
+
     /**
      * Returns an ActiveQuery for all assigned user models of this task.
      *
@@ -506,7 +529,7 @@ class Task extends ContentActiveRecord implements Searchable
 
     public function getTaskUsers()
     {
-        return $this->hasMany(TaskUser::className(), ['task_id' => 'id']);
+        return $this->hasMany(TaskUser::class, ['task_id' => 'id']);
     }
 
     /**

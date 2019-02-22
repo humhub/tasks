@@ -1,6 +1,5 @@
 <?php
-
-return [
-    'Completed' => '',
-    'Title' => '',
-];
+return array (
+  'Completed' => 'Teljesítve',
+  'Title' => 'Cím',
+);

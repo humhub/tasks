@@ -4,6 +4,12 @@
  * @license https://www.humhub.com/licences
  *
  */
+#task-assignment-info {
+  margin: 5px 0px 0px;
+}
+#task-container .task-head {
+  padding-left: 5px;
+}
 #task-container .panel-heading {
   background-color: #f7f7f7;
 }
@@ -43,6 +49,12 @@
   color: #bebebe;
   font-size: 11px;
 }
+.task-overview {
+  border-top: 1px solid #ddd;
+}
+.task-overview #filter-tasks-list .empty {
+  margin-top: 15px;
+}
 .task-overview li {
   cursor: pointer;
 }
@@ -50,7 +62,7 @@
   border-bottom: 0;
 }
 .task-overview .panel-body {
-  padding: 10px 0 !important;
+  padding: 0 0 10px 0 !important;
 }
 .task-overview .media-list .progress {
   margin-top: 2px;
@@ -72,39 +84,57 @@
 .task-overview .media-list .pagination li:hover {
   border: 0;
 }
-.task-overview .task-filter {
-  background-color: #f7f7f7;
-  padding: 10px 10px 0 10px;
-  margin-top: -10px;
+.task-overview #task-filter-nav {
+  padding: 10px;
 }
-.task-overview .task-filter #task-filter-loader {
+.task-overview #task-filter-nav .task-title-filter .form-group {
+  margin-bottom: 5px;
+}
+.task-overview #task-filter-nav .filter-root {
+  margin: 0;
+  padding: 5px;
+}
+.task-overview #task-filter-nav .filter-root .filterInput {
+  font-size: 13px;
+  margin: 5px;
+}
+.task-overview #task-filter-nav .filter-panel {
+  vertical-align: top;
+  width: auto !important;
+}
+.task-overview #task-filter-nav .task-filter-picker-container {
+  width: 200px;
+}
+.task-overview #task-filter-nav #task-filter-loader {
   padding-top: 12px;
 }
-.task-overview .task-filter .row {
-  padding-left: 10px;
-  display: inline-block;
-  margin-bottom: 10px;
+.task-overview #task-filter-nav .task-bottom-panel .filterInput {
+  margin: 5px;
 }
-.task-overview .task-filter .dropdown-filter {
+.task-overview #task-filter-nav .select2 {
+  width: 260px !important;
   display: inline-block;
 }
-.task-overview .task-filter .dropdown-filter .form-group {
+.task-overview #task-filter-nav .dropdown-filter {
+  display: inline-block;
+}
+.task-overview #task-filter-nav .dropdown-filter .form-group {
   margin: -7px;
 }
-.task-overview .task-filter .dropdown-filter .form-group .form-control {
+.task-overview #task-filter-nav .dropdown-filter .form-group .form-control {
   padding: 0 20px 0 8px;
   margin-left: 12px;
 }
-.task-overview .task-filter .checkbox-filter {
+.task-overview #task-filter-nav .checkbox-filter {
   display: inline-block;
 }
-.task-overview .task-filter .checkbox-filter .regular-checkbox:not(:checked) + .regular-checkbox-box {
+.task-overview #task-filter-nav .checkbox-filter .regular-checkbox:not(:checked) + .regular-checkbox-box {
   background-color: #fff;
 }
-.task-overview .task-filter .checkbox-filter .form-group {
+.task-overview #task-filter-nav .checkbox-filter .form-group {
   margin: 0;
 }
-.task-overview .task-filter .checkbox-filter .form-group .checkbox {
+.task-overview #task-filter-nav .checkbox-filter .form-group .checkbox {
   margin: 0 !important;
 }
 #task-list-loader {
@@ -221,9 +251,6 @@
   margin: 0;
   padding: 0;
 }
-.task-list-item-title label {
-  margin: 5px;
-}
 .ui-sortable-helper {
   background-color: white;
   border: 1px solid #ddd;
@@ -294,7 +321,6 @@
 .task-controls {
   font-size: 12px;
   margin-right: 10px;
-  margin-top: 2px;
   border-right: 1px solid #eee;
   padding-right: 10px;
 }

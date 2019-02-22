@@ -5,41 +5,38 @@
  * @license https://www.humhub.com/licences
  *
  */
-use humhub\modules\file\widgets\FilePreview;
-use humhub\modules\file\widgets\UploadButton;
+
+use humhub\modules\file\widgets\Upload;
 
 
 /* @var $form \humhub\widgets\ActiveForm */
 /* @var $taskForm \humhub\modules\calendar\models\forms\CalendarEntryForm */
 /* @var $taskForm \humhub\modules\tasks\models\forms\TaskForm */
 
+$upload = Upload::withName();
+
 ?>
 
 <div class="modal-body">
     <div class="row">
         <div class="col-md-2">
-            <?= UploadButton::widget([
-                'id' => 'task_upload_button',
+            <?= $upload->button([
                 'label' => true,
                 'tooltip' => false,
                 'cssButtonClass' => 'btn-default btn-sm',
                 'dropZone' => '#task-form',
-                'preview' => '#task_upload_preview',
-                'progress' => '#task_upload_progress',
                 'max' => Yii::$app->getModule('content')->maxAttachedFiles,
-            ]) ?>
+            ])?>
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-9">
-            <?= FilePreview::widget([
-                'id' => 'task_upload_preview',
+            <?= $upload->preview([
                 'options' => ['style' => 'margin-top:10px'],
                 'model' => $taskForm->task,
                 'showInStream' => true,
-                'edit' => true,
-            ]) ?>
+            ])?>
         </div>
     </div>
     <br>
-    <div id="task_upload_progress" style="display:none"></div>
+    <?= $upload->progress()?>
 </div>

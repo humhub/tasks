@@ -28,7 +28,7 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
 
 ?>
 <div class="panel-heading clearfix">
-    <div class="task-head" style="padding-left:5px; border-left: 5px solid <?= $color ?>">
+    <div class="task-head" style="border-left: 5px solid <?= $color ?>">
         <div>
             <strong><i class="fa <?= $icon ?>"></i> <?= Html::encode($task->title); ?></strong>
         </div>
@@ -51,18 +51,18 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
                 </span>
                 <?php if ($task->content->updated_at !== null) : ?>
                     &middot <span class="tt updated"
-                                  title="<?= Yii::$app->formatter->asDateTime($task->content->updated_at); ?>"><?= Yii::t('ContentModule.base', 'Updated'); ?></span>
+                            title="<?= Yii::$app->formatter->asDateTime($task->content->updated_at); ?>">
+                        <?= Yii::t('ContentModule.base', 'Updated'); ?>
+                    </span>
                 <?php endif; ?>
 
-                <?php $badge = TaskBadge::widget(['task' => $task]) ?>
-                <?= (!empty($badge)) ? '<br>' . $badge : '' ?>
+                <div class="pull-right">
+                    <?= TaskBadge::widget(['task' => $task]) ?>
 
-                <?php if ($task->content->isPublic()) : ?>
-                    <span class="label label-info"><?= Yii::t('SpaceModule.base', 'Public'); ?></span>
-                <?php endif; ?>
-
-                <?= Button::back(TaskListUrl::taskListRoot($contentContainer), Yii::t('TasksModule.base', 'Back to overview'))->sm()->loader(true); ?>
-
+                    <?php if ($task->content->isPublic()) : ?>
+                        <span class="label label-info"><?= Yii::t('SpaceModule.base', 'Public'); ?></span>
+                    <?php endif; ?>
+                </div>
             </div>
 
             <hr>

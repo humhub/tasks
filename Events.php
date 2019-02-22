@@ -8,7 +8,9 @@
 
 namespace humhub\modules\tasks;
 
+use humhub\modules\infoscreen\helpers\Url;
 use humhub\modules\tasks\helpers\TaskListUrl;
+use humhub\modules\tasks\helpers\TaskUrl;
 use Yii;
 use humhub\modules\notification\models\Notification;
 use humhub\modules\tasks\jobs\SendReminder;
@@ -32,6 +34,27 @@ use yii\db\Expression;
  */
 class Events
 {
+
+    public static function onTopMenuInit($event)
+    {
+        /* @var $module Module */
+        $module = Yii::$app->getModule('tasks');
+
+        if(!$module->showTopMenuItem) {
+            return;
+        }
+
+        // Is Module enabled on this workspace?
+        $event->sender->addItem([
+            'label' => Yii::t('TasksModule.base', 'Tasks'),
+            'id' => 'tasks-global',
+            'icon' => '<i class="fa fa-tasks"></i>',
+            'url' => TaskUrl::globalView(),
+            'sortOrder' => $module->topMenuSort,
+            'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'tasks' && Yii::$app->controller->id == 'global'),
+        ]);
+    }
+
     /**
      * @param $event \humhub\modules\calendar\interfaces\CalendarItemTypesEvent
      * @return mixed

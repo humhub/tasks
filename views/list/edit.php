@@ -14,7 +14,7 @@ $header = $model->isNewRecord ? Yii::t('TasksModule.base', '<strong>Create</stro
 <?php ModalDialog::begin(['header' => $header])?>
     <?php $form = ActiveForm::begin() ?>
         <div class="modal-body">
-            <div id="event-color-field" class="form-group space-color-chooser-edit" style="margin-top: 5px;">
+            <div id="event-color-field" class="form-group space-color-chooser-edit">
                 <?= $form->field($model, 'color')->widget(ColorPicker::class, ['container' => 'event-color-field'])->label(Yii::t('TasksModule.views_index_edit', 'Title and Color')); ?>
 
                 <?= $form->field($model, 'name', ['template' => '
