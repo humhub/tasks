@@ -16,6 +16,8 @@
 namespace humhub\modules\tasks\models\forms;
 
 
+use humhub\libs\DbDateValidator;
+use humhub\modules\tasks\CalendarUtils;
 use Yii;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\content\components\ContentContainerActiveRecord;
@@ -31,12 +33,19 @@ class TaskFilter extends Model
     const FILTER_MINE = 'mine';
     const FILTER_STATE = 'state';
     const FILTER_SPACE = 'spaces';
+    const FILTER_DATE_START = 'date_start';
+    const FILTER_DATE_END = 'date_end';
 
     public $filters = [];
 
     public $states = [];
 
     public $spaces = [];
+
+    public $date_start;
+
+    public $date_end;
+
 
     /**
      * @var ContentContainerActiveRecord
@@ -56,9 +65,10 @@ class TaskFilter extends Model
     public function rules()
     {
         return [
-            ['title', 'string'],
+            [['title', 'date_start', 'date_end'], 'string'],
             [['filters', 'states', 'spaces'], 'safe'],
-            [['taskAssigned', 'taskResponsible', 'own', 'status', 'overdue'], 'integer']
+            [['date_start'], DbDateValidator::class],
+            [['date_end'], DbDateValidator::class],
         ];
     }
 
@@ -76,6 +86,8 @@ class TaskFilter extends Model
 
     public function query()
     {
+        $this->validate();
+
         $query = Task::find()->readable();
 
         if($this->contentContainer) {
@@ -114,6 +126,25 @@ class TaskFilter extends Model
 
         if($this->isFilterActive(static::FILTER_MINE)) {
             $query->andWhere(['content.created_by' => Yii::$app->user->identity->contentcontainer_id]);
+        }
+
+        if (! empty($this->date_start) && ! empty($this->date_end)) {
+            $query->andWhere(
+                ['or',
+                    ['and',
+                        CalendarUtils::getStartCriteria($this->date_start, 'start_datetime', '>='),
+                        CalendarUtils::getStartCriteria($this->date_end, 'start_datetime', '<=')
+                    ],
+                    ['and',
+                        CalendarUtils::getEndCriteria($this->date_start, 'end_datetime', '>='),
+                        CalendarUtils::getEndCriteria($this->date_end, 'end_datetime', '<=')
+                    ]
+                ]
+            );
+        } elseif (! empty($this->date_start)) {
+            $query->andWhere(CalendarUtils::getStartCriteria($this->date_start, 'start_datetime'));
+        } elseif (! empty($this->date_end)) {
+            $query->andWhere(CalendarUtils::getEndCriteria($this->date_end, 'end_datetime'));
         }
 
         $query->orderBy(['task.status' => SORT_ASC, 'task.scheduling' => SORT_DESC, 'task.end_datetime' => SORT_ASC]);
