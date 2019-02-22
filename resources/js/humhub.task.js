@@ -126,19 +126,18 @@ humhub.module('task', function (module, require, $) {
     var deleteTask = function(evt) {
          var widget = Widget.closest(evt.$trigger);
 
-         if(widget && widget.loader) {
-             widget.loader();
-         }
+        widget.$.fadeOut('fast');
 
         client.post(evt).then(function() {
             // in case the modal delete was clicked
             modal.global.close();
             if(widget) {
-                widget.$.fadeOut('fast', function() {widget.$.remove()});
+                widget.$.remove()
             }
 
             event.trigger('task.afterDelete')
         }).catch(function(e) {
+            widget.$.fadeIn('fast');
             module.log.error(e, true);
         });
      };

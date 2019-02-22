@@ -37,6 +37,11 @@ Assets::register($this);
 
     <div class="panel-body">
         <div data-ui-widget="task.list.Root" data-ui-init="1" data-drop-list-url="<?= TaskListUrl::dropTaskList($contentContainer) ?>">
+            <div class="clearfix">
+                <?= Button::defaultType(Yii::t('TasksModule.base', 'Toggle lists'))->id('toggle-lists')
+                    ->action('collapseAll')->loader(false)->right()->xs()->icon('fa-toggle-on'); ?>
+                <br><br>
+            </div>
 
             <div class="task-list-ul">
                 <?php foreach ($taskLists as $taskList) : ?>
@@ -62,7 +67,7 @@ Assets::register($this);
             </div>
 
             <div class="task-list-empty empty" style="display:none">
-                <i class="fa fa-check-square-o"></i> <?= Yii::t('TasksModule.base','No pending tasks found') ?>
+                <?= Yii::t('TasksModule.base','No pending tasks found') ?>
             </div>
         </div>
     </div>

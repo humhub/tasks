@@ -27,17 +27,23 @@ use yii\helpers\Html;
 /* @var $showMoreCompletedUrl string */
 /* @var $canManage boolean */
 /* @var $canCreate boolean */
+/* @var $canSort boolean */
 
 ?>
 
 <?= Html::beginTag('div', $options) ?>
-    <div class="task-list-container" style="border-color:<?= $color ?>">
+    <div class="task-list-container collapsable" style="border-color:<?= $color ?>">
         <div class="task-list-title-bar clearfix">
-            <i class="fa fa-minus-square toggleItems"></i>
-            <?php if($canManage) : ?>
+
+            <?php if($canSort) : ?>
                 <i class="fa fa-bars task-moving-handler"></i>
-            <?php endif; ?>
-            <?= Button::asLink(Html::encode($title))->cssClass('task-list-title') ?>
+            <?php else: ?>
+                <i class="fa fa-tasks"></i>
+            <?php endif ?>
+
+            <?= Html::encode($title) ?>
+
+           <i class="fa fa-caret-up toggleItems"></i>
 
             <?php if($list instanceof TaskList) : ?>
 
@@ -66,7 +72,7 @@ use yii\helpers\Html;
 
         <div class="task-list-items">
             <?php foreach ($tasks as $task) : ?>
-                <?= TaskListItem::widget(['task' => $task]) ?>
+                <?= TaskListItem::widget(['task' => $task, 'canManage' => $canManage]) ?>
             <?php endforeach; ?>
         </div>
 

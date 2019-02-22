@@ -44,6 +44,11 @@ class TaskListItem extends JsWidget
     public $details = false;
 
     /**
+     * @var bool
+     */
+    public $canManage = false;
+
+    /**
      * @inheritdoc
      */
     public function init()
@@ -60,6 +65,7 @@ class TaskListItem extends JsWidget
         return $this->render('taskListItem', [
             'task' => $this->task,
             'details' => $this->details,
+            'canManage' => $this->canManage,
             'options' => $this->getOptions()
         ]);
     }

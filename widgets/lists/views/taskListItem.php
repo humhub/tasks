@@ -12,7 +12,7 @@ use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\widgets\lists\TaskListDetails;
 use humhub\modules\tasks\widgets\TaskBadge;
 use humhub\modules\tasks\widgets\TaskUserList;
-use humhub\modules\user\widgets\Image;
+use humhub\widgets\Link;
 use humhub\widgets\Button;
 use humhub\modules\tasks\models\Task;
 use yii\helpers\Html;
@@ -21,6 +21,7 @@ use yii\helpers\Html;
 /* @var $task \humhub\modules\tasks\models\Task */
 /* @var $options array */
 /* @var $details boolean */
+/* @var $canManage boolean */
 /* @var $contentContainer \humhub\modules\content\components\ContentActiveRecord */
 
 $checkUrl = $task->state->getCheckUrl();
@@ -32,6 +33,10 @@ $checkUrl = $task->state->getCheckUrl();
 <div class="task-list-task-title-bar">
     <span class="task-list-item-title">
 
+         <?php if ($canManage && !$task->isCompleted()) : ?>
+             <i class="fa fa-bars task-moving-handler"></i>
+         <?php endif; ?>
+
         <?php // We use an extra label in order to prevent click events on the actual label otherwise tasks could be accidentally finished ?>
         <?= Html::checkBox('item[' . $task->id . ']', $task->isCompleted(), [
             'label' => '&nbsp;',
@@ -39,34 +44,45 @@ $checkUrl = $task->state->getCheckUrl();
             'data-action-url' => $checkUrl,
             'disabled' => empty($checkUrl)
         ]); ?>
-        <?php if (!$task->isCompleted()) : ?>
-            <i class="fa fa-bars task-moving-handler"></i>
-        <?php endif; ?>
+
         <span class="toggleTaskDetails"><?= Html::encode($task->title) ?></span>
 
         <?= TaskBadge::widget(['task' => $task, 'includePending' => false, 'includeCompleted' => false]) ?>
-
-        <?php if (!$task->isCompleted()) : ?>
-            <span class="task-drag-icon tt" title="<?= Yii::t('TasksModule.views_index_index', 'Drag task') ?>"
-                  style="display:none">
-                <i class="fa fa-arrows"></i>&nbsp;
-            </span>
-        <?php endif; ?>
 
     </span>
 
     <?php if ($task->content->canEdit()) : ?>
         <div class="task-controls end pull-right">
-            <?= Button::asLink()->action('task.list.editTask', TaskUrl::editTask($task))
-                ->icon('fa-pencil')->cssClass('tt')->options(['title' => Yii::t('TasksModule.base', 'Edit task')]); ?>
-            <?= Button::asLink()->action('task.deleteTask', TaskUrl::deleteTask($task))
-                ->icon('fa-trash')->confirm()->cssClass('tt')->options(['title' => Yii::t('TasksModule.base', 'Delete task')]); ?>
+            <div class="btn-group">
+                <?= Link::none()->icon('fa-ellipsis-v')
+                    ->cssClass('dropdown-toggle')
+                    ->options([
+                        'data-toggle' => 'dropdown',
+                        'haspopup' => 'true',
+                        'aria-expanded' => 'false'
+                    ])->sm()->loader(false) ?>
+                <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu pull-right">
+                    <li>
+                        <?= Button::asLink(Yii::t('TasksModule.base', 'Edit task'))
+                            ->action('task.list.editTask', TaskUrl::editTask($task))
+                            ->icon('fa-pencil'); ?>
+                    </li>
+                    <li>
+                    <?= Button::asLink( Yii::t('TasksModule.base', 'Delete task'))
+                        ->action('task.deleteTask', TaskUrl::deleteTask($task))
+                        ->icon('fa-trash')->confirm(); ?>
+                    </li>
+                </ul>
+            </div>
+
+
         </div>
     <?php endif; ?>
 
-    <div class="task-controls pull-right toggleTaskDetails hidden-xs"
-         style="<?= (!$task->content->canEdit()) ? 'border-right:0;margin-right:0' : '' ?>">
-        <?= Button::asLink()->icon('fa-comment-o') ?> <?= Comment::getCommentCount(Task::class, $task->id); ?>
+    <div class="task-controls pull-right toggleTaskDetails hidden-xs" style="<?= (!$task->content->canEdit()) ? 'border-right:0;margin-right:0' : '' ?>">
+        <i class="fa fa-comment-o"></i> <?= Comment::getCommentCount(Task::class, $task->id); ?>
     </div>
 
     <?php if ($task->scheduling) : ?>
@@ -87,14 +103,14 @@ $checkUrl = $task->state->getCheckUrl();
         ?>
 
         <div class="task-controls pull-right toggleTaskDetails hidden-xs">
-            <?= Button::asLink()->icon('fa-clock-o')->cssClass($schedulingColor)->cssClass('tt')->options(['title' => $schedulingTitle]) ?> <?= $daysRemaining ?>
+            <i class="fa fa-clock-o tt <?= $schedulingColor ?>" title="<?= $schedulingTitle ?>"></i>
         </div>
 
     <?php endif; ?>
 
     <?php if ($task->review) : ?>
         <div class="task-controls pull-right toggleTaskDetails">
-            <?= Button::asLink()->icon('fa-eye')->cssClass('hidden-xs tt')->options(['title' => Yii::t('TasksModule.base', 'This task requires to be reviewed by a responsible')]) ?>
+            <i class="fa fa-eye tt hidden-xs tt" title="<?= Yii::t('TasksModule.base', 'This task requires to be reviewed by a responsible') ?>"></i>
         </div>
     <?php endif; ?>
 
