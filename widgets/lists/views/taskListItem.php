@@ -39,7 +39,9 @@ $checkUrl = $task->state->getCheckUrl();
             'data-action-url' => $checkUrl,
             'disabled' => empty($checkUrl)
         ]); ?>
-
+        <?php if (!$task->isCompleted()) : ?>
+            <i class="fa fa-bars task-moving-handler"></i>
+        <?php endif; ?>
         <span class="toggleTaskDetails"><?= Html::encode($task->title) ?></span>
 
         <?= TaskBadge::widget(['task' => $task, 'includePending' => false, 'includeCompleted' => false]) ?>

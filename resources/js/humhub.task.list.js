@@ -37,7 +37,7 @@ humhub.module('task.list', function (module, require, $) {
             start: function(event, ui) {
                 ui.helper.find('.task-list-title-bar').find('.task-drag-icon').show();
             },
-            handle: '.task-list-title-bar',
+            handle: '.task-moving-handler',
             helper: 'clone',
             placeholder: "task-list-state-highlight",
             update: $.proxy(this.dropItem, this)
@@ -83,7 +83,7 @@ humhub.module('task.list', function (module, require, $) {
     TaskList.prototype.init = function () {
         this.getItemsRoot().sortable({
             delay: (view.isSmall()) ? DELAY_DRAG_SMALL_DEVICES : null,
-            handle: '.task-list-task-title-bar',
+            handle: '.task-moving-handler',
             start: function(event, ui) {
                 var test = ui.helper.find('.task-drag-icon');
                 ui.helper.find('.task-drag-icon').show();
@@ -92,6 +92,13 @@ humhub.module('task.list', function (module, require, $) {
             connectWith: '.task-list-items',
             placeholder: "task-state-highlight",
             update: $.proxy(this.dropItem, this)
+        });
+
+        $('.task-list').on('mouseover', '.task-moving-handler', function () {
+            $(this).closest('.task-list-task-title-bar').addClass('highlighter')
+        });
+        $('.task-list').on('mouseout', '.task-moving-handler', function () {
+            $(this).closest('.task-list-task-title-bar').removeClass('highlighter')
         });
 
         var $taskTitleBar = this.$.find('.task-list-title-bar');

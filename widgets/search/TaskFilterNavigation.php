@@ -25,10 +25,12 @@ class TaskFilterNavigation extends FilterNavigation
     const PANEL_POSITION_TOP = 1;
     const PANEL_POSITION_BOTTOM_LEFT = 2;
     const PANEL_POSITION_BOTTOM_CENTER = 3;
+    const PANEL_POSITION_BOTTOM_RIGHT = 4;
 
     const FILTER_BLOCK_TITLE = 'title';
     const FILTER_BLOCK_CHECKBOX = 'checkbox';
     const FILTER_BLOCK_PICKER = 'picker';
+    const FILTER_BLOCK_DATEPICKER = 'datePicker';
 
     public $jsWidget = 'task.search.TaskFilter';
 
@@ -59,6 +61,7 @@ class TaskFilterNavigation extends FilterNavigation
         $this->filterPanels[static::PANEL_POSITION_TOP] = [];
         $this->filterPanels[static::PANEL_POSITION_BOTTOM_LEFT] = [];
         $this->filterPanels[static::PANEL_POSITION_BOTTOM_CENTER] = [];
+        $this->filterPanels[static::PANEL_POSITION_BOTTOM_RIGHT] = [];
     }
 
     /**
@@ -71,6 +74,7 @@ class TaskFilterNavigation extends FilterNavigation
         $this->addFilterBlock(static::FILTER_BLOCK_TITLE, [], static::PANEL_POSITION_TOP);
         $this->addFilterBlock(static::FILTER_BLOCK_CHECKBOX, [], static::PANEL_POSITION_BOTTOM_LEFT);
         $this->addFilterBlock(static::FILTER_BLOCK_PICKER, [], static::PANEL_POSITION_BOTTOM_CENTER);
+        $this->addFilterBlock(static::FILTER_BLOCK_DATEPICKER, [], static::PANEL_POSITION_BOTTOM_RIGHT);
     }
 
     /**
@@ -175,6 +179,22 @@ class TaskFilterNavigation extends FilterNavigation
                     'defaultResults' => $spaces,
                 ]], static::FILTER_BLOCK_PICKER);
         }
+
+        $this->addFilter([
+            'id' => TaskFilter::FILTER_DATE_START,
+            'category' => 'date_start',
+            'class' => DateFilter::class,
+            'filterOptions' => [
+                'placeholder' =>  Yii::t('TasksModule.models_forms_TaskFilter', 'Start date'),
+            ]], static::FILTER_BLOCK_DATEPICKER);
+
+        $this->addFilter([
+            'id' => TaskFilter::FILTER_DATE_END,
+            'category' => 'date_end',
+            'class' => DateFilter::class,
+            'filterOptions' => [
+                'placeholder' => Yii::t('TasksModule.models_forms_TaskFilter', 'End date'),
+            ]], static::FILTER_BLOCK_DATEPICKER);
     }
 
     public function getData()
