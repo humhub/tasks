@@ -1,11 +1,10 @@
 <?php
-
-return [
-    'End Date' => '',
-    'End Time' => '',
-    'End time must be after start time!' => '',
-    'Public' => '',
-    'Start Date' => '',
-    'Start Time' => '',
-    'Time Zone' => '',
-];
+return array (
+  'End Date' => 'Päättymispäivä',
+  'End Time' => 'Päättymisaika',
+  'End time must be after start time!' => 'Päättymisaika on oltava alkamisajan jälkeen!',
+  'Public' => 'Julkinen',
+  'Start Date' => 'Aloituspäivä',
+  'Start Time' => 'Aloitusaika',
+  'Time Zone' => 'Aikavyöhyke',
+);
