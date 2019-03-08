@@ -2,6 +2,7 @@
 /* @var $this \humhub\components\View */
 
 use humhub\modules\comment\widgets\Comments;
+use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\content\widgets\WallEntryAddons;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\widgets\ChangeStatusButton;
@@ -41,7 +42,7 @@ if (($task->schedule->isOverdue())) {
 
         </div>
 
-        <?= MarkdownView::widget(['markdown' => $task->description]); ?>
+        <?= RichText::output($task->description); ?>
 
         <?= TaskChecklist::widget(['task' => $task]) ?>
 

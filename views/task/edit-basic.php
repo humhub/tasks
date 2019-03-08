@@ -7,8 +7,8 @@
  */
 
 use humhub\modules\tasks\models\lists\TaskList;
-use humhub\widgets\ContentTagDropDown;
-use humhub\widgets\MarkdownField;
+use humhub\modules\content\widgets\ContentTagDropDown;
+use humhub\modules\content\widgets\richtext\RichTextField;
 
 /* @var $form \humhub\widgets\ActiveForm */
 /* @var $taskForm \humhub\modules\tasks\models\forms\TaskForm */
@@ -28,7 +28,7 @@ use humhub\widgets\MarkdownField;
         ]); ?>
     <?php endif; ?>
 
-    <?= $form->field($taskForm->task, 'description')->widget(MarkdownField::class, ['fileModel' => $taskForm->task, 'fileAttribute' => 'files']) ?>
+    <?= $form->field($taskForm->task, 'description')->widget(RichTextField::class) ?>
 
     <?= $form->field($taskForm, 'is_public')->checkbox() ?>
     <?= $form->field($taskForm->task, 'scheduling')->checkbox(['data-action-change' => 'toggleScheduling']) ?>

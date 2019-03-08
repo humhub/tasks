@@ -10,6 +10,7 @@ Changelog
 - Enh: Added `searchPaginationSize` module configuration 
 - Enh: Added `showTopMenuItem` and `topMenuSort` module configuration
 - Fix: RemindEnd notification displays start date instead of end date
+- Enh: Use of new richtext editor
 
 1.2.2 (October 15, 2018)
 --------------------
