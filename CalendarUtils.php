@@ -18,6 +18,8 @@ use DateTime;
 class CalendarUtils
 {
 
+    const DATE_FORMAT = 'Y-m-d';
+
     /**
      *
      * @param DateTime $date1
@@ -41,6 +43,30 @@ class CalendarUtils
 
 
         return false;
+    }
+
+    /**
+     * Helper function to get the start_datetime query filter.
+     * @param string $date
+     * @param $field
+     * @param string $eq
+     * @return array
+     */
+    public static function getStartCriteria($date, $field, $eq = '>=')
+    {
+        return [$eq, $field, date(static::DATE_FORMAT, strtotime($date))];
+    }
+
+    /**
+     * Helper function to get the end_datetime query filter.
+     * @param string $date
+     * @param $field
+     * @param string $eq
+     * @return array
+     */
+    public static function getEndCriteria($date, $field, $eq = '<=')
+    {
+        return [$eq, $field, date(static::DATE_FORMAT, strtotime($date))];
     }
 
 }

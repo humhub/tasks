@@ -34,10 +34,7 @@ humhub.module('task.list', function (module, require, $) {
         var that = this;
         $('.task-list-ul:not(.task-list-unsorted)').sortable({
             delay: (view.isSmall()) ? DELAY_DRAG_SMALL_DEVICES : null,
-            start: function(event, ui) {
-                ui.helper.find('.task-list-title-bar').find('.task-drag-icon').show();
-            },
-            handle: '.task-list-title-bar',
+            handle: '.task-moving-handler',
             helper: 'clone',
             placeholder: "task-list-state-highlight",
             update: $.proxy(this.dropItem, this)
@@ -74,6 +71,17 @@ humhub.module('task.list', function (module, require, $) {
         })
     };
 
+    Root.prototype.collapseAll = function(evt) {
+        var $visible = this.$.find('.task-list-items.ui-sortable:visible');
+        if($visible.length) {
+            $visible.siblings('.task-list-title-bar').click();
+            $('#toggle-lists').find('i').removeClass('fa-toggle-on').addClass('fa-toggle-off');
+        } else {
+            this.$.find('.task-list-items.ui-sortable:hidden').siblings('.task-list-title-bar').click();
+            $('#toggle-lists').find('i').removeClass('fa-toggle-off').addClass('fa-toggle-on');
+        }
+    };
+
     var TaskList = function (node, options) {
         Widget.call(this, node, options);
     };
@@ -83,15 +91,18 @@ humhub.module('task.list', function (module, require, $) {
     TaskList.prototype.init = function () {
         this.getItemsRoot().sortable({
             delay: (view.isSmall()) ? DELAY_DRAG_SMALL_DEVICES : null,
-            handle: '.task-list-task-title-bar',
-            start: function(event, ui) {
-                var test = ui.helper.find('.task-drag-icon');
-                ui.helper.find('.task-drag-icon').show();
-            },
+            handle: '.task-moving-handler',
             helper: 'clone',
             connectWith: '.task-list-items',
             placeholder: "task-state-highlight",
             update: $.proxy(this.dropItem, this)
+        });
+
+        $('.task-list').on('mouseover', '.task-moving-handler', function () {
+            $(this).closest('.task-list-task-title-bar').addClass('highlighter')
+        });
+        $('.task-list').on('mouseout', '.task-moving-handler', function () {
+            $(this).closest('.task-list-task-title-bar').removeClass('highlighter')
         });
 
         var $taskTitleBar = this.$.find('.task-list-title-bar');
@@ -114,7 +125,6 @@ humhub.module('task.list', function (module, require, $) {
         if(!view.isSmall() || view.isMedium()) {
             this.$.find('.task-list-edit').hide();
         }
-        //this.$.find('.task-list-title-bar').find('.task-drag-icon').hide();
     };
 
     TaskList.prototype.toggleItems = function (evt) {
@@ -125,10 +135,13 @@ humhub.module('task.list', function (module, require, $) {
 
         var $items = this.getItemsRoot();
 
+        var downIcon =  'fa-caret-up';
+        var upIcon ='fa-caret-down';
+
         if($items.is(':visible')) {
-            this.$.find('.toggleItems').removeClass('fa-minus-square').addClass('fa-plus-square');
+            this.$.find('.toggleItems').removeClass(downIcon).addClass(upIcon);
         } else {
-            this.$.find('.toggleItems').removeClass('fa-plus-square').addClass('fa-minus-square');
+            this.$.find('.toggleItems').removeClass(upIcon).addClass(downIcon);
         }
 
         $items.add(this.getItemsCompletedRoot()).slideToggle(100,"linear");
@@ -138,7 +151,6 @@ humhub.module('task.list', function (module, require, $) {
     TaskList.prototype.dropItem = function (event, ui) {
         var item = ui.item;
         var taskId = item.data('task-id');
-        var index = item.data('task-id');
 
         var itemWidget = Widget.instance(item);
         var targetList = itemWidget.parent();

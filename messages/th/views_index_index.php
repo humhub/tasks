@@ -1,13 +1,11 @@
 <?php
 
 return [
-    'All' => '',
     'Any user with a "Process unassigned tasks" permission can work on this task' => '',
     'Assigned' => '',
     'Completed' => '',
     'Deadline at' => '',
     'Drag entry' => '',
-    'Drag task' => '',
     'Edit' => '',
     'Filter tasks by title' => '',
     'In Progress' => '',

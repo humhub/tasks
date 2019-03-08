@@ -11,7 +11,7 @@
     <strong><i class="fa <?= $icon ?>"></i> <?= $title ?>
     </strong><br>
     <span class="task-info-text <?= $textClass ?>">
-       <?= $value ?>
+       <small><?= $value ?></small>
     </span>
 </div>
 
