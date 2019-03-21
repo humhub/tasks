@@ -9,7 +9,7 @@
 namespace humhub\modules\tasks\jobs;
 
 use DateTime;
-use humhub\components\queue\ActiveJob;
+use humhub\modules\queue\ActiveJob;
 use humhub\modules\tasks\models\Task;
 
 class SendReminder extends ActiveJob
@@ -23,7 +23,6 @@ class SendReminder extends ActiveJob
             ->innerJoinWith('taskReminder')
             ->where(['task.scheduling' => 1])
             ->andWhere(['!=', 'task.status', Task::STATUS_COMPLETED])
-
             ->all();
 
         foreach ($tasks as $task) {

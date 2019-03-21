@@ -2,6 +2,7 @@
 
 namespace humhub\modules\tasks;
 
+use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\lists\TaskList;
 use humhub\modules\tasks\permissions\ProcessUnassignedTasks;
 use humhub\modules\tasks\permissions\CreateTask;
@@ -25,11 +26,34 @@ class Module extends ContentContainerModule
     /**
      * @inheritdoc
      */
+    public $searchPaginationSize = 30;
+
+    /**
+     * @inheritdoc
+     */
+    public $showTopMenuItem = true;
+
+    /**
+     * @inheritdoc
+     */
+    public $topMenuSort = 500;
+
+    /**
+     * @inheritdoc
+     */
     public function getContentContainerTypes()
     {
         return [
-            Space::className(),
+            Space::class,
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getConfigUrl()
+    {
+        return TaskUrl::toConfig();
     }
 
     /**
@@ -45,11 +69,13 @@ class Module extends ContentContainerModule
             $taskList->delete();
         }
 
+        TaskList::deleteByModule();
         parent::disable();
     }
 
     /**
      * @inheritdoc
+     * @throws \yii\base\Exception
      */
     public function disableContentContainer(ContentContainerActiveRecord $container)
     {
@@ -63,6 +89,7 @@ class Module extends ContentContainerModule
             $taskList->delete();
         }
 
+        TaskList::deleteByModule($container);
         parent::disableContentContainer($container);
     }
 
@@ -81,7 +108,7 @@ class Module extends ContentContainerModule
 
     public static function onDashboardSidebarInit($event)
     {
-        $event->sender->addWidget(widgets\MyTasks::className(), array(), array('sortOrder' => 600));
+        $event->sender->addWidget(widgets\MyTasks::class, [], ['sortOrder' => 600]);
     }
 
     /**

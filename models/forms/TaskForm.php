@@ -13,6 +13,7 @@
 
 namespace humhub\modules\tasks\models\forms;
 
+use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\tasks\helpers\TaskUrl;
 use Yii;
 use yii\base\Model;
@@ -125,8 +126,8 @@ class TaskForm extends Model
     {
         return [
             [['start_time', 'end_time'], 'date', 'type' => 'time', 'format' => $this->getTimeFormat()],
-            [['start_date'], DbDateValidator::className(), 'format' => Yii::$app->params['formatter']['defaultDateFormat'], 'timeAttribute' => 'start_time', 'timeZone' => $this->timeZone],
-            [['end_date'], DbDateValidator::className(), 'format' => Yii::$app->params['formatter']['defaultDateFormat'], 'timeAttribute' => 'end_time', 'timeZone' => $this->timeZone],
+            [['start_date'], DbDateValidator::class, 'format' => Yii::$app->params['formatter']['defaultDateFormat'], 'timeAttribute' => 'start_time', 'timeZone' => $this->timeZone],
+            [['end_date'], DbDateValidator::class, 'format' => Yii::$app->params['formatter']['defaultDateFormat'], 'timeAttribute' => 'end_time', 'timeZone' => $this->timeZone],
             [['end_date'], 'validateEndTime'],
 
             [['start_date', 'end_date'], 'required', 'when' => function($model) {
@@ -252,6 +253,8 @@ class TaskForm extends Model
     /**
      * Validates and saves the task instance.
      * @return bool
+     * @throws HttpException
+     * @throws \yii\base\InvalidConfigException
      */
     public function save()
     {
@@ -278,7 +281,7 @@ class TaskForm extends Model
         $this->reloadListId = $this->getListIdsToReload();
 
         if($this->task->save()) {
-            $this->task->fileManager->attach(Yii::$app->request->post('fileList'));
+            RichText::postProcess($this->task->description, $this->task);
             return true;
         }
 

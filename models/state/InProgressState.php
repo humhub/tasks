@@ -76,7 +76,7 @@ class InProgressState extends TaskState
     {
         if ($this->task->review && $this->task->hasTaskAssigned()) {
             $this->task->deleteOldNotifications(ReviewRejectedNotification::class);
-            ReviewRejectedNotification::instance()->from(Yii::$app->user->getIdentity())->about($this->task)->sendBulk($this->task->getTaskAssignedUsers(true));
+            ReviewRejectedNotification::instance()->from(Yii::$app->user->getIdentity())->about($this->task)->sendBulk($this->task->filterResponsibleAssigned());
         } else {
             $this->notifyInProgress();
         }

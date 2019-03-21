@@ -8,7 +8,9 @@
 
 namespace humhub\modules\tasks;
 
+use humhub\modules\infoscreen\helpers\Url;
 use humhub\modules\tasks\helpers\TaskListUrl;
+use humhub\modules\tasks\helpers\TaskUrl;
 use Yii;
 use humhub\modules\notification\models\Notification;
 use humhub\modules\tasks\jobs\SendReminder;
@@ -19,6 +21,7 @@ use humhub\modules\tasks\models\scheduling\TaskReminder;
 use humhub\modules\tasks\integration\calendar\TaskCalendar;
 use humhub\modules\tasks\widgets\MyTasks;
 use humhub\modules\tasks\models\user\TaskUser;
+use yii\db\Expression;
 
 
 /* @var $user \humhub\modules\user\models\User */
@@ -31,6 +34,27 @@ use humhub\modules\tasks\models\user\TaskUser;
  */
 class Events
 {
+
+    public static function onTopMenuInit($event)
+    {
+        /* @var $module Module */
+        $module = Yii::$app->getModule('tasks');
+
+        if(!$module->showTopMenuItem) {
+            return;
+        }
+
+        // Is Module enabled on this workspace?
+        $event->sender->addItem([
+            'label' => Yii::t('TasksModule.base', 'Tasks'),
+            'id' => 'tasks-global',
+            'icon' => '<i class="fa fa-tasks"></i>',
+            'url' => TaskUrl::globalView(),
+            'sortOrder' => $module->topMenuSort,
+            'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'tasks' && Yii::$app->controller->id == 'global'),
+        ]);
+    }
+
     /**
      * @param $event \humhub\modules\calendar\interfaces\CalendarItemTypesEvent
      * @return mixed
@@ -65,7 +89,7 @@ class Events
         $settings = SnippetModuleSettings::instantiate();
 
         if ($settings->showMyTasksSnippet()) {
-            $event->sender->addWidget(MyTasks::className(), ['limit' => $settings->myTasksSnippetMaxItems], ['sortOrder' => $settings->myTasksSnippetSortOrder]);
+            $event->sender->addWidget(MyTasks::class, ['limit' => $settings->myTasksSnippetMaxItems], ['sortOrder' => $settings->myTasksSnippetSortOrder]);
         }
     }
 
@@ -80,7 +104,9 @@ class Events
 
         if ($space->isModuleEnabled('tasks')) {
             if ($settings->showMyTasksSnippetSpace()) {
-                $event->sender->addWidget(MyTasks::className(), ['limit' => $settings->myTasksSnippetMaxItems], ['sortOrder' => $settings->myTasksSnippetSortOrder]);
+                $event->sender->addWidget(MyTasks::class, [
+                    'contentContainer' => $space,
+                    'limit' => $settings->myTasksSnippetMaxItems], ['sortOrder' => $settings->myTasksSnippetSortOrder]);
             }
         }
     }
@@ -92,7 +118,6 @@ class Events
         $space = $event->sender->space;
 
         if ($space->isModuleEnabled('tasks') && $space->isMember()) {
-
             $event->sender->addItem([
                 'label' => Yii::t('TasksModule.base', 'Tasks'),
                 'group' => 'modules',
@@ -108,6 +133,7 @@ class Events
      *
      * @param Event $event
      * @throws \Exception
+     * @throws \Throwable
      */
     public static function onIntegrityCheck($event)
     {
@@ -133,6 +159,16 @@ class Events
             if ($taskUser->user === null) {
                 if ($integrityController->showFix("Deleting task user user id " . $taskUser->id . " without existing user!")) {
                     $taskUser->delete();
+                }
+            }
+        }
+
+        $integrityController->showTestHeadline("Tasks Module (" . Task::find()->count() . " entries)");
+
+        foreach (Task::find()->all() as $task) {
+            if ($task->task_list_id != null && !$task->list) {
+                if ($integrityController->showFix("Reset task list for task" . $task->id . " with invalid task_list_setting!")) {
+                    $task->updateAttributes(['task_list_id' => new Expression('NULL')]);
                 }
             }
         }
@@ -209,9 +245,7 @@ class Events
 
     public static function onCronRun($event)
     {
-        if (Yii::$app->controller->action->id == 'hourly') {
-            Yii::$app->queue->push( new SendReminder());
-        }
+        Yii::$app->queue->push(new SendReminder());
     }
 
 }

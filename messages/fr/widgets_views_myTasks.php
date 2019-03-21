@@ -1,5 +1,4 @@
 <?php
 return array (
-  '<strong>Your</strong> tasks' => '<strong>Mes</strong> tâches',
-  'From space: ' => 'De l\'espace :',
+  '<strong>Your</strong> tasks' => 'Mes <strong>tâches</strong>',
 );

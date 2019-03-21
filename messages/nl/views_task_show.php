@@ -4,7 +4,7 @@ return array (
   'Add Task' => 'Taak toevoegen',
   'Cancel' => 'Annuleren',
   'Delete' => 'Verwijder',
-  'Do you really want to delete this task?' => 'Wil je deze taak echt verwijderen?',
+  'Do you really want to delete this task?' => 'Wilt u deze taak echt verwijderen?',
   'No open tasks...' => 'Geen open taken...',
   'completed tasks' => 'voltooide taken',
 );

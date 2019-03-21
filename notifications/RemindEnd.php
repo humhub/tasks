@@ -35,7 +35,7 @@ class RemindEnd extends BaseNotification
     /**
      * @inheritdoc
      */
-    public $viewName = "remind.php";
+    public $viewName = "remind";
 
     /**
      * @var Task
@@ -55,7 +55,7 @@ class RemindEnd extends BaseNotification
         return Yii::t('TasksModule.notifications', 'Task {task} in space {spaceName} ends at {dateTime}.', [
             '{task}' => Html::tag('strong', Html::encode($this->getContentInfo($this->source, false))),
             '{spaceName}' => Html::tag('strong', Html::encode($this->source->content->container->displayName)),
-            '{dateTime}' => Html::encode($this->source->schedule->getFormattedStartDateTime())
+            '{dateTime}' => Html::encode($this->source->schedule->getFormattedEndDateTime())
         ]);
 
     }
@@ -68,7 +68,7 @@ class RemindEnd extends BaseNotification
         return Yii::t('TasksModule.notifications', 'Task {task} in space {spaceName} ends at {dateTime}.', [
             '{task}' => Html::encode($this->getContentInfo($this->source, false)),
             '{spaceName}' => Html::encode($this->source->content->container->displayName),
-            '{dateTime}' => Html::encode($this->source->schedule->getFormattedStartDateTime())
+            '{dateTime}' => Html::encode($this->source->schedule->getFormattedEndDateTime())
         ]);
     }
 }

@@ -9,9 +9,11 @@
 namespace humhub\modules\tasks\models;
 
 use humhub\modules\content\components\ContentContainerPermissionManager;
+use humhub\modules\space\modules\manage\models\MembershipSearch;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\permissions\CreateTask;
 use humhub\modules\tasks\permissions\ProcessUnassignedTasks;
+use humhub\modules\user\components\ActiveQueryUser;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\Expression;
@@ -62,6 +64,16 @@ class Task extends ContentActiveRecord implements Searchable
 {
 
     const SCENARIO_EDIT = 'edit';
+
+    /**
+     * @inheritdocs
+     */
+    public $canMove = true;
+
+    /**
+     * @inheritdocs
+     */
+    public $moduleId = 'tasks';
 
     /**
      * @inheritdocs
@@ -221,8 +233,10 @@ class Task extends ContentActiveRecord implements Searchable
             }, 'whenClient' => "function (attribute, value) {
                 return $('#task-scheduling').val() == 1;
             }"],
-            [['start_datetime'], DbDateValidator::className()],
-            [['end_datetime'], DbDateValidator::className()],
+            [['start_datetime'], 'default', 'value' => null],
+            [['end_datetime'], 'default', 'value' => null],
+            [['start_datetime'], DbDateValidator::class],
+            [['end_datetime'], DbDateValidator::class],
             [['all_day', 'scheduling', 'review', 'request_sent'], 'integer'],
             [['cal_mode'], 'in', 'range' => TaskScheduling::$calModes],
             [['assignedUsers', 'description', 'responsibleUsers', 'selectedReminders'], 'safe'],
@@ -236,7 +250,7 @@ class Task extends ContentActiveRecord implements Searchable
         if($this->task_list_id) {
             $taskList = TaskList::findByContainer($this->content->container)->where(['id' => $this->task_list_id]);
             if(!$taskList) {
-                $this->addError('task_list_id',  Yii::t('TaskModule.base', 'Invalid task list selection.'));
+                $this->addError('task_list_id',  Yii::t('TasksModule.base', 'Invalid task list selection.'));
             }
         }
     }
@@ -300,7 +314,15 @@ class Task extends ContentActiveRecord implements Searchable
         return static::findUnsorted($contentContainer)->andWhere(['task.status' => Task::STATUS_COMPLETED]);
     }
 
-    public static function findUserTasks(User $user = null, $limit = 5)
+    /**
+     * @param User|null $user
+     * @param ContentActiveRecord|null $container
+     * @param int $limit
+     * @return array|Notification[]|Task[]|\yii\db\ActiveRecord[]
+     * @throws \Throwable
+     * @throws \yii\base\Exception
+     */
+    public static function findUserTasks(User $user = null, $container = null, $limit = 5)
     {
         if (!$user && !Yii::$app->user->isGuest) {
             $user = Yii::$app->user->getIdentity();
@@ -308,7 +330,9 @@ class Task extends ContentActiveRecord implements Searchable
             return [];
         }
 
-        return self::find()
+        $query = ($container) ? self::find()->contentContainer($container) : self::find();
+
+        return $query
             ->leftJoin('task_user', 'task.id=task_user.task_id', [])
             ->where(['task_user.user_id' => $user->id])
             ->andWhere(['!=', 'task.status', Task::STATUS_COMPLETED])
@@ -373,6 +397,8 @@ class Task extends ContentActiveRecord implements Searchable
      */
     public function afterSave($insert, $changedAttributes)
     {
+        parent::afterSave($insert, $changedAttributes);
+
         if($this->scenario === self::SCENARIO_EDIT) {
             $oldTaskUsers = $this->taskUsers;
 
@@ -415,14 +441,24 @@ class Task extends ContentActiveRecord implements Searchable
             $this->schedule->afterSave($insert, $changedAttributes);
 
             $this->saveNewItems();
-            parent::afterSave($insert, $changedAttributes);
+
         }
 
         if($this->list) {
             $this->list->setAttributes(['updated_at' => new Expression('NOW()')]);
         }
+    }
 
-        parent::afterSave($insert, $changedAttributes);
+    public function afterMove(ContentContainerActiveRecord $container = null)
+    {
+
+        foreach ($this->taskUsers as $taskUser) {
+            if(!$container->isMember($taskUser->user_id)) {
+                $taskUser->delete();
+            }
+        }
+
+        $this->updateAttributes(['task_list_id' => null]);
     }
 
     /**
@@ -495,7 +531,7 @@ class Task extends ContentActiveRecord implements Searchable
 
     public function getTaskUsers()
     {
-        return $this->hasMany(TaskUser::className(), ['task_id' => 'id']);
+        return $this->hasMany(TaskUser::class, ['task_id' => 'id']);
     }
 
     /**
@@ -777,14 +813,14 @@ class Task extends ContentActiveRecord implements Searchable
     {
         if (!$notificationClassName) {
             // delete all old notifications - used for reset
-            $notifications = Notification::find()->where(['source_class' => self::className(), 'source_pk' => $this->id, 'space_id' => $this->content->container->id])->all();
+            $notifications = Notification::find()->where(['source_class' => self::class, 'source_pk' => $this->id, 'space_id' => $this->content->container->id])->all();
             foreach ($notifications as $notification) {
                 $notification->delete();
             }
         }
         else {
             // delete specific old notifications
-            $notifications = Notification::find()->where(['class' => $notificationClassName, 'source_class' => self::className(), 'source_pk' => $this->id, 'space_id' => $this->content->container->id])->all();
+            $notifications = Notification::find()->where(['class' => $notificationClassName, 'source_class' => self::class, 'source_pk' => $this->id, 'space_id' => $this->content->container->id])->all();
             foreach ($notifications as $notification) {
                 $notification->delete();
             }
@@ -987,8 +1023,9 @@ class Task extends ContentActiveRecord implements Searchable
      */
     public function removeUser($userId)
     {
-        if (empty($userId) || !isset($userId))
+        if (empty($userId) || !isset($userId)) {
             return false;
+        }
 
         $taskAssigned = $this->getAssignedTaskUsers()->where(['task_user.user_id' => $userId])->all();
         foreach ($taskAssigned as $assigned) {
@@ -1002,7 +1039,7 @@ class Task extends ContentActiveRecord implements Searchable
 
     public function getColor()
     {
-        if($this->task_list_id) {
+        if($this->task_list_id && $this->list) {
             return $this->list->getColor();
         }
     }

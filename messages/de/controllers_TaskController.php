@@ -1,5 +1,5 @@
 <?php
 return array (
-  'Could not access task!' => 'Konnte auf die Aufgabe nicht zugreifen!',
-    'Assignment' => 'Zuweisung',
+  'Assignment' => 'Zuweisung',
+  'Could not access task!' => 'Zugriff auf Aufgabe nicht möglich!',
 );

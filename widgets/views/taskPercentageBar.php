@@ -20,7 +20,6 @@
 
     $color = "progress-bar-info";
     ?>
-    <div class="col-md-6" style="padding-left: 0; padding-right: 30px;">
     <div class="progress">
         <div id="<?= $divID; ?>"
              class="progress-bar <?= $color; ?>"
@@ -32,6 +31,5 @@
     <script type="text/javascript">
         $('#<?= $divID ?>').css('width', '<?= $percent; ?>%');
     </script>
-    </div>
 <?php else : ?>
 <?php endif; ?>

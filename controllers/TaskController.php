@@ -31,9 +31,12 @@ class TaskController extends AbstractTaskController
     /**
      * @param int|null $id
      * @param bool $cal
+     * @param bool $redirect
      * @param int|null $listId used while task creation and is ignored for edits
      * @return string
      * @throws HttpException
+     * @throws \yii\base\Exception
+     * @throws \yii\base\InvalidConfigException
      */
     public function actionEdit($id = null, $cal = false, $redirect = false, $listId = null)
     {

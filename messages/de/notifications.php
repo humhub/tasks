@@ -2,8 +2,9 @@
 return array (
   'Receive Notifications for Task Reminder.' => 'Benachrichtigungen für Aufgaben-Erinnerungen empfangen',
   'Receive Notifications for Tasks (Deadline Updates, Status changes ...).' => 'Benachrichtigungen zu Aufgaben erhalten (Friständerungen, Statusänderungen....) empfangen',
+  'Reminder' => 'Erinnerung',
   'Task {task} in space {spaceName} ends at {dateTime}.' => 'Die Frist für die Aufgabe {task} im Space {spaceName} endet: {dateTime}.',
-  '{userName} assigned you as responsible person in task {task} from space {spaceName}.' => '{userName} hat dich als hauptverantwortliche Person für die Aufgabe {task} aus dem Space {spaceName} bestimmt.',
+  'Task {task} in space {spaceName} starts at {dateTime}.' => 'Aufgabe {task} im Space {spaceName} beginnt am {dateTime}.',
   '{userName} assigned you to task {task} in space {spaceName}.' => '{userName} hat dich der Aufgabe {task} im Space {spaceName} zugewiesen.',
   '{userName} completed Task {task} in space {spaceName}.' => '{userName} hat die Aufgabe {task} im Space {spaceName} fertiggestellt.',
   '{userName} has changed deadline for task {task} in space {spaceName}.' => '{userName} hat die Frist für die Aufgabe {task} im Space {spaceName} verlängert.',

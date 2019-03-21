@@ -38,7 +38,7 @@ class MyTasks extends Widget
     public function run()
     {
         $settings = SnippetModuleSettings::instantiate();
-        $taskEntries = Task::findUserTasks(null, $settings->myTasksSnippetMaxItems);
+        $taskEntries = Task::findUserTasks(null,  $this->contentContainer, $settings->myTasksSnippetMaxItems);
 
         if (empty($taskEntries)) {
             return;

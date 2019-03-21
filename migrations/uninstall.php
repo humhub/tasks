@@ -7,16 +7,34 @@ class uninstall extends Migration
 
     public function up()
     {
-        $this->dropForeignKey('fk-task-list-task-id', 'task');
-        $this->dropForeignKey('fk-task-item-task-id', 'task_item');
-        $this->dropForeignKey('fk-task-reminder-task-id', 'task_reminder');
-        $this->dropForeignKey('fk-task-list-setting-task-id', 'task_list_setting');
+        try {
+            $this->dropFK('fk-task-list-task-id', 'task');
+            $this->dropFK('fk-task-item-task-id', 'task_item');
+            $this->dropFK('fk-task-reminder-task-id', 'task_reminder');
+            $this->dropFK('fk-task-list-setting-task-id', 'task_list_setting');
+        } catch(\Exception $e) {}
 
-        $this->dropTable('task');
-        $this->dropTable('task_list_setting');
-        $this->dropTable('task_user');
-        $this->dropTable('task_item');
-        $this->dropTable('task_reminder');
+        $this->dropTableSave('task');
+        $this->dropTableSave('task_list_setting');
+        $this->dropTableSave('task_user');
+        $this->dropTableSave('task_item');
+        $this->dropTableSave('task_reminder');
+    }
+
+    public function dropFK($name, $table) {
+        try {
+            $this->dropForeignKey($name, $table);
+        } catch(\Exception $e) {
+            Yii::warning($e);
+        }
+    }
+
+    public function dropTableSave($name) {
+        try {
+            $this->dropTable($name);
+        } catch(\Exception $e) {
+            Yii::warning($e);
+        }
     }
 
     public function down()

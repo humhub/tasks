@@ -18,7 +18,6 @@ use humhub\modules\tasks\widgets\TaskPicker;
 use Yii;
 use yii\web\Controller;
 
-
 /**
  * todo.
  * Search Controller provides action for searching tasks.
@@ -40,7 +39,7 @@ class SearchController extends AbstractTaskController
         return $this->render("index", [
             'canEdit' =>$this->canManageTasks(),
             'contentContainer' => $this->contentContainer,
-            'filter' => new TaskFilter(['contentContainer' => $this->contentContainer])
+            'filter' => new TaskFilter(['contentContainer' => $this->contentContainer, 'filters' => [TaskFilter::FILTER_ASSIGNED]])
         ]);
     }
 
@@ -73,4 +72,3 @@ class SearchController extends AbstractTaskController
 
 }
 
-?>

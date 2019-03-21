@@ -1,6 +1,49 @@
 Changelog
 =========
 
+1.2.3
+--------------------
+- Enh: Filter by container related tasks in "Your tasks" snippet.
+- Enh: Global overview
+- Enh: Added move content feature
+- Enh: Added Tabbed Menu to single task view
+- Enh: Added `searchPaginationSize` module configuration 
+- Enh: Added `showTopMenuItem` and `topMenuSort` module configuration
+- Fix: RemindEnd notification displays start date instead of end date
+- Enh: Added date filter to search view
+- Enh: Enhanced list view usability
+- Enh: Use of new richtext editor
+
+1.2.2 (October 15, 2018)
+--------------------
+- Fix: Reminder mail link broken
+- Fix: Broken mobile view
+
+1.2.1 (September 19, 2018)
+--------------------
+- Fix: Finished Task List contains unfinished list
+
+1.2.0 (September 19, 2018)
+--------------------
+- Fix: Reminder queue logic not compatible with v1.3
+- Chng: Changed min HumHub Version to v1.3
+
+1.1.15 (September 19, 2018)
+--------------------
+- Fix: TaskAssigned notification not sent when creating a task
+
+1.1.14 (August 22, 2018)
+--------------------
+- Fix: TaskList not dropped for deinstalled container and module deinstallation
+
+1.1.13 (August 22, 2018)
+--------------------
+- Fix Use of save drop function in uninstall.php
+
+1.1.12 (August 22, 2018)
+--------------------
+- Fix #76 Error when deleting task list for MyISAM based db
+
 1.1.11 (July 18, 2018)
 --------------------
 - Fix #72 File attachment on task creation not working

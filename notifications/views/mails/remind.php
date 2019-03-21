@@ -6,9 +6,11 @@
  *
  */
 
+use yii\helpers\Url;
 use humhub\modules\tasks\widgets\MailContentEntry;
 use humhub\widgets\mails\MailHeadline;
-
+use humhub\widgets\mails\MailButtonList;
+use humhub\widgets\mails\MailButton;
 
 /**
  * @link https://www.humhub.org/
@@ -64,10 +66,9 @@ use humhub\widgets\mails\MailHeadline;
         </tr>
         <tr>
             <td>
-                <?=
-                humhub\widgets\mails\MailButtonList::widget(['buttons' => [
-                    humhub\widgets\mails\MailButton::widget([
-                        'url' => $url,
+                <?= MailButtonList::widget(['buttons' => [
+                    MailButton::widget([
+                        'url' => Url::to(['/content/perma', 'id' => $source->content->id], true),
                         'text' => Yii::t('ContentModule.notifications_mails', 'View Online')
                     ])
                 ]]);

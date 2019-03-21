@@ -13,12 +13,15 @@ humhub.module('task.list', function (module, require, $) {
     var modal = require('ui.modal');
     var additions = require('ui.additions');
     var event = require('event');
+    var view = require('ui.view');
 
     var STATUS_PENDING = 1;
     var STATUS_IN_PROGRESS = 2;
     var STATUS_PENDING_REVIEW = 3;
     var STATUS_COMPLETED = 5;
     var STATUS_ALL = 4;
+
+    var DELAY_DRAG_SMALL_DEVICES = 250;
 
     var Root = function (node, options) {
         Widget.call(this, node, options);
@@ -28,8 +31,10 @@ humhub.module('task.list', function (module, require, $) {
     object.inherits(Root, Widget);
 
     Root.prototype.init = function () {
+        var that = this;
         $('.task-list-ul:not(.task-list-unsorted)').sortable({
-            handle: '.task-list-title-bar',
+            delay: (view.isSmall()) ? DELAY_DRAG_SMALL_DEVICES : null,
+            handle: '.task-moving-handler',
             helper: 'clone',
             placeholder: "task-list-state-highlight",
             update: $.proxy(this.dropItem, this)
@@ -66,6 +71,17 @@ humhub.module('task.list', function (module, require, $) {
         })
     };
 
+    Root.prototype.collapseAll = function(evt) {
+        var $visible = this.$.find('.task-list-items.ui-sortable:visible');
+        if($visible.length) {
+            $visible.siblings('.task-list-title-bar').click();
+            $('#toggle-lists').find('i').removeClass('fa-toggle-on').addClass('fa-toggle-off');
+        } else {
+            this.$.find('.task-list-items.ui-sortable:hidden').siblings('.task-list-title-bar').click();
+            $('#toggle-lists').find('i').removeClass('fa-toggle-off').addClass('fa-toggle-on');
+        }
+    };
+
     var TaskList = function (node, options) {
         Widget.call(this, node, options);
     };
@@ -74,34 +90,67 @@ humhub.module('task.list', function (module, require, $) {
 
     TaskList.prototype.init = function () {
         this.getItemsRoot().sortable({
-            handle: '.task-list-task-title-bar',
+            delay: (view.isSmall()) ? DELAY_DRAG_SMALL_DEVICES : null,
+            handle: '.task-moving-handler',
             helper: 'clone',
             connectWith: '.task-list-items',
             placeholder: "task-state-highlight",
             update: $.proxy(this.dropItem, this)
         });
 
-        this.$.find('.task-list-title-bar')
-            .off('click').on('click', $.proxy(this.toggleItems, this))
+        $('.task-list').on('mouseover', '.task-moving-handler', function () {
+            $(this).closest('.task-list-task-title-bar').addClass('highlighter')
+        });
+        $('.task-list').on('mouseout', '.task-moving-handler', function () {
+            $(this).closest('.task-list-task-title-bar').removeClass('highlighter')
+        });
+
+        var $taskTitleBar = this.$.find('.task-list-title-bar');
+        $taskTitleBar.off('click').on('click', $.proxy(this.toggleItems, this))
             .hover($.proxy(this.mouseOver, this), $.proxy(this.mouseOut, this)).disableSelection();
+
+        if(view.isSmall() || view.isMedium()) {
+            // show elements
+            this.$.find('.task-list-edit').show();
+        }
 
         this.updated();
     };
 
     TaskList.prototype.mouseOver = function (event, ui) {
         this.$.find('.task-list-edit').show();
-        this.$.find('.task-list-title-bar').find('.task-drag-icon').show();
     };
 
     TaskList.prototype.mouseOut = function (event, ui) {
-        this.$.find('.task-list-edit').hide();
-        this.$.find('.task-list-title-bar').find('.task-drag-icon').hide();
+        if(!view.isSmall() || view.isMedium()) {
+            this.$.find('.task-list-edit').hide();
+        }
     };
+
+    TaskList.prototype.toggleItems = function (evt) {
+        var $target = $(evt.target);
+        if(!$target.is('.task-list-title-bar') && !$target.closest('.toggleItems').length) {
+            return;
+        }
+
+        var $items = this.getItemsRoot();
+
+        var downIcon =  'fa-caret-up';
+        var upIcon ='fa-caret-down';
+
+        if($items.is(':visible')) {
+            this.$.find('.toggleItems').removeClass(downIcon).addClass(upIcon);
+        } else {
+            this.$.find('.toggleItems').removeClass(upIcon).addClass(downIcon);
+        }
+
+        $items.add(this.getItemsCompletedRoot()).slideToggle(100,"linear");
+    };
+
 
     TaskList.prototype.dropItem = function (event, ui) {
         var item = ui.item;
         var taskId = item.data('task-id');
-        var index = item.data('task-id');
 
         var itemWidget = Widget.instance(item);
         var targetList = itemWidget.parent();
@@ -137,9 +186,8 @@ humhub.module('task.list', function (module, require, $) {
     TaskList.prototype.showMoreCompleted = function (evt) {
         var that = this;
         var $tasksCompleted = this.$.find('.tasks-completed');
-        var $showMoreSpan = this.$.find('.showMoreCompletedSpan');
         var offset = $tasksCompleted.find('.task-list-item').length ;
-        //loader.set($showMoreSpan);
+
         client.get(evt, {data: {offset: offset}}).then(function(response) {
             response.tasks.forEach(function(task) {
                 that.appendCompleted($(task));
@@ -150,29 +198,9 @@ humhub.module('task.list', function (module, require, $) {
             } else {
                 that.$.find('.task-list-task-completed-show-more').remove();
             }
-            console.log(response);
         }).catch(function(e) {
             module.log.error(e, true);
-        }).finally(function() {
-          // loader.reset($showMoreSpan);
         });
-    };
-
-    TaskList.prototype.toggleItems = function (evt) {
-        var $target = $(evt.target);
-        if(!$target.is('.task-list-title-bar') && !$target.closest('.toggleItems').length) {
-            return;
-        }
-
-        var $items = this.getItemsRoot();
-
-        if($items.is(':visible')) {
-            this.$.find('.toggleItems').removeClass('fa-minus-square').addClass('fa-plus-square');
-        } else {
-            this.$.find('.toggleItems').removeClass('fa-plus-square').addClass('fa-minus-square');
-        }
-
-        $items.add(this.getItemsCompletedRoot()).slideToggle(100,"linear");
     };
 
     TaskList.prototype.loader = function (show) {
@@ -272,16 +300,7 @@ humhub.module('task.list', function (module, require, $) {
 
     Task.prototype.init = function (evt) {
         this.$.find('.task-list-task-title-bar').off('click').on('click', $.proxy(this.toggleDetails, this));
-        this.$.find('.task-list-task-title-bar').hover( $.proxy(this.mouseOver, this),  $.proxy(this.mouseOut, this));
         this.updated();
-    };
-
-    Task.prototype.mouseOver = function(evt) {
-        this.$.find('.task-list-task-title-bar .task-drag-icon').show();
-    };
-
-    Task.prototype.mouseOut = function(evt) {
-        this.$.find('.task-list-task-title-bar .task-drag-icon').hide();
     };
 
     Task.prototype.changeState = function(evt) {
