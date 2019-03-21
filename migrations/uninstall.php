@@ -7,10 +7,12 @@ class uninstall extends Migration
 
     public function up()
     {
-        $this->dropFK('fk-task-list-task-id', 'task');
-        $this->dropFK('fk-task-item-task-id', 'task_item');
-        $this->dropFK('fk-task-reminder-task-id', 'task_reminder');
-        $this->dropFK('fk-task-list-setting-task-id', 'task_list_setting');
+        try {
+            $this->dropFK('fk-task-list-task-id', 'task');
+            $this->dropFK('fk-task-item-task-id', 'task_item');
+            $this->dropFK('fk-task-reminder-task-id', 'task_reminder');
+            $this->dropFK('fk-task-list-setting-task-id', 'task_list_setting');
+        } catch(\Exception $e) {}
 
         $this->dropTableSave('task');
         $this->dropTableSave('task_list_setting');

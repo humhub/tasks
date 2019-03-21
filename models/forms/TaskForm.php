@@ -13,6 +13,7 @@
 
 namespace humhub\modules\tasks\models\forms;
 
+use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\tasks\helpers\TaskUrl;
 use Yii;
 use yii\base\Model;
@@ -252,6 +253,8 @@ class TaskForm extends Model
     /**
      * Validates and saves the task instance.
      * @return bool
+     * @throws HttpException
+     * @throws \yii\base\InvalidConfigException
      */
     public function save()
     {
@@ -278,7 +281,7 @@ class TaskForm extends Model
         $this->reloadListId = $this->getListIdsToReload();
 
         if($this->task->save()) {
-            $this->task->fileManager->attach(Yii::$app->request->post('fileList'));
+            RichText::postProcess($this->task->description, $this->task);
             return true;
         }
 

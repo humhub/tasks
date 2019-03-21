@@ -15,6 +15,8 @@ class UnsortedTaskListWidget extends TaskListWidget
      */
     public $id;
 
+    public $canBeSorted = false;
+
     public $renderIfEmpty = true;
 
     public $hasOtherLists = false;

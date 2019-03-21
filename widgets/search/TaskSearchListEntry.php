@@ -27,7 +27,8 @@ class TaskSearchListEntry extends Widget
     {
         return $this->render('taskSearchListEntry', [
             'task' => $this->task,
-            'filterResult' => $this->filterResult
+            'filterResult' => $this->filterResult,
+            'contentContainer' => $this->contentContainer
         ]);
     }
 

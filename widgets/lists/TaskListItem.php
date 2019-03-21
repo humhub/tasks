@@ -10,6 +10,7 @@ namespace humhub\modules\tasks\widgets\lists;
 
 
 use humhub\modules\content\components\ContentActiveRecord;
+use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\tasks\helpers\TaskListUrl;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\permissions\ManageTasks;
@@ -34,7 +35,7 @@ class TaskListItem extends JsWidget
     public $init = true;
 
     /**
-     * @var ContentActiveRecord
+     * @var ContentContainerActiveRecord
      */
     private $contentContainer;
 
@@ -42,6 +43,11 @@ class TaskListItem extends JsWidget
      * @var bool wheather or not to eager load the detail view
      */
     public $details = false;
+
+    /**
+     * @var bool
+     */
+    public $canManage = false;
 
     /**
      * @inheritdoc
@@ -57,9 +63,11 @@ class TaskListItem extends JsWidget
      */
     public function run()
     {
+        $this->canManage =  $this->contentContainer->can(ManageTasks::class);
         return $this->render('taskListItem', [
             'task' => $this->task,
             'details' => $this->details,
+            'canManage' => $this->canManage,
             'options' => $this->getOptions()
         ]);
     }

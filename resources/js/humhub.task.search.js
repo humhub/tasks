@@ -105,16 +105,12 @@ humhub.module('task.search', function (module, require, $) {
     };
 
     TaskFilter.prototype.loader = function (show) {
-        var $node = $('#task-search-loader');
+        var $node = $('#filter-tasks-list');
 
         if (show === false) {
             loader.reset($node);
         } else {
-            loader.set($node, {
-                'position': 'left',
-                'size': '8px',
-                'css': {padding: '0px'}
-            });
+            loader.set($node,);
         }
     };
 

@@ -19,18 +19,6 @@ humhub.module('task.checklist', function (module, require, $) {
         } else {
             label.removeClass("item-finished");
         }
-
-        var that = this;
-
-        if (this.parent().options.canResort) {
-            this.$.on('mouseover', function () {
-                if(that.$.siblings('li').length > 0 && that.$.find('.legacyFlag').length == 0) {
-                    that.$.find('.task-drag-icon').show();
-                }
-            }).on('mouseout', function () {
-                that.$.find('.task-drag-icon').hide();
-            });
-        }
     };
 
     Item.prototype.index = function () {

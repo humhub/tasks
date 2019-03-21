@@ -37,6 +37,8 @@ class TaskListWidget extends JsWidget
      */
     public $tasks;
 
+    public $canBeSorted = true;
+
     public $canManage = false;
 
     public $canCreate = false;
@@ -55,6 +57,7 @@ class TaskListWidget extends JsWidget
             'title' => $this->getTitle(),
             'tasks' => $tasks,
             'canManage' => $this->canManage,
+            'canSort' => $this->canManage && $this->canBeSorted,
             'canCreate' => $this->canCreate,
             'completedTasks' => $completedTasksQuery->limit(3)->all(),
             'completedTasksCount' => $countQuery->count(),

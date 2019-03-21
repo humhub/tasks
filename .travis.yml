@@ -21,7 +21,7 @@ env:
     - HUMHUB_PATH=/opt/humhub
   matrix:
     - HUMHUB_VERSION=master
-    - HUMHUB_VERSION=v1.2.5
+    - HUMHUB_VERSION=v1.3.8
 
 matrix:
   exclude:
@@ -47,4 +47,4 @@ before_script:
 script:
   - cd tests
   - php ${HUMHUB_PATH}/protected/vendor/bin/codecept build
-  - php ${HUMHUB_PATH}/protected/vendor/bin/codecept run
+  - php ${HUMHUB_PATH}/protected/vendor/bin/codecept run --env travis

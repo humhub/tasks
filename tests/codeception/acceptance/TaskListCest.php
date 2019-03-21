@@ -40,7 +40,7 @@ class TaskListCest
         $I->waitForText('Create new task', null, '#globalModal');
 
         $I->fillField('Task[title]', 'My First Task');
-        $I->fillField('Task[description]', 'This is a test task!');
+        $I->fillField('#task-description .humhub-ui-richtext', 'This is a test task!');
         //$I->click('[for="task-scheduling"]', '#globalModal');
         //$I->click('Scheduling', '#globalModal');
 
