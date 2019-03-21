@@ -24,6 +24,12 @@ humhub.module('task.search', function (module, require, $) {
             that.loadUpdate();
         });
 
+        this.buildExportUrls(this.buildRequestFilterData().data);
+
+        this.on('filterApplied', function(event, data) {
+            that.buildExportUrls(data);
+        });
+
         $('#filter-tasks-list').on('click', '.pagination-container a', function (evt) {
             evt.preventDefault();
 
@@ -52,6 +58,7 @@ humhub.module('task.search', function (module, require, $) {
         that.loader();
         client.get(url, data).then(function(response) {
             if(response.result) {
+                that.fire('filterApplied', data.data);
                 $('#filter-tasks-list').html(response.result);
             }
         }).catch(function(e) {
@@ -109,6 +116,12 @@ humhub.module('task.search', function (module, require, $) {
 
     TaskFilter.prototype.title = function () {
         return this.$titleFilter.val();
+    };
+
+    TaskFilter.prototype.buildExportUrls = function (data) {
+        var params = $.param(data);
+        $('#task-export-button a:contains("csv")').attr('href', this.options.csvExportUrl + '&' + params);
+        $('#task-export-button a:contains("xlsx")').attr('href', this.options.xlsxExportUrl + '&' + params);
     };
 
     var TaskSearchListItem = function (node, options) {

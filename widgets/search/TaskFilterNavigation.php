@@ -200,7 +200,9 @@ class TaskFilterNavigation extends FilterNavigation
     public function getData()
     {
         return [
-            'filter-url' => TaskUrl::globalFilter($this->filter->contentContainer)
+            'filter-url' => TaskUrl::globalFilter($this->filter->contentContainer),
+            'csv-export-url' => TaskUrl::exportCsv($this->filter->contentContainer),
+            'xlsx-export-url' => TaskUrl::exportXlsx($this->filter->contentContainer),
         ];
     }
 }

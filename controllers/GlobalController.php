@@ -15,7 +15,7 @@ use humhub\components\Controller;
 use humhub\modules\tasks\models\forms\TaskFilter;
 use humhub\modules\tasks\widgets\search\TaskSearchList;
 
-class GlobalController extends ContentContainerController
+class GlobalController extends AbstractTaskController
 {
     public $requireContainer = false;
 

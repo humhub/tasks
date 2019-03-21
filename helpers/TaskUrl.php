@@ -39,6 +39,8 @@ class TaskUrl extends Url
     const ROUTE_GLOBAL = '/tasks/global';
     const ROUTE_GLOBAL_FILTER = '/tasks/global/filter';
 
+    const ROUTE_EXPORT = 'export';
+
     const ROUTE_CONFIG = '/tasks/config';
 
     public static function toConfig()
@@ -54,6 +56,16 @@ class TaskUrl extends Url
     public static function globalFilter($container = null)
     {
         return static::toRoute([static::ROUTE_GLOBAL_FILTER, 'container' => $container]);
+    }
+
+    public static function exportCsv($container = null)
+    {
+        return static::toRoute([static::ROUTE_EXPORT, 'format' => 'csv', 'container' => $container]);
+    }
+
+    public static function exportXlsx($container = null)
+    {
+        return static::toRoute([static::ROUTE_EXPORT, 'format' => 'xlsx', 'container' => $container]);
     }
 
     public static function viewTask(Task $task)
