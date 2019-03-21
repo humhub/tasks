@@ -48,11 +48,14 @@ abstract class AbstractTaskController extends ContentContainerController
     public function actionExport($format)
     {
         $filterModel = new TaskFilter(['contentContainer' => $this->contentContainer]);
-        $filterModel->load(Yii::$app->request->queryParams);
+
+        $filterModel->load(Yii::$app->request->get());
         $query = $filterModel->query();
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query
         ]);
+        
         $exporter = new SpreadsheetExport([
             'dataProvider' => $dataProvider,
             'columns' => $this->collectExportColumns(clone $query),
@@ -80,6 +83,12 @@ abstract class AbstractTaskController extends ContentContainerController
             [
                 'attribute' => 'Space',
                 'value' => $this->getRelatedContainer()
+            ],
+            [
+                'attribute' => 'SpaceId',
+                'value' =>  function ($model) {
+                    return $model->content->container->id;
+                }
             ],
             [
                 'class' => DateTimeColumn::class,

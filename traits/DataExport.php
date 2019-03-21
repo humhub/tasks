@@ -76,7 +76,12 @@ trait DataExport
         return function ($model, $key) {
             $commentsCount = Comment::GetCommentCount(get_class($model), $key);
             $comments = Comment::GetCommentsLimited(get_class($model), $key, $commentsCount);
-            $messages = ArrayHelper::map($comments, 'id', 'message');
+
+            $messages = array_map(function($comment) {
+                /* @var $comment Comment */
+                return $comment->createdBy ? $comment->createdBy->getDisplayName().': '.$comment->message : $comment->message;
+            }, $comments);
+
             return implode(' | ', $messages);
         };
     }

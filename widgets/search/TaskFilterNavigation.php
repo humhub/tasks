@@ -8,6 +8,7 @@
 
 namespace humhub\modules\tasks\widgets\search;
 
+use humhub\modules\content\helpers\ContentContainerHelper;
 use humhub\modules\space\models\Space;
 use humhub\modules\space\modules\manage\models\MembershipSearch;
 use humhub\modules\space\widgets\SpacePickerField;
@@ -199,7 +200,9 @@ class TaskFilterNavigation extends FilterNavigation
 
     public function getData()
     {
+        $container = ContentContainerHelper::getCurrent();
         return [
+            'container-guid' => $container ? $container->guid : null,
             'filter-url' => TaskUrl::globalFilter($this->filter->contentContainer),
             'csv-export-url' => TaskUrl::exportCsv($this->filter->contentContainer),
             'xlsx-export-url' => TaskUrl::exportXlsx($this->filter->contentContainer),
