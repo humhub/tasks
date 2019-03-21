@@ -233,8 +233,10 @@ class Task extends ContentActiveRecord implements Searchable
             }, 'whenClient' => "function (attribute, value) {
                 return $('#task-scheduling').val() == 1;
             }"],
-            [['start_datetime'], DbDateValidator::className()],
-            [['end_datetime'], DbDateValidator::className()],
+            [['start_datetime'], 'default', 'value' => null],
+            [['end_datetime'], 'default', 'value' => null],
+            [['start_datetime'], DbDateValidator::class],
+            [['end_datetime'], DbDateValidator::class],
             [['all_day', 'scheduling', 'review', 'request_sent'], 'integer'],
             [['cal_mode'], 'in', 'range' => TaskScheduling::$calModes],
             [['assignedUsers', 'description', 'responsibleUsers', 'selectedReminders'], 'safe'],
