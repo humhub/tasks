@@ -55,7 +55,7 @@ abstract class AbstractTaskController extends ContentContainerController
         $dataProvider = new ActiveDataProvider([
             'query' => $query
         ]);
-        
+
         $exporter = new SpreadsheetExport([
             'dataProvider' => $dataProvider,
             'columns' => $this->collectExportColumns(clone $query),

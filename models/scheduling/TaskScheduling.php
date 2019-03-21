@@ -211,6 +211,7 @@ class TaskScheduling extends Component
     /**
      * Request deadline extension
      * @throws \yii\base\InvalidConfigException
+     * @throws \Throwable
      */
     public function sendExtensionRequest()
     {
