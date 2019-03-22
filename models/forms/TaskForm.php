@@ -282,6 +282,8 @@ class TaskForm extends Model
 
         if($this->task->save()) {
             RichText::postProcess($this->task->description, $this->task);
+            // Required for attached files
+            $this->task->fileManager->attach(Yii::$app->request->post('fileList'));
             return true;
         }
 
