@@ -8,7 +8,6 @@
 
 namespace humhub\modules\tasks\widgets;
 
-
 use humhub\modules\tasks\helpers\TaskListUrl;
 use humhub\widgets\SettingsTabs;
 use Yii;

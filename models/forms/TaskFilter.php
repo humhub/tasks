@@ -15,7 +15,6 @@
 
 namespace humhub\modules\tasks\models\forms;
 
-
 use humhub\libs\DbDateValidator;
 use humhub\modules\tasks\CalendarUtils;
 use Yii;

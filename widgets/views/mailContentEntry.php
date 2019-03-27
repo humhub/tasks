@@ -11,6 +11,7 @@ use yii\helpers\Html;
 /* @var $space \humhub\modules\space\models\Space */
 /* @var $originator humhub\modules\user\models\User */
 /* @var $content string */
+/* @var $date string */
 /* @var $isReminder boolean */
 /* @var $source \humhub\modules\tasks\models\Task */
 /* @var $module \humhub\modules\content\components\ContentContainerModule */

@@ -9,13 +9,10 @@
 
 namespace humhub\modules\tasks\controllers;
 
-use Yii;
-use yii\data\ActiveDataProvider;
-use yii\helpers\Url;
-use humhub\modules\admin\permissions\ManageModules;
 use humhub\modules\admin\components\Controller;
+use humhub\modules\admin\permissions\ManageModules;
 use humhub\modules\tasks\models\SnippetModuleSettings;
-use yii\web\HttpException;
+use Yii;
 
 /**
  * 

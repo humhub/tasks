@@ -6,8 +6,6 @@
  *
  */
 
-use humhub\widgets\Button;
-
 use humhub\widgets\ModalDialog;
 use humhub\widgets\ModalButton;
 use humhub\widgets\ActiveForm;

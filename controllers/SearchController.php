@@ -8,15 +8,12 @@
 
 namespace humhub\modules\tasks\controllers;
 
-use humhub\modules\content\components\ContentContainerController;
 use humhub\modules\content\components\ContentContainerControllerAccess;
 use humhub\modules\space\models\Space;
 use humhub\modules\tasks\models\forms\TaskFilter;
-use humhub\modules\tasks\permissions\ManageTasks;
 use humhub\modules\tasks\widgets\search\TaskSearchList;
 use humhub\modules\tasks\widgets\TaskPicker;
 use Yii;
-use yii\web\Controller;
 
 /**
  * todo.

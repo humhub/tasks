@@ -8,7 +8,6 @@
 
 namespace humhub\modules\tasks\models\search;
 
-use Yii;
 use yii\helpers\Html;
 
 /**
@@ -41,7 +40,7 @@ class TaskPicker
      * 
      * disableFillUser - Specifies if the results of the fillQuery should be disabled in the taskpicker results - default = true
      * 
-     * @param type $cfg filter configuration
+     * @param $cfg filter configuration
      * @return type json representation used by the taskpicker
      */
     public static function filter($cfg = null)
@@ -94,8 +93,8 @@ class TaskPicker
     /**
      * Assambles all user Ids of the given $users into an array
      * 
-     * @param array $users array of user models
-     * @return array user id array
+     * @param $tasks array of task models
+     * @return array task id array
      */
     private static function getTaskIdArray($tasks)
     {
@@ -105,14 +104,14 @@ class TaskPicker
         }
         return $result;
     }
-        
+
     /**
      * Creates an json result with user information arrays. A user will be marked
      * as disabled, if the permission check fails on this user.
-     * 
-     * @param type $tasks
-     * @param type $permission
-     * @return type
+     *
+     * @param $tasks
+     * @param $permission
+     * @return array
      */
     public static function asJSON($tasks, $permission = null, $priority = null, $disabledText = null)
     {
@@ -134,9 +133,9 @@ class TaskPicker
      * as disabled, if the given $permission check fails on this user. If the second argument
      * is of type boolean, the it will define the disabled field of the result directly.
      * 
-     * @param type $user
+     * @param $task
      * @param \humhub\libs\BasePermission|boolean|null if boolean is given
-     * @return type
+     * @return array
      */
     private static function createJSONTaskInfo($task, $permission = null, $priority = null, $disabledText = null)
     {

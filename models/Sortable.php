@@ -8,7 +8,6 @@
 
 namespace humhub\modules\tasks\models;
 
-
 interface Sortable
 {
     public function moveItemIndex($id, $newIndex);

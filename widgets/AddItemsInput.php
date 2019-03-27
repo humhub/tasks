@@ -28,5 +28,3 @@ class AddItemsInput extends Widget
     }
 
 }
-
-?>

@@ -18,8 +18,6 @@ use humhub\modules\tasks\models\forms\TaskFilter;
             <i class="fa fa-tasks"></i> <?= Yii::t('TasksModule.base', '<strong>Task</strong> Overview'); ?>
         </div>
 
-
-
         <div class="task-overview">
 
             <?= TaskFilterNavigation::widget(['filter' => $filter, 'options' => ['style' => 'border-radius:4px;background-color:' . $this->theme->variable('background-color-secondary')]]) ?>

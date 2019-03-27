@@ -1,14 +1,11 @@
 <?php
 
-
 namespace humhub\modules\tasks\models\state;
-
 
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\Task;
 use Yii;
 use yii\base\Component;
-
 
 /**
  * Class TaskState
@@ -232,7 +229,7 @@ abstract class TaskState extends Component
 
     /**
      * @param $newState
-     * @return TaskState
+     * @return object TaskState
      */
     public function getStateInstance($newState)
     {

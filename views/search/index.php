@@ -11,7 +11,6 @@
 use humhub\modules\tasks\widgets\search\TaskSearchList;
 use humhub\modules\tasks\widgets\TaskSubMenu;
 use humhub\modules\tasks\widgets\search\TaskFilterNavigation;
-use humhub\modules\tasks\models\forms\TaskFilter;
 
 /* @var $canEdit boolean */
 /* @var $contentContainer \humhub\modules\content\components\ContentContainerActiveRecord */
@@ -23,7 +22,6 @@ $emptyText = ($canEdit) ? Yii::t('TasksModule.views_index_index', 'Start now, by
     : Yii::t('TasksModule.views_index_index', 'There are currently no upcoming tasks!.');
 
 ?>
-
 
 <div class="panel panel-default task-overview">
     <?= TaskSubMenu::widget() ?>

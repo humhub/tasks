@@ -13,19 +13,17 @@
 
 namespace humhub\modules\tasks\models\forms;
 
-use humhub\modules\content\widgets\richtext\RichText;
-use humhub\modules\tasks\helpers\TaskUrl;
-use Yii;
-use yii\base\Model;
-use DateInterval;
 use DateTime;
 use DateTimeZone;
 use humhub\libs\DbDateValidator;
-use humhub\modules\tasks\models\scheduling\TaskReminder;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\content\models\Content;
+use humhub\modules\content\widgets\richtext\RichText;
+use humhub\modules\tasks\helpers\TaskUrl;
+use humhub\modules\tasks\models\scheduling\TaskReminder;
 use humhub\modules\tasks\models\Task;
-use humhub\modules\tasks\CalendarUtils;
+use Yii;
+use yii\base\Model;
 use yii\web\HttpException;
 
 class TaskForm extends Model

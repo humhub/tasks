@@ -33,6 +33,4 @@ use humhub\modules\content\widgets\richtext\RichTextField;
     <?= $form->field($taskForm, 'is_public')->checkbox() ?>
     <?= $form->field($taskForm->task, 'scheduling')->checkbox(['data-action-change' => 'toggleScheduling']) ?>
 
-
-
 </div>

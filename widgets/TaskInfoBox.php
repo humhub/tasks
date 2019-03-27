@@ -1,11 +1,8 @@
 <?php
 
-
 namespace humhub\modules\tasks\widgets;
 
-
 use humhub\components\Widget;
-use humhub\modules\tasks\models\Task;
 
 class TaskInfoBox extends Widget
 {

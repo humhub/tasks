@@ -3,7 +3,6 @@
 
 use humhub\widgets\Button;
 
-
 /* @var $task \humhub\modules\tasks\models\Task */
 /* @var $primaryStateConfig array */
 /* @var $primaryUrl string */

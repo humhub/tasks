@@ -8,10 +8,8 @@
 
 namespace humhub\modules\tasks\models\lists;
 
-
 use humhub\modules\content\components\ActiveQueryContent;
 use humhub\modules\content\components\ContentContainerActiveRecord;
-use humhub\modules\content\models\ContentContainer;
 use humhub\modules\content\models\ContentTag;
 use humhub\modules\tasks\models\Sortable;
 use humhub\modules\tasks\models\Task;

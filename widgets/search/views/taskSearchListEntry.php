@@ -13,7 +13,6 @@ use humhub\modules\tasks\widgets\TaskBadge;
 use humhub\modules\tasks\widgets\TaskPercentageBar;
 use humhub\modules\tasks\widgets\TaskUserList;
 use humhub\modules\space\widgets\Image;
-use humhub\widgets\Button;
 
 /* @var $task \humhub\modules\tasks\models\Task */
 /* @var $canEdit boolean */
@@ -22,9 +21,7 @@ use humhub\widgets\Button;
 
 $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
 
-
 ?>
-
 
 <div class="media task" data-task-url="<?= TaskUrl::viewTask($task) ?>">
     <div class="task-head">

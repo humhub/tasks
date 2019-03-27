@@ -6,7 +6,6 @@
  *
  */
 
-use humhub\modules\tasks\models\scheduling\TaskScheduling;
 use humhub\modules\user\widgets\UserPickerField;
 use humhub\widgets\Button;
 use humhub\widgets\Link;

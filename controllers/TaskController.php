@@ -2,19 +2,18 @@
 
 namespace humhub\modules\tasks\controllers;
 
-use humhub\modules\tasks\helpers\TaskUrl;
-use Yii;
-use yii\web\HttpException;
 use humhub\modules\content\components\ContentContainerControllerAccess;
 use humhub\modules\space\models\Space;
+use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\forms\ItemDrop;
 use humhub\modules\tasks\models\forms\TaskForm;
-use humhub\modules\tasks\models\user\TaskUser;
+use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\permissions\CreateTask;
 use humhub\modules\tasks\permissions\ManageTasks;
 use humhub\modules\user\models\UserPicker;
 use humhub\widgets\ModalClose;
-use humhub\modules\tasks\models\Task;
+use Yii;
+use yii\web\HttpException;
 
 class TaskController extends AbstractTaskController
 {

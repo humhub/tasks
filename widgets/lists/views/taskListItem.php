@@ -7,7 +7,6 @@
  */
 
 use humhub\modules\comment\models\Comment;
-
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\widgets\lists\TaskListDetails;
 use humhub\modules\tasks\widgets\TaskBadge;
@@ -62,7 +61,7 @@ $checkUrl = $task->state->getCheckUrl();
                         'aria-expanded' => 'false'
                     ])->sm()->loader(false) ?>
                 <span class="sr-only">Toggle Dropdown</span>
-                </button>
+
                 <ul class="dropdown-menu pull-right">
                     <li>
                         <?= Button::asLink(Yii::t('TasksModule.base', 'Edit task'))
@@ -76,8 +75,6 @@ $checkUrl = $task->state->getCheckUrl();
                     </li>
                 </ul>
             </div>
-
-
         </div>
     <?php endif; ?>
 

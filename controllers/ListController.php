@@ -8,7 +8,6 @@
 
 namespace humhub\modules\tasks\controllers;
 
-
 use humhub\modules\content\components\ContentContainerControllerAccess;
 use humhub\modules\space\models\Space;
 use humhub\modules\tasks\models\lists\TaskListItemDrop;

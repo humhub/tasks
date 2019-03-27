@@ -13,7 +13,6 @@
 
 namespace humhub\modules\tasks\widgets\search;
 
-
 use humhub\components\Widget;
 
 class TaskSearchListEntry extends Widget

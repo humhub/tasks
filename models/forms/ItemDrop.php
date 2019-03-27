@@ -13,7 +13,6 @@
 
 namespace humhub\modules\tasks\models\forms;
 
-
 use humhub\modules\tasks\models\Sortable;
 use humhub\modules\tasks\models\Task;
 use yii\base\Model;

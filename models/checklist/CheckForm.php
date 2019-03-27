@@ -1,8 +1,6 @@
 <?php
 
-
 namespace humhub\modules\tasks\models\checklist;
-
 
 use humhub\modules\tasks\models\Task;
 use yii\base\Model;
@@ -43,7 +41,6 @@ class CheckForm extends Model
             [['item'], 'validateCanCheck'],
         ];
     }
-
 
     public function validateCanCheck($attribute, $params)
     {

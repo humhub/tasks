@@ -8,12 +8,10 @@
 
 namespace humhub\modules\tasks\controllers;
 
-use humhub\modules\content\components\ContentContainerController;
-use Yii;
 use humhub\components\access\ControllerAccess;
-use humhub\components\Controller;
 use humhub\modules\tasks\models\forms\TaskFilter;
 use humhub\modules\tasks\widgets\search\TaskSearchList;
+use Yii;
 
 class GlobalController extends AbstractTaskController
 {

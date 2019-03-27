@@ -2,14 +2,10 @@
 
 namespace humhub\modules\tasks\helpers;
 
-use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\content\components\ContentContainerActiveRecord;
-use humhub\modules\content\components\ContentContainerController;
-use humhub\modules\content\models\ContentTag;
 use humhub\modules\tasks\models\lists\TaskList;
 use humhub\modules\tasks\models\lists\TaskListInterface;
 use humhub\modules\tasks\models\Task;
-use Yii;
 
 class TaskListUrl extends TaskUrl
 {

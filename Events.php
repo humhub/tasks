@@ -23,7 +23,6 @@ use humhub\modules\tasks\widgets\MyTasks;
 use humhub\modules\tasks\models\user\TaskUser;
 use yii\db\Expression;
 
-
 /* @var $user \humhub\modules\user\models\User */
 
 /**
@@ -234,7 +233,7 @@ class Events
                 // remove notifications
 //                $event->sender->className()
 //                $event->sender->getPrimaryKey()
-                $notifications = Notification::find()->where(['source_class' => Task::className(), 'source_pk' => $task->id, 'space_id' => $event->space->id])->all();
+                $notifications = Notification::find()->where(['source_class' => Task::class, 'source_pk' => $task->id, 'space_id' => $event->space->id])->all();
                 foreach ($notifications as $notification) {
                     $notification->delete();
                 }

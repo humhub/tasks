@@ -8,7 +8,6 @@
 
 namespace humhub\modules\tasks\models\lists;
 
-
 use humhub\modules\content\models\ContentTagAddition;
 use Yii;
 

@@ -1,7 +1,6 @@
 <?php
 /* @var $this \humhub\components\View */
 
-use humhub\modules\comment\widgets\Comments;
 use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\content\widgets\WallEntryAddons;
 use humhub\modules\tasks\helpers\TaskUrl;
@@ -23,7 +22,6 @@ if (($task->schedule->isOverdue())) {
 <div class="task-list-task-details">
 
     <div class="task-list-task-details-body clearfix">
-
 
         <div class="task-list-task-infos">
             <?= TaskRoleInfoBox::widget(['task' => $task]) ?>

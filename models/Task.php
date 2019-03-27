@@ -9,11 +9,9 @@
 namespace humhub\modules\tasks\models;
 
 use humhub\modules\content\components\ContentContainerPermissionManager;
-use humhub\modules\space\modules\manage\models\MembershipSearch;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\permissions\CreateTask;
 use humhub\modules\tasks\permissions\ProcessUnassignedTasks;
-use humhub\modules\user\components\ActiveQueryUser;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\Expression;
@@ -33,7 +31,6 @@ use humhub\modules\search\interfaces\Searchable;
 use humhub\widgets\Label;
 use humhub\modules\tasks\widgets\WallEntry;
 use humhub\modules\tasks\permissions\ManageTasks;
-
 
 /**
  * This is the model class for table "task".
@@ -167,7 +164,6 @@ class Task extends ContentActiveRecord implements Searchable
         $scenarios[self::SCENARIO_EDIT] = $scenarios[self::SCENARIO_DEFAULT];
         return $scenarios;
     }
-
 
     /**
      * @return string the associated database table name
@@ -420,6 +416,7 @@ class Task extends ContentActiveRecord implements Searchable
                     $this->addTaskAssigned($guid, empty($oldAssigned));
                 }
             }
+
             if (!empty($this->responsibleUsers)) {
                 foreach ($this->responsibleUsers as $guid) {
                     $user = User::findOne(['guid' => $guid]);
@@ -441,7 +438,6 @@ class Task extends ContentActiveRecord implements Searchable
             $this->schedule->afterSave($insert, $changedAttributes);
 
             $this->saveNewItems();
-
         }
 
         if($this->list) {
@@ -451,7 +447,6 @@ class Task extends ContentActiveRecord implements Searchable
 
     public function afterMove(ContentContainerActiveRecord $container = null)
     {
-
         foreach ($this->taskUsers as $taskUser) {
             if(!$container->isMember($taskUser->user_id)) {
                 $taskUser->delete();
@@ -464,7 +459,8 @@ class Task extends ContentActiveRecord implements Searchable
     /**
      * Returns an ActiveQuery for all assigned user models of this task.
      *
-     * @return \yii\db\ActiveQuery
+     * @param bool $filterOutResponsibleUsers
+     * @return ActiveQuery
      */
     public function getTaskAssignedUsers($filterOutResponsibleUsers = false)
     {
@@ -555,8 +551,6 @@ class Task extends ContentActiveRecord implements Searchable
     }
 
 
-
-
     // ###########  handle responsible users  ###########
 
     /**
@@ -645,7 +639,7 @@ class Task extends ContentActiveRecord implements Searchable
      */
     public function getTaskReminder()
     {
-        $query = $this->hasMany(TaskReminder::className(), ['task_id' => 'id']);
+        $query = $this->hasMany(TaskReminder::class, ['task_id' => 'id']);
         return $query;
     }
 
@@ -930,8 +924,6 @@ class Task extends ContentActiveRecord implements Searchable
     }
 
 
-
-
     // ###########  handle view-specific  ###########
 
     /**
@@ -1017,7 +1009,7 @@ class Task extends ContentActiveRecord implements Searchable
 
     /**
      * @param $userId
-     * @return boolw
+     * @return bool
      * @throws \Exception
      * @throws \yii\db\StaleObjectException
      */

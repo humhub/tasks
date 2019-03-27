@@ -9,7 +9,6 @@ use yii\helpers\Html;
 /* @var $style \humhub\modules\user\models\User[] */
 /* @var $type int*/
 
-
 ?>
 
 <?php foreach ($users as $user): ?>

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace humhub\modules\tasks\models\lists;
-
 
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\tasks\models\Sortable;
@@ -40,9 +38,7 @@ class TaskListRoot extends Component implements Sortable
                 $newIndex = count($taskLists) -1;
             }
 
-
             array_splice($taskLists, $newIndex, 0, [$taskList]);
-
 
             foreach ($taskLists as $index => $item) {
                 $item->addition->updateAttributes(['sort_order' => $index]);

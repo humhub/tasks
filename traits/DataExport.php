@@ -4,14 +4,12 @@ namespace humhub\modules\tasks\traits;
 
 use humhub\modules\comment\models\Comment;
 use humhub\modules\tasks\models\Task;
-use PhpOffice\PhpSpreadsheet\Shared\Date;
-use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use yii\helpers\ArrayHelper;
 
 trait DataExport
 {
     /**
-     * Getting the parrent content container name related to task
+     * Getting the parent content container name related to task
      *
      * @return \Closure
      */

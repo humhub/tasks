@@ -1,8 +1,6 @@
 <?php
 
-
 namespace humhub\modules\tasks\widgets\lists;
-
 
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\tasks\helpers\TaskListUrl;

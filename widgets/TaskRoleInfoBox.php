@@ -1,8 +1,6 @@
 <?php
 
-
 namespace humhub\modules\tasks\widgets;
-
 
 use humhub\modules\tasks\models\Task;
 use Yii;

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace humhub\modules\tasks\models\lists;
 
 use humhub\modules\content\components\ContentContainerActiveRecord;

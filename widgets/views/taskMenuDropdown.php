@@ -5,9 +5,6 @@
  * @license https://www.humhub.com/licences
  *
  */
-?>
-
-<?php
 
 use humhub\widgets\Button;
 use humhub\widgets\Link;
@@ -23,7 +20,6 @@ use humhub\widgets\ModalButton;
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu pull-right">
-
                 <li>
                     <?= ModalButton::asLink(Yii::t('TasksModule.base', 'Edit'))->post($editUrl)->icon('fa-edit')->visible($canEdit) ?>
                 </li>

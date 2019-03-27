@@ -1,8 +1,6 @@
 <?php
 
-
 namespace humhub\modules\tasks\models\lists;
-
 
 use humhub\modules\content\components\ActiveQueryContent;
 use humhub\modules\tasks\models\Sortable;

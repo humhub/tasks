@@ -10,13 +10,8 @@
 /* @var $task \humhub\modules\tasks\models\Task */
 /* @var $contentContainer \humhub\modules\content\components\ContentContainerActiveRecord */
 
-
-use humhub\modules\tasks\widgets\ChangeStatusButton;
 use humhub\modules\tasks\widgets\lists\TaskListDetails;
 use humhub\modules\tasks\widgets\TaskSubMenu;
-use humhub\widgets\MarkdownView;
-use humhub\modules\content\widgets\WallEntryAddons;
-use humhub\modules\tasks\widgets\checklist\TaskChecklist;
 
 \humhub\modules\tasks\assets\Assets::register($this);
 

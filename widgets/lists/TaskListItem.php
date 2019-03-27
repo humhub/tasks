@@ -8,8 +8,6 @@
 
 namespace humhub\modules\tasks\widgets\lists;
 
-
-use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\tasks\helpers\TaskListUrl;
 use humhub\modules\tasks\models\Task;
@@ -40,7 +38,7 @@ class TaskListItem extends JsWidget
     private $contentContainer;
 
     /**
-     * @var bool wheather or not to eager load the detail view
+     * @var bool whether or not to eager load the detail view
      */
     public $details = false;
 

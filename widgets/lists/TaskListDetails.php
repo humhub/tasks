@@ -1,8 +1,6 @@
 <?php
 
-
 namespace humhub\modules\tasks\widgets\lists;
-
 
 use humhub\components\Widget;
 use humhub\modules\tasks\models\Task;

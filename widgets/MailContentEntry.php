@@ -89,5 +89,3 @@ class MailContentEntry extends Widget
     }
 
 }
-
-?>

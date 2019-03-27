@@ -7,15 +7,10 @@
  */
 
 use humhub\libs\Html;
-use humhub\modules\tasks\helpers\TaskListUrl;
 use humhub\modules\tasks\models\Task;
-use humhub\modules\tasks\widgets\ChangeStatusButton;
 use humhub\modules\tasks\widgets\TaskBadge;
 use humhub\modules\tasks\widgets\TaskContextMenu;
 use humhub\modules\tasks\widgets\TaskUserList;
-use humhub\modules\user\widgets\Image;
-use humhub\widgets\Button;
-use humhub\widgets\TimeAgo;
 
 /* @var $contentContainer \humhub\modules\content\components\ContentContainerActiveRecord */
 /* @var $task \humhub\modules\tasks\models\Task */
@@ -96,8 +91,6 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
                         </div>
                     </div>
                 <?php endif ?>
-
-
 
             </div>
         </div>

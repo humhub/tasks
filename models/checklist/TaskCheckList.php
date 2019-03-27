@@ -2,10 +2,9 @@
 
 namespace humhub\modules\tasks\models\checklist;
 
-use Yii;
-use yii\base\Component;
 use humhub\modules\tasks\models\Sortable;
 use humhub\modules\tasks\models\Task;
+use yii\base\Component;
 
 /**
  * Class TaskCheckList

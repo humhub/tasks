@@ -1,8 +1,6 @@
 <?php
 
-
 namespace humhub\modules\tasks\models\state;
-
 
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\notifications\PendingReviewNotification;

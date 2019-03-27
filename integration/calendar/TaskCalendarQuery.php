@@ -16,7 +16,6 @@
 namespace humhub\modules\tasks\integration\calendar;
 
 use humhub\modules\calendar\interfaces\AbstractCalendarQuery;
-use humhub\modules\calendar\interfaces\FilterNotSupportedException;
 use humhub\modules\tasks\models\scheduling\TaskScheduling;
 use humhub\modules\tasks\models\Task;
 

@@ -10,9 +10,7 @@ namespace humhub\modules\tasks\models\scheduling;
 
 use DateTime;
 use DateTimeZone;
-use humhub\modules\tasks\CalendarUtils;
 use humhub\modules\tasks\helpers\TaskUrl;
-use humhub\modules\tasks\integration\calendar\TaskCalendar;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\notifications\ChangedDateTimeNotification;
 use humhub\modules\tasks\notifications\ExtensionRequestNotification;
@@ -216,7 +214,7 @@ class TaskScheduling extends Component
     public function sendExtensionRequest()
     {
         if ($this->task->hasTaskResponsible()) {
-            $this->task->deleteOldNotifications(ExtensionRequestNotification::className());
+            $this->task->deleteOldNotifications(ExtensionRequestNotification::class);
             ExtensionRequestNotification::instance()->from(Yii::$app->user->getIdentity())->about($this->task)->sendBulk($this->task->taskResponsibleUsers);
         }
     }
@@ -256,7 +254,7 @@ class TaskScheduling extends Component
         if ($this->task->isCompleted())
             return;
         // remove old notifications
-        $this->task->deleteOldNotifications(ChangedDateTimeNotification::className());
+        $this->task->deleteOldNotifications(ChangedDateTimeNotification::class);
 
         if (!empty($this->taskAssignedUsers)) {
             ChangedDateTimeNotification::instance()->from(Yii::$app->user->getIdentity())->about($this->task)->sendBulk($this->task->filterResponsibleAssigned());

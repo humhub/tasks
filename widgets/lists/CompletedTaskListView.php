@@ -15,7 +15,6 @@
 
 namespace humhub\modules\tasks\widgets\lists;
 
-
 use humhub\components\Widget;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\meeting\models\forms\MeetingFilter;

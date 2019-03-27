@@ -9,7 +9,6 @@
 
 namespace humhub\modules\tasks\widgets;
 
-use humhub\modules\content\widgets\WallEntryControlLink;
 use humhub\modules\tasks\assets\Assets;
 use humhub\modules\content\widgets\EditLink;
 use humhub\modules\content\widgets\DeleteLink;

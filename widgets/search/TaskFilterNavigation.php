@@ -9,7 +9,6 @@
 namespace humhub\modules\tasks\widgets\search;
 
 use humhub\modules\content\helpers\ContentContainerHelper;
-use humhub\modules\space\models\Space;
 use humhub\modules\space\modules\manage\models\MembershipSearch;
 use humhub\modules\space\widgets\SpacePickerField;
 use Yii;

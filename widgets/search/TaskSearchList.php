@@ -13,7 +13,6 @@
 
 namespace humhub\modules\tasks\widgets\search;
 
-
 use humhub\components\Widget;
 use humhub\modules\tasks\models\forms\TaskFilter;
 use humhub\modules\tasks\models\Task;
