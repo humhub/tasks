@@ -48,7 +48,6 @@ humhub.module('task.search', function (module, require, $) {
             if(that.options.containerGuid) {
                 $params['cguid'] = that.options.containerGuid;
             }
-            debugger;
 
             window.location = $this.data('originalUrl') + '&' +$.param($params);
         });
@@ -120,7 +119,7 @@ humhub.module('task.search', function (module, require, $) {
         if (show === false) {
             loader.reset($node);
         } else {
-            loader.set($node,);
+            loader.set($node);
         }
     };
 
