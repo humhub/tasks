@@ -33,7 +33,7 @@ $titleFilter = $title[0];
 
     </div>
 
-<div class="filter-root clearfix" style="position:relative;padding-top:0;padding-bottom:0">
+<div class="task-filter-root clearfix">
     <div class="row task-bottom-panel">
         <?= FilterPanel::widget(['blocks' => $checkboxes, 'span' => 2]) ?>
         <?= FilterPanel::widget(['blocks' => $datePicker, 'span' => 2]) ?>
