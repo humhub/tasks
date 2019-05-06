@@ -21,6 +21,7 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
             <a href="<?= $task->getUrl(); ?>" class="pull-left" style="margin-right: 10px">
                 <i class="fa fa-tasks meeting-wall-icon colorDefault" style="font-size: 38px;"></i>
             </a>
+
             <h4 class="media-heading">
                 <a href="<?= $task->getUrl(); ?>">
                     <b><?= Html::encode($task->title); ?></b>

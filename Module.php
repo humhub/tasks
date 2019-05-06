@@ -31,16 +31,6 @@ class Module extends ContentContainerModule
     /**
      * @inheritdoc
      */
-    public $showTopMenuItem = true;
-
-    /**
-     * @inheritdoc
-     */
-    public $topMenuSort = 500;
-
-    /**
-     * @inheritdoc
-     */
     public function getContentContainerTypes()
     {
         return [

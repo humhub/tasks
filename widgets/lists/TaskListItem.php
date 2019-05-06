@@ -89,6 +89,7 @@ class TaskListItem extends JsWidget
     {
         return [
             'task-id' =>  $this->task->id,
+            'content-id' =>  $this->task->content->id,
             'reload-url' => TaskListUrl::reloadTaskListTask($this->task),
             'load-details-url' =>  TaskListUrl::loadTaskDetails($this->task),
             'task-status' => $this->task->status

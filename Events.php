@@ -40,7 +40,8 @@ class Events
         /* @var $module Module */
         $module = Yii::$app->getModule('tasks');
 
-        if(!$module->showTopMenuItem) {
+
+        if(!(int) $module->settings->get('showGlobalMenuItem', 1)) {
             return;
         }
 
@@ -50,7 +51,7 @@ class Events
             'id' => 'tasks-global',
             'icon' => '<i class="fa fa-tasks"></i>',
             'url' => TaskUrl::globalView(),
-            'sortOrder' => $module->topMenuSort,
+            'sortOrder' => $module->settings->get('menuSortOrder', 500),
             'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'tasks' && Yii::$app->controller->id == 'global'),
         ]);
     }

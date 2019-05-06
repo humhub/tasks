@@ -187,6 +187,18 @@ humhub.module('task', function (module, require, $) {
         $(document).on('click', '.task-change-state-button a', function() {
            loader.initLoaderButton($('.task-change-state-button').children().first()[0]);
         });
+
+        event.on('humhub:content:afterMove.tasks', function(evt, resp) {
+            if($('#task-space-menu').length) {
+                $task = $('[data-content-id="'+resp.id+'"]');
+                if($task.length) {
+                    $task.remove();
+                } else {
+                    $('#task-space-menu').find('a:first').click();
+                }
+            }
+        })
+
     };
 
     module.export({

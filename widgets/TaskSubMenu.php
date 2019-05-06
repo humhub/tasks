@@ -15,8 +15,7 @@ use Yii;
 
 class TaskSubMenu extends SettingsTabs
 {
-
-    public $options = ['style' => 'border-radius:4px;margin-bottom:0px;'];
+    public $options = ['id' => 'task-space-menu', 'style' => 'border-radius:4px;margin-bottom:0px;'];
 
     /**
      * @inheritdoc

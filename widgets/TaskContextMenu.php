@@ -46,6 +46,7 @@ class TaskContextMenu extends Widget
         return $this->render('taskMenuDropdown', [
                     'deleteUrl' => TaskUrl::deleteTask($this->task, null, 1),
                     'editUrl' =>  TaskUrl::editTask($this->task, null, 1),
+                    'task' => $this->task,
                     'extensionRequestUrl' => TaskUrl::requestExtension($this->task),
                     'resetUrl' => TaskUrl::resetTask($this->task),
                     'canEdit' => $this->task->content->canEdit(),

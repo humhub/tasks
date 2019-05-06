@@ -34,6 +34,12 @@ class SnippetModuleSettings extends Model
      */
     public $myTasksSnippetSortOrder = 1;
 
+    /**
+     * @var int defines if the global task menu item should be displayed
+     */
+    public $showGlobalMenuItem = 1;
+    public $menuSortOrder = 500;
+
 
     public function init()
     {
@@ -42,6 +48,8 @@ class SnippetModuleSettings extends Model
         $this->myTasksSnippetShowSpace = $module->settings->get('myTasksSnippetShowSpace', $this->myTasksSnippetShowSpace);
         $this->myTasksSnippetMaxItems = $module->settings->get('myTasksSnippetMaxItems', $this->myTasksSnippetMaxItems);
         $this->myTasksSnippetSortOrder = $module->settings->get('myTasksSnippetSortOrder', $this->myTasksSnippetSortOrder);
+        $this->showGlobalMenuItem = $module->settings->get('showGlobalMenuItem', $this->showGlobalMenuItem);
+        $this->menuSortOrder = $module->settings->get('menuSortOrder', $this->menuSortOrder);
     }
 
     public function showMyTasksSnippet()
@@ -69,9 +77,9 @@ class SnippetModuleSettings extends Model
     public function rules()
     {
         return [
-            [['myTasksSnippetShow', 'myTasksSnippetShowSpace'],  'boolean'],
+            [['myTasksSnippetShow', 'myTasksSnippetShowSpace', 'showGlobalMenuItem'],  'boolean'],
             ['myTasksSnippetMaxItems',  'number', 'min' => 1, 'max' => 30],
-            ['myTasksSnippetSortOrder',  'number', 'min' => 0],
+            [['myTasksSnippetSortOrder', 'menuSortOrder'],  'number', 'min' => 0],
         ];
     }
 
@@ -85,6 +93,8 @@ class SnippetModuleSettings extends Model
             'myTasksSnippetShowSpace' => Yii::t('TasksModule.config', 'Show snippet in Space'),
             'myTasksSnippetMaxItems' => Yii::t('TasksModule.config', 'Max tasks items'),
             'myTasksSnippetSortOrder' => Yii::t('TasksModule.config', 'Sort order'),
+            'showGlobalMenuItem' => Yii::t('TasksModule.config', 'Show global task menu item'),
+            'menuSortOrder' => Yii::t('TasksModule.config', 'Menu Item sort order'),
         ];
     }
 
@@ -99,6 +109,8 @@ class SnippetModuleSettings extends Model
         $module->settings->set('myTasksSnippetShowSpace', $this->myTasksSnippetShowSpace);
         $module->settings->set('myTasksSnippetMaxItems', $this->myTasksSnippetMaxItems);
         $module->settings->set('myTasksSnippetSortOrder', $this->myTasksSnippetSortOrder);
+        $module->settings->set('showGlobalMenuItem', $this->showGlobalMenuItem);
+        $module->settings->set('menuSortOrder', $this->menuSortOrder);
         return true;
     }
 }

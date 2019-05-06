@@ -15,6 +15,7 @@ use humhub\modules\tasks\widgets\TaskUserList;
 use humhub\widgets\Link;
 use humhub\widgets\Button;
 use humhub\modules\tasks\models\Task;
+use humhub\modules\content\widgets\MoveContentLink;
 use yii\helpers\Html;
 
 /* @var $this \humhub\components\View */
@@ -68,6 +69,9 @@ $checkUrl = $task->state->getCheckUrl();
                         <?= Button::asLink(Yii::t('TasksModule.base', 'Edit task'))
                             ->action('task.list.editTask', TaskUrl::editTask($task))
                             ->icon('fa-pencil'); ?>
+                    </li>
+                    <li>
+                        <?= MoveContentLink::widget(['model' => $task]) ?>
                     </li>
                     <li>
                         <?= Button::asLink(Yii::t('TasksModule.base', 'Delete task'))

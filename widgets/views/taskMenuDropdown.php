@@ -12,6 +12,7 @@
 use humhub\widgets\Button;
 use humhub\widgets\Link;
 use humhub\widgets\ModalButton;
+use humhub\modules\content\widgets\MoveContentLink;
 
 ?>
 
@@ -26,6 +27,9 @@ use humhub\widgets\ModalButton;
 
                 <li>
                     <?= ModalButton::asLink(Yii::t('TasksModule.base', 'Edit'))->post($editUrl)->icon('fa-edit')->visible($canEdit) ?>
+                </li>
+                <li>
+                    <?= MoveContentLink::widget(['model' => $task]) ?>
                 </li>
                 <li>
                     <?= Link::asLink(Yii::t('TasksModule.base', 'Delete'))->action('ui.modal.post', $deleteUrl)->icon('fa-trash')
