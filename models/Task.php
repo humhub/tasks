@@ -53,6 +53,7 @@ use humhub\modules\tasks\permissions\ManageTasks;
  * @property integer $cal_mode
  * @property integer $task_list_id
  * @property string $time_zone The timeZone this entry was saved, note the dates itself are always saved in app timeZone
+ * @property string $uid uid field used by calendar integration
  *
  * @property TaskReminder[] $taskReminder
  * @property TaskItem[] $items
