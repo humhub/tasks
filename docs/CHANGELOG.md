@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.3
+1.3.0 (May, 9, 2019)
 --------------------
 - Enh: Filter by container related tasks in "Your tasks" snippet.
 - Enh: Global overview
@@ -13,6 +13,7 @@ Changelog
 - Enh: Added date filter to search view
 - Enh: Enhanced list view usability
 - Enh: Use of new richtext editor
+- Enh: Added uid field for calendar integration
 
 1.2.2 (October 15, 2018)
 --------------------
