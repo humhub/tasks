@@ -1,10 +1,10 @@
-[![Build Status](https://travis-ci.org/humhub/humhub-modules-tasks.svg?branch=master)](https://travis-ci.org/humhub/humhub-modules-tasks)
-
-Tasks Module
+Tasks Module for Polygon Campus
 ==============
 
 Simple task manager for spaces.
+- Added clone task function
+- Added custom fields (number and text)
 
 
-For more  informations visit:
-<https://github.com/humhub/humhub-modules-tasks>
+Polygon.by - Art & Gamedev School (Minsk, Belarus)
+https://polygon.by
