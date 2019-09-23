@@ -10,5 +10,5 @@ return array (
   'At least 2 Hours before' => '',
   'Do not remind' => 'Påminn inte',
   'Remind Mode' => 'Påminnelse läge',
-  'Task' => '',
+  'Task' => 'Uppgift',
 );

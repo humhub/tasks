@@ -4,7 +4,7 @@ return array (
   'Add schedule to the space calendar' => '',
   'Add to space calendar' => '',
   'All Day' => 'Čitav dan',
-  'Assigned user(s)' => '',
+  'Assigned user(s)' => 'Dodijeljeni korisnik(ci)',
   'Checklist Items' => '',
   'Color' => 'Boja',
   'Deadline: ' => '',

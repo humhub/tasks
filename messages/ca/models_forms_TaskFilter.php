@@ -1,15 +1,14 @@
 <?php
-
-return [
-    'Created by me' => '',
-    'End date' => '',
-    'Filter status' => '',
-    'Filter tasks' => '',
-    'I\'m assigned' => '',
-    'I\'m responsible' => '',
-    'Overdue' => '',
-    'Spaces' => '',
-    'Start date' => '',
-    'Status' => '',
-    'Title' => '',
-];
+return array (
+  'Created by me' => 'Creat per mi',
+  'End date' => '',
+  'Filter status' => '',
+  'Filter tasks' => '',
+  'I\'m assigned' => '',
+  'I\'m responsible' => '',
+  'Overdue' => '',
+  'Spaces' => 'Espais',
+  'Start date' => '',
+  'Status' => 'Estat',
+  'Title' => 'Títol',
+);

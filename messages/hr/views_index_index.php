@@ -4,7 +4,7 @@ return array (
   'Assigned' => '',
   'Completed' => 'Dovršeno',
   'Deadline at' => '',
-  'Drag entry' => '',
+  'Drag entry' => 'Povuci unos',
   'Edit' => 'Uredi',
   'Filter tasks by title' => '',
   'In Progress' => 'U toku',
