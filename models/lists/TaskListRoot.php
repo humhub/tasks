@@ -37,7 +37,7 @@ class TaskListRoot extends Component implements Sortable
             if($newIndex < 0) {
                 $newIndex = 0;
             } else if($newIndex >= count($taskLists)) {
-                $newIndex = count($taskLists) -1;
+                $newIndex = count($taskLists);
             }
 
 
