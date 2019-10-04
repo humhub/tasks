@@ -7,12 +7,14 @@
  */
 
 use humhub\libs\Html;
+use humhub\modules\space\models\Space;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\widgets\TaskBadge;
 use humhub\modules\tasks\widgets\TaskPercentageBar;
 use humhub\modules\tasks\widgets\TaskUserList;
-use humhub\modules\space\widgets\Image;
+use humhub\modules\space\widgets\Image as SpaceImage;
+use humhub\modules\user\widgets\Image as UserImage;
 use humhub\widgets\Button;
 
 /* @var $task \humhub\modules\tasks\models\Task */
@@ -22,6 +24,17 @@ use humhub\widgets\Button;
 
 $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
 
+$image = $task->content->container instanceof Space
+    ? SpaceImage::widget([
+        'space' => $task->content->container,
+        'width' => '24',
+        'showTooltip' => true,
+        'link' => true])
+    : UserImage::widget([
+        'user' => $task->content->container,
+        'width' => '24',
+        'showTooltip' => true,
+        'link' => true]);
 
 ?>
 
@@ -33,12 +46,7 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
             <?php if(!$contentContainer) : ?>
 
                 <div class="task-controls" style="display:inline">
-                    <?= Image::widget([
-                        'space' => $task->content->container,
-                        'width' => '24',
-                        'showTooltip' => true,
-                        'link' => true
-                    ]) ?>
+                    <?= $image ?>
                 </div>
 
             <?php endif ?>

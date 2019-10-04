@@ -23,6 +23,7 @@ use humhub\modules\tasks\widgets\lists\TaskListDetails;
 use humhub\modules\tasks\widgets\lists\TaskListItem;
 use humhub\modules\tasks\widgets\lists\TaskListWidget;
 use humhub\modules\tasks\widgets\lists\UnsortedTaskListWidget;
+use humhub\modules\user\models\User;
 use humhub\widgets\ModalClose;
 use Yii;
 use yii\web\HttpException;
@@ -32,7 +33,7 @@ class ListController extends AbstractTaskController
     public function getAccessRules()
     {
         return [
-            [ContentContainerControllerAccess::RULE_USER_GROUP_ONLY => [Space::USERGROUP_MEMBER]],
+            [ContentContainerControllerAccess::RULE_USER_GROUP_ONLY => [Space::USERGROUP_MEMBER, User::USERGROUP_SELF]],
             ['permission' => ManageTasks::class, 'actions' => ['edit', 'delete', 'drop-task', 'drop-task-list']],
         ];
     }

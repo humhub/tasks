@@ -81,11 +81,18 @@ abstract class AbstractTaskController extends ContentContainerController
             'title',
             'description',
             [
-                'attribute' => 'Space',
+                'attribute' => 'Container',
                 'value' => $this->getRelatedContainer()
             ],
             [
-                'attribute' => 'SpaceId',
+                'attribute' => 'ContainerType',
+                'value' =>  function ($model) {
+                    /* @var $model \humhub\modules\tasks\models\Task */
+                    return (new \ReflectionClass($model->content->container))->getShortName();
+                }
+            ],
+            [
+                'attribute' => 'ContainerId',
                 'value' =>  function ($model) {
                     return $model->content->container->id;
                 }

@@ -35,6 +35,7 @@ class Module extends ContentContainerModule
     {
         return [
             Space::class,
+            User::class,
         ];
     }
 
@@ -66,6 +67,7 @@ class Module extends ContentContainerModule
     /**
      * @inheritdoc
      * @throws \yii\base\Exception
+     * @throws \Throwable
      */
     public function disableContentContainer(ContentContainerActiveRecord $container)
     {

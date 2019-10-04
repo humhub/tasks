@@ -85,7 +85,7 @@ class TaskFilterNavigation extends FilterNavigation
      */
     protected function initFilters()
     {
-        if(!$this->filter) {
+        if (!$this->filter) {
             $this->filter = new TaskFilter();
         }
 
@@ -103,7 +103,7 @@ class TaskFilterNavigation extends FilterNavigation
                     'style' => 'width:100%',
                     'data-action-keydown' => 'inputChange',
                     'data-action-keypress' => null,
-                    'placeholder' =>   Yii::t('TasksModule.views_index_index', 'Filter tasks by title')
+                    'placeholder' => Yii::t('TasksModule.views_index_index', 'Filter tasks by title')
                 ],
                 'sortOrder' => 100], static::FILTER_BLOCK_TITLE);
         } else {
@@ -114,7 +114,7 @@ class TaskFilterNavigation extends FilterNavigation
                 'class' => TextFilterInput::class,
                 'options' => [
                     'style' => 'width:100%',
-                    'placeholder' =>   Yii::t('TasksModule.views_index_index', 'Filter tasks by title')
+                    'placeholder' => Yii::t('TasksModule.views_index_index', 'Filter tasks by title')
                 ],
                 'sortOrder' => 100], static::FILTER_BLOCK_TITLE);
         }
@@ -126,23 +126,26 @@ class TaskFilterNavigation extends FilterNavigation
             'title' => Yii::t('TasksModule.models_forms_TaskFilter', 'Overdue'),
             'sortOrder' => 100], static::FILTER_BLOCK_CHECKBOX);
 
-        $this->addFilter([
-            'id' => TaskFilter::FILTER_ASSIGNED,
-            'checked' => $this->filter->isFilterActive(TaskFilter::FILTER_ASSIGNED),
-            'title' => Yii::t('TasksModule.models_forms_TaskFilter', 'I\'m assigned'),
-            'sortOrder' => 200], static::FILTER_BLOCK_CHECKBOX);
 
-        $this->addFilter([
-            'id' => TaskFilter::FILTER_RESPONSIBLE,
-            'checked' => $this->filter->isFilterActive(TaskFilter::FILTER_RESPONSIBLE),
-            'title' => Yii::t('TasksModule.models_forms_TaskFilter', 'I\'m responsible'),
-            'sortOrder' => 300], static::FILTER_BLOCK_CHECKBOX);
+        if (!$this->filter->contentContainer || $this->filter->contentContainer instanceof Space) {
+            $this->addFilter([
+                'id' => TaskFilter::FILTER_ASSIGNED,
+                'checked' => $this->filter->isFilterActive(TaskFilter::FILTER_ASSIGNED),
+                'title' => Yii::t('TasksModule.models_forms_TaskFilter', 'I\'m assigned'),
+                'sortOrder' => 200], static::FILTER_BLOCK_CHECKBOX);
 
-        $this->addFilter([
-            'id' => TaskFilter::FILTER_MINE,
-            'checked' => $this->filter->isFilterActive(TaskFilter::FILTER_MINE),
-            'title' => Yii::t('TasksModule.models_forms_TaskFilter', 'Created by me'),
-            'sortOrder' => 400], static::FILTER_BLOCK_CHECKBOX);
+            $this->addFilter([
+                'id' => TaskFilter::FILTER_RESPONSIBLE,
+                'checked' => $this->filter->isFilterActive(TaskFilter::FILTER_RESPONSIBLE),
+                'title' => Yii::t('TasksModule.models_forms_TaskFilter', 'I\'m responsible'),
+                'sortOrder' => 300], static::FILTER_BLOCK_CHECKBOX);
+
+            $this->addFilter([
+                'id' => TaskFilter::FILTER_MINE,
+                'checked' => $this->filter->isFilterActive(TaskFilter::FILTER_MINE),
+                'title' => Yii::t('TasksModule.models_forms_TaskFilter', 'Created by me'),
+                'sortOrder' => 400], static::FILTER_BLOCK_CHECKBOX);
+        }
 
         $this->addFilter([
             'id' => TaskFilter::FILTER_STATE,

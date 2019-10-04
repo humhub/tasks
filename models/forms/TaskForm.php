@@ -177,6 +177,7 @@ class TaskForm extends Model
      *
      * @param string $attribute attribute name
      * @param [] $params parameters
+     * @throws \Exception
      */
     public function validateEndTime($attribute, $params)
     {
@@ -214,6 +215,7 @@ class TaskForm extends Model
      * Instantiates a new task for the given ContentContainerActiveRecord.
      *
      * @param ContentContainerActiveRecord $contentContainer
+     * @throws \yii\base\Exception
      */
     public function createNew(ContentContainerActiveRecord $contentContainer)
     {
@@ -230,6 +232,7 @@ class TaskForm extends Model
      * @param array $data
      * @param null $formName
      * @return bool
+     * @throws \yii\base\InvalidConfigException
      */
     public function load($data, $formName = null)
     {
@@ -317,6 +320,7 @@ class TaskForm extends Model
      * @param string $end end string date in $targetTimeZone
      * @param string $sourceTimeZone
      * @param string $targetTimeZone
+     * @throws \yii\base\InvalidConfigException
      */
     public function translateDateTimes($start = null, $end = null, $sourceTimeZone = null, $targetTimeZone = null, $dateFormat = 'php:Y-m-d H:i:s e')
     {

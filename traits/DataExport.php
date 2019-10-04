@@ -18,7 +18,8 @@ trait DataExport
     private function getRelatedContainer()
     {
         return function ($model) {
-            return $model->content->container->name;
+            /* @var $model Task */
+            return $model->content->container->getDisplayName();
         };
     }
 

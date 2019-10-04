@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.3.1 (October, 04, 2019)
+--------------------
+- Enh: Allow module installation on user profile
+- Fix: Task list sorting not working when dragging to last index
+- Chng: The export now has an Container, ContainerType and ContainerId field instead of Space and SpaceId
+
 1.3.0 (May, 9, 2019)
 --------------------
 - Enh: Filter by container related tasks in "Your tasks" snippet.

@@ -8,6 +8,7 @@
 
 namespace humhub\modules\tasks\permissions;
 
+use humhub\modules\user\models\User;
 use Yii;
 use humhub\libs\BasePermission;
 use humhub\modules\space\models\Space;
@@ -30,13 +31,18 @@ class CreateTask extends BasePermission
         Space::USERGROUP_ADMIN,
         Space::USERGROUP_MODERATOR,
         Space::USERGROUP_MEMBER,
+        User::USERGROUP_SELF,
     ];
-    
+
     /**
      * @inheritdoc
      */
     protected $fixedGroups = [
-        Space::USERGROUP_USER
+        Space::USERGROUP_USER,
+        User::USERGROUP_SELF,
+        User::USERGROUP_FRIEND,
+        User::USERGROUP_USER,
+        User::USERGROUP_GUEST
     ];
 
 

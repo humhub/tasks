@@ -3,13 +3,13 @@
 namespace humhub\modules\tasks\controllers;
 
 use humhub\modules\tasks\helpers\TaskUrl;
+use humhub\modules\user\models\User;
 use Yii;
 use yii\web\HttpException;
 use humhub\modules\content\components\ContentContainerControllerAccess;
 use humhub\modules\space\models\Space;
 use humhub\modules\tasks\models\forms\ItemDrop;
 use humhub\modules\tasks\models\forms\TaskForm;
-use humhub\modules\tasks\models\user\TaskUser;
 use humhub\modules\tasks\permissions\CreateTask;
 use humhub\modules\tasks\permissions\ManageTasks;
 use humhub\modules\user\models\UserPicker;
@@ -24,7 +24,8 @@ class TaskController extends AbstractTaskController
     public function getAccessRules()
     {
         return [
-            [ContentContainerControllerAccess::RULE_USER_GROUP_ONLY => [Space::USERGROUP_MEMBER]]
+            [ContentContainerControllerAccess::RULE_USER_GROUP_ONLY => [Space::USERGROUP_MEMBER, User::USERGROUP_SELF]],
+            [ContentContainerControllerAccess::RULE_SPACE_ONLY => ['task-assigned-picker', 'task-responsible-picker']]
         ];
     }
 
@@ -182,6 +183,7 @@ class TaskController extends AbstractTaskController
      * @return string
      * @throws HttpException
      * @throws \yii\base\Exception
+     * @throws \Throwable
      */
     public function actionExtend($id)
     {

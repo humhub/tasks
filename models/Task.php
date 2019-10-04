@@ -8,7 +8,9 @@
 
 namespace humhub\modules\tasks\models;
 
+use humhub\modules\content\components\ActiveQueryContent;
 use humhub\modules\content\components\ContentContainerPermissionManager;
+use humhub\modules\space\models\Space;
 use humhub\modules\space\modules\manage\models\MembershipSearch;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\permissions\CreateTask;
@@ -299,7 +301,9 @@ class Task extends ContentActiveRecord implements Searchable
 
     /**
      * @param ContentContainerActiveRecord $contentContainer
-     * @return \humhub\modules\content\components\ActiveQueryContent
+     * @return ActiveQueryContent
+     * @throws \Throwable
+     * @throws \yii\base\Exception
      */
     public static function findUnsorted(ContentContainerActiveRecord $contentContainer)
     {
@@ -308,7 +312,9 @@ class Task extends ContentActiveRecord implements Searchable
 
     /**
      * @param ContentContainerActiveRecord $contentContainer
-     * @return \humhub\modules\content\components\ActiveQueryContent
+     * @return ActiveQueryContent
+     * @throws \Throwable
+     * @throws \yii\base\Exception
      */
     public static function findUnsortedCompleted(ContentContainerActiveRecord $contentContainer)
     {
@@ -395,6 +401,7 @@ class Task extends ContentActiveRecord implements Searchable
      * @param boolean $insert
      * @param array $changedAttributes
      * @return boolean
+     * @throws \yii\base\Exception
      */
     public function afterSave($insert, $changedAttributes)
     {
@@ -404,6 +411,11 @@ class Task extends ContentActiveRecord implements Searchable
             $oldTaskUsers = $this->taskUsers;
 
             TaskUser::deleteAll(['task_id' => $this->id]);
+
+            // Auto assign the user for his own tasks
+            if($this->content->container instanceof User) {
+                $this->assignedUsers = [$this->content->container->guid];
+            }
 
             if (!empty($this->assignedUsers)) {
                 foreach ($this->assignedUsers as $guid) {
@@ -421,6 +433,7 @@ class Task extends ContentActiveRecord implements Searchable
                     $this->addTaskAssigned($guid, empty($oldAssigned));
                 }
             }
+
             if (!empty($this->responsibleUsers)) {
                 foreach ($this->responsibleUsers as $guid) {
                     $user = User::findOne(['guid' => $guid]);
@@ -501,6 +514,11 @@ class Task extends ContentActiveRecord implements Searchable
         if (!$user) {
             return false;
         }
+
+        if($this->content->container instanceof User && !$user->is($this->content->container)) {
+            return false;
+        }
+
 
         if (!$this->isTaskAssigned($user)) {
             $taskAssigned = new TaskUser([

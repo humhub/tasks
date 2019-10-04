@@ -11,6 +11,7 @@ namespace humhub\modules\tasks;
 use humhub\modules\infoscreen\helpers\Url;
 use humhub\modules\tasks\helpers\TaskListUrl;
 use humhub\modules\tasks\helpers\TaskUrl;
+use humhub\modules\user\models\User;
 use Yii;
 use humhub\modules\notification\models\Notification;
 use humhub\modules\tasks\jobs\SendReminder;
@@ -129,6 +130,21 @@ class Events
         }
     }
 
+    public static function onProfileMenuInit($event)
+    {
+        /* @var $user User */
+        $user = $event->sender->user;
+        if ($user->isModuleEnabled('tasks')) {
+
+            $event->sender->addItem([
+                'label' => Yii::t('TasksModule.base', 'Tasks'),
+                'url' => TaskListUrl::taskListRoot($user),
+                'icon' => '<i class="fa fa-tasks"></i>',
+                'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'tasks'),
+            ]);
+        }
+    }
+
     /**
      * Callback to validate module database records.
      *
@@ -220,6 +236,7 @@ class Events
      * @throws \Exception
      * @throws \yii\base\Exception
      * @throws \yii\db\StaleObjectException
+     * @throws \Throwable
      */
     public static function onMemberRemoved ($event)
     {
@@ -232,9 +249,6 @@ class Events
                     $user->delete();
                 }
 
-                // remove notifications
-//                $event->sender->className()
-//                $event->sender->getPrimaryKey()
                 $notifications = Notification::find()->where(['source_class' => Task::className(), 'source_pk' => $task->id, 'space_id' => $event->space->id])->all();
                 foreach ($notifications as $notification) {
                     $notification->delete();
