@@ -6,6 +6,7 @@ Changelog
 - Enh: Allow module installation on user profile
 - Fix: Task list sorting not working when dragging to last index
 - Chng: The export now has an Container, ContainerType and ContainerId field instead of Space and SpaceId
+- Fix #12: Do not notify assigned user when user assigns himself
 
 1.3.0 (May, 9, 2019)
 --------------------

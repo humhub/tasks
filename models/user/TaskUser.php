@@ -87,6 +87,7 @@ class TaskUser extends ActiveRecord
     /**
      * Notify users about created task
      * @throws \yii\base\InvalidConfigException
+     * @throws \Throwable
      */
     public function notifyCreated()
     {
@@ -97,6 +98,10 @@ class TaskUser extends ActiveRecord
         $source = $this->task;
         $target = $this->user;
         $from = Yii::$app->user->getIdentity();
+
+        if($target->is($from)) {
+            return;
+        }
 
         if($this->user_type === Task::USER_ASSIGNED) {
             AssignedNotification::instance()->about($source)->delete($target);
