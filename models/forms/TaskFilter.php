@@ -125,7 +125,7 @@ class TaskFilter extends Model
         }
 
         if($this->isFilterActive(static::FILTER_MINE)) {
-            $query->andWhere(['content.created_by' => Yii::$app->user->identity->contentcontainer_id]);
+            $query->andWhere(['content.created_by' => Yii::$app->user->id]);
         }
 
         if (! empty($this->date_start) && ! empty($this->date_end)) {

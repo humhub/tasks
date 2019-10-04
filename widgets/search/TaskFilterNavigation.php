@@ -127,7 +127,7 @@ class TaskFilterNavigation extends FilterNavigation
             'sortOrder' => 100], static::FILTER_BLOCK_CHECKBOX);
 
 
-        if (!$this->filter->contentContainer || $this->filter->contentContainer instanceof Space) {
+        if (!Yii::$app->user->isGuest && (!$this->filter->contentContainer || $this->filter->contentContainer instanceof Space)) {
             $this->addFilter([
                 'id' => TaskFilter::FILTER_ASSIGNED,
                 'checked' => $this->filter->isFilterActive(TaskFilter::FILTER_ASSIGNED),

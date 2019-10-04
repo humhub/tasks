@@ -7,6 +7,8 @@ Changelog
 - Fix: Task list sorting not working when dragging to last index
 - Chng: The export now has an Container, ContainerType and ContainerId field instead of Space and SpaceId
 - Fix #12: Do not notify assigned user when user assigns himself
+- Fix #96: Created by filter not working
+- Fix: Task space navigation only visible for space members
 
 1.3.0 (May, 9, 2019)
 --------------------

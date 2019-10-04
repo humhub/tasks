@@ -119,7 +119,7 @@ class Events
 
         $space = $event->sender->space;
 
-        if ($space->isModuleEnabled('tasks') && $space->isMember()) {
+        if ($space->isModuleEnabled('tasks')) {
             $event->sender->addItem([
                 'label' => Yii::t('TasksModule.base', 'Tasks'),
                 'group' => 'modules',
@@ -135,7 +135,6 @@ class Events
         /* @var $user User */
         $user = $event->sender->user;
         if ($user->isModuleEnabled('tasks')) {
-
             $event->sender->addItem([
                 'label' => Yii::t('TasksModule.base', 'Tasks'),
                 'url' => TaskListUrl::taskListRoot($user),
