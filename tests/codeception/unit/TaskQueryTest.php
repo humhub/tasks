@@ -49,22 +49,22 @@ class TaskQueryTest extends TaskTestCase
     {
         $this->becomeUser('User1');
         $this->createTask(Space::findOne(4), 'Task1', null, [
-            'scheduling' => true,
+            'scheduling' => 1,
             'start_datetime' => date('Y-m-d H:i:s', strtotime('-10 days')),
             'end_datetime' => date('Y-m-d H:i:s', strtotime('+10 days'))
         ]);
         $this->createTask(Space::findOne(4), 'Task2', null, [
-            'scheduling' => true,
+            'scheduling' => 1,
             'start_datetime' => date('Y-m-d H:i:s', strtotime('-20 days')),
             'end_datetime' => date('Y-m-d H:i:s', strtotime('+20 days'))
         ]);
         $this->createTask(Space::findOne(4), 'Task3', null, [
-            'scheduling' => true,
+            'scheduling' => 1,
             'start_datetime' => date('Y-m-d H:i:s', strtotime('-5 days')),
             'end_datetime' => date('Y-m-d H:i:s', strtotime('+10 days'))
         ]);
         $this->createTask(Space::findOne(4), 'Task4', null, [
-            'scheduling' => true,
+            'scheduling' => 1,
             'start_datetime' => date('Y-m-d H:i:s', strtotime('-10 days')),
             'end_datetime' => date('Y-m-d H:i:s', strtotime('+5 days'))
         ]);
