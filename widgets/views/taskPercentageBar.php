@@ -6,30 +6,29 @@
  *
  */
 
+use humhub\libs\Html;
+
 /* @var $task \humhub\modules\tasks\models\Task */
 /* @var $filterResult boolean */
 ?>
-<?php if (/*$task->hasItems()*/ true) : ?>
-    <!--    Progress Bar    -->
-    <?php
-    $percent = round($task->getPercent());
-    if ($filterResult)
-        $divID = "task_progress_" . $task->id . "_filter";
-    else
-        $divID = "task_progress_" . $task->id;
 
-    $color = "progress-bar-info";
-    ?>
-    <div class="progress">
-        <div id="<?= $divID; ?>"
-             class="progress-bar <?= $color; ?>"
-             role="progressbar"
-             aria-valuenow="<?= $percent; ?>" aria-valuemin="0" aria-valuemax="100"
-             style="width: 0%">
-        </div>
+<!--    Progress Bar    -->
+<?php
+$percent = round($task->getPercent());
+
+$divID = ($filterResult)
+    ? "task_progress_" . $task->id . "_filter"
+    : "task_progress_" . $task->id;
+
+$color = "progress-bar-info";
+?>
+<div class="progress">
+    <div id="<?= $divID; ?>"
+         class="progress-bar <?= $color; ?>"
+         role="progressbar"
+         aria-valuenow="<?= $percent; ?>" aria-valuemin="0" aria-valuemax="100"
+         style="width: 0%">
     </div>
-    <script type="text/javascript">
-        $('#<?= $divID ?>').css('width', '<?= $percent; ?>%');
-    </script>
-<?php else : ?>
-<?php endif; ?>
+</div>
+<?= Html::script("$('#{$divID}').css('width', '{$percent}%');") ?>
+

@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.3.2
+--------------------
+- Enh: 1.4 web security nonce support
+
 1.3.1 (October, 04, 2019)
 --------------------
 - Enh: Allow module installation on user profile
