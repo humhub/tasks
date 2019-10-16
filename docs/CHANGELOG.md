@@ -1,9 +1,9 @@
 Changelog
 =========
 
-1.3.2
+1.3.2 (October, 16, 2019)
 --------------------
-- Enh: 1.4 web security nonce support
+- Enh: 1.4 csp nonce support
 
 1.3.1 (October, 04, 2019)
 --------------------
