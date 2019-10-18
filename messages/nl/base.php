@@ -46,7 +46,7 @@ return array (
   'Tasks: Reminder' => 'Taken: herinnering',
   'This task requires to be reviewed by a responsible' => 'Een verantwoordelijk moet deze taak beoordelen.',
   'Toggle lists' => 'Aan/uit zetten lijsten',
-  'Unsorted' => 'Niet sorteerd',
+  'Unsorted' => 'Niet toevoegen aan lijst',
   'You are assigned!' => 'U bent toegewezen!',
   'You are responsible!' => 'U bent verantwoordelijk',
   'view all' => 'Bekijk alles',
