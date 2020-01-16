@@ -327,12 +327,6 @@ class TaskScheduling extends Component
      */
     public function getFullCalendarArray()
     {
-        $end = $this->getEndDateTime();
-
-        if(!Yii::$app->user->isGuest) {
-            Yii::$app->formatter->timeZone = Yii::$app->user->getIdentity()->time_zone;
-        }
-
         $title = Yii::t('TasksModule.models_task', 'Deadline: ') . Html::encode($this->task->title);
 
 
@@ -346,8 +340,8 @@ class TaskScheduling extends Component
             //'updateUrl' => $this->task->content->container->createUrl('/tasks/task/edit-ajax', ['id' => $this->task->id]),
             'viewUrl' => TaskUrl::viewTaskModal($this->task, 1),
             'openUrl' => TaskUrl::viewTask($this->task),
-            'start' => $end,
-            'end' => $end,
+            'start' => $this->getStartDateTime(),
+            'end' => $this->getEndDateTime(),
         ];
 
         $color = Html::encode($this->task->getColor());

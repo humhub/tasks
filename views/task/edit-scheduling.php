@@ -24,7 +24,7 @@ $taskReminder = ArrayHelper::map($taskForm->task->getTaskReminder()->all(),'id',
 
     <div class="row">
         <div class="col-md-6 dateField">
-            <?= $form->field($taskForm, 'start_date')->widget(DatePicker::class, ['dateFormat' => Yii::$app->params['formatter']['defaultDateFormat'], 'clientOptions' => [], 'options' => ['class' => 'form-control', 'autocomplete' => "off"]]) ?>
+            <?= $form->field($taskForm, 'start_date')->widget(DatePicker::class, ['dateFormat' => Yii::$app->formatter->dateInputFormat, 'clientOptions' => [], 'options' => ['class' => 'form-control', 'autocomplete' => "off"]]) ?>
         </div>
         <div class="col-md-6 timeField" <?= !$taskForm->showTimeFields() ? 'style="opacity:0.2"' : '' ?>>
             <?= $form->field($taskForm, 'start_time')->widget(TimePicker::class, ['disabled' => $taskForm->task->all_day]); ?>
@@ -33,7 +33,7 @@ $taskReminder = ArrayHelper::map($taskForm->task->getTaskReminder()->all(),'id',
 
     <div class="row">
         <div class="col-md-6 dateField">
-            <?= $form->field($taskForm, 'end_date')->widget(DatePicker::class, ['dateFormat' => Yii::$app->params['formatter']['defaultDateFormat'], 'clientOptions' => [], 'options' => ['class' => 'form-control',  'autocomplete' => "off"]]) ?>
+            <?= $form->field($taskForm, 'end_date')->widget(DatePicker::class, ['dateFormat' => Yii::$app->formatter->dateInputFormat, 'clientOptions' => [], 'options' => ['class' => 'form-control',  'autocomplete' => "off"]]) ?>
         </div>
         <div class="col-md-6 timeField" <?= !$taskForm->showTimeFields() ? 'style="opacity:0.2"' : '' ?>>
             <?= $form->field($taskForm, 'end_time')->widget(TimePicker::class, ['disabled' => $taskForm->task->all_day]); ?>

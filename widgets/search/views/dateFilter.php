@@ -11,7 +11,7 @@ use humhub\modules\ui\form\widgets\DatePicker;
 /* @var $this \humhub\components\View */
 ?>
 <?= DatePicker::widget([
-    'dateFormat' => Yii::$app->params['formatter']['defaultDateFormat'],
+    'dateFormat' => Yii::$app->formatter->dateInputFormat,
     'clientOptions' => [],
     'options' => array_merge(['autocomplete' => "on"], $options)
 ]) ?>
