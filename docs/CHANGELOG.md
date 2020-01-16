@@ -3,6 +3,12 @@ Changelog
 
 1.3.2 (October, 16, 2019)
 --------------------
+- Fix: Invalid date range in calendar integration
+- Fix: Invalid date format used when default input format is fixed
+- Enh: Translation updates
+
+1.3.2 (October, 16, 2019)
+--------------------
 - Enh: 1.4 csp nonce support
 
 1.3.1 (October, 04, 2019)
