@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.3.2 (October, 16, 2019)
+1.3.3 (October, 16, 2019)
 --------------------
 - Fix: Invalid date range in calendar integration
 - Fix: Invalid date format used when default input format is fixed
