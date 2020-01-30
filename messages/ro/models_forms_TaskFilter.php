@@ -1,6 +1,6 @@
 <?php
 return array (
-  'Created by me' => '',
+  'Created by me' => 'Creat de mine',
   'End date' => '',
   'Filter status' => '',
   'Filter tasks' => '',

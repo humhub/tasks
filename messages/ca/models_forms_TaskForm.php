@@ -6,5 +6,5 @@ return array (
   'Public' => 'Públic',
   'Start Date' => 'Data d\'inici',
   'Start Time' => 'Hora d\'inici',
-  'Time Zone' => '',
+  'Time Zone' => 'Fus horari',
 );

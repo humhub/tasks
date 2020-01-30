@@ -6,7 +6,7 @@ return array (
   'All Day' => 'Setiap Hari',
   'Assigned user(s)' => '',
   'Checklist Items' => '',
-  'Color' => '',
+  'Color' => 'Warna',
   'Deadline: ' => '',
   'Description' => 'Deskripsi',
   'Don\'t add to calendar' => '',

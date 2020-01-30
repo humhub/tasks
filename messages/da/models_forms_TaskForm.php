@@ -6,5 +6,5 @@ return array (
   'Public' => 'Offentlig',
   'Start Date' => 'Start Dato',
   'Start Time' => 'Start Tidspunkt',
-  'Time Zone' => '',
+  'Time Zone' => 'Tidszone',
 );

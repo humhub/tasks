@@ -5,7 +5,7 @@ return array (
   'Assigned to me' => '',
   'Created by me' => '',
   'Creation time' => '',
-  'Filter' => '',
+  'Filter' => 'Filter',
   'Last update' => '',
   'Nobody assigned' => '',
   'Sorting' => '',

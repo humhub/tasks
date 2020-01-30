@@ -17,7 +17,7 @@ return array (
   'Delete' => 'Διαγραφή',
   'Delete list' => '',
   'Delete task' => '',
-  'Edit' => '',
+  'Edit' => 'Επεξεργασία',
   'Edit list' => '',
   'Edit task' => '',
   'Finish Task' => '',
