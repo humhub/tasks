@@ -22,7 +22,7 @@ return array (
   'Edit task' => 'Aufgabe bearbeiten',
   'Finish Task' => 'Aufgabe fertigstellen',
   'Finished Lists' => 'Abgeschlossene Listen',
-  'Here you can manage your task lists in order to categorize and sort tasks.' => 'Hier kannst Du Deine Aufgabenlisten verwalten, um Aufgaben zu kategorisieren und zu sortieren.',
+  'Here you can manage your task lists in order to categorize and sort tasks.' => 'Hier kannst du deine Aufgabenlisten verwalten, um Aufgaben zu kategorisieren und zu sortieren.',
   'Hide this list once all tasks are completed' => 'Blende diese Liste aus, sobald alle Aufgaben abgeschlossen sind',
   'If no assigned user is selected, every space member with the permission to process unassigned tasks can process the task.' => 'Wenn kein zugewiesener Benutzer ausgewählt ist, kann jedes Gruppen-Mitglied mit der Berechtigung zum Verarbeiten nicht zugewiesener Aufgaben die Aufgaben verarbeiten.',
   'In case the review option is active, a <strong>responsible user</strong> will have to review and either reject or confirm this task before completion.' => 'Falls die Überprüfungsoption aktiviert ist, muss ein <strong>verantwortlicher Benutzer</strong> diese Aufgabe überprüfen und diese Aufgabe entweder vor dem Abschluss ablehnen oder bestätigen.',
