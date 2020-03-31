@@ -8,15 +8,11 @@
 
 namespace humhub\modules\tasks\models;
 
-use humhub\modules\calendar\helpers\CalendarUtils;
 use humhub\modules\content\components\ActiveQueryContent;
 use humhub\modules\content\components\ContentContainerPermissionManager;
-use humhub\modules\space\models\Space;
-use humhub\modules\space\modules\manage\models\MembershipSearch;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\permissions\CreateTask;
 use humhub\modules\tasks\permissions\ProcessUnassignedTasks;
-use humhub\modules\user\components\ActiveQueryUser;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\Expression;
@@ -228,7 +224,7 @@ class Task extends ContentActiveRecord implements Searchable
      */
     public function rules()
     {
-        $dateFormat = 'php:' . CalendarUtils::DB_DATE_FORMAT;
+        $dateFormat = 'php:Y-m-d H:i:s';
 
         return [
             [['title'], 'required'],

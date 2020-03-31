@@ -24,6 +24,8 @@ env:
     - HUMHUB_VERSION=v1.3.11
 
 matrix:
+  allow_failures:
+    - env: HUMHUB_VERSION=develop
   fast_finish: true
 
 
