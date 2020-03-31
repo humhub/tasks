@@ -13,11 +13,11 @@ composer install --prefer-dist --no-interaction
 
 npm install
 
-if [ "${HUMHUB_VERSION}" != 'v1.2.5' ] ; then
-  grunt build-assets
-fi
+grunt build-assets
 
 cd ${HUMHUB_PATH}/protected/humhub/tests
+
+cat config/common.php
 
 sed -i -e "s|'installed' => true,|'installed' => true,\n\t'moduleAutoloadPaths' => ['$(dirname $old)']|g" config/common.php
 
