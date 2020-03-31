@@ -106,17 +106,13 @@ class Module extends ContentContainerModule
     /**
      * @inheritdoc
      */
-    public function getPermissions($contentContainer = null)
+    public function getContainerPermissions($contentContainer = null)
     {
-        if ($contentContainer instanceof Space) {
-            return [
-                new CreateTask(),
-                new ManageTasks(),
-                new ProcessUnassignedTasks(),
-            ];
-        }
-
-        return [];
+        return [
+            new CreateTask(),
+            new ManageTasks(),
+            new ProcessUnassignedTasks(),
+        ];
     }
 
 }
