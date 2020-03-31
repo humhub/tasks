@@ -38,23 +38,27 @@ class Events
 
     public static function onTopMenuInit($event)
     {
-        /* @var $module Module */
-        $module = Yii::$app->getModule('tasks');
+        try {
+            /* @var $module Module */
+            $module = Yii::$app->getModule('tasks');
 
 
-        if(!(int) $module->settings->get('showGlobalMenuItem', 1)) {
-            return;
+            if (!(int)$module->settings->get('showGlobalMenuItem', 1)) {
+                return;
+            }
+
+            // Is Module enabled on this workspace?
+            $event->sender->addItem([
+                'label' => Yii::t('TasksModule.base', 'Tasks'),
+                'id' => 'tasks-global',
+                'icon' => '<i class="fa fa-tasks"></i>',
+                'url' => TaskUrl::globalView(),
+                'sortOrder' => $module->settings->get('menuSortOrder', 500),
+                'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'tasks' && Yii::$app->controller->id == 'global'),
+            ]);
+        } catch (\Throwable $e) {
+            Yii::error($e);
         }
-
-        // Is Module enabled on this workspace?
-        $event->sender->addItem([
-            'label' => Yii::t('TasksModule.base', 'Tasks'),
-            'id' => 'tasks-global',
-            'icon' => '<i class="fa fa-tasks"></i>',
-            'url' => TaskUrl::globalView(),
-            'sortOrder' => $module->settings->get('menuSortOrder', 500),
-            'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'tasks' && Yii::$app->controller->id == 'global'),
-        ]);
     }
 
     /**
@@ -63,10 +67,14 @@ class Events
      */
     public static function onGetCalendarItemTypes($event)
     {
-        $contentContainer = $event->contentContainer;
+        try {
+            $contentContainer = $event->contentContainer;
 
-        if(!$contentContainer || $contentContainer->isModuleEnabled('tasks')) {
-            TaskCalendar::addItemTypes($event);
+            if (!$contentContainer || $contentContainer->isModuleEnabled('tasks')) {
+                TaskCalendar::addItemTypes($event);
+            }
+        } catch (\Throwable $e) {
+            Yii::error($e);
         }
     }
 
@@ -75,41 +83,53 @@ class Events
      */
     public static function onFindCalendarItems($event)
     {
-        $contentContainer = $event->contentContainer;
+        try {
+            $contentContainer = $event->contentContainer;
 
-        if(!$contentContainer || $contentContainer->isModuleEnabled('tasks')) {
-            TaskCalendar::addItems($event);
+            if (!$contentContainer || $contentContainer->isModuleEnabled('tasks')) {
+                TaskCalendar::addItems($event);
+            }
+        } catch (\Throwable $e) {
+            Yii::error($e);
         }
     }
 
     public static function onDashboardSidebarInit($event)
     {
-        if (Yii::$app->user->isGuest) {
-            return;
-        }
+        try {
+            if (Yii::$app->user->isGuest) {
+                return;
+            }
 
-        $settings = SnippetModuleSettings::instantiate();
+            $settings = SnippetModuleSettings::instantiate();
 
-        if ($settings->showMyTasksSnippet()) {
-            $event->sender->addWidget(MyTasks::class, ['limit' => $settings->myTasksSnippetMaxItems], ['sortOrder' => $settings->myTasksSnippetSortOrder]);
+            if ($settings->showMyTasksSnippet()) {
+                $event->sender->addWidget(MyTasks::class, ['limit' => $settings->myTasksSnippetMaxItems], ['sortOrder' => $settings->myTasksSnippetSortOrder]);
+            }
+        } catch (\Throwable $e) {
+            Yii::error($e);
         }
     }
 
     public static function onSpaceSidebarInit($event)
     {
-        if (Yii::$app->user->isGuest) {
-            return;
-        }
-
-        $space = $event->sender->space;
-        $settings = SnippetModuleSettings::instantiate();
-
-        if ($space->isModuleEnabled('tasks')) {
-            if ($settings->showMyTasksSnippetSpace()) {
-                $event->sender->addWidget(MyTasks::class, [
-                    'contentContainer' => $space,
-                    'limit' => $settings->myTasksSnippetMaxItems], ['sortOrder' => $settings->myTasksSnippetSortOrder]);
+        try {
+            if (Yii::$app->user->isGuest) {
+                return;
             }
+
+            $space = $event->sender->space;
+            $settings = SnippetModuleSettings::instantiate();
+
+            if ($space->isModuleEnabled('tasks')) {
+                if ($settings->showMyTasksSnippetSpace()) {
+                    $event->sender->addWidget(MyTasks::class, [
+                        'contentContainer' => $space,
+                        'limit' => $settings->myTasksSnippetMaxItems], ['sortOrder' => $settings->myTasksSnippetSortOrder]);
+                }
+            }
+        } catch (\Throwable $e) {
+            Yii::error($e);
         }
     }
 
@@ -117,30 +137,38 @@ class Events
     {
         /* @var $space \humhub\modules\space\models\Space */
 
-        $space = $event->sender->space;
+        try {
+            $space = $event->sender->space;
 
-        if ($space->isModuleEnabled('tasks')) {
-            $event->sender->addItem([
-                'label' => Yii::t('TasksModule.base', 'Tasks'),
-                'group' => 'modules',
-                'url' => TaskListUrl::taskListRoot($space),
-                'icon' => '<i class="fa fa-tasks"></i>',
-                'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'tasks'),
-            ]);
+            if ($space->isModuleEnabled('tasks')) {
+                $event->sender->addItem([
+                    'label' => Yii::t('TasksModule.base', 'Tasks'),
+                    'group' => 'modules',
+                    'url' => TaskListUrl::taskListRoot($space),
+                    'icon' => '<i class="fa fa-tasks"></i>',
+                    'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'tasks'),
+                ]);
+            }
+        } catch (\Throwable $e) {
+            Yii::error($e);
         }
     }
 
     public static function onProfileMenuInit($event)
     {
         /* @var $user User */
-        $user = $event->sender->user;
-        if ($user->isModuleEnabled('tasks')) {
-            $event->sender->addItem([
-                'label' => Yii::t('TasksModule.base', 'Tasks'),
-                'url' => TaskListUrl::taskListRoot($user),
-                'icon' => '<i class="fa fa-tasks"></i>',
-                'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'tasks'),
-            ]);
+        try {
+            $user = $event->sender->user;
+            if ($user->isModuleEnabled('tasks')) {
+                $event->sender->addItem([
+                    'label' => Yii::t('TasksModule.base', 'Tasks'),
+                    'url' => TaskListUrl::taskListRoot($user),
+                    'icon' => '<i class="fa fa-tasks"></i>',
+                    'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'tasks'),
+                ]);
+            }
+        } catch (\Throwable $e) {
+            Yii::error($e);
         }
     }
 
@@ -237,22 +265,26 @@ class Events
      * @throws \yii\db\StaleObjectException
      * @throws \Throwable
      */
-    public static function onMemberRemoved ($event)
+    public static function onMemberRemoved($event)
     {
-        $tasks = Task::find()->contentContainer($event->space)->all();
+        try {
+            $tasks = Task::find()->contentContainer($event->space)->all();
 
-        if (!empty($tasks)) {
-            foreach ($tasks as $task) {
-                $taskUser = $task->getAssignedTaskUsers()->where(['task_user.user_id' => $event->user->id])->all();
-                foreach ($taskUser as $user) {
-                    $user->delete();
-                }
+            if (!empty($tasks)) {
+                foreach ($tasks as $task) {
+                    $taskUser = $task->getAssignedTaskUsers()->where(['task_user.user_id' => $event->user->id])->all();
+                    foreach ($taskUser as $user) {
+                        $user->delete();
+                    }
 
-                $notifications = Notification::find()->where(['source_class' => Task::className(), 'source_pk' => $task->id, 'space_id' => $event->space->id])->all();
-                foreach ($notifications as $notification) {
-                    $notification->delete();
+                    $notifications = Notification::find()->where(['source_class' => Task::className(), 'source_pk' => $task->id, 'space_id' => $event->space->id])->all();
+                    foreach ($notifications as $notification) {
+                        $notification->delete();
+                    }
                 }
             }
+        } catch(\Throwable $e) {
+            Yii::error($e);
         }
     }
 

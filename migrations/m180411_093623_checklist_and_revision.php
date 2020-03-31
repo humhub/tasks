@@ -21,7 +21,12 @@ class m180411_093623_checklist_and_revision extends Migration
      */
     public function safeUp()
     {
-        $this->dropColumn('task', 'percent');
+        try {
+            $this->dropColumn('task', 'percent');
+        } catch(\Throwable $e) {
+            Yii::error($e);
+        }
+
         $this->renameColumn('task', 'deadline', 'end_datetime');
         $this->addColumn('task', 'color', 'varchar(7)');
         $this->addColumn('task', 'review', 'tinyint(4) NOT NULL');

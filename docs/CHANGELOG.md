@@ -6,6 +6,7 @@ Changelog
 - Fix #109: Invalid time saved when using non system timezone
 - Chg: Raised HumHub min version to 1.3.11
 - Fix: Task permissions displayed on container without task module installed (https://github.com/humhub/humhub/issues/3828)
+- Enh: Improved event handler exception handling
 
 1.3.3 (October, 16, 2019)
 --------------------
