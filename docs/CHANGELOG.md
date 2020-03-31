@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.3.4 (March, 31, 2020)
+--------------------
+- Fix #109: Invalid time saved when using non system timezone
+
 1.3.3 (October, 16, 2019)
 --------------------
 - Fix: Invalid date range in calendar integration

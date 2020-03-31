@@ -8,6 +8,7 @@
 
 namespace humhub\modules\tasks\models;
 
+use humhub\modules\calendar\helpers\CalendarUtils;
 use humhub\modules\content\components\ActiveQueryContent;
 use humhub\modules\content\components\ContentContainerPermissionManager;
 use humhub\modules\space\models\Space;
@@ -27,7 +28,6 @@ use humhub\modules\tasks\models\scheduling\TaskReminder;
 use humhub\modules\tasks\models\scheduling\TaskScheduling;
 use humhub\modules\tasks\models\state\TaskState;
 use humhub\modules\tasks\models\user\TaskUser;
-use humhub\libs\DbDateValidator;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\user\models\User;
@@ -228,6 +228,8 @@ class Task extends ContentActiveRecord implements Searchable
      */
     public function rules()
     {
+        $dateFormat = 'php:' . CalendarUtils::DB_DATE_FORMAT;
+
         return [
             [['title'], 'required'],
             [['color'], 'string', 'max' => 7],
@@ -238,8 +240,8 @@ class Task extends ContentActiveRecord implements Searchable
             }"],
             [['start_datetime'], 'default', 'value' => null],
             [['end_datetime'], 'default', 'value' => null],
-            [['start_datetime'], DbDateValidator::class],
-            [['end_datetime'], DbDateValidator::class],
+            [['start_datetime'], 'date', 'format' => $dateFormat],
+            [['end_datetime'], 'date', 'format' => $dateFormat],
             [['all_day', 'scheduling', 'review', 'request_sent'], 'integer'],
             [['cal_mode'], 'in', 'range' => TaskScheduling::$calModes],
             [['assignedUsers', 'description', 'responsibleUsers', 'selectedReminders'], 'safe'],

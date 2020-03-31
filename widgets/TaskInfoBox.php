@@ -15,7 +15,7 @@ class TaskInfoBox extends Widget
     public $title;
 
     /**
-     * @var $string
+     * @var string|array
      */
     public $value;
 

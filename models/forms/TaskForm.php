@@ -14,18 +14,16 @@
 namespace humhub\modules\tasks\models\forms;
 
 use humhub\modules\content\widgets\richtext\RichText;
+use humhub\modules\tasks\comp\DbDateValidatorPatched;
 use humhub\modules\tasks\helpers\TaskUrl;
 use Yii;
 use yii\base\Model;
-use DateInterval;
 use DateTime;
 use DateTimeZone;
-use humhub\libs\DbDateValidator;
 use humhub\modules\tasks\models\scheduling\TaskReminder;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\content\models\Content;
 use humhub\modules\tasks\models\Task;
-use humhub\modules\tasks\CalendarUtils;
 use yii\web\HttpException;
 
 class TaskForm extends Model
@@ -125,9 +123,11 @@ class TaskForm extends Model
     public function rules()
     {
         return [
+            [['timeZone'], 'in', 'range' => DateTimeZone::listIdentifiers()],
             [['start_time', 'end_time'], 'date', 'type' => 'time', 'format' => $this->getTimeFormat()],
-            [['start_date'], DbDateValidator::class, 'format' => Yii::$app->formatter->dateInputFormat, 'timeAttribute' => 'start_time', 'timeZone' => $this->timeZone],
-            [['end_date'], DbDateValidator::class, 'format' => Yii::$app->formatter->dateInputFormat, 'timeAttribute' => 'end_time', 'timeZone' => $this->timeZone],
+            [['start_time', 'end_time'], 'date', 'type' => 'time', 'format' => $this->getTimeFormat()],
+            [['start_date'], DbDateValidatorPatched::class, 'format' => Yii::$app->formatter->dateInputFormat, 'timeAttribute' => 'start_time', 'timeZone' => $this->timeZone],
+            [['end_date'], DbDateValidatorPatched::class, 'format' => Yii::$app->formatter->dateInputFormat, 'timeAttribute' => 'end_time', 'timeZone' => $this->timeZone],
             [['end_date'], 'validateEndTime'],
 
             [['start_date', 'end_date'], 'required', 'when' => function($model) {
@@ -236,10 +236,11 @@ class TaskForm extends Model
      */
     public function load($data, $formName = null)
     {
-        // Make sure we load the timezone beforehand so its available in validators etc..
-        if($data && isset($data[$this->formName()]) && isset($data[$this->formName()]['timeZone']) && !empty($data[$this->formName()]['timeZone'])) {
-            $this->timeZone = $data[$this->formName()]['timeZone'];
+        // Make sure the timeZone is loaded prior to validation rule built
+        if(isset($data[$this->formName()])) {
+            $this->timeZone = $data[$this->formName()]['timeZone'] ?? $this->timeZone;
         }
+
         if(parent::load($data) && !empty($this->timeZone)) {
             $this->task->time_zone = $this->timeZone;
         }
@@ -268,8 +269,7 @@ class TaskForm extends Model
             return false;
         }
 
-        if(!$this->task->content->canEdit())
-        {
+        if(!$this->task->content->canEdit()) {
             throw new HttpException(403);
         }
 

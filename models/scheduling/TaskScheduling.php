@@ -183,6 +183,31 @@ class TaskScheduling extends Component
         return $result;
     }
 
+    public function getFormattedStartText($timeZone = null, $format = 'short')
+    {
+        if ($timeZone) {
+            Yii::$app->formatter->timeZone = $timeZone;
+        }
+
+        if (!$this->task->scheduling)
+            $result = '';
+        else {
+            $result = Yii::t('TasksModule.views_index_index', 'Starting at');
+            if ($this->task->all_day) {
+                $result .= ' ' . Yii::$app->formatter->asDate($this->getStartDateTime(), $format);
+            }
+            else {
+                $result .= ' ' . Yii::$app->formatter->asDatetime($this->getStartDateTime(), $format);
+            }
+        }
+
+        if ($timeZone) {
+            Yii::$app->i18n->autosetLocale();
+        }
+
+        return $result;
+    }
+
     public function getFormattedDateTime($timeZone = null, $format = 'short')
     {
         if ($timeZone) {
