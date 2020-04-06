@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.3.5 (April, 06, 2020)
+--------------------
+- Chg: Added 1.5 defer compatibility
+
 1.3.4 (March, 31, 2020)
 --------------------
 - Fix #109: Invalid time saved when using non system timezone
