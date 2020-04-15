@@ -10,7 +10,7 @@ return array (
   'Deadline: ' => '',
   'Description' => 'Περιγραφή',
   'Don\'t add to calendar' => '',
-  'End' => '',
+  'End' => 'Τέλος',
   'Extend deadline request' => '',
   'Parent Task' => '',
   'Reminder sent' => '',
