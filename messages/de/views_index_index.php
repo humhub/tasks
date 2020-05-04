@@ -21,4 +21,5 @@ return [
     'Today' => 'Heute',
     'ending Review' => 'Beendigung der Überprüfung',
     '{count} {n,plural,=1{day} other{days}} remaining' => '{count} {n,plural,=1{Tag} other{Tage}} bis Fristende',
+    'Starting at' => '',
 ];

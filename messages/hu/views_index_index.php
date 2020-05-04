@@ -21,4 +21,5 @@ return [
     'Today' => 'Ma',
     'ending Review' => 'Ellenőrzés befejezése',
     '{count} {n,plural,=1{day} other{days}} remaining' => '{count} {n,plural,=1{day} other{days}} maradt',
+    'Starting at' => '',
 ];

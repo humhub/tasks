@@ -21,4 +21,5 @@ return [
     'Today' => 'Tänään',
     'ending Review' => 'päättyvä tarkastus',
     '{count} {n,plural,=1{day} other{days}} remaining' => '{count} {n,plural,=1{day} other{days}} jatkuu',
+    'Starting at' => '',
 ];
