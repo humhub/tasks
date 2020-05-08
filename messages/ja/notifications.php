@@ -6,6 +6,7 @@ return [
     'Reminder' => '',
     'Task {task} in space {spaceName} ends at {dateTime}.' => '',
     'Task {task} in space {spaceName} starts at {dateTime}.' => '',
+    'View Online' => '',
     '{userName} assigned you to task {task} in space {spaceName}.' => '',
     '{userName} completed Task {task} in space {spaceName}.' => '',
     '{userName} has changed deadline for task {task} in space {spaceName}.' => '',

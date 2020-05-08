@@ -21,4 +21,5 @@ return [
     'Today' => 'Vandaag',
     'ending Review' => 'Beoordeling beëindigen',
     '{count} {n,plural,=1{day} other{days}} remaining' => '{count} {n,plural,=1{dag} other{dagen}} resterend',
+    'Starting at' => '',
 ];

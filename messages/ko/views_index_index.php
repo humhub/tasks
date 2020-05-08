@@ -17,6 +17,7 @@ return [
     'Reset Task' => '',
     'Responsible' => '',
     'Start now, by creating a new task!' => '',
+    'Starting at' => '',
     'There are currently no upcoming tasks!.' => '',
     'Today' => '',
     'ending Review' => '',
