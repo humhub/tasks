@@ -6,6 +6,7 @@ Changelog
 - Fix #116: Completed lists pagination broken
 - Fix #117: Task list settings updated_at field not updated on task save
 - Chg #97: Reduced Completed list pagination size from 20 to 10
+- Enh: Updated translations
 
 1.3.5 (April, 06, 2020)
 --------------------
