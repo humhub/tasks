@@ -17,6 +17,7 @@ use Yii;
  * @property integer $sort_order
  * @property integer $tag_id
  * @property integer $hide_if_completed
+ * @property integer $updated_at
  */
 class TaskListSettings extends ContentTagAddition
 {
@@ -31,7 +32,7 @@ class TaskListSettings extends ContentTagAddition
     public function rules()
     {
         return [
-            [['hide_if_completed'], 'safe']
+            [['hide_if_completed', 'updated_at'], 'safe']
         ];
     }
 

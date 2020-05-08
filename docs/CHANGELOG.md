@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.3.6 (May, 05, 2020)
+-------------------
+- Fix #116: Completed lists pagination broken
+- Fix #117: Task list settings updated_at field not updated on task save
+- Chg #97: Reduced Completed list pagination size from 20 to 10
+
 1.3.5 (April, 06, 2020)
 --------------------
 - Chg: Added 1.5 defer compatibility

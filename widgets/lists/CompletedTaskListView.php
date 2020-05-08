@@ -22,6 +22,7 @@ use humhub\modules\meeting\models\forms\MeetingFilter;
 use humhub\modules\tasks\helpers\TaskListUrl;
 use humhub\modules\tasks\models\lists\TaskList;
 use humhub\modules\tasks\permissions\ManageTasks;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\widgets\ListView;
 
@@ -37,7 +38,7 @@ class CompletedTaskListView extends Widget
         $dataProvider = new ActiveDataProvider([
             'query' => TaskList::findHiddenLists($this->contentContainer),
             'pagination' => [
-                'pageSize' => 20,
+                'pageSize' => 10,
                 'route' => TaskListUrl::ROUTE_LOAD_CLOSED_LISTS
             ],
         ]);
@@ -56,7 +57,7 @@ class CompletedTaskListView extends Widget
             'itemOptions' => [
                 'tag' => 'li'
             ],
-            'layout' => "{items}\n<div class=\"pagination-container\">{pager}</div>"
+            'layout' => "{items}\n<li class=\"pagination-container\">{pager}</li>"
         ]);
     }
 

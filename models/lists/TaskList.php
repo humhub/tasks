@@ -172,7 +172,7 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
 
         $includes =  [Task::STATUS_IN_PROGRESS, Task::STATUS_PENDING_REVIEW, Task::STATUS_PENDING];
 
-        $subQuery = Task::find()->where(['task_list_id' => new Expression('content_tag.id')])->andWhere(['IN', 'task.status', $includes]);
+        $subQuery = Task::find()->where('task.task_list_id = content_tag.id')->andWhere(['IN', 'task.status', $includes]);
 
         $query->andWhere(
             ['AND',
@@ -182,7 +182,7 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
             ]
         );
 
-        $query->orderBy(['task_list_setting.updated_at' => SORT_ASC]);
+       $query->orderBy(['task_list_setting.updated_at' => SORT_ASC, 'task_list_setting.id' => SORT_DESC])->distinct();
 
         return $query;
     }

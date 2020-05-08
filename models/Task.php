@@ -457,7 +457,7 @@ class Task extends ContentActiveRecord implements Searchable
         }
 
         if($this->list) {
-            $this->list->setAttributes(['updated_at' => new Expression('NOW()')]);
+            $this->list->addition->updateAttributes(['updated_at' => new Expression('NOW()')]);
         }
     }
 

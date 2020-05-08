@@ -417,11 +417,12 @@ humhub.module('task.list', function (module, require, $) {
 
     CompletedTaskListView.prototype.init = function() {
         var that = this;
-        $('.closed-task-lists-container').on('click', '.pagination-container a', function (evt) {
+        that.$.on('click', '.pagination-container a', function (evt) {
             evt.preventDefault();
             that.changePage($(this).attr('href'));
         });
     };
+
 
     CompletedTaskListView.prototype.changePage = function (url) {
         var that = this;
