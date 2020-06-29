@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.3.7 (Unreleased)
+------------------
+- Fix stream action on "Completed" tasks (@tmthan)
+
+
+
 1.3.6 (May, 05, 2020)
 -------------------
 - Fix #116: Completed lists pagination broken
