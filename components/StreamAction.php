@@ -38,7 +38,7 @@ class StreamAction extends ContentContainerStream
             }
 
             if (in_array('tasks_finished', $this->filters)) {
-                $this->activeQuery->andWhere(['task.status' => Task::STATUS_FINISHED]);
+                $this->activeQuery->andWhere(['task.status' => Task::STATUS_COMPLETED]);
             }
         }
     }
