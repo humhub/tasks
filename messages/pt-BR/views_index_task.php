@@ -1,5 +1,4 @@
 <?php
-
-return [
-    'Task Users have been notified' => '',
-];
+return array (
+  'Task Users have been notified' => 'Tarefa Os usuários foram notificados',
+);

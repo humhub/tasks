@@ -1,7 +1,6 @@
 <?php
-
-return [
-    'Anyone can work on this task!' => '',
-    'Open Task' => '',
-    'This task can only be processed by assigned and responsible users.' => '',
-];
+return array (
+  'Anyone can work on this task!' => 'Qualquer um pode trabalhar nessa tarefa!',
+  'Open Task' => 'Tarefa aberta',
+  'This task can only be processed by assigned and responsible users.' => 'Esta tarefa pode ser processada apenas por usuários designados e responsáveis.',
+);
