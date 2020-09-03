@@ -8,7 +8,7 @@
 
 use humhub\modules\ui\form\widgets\DatePicker;
 
-/* @var $this \humhub\components\View */
+/* @var $this \humhub\modules\ui\view\components\View */
 ?>
 <?= DatePicker::widget([
     'dateFormat' => Yii::$app->formatter->dateInputFormat,

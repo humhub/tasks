@@ -4,7 +4,7 @@ use humhub\modules\tasks\models\Task;
 use humhub\modules\user\widgets\Image;
 use yii\helpers\Html;
 
-/* @var $this \humhub\components\View */
+/* @var $this \humhub\modules\ui\view\components\View */
 /* @var $users \humhub\modules\user\models\User[] */
 /* @var $style \humhub\modules\user\models\User[] */
 /* @var $type int*/

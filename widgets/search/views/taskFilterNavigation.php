@@ -12,7 +12,7 @@ use yii\helpers\Html;
 use humhub\modules\ui\filter\widgets\FilterPanel;
 use humhub\modules\tasks\widgets\search\TextFilterInput;
 
-/* @var $this \humhub\components\View */
+/* @var $this \humhub\modules\ui\view\components\View */
 /* @var $panels [] */
 /* @var $options [] */
 

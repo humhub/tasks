@@ -14,7 +14,7 @@ use humhub\modules\tasks\widgets\lists\UnsortedTaskListWidget;
 use humhub\modules\tasks\widgets\TaskSubMenu;
 use humhub\widgets\Button;
 
-/* @var $this \humhub\components\View */
+/* @var $this \humhub\modules\ui\view\components\View */
 /* @var $canManage boolean */
 /* @var $canCreate boolean*/
 /* @var $contentContainer \humhub\modules\content\components\ContentContainerActiveRecord */

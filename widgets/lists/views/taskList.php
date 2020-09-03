@@ -12,7 +12,7 @@ use humhub\modules\tasks\widgets\lists\TaskListItem;
 use humhub\widgets\Button;
 use yii\helpers\Html;
 
-/* @var $this \humhub\components\View */
+/* @var $this \humhub\modules\ui\view\components\View */
 /* @var $list \humhub\modules\tasks\models\lists\TaskListInterface */
 /* @var $title string */
 /* @var $color string */

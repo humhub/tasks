@@ -18,7 +18,7 @@ use humhub\modules\tasks\models\Task;
 use humhub\modules\content\widgets\MoveContentLink;
 use yii\helpers\Html;
 
-/* @var $this \humhub\components\View */
+/* @var $this \humhub\modules\ui\view\components\View */
 /* @var $task \humhub\modules\tasks\models\Task */
 /* @var $options array */
 /* @var $details boolean */
