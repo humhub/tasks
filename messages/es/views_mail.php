@@ -1,5 +1,4 @@
 <?php
-
-return [
-    'Your Reminder for task {task}' => '',
-];
+return array (
+  'Your Reminder for task {task}' => 'Tu recordatorio para la tarea {task}',
+);

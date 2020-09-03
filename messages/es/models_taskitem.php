@@ -1,5 +1,5 @@
 <?php
 return array (
-  'Completed' => '',
+  'Completed' => 'Completado',
   'Title' => 'Título',
 );
