@@ -1,5 +1,4 @@
 <?php
-
-return [
-    '{userName} finished task {task}.' => '',
-];
+return array (
+  '{userName} finished task {task}.' => '{task} 完成任务 {userName} .',
+);

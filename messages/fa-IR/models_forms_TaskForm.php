@@ -1,11 +1,10 @@
 <?php
-
-return [
-    'End Date' => '',
-    'End Time' => '',
-    'End time must be after start time!' => '',
-    'Public' => '',
-    'Start Date' => '',
-    'Start Time' => '',
-    'Time Zone' => '',
-];
+return array (
+  'End Date' => 'تاریخ پایان',
+  'End Time' => 'پایان زمان',
+  'End time must be after start time!' => 'تاریخ پایان باید پس از تاریخ آغاز باشد!',
+  'Public' => 'همگانی',
+  'Start Date' => 'تاریخ شروع',
+  'Start Time' => 'آغاز زمان',
+  'Time Zone' => 'منطقه زمانی',
+);

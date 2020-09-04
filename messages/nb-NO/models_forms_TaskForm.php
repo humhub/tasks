@@ -1,11 +1,10 @@
 <?php
-
-return [
-    'End Date' => '',
-    'End Time' => '',
-    'End time must be after start time!' => '',
-    'Public' => '',
-    'Start Date' => '',
-    'Start Time' => '',
-    'Time Zone' => '',
-];
+return array (
+  'End Date' => 'Slutter dato',
+  'End Time' => 'Slutt',
+  'End time must be after start time!' => 'Aktiviteten kan ikke slutte før den har startet!',
+  'Public' => 'Offentlig',
+  'Start Date' => 'Starter dato',
+  'Start Time' => 'Start',
+  'Time Zone' => 'Tidssone',
+);

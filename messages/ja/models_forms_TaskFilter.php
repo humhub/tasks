@@ -1,6 +1,6 @@
 <?php
 return array (
-  'Created by me' => '',
+  'Created by me' => '私が作成したもの',
   'End date' => '',
   'Filter status' => '',
   'Filter tasks' => '',

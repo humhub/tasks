@@ -6,7 +6,7 @@ return array (
   'All Day' => '',
   'Assigned user(s)' => '',
   'Checklist Items' => '',
-  'Color' => '',
+  'Color' => 'اللون',
   'Deadline: ' => '',
   'Description' => 'توضيج',
   'Don\'t add to calendar' => '',
@@ -19,6 +19,6 @@ return array (
   'Review by responsible user required' => '',
   'Scheduling' => '',
   'Start' => '',
-  'Status' => '',
+  'Status' => 'الحالة',
   'Title' => 'العنوان',
 );

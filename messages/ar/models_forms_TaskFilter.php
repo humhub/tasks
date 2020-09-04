@@ -9,6 +9,6 @@ return array (
   'Overdue' => '',
   'Spaces' => 'الباحات',
   'Start date' => '',
-  'Status' => '',
+  'Status' => 'الحالة',
   'Title' => 'العنوان',
 );

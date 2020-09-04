@@ -4,7 +4,7 @@ return array (
   '<b>There are no tasks yet!</b><br>Be the first and create one...' => '',
   'Assigned to me' => '',
   'Back to stream' => '@@ストリームに戻る@@',
-  'Created by me' => '',
+  'Created by me' => '私が作成したもの',
   'Creation time' => '作成時間',
   'Filter' => 'フィルター',
   'Last update' => '最後のアップデート',
