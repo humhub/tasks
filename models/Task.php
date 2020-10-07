@@ -457,7 +457,7 @@ class Task extends ContentActiveRecord implements Searchable
         }
 
         if($this->list && $this->list->addition) {
-            $this->list->addition->updateAttributes(['updated_at' => new Expression('NOW()')]);
+            $this->list->addition->updateAttributes(['updated_at' => date('Y-m-d G:i:s')]);
         }
     }
 
@@ -537,7 +537,7 @@ class Task extends ContentActiveRecord implements Searchable
     public function afterDelete()
     {
         if($this->list) {
-            $this->list->setAttributes(['updated_at' => new Expression('NOW()')]);
+            $this->list->setAttributes(['updated_at' => date('Y-m-d G:i:s')]);
         }
 
         parent::afterDelete();
