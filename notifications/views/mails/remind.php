@@ -48,16 +48,14 @@ use humhub\widgets\mails\MailButton;
         </tr>
         <tr>
             <td>
-                <?=
-                MailContentEntry::widget([
+                <?=  MailContentEntry::widget([
                     'originator' => $originator,
                     'content' => $html,
                     'date' => $date,
                     'space' => $space,
                     'isReminder' => true,
                     'source' => $source
-                ])
-                ?>
+                ]) ?>
             </td>
         </tr>
         <tr>

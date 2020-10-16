@@ -47,16 +47,14 @@ use yii\helpers\Url;
     </tr>
     <tr>
         <td>
-            <?=
-            MailContentEntry::widget([
+            <?=  MailContentEntry::widget([
                 'originator' => $originator,
                 'content' => $html,
                 'date' => $date,
                 'space' => $space,
                 'isReminder' => false,
                 'source' => $source
-            ])
-            ?>
+            ])  ?>
         </td>
     </tr>
     <tr>

@@ -15,14 +15,11 @@
 
 namespace humhub\modules\tasks\widgets\lists;
 
-
 use humhub\components\Widget;
 use humhub\modules\content\components\ContentContainerActiveRecord;
-use humhub\modules\meeting\models\forms\MeetingFilter;
 use humhub\modules\tasks\helpers\TaskListUrl;
 use humhub\modules\tasks\models\lists\TaskList;
 use humhub\modules\tasks\permissions\ManageTasks;
-use Yii;
 use yii\data\ActiveDataProvider;
 use yii\widgets\ListView;
 

@@ -1,11 +1,11 @@
 Changelog
 =========
 
-1.3.7 (Unreleased)
+1.3.7 (Octrober, 16, 2020)
 ------------------
-- Fix stream action on "Completed" tasks (@tmthan)
-
-
+- Fix: stream action on "Completed" tasks (@tmthan)
+- Fix: Removed usage of legacy richtext
+- Fix: Task style overwrites wallentry controls style
 
 1.3.6 (May, 05, 2020)
 -------------------

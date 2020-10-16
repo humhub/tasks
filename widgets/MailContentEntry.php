@@ -12,7 +12,6 @@ namespace humhub\modules\tasks\widgets;
 use humhub\components\ActiveRecord;
 use Yii;
 use yii\base\Widget;
-use humhub\widgets\RichText;
 use humhub\components\rendering\ViewPathRenderer;
 use humhub\components\rendering\Viewable;
 use humhub\modules\content\interfaces\ContentOwner;
@@ -70,13 +69,7 @@ class MailContentEntry extends Widget
             } catch (\yii\base\ViewNotFoundException $e) {
                 Yii::error($e);
             }
-        } else if ($this->content instanceof \humhub\modules\content\interfaces\ContentOwner) {
-            $content = RichText::widget(['text' => $this->content->getContentDescription(), 'minimal' => true]);
-            if(!$this->originator) {
-                $this->originator = $this->content->content->createdBy;
-            }
         }
-
 
         return $this->render('mailContentEntry', [
                     'originator' => $this->originator,
@@ -89,5 +82,3 @@ class MailContentEntry extends Widget
     }
 
 }
-
-?>
