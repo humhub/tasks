@@ -20,14 +20,13 @@ $divID = ($filterResult)
     ? "task_progress_" . $task->id . "_filter"
     : "task_progress_" . $task->id;
 
-$color = "progress-bar-info";
 ?>
 <div class="progress">
-    <div id="<?= $divID; ?>"
-         class="progress-bar <?= $color; ?>"
+    <div id="<?= $divID ?>"
+         class="progress-bar progress-bar-info"
          role="progressbar"
          aria-valuenow="<?= $percent; ?>" aria-valuemin="0" aria-valuemax="100"
-         style="width: 0%">
+         style="width: 0">
     </div>
 </div>
 <?= Html::script("$('#{$divID}').css('width', '{$percent}%');") ?>

@@ -18,6 +18,8 @@ $scheduleTextClass = '';
 if (($task->schedule->isOverdue())) {
     $scheduleTextClass = 'colorDanger';
 }
+
+$color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
 ?>
 
 <div class="task-list-task-details">
@@ -26,11 +28,12 @@ if (($task->schedule->isOverdue())) {
 
 
         <div class="task-list-task-infos">
-            <?= TaskRoleInfoBox::widget(['task' => $task]) ?>
+            <?= TaskRoleInfoBox::widget(['task' => $task, 'iconColor' => $color]) ?>
             <?= TaskInfoBox::widget([
                 'title' => Yii::t('TasksModule.base', 'Scheduling'),
                 'value' => $task->schedule->getFormattedDateTime(),
                 'icon' => 'fa-clock-o',
+                'iconColor' => $color,
                 'textClass' => $scheduleTextClass]) ?>
 
             <?php if ($task->schedule->canRequestExtension()): ?>

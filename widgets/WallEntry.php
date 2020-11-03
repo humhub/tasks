@@ -9,23 +9,30 @@
 
 namespace humhub\modules\tasks\widgets;
 
+use humhub\modules\content\widgets\stream\WallStreamModuleEntryWidget;
 use humhub\modules\content\widgets\WallEntryControlLink;
 use humhub\modules\tasks\assets\Assets;
 use humhub\modules\content\widgets\EditLink;
 use humhub\modules\content\widgets\DeleteLink;
 use humhub\modules\tasks\helpers\TaskUrl;
+use humhub\modules\tasks\models\Task;
 use Yii;
 
 /**
  * @inheritdoc
  */
-class WallEntry extends \humhub\modules\content\widgets\WallEntry
+class WallEntry extends WallStreamModuleEntryWidget
 {
     public $editMode = self::EDIT_MODE_MODAL;
 
+    /**
+     * @var Task
+     */
+    public $model;
+
     public function getEditUrl()
     {
-        return TaskUrl::editTask($this->contentObject, 0, 1);
+        return TaskUrl::editTask($this->model, 0, 1);
     }
 
     public function isInModal()
@@ -33,16 +40,7 @@ class WallEntry extends \humhub\modules\content\widgets\WallEntry
         return Yii::$app->request->get('cal');
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function run()
-    {
-        Assets::register($this->view);
-        return $this->render('wallEntry', ['task' => $this->contentObject, 'justEdited' => $this->justEdited]);
-    }
-
-    public function getContextMenu()
+    /*public function getContextMenu()
     {
         if(!$this->isInModal() || !$this->contentObject->content->canEdit()) {
             return parent::getContextMenu();
@@ -53,15 +51,22 @@ class WallEntry extends \humhub\modules\content\widgets\WallEntry
         $result = parent::getContextMenu();
 
         return $result;
-    }
+    }*/
 
-    public function getWallEntryViewParams()
+    /**
+     * @return string returns the content type specific part of this wall entry (e.g. post content)
+     */
+    protected function renderContent()
     {
-        $params = parent::getWallEntryViewParams();
-        if($this->isInModal()) {
-            $params['showContentContainer'] = true;
-        }
-        return $params;
+        Assets::register($this->view);
+        return $this->render('wallEntry', ['task' => $this->model, 'justEdited' => $this->renderOptions->justEdited]);
     }
 
+    /**
+     * @return string a non encoded plain text title (no html allowed) used in the header of the widget
+     */
+    protected function getTitle()
+    {
+        return $this->model->title;
+    }
 }

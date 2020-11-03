@@ -18,7 +18,7 @@ $disabled = ($task->canCheckItems()) ? false : 'true';
 ?>
 <?= Html::beginTag('li', $options) ?>
 
-<div class="task-item" id="item-<?= $item->id; ?>">
+<div class="task-item" id="item-<?= $item->id ?>">
 
     <div class="row">
         <div class="col-md-12" style="padding-right: 0;">

@@ -7,15 +7,11 @@
  */
 
 use humhub\libs\Html;
-use humhub\modules\tasks\helpers\TaskListUrl;
 use humhub\modules\tasks\models\Task;
-use humhub\modules\tasks\widgets\ChangeStatusButton;
 use humhub\modules\tasks\widgets\TaskBadge;
 use humhub\modules\tasks\widgets\TaskContextMenu;
 use humhub\modules\tasks\widgets\TaskUserList;
-use humhub\modules\user\widgets\Image;
-use humhub\widgets\Button;
-use humhub\widgets\TimeAgo;
+use humhub\modules\ui\icon\widgets\Icon;
 
 /* @var $contentContainer \humhub\modules\content\components\ContentContainerActiveRecord */
 /* @var $task \humhub\modules\tasks\models\Task */
@@ -28,31 +24,31 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
 
 ?>
 <div class="panel-heading clearfix">
-    <div class="task-head" style="border-left: 5px solid <?= $color ?>">
+    <div class="task-head">
         <div>
-            <strong><i class="fa <?= $icon ?>"></i> <?= Html::encode($task->title); ?></strong>
+            <strong><?= Icon::get($icon)->color($color)?> <?= Html::encode($task->title) ?></strong>
         </div>
     </div>
 
-    <?= TaskContextMenu::widget(['task' => $task, 'contentContainer' => $contentContainer]); ?>
+    <?= TaskContextMenu::widget(['task' => $task, 'contentContainer' => $contentContainer]) ?>
 
     <div class="row clearfix">
         <div class="col-sm-12 media">
             <div class="media-body clearfix">
                 <?php if ($task->scheduling) : ?>
                     <h2 style="margin:5px 0 0 0;">
-                        <?= $task->schedule->getFormattedStartDateTime(); ?>
+                        <?= $task->schedule->getFormattedStartDateTime() ?>
                         -
-                        <?= $task->schedule->getFormattedEndDateTime(); ?>
+                        <?= $task->schedule->getFormattedEndDateTime() ?>
                     </h2>
                 <?php endif; ?>
                 <span class="author">
-                    <?= Html::containerLink($task->content->createdBy); ?>
+                    <?= Html::containerLink($task->content->createdBy) ?>
                 </span>
                 <?php if ($task->content->updated_at !== null) : ?>
                     &middot <span class="tt updated"
-                            title="<?= Yii::$app->formatter->asDateTime($task->content->updated_at); ?>">
-                        <?= Yii::t('ContentModule.base', 'Updated'); ?>
+                            title="<?= Yii::$app->formatter->asDateTime($task->content->updated_at) ?>">
+                        <?= Yii::t('ContentModule.base', 'Updated') ?>
                     </span>
                 <?php endif; ?>
 
@@ -60,7 +56,7 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
                     <?= TaskBadge::widget(['task' => $task]) ?>
 
                     <?php if ($task->content->isPublic()) : ?>
-                        <span class="label label-info"><?= Yii::t('SpaceModule.base', 'Public'); ?></span>
+                        <span class="label label-info"><?= Yii::t('SpaceModule.base', 'Public') ?></span>
                     <?php endif; ?>
                 </div>
             </div>
@@ -96,8 +92,6 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
                         </div>
                     </div>
                 <?php endif ?>
-
-
 
             </div>
         </div>

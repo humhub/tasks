@@ -24,8 +24,8 @@ $module = Yii::$app->moduleManager->getModule('tasks');
         <td width="40" valign="top" align="left" style="padding-right:20px;">
 
             <?php if ($isReminder) : ?>
-                <a href="<?= $source->getUrl(); ?>">
-                    <img src="<?= $module->getImage(); ?>"
+                <a href="<?= $source->getUrl() ?>">
+                    <img src="<?= $module->getImage() ?>"
                          width="50"
                          height="50"
                          alt=""
@@ -34,7 +34,7 @@ $module = Yii::$app->moduleManager->getModule('tasks');
                          border="0" hspace="0" vspace="0"/>
                 </a>
             <?php elseif ($originator ) : ?>
-                <?= humhub\widgets\mails\MailContentContainerImage::widget(['container' => $originator]); ?>
+                <?= humhub\widgets\mails\MailContentContainerImage::widget(['container' => $originator]) ?>
             <?php endif; ?>
 
         </td>

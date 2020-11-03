@@ -28,7 +28,7 @@ use humhub\modules\tasks\helpers\TaskUrl;
             <?php foreach ($taskEntries as $entry) : ?>
                 <?php $color = $entry->getColor() ? $entry->getColor() : $this->theme->variable('info') ?>
                 <a href="<?= $entry->getUrl() ?>">
-                    <li style="border-left: 3px solid <?= $color?>">
+                    <li style="border-left: 3px solid <?= Html::encode($color) ?>">
                         <div class="media">
                             <div class="media-body text-break">
                                 <?=  $entry->getBadge() ?>

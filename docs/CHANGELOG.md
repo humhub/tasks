@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.4.0 (November, 03, 2020)
+------------------
+- Chng: Migrated to 1.7 wall stream entry widget
+- Chng: Min HumHub version 1.7
+- Enh: Reworked wall stream entry layout
+
 1.3.7 (Octrober, 16, 2020)
 ------------------
 - Fix: stream action on "Completed" tasks (@tmthan)

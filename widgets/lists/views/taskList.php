@@ -32,7 +32,7 @@ use yii\helpers\Html;
 ?>
 
 <?= Html::beginTag('div', $options) ?>
-<div class="task-list-container collapsable" style="border-color:<?= $color ?>">
+<div class="task-list-container collapsable" style="border-color:<?= Html::encode($color) ?>">
     <div class="task-list-title-bar clearfix">
 
         <?php if ($canSort) : ?>

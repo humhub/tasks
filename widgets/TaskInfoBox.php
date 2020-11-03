@@ -24,6 +24,8 @@ class TaskInfoBox extends Widget
      */
     public $icon;
 
+    public $iconColor;
+
     /**
      * @var string
      */
@@ -31,12 +33,29 @@ class TaskInfoBox extends Widget
 
     public $textClass;
 
+    public function init()
+    {
+        parent::init();
+
+        if(!$this->iconColor) {
+            $this->iconColor = $this->view->theme->variable('info');
+        }
+    }
+
+
     /**
      * @inheritdoc
      */
     public function run()
     {
-        return $this->render('taskInfoBox', ['cssClass' => $this->cssClass, 'textClass'  => $this->textClass, 'title' => $this->getTitle(), 'value' => $this->getValue(), 'icon' => $this->getIcon()]);
+        return $this->render('taskInfoBox', [
+            'cssClass' => $this->cssClass,
+            'textClass'  => $this->textClass,
+            'title' => $this->getTitle(),
+            'value' => $this->getValue(),
+            'icon' => $this->getIcon(),
+            'iconColor' => $this->iconColor,
+        ]);
     }
 
     public function getTitle()
