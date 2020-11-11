@@ -88,13 +88,17 @@ class TaskFilter extends Model
     {
         $this->validate();
 
-        $query = Task::find()->readable();
+        $query = Task::find()->readable()->andWhere('content.archived = 0');
+
 
         if($this->contentContainer) {
             $query->contentContainer($this->contentContainer);
         } else if (!empty($this->spaces)) {
             $query->joinWith(['content', 'content.contentContainer', 'content.createdBy']);
             $query->andWhere( ['IN', 'contentcontainer.guid', $this->spaces]);
+        } else {
+            // exclude archived content from global view
+            $query->andWhere('space.status = 1 OR space.status IS NULL');
         }
 
         if($this->isFilterActive(static::FILTER_OVERDUE)) {

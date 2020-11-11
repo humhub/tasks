@@ -4,6 +4,7 @@ Changelog
 1.4.1 (November, 11, 2020)
 ------------------
 - Fix #128: Task list details request does not fetch required assets
+- Fix #126: Exclude archived content from global view
 
 1.4.0 (November, 03, 2020)
 ------------------
