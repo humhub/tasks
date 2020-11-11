@@ -6,6 +6,7 @@ Changelog
 - Fix #128: Task list details request does not fetch required assets
 - Fix #126: Exclude archived content from global view
 - Fix #125: Removed pointer cursor in task detail body
+- Fix #123: Task scheduling fails in Chinese or Korean
 
 1.4.0 (November, 03, 2020)
 ------------------

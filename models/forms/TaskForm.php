@@ -13,8 +13,8 @@
 
 namespace humhub\modules\tasks\models\forms;
 
+use humhub\libs\DbDateValidator;
 use humhub\modules\content\widgets\richtext\RichText;
-use humhub\modules\tasks\comp\DbDateValidatorPatched;
 use humhub\modules\tasks\helpers\TaskUrl;
 use Yii;
 use yii\base\Model;
@@ -124,10 +124,10 @@ class TaskForm extends Model
     {
         return [
             [['timeZone'], 'in', 'range' => DateTimeZone::listIdentifiers()],
-            [['start_time', 'end_time'], 'date', 'type' => 'time', 'format' => $this->getTimeFormat()],
-            [['start_time', 'end_time'], 'date', 'type' => 'time', 'format' => $this->getTimeFormat()],
-            [['start_date'], DbDateValidatorPatched::class, 'format' => Yii::$app->formatter->dateInputFormat, 'timeAttribute' => 'start_time', 'timeZone' => $this->timeZone],
-            [['end_date'], DbDateValidatorPatched::class, 'format' => Yii::$app->formatter->dateInputFormat, 'timeAttribute' => 'end_time', 'timeZone' => $this->timeZone],
+            [['start_time', 'end_time'], 'date', 'type' => 'time', 'format' => $this->getTimeFormat(), 'locale' => $this->getTimeLocale()],
+            [['start_time', 'end_time'], 'date', 'type' => 'time', 'format' => $this->getTimeFormat(), 'locale' => $this->getTimeLocale()],
+            [['start_date'], DbDateValidator::class, 'format' => Yii::$app->formatter->dateInputFormat, 'timeAttribute' => 'start_time', 'timeZone' => $this->timeZone],
+            [['end_date'], DbDateValidator::class, 'format' => Yii::$app->formatter->dateInputFormat, 'timeAttribute' => 'end_time', 'timeZone' => $this->timeZone],
             [['end_date'], 'validateEndTime'],
 
             [['start_date', 'end_date'], 'required', 'when' => function($model) {
@@ -151,6 +151,23 @@ class TaskForm extends Model
         return Yii::$app->formatter->isShowMeridiem() ? 'h:mm a' : 'php:H:i';
     }
 
+    public function getTimeLocale()
+    {
+        return Yii::$app->formatter->isShowMeridiem() ? 'en-US' : Yii::$app->formatter->locale;
+    }
+
+    private function getAsTime($date)
+    {
+        $locale = Yii::$app->formatter->locale;
+
+        Yii::$app->formatter->locale = $this->getTimeLocale();
+
+        $result = Yii::$app->formatter->asTime($date, $this->getTimeFormat());
+
+        Yii::$app->formatter->locale = $locale;
+        return $result;
+    }
+
     public function beforeValidate()
     {
         $this->checkAllDay();
@@ -164,12 +181,14 @@ class TaskForm extends Model
         if($this->task->all_day) {
             $date = new DateTime('now', new DateTimeZone($this->timeZone));
             $date->setTime(0,0);
-            $this->start_time = Yii::$app->formatter->asTime($date, $this->getTimeFormat());
-            $date->setTime(23,59);
-            $this->end_time = Yii::$app->formatter->asTime($date, $this->getTimeFormat());
+
+            $this->start_time = $this->getAsTime($date);
+            $date->setTime(23, 59);
+            $this->end_time = $this->getAsTime($date);
         }
         Yii::$app->i18n->autosetLocale();
     }
+
 
     /**
      * Validator for the endtime field.
@@ -345,10 +364,10 @@ class TaskForm extends Model
         }*/
 
         $this->start_date = Yii::$app->formatter->asDateTime($startTime, $dateFormat);
-        $this->start_time = Yii::$app->formatter->asTime($startTime, $this->getTimeFormat());
+        $this->start_time = $this->getAsTime($startTime);
 
         $this->end_date = Yii::$app->formatter->asDateTime($endTime, $dateFormat);
-        $this->end_time = Yii::$app->formatter->asTime($endTime, $this->getTimeFormat());
+        $this->end_time = $this->getAsTime($endTime);
 
         Yii::$app->i18n->autosetLocale();
     }
