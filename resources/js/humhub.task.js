@@ -190,7 +190,7 @@ humhub.module('task', function (module, require, $) {
 
         event.on('humhub:content:afterMove.tasks', function(evt, resp) {
             if($('#task-space-menu').length) {
-                $task = $('[data-content-id="'+resp.id+'"]');
+                var $task = $('[data-content-id="'+resp.id+'"]');
                 if($task.length) {
                     $task.remove();
                 } else {

@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.4.1 (November, 11, 2020)
+------------------
+- Fix #128: Task list details request does not fetch required assets
+
 1.4.0 (November, 03, 2020)
 ------------------
 - Chng: Migrated to 1.7 wall stream entry widget
