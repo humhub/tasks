@@ -125,7 +125,6 @@ class TaskForm extends Model
         return [
             [['timeZone'], 'in', 'range' => DateTimeZone::listIdentifiers()],
             [['start_time', 'end_time'], 'date', 'type' => 'time', 'format' => $this->getTimeFormat(), 'locale' => $this->getTimeLocale()],
-            [['start_time', 'end_time'], 'date', 'type' => 'time', 'format' => $this->getTimeFormat(), 'locale' => $this->getTimeLocale()],
             [['start_date'], DbDateValidator::class, 'format' => Yii::$app->formatter->dateInputFormat, 'timeAttribute' => 'start_time', 'timeZone' => $this->timeZone],
             [['end_date'], DbDateValidator::class, 'format' => Yii::$app->formatter->dateInputFormat, 'timeAttribute' => 'end_time', 'timeZone' => $this->timeZone],
             [['end_date'], 'validateEndTime'],

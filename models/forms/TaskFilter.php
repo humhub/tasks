@@ -16,8 +16,8 @@
 namespace humhub\modules\tasks\models\forms;
 
 
+use humhub\libs\DbDateValidator;
 use humhub\modules\tasks\CalendarUtils;
-use humhub\modules\tasks\comp\DbDateValidatorPatched;
 use Yii;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\content\components\ContentContainerActiveRecord;
@@ -67,8 +67,8 @@ class TaskFilter extends Model
         return [
             [['title', 'date_start', 'date_end'], 'string'],
             [['filters', 'states', 'spaces'], 'safe'],
-            [['date_start'], DbDateValidatorPatched::class],
-            [['date_end'], DbDateValidatorPatched::class],
+            [['date_start'], DbDateValidator::class],
+            [['date_end'], DbDateValidator::class],
         ];
     }
 
