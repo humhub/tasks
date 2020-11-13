@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.4.1 (November, 13, 2020)
+------------------
+- Fix: Responsive task filter
+
 1.4.1 (November, 11, 2020)
 ------------------
 - Fix #128: Task list details request does not fetch required assets

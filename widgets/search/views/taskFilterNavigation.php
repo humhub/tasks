@@ -35,12 +35,12 @@ $titleFilter = $title[0];
 
 <div class="filter-root clearfix" style="position:relative;padding-top:0;padding-bottom:0">
     <div class="row task-bottom-panel">
-        <?= FilterPanel::widget(['blocks' => $checkboxes, 'span' => 2]) ?>
-        <?= FilterPanel::widget(['blocks' => $datePicker, 'span' => 2]) ?>
-        <?= FilterPanel::widget(['blocks' => $picker, 'span' => 2]) ?>
+        <?= FilterPanel::widget(['blocks' => $checkboxes, 'span' => 3]) ?>
+        <?= FilterPanel::widget(['blocks' => $datePicker, 'span' => 3]) ?>
+        <?= FilterPanel::widget(['blocks' => $picker, 'span' => 3]) ?>
     </div>
   
-    <div id="task-export-button" style="position:absolute;top:0;right:0;">
+    <div id="task-export-button">
         <?= ExportButton::widget(['filter' => 'TaskFilter']) ?>
     </div>
 

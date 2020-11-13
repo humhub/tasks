@@ -122,6 +122,23 @@
     }
   }
 
+
+
+  #task-export-button {
+    float:right;
+  }
+
+  @media (max-width: 767px) {
+    #task-filter-nav {
+      overflow: auto;
+    }
+
+    #task-export-button {
+      float:none;
+    }
+
+  }
+
   #task-filter-nav {
 
     padding: 10px;
@@ -132,9 +149,16 @@
       }
     }
 
+    .filter-list a {
+      white-space: nowrap;
+    }
+
     .filter-root {
       margin: 0;
       padding: 5px;
+      position: relative;
+      padding-top: 0;
+      padding-bottom: 0;
 
       .filterInput {
         font-size: 13px;
@@ -163,6 +187,7 @@
       .filterInput.task-date-picker {
         margin: 0;
         height: 45px;
+        width: 200px;
       }
     }
 
