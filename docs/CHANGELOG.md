@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.4.1 (November, 13, 2020)
+1.4.2 (November, 13, 2020)
 ------------------
 - Fix: Responsive task filter
 
