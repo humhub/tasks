@@ -8,18 +8,28 @@
 
 namespace humhub\modules\tasks\tests\codeception\unit;
 
+use humhub\libs\BasePermission;
 use humhub\modules\space\models\Space;
 use humhub\modules\tasks\models\state\CompletedState;
 use humhub\modules\tasks\models\state\InProgressState;
 use humhub\modules\tasks\models\state\PendingReviewState;
 use humhub\modules\tasks\models\state\PendingState;
 use humhub\modules\tasks\models\Task;
+use humhub\modules\tasks\permissions\ManageTasks;
 use humhub\modules\user\models\User;
 use tasks\TaskTestCase;
 
 
 class TaskStateTest extends TaskTestCase
 {
+    public function _before()
+    {
+        parent::_before();
+        $space4 = Space::findOne(4);
+        $this->setContentContainerPermission($space4,Space::USERGROUP_ADMIN,ManageTasks::class, BasePermission::STATE_DENY);
+        $this->setContentContainerPermission($space4,Space::USERGROUP_MODERATOR,ManageTasks::class, BasePermission::STATE_DENY);
+    }
+
     public function testResetTask()
     {
         $this->becomeUser('User1');
@@ -33,6 +43,7 @@ class TaskStateTest extends TaskTestCase
 
     public function testReviewRevertStateProcess()
     {
+
         $user1 = User::findOne(2);
         $user2 = User::findOne(3);
         $this->becomeUser('User2');
