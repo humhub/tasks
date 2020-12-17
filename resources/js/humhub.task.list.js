@@ -350,8 +350,6 @@ humhub.module('task.list', function (module, require, $) {
 
         client.html(this.options.loadDetailsUrl).then(function(response) {
             that.$.append(response.html);
-            // currently the comments are hidden by default
-            that.$.find('.comment-container').show();
         }).catch(function(e) {
             module.log.error(e, true);
         }).finally(function() {

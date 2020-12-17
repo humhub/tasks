@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.4.3 (Unreleased)
+------------------
+- Fix: Remove gap between comments
+
 1.4.2 (November, 13, 2020)
 ------------------
 - Fix: Responsive task filter
