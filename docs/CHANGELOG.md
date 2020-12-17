@@ -1,9 +1,10 @@
 Changelog
 =========
 
-1.4.3 (Unreleased)
+1.5.0 (December, 17, 2020)
 ------------------
 - Fix: Remove gap between comments
+- Chg: Add process permissions to users with ManageTasks and task owner
 
 1.4.2 (November, 13, 2020)
 ------------------
@@ -22,7 +23,7 @@ Changelog
 - Chng: Min HumHub version 1.7
 - Enh: Reworked wall stream entry layout
 
-1.3.7 (Octrober, 16, 2020)
+1.3.7 (October, 16, 2020)
 ------------------
 - Fix: stream action on "Completed" tasks (@tmthan)
 - Fix: Removed usage of legacy richtext
