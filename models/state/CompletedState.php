@@ -46,18 +46,20 @@ class CompletedState extends TaskState
 
     public function checkRevertRules($newStatus = null, $user = null)
     {
-        if($this->task->isTaskResponsible($user) || $this->task->isOwner($user)) {
-            return true;
-        } else {
-            return $this->task->canProcess($user);
-        }
+        return $this->task->isTaskResponsible($user)
+            || $this->task->isOwner($user)
+            || $this->task->canProcess($user);
     }
 
     public function canCompleteTask($user = null)
     {
-        if($this->task->isTaskResponsible($user) || $this->task->isOwner($user)) {
+        if($this->task->isTaskResponsible($user)
+            || $this->task->isOwner($user)
+            || $this->task->canManageTasks($user)) {
             return true;
-        } else if(!$this->task->review) {
+        }
+
+        if(!$this->task->review) {
             return $this->task->isTaskAssigned($user) || $this->task->canProcess($user);
         }
 

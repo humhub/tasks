@@ -39,7 +39,9 @@ class PendingState extends TaskState
 
     public function checkProceedRules($newStatus = null, $user = null)
     {
-        return $this->task->isTaskResponsible($user) || $this->task->isTaskAssigned($user) || $this->task->canProcess($user);
+        return $this->task->isTaskResponsible($user)
+            || $this->task->isTaskAssigned($user)
+            || $this->task->canProcess($user);
     }
 
     public function afterRevert(TaskState $oldState)

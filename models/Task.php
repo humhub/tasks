@@ -625,7 +625,6 @@ class Task extends ContentActiveRecord implements Searchable
         }
 
         return $this->content->created_by === $user->getId();
-
     }
 
     public function addTaskResponsible($user, $sendNotification = true)
@@ -902,12 +901,37 @@ class Task extends ContentActiveRecord implements Searchable
             $user = Yii::$app->user->getIdentity();
         }
 
+        if($this->isOwner($user)) {
+            return true;
+        }
+
+        if($this->canManageTasks($user)) {
+            return true;
+        }
+
         $permissionManager = new ContentContainerPermissionManager([
             'contentContainer' => $this->content->container,
             'subject' => $user
         ]);
 
         return (!$this->hasTaskAssigned() && $permissionManager->can(ProcessUnassignedTasks::class));
+    }
+
+    public function canManageTasks($user = null) {
+        if(!$user && Yii::$app->user->isGuest) {
+            return false;
+        }
+
+        if(!$user) {
+            $user = Yii::$app->user->getIdentity();
+        }
+
+        $permissionManager = new ContentContainerPermissionManager([
+            'contentContainer' => $this->content->container,
+            'subject' => $user
+        ]);
+
+        return $permissionManager->can(ManageTasks::class);
     }
 
     /**

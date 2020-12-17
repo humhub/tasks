@@ -36,12 +36,14 @@ class PendingReviewState extends TaskState
 
     public function checkProceedRules($newStatus = null, $user = null)
     {
-        return $this->task->isTaskResponsible($user);
+        return $this->task->isTaskResponsible($user)
+            || $this->task->canManageTasks($user);
     }
 
     public function checkRevertRules($newStatus = null, $user = null)
     {
-        return $this->task->isTaskResponsible($user);
+        return $this->task->isTaskResponsible($user)
+            || $this->task->canManageTasks($user);
     }
 
     public function afterRevert(TaskState $oldState)
