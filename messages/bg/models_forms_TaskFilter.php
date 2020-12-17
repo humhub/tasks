@@ -1,15 +1,14 @@
 <?php
-
-return [
-    'Created by me' => '',
-    'End date' => '',
-    'Filter status' => '',
-    'Filter tasks' => '',
-    'I\'m assigned' => '',
-    'I\'m responsible' => '',
-    'Overdue' => '',
-    'Spaces' => '',
-    'Start date' => '',
-    'Status' => '',
-    'Title' => '',
-];
+return array (
+  'Created by me' => 'Създадени от мен',
+  'End date' => 'Крайна дата',
+  'Filter status' => 'Състояние на филтъра',
+  'Filter tasks' => 'Филтрирайте задачи',
+  'I\'m assigned' => 'Аз съм назначен',
+  'I\'m responsible' => 'Аз съм отговорен',
+  'Overdue' => 'Просрочена',
+  'Spaces' => 'Раздели',
+  'Start date' => 'Начална дата',
+  'Status' => 'Статус',
+  'Title' => 'Заглавие',
+);
