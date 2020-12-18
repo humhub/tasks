@@ -9,6 +9,8 @@ use humhub\modules\tasks\widgets\ChangeStatusButton;
 use humhub\modules\tasks\widgets\TaskInfoBox;
 use humhub\modules\tasks\widgets\checklist\TaskChecklist;
 use humhub\modules\tasks\widgets\TaskRoleInfoBox;
+use humhub\modules\topic\models\Topic;
+use humhub\modules\topic\widgets\TopicLabel;
 use humhub\widgets\Button;
 
 /* @var $task \humhub\modules\tasks\models\Task */
@@ -43,6 +45,12 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
             <?php endif; ?>
 
             <?= ChangeStatusButton::widget(['task' => $task]) ?>
+        </div>
+
+        <div class="task-list-task-topics">
+            <?php foreach (Topic::findByContent($task->content)->all() as $topic) : ?>
+                <?= TopicLabel::forTopic($topic) ?>
+            <?php endforeach; ?>
         </div>
 
         <?php if(!empty($task->description)) : ?>
