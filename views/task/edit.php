@@ -30,7 +30,6 @@ if($taskForm->getContentContainer() instanceof Space) {
 
 $tabs[] = ['label' => Yii::t('TasksModule.views_index_edit', 'Checklist'), 'view' => 'edit-checklist', 'linkOptions' => ['class' => 'tab-checklist']];
 $tabs[] = ['label' => Yii::t('TasksModule.views_index_edit', 'Files'), 'view' => 'edit-files', 'linkOptions' => ['class' => 'tab-files']];
-$tabs[] = ['label' => Yii::t('TasksModule.views_index_edit', 'Topics'), 'view' => 'edit-topics', 'linkOptions' => ['class' => 'tab-topics']];
 
 ?>
 
