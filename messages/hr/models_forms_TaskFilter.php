@@ -1,14 +1,14 @@
 <?php
 return array (
   'Created by me' => 'Kreirao sam',
-  'End date' => '',
-  'Filter status' => '',
-  'Filter tasks' => '',
-  'I\'m assigned' => '',
-  'I\'m responsible' => '',
-  'Overdue' => '',
+  'End date' => 'Datum završetka',
+  'Filter status' => 'Filter statusa',
+  'Filter tasks' => 'Filter zadataka',
+  'I\'m assigned' => 'Dodijeljen sam',
+  'I\'m responsible' => 'Ja sam odgovoran',
+  'Overdue' => 'Zakašnjelo',
   'Spaces' => 'Prostori',
-  'Start date' => '',
+  'Start date' => 'Početni datum',
   'Status' => 'Status',
   'Title' => 'Naziv',
 );
