@@ -16,6 +16,7 @@ namespace humhub\modules\tasks\models\forms;
 use humhub\libs\DbDateValidator;
 use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\tasks\helpers\TaskUrl;
+use humhub\modules\topic\models\Topic;
 use Yii;
 use yii\base\Model;
 use DateTime;
@@ -100,6 +101,11 @@ class TaskForm extends Model
     public $submitUrl;
 
     /**
+     * @var array
+     */
+    public $topics = [];
+
+    /**
      * @inheritdoc
      */
     public function init()
@@ -114,6 +120,8 @@ class TaskForm extends Model
 
             $this->translateDateTimes($this->task->start_datetime, $this->task->end_datetime, Yii::$app->timeZone, $this->timeZone);
             $this->is_public = $this->task->content->visibility;
+
+            $this->topics = Topic::findByContent($this->task->content);
         }
     }
 
@@ -141,7 +149,7 @@ class TaskForm extends Model
             }"],
 
             [['is_public'], 'integer'],
-            [['newItems', 'editItems'], 'safe'],
+            [['newItems', 'editItems', 'topics'], 'safe'],
         ];
     }
 
@@ -305,6 +313,8 @@ class TaskForm extends Model
             RichText::postProcess($this->task->description, $this->task);
             // Required for attached files
             $this->task->fileManager->attach(Yii::$app->request->post('fileList'));
+            // Save topics
+            Topic::attach($this->task->content, $this->topics);
             return true;
         }
 

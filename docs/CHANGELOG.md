@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.5.1 (Unreleased)
+------------------
+- Enh: Allow to change topics from the edit form
+
 1.5.0 (December, 17, 2020)
 ------------------
 - Fix: Remove gap between comments
