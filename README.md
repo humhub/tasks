@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/humhub/humhub-modules-tasks.svg?branch=master)](https://travis-ci.org/humhub/humhub-modules-tasks)
+[![Test Status](https://github.com/humhub/humhub-modules-tasks/workflows/PHP%20Codeception%20Tests/badge.svg)](https://github.com/humhub/humhub-modules-tasks/actions)
 
 Tasks Module
 ==============
