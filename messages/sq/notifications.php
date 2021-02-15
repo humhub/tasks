@@ -2,10 +2,10 @@
 return array (
   'Receive Notifications for Task Reminder.' => '',
   'Receive Notifications for Tasks (Deadline Updates, Status changes ...).' => '',
-  'Reminder' => 'Lembrete',
+  'Reminder' => '',
   'Task {task} in space {spaceName} ends at {dateTime}.' => '',
   'Task {task} in space {spaceName} starts at {dateTime}.' => '',
-  'View Online' => 'Ver online',
+  'View Online' => 'Shiko Online',
   '{userName} assigned you to task {task} in space {spaceName}.' => '',
   '{userName} completed Task {task} in space {spaceName}.' => '',
   '{userName} has changed deadline for task {task} in space {spaceName}.' => '',

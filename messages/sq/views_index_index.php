@@ -5,7 +5,7 @@ return array (
   'Completed' => '',
   'Deadline at' => '',
   'Drag entry' => '',
-  'Edit' => 'Editar',
+  'Edit' => 'Ndrysho',
   'Filter tasks by title' => '',
   'In Progress' => '',
   'In Review' => '',

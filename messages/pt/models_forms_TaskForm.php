@@ -1,10 +1,10 @@
 <?php
 return array (
   'End Date' => 'Data final',
-  'End Time' => '',
+  'End Time' => 'Hora de fecho',
   'End time must be after start time!' => 'Horário final precisa ser depois do horário inicial.',
-  'Public' => '',
+  'Public' => 'Público',
   'Start Date' => 'Data inicial',
-  'Start Time' => '',
-  'Time Zone' => '',
+  'Start Time' => 'Hora de início',
+  'Time Zone' => 'Zona Horária',
 );

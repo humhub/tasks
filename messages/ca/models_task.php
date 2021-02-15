@@ -6,7 +6,7 @@ return array (
   'All Day' => 'Tot el dia',
   'Assigned user(s)' => '',
   'Checklist Items' => '',
-  'Color' => '',
+  'Color' => 'Color',
   'Deadline: ' => '',
   'Description' => 'Descripció',
   'Don\'t add to calendar' => '',
