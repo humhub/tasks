@@ -1,6 +1,6 @@
 <?php
 return array (
-  'Already requested' => '',
-  'Request sent' => '',
-  'You have insufficient permissions to perform that operation!' => 'Não tens permissões suficientes para executar esta operação!',
+  'Already requested' => 'Já pedido',
+  'Request sent' => 'Pedido enviado',
+  'You have insufficient permissions to perform that operation!' => 'Não tens permissões suficientes para executar essa operação!',
 );
