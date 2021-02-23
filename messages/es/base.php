@@ -39,7 +39,7 @@ return array (
   'Reset Task' => 'Reiniciar tarea',
   'Scheduling' => 'Agendado',
   'Search' => 'Buscar',
-  'Show {count} more completed {n,plural,=1{task} other{tasks}}' => 'Mostrar {count} más completada {n,plural,=1{task} other{tasks}}',
+  'Show {count} more completed {count,plural,=1{task} other{tasks}}' => 'Mostrar {count} más completada {count,plural,=1{task} other{tasks}}',
   'Task' => 'Tarea',
   'Task Lists' => 'Listas de tareas',
   'Tasks' => 'Tareas',

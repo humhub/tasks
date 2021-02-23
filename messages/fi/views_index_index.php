@@ -20,6 +20,6 @@ return [
     'There are currently no upcoming tasks!.' => 'Tällä hetkellä ei ole tulevia tehtäviä!.',
     'Today' => 'Tänään',
     'ending Review' => 'päättyvä tarkastus',
-    '{count} {n,plural,=1{day} other{days}} remaining' => '{count} {n,plural,=1{day} other{days}} jatkuu',
+    '{count,plural,=1{# day} other{# days}} remaining' => '{count,plural,=1{# päivä} other{# päivää}} jäljellä',
     'Starting at' => '',
 ];

@@ -144,7 +144,7 @@ class ListController extends AbstractTaskController
         return $this->asJson([
             'tasks' => $result,
             'remainingCount' => $remainingCount,
-            'showMoreMessage' => Yii::t('TasksModule.base','Show {count} more completed {n,plural,=1{task} other{tasks}}', ['n' => $remainingCount, 'count' => $remainingCount])
+            'showMoreMessage' => Yii::t('TasksModule.base','Show {count} more completed {count,plural,=1{task} other{tasks}}', ['count' => $remainingCount])
         ]);
     }
 
