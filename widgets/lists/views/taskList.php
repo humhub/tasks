@@ -84,7 +84,7 @@ use yii\helpers\Html;
         <?php if ($completedTasksCount > count($completedTasks)) : ?>
             <?php $remainingCount = $completedTasksCount - count($completedTasks); ?>
             <div class="task-list-task-completed-show-more">
-                <?= Button::asLink('<i class="fa fa-chevron-down"></i> ' . Yii::t('TasksModule.base', 'Show {count} more completed {n,plural,=1{task} other{tasks}}', ['n' => $remainingCount, 'count' => $remainingCount]))
+                <?= Button::asLink('<i class="fa fa-chevron-down"></i> ' . Yii::t('TasksModule.base', 'Show {count} more completed {count,plural,=1{task} other{tasks}}', ['count' => $remainingCount]))
                     ->action('showMoreCompleted', TaskListUrl::showMore($list))->cssClass('showMoreCompleted')->loader(true) ?>
             </div>
         <?php endif; ?>

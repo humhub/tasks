@@ -40,7 +40,7 @@ return [
     'Reset Task' => '',
     'Scheduling' => '',
     'Search' => '',
-    'Show {count} more completed {n,plural,=1{task} other{tasks}}' => '',
+    'Show {count} more completed {count,plural,=1{task} other{tasks}}' => '',
     'Task' => '',
     'Task Lists' => '',
     'Tasks' => '',

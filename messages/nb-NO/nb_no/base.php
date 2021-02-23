@@ -42,7 +42,7 @@ return [
     'Reset Task' => 'Tilbakestill oppgave',
     'Scheduling' => 'Planlegging',
     'Search' => 'Søk',
-    'Show {count} more completed {n,plural,=1{task} other{tasks}}' => 'Vis {count} mer ferdidge {n,plural,=1{task} other{tasks}}',
+    'Show {count} more completed {count,plural,=1{task} other{tasks}}' => 'Vis {count} mer ferdidge {count,plural,=1{task} other{tasks}}',
     'Task' => 'Oppgave',
     'Task Lists' => 'Oppgave liste',
     'Tasks' => 'Oppgaver',

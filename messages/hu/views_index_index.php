@@ -20,5 +20,5 @@ return array (
   'There are currently no upcoming tasks!.' => 'Jelenleg nincsenek közelgő feladatok!',
   'Today' => 'Ma',
   'ending Review' => 'Ellenőrzés befejezése',
-  '{count} {n,plural,=1{day} other{days}} remaining' => '{count} {n,plural,=1{day} other{days}} maradt',
+  '{count,plural,=1{# day} other{# days}} remaining' => '{count} nap maradt',
 );

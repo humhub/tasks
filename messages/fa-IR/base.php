@@ -39,7 +39,7 @@ return array (
   'Reset Task' => 'بازنشانی کار',
   'Scheduling' => 'زمان‌بندی',
   'Search' => 'جستجو',
-  'Show {count} more completed {n,plural,=1{task} other{tasks}}' => '',
+  'Show {count} more completed {count,plural,=1{task} other{tasks}}' => '',
   'Task' => 'کار',
   'Task Lists' => 'فهرست کارها',
   'Tasks' => 'کارها',

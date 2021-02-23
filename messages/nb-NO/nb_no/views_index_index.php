@@ -20,5 +20,5 @@ return [
     'There are currently no upcoming tasks!.' => 'Der er fortiden ingen kommende oppgaver',
     'Today' => 'I dag',
     'ending Review' => 'Avslutt gjennomgang',
-    '{count} {n,plural,=1{day} other{days}} remaining' => '{count} {n,plural,=1{day} other{days}} gjenstår',
+    '{count,plural,=1{# day} other{# days}} remaining' => '{count,plural,=1{# dag} other{# dager}} gjenstår',
 ];

@@ -39,7 +39,7 @@ return array (
   'Reset Task' => 'Feladat visszaállítása alaphelyzetbe',
   'Scheduling' => 'Ütemezés',
   'Search' => 'Keresés',
-  'Show {count} more completed {n,plural,=1{task} other{tasks}}' => 'Mutasson {count} több befejezett {n,plural,=1{task} other{tasks}}',
+  'Show {count} more completed {count,plural,=1{task} other{tasks}}' => 'Mutasson {count} több befejezett {count,plural,=1{task} other{tasks}}',
   'Task' => 'Feladat',
   'Task Lists' => 'Feladatlisták',
   'Tasks' => 'Feladatok',

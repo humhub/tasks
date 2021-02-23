@@ -21,5 +21,5 @@ return [
     'There are currently no upcoming tasks!.' => '',
     'Today' => '',
     'ending Review' => '',
-    '{count} {n,plural,=1{day} other{days}} remaining' => '',
+    '{count,plural,=1{# day} other{# days}} remaining' => '',
 ];

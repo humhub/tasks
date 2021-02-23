@@ -102,7 +102,7 @@ $checkUrl = $task->state->getCheckUrl();
             $schedulingTitle = Yii::t('TasksModule.views_index_index', 'Today');
             $schedulingColor = 'colorWarning';
         } else {
-            $schedulingTitle = Yii::t('TasksModule.views_index_index', '{count} {n,plural,=1{day} other{days}} remaining', ['count' => $daysRemaining, 'n' => $daysRemaining]);
+            $schedulingTitle = Yii::t('TasksModule.views_index_index', '{count,plural,=1{# day} other{# days}} remaining', ['count' => $daysRemaining]);
             $schedulingColor = $daysRemaining > 1 ? '' : 'colorWarning';
         }
         ?>

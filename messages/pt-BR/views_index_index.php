@@ -20,5 +20,5 @@ return array (
   'There are currently no upcoming tasks!.' => 'No momento, não há tarefas futuras !.',
   'Today' => 'Hoje',
   'ending Review' => 'revisão final',
-  '{count} {n,plural,=1{day} other{days}} remaining' => '',
+  '{count,plural,=1{# day} other{# days}} remaining' => '',
 );

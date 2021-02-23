@@ -20,5 +20,5 @@ return array (
   'There are currently no upcoming tasks!.' => 'В момента няма предстоящи задачи !.',
   'Today' => 'Днес',
   'ending Review' => 'завърши преглед',
-  '{count} {n,plural,=1{day} other{days}} remaining' => '{count} {n,plural,=1{ден остава} other{дни остават}}',
+  '{count,plural,=1{# day} other{# days}} remaining' => '{count,plural,=1{# ден остава} other{# дни остават}}',
 );

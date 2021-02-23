@@ -39,7 +39,7 @@ return array (
   'Reset Task' => 'Нулиране на задачата',
   'Scheduling' => 'Планиране',
   'Search' => 'Търси',
-  'Show {count} more completed {n,plural,=1{task} other{tasks}}' => 'Показване на {count} {n,plural,=1{завършена задача} other{завършени задачи}}',
+  'Show {count} more completed {count,plural,=1{task} other{tasks}}' => 'Показване на {count,plural,=1{# завършена задача} other{# завършени задачи}}',
   'Task' => 'Задача',
   'Task Lists' => 'Списък със задачи',
   'Tasks' => 'Задачи',

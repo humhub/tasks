@@ -39,7 +39,7 @@ return array (
   'Reset Task' => '',
   'Scheduling' => '',
   'Search' => 'Tìm kiếm',
-  'Show {count} more completed {n,plural,=1{task} other{tasks}}' => '',
+  'Show {count} more completed {count,plural,=1{task} other{tasks}}' => '',
   'Task' => 'Công việc/Nhiệm vụ',
   'Task Lists' => '',
   'Tasks' => 'Công việc',
