@@ -9,6 +9,7 @@
 namespace humhub\modules\tasks;
 
 use humhub\modules\infoscreen\helpers\Url;
+use humhub\modules\rest\Module as RestModule;
 use humhub\modules\tasks\helpers\TaskListUrl;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\user\models\User;
@@ -292,6 +293,38 @@ class Events
     public static function onCronRun($event)
     {
         Yii::$app->queue->push(new SendReminder());
+    }
+
+    public static function onRestApiAddRules()
+    {
+        /* @var RestModule $restModule */
+        $restModule = Yii::$app->getModule('rest');
+        $restModule->addRules([
+
+            ['pattern' => 'tasks/', 'route' => 'tasks/rest/tasks/find', 'verb' => ['GET', 'HEAD']],
+            ['pattern' => 'tasks/container/<containerId:\d+>', 'route' => 'tasks/rest/tasks/find-by-container', 'verb' => ['GET', 'HEAD']],
+            ['pattern' => 'tasks/container/<containerId:\d+>', 'route' => 'tasks/rest/tasks/delete-by-container', 'verb' => 'DELETE'],
+
+            //Task CRUD
+            ['pattern' => 'tasks/container/<containerId:\d+>', 'route' => 'tasks/rest/tasks/create', 'verb' => 'POST'],
+            ['pattern' => 'tasks/task/<id:\d+>', 'route' => 'tasks/rest/tasks/view', 'verb' => ['GET', 'HEAD']],
+            ['pattern' => 'tasks/task/<id:\d+>', 'route' => 'tasks/rest/tasks/update', 'verb' => 'PUT'],
+            ['pattern' => 'tasks/task/<id:\d+>', 'route' => 'tasks/rest/tasks/delete', 'verb' => 'DELETE'],
+
+            //Task management
+            ['pattern' => 'tasks/task/<id:\d+>/processed', 'route' => 'tasks/rest/tasks/processed', 'verb' => 'PATCH'],
+            ['pattern' => 'tasks/task/<id:\d+>/revert', 'route' => 'tasks/rest/tasks/revert', 'verb' => 'PATCH'],
+            ['pattern' => 'tasks/task/<id:\d+>/upload-files', 'route' => 'tasks/rest/tasks/attach-files', 'verb' => 'POST'],
+            ['pattern' => 'tasks/task/<id:\d+>/remove-file/<fileId:\d+>', 'route' => 'tasks/rest/tasks/remove-file', 'verb' => 'DELETE'],
+
+            //Task List CRUD
+            ['pattern' => 'tasks/lists/container/<containerId:\d+>', 'route' => 'tasks/rest/task-list/index', 'verb' => 'GET'],
+            ['pattern' => 'tasks/lists/container/<containerId:\d+>', 'route' => 'tasks/rest/task-list/create', 'verb' => 'POST'],
+            ['pattern' => 'tasks/list/<id:\d+>', 'route' => 'tasks/rest/task-list/view', 'verb' => ['GET', 'HEAD']],
+            ['pattern' => 'tasks/list/<id:\d+>', 'route' => 'tasks/rest/task-list/update', 'verb' => 'PUT'],
+            ['pattern' => 'tasks/list/<id:\d+>', 'route' => 'tasks/rest/task-list/delete', 'verb' => 'DELETE'],
+
+        ], 'calendar');
     }
 
 }

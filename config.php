@@ -24,6 +24,7 @@ return array(
         ['class' => Membership::class, 'event' => Membership::EVENT_MEMBER_REMOVED, 'callback' => ['humhub\modules\tasks\Events', 'onMemberRemoved']],
         ['class' => 'humhub\modules\calendar\interfaces\CalendarService', 'event' => 'getItemTypes', 'callback' => ['humhub\modules\tasks\Events', 'onGetCalendarItemTypes']],
         ['class' => 'humhub\modules\calendar\interfaces\CalendarService', 'event' => 'findItems', 'callback' => ['humhub\modules\tasks\Events', 'onFindCalendarItems']],
+        ['class' => 'humhub\modules\rest\Module', 'event' => 'restApiAddRules', 'callback' => ['humhub\modules\tasks\Events', 'onRestApiAddRules']],
     ]
 );
 ?>
