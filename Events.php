@@ -324,7 +324,7 @@ class Events
             ['pattern' => 'tasks/list/<id:\d+>', 'route' => 'tasks/rest/task-list/update', 'verb' => 'PUT'],
             ['pattern' => 'tasks/list/<id:\d+>', 'route' => 'tasks/rest/task-list/delete', 'verb' => 'DELETE'],
 
-        ], 'calendar');
+        ], 'tasks');
     }
 
 }
