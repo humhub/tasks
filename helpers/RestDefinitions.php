@@ -27,21 +27,21 @@ class RestDefinitions
             'status' => $task->status,
             'start_datetime' => $task->start_datetime,
             'end_datetime' => $task->end_datetime,
-            'scheduling' => $task->scheduling,
-            'all_day' => $task->all_day,
+            'scheduling' => (int)$task->scheduling,
+            'all_day' => (int)$task->all_day,
             'reminders' => $task->taskReminder,
-            'max_users' => $task->max_users,
+            'max_users' => (int)$task->max_users,
             'color' => $task->color,
             'task_list' => static::getTaskList($task->list),
-            'cal_mode' => $task->cal_mode,
-            'review' => $task->review,
+            'cal_mode' => (int)$task->cal_mode,
+            'review' => (int)$task->review,
             'request_sent' => $task->request_sent,
             'time_zone' => $task->time_zone,
-            'created_at' => $task->created_at,
+            'created_at' => $task->content->created_at,
             'created_by' => UserDefinitions::getUserShort($task->getOwner()),
             'content' => ContentDefinitions::getContent($task->content),
             'percentage' => $task->getPercent(),
-            'checklist' => $task->items,
+            'checklist' => array_map(function($item) {return $item->getAttributes();}, $task->items),
             'assigned_users' => static::getUsers($task->taskAssignedUsers),
             'responsible_users' => static::getUsers($task->taskResponsibleUsers)
         ];
@@ -77,8 +77,8 @@ class RestDefinitions
     private static function getListSettings($addition)
     {
         return [
-            'hide_if_completed' => $addition->hide_if_completed,
-            'sort_order' => $addition->sort_order
+            'hide_if_completed' => (int)$addition->hide_if_completed,
+            'sort_order' => (int)$addition->sort_order
         ];
     }
 

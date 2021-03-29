@@ -67,7 +67,7 @@ class TasksController extends BaseContentController
 
         $requestParams = $this->prepareRequestParams(Yii::$app->request->getBodyParams(), 'TaskForm', 'Task');
         if ($taskForm->load($requestParams) && $taskForm->save()) {
-            return RestDefinitions::getTask($taskForm->task);
+            return RestDefinitions::getTask(Task::findOne(['id' => $taskForm->task->id]));
         }
 
         if ($taskForm->hasErrors() || $taskForm->task->hasErrors()) {
@@ -96,7 +96,7 @@ class TasksController extends BaseContentController
         
         $requestParams = $this->prepareRequestParams(Yii::$app->request->getBodyParams(), 'TaskForm', 'Task');
         if ($taskForm->load($requestParams) && $taskForm->save()) {
-            return RestDefinitions::getTask($taskForm->task);
+            return RestDefinitions::getTask(Task::findOne(['id' => $taskForm->task->id]));
         }
 
         if ($taskForm->hasErrors() || $taskForm->task->hasErrors()) {

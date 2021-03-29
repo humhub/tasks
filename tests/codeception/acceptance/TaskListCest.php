@@ -19,7 +19,7 @@ class TaskListCest
     {
         $I->amAdmin();
         $I->wantToTest('the creation of a task list');
-        $I->amGoingTo('install the calendar module for space 1');
+        $I->amGoingTo('install the tasks module for space 1');
         $I->enableModule(1, 'tasks');
 
         $I->amOnSpace1();
@@ -64,7 +64,7 @@ class TaskListCest
     {
         $I->amUser1();
         $I->wantToTest('the creation of a task list on user profile');
-        $I->amGoingTo('install the calendar module on user profile');
+        $I->amGoingTo('install the tasks module on user profile');
         $this->enableProfileModule($I);
 
         $I->amOnProfile();
