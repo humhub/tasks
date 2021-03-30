@@ -110,13 +110,13 @@ class TaskCest extends HumHubApiTestCest
         $I->seeSuccessMessage('Task successfully reverted.');
     }
 
-    public function testEventFiles(ApiTester $I)
+    public function testTaskFiles(ApiTester $I)
     {
         if (!$this->isRestModuleEnabled()) {
             return;
         }
 
-        $I->wantTo('upload/remove files to the event');
+        $I->wantTo('upload/remove files to the task');
         $I->amAdmin();
 
         $I->createSampleTask();
