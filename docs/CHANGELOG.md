@@ -1,21 +1,24 @@
 Changelog
 =========
 
-1.5.1 (Unreleased)
-------------------
+1.5.1 (April 7, 2021)
+---------------------
 - Enh: Allow to change topics from the edit form
 
+
 1.5.0 (December, 17, 2020)
-------------------
+--------------------------
 - Fix: Remove gap between comments
 - Chg: Add process permissions to users with ManageTasks and task owner
 
+
 1.4.2 (November, 13, 2020)
-------------------
+--------------------------
 - Fix: Responsive task filter
 
+
 1.4.1 (November, 11, 2020)
-------------------
+--------------------------
 - Fix #128: Task list details request does not fetch required assets
 - Fix #126: Exclude archived content from global view
 - Fix #125: Removed pointer cursor in task detail body
