@@ -23,8 +23,8 @@ paths:
         - application/json
         - application/xml
       parameters:
-        - $ref: 'https://raw.githubusercontent.com/humhub/humhub-modules-rest/master/docs/swagger/common.yaml#/components/parameters/pageParam'
-        - $ref: 'https://raw.githubusercontent.com/humhub/humhub-modules-rest/master/docs/swagger/common.yaml#/components/parameters/limitParam'
+        - $ref: 'https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/common.yaml#/components/parameters/pageParam'
+        - $ref: 'https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/common.yaml#/components/parameters/limitParam'
       responses:
         '200':
           description: Success
@@ -32,13 +32,13 @@ paths:
             type: object
             properties:
               total:
-                $ref: 'https://raw.githubusercontent.com/humhub/humhub-modules-rest/master/docs/swagger/common.yaml#/components/properties/totalProperty'
+                $ref: 'https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/common.yaml#/components/properties/totalProperty'
               page:
-                $ref: 'https://raw.githubusercontent.com/humhub/humhub-modules-rest/master/docs/swagger/common.yaml#/components/properties/pageProperty'
+                $ref: 'https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/common.yaml#/components/properties/pageProperty'
               pages:
-                $ref: 'https://raw.githubusercontent.com/humhub/humhub-modules-rest/master/docs/swagger/common.yaml#/components/properties/pagesProperty'
+                $ref: 'https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/common.yaml#/components/properties/pagesProperty'
               links:
-                $ref: 'https://raw.githubusercontent.com/humhub/humhub-modules-rest/master/docs/swagger/common.yaml#/components/properties/linksProperty'
+                $ref: 'https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/common.yaml#/components/properties/linksProperty'
               results:
                 type: array
                 items:
@@ -59,8 +59,8 @@ paths:
           description: ID of content container
           required: true
           type: integer
-        - $ref: 'https://raw.githubusercontent.com/humhub/humhub-modules-rest/master/docs/swagger/common.yaml#/components/parameters/pageParam'
-        - $ref: 'https://raw.githubusercontent.com/humhub/humhub-modules-rest/master/docs/swagger/common.yaml#/components/parameters/limitParam'
+        - $ref: 'https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/common.yaml#/components/parameters/pageParam'
+        - $ref: 'https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/common.yaml#/components/parameters/limitParam'
       responses:
         200:
           description: Success
@@ -68,13 +68,13 @@ paths:
             type: object
             properties:
               total:
-                $ref: 'https://raw.githubusercontent.com/humhub/humhub-modules-rest/master/docs/swagger/common.yaml#/components/properties/totalProperty'
+                $ref: 'https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/common.yaml#/components/properties/totalProperty'
               page:
-                $ref: 'https://raw.githubusercontent.com/humhub/humhub-modules-rest/master/docs/swagger/common.yaml#/components/properties/pageProperty'
+                $ref: 'https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/common.yaml#/components/properties/pageProperty'
               pages:
-                $ref: 'https://raw.githubusercontent.com/humhub/humhub-modules-rest/master/docs/swagger/common.yaml#/components/properties/pagesProperty'
+                $ref: 'https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/common.yaml#/components/properties/pagesProperty'
               links:
-                $ref: 'https://raw.githubusercontent.com/humhub/humhub-modules-rest/master/docs/swagger/common.yaml#/components/properties/linksProperty'
+                $ref: 'https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/common.yaml#/components/properties/linksProperty'
               results:
                 type: array
                 items:
@@ -618,8 +618,8 @@ paths:
           description: ID of content container
           required: true
           type: integer
-        - $ref: 'https://raw.githubusercontent.com/humhub/humhub-modules-rest/master/docs/swagger/common.yaml#/components/parameters/pageParam'
-        - $ref: 'https://raw.githubusercontent.com/humhub/humhub-modules-rest/master/docs/swagger/common.yaml#/components/parameters/limitParam'
+        - $ref: 'https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/common.yaml#/components/parameters/pageParam'
+        - $ref: 'https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/common.yaml#/components/parameters/limitParam'
       responses:
         200:
           description: Success
@@ -627,13 +627,13 @@ paths:
             type: object
             properties:
               total:
-                $ref: 'https://raw.githubusercontent.com/humhub/humhub-modules-rest/master/docs/swagger/common.yaml#/components/properties/totalProperty'
+                $ref: 'https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/common.yaml#/components/properties/totalProperty'
               page:
-                $ref: 'https://raw.githubusercontent.com/humhub/humhub-modules-rest/master/docs/swagger/common.yaml#/components/properties/pageProperty'
+                $ref: 'https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/common.yaml#/components/properties/pageProperty'
               pages:
-                $ref: 'https://raw.githubusercontent.com/humhub/humhub-modules-rest/master/docs/swagger/common.yaml#/components/properties/pagesProperty'
+                $ref: 'https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/common.yaml#/components/properties/pagesProperty'
               links:
-                $ref: 'https://raw.githubusercontent.com/humhub/humhub-modules-rest/master/docs/swagger/common.yaml#/components/properties/linksProperty'
+                $ref: 'https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/common.yaml#/components/properties/linksProperty'
               results:
                 type: array
                 items:
@@ -806,7 +806,7 @@ paths:
                 example: Task list not found
 
 securityDefinitions:
-  $ref: "https://raw.githubusercontent.com/humhub/humhub-modules-rest/master/docs/swagger/common.yaml#/securityDefinitions"
+  $ref: "https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/common.yaml#/securityDefinitions"
 
 definitions:
   Task:
@@ -869,9 +869,9 @@ definitions:
         type: string
         example: 2019-03-05 15:35:02
       created_by:
-        $ref: "https://raw.githubusercontent.com/humhub/humhub-modules-rest/master/docs/swagger/user.yaml#/definitions/UserShort"
+        $ref: "https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/user.yaml#/definitions/UserShort"
       content:
-        $ref: "https://raw.githubusercontent.com/humhub/humhub-modules-rest/master/docs/swagger/content.yaml#/definitions/Content"
+        $ref: "https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/content.yaml#/definitions/Content"
       percentage:
         type: integer
         format: int64
@@ -883,11 +883,11 @@ definitions:
       assigned_users:
         type: array
         items:
-          $ref: "https://raw.githubusercontent.com/humhub/humhub-modules-rest/master/docs/swagger/user.yaml#/definitions/UserShort"
+          $ref: "https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/user.yaml#/definitions/UserShort"
       responsible_users:
         type: array
         items:
-          $ref: "https://raw.githubusercontent.com/humhub/humhub-modules-rest/master/docs/swagger/user.yaml#/definitions/UserShort"
+          $ref: "https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/user.yaml#/definitions/UserShort"
 
   TaskParams:
     in: body
