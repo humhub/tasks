@@ -4,6 +4,7 @@
     "description": "Simple taskmanager for your spaces.",
     "keywords": ["task", "todo"],
     "version": "1.5.1",
+    "homepage": "https://github.com/humhub/tasks",
     "humhub": {
         "minVersion": "1.7"
     },
