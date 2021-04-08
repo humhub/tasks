@@ -1,5 +1,6 @@
 <?php
 
+use humhub\components\console\Application;
 use humhub\widgets\TopMenu;
 use humhub\modules\space\widgets\Menu;
 use humhub\commands\IntegrityController;
@@ -25,6 +26,7 @@ return array(
         ['class' => 'humhub\modules\calendar\interfaces\CalendarService', 'event' => 'getItemTypes', 'callback' => ['humhub\modules\tasks\Events', 'onGetCalendarItemTypes']],
         ['class' => 'humhub\modules\calendar\interfaces\CalendarService', 'event' => 'findItems', 'callback' => ['humhub\modules\tasks\Events', 'onFindCalendarItems']],
         ['class' => 'humhub\modules\rest\Module', 'event' => 'restApiAddRules', 'callback' => ['humhub\modules\tasks\Events', 'onRestApiAddRules']],
+        ['class' => Application::class, 'event' => Application::EVENT_BEFORE_ACTION, 'callback' => ['humhub\modules\tasks\Events', 'onBeforeConsoleAction']],
     ]
 );
 ?>
