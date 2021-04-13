@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.5.3  (April 13, 2021)
+-----------------------
+- Fix #143: Fix translation syntax error
+
+
 1.5.2  (April 8, 2021)
 ----------------------
 - Fix #221: Fix call of console commands when REST API module doesn't exist

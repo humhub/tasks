@@ -39,7 +39,7 @@ return array (
   'Reset Task' => 'Obnovi zadatak',
   'Scheduling' => 'Zakazivanje',
   'Search' => 'Pretraži',
-  'Show {count} more completed {count,plural,=1{task} other{tasks}}' => 'Prikaži {count} više izvršenih {count,plural,=1{task} other{tasks}}',
+  'Show {count} more completed {countTasks,plural,=1{task} other{tasks}}' => 'Prikaži {count} više izvršenih {countTasks,plural,=1{task} other{tasks}}',
   'Task' => 'Zadatak',
   'Task Lists' => 'Popisi zadataka',
   'Tasks' => 'Zadaci',

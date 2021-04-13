@@ -39,7 +39,7 @@ return array (
   'Reset Task' => 'Ricomincia attività',
   'Scheduling' => 'Schedulazione',
   'Search' => 'Ricerca',
-  'Show {count} more completed {count,plural,=1{task} other{tasks}}' => 'Mostra {count,plural,=1{# altra attività} other{# altre attività}}',
+  'Show {count} more completed {countTasks,plural,=1{task} other{tasks}}' => 'Mostra {countTasks,plural,=1{# altra attività} other{# altre attività}}',
   'Task' => 'Attività',
   'Task Lists' => 'Elenco attività',
   'Tasks' => 'Attività',

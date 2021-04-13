@@ -39,7 +39,7 @@ return array (
   'Reset Task' => '',
   'Scheduling' => '',
   'Search' => 'Поиск',
-  'Show {count} more completed {count,plural,=1{task} other{tasks}}' => '',
+  'Show {count} more completed {countTasks,plural,=1{task} other{tasks}}' => '',
   'Task' => 'Задача',
   'Task Lists' => '',
   'Tasks' => 'Задачи',

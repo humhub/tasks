@@ -39,7 +39,7 @@ return array (
   'Reset Task' => 'Återställ uppgift',
   'Scheduling' => 'Schemaläggning',
   'Search' => 'Sök',
-  'Show {count} more completed {count,plural,=1{task} other{tasks}}' => '',
+  'Show {count} more completed {countTasks,plural,=1{task} other{tasks}}' => '',
   'Task' => 'Uppgift',
   'Task Lists' => 'Uppgiftslista',
   'Tasks' => 'Uppgifter',
