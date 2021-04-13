@@ -39,7 +39,7 @@ return array (
   'Reset Task' => 'Taak opnieuw instellen',
   'Scheduling' => 'Planning',
   'Search' => 'Zoek',
-  'Show {count} more completed {count,plural,=1{task} other{tasks}}' => 'Toon {count} voltooide {count,plural,=1{taak} other{taken}} meer.',
+  'Show {count} more completed {countTasks,plural,=1{task} other{tasks}}' => 'Toon {count} voltooide {countTasks,plural,=1{taak} other{taken}} meer.',
   'Task' => 'Taak',
   'Task Lists' => 'Takenlijsten',
   'Tasks' => 'Taken',

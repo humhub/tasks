@@ -39,7 +39,7 @@ return array (
   'Reset Task' => 'Palauta tehtävä',
   'Scheduling' => 'Aikataulutus',
   'Search' => 'Hae',
-  'Show {count} more completed {count,plural,=1{task} other{tasks}}' => 'Näytä {count} valmista tähtävää lisää {count,plural,=1{task} other{tasks}}',
+  'Show {count} more completed {countTasks,plural,=1{task} other{tasks}}' => 'Näytä {count} valmista tähtävää lisää {countTasks,plural,=1{task} other{tasks}}',
   'Task' => 'Tehtävä',
   'Task Lists' => 'Tehtävälista',
   'Tasks' => 'Tehtävät',
