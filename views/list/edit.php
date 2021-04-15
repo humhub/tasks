@@ -26,7 +26,7 @@ $header = $model->isNewRecord ? Yii::t('TasksModule.base', '<strong>Create</stro
                                         {input}
                                     </div>
                                     {error}{hint}'
-                ])->textInput(['placeholder' => Yii::t('TasksModule.views_index_edit', 'Title of your task'), 'maxlength' => true])->label(false) ?>
+                ])->textInput(['placeholder' => Yii::t('TasksModule.views_index_edit', 'Title of your task list'), 'maxlength' => true])->label(false) ?>
 
                 <?= $form->field($model->addition, 'hide_if_completed')->checkbox() ?>
             </div>

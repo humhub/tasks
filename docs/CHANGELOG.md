@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.5.4  (Unreleased)
+-----------------------
+- Fix #146: Fix placeholder text
+
+
 1.5.3  (April 13, 2021)
 -----------------------
 - Fix #143: Fix translation syntax error
