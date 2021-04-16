@@ -54,7 +54,7 @@ humhub.module('task.checklist', function (module, require, $) {
     };
 
     Item.prototype.setData = function (itemData) {
-        if(itemData.checked) {
+        if(itemData.checked == 1) {
             this.$.find('label').addClass("item-finished");
         } else {
             this.$.find('label').removeClass("item-finished");
