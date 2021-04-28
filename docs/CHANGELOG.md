@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.5.4  (Unreleased)
+1.5.4  (April 28, 2021)
 -----------------------
 - Fix #146: Fix placeholder text
 - Fix #147: Fix checkpoints strikethrough style
