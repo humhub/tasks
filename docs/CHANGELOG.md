@@ -5,6 +5,7 @@ Changelog
 -----------------------
 - Fix #146: Fix placeholder text
 - Fix #147: Fix checkpoints strikethrough style
+- Fix #150: Fix access to search profile tasks
 
 
 1.5.3  (April 13, 2021)
