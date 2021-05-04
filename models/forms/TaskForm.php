@@ -41,6 +41,16 @@ class TaskForm extends Model
     public $task;
 
     /**
+     * @var string Format to validate a date field
+     */
+    public $dateFormat;
+
+    /**
+     * @var string Format to validate a date field
+     */
+    public $timeFormat;
+
+    /**
      * @var string start date submitted by user will be converted to db date format and timezone after validation
      */
     public $start_date;
@@ -133,8 +143,8 @@ class TaskForm extends Model
         return [
             [['timeZone'], 'in', 'range' => DateTimeZone::listIdentifiers()],
             [['start_time', 'end_time'], 'date', 'type' => 'time', 'format' => $this->getTimeFormat(), 'locale' => $this->getTimeLocale()],
-            [['start_date'], DbDateValidator::class, 'format' => Yii::$app->formatter->dateInputFormat, 'timeAttribute' => 'start_time', 'timeZone' => $this->timeZone],
-            [['end_date'], DbDateValidator::class, 'format' => Yii::$app->formatter->dateInputFormat, 'timeAttribute' => 'end_time', 'timeZone' => $this->timeZone],
+            [['start_date'], DbDateValidator::class, 'format' => $this->getDateFormat(), 'timeAttribute' => 'start_time', 'timeZone' => $this->timeZone],
+            [['end_date'], DbDateValidator::class, 'format' => $this->getDateFormat(), 'timeAttribute' => 'end_time', 'timeZone' => $this->timeZone],
             [['end_date'], 'validateEndTime'],
 
             [['start_date', 'end_date'], 'required', 'when' => function($model) {
@@ -153,8 +163,21 @@ class TaskForm extends Model
         ];
     }
 
+    public function getDateFormat()
+    {
+        if (isset($this->dateFormat)) {
+            return $this->dateFormat;
+        }
+
+        return Yii::$app->formatter->dateInputFormat;
+    }
+
     public function getTimeFormat()
     {
+        if (isset($this->timeFormat)) {
+            return $this->timeFormat;
+        }
+
         return Yii::$app->formatter->isShowMeridiem() ? 'h:mm a' : 'php:H:i';
     }
 
