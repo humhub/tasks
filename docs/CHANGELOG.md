@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.5.5  (Unreleased)
+-----------------------
+- Fix #60: Fix date and time formats on create/update task by API
+
 1.5.4  (April 28, 2021)
 -----------------------
 - Fix #146: Fix placeholder text

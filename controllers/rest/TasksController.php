@@ -57,7 +57,9 @@ class TasksController extends BaseContentController
 
         $taskForm = new TaskForm([
             'cal' => isset($taskParams['cal_mode']) ? $taskParams['cal_mode'] : null,
-            'taskListId' => isset($taskParams['task_list_id']) ? $taskParams['task_list_id'] : null
+            'taskListId' => isset($taskParams['task_list_id']) ? $taskParams['task_list_id'] : null,
+            'dateFormat' => 'php:Y-m-d',
+            'timeFormat' => 'php:H:i',
         ]);
         $taskForm->createNew($container);
 
@@ -88,7 +90,11 @@ class TasksController extends BaseContentController
             return $this->returnError(404, 'Task not found!');
         }
 
-        $taskForm = new TaskForm(['task' => $task]);
+        $taskForm = new TaskForm([
+            'task' => $task,
+            'dateFormat' => 'php:Y-m-d',
+            'timeFormat' => 'php:H:i',
+        ]);
 
         if(! $taskForm->task->content->canEdit()) {
             return $this->returnError(403, 'You are not allowed to update this task!');
