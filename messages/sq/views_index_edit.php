@@ -17,5 +17,5 @@ return [
     'Leave empty to let anyone work on this task.' => '',
     'Scheduling' => '',
     'Title and Color' => '',
-    'Title of your task' => '',
+    'Title of your task list' => '',
 ];
