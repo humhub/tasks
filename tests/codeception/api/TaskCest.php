@@ -20,7 +20,7 @@ class TaskCest extends HumHubApiTestCest
         $I->seeLastCreatedTaskDefinition();
 
         $I->amGoingTo('create a task with error');
-        $I->sendPost('tasks/container/1');
+        $I->sendPost('tasks/container/1', ['Task' => ['scheduling' => 1]]);
         $I->seeBadMessage('Start date cannot be blank');
     }
 
