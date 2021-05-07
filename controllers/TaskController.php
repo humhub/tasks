@@ -107,7 +107,7 @@ class TaskController extends AbstractTaskController
         return $this->asJson(['success' => $task->state->revert($status)]);
     }
 
-    public function actionTaskAssignedPicker($id = null, $keyword)
+    public function actionTaskAssignedPicker($id = null, $keyword = '')
     {
         $query = $this->getSpace()->getMembershipUser();
 
@@ -118,7 +118,7 @@ class TaskController extends AbstractTaskController
         ]));
     }
 
-    public function actionTaskResponsiblePicker($id = null, $keyword)
+    public function actionTaskResponsiblePicker($id = null, $keyword = '')
     {
         $query = $this->getSpace()->getMembershipUser();
 

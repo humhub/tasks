@@ -121,7 +121,7 @@ class ListController extends AbstractTaskController
         return $this->asJson(['success' => false]);
     }
 
-    public function actionShowMoreCompleted($id = null, $offset)
+    public function actionShowMoreCompleted($id = null, $offset = 0)
     {
         /** @var $taskList TaskListInterface */
         $taskList = $id ? TaskList::findById($id, $this->contentContainer) :  new UnsortedTaskList(['contentContainer' => $this->contentContainer]);
