@@ -2,6 +2,7 @@
 
 namespace humhub\modules\tasks;
 
+use humhub\components\console\Application as ConsoleApplication;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\lists\TaskList;
 use humhub\modules\tasks\permissions\ProcessUnassignedTasks;
@@ -27,6 +28,19 @@ class Module extends ContentContainerModule
      * @inheritdoc
      */
     public $searchPaginationSize = 30;
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+
+        if (Yii::$app instanceof ConsoleApplication) {
+            // Prevents the Yii HelpCommand from crawling all web controllers and possibly throwing errors at REST endpoints if the REST module is not available.
+            $this->controllerNamespace = 'tasks/commands';
+        }
+    }
 
     /**
      * @inheritdoc
