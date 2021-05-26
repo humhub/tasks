@@ -5,6 +5,7 @@ Changelog
 -----------------------
 - Fix #60: Fix date and time formats on create/update task by API
 - Fix #114: PHP8 - Deprecate required parameters after optional parameters
+- Fix #157: CLI error when no REST module is installed 
 
 1.5.4  (April 28, 2021)
 -----------------------
