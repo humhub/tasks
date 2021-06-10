@@ -1,5 +1,5 @@
 <?php
 return array (
-  'Completed' => '',
-  'Title' => 'Título',
+  'Completed' => 'เสร็จสมบูรณ์',
+  'Title' => 'หัวข้อ',
 );
