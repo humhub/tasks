@@ -10,5 +10,5 @@ return array (
   'Spaces' => 'Hapësirat',
   'Start date' => '',
   'Status' => '',
-  'Title' => '',
+  'Title' => 'Titulli',
 );

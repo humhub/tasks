@@ -6,7 +6,7 @@ return array (
   'All Day' => 'Όλη μέρα',
   'Assigned user(s)' => '',
   'Checklist Items' => '',
-  'Color' => '',
+  'Color' => 'Χρώμα',
   'Deadline: ' => '',
   'Description' => 'Περιγραφή',
   'Don\'t add to calendar' => '',

@@ -10,7 +10,7 @@ return array (
   'Last update' => 'Τελευταία ενημέρωση',
   'No tasks found which matches your current filter(s)!' => '@@@@',
   'Nobody assigned' => '',
-  'Sorting' => '',
+  'Sorting' => 'Ταξινόμηση',
   'State is finished' => '',
   'State is open' => '',
 );
