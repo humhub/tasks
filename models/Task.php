@@ -10,6 +10,7 @@ namespace humhub\modules\tasks\models;
 
 use humhub\modules\content\components\ActiveQueryContent;
 use humhub\modules\content\components\ContentContainerPermissionManager;
+use humhub\modules\space\models\Space;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\permissions\CreateTask;
 use humhub\modules\tasks\permissions\ProcessUnassignedTasks;
@@ -785,6 +786,19 @@ class Task extends ContentActiveRecord implements Searchable
     public function isCompleted()
     {
         return $this->state->isCompleted();
+    }
+
+    public function canView($user = null): bool
+    {
+        if (!$this->content->canView($user)) {
+            return false;
+        }
+
+        if (($this->content->container instanceof Space) && !$this->content->container->isMember($user)) {
+            return false;
+        }
+
+        return true;
     }
 
     public function canReview($user = null)

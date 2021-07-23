@@ -8,8 +8,8 @@
 
 namespace humhub\modules\tasks;
 
-use humhub\modules\infoscreen\helpers\Url;
 use humhub\modules\rest\Module as RestModule;
+use humhub\modules\space\models\Space;
 use humhub\modules\tasks\helpers\TaskListUrl;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\user\models\User;
@@ -119,10 +119,11 @@ class Events
                 return;
             }
 
+            /* @var $space Space */
             $space = $event->sender->space;
-            $settings = SnippetModuleSettings::instantiate();
 
-            if ($space->isModuleEnabled('tasks')) {
+            if ($space->isModuleEnabled('tasks') && $space->isMember()) {
+                $settings = SnippetModuleSettings::instantiate();
                 if ($settings->showMyTasksSnippetSpace()) {
                     $event->sender->addWidget(MyTasks::class, [
                         'contentContainer' => $space,
@@ -141,7 +142,7 @@ class Events
         try {
             $space = $event->sender->space;
 
-            if ($space->isModuleEnabled('tasks')) {
+            if ($space->isModuleEnabled('tasks') && $space->isMember()) {
                 $event->sender->addItem([
                     'label' => Yii::t('TasksModule.base', 'Tasks'),
                     'group' => 'modules',
