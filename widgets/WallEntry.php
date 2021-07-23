@@ -9,11 +9,9 @@
 
 namespace humhub\modules\tasks\widgets;
 
+use humhub\modules\content\widgets\PermaLink;
 use humhub\modules\content\widgets\stream\WallStreamModuleEntryWidget;
-use humhub\modules\content\widgets\WallEntryControlLink;
 use humhub\modules\tasks\assets\Assets;
-use humhub\modules\content\widgets\EditLink;
-use humhub\modules\content\widgets\DeleteLink;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\Task;
 use Yii;
@@ -68,5 +66,36 @@ class WallEntry extends WallStreamModuleEntryWidget
     protected function getTitle()
     {
         return $this->model->title;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function getPermaLink()
+    {
+        if (!$this->model->canView()) {
+            return null;
+        }
+
+        return parent::getPermaLink();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getControlsMenuEntries()
+    {
+        $controlsMenuEntries = parent::getControlsMenuEntries();
+
+        if (!$this->model->canView()) {
+            foreach ($controlsMenuEntries as $c => $controlsMenuEntry) {
+                if (is_array($controlsMenuEntry) && $controlsMenuEntry[0] === PermaLink::class) {
+                    unset($controlsMenuEntries[$c]);
+                    break;
+                }
+            }
+        }
+
+        return $controlsMenuEntries;
     }
 }

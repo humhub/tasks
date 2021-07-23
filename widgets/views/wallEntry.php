@@ -8,7 +8,6 @@
 
 /* @var $task \humhub\modules\tasks\models\Task */
 
-use humhub\libs\Html;
 use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\tasks\widgets\TaskRoleInfoBox;
 use humhub\modules\ui\icon\widgets\Icon;
@@ -40,7 +39,9 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
 
     <br>
 
-    <?= ModalButton::primary(Yii::t('TasksModule.widgets_views_wallentry', 'Open Task'))->icon('fa-eye')->close()->link($task->getUrl())->sm() ?>
+    <?php if ($task->canView()) : ?>
+        <?= ModalButton::primary(Yii::t('TasksModule.widgets_views_wallentry', 'Open Task'))->icon('fa-eye')->close()->link($task->getUrl())->sm() ?>
+    <?php endif; ?>
 
 </div>
 
