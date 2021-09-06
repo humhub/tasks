@@ -62,7 +62,7 @@ $taskReminder = ArrayHelper::map($taskForm->task->getTaskReminder()->all(),'id',
         ?>
     </div>
 
-    <?php if($taskForm->getContentContainer()->isModuleEnabled('calendar')) : ?>
+    <?php if($taskForm->getContentContainer()->moduleManager->isEnabled('calendar')) : ?>
         <br>
         <?= $form->field($taskForm->task, 'cal_mode')->checkbox() ?>
     <?php endif; ?>
