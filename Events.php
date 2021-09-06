@@ -8,6 +8,7 @@
 
 namespace humhub\modules\tasks;
 
+use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\rest\Module as RestModule;
 use humhub\modules\space\models\Space;
 use humhub\modules\tasks\helpers\TaskListUrl;
@@ -69,9 +70,10 @@ class Events
     public static function onGetCalendarItemTypes($event)
     {
         try {
+            /* @var ContentContainerActiveRecord $contentContainer */
             $contentContainer = $event->contentContainer;
 
-            if (!$contentContainer || $contentContainer->isModuleEnabled('tasks')) {
+            if (!$contentContainer || $contentContainer->moduleManager->isEnabled('tasks')) {
                 TaskCalendar::addItemTypes($event);
             }
         } catch (\Throwable $e) {
@@ -85,9 +87,10 @@ class Events
     public static function onFindCalendarItems($event)
     {
         try {
+            /* @var ContentContainerActiveRecord $contentContainer */
             $contentContainer = $event->contentContainer;
 
-            if (!$contentContainer || $contentContainer->isModuleEnabled('tasks')) {
+            if (!$contentContainer || $contentContainer->moduleManager->isEnabled('tasks')) {
                 TaskCalendar::addItems($event);
             }
         } catch (\Throwable $e) {
@@ -122,7 +125,7 @@ class Events
             /* @var $space Space */
             $space = $event->sender->space;
 
-            if ($space->isModuleEnabled('tasks') && $space->isMember()) {
+            if ($space->moduleManager->isEnabled('tasks') && $space->isMember()) {
                 $settings = SnippetModuleSettings::instantiate();
                 if ($settings->showMyTasksSnippetSpace()) {
                     $event->sender->addWidget(MyTasks::class, [
@@ -137,12 +140,11 @@ class Events
 
     public static function onSpaceMenuInit($event)
     {
-        /* @var $space \humhub\modules\space\models\Space */
-
         try {
+            /* @var $space Space */
             $space = $event->sender->space;
 
-            if ($space->isModuleEnabled('tasks') && $space->isMember()) {
+            if ($space->moduleManager->isEnabled('tasks') && $space->isMember()) {
                 $event->sender->addItem([
                     'label' => Yii::t('TasksModule.base', 'Tasks'),
                     'group' => 'modules',
@@ -161,7 +163,7 @@ class Events
         /* @var $user User */
         try {
             $user = $event->sender->user;
-            if ($user->isModuleEnabled('tasks')) {
+            if ($user->moduleManager->isEnabled('tasks')) {
                 $event->sender->addItem([
                     'label' => Yii::t('TasksModule.base', 'Tasks'),
                     'url' => TaskListUrl::taskListRoot($user),
