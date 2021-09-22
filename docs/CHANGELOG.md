@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.6.0 (Unreleased)
+---------------------
+- Enh #140: Use widget ContentVisibiltySelect
+
 1.5.5  (Unreleased)
 -----------------------
 - Fix #60: Fix date and time formats on create/update task by API
