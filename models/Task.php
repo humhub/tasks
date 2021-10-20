@@ -889,15 +889,15 @@ class Task extends ContentActiveRecord implements Searchable
         $itemDescriptions = "";
 
         foreach ($this->items as $item) {
-            $itemTitles .= $item->title;
-            $itemDescriptions .= $item->description;
+            $itemTitles .= $item->title . ' ';
+            $itemDescriptions .= $item->description . ' ';
         }
 
         return [
             'title' => $this->title,
             'description' => $this->description,
-            'itemTitles' => $itemTitles,
-            'itemDescriptions' => $itemDescriptions
+            'itemTitles' => trim($itemTitles),
+            'itemDescriptions' => trim($itemDescriptions)
         ];
     }
 
