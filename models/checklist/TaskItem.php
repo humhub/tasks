@@ -19,6 +19,7 @@ use humhub\modules\tasks\permissions\ManageTasks;
  * @property integer $id
  * @property integer $task_id
  * @property string $title
+ * @property string $description
  * @property integer $completed
  * @property integer $sort_order
  *
