@@ -8,6 +8,7 @@ Changelog
 - Fix #157: CLI error when no REST module is installed
 - Fix #159: Fix view access for non-members
 - Enh #5274: Deprecate CompatModuleManager
+- Fix #167: added separator for concatenated search attributes
 
 1.5.4  (April 28, 2021)
 -----------------------
