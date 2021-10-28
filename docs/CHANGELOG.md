@@ -9,6 +9,7 @@ Changelog
 - Fix #159: Fix view access for non-members
 - Enh #5274: Deprecate CompatModuleManager
 - Fix #167: added separator for concatenated search attributes
+- Enh #170: Confirmation before close a not saved task
 
 1.5.4  (April 28, 2021)
 -----------------------
