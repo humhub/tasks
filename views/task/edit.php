@@ -35,7 +35,7 @@ $tabs[] = ['label' => Yii::t('TasksModule.views_index_edit', 'Files'), 'view' =>
 
 <?php ModalDialog::begin(['header' => $taskForm->getTitle(), 'closable' => false]) ?>
 
-    <?php $form = ActiveForm::begin(['enableClientValidation' => false]); ?>
+    <?php $form = ActiveForm::begin(['enableClientValidation' => false, 'acknowledge' => true]); ?>
 
         <div id="task-form" data-ui-widget="task.Form" data-ui-init>
 
