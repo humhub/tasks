@@ -1,14 +1,14 @@
 <?php
 return array (
   'Created by me' => 'Создано мной',
-  'End date' => '',
+  'End date' => 'Дата конца',
   'Filter status' => '',
-  'Filter tasks' => '',
-  'I\'m assigned' => '',
-  'I\'m responsible' => '',
-  'Overdue' => '',
+  'Filter tasks' => 'Фильтр задач',
+  'I\'m assigned' => 'Исполнитель',
+  'I\'m responsible' => 'Ответственный',
+  'Overdue' => 'Просроченная',
   'Spaces' => 'Пространств',
-  'Start date' => '',
+  'Start date' => 'Дата начала',
   'Status' => 'Статус',
   'Title' => 'Заголовок',
 );
