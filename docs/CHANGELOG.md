@@ -10,6 +10,7 @@ Changelog
 - Enh #5274: Deprecate CompatModuleManager
 - Fix #167: added separator for concatenated search attributes
 - Enh #170: Confirmation before close a not saved task
+- Fix #169: Activate tab with first error field on edit a task
 
 1.5.4  (April 28, 2021)
 -----------------------
