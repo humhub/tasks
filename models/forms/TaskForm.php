@@ -15,6 +15,7 @@ namespace humhub\modules\tasks\models\forms;
 
 use humhub\libs\DbDateValidator;
 use humhub\modules\content\widgets\richtext\RichText;
+use humhub\modules\space\models\Space;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\topic\models\Topic;
 use Yii;
@@ -444,5 +445,56 @@ class TaskForm extends Model
             TaskReminder::REMIND_THREE_WEEKS => Yii::t('TasksModule.models_taskReminder', '3 Weeks before'),
             TaskReminder::REMIND_ONE_MONTH => Yii::t('TasksModule.models_taskReminder', '1 Month before'),
         ];
+    }
+
+    public function getTabs(): array
+    {
+        $tabs = [
+            [
+                'label' => Yii::t('TasksModule.views_index_edit', 'Basic'),
+                'view' => 'edit-basic',
+                'linkOptions' => ['class' => 'tab-basic'],
+                'fields' => ['title', 'task_list_id', 'description', 'topics', 'is_public', 'scheduling'],
+            ],
+            [
+                'label' => Yii::t('TasksModule.views_index_edit', 'Scheduling'),
+                'view' => 'edit-scheduling',
+                'linkOptions' => ['class' => 'tab-scheduling'],
+                'fields' => ['all_day', 'start_date', 'start_time', 'end_date', 'end_time', 'selectedReminders', 'cal_mode'],
+            ]
+        ];
+
+        if ($this->getContentContainer() instanceof Space) {
+            $tabs[] = [
+                'label' => Yii::t('TasksModule.views_index_edit', 'Assignment'),
+                'view' => 'edit-assignment',
+                'linkOptions' => ['class' => 'tab-assignment'],
+                'fields' => ['assignedUsers', 'responsibleUsers', 'review'],
+            ];
+        }
+
+        $tabs[] = [
+            'label' => Yii::t('TasksModule.views_index_edit', 'Checklist'),
+            'view' => 'edit-checklist',
+            'linkOptions' => ['class' => 'tab-checklist'],
+        ];
+        $tabs[] = [
+            'label' => Yii::t('TasksModule.views_index_edit', 'Files'),
+            'view' => 'edit-files',
+            'linkOptions' => ['class' => 'tab-files'],
+        ];
+
+        // Activate tab with first error field
+        if ($this->hasErrors()) {
+            $errorFields = array_keys($this->getErrors());
+            foreach ($tabs as $t => $tab) {
+                if (!empty(array_intersect($tab['fields'], $errorFields))) {
+                    $tabs[$t]['active'] = true;
+                    break;
+                }
+            }
+        }
+
+        return $tabs;
     }
 }
