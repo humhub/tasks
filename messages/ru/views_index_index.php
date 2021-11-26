@@ -10,7 +10,7 @@ return array (
   'In Progress' => '',
   'In Review' => '',
   'No Scheduling set for this Task' => '',
-  'Overdue' => '',
+  'Overdue' => 'Просроченная',
   'Pending' => 'В ожидании',
   'Pending Review' => '',
   'Reset Task' => '',
