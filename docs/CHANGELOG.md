@@ -11,6 +11,7 @@ Changelog
 - Fix #167: added separator for concatenated search attributes
 - Enh #170: Confirmation before close a not saved task
 - Fix #169: Activate tab with first error field on edit a task
+- Enh #169: Use new tabbed form for auto active tab with first error field
 
 1.5.4  (April 28, 2021)
 -----------------------

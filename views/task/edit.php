@@ -26,7 +26,7 @@ Assets::register($this);
             <?= Tabs::widget([
                 'viewPath' => '@tasks/views/task',
                 'params' => ['form' => $form, 'taskForm' => $taskForm],
-                'items' => $taskForm->getTabs(),
+                'form' => $taskForm,
             ]); ?>
 
         </div>
