@@ -18,7 +18,7 @@ use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\space\models\Space;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\topic\models\Topic;
-use humhub\widgets\TabbedForm;
+use humhub\modules\ui\form\interfaces\TabbedFormModel;
 use Yii;
 use yii\base\Model;
 use DateTime;
@@ -29,7 +29,7 @@ use humhub\modules\content\models\Content;
 use humhub\modules\tasks\models\Task;
 use yii\web\HttpException;
 
-class TaskForm extends Model implements TabbedForm
+class TaskForm extends Model implements TabbedFormModel
 {
 
     /**

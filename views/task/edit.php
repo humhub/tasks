@@ -7,10 +7,10 @@
  */
 
 use humhub\modules\tasks\assets\Assets;
+use humhub\modules\ui\form\widgets\FormTabs;
 use humhub\widgets\ModalDialog;
 use humhub\widgets\ModalButton;
 use humhub\widgets\ActiveForm;
-use humhub\widgets\Tabs;
 
 /* @var $taskForm \humhub\modules\tasks\models\forms\TaskForm */
 
@@ -23,7 +23,7 @@ Assets::register($this);
 
         <div id="task-form" data-ui-widget="task.Form" data-ui-init>
 
-            <?= Tabs::widget([
+            <?= FormTabs::widget([
                 'viewPath' => '@tasks/views/task',
                 'params' => ['form' => $form, 'taskForm' => $taskForm],
                 'form' => $taskForm,
