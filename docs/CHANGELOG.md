@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.5.5  (Unreleased)
+1.5.5  (March 13, 2022)
 -----------------------
 - Fix #60: Fix date and time formats on create/update task by API
 - Fix #114: PHP8 - Deprecate required parameters after optional parameters
@@ -11,6 +11,8 @@ Changelog
 - Fix #167: added separator for concatenated search attributes
 - Enh #170: Confirmation before close a not saved task
 - Fix #169: Activate tab with first error field on edit a task
+- Fix #179: Error 400 when trying to assign the user for a task 
+
 
 1.5.4  (April 28, 2021)
 -----------------------
