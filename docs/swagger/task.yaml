@@ -998,6 +998,8 @@ definitions:
               example:
                 - first item
                 - second item
+        content:
+          $ref: "https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/content.yaml#/definitions/ContentForm"
 
   TaskListParams:
     in: body
