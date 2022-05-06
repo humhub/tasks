@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.5.6  (Unreleased)
+-----------------------
+- Enh #182: Allow update content topics
+
+
 1.5.5  (March 13, 2022)
 -----------------------
 - Fix #60: Fix date and time formats on create/update task by API
