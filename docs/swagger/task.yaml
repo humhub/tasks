@@ -999,7 +999,7 @@ definitions:
                 - first item
                 - second item
         content:
-          $ref: "https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/content.yaml#/definitions/ContentForm"
+          $ref: "https://raw.githubusercontent.com/humhub/rest/master/docs/swagger/content.yaml#/definitions/Content"
 
   TaskListParams:
     in: body
