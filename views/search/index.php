@@ -23,11 +23,11 @@ $emptyText = ($canEdit) ? Yii::t('TasksModule.views_index_index', 'Start now, by
     : Yii::t('TasksModule.views_index_index', 'There are currently no upcoming tasks!.');
 
 ?>
-
+<div class="task-list-tabs">
+    <?= TaskSubMenu::widget() ?>
+</div>
 
 <div class="panel panel-default task-overview">
-    <?= TaskSubMenu::widget() ?>
-
     <?= TaskFilterNavigation::widget(['filter' => $filter, 'options' => ['style' => 'border-radius:4px;background-color:'.$this->theme->variable('background-color-secondary')]]) ?>
 
     <div id="filter-tasks-list" class="panel-body">
