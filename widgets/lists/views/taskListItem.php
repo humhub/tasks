@@ -32,10 +32,11 @@ $checkUrl = $task->state->getCheckUrl();
 <?= Html::beginTag('div', $options) ?>
 
 <div class="task-list-task-title-bar">
+    <div>
     <span class="task-list-item-title">
 
          <?php if ($canManage && !$task->isCompleted()) : ?>
-             <i class="fa fa-bars task-moving-handler"></i>
+             <i class="fa fa-arrows task-moving-handler"></i>
          <?php endif; ?>
 
         <?php // We use an extra label in order to prevent click events on the actual label otherwise tasks could be accidentally finished ?>
@@ -126,6 +127,7 @@ $checkUrl = $task->state->getCheckUrl();
             <?= TaskUserList::widget(['users' => $task->taskAssignedUsers]) ?>
         </div>
     <?php endif; ?>
+    </div>
 </div>
 <?php if ($details) : ?>
     <?= TaskListDetails::widget(['task' => $task]) ?>

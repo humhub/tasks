@@ -61,12 +61,18 @@ Assets::register($this);
         </div>
     </div>
 
-    <div class="closed-task-lists-container task-list-container" data-ui-widget="task.list.CompletedTaskListView" data-ui-init="1">
-        <div class="task-list-title-bar clearfix">
-            <i class="fa fa-check-square-o"></i> <a href="#"><?= Yii::t('TasksModule.base', 'Finished Lists')?></a>
-        </div>
-        <div class="closed-task-list-view">
-            <?= CompletedTaskListView::widget(['contentContainer' => $contentContainer]) ?>
+    <div class="task-list-ul">
+        <div class="task-list-li">
+            <div class="closed-task-lists-container task-list-container" data-ui-widget="task.list.CompletedTaskListView" data-ui-init="1">
+                <div class="task-list-title-bar clearfix">
+                    <div>
+                        <i class="fa fa-check-square-o"></i> <span class="task-list-title-text"><?= Yii::t('TasksModule.base', 'Finished Lists')?></span>
+                    </div>
+                </div>
+                <div class="closed-task-list-view">
+                    <?= CompletedTaskListView::widget(['contentContainer' => $contentContainer]) ?>
+                </div>
+            </div>
         </div>
     </div>
 

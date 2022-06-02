@@ -106,30 +106,16 @@ humhub.module('task.list', function (module, require, $) {
         });
 
         var $taskTitleBar = this.$.find('.task-list-title-bar');
-        $taskTitleBar.off('click').on('click', $.proxy(this.toggleItems, this))
-            .hover($.proxy(this.mouseOver, this), $.proxy(this.mouseOut, this)).disableSelection();
-
-        if(view.isSmall() || view.isMedium()) {
-            // show elements
-            this.$.find('.task-list-edit').show();
-        }
+        $taskTitleBar.off('click').on('click', $.proxy(this.toggleItems, this)).disableSelection();
 
         this.updated();
     };
 
-    TaskList.prototype.mouseOver = function (event, ui) {
-        this.$.find('.task-list-edit').show();
-    };
-
-    TaskList.prototype.mouseOut = function (event, ui) {
-        if(!view.isSmall() || view.isMedium()) {
-            this.$.find('.task-list-edit').hide();
-        }
-    };
-
     TaskList.prototype.toggleItems = function (evt) {
         var $target = $(evt.target);
-        if(!$target.is('.task-list-title-bar') && !$target.closest('.toggleItems').length) {
+        if (!$target.is('.task-list-title-bar') &&
+            !$target.closest('.toggleItems').length &&
+            !$target.closest('.task-list-title-text')) {
             return;
         }
 
@@ -144,6 +130,7 @@ humhub.module('task.list', function (module, require, $) {
             this.$.find('.toggleItems').removeClass(upIcon).addClass(downIcon);
         }
 
+        $items.closest('.task-list-li').toggleClass('task-list-li-collapsed');
         $items.add(this.getItemsCompletedRoot()).slideToggle(100,"linear");
     };
 
