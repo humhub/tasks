@@ -8,6 +8,7 @@
 
 namespace humhub\modules\tasks\models;
 
+use Colors\RandomColor;
 use humhub\modules\content\components\ActiveQueryContent;
 use humhub\modules\content\components\ContentContainerPermissionManager;
 use humhub\modules\space\models\Space;
@@ -247,11 +248,11 @@ class Task extends ContentActiveRecord implements Searchable
         ];
     }
 
-    public function validateTaskList($attribute, $params)
+    public function validateTaskList()
     {
-        if($this->task_list_id) {
+        if ($this->task_list_id && !$this->hasNewTaskList()) {
             $taskList = TaskList::findByContainer($this->content->container)->where(['id' => $this->task_list_id]);
-            if(!$taskList) {
+            if(!$taskList->exists()) {
                 $this->addError('task_list_id',  Yii::t('TasksModule.base', 'Invalid task list selection.'));
             }
         }
@@ -371,7 +372,8 @@ class Task extends ContentActiveRecord implements Searchable
     public function beforeSave($insert)
     {
         $this->schedule->beforeSave();
-        return parent::beforeSave($insert);
+        return $this->saveTaskList() &&
+            parent::beforeSave($insert);
     }
 
     /**
@@ -1097,5 +1099,27 @@ class Task extends ContentActiveRecord implements Searchable
         if($this->task_list_id && $this->list) {
             return $this->list->getColor();
         }
+    }
+
+    private function hasNewTaskList(): bool
+    {
+        return !preg_match('/^\d+$/', $this->task_list_id);
+    }
+
+    private function saveTaskList(): bool
+    {
+        if (!$this->hasNewTaskList()) {
+            return true;
+        }
+
+        $taskList = new TaskList($this->content->container);
+        $taskList->color = RandomColor::one(['luminosity' => 'dark']);
+        $taskList->name = $this->task_list_id;
+        if (!$taskList->save()) {
+            return false;
+        }
+
+        $this->task_list_id = $taskList->id;
+        return true;
     }
 }

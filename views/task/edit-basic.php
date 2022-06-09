@@ -25,7 +25,10 @@ use humhub\modules\ui\form\widgets\ContentVisibilitySelect;
         <?= $form->field($taskForm->task, 'task_list_id')->widget(ContentTagDropDown::class, [
             'prompt' => Yii::t('TasksModule.base', 'Unsorted'),
             'contentContainer' => $taskForm->contentContainer,
-            'options' => ['data-ui-select2' => true],
+            'options' => [
+                'data-ui-select2' => true,
+                'data-ui-select2-allow-new' => true
+            ],
             'tagClass' => TaskList::class
         ]); ?>
     <?php endif; ?>

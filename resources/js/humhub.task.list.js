@@ -435,14 +435,6 @@ humhub.module('task.list', function (module, require, $) {
         this.$.closest('li').fadeOut('fast', function() {$(this).remove()});
     };
 
-    var create = function (evt) {
-        modal.load(evt).then(function () {
-            modal.global.$.one('hidden.bs.modal', function() {
-                client.reload();
-            });
-        });
-    };
-
     var edit = function (evt) {
         modal.load(evt).then(function () {
             modal.global.$.one('hidden.bs.modal', function() {
@@ -503,7 +495,6 @@ humhub.module('task.list', function (module, require, $) {
         Task: Task,
         Root: Root,
         edit: edit,
-        create: create,
         editTask: editTask
     });
 })

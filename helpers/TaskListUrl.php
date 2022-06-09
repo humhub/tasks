@@ -52,9 +52,15 @@ class TaskListUrl extends TaskUrl
         return static::container($taskList)->createUrl('/tasks/list/show-more-completed', ['id' => $taskList->getId()]);
     }
 
-    public static function addTaskListTask(TaskListInterface $taskList)
+    public static function addTaskListTask(?TaskListInterface $taskList = null, ?ContentContainerActiveRecord $container = null)
     {
-        return static::container($taskList)->createUrl(static::ROUTE_EDIT_TASK, ['listId' => $taskList->getId()]);
+        if ($taskList) {
+            $container = static::container($taskList);
+            $params = ['listId' => $taskList->getId()];
+        } else {
+            $params = [];
+        }
+        return $container->createUrl(static::ROUTE_EDIT_TASK, $params);
     }
 
     public static function reloadTaskList(TaskListInterface $taskList)

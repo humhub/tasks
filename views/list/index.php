@@ -25,8 +25,8 @@ Assets::register($this);
 ?>
 <div class="panel panel-default task-list-header">
     <div class="panel-body clearfix">
-        <?= Button::success(Yii::t('TasksModule.base', 'Add Task List'))
-            ->action('task.list.create', TaskListUrl::createTaskList($contentContainer))
+        <?= Button::success(Yii::t('TasksModule.base', 'Add task'))
+            ->action('task.list.editTask', TaskListUrl::addTaskListTask(null, $contentContainer))
             ->icon('fa-plus')
             ->right()
             ->loader(false)
