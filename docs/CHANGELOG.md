@@ -1,9 +1,10 @@
 Changelog
 =========
 
-1.5.6  (Unreleased)
+1.6.0  (Unreleased)
 -----------------------
 - Enh #182: Allow update content topics
+- Enh #169: Use new tabbed form for auto active tab with first error field
 
 
 1.5.5  (March 13, 2022)
@@ -17,7 +18,6 @@ Changelog
 - Enh #170: Confirmation before close a not saved task
 - Fix #169: Activate tab with first error field on edit a task
 - Fix #179: Error 400 when trying to assign the user for a task 
-
 
 1.5.4  (April 28, 2021)
 -----------------------

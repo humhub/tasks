@@ -18,6 +18,7 @@ use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\space\models\Space;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\topic\models\Topic;
+use humhub\modules\ui\form\interfaces\TabbedFormModel;
 use Yii;
 use yii\base\Model;
 use DateTime;
@@ -28,7 +29,7 @@ use humhub\modules\content\models\Content;
 use humhub\modules\tasks\models\Task;
 use yii\web\HttpException;
 
-class TaskForm extends Model
+class TaskForm extends Model implements TabbedFormModel
 {
 
     /**
@@ -483,17 +484,6 @@ class TaskForm extends Model
             'view' => 'edit-files',
             'linkOptions' => ['class' => 'tab-files'],
         ];
-
-        // Activate tab with first error field
-        if ($this->hasErrors()) {
-            $errorFields = array_keys($this->getErrors());
-            foreach ($tabs as $t => $tab) {
-                if (!empty(array_intersect($tab['fields'], $errorFields))) {
-                    $tabs[$t]['active'] = true;
-                    break;
-                }
-            }
-        }
 
         return $tabs;
     }
