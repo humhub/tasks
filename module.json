@@ -3,10 +3,10 @@
     "name": "Tasks",
     "description": "Simple taskmanager for your spaces.",
     "keywords": ["task", "todo"],
-    "version": "1.5.5",
+    "version": "1.6.0",
     "homepage": "https://github.com/humhub/tasks",
     "humhub": {
-        "minVersion": "1.7"
+        "minVersion": "1.11"
     },
     "screenshots": ["assets/screen1.jpg", "assets/screen2.jpg"]
 }
