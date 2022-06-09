@@ -5,6 +5,7 @@ Changelog
 -----------------------
 - Enh #182: Allow update content topics
 - Enh #169: Use new tabbed form for auto active tab with first error field
+- Enh #140: Use widget ContentVisibiltySelect
 
 
 1.5.5  (March 13, 2022)

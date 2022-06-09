@@ -10,6 +10,7 @@ use humhub\modules\tasks\models\lists\TaskList;
 use humhub\modules\content\widgets\ContentTagDropDown;
 use humhub\modules\content\widgets\richtext\RichTextField;
 use humhub\modules\topic\widgets\TopicPicker;
+use humhub\modules\ui\form\widgets\ContentVisibilitySelect;
 
 /* @var $form \humhub\widgets\ActiveForm */
 /* @var $taskForm \humhub\modules\tasks\models\forms\TaskForm */
@@ -32,7 +33,7 @@ use humhub\modules\topic\widgets\TopicPicker;
     <?= $form->field($taskForm->task, 'description')->widget(RichTextField::class) ?>
     <?= $form->field($taskForm, 'topics')->widget(TopicPicker::class, ['contentContainer' => $taskForm->task->content->container])->label(false) ?>
 
-    <?= $form->field($taskForm, 'is_public')->checkbox() ?>
+    <?= $form->field($taskForm, 'is_public')->widget(ContentVisibilitySelect::class, ['contentOwner' => 'task']) ?>
     <?= $form->field($taskForm->task, 'scheduling')->checkbox(['data-action-change' => 'toggleScheduling']) ?>
 
 
