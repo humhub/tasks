@@ -13,22 +13,28 @@
 
 namespace humhub\modules\tasks\models\forms;
 
+use DateTime;
+use DateTimeZone;
 use humhub\libs\DbDateValidator;
 use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\space\models\Space;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\topic\models\Topic;
 use humhub\modules\ui\form\interfaces\TabbedFormModel;
-use Yii;
-use yii\base\Model;
-use DateTime;
-use DateTimeZone;
 use humhub\modules\tasks\models\scheduling\TaskReminder;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\content\models\Content;
 use humhub\modules\tasks\models\Task;
+use Yii;
+use yii\base\Model;
 use yii\web\HttpException;
 
+/**
+ * Class TaskForm
+ * @package humhub\modules\tasks\models\forms
+ *
+ * @property-read ContentContainerActiveRecord $contentContainer
+ */
 class TaskForm extends Model implements TabbedFormModel
 {
 

@@ -26,7 +26,7 @@ class TaskSubMenu extends SettingsTabs
 
         $this->items = [
             [
-                'label' => Yii::t('TasksModule.base', 'Lists'),
+                'label' => Yii::t('TasksModule.base', 'Task List'),
                 'url' => TaskListUrl::taskListRoot($contentContainer),
                 'active' => $this->isCurrentRoute('tasks', 'list')
             ],

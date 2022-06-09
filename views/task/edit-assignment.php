@@ -6,12 +6,11 @@
  *
  */
 
-use humhub\modules\tasks\models\scheduling\TaskScheduling;
 use humhub\modules\user\widgets\UserPickerField;
 use humhub\widgets\Button;
 use humhub\widgets\Link;
 
-/* @var $form \humhub\widgets\ActiveForm */
+/* @var $form \humhub\modules\ui\form\widgets\ActiveForm */
 /* @var $taskForm \humhub\modules\tasks\models\forms\TaskForm */
 /* @var $responsible [] \humhub\modules\user\models\User */
 

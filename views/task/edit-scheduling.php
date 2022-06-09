@@ -6,13 +6,13 @@
  *
  */
 
-use  humhub\modules\ui\form\widgets\MultiSelect;
+use humhub\modules\ui\form\widgets\MultiSelect;
 use humhub\modules\ui\form\widgets\TimePicker;
 use humhub\widgets\TimeZoneDropdownAddition;
 use humhub\modules\ui\form\widgets\DatePicker;
 use yii\helpers\ArrayHelper;
 
-/* @var $form \humhub\widgets\ActiveForm */
+/* @var $form \humhub\modules\ui\form\widgets\ActiveForm */
 /* @var $taskForm \humhub\modules\tasks\models\forms\TaskForm */
 
 $taskReminder = ArrayHelper::map($taskForm->task->getTaskReminder()->all(),'id','remind_mode');

@@ -115,7 +115,7 @@ humhub.module('task.list', function (module, require, $) {
         var $target = $(evt.target);
         if (!$target.is('.task-list-title-bar') &&
             !$target.closest('.toggleItems').length &&
-            !$target.closest('.task-list-title-text')) {
+            !$target.closest('.task-list-title-text').length) {
             return;
         }
 

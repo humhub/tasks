@@ -19,7 +19,6 @@ use humhub\widgets\Button;
 /* @var $canCreate boolean */
 /* @var $contentContainer \humhub\modules\content\components\ContentContainerActiveRecord */
 /* @var $taskLists \humhub\modules\tasks\models\lists\TaskList[] */
-/* @var $unsortedTasks \humhub\modules\tasks\models\Task[] */
 
 Assets::register($this);
 ?>
@@ -30,9 +29,9 @@ Assets::register($this);
             ->icon('fa-plus')
             ->right()
             ->loader(false)
-            ->visible($canManage) ?>
-        <h4><?= Yii::t('TasksModule.base', 'Task Lists') ?></h4>
-        <div class="help-block"><?= Yii::t('TasksModule.base', 'Here you can manage your task lists in order to categorize and sort tasks.') ?></div>
+            ->visible($canCreate) ?>
+        <h4><?= Yii::t('TasksModule.base', 'Tasks') ?></h4>
+        <div class="help-block"><?= Yii::t('TasksModule.base', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi esse obcaecati unde voluptatem! Assumenda, sed.') ?></div>
     </div>
 </div>
 
@@ -57,7 +56,7 @@ Assets::register($this);
 
     <div class="task-list-ul task-list-unsorted">
         <div class="task-list-li">
-            <?= UnsortedTaskListWidget::widget(['hasOtherLists' => !empty($taskLists), 'canManage' => $canManage,  'canCreate' => $canCreate]) ?>
+            <?= UnsortedTaskListWidget::widget(['hasOtherLists' => !empty($taskLists), 'canManage' => $canManage, 'canCreate' => $canCreate]) ?>
         </div>
     </div>
 

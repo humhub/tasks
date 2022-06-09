@@ -10,7 +10,7 @@ use yii\bootstrap\Html;
 use humhub\modules\tasks\widgets\AddItemsInput;
 
 
-/* @var $form \humhub\widgets\ActiveForm */
+/* @var $form \humhub\modules\ui\form\widgets\ActiveForm */
 /* @var $taskForm \humhub\modules\tasks\models\forms\TaskForm */
 /* @var $item \humhub\modules\tasks\models\checklist\TaskItem */
 

@@ -6,19 +6,21 @@
  *
  */
 
+use humhub\modules\tasks\models\forms\TaskForm;
 use humhub\modules\tasks\models\lists\TaskList;
 use humhub\modules\content\widgets\ContentTagDropDown;
 use humhub\modules\content\widgets\richtext\RichTextField;
+use humhub\modules\tasks\permissions\ManageTasks;
 use humhub\modules\topic\widgets\TopicPicker;
+use humhub\modules\ui\form\widgets\ActiveForm;
 use humhub\modules\ui\form\widgets\ContentVisibilitySelect;
 
-/* @var $form \humhub\widgets\ActiveForm */
-/* @var $taskForm \humhub\modules\tasks\models\forms\TaskForm */
+/* @var $form ActiveForm */
+/* @var $taskForm TaskForm */
 
+$canManage = $taskForm->contentContainer->can(ManageTasks::class);
 ?>
-
 <div class="modal-body">
-
     <?= $form->field($taskForm->task, 'title')->textInput(); ?>
 
     <?php if (TaskList::findByContainer($taskForm->contentContainer)->count()) : ?>
@@ -27,7 +29,7 @@ use humhub\modules\ui\form\widgets\ContentVisibilitySelect;
             'contentContainer' => $taskForm->contentContainer,
             'options' => [
                 'data-ui-select2' => true,
-                'data-ui-select2-allow-new' => true
+                'data-ui-select2-allow-new' => $canManage
             ],
             'tagClass' => TaskList::class
         ]); ?>
@@ -38,6 +40,4 @@ use humhub\modules\ui\form\widgets\ContentVisibilitySelect;
 
     <?= $form->field($taskForm, 'is_public')->widget(ContentVisibilitySelect::class, ['contentOwner' => 'task']) ?>
     <?= $form->field($taskForm->task, 'scheduling')->checkbox(['data-action-change' => 'toggleScheduling']) ?>
-
-
 </div>

@@ -6,23 +6,24 @@
  *
  */
 
-\humhub\modules\tasks\assets\Assets::register($this);
-
+use humhub\modules\tasks\assets\Assets;
+use humhub\modules\tasks\models\forms\TaskFilter;
 use humhub\modules\tasks\widgets\search\TaskSearchList;
 use humhub\modules\tasks\widgets\TaskSubMenu;
 use humhub\modules\tasks\widgets\search\TaskFilterNavigation;
-use humhub\modules\tasks\models\forms\TaskFilter;
 
 /* @var $canEdit boolean */
-/* @var $contentContainer \humhub\modules\content\components\ContentContainerActiveRecord */
-/* @var $pendingTasks \humhub\modules\tasks\models\Task[] */
-/* @var $tasksPastProvider \yii\data\ActiveDataProvider */
-/* @var $filter \humhub\modules\tasks\models\forms\TaskFilter */
+/* @var $filter TaskFilter */
 
-$emptyText = ($canEdit) ? Yii::t('TasksModule.views_index_index', 'Start now, by creating a new task!')
-    : Yii::t('TasksModule.views_index_index', 'There are currently no upcoming tasks!.');
-
+Assets::register($this);
 ?>
+<div class="panel panel-default task-list-header">
+    <div class="panel-body clearfix">
+        <h4><?= Yii::t('TasksModule.base', 'Tasks') ?></h4>
+        <div class="help-block"><?= Yii::t('TasksModule.base', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi esse obcaecati unde voluptatem! Assumenda, sed.') ?></div>
+    </div>
+</div>
+
 <div class="task-list-tabs">
     <?= TaskSubMenu::widget() ?>
 </div>
