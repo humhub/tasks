@@ -6,5 +6,5 @@ return array (
   'Public' => 'عام',
   'Start Date' => '',
   'Start Time' => '',
-  'Time Zone' => '',
+  'Time Zone' => 'وحدة زمنية',
 );

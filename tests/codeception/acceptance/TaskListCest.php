@@ -108,7 +108,7 @@ class TaskListCest
     {
         $I->amOnRoute(Url::toRoute(['/user/account/edit-modules', 'moduleId' => 'tasks']));
         $I->wait(1);
-        $I->executeJS('$(\'.media-heading\').each(function() {if($(this).text() === \'Tasks\') {$(this).siblings(\'a:visible\').click()}});');
+        $I->executeJS('$(\'.enable-module-tasks\').click()');
         $I->wait(2);
     }
 }

@@ -2,7 +2,7 @@
 return array (
   'Receive Notifications for Task Reminder.' => '',
   'Receive Notifications for Tasks (Deadline Updates, Status changes ...).' => '',
-  'Reminder' => '',
+  'Reminder' => 'Hatırlatıcı',
   'Task {task} in space {spaceName} ends at {dateTime}.' => '',
   'Task {task} in space {spaceName} starts at {dateTime}.' => '',
   'View Online' => 'Çevrimiçi Görüntüleme',

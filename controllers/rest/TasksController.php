@@ -39,6 +39,14 @@ class TasksController extends BaseContentController
         return RestDefinitions::getTask($contentRecord);
     }
 
+    private function saveTask(TaskForm $taskForm): bool
+    {
+        $data = $this->prepareRequestParams(Yii::$app->request->getBodyParams(), 'TaskForm', 'Task');
+        return $taskForm->load($data) &&
+            $taskForm->save() &&
+            (!method_exists($this, 'updateContent') || $this->updateContent($taskForm->task, $data));
+    }
+
     public function actionCreate($containerId)
     {
         $containerRecord = ContentContainer::findOne(['id' => $containerId]);
@@ -67,9 +75,8 @@ class TasksController extends BaseContentController
             return $this->returnError(403, 'You are not allowed to edit this task!');
         }
 
-        $requestParams = $this->prepareRequestParams(Yii::$app->request->getBodyParams(), 'TaskForm', 'Task');
-        if ($taskForm->load($requestParams) && $taskForm->save()) {
-            return RestDefinitions::getTask(Task::findOne(['id' => $taskForm->task->id]));
+        if ($this->saveTask($taskForm)) {
+            return $this->returnContentDefinition(Task::findOne(['id' => $taskForm->task->id]));
         }
 
         if ($taskForm->hasErrors() || $taskForm->task->hasErrors()) {
@@ -96,13 +103,12 @@ class TasksController extends BaseContentController
             'timeFormat' => 'php:H:i',
         ]);
 
-        if(! $taskForm->task->content->canEdit()) {
+        if (!$taskForm->task->content->canEdit()) {
             return $this->returnError(403, 'You are not allowed to update this task!');
         }
-        
-        $requestParams = $this->prepareRequestParams(Yii::$app->request->getBodyParams(), 'TaskForm', 'Task');
-        if ($taskForm->load($requestParams) && $taskForm->save()) {
-            return RestDefinitions::getTask(Task::findOne(['id' => $taskForm->task->id]));
+
+        if ($this->saveTask($taskForm)) {
+            return $this->returnContentDefinition(Task::findOne(['id' => $taskForm->task->id]));
         }
 
         if ($taskForm->hasErrors() || $taskForm->task->hasErrors()) {

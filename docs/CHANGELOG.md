@@ -1,17 +1,24 @@
 Changelog
 =========
 
-1.6.0 (Unreleased)
----------------------
+1.6.0  (Unreleased)
+-----------------------
+- Enh #182: Allow update content topics
+- Enh #169: Use new tabbed form for auto active tab with first error field
 - Enh #140: Use widget ContentVisibiltySelect
 
-1.5.5  (Unreleased)
+
+1.5.5  (March 13, 2022)
 -----------------------
 - Fix #60: Fix date and time formats on create/update task by API
 - Fix #114: PHP8 - Deprecate required parameters after optional parameters
 - Fix #157: CLI error when no REST module is installed
 - Fix #159: Fix view access for non-members
 - Enh #5274: Deprecate CompatModuleManager
+- Fix #167: added separator for concatenated search attributes
+- Enh #170: Confirmation before close a not saved task
+- Fix #169: Activate tab with first error field on edit a task
+- Fix #179: Error 400 when trying to assign the user for a task 
 
 1.5.4  (April 28, 2021)
 -----------------------
