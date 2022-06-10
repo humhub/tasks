@@ -149,19 +149,18 @@
 
   }
 
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    color: @tasks-text-color;
+  }
+
   #task-filter-nav {
     background: #FFF;
     border-radius: 4px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
     padding: 20px;
-
-    .form-group {
-      label {
-        font-size: 13px;
-        font-weight: bold;
-        color: @tasks-text-color;
-      }
-    }
 
     .filter-list a {
       white-space: nowrap;
@@ -169,10 +168,6 @@
 
     .filter-root {
       margin: 0;
-      padding: 5px;
-      position: relative;
-      padding-top: 0;
-      padding-bottom: 0;
 
       .filterInput {
         font-size: 13px;
@@ -183,6 +178,13 @@
     .filter-panel {
       vertical-align: top;
       width: auto !important;
+      padding: 0 40px;
+      &:first-child {
+        padding-left: 0;
+      }
+      &:last-child {
+        padding-right: 0;
+      }
     }
 
     .task-filter-picker-container {
@@ -194,8 +196,23 @@
     }
 
     .task-bottom-panel {
+      margin: 16px 0;
       .filterInput {
         margin: 5px;
+        &[data-filter-type=checkbox] .fa {
+          width: 18px;
+          height: 18px;
+          margin: 0 4px -4px -7px;
+          border: 2px solid #D7D7D7;
+          border-radius: 4px;
+          &:before {
+            content: "";
+          }
+          &.fa-check-square-o {
+            border-color: #21A1B3;
+            background: #21A1B3;
+          }
+        }
       }
 
       .filterInput.task-date-picker {

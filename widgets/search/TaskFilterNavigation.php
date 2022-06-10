@@ -133,7 +133,10 @@ class TaskFilterNavigation extends FilterNavigation
             'id' => TaskFilter::FILTER_STATE,
             'category' => 'states',
             'title' => Yii::t('TasksModule.models_forms_TaskFilter', 'Status'),
-            'class' => PickerFilterInput::class,
+            'class' => \humhub\modules\tasks\widgets\search\PickerFilterInput::class,
+            'options' => [
+                'label' => Yii::t('TasksModule.base', 'Filter by status'),
+            ],
             'picker' => MultiSelect::class,
             'pickerOptions' => [
                 'items' => TaskState::getStatusItems(),
@@ -172,6 +175,7 @@ class TaskFilterNavigation extends FilterNavigation
             'category' => 'date_start',
             'class' => DateFilter::class,
             'filterOptions' => [
+                'label' => Yii::t('TasksModule.base', 'Filter by date'),
                 'placeholder' =>  Yii::t('TasksModule.models_forms_TaskFilter', 'Start date'),
             ]], static::FILTER_BLOCK_DATEPICKER);
 
