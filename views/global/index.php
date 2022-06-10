@@ -24,7 +24,7 @@ use humhub\modules\tasks\models\forms\TaskFilter;
 
             <?= TaskFilterNavigation::widget(['filter' => $filter, 'options' => ['style' => 'border-radius:4px;background-color:' . $this->theme->variable('background-color-secondary')]]) ?>
 
-            <div id="filter-tasks-list" class="panel-body">
+            <div id="filter-tasks-list">
                 <?= TaskSearchList::widget(['filter' => $filter]) ?>
             </div>
         </div>

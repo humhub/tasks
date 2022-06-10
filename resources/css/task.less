@@ -75,6 +75,7 @@
 .task-overview {
 
   #filter-tasks-list {
+    margin-top: 15px;
     .empty {
       margin: 15px 0;
     }
@@ -85,17 +86,23 @@
       li:last-of-type {
         border-bottom: 0;
       }
+      li, .empty {
+        background: #FFF;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
+        border-radius: 4px;
+        padding: 20px;
+        color: @tasks-text-color;
+        font-size: 13px;
+      }
     }
   }
 
-  border-top: 1px solid #ddd;
-
   li {
     cursor: pointer;
-  }
-
-  li:last-child {
-    border-bottom: 0;
+    margin-bottom: 4px;
+    &:last-child {
+      border-bottom: 0;
+    }
   }
 
   .media-list {
@@ -143,12 +150,16 @@
   }
 
   #task-filter-nav {
+    background: #FFF;
+    border-radius: 4px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
+    padding: 20px;
 
-    padding: 10px;
-
-    .task-title-filter {
-      .form-group {
-        margin-bottom: 5px;
+    .form-group {
+      label {
+        font-size: 13px;
+        font-weight: bold;
+        color: @tasks-text-color;
       }
     }
 

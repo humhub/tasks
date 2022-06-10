@@ -28,10 +28,10 @@ Assets::register($this);
     <?= TaskSubMenu::widget() ?>
 </div>
 
-<div class="panel panel-default task-overview">
-    <?= TaskFilterNavigation::widget(['filter' => $filter, 'options' => ['style' => 'border-radius:4px;background-color:'.$this->theme->variable('background-color-secondary')]]) ?>
+<div class="task-overview">
+    <?= TaskFilterNavigation::widget(['filter' => $filter]) ?>
 
-    <div id="filter-tasks-list" class="panel-body">
+    <div id="filter-tasks-list">
         <?= TaskSearchList::widget(['filter' => $filter]) ?>
     </div>
 </div>
