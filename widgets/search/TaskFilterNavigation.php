@@ -94,10 +94,13 @@ class TaskFilterNavigation extends FilterNavigation
             'category' => 'title',
             'title' => Yii::t('TasksModule.models_forms_TaskFilter', 'Title'),
             'class' => TextFilterInput::class,
-            'changeAction' => 'inputChange',
+            'changeAction' => null,
+            'type' => 'text',
             'options' => [
                 'label' => Yii::t('TasksModule.views_index_index', 'Filter tasks by title'),
                 'style' => 'width:100%',
+                'data-action-keydown' => 'inputChange',
+                'data-action-keypress' => null,
                 'placeholder' => Yii::t('TasksModule.views_index_index', 'Filter tasks by title')
             ],
             'sortOrder' => 100], static::FILTER_BLOCK_TITLE);
@@ -106,6 +109,8 @@ class TaskFilterNavigation extends FilterNavigation
             'id' => TaskFilter::FILTER_OVERDUE,
             'checked' => $this->filter->isFilterActive(TaskFilter::FILTER_OVERDUE),
             'title' => Yii::t('TasksModule.models_forms_TaskFilter', 'Overdue'),
+            'class' => CheckboxFilterInput::class,
+            'options' => ['label' => Yii::t('TasksModule.views_index_index', 'Filter')],
             'sortOrder' => 100], static::FILTER_BLOCK_CHECKBOX);
 
 

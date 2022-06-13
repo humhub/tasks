@@ -1103,7 +1103,7 @@ class Task extends ContentActiveRecord implements Searchable
 
     private function hasNewTaskList(): bool
     {
-        return !preg_match('/^\d+$/', $this->task_list_id);
+        return !empty($this->task_list_id) && !preg_match('/^\d+$/', $this->task_list_id);
     }
 
     private function saveTaskList(): bool
