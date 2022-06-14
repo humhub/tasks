@@ -262,7 +262,7 @@ class TaskForm extends Model implements TabbedFormModel
     public function getTitle()
     {
         if($this->task->isNewRecord) {
-           return Yii::t('TasksModule.views_index_edit', '<strong>Create</strong> new task');
+           return Yii::t('TasksModule.views_index_edit', '<strong>New</strong> Task');
         }
 
         return Yii::t('TasksModule.views_index_edit', '<strong>Edit</strong> task');
@@ -458,7 +458,7 @@ class TaskForm extends Model implements TabbedFormModel
     {
         $tabs = [
             [
-                'label' => Yii::t('TasksModule.views_index_edit', 'Basic'),
+                'label' => Yii::t('TasksModule.views_index_edit', 'General'),
                 'view' => 'edit-basic',
                 'linkOptions' => ['class' => 'tab-basic'],
                 'fields' => ['title', 'task_list_id', 'description', 'topics', 'is_public', 'scheduling'],
@@ -481,12 +481,12 @@ class TaskForm extends Model implements TabbedFormModel
         }
 
         $tabs[] = [
-            'label' => Yii::t('TasksModule.views_index_edit', 'Checklist'),
+            'label' => Yii::t('TasksModule.views_index_edit', 'Checkpoints'),
             'view' => 'edit-checklist',
             'linkOptions' => ['class' => 'tab-checklist'],
         ];
         $tabs[] = [
-            'label' => Yii::t('TasksModule.views_index_edit', 'Files'),
+            'label' => Yii::t('TasksModule.views_index_edit', 'Attachments'),
             'view' => 'edit-files',
             'linkOptions' => ['class' => 'tab-files'],
         ];

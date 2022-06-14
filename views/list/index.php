@@ -27,8 +27,9 @@ Assets::register($this);
 
 <div class="task-list" data-ui-widget="task.list.Root" data-ui-init="1" data-drop-list-url="<?= TaskListUrl::dropTaskList($contentContainer) ?>">
     <div class="task-list-tabs">
-        <?= Button::defaultType(Yii::t('TasksModule.base', 'Toggle lists'))
+        <?= Button::defaultType(Yii::t('TasksModule.base', 'Collapse'))
             ->icon('fa-toggle-on')
+            ->options(['data-title-expand' => Yii::t('TasksModule.base', 'Expand')])
             ->id('toggle-lists')
             ->action('collapseAll')
             ->loader(false)
@@ -55,7 +56,7 @@ Assets::register($this);
             <div class="closed-task-lists-container task-list-container" data-ui-widget="task.list.CompletedTaskListView" data-ui-init="1">
                 <div class="task-list-title-bar clearfix">
                     <div>
-                        <i class="fa fa-check-square-o"></i> <span class="task-list-title-text"><?= Yii::t('TasksModule.base', 'Finished Lists')?></span>
+                        <i class="fa fa-check-square-o"></i> <span class="task-list-title-text"><?= Yii::t('TasksModule.base', 'Completed') ?></span>
                     </div>
                 </div>
                 <div class="closed-task-list-view">

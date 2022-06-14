@@ -27,9 +27,9 @@ $responsible = $taskForm->task->taskResponsibleUsers;
         'selection' => $taskForm->task->taskAssignedUsers,
         'url' => $taskForm->getTaskAssignedPickerUrl(),
         'placeholder' => Yii::t('TasksModule.views_index_edit', 'Assign users')
-    ])->hint(Yii::t('TasksModule.views_index_edit', 'Leave empty to let anyone work on this task.'),[]) ?>
+    ])->hint(Yii::t('TasksModule.views_index_edit', 'If empty any user can complete the task.'),[]) ?>
 
-    <?= Link::userPickerSelfSelect('#taskAssignedUserPicker'); ?>
+    <?= Link::userPickerSelfSelect('#taskAssignedUserPicker', Yii::t('TasksModule.base', 'Assign myself')); ?>
 
     <br>
 
@@ -40,7 +40,7 @@ $responsible = $taskForm->task->taskResponsibleUsers;
         'placeholder' => Yii::t('TasksModule.views_index_edit', 'Add responsible users'),
     ]) ?>
 
-    <?= Link::userPickerSelfSelect('#taskResponsibleUserPicker'); ?>
+    <?= Link::userPickerSelfSelect('#taskResponsibleUserPicker', Yii::t('TasksModule.base', 'Assign myself')); ?>
 
     <br>
     <?= $form->field($taskForm->task, 'review')->checkbox() ?>

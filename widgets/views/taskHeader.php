@@ -12,13 +12,13 @@ use humhub\widgets\Button;
 <div class="panel panel-default task-list-header">
     <div class="panel-body clearfix">
         <?php if ($addTaskUrl) : ?>
-            <?= Button::success(Yii::t('TasksModule.base', 'Add task'))
+            <?= Button::success(Yii::t('TasksModule.base', 'Add'))
                 ->action('task.list.editTask', $addTaskUrl)
                 ->icon('fa-plus')
                 ->right()
                 ->loader(false) ?>
         <?php endif; ?>
         <h4><?= Yii::t('TasksModule.base', 'Tasks') ?></h4>
-        <div class="help-block"><?= Yii::t('TasksModule.base', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi esse obcaecati unde voluptatem! Assumenda, sed.') ?></div>
+        <div class="help-block"><?= Yii::t('TasksModule.base', 'Create tasks, schedule individual and collaborative projects and assign other users in your network to tasks and activities. Use the various filters to sort and view tasks.') ?></div>
     </div>
 </div>

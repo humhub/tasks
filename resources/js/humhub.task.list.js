@@ -72,14 +72,19 @@ humhub.module('task.list', function (module, require, $) {
     };
 
     Root.prototype.collapseAll = function(evt) {
+        var toggler = evt.$trigger;
         var $visible = this.$.find('.task-list-items.ui-sortable:visible');
-        if($visible.length) {
+        var collapse = $visible.length;
+        if (collapse) {
             $visible.siblings('.task-list-title-bar').click();
-            $('#toggle-lists').find('i').removeClass('fa-toggle-on').addClass('fa-toggle-off');
         } else {
             this.$.find('.task-list-items.ui-sortable:hidden').siblings('.task-list-title-bar').click();
-            $('#toggle-lists').find('i').removeClass('fa-toggle-off').addClass('fa-toggle-on');
         }
+        $('#toggle-lists').find('i')
+            .removeClass(collapse ? 'fa-toggle-on' : 'fa-toggle-off')
+            .addClass(collapse ? 'fa-toggle-off' : 'fa-toggle-on');
+        toggler.data(collapse ? 'title-collapse' : 'title-expand', toggler.text());
+        toggler.html(toggler.html().replace(/(<\/i> ).+$/, '$1' + toggler.data(collapse ? 'title-expand' : 'title-collapse')));
     };
 
     var TaskList = function (node, options) {

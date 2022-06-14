@@ -28,10 +28,10 @@ class TaskListCest
 
         $I->amGoingTo('create a new task list');
         $I->click('Tasks', '.layout-nav-container');
-        $I->waitForText('Task List');
+        $I->waitForText('Overview');
 
-        $I->click('Add task');
-        $I->waitForText('Create new task', null, '#globalModal');
+        $I->click('Add');
+        $I->waitForText('New Task', null, '#globalModal');
         $I->fillField('Task[title]', 'Test task with new list');
         $I->fillContentTagDropDown('task-task_list_id', 'My New Tasklist');
         $I->click('Save', '#globalModal');
@@ -39,7 +39,7 @@ class TaskListCest
         $I->waitForText('My New Tasklist', null, '.task-list');
 
         $I->click(Locator::elementAt('[data-task-list-id=1] [data-action-click="task.list.editTask"]',1));
-        $I->waitForText('Create new task', null, '#globalModal');
+        $I->waitForText('New Task', null, '#globalModal');
 
         $I->fillField('Task[title]', 'My First Task');
         $I->fillField('#task-description .humhub-ui-richtext', 'This is a test task!');
@@ -72,10 +72,10 @@ class TaskListCest
 
         $I->amGoingTo('create a new task list');
         $I->click('Tasks', '.layout-nav-container');
-        $I->waitForText('Task List');
+        $I->waitForText('Overview');
 
-        $I->click('Add task');
-        $I->waitForText('Create new task', null, '#globalModal');
+        $I->click('Add');
+        $I->waitForText('New Task', null, '#globalModal');
         $I->fillField('Task[title]', 'Test task with new list');
         $I->fillContentTagDropDown('task-task_list_id', 'My New Tasklist');
         $I->click('Save', '#globalModal');
@@ -83,7 +83,7 @@ class TaskListCest
         $I->waitForText('My New Tasklist', null, '.task-list');
 
         $I->click(Locator::elementAt('[data-task-list-id=1] [data-action-click="task.list.editTask"]',1));
-        $I->waitForText('Create new task', null, '#globalModal');
+        $I->waitForText('New Task', null, '#globalModal');
 
         $I->fillField('Task[title]', 'My First Task');
         $I->fillField('#task-description .humhub-ui-richtext', 'This is a test task!');

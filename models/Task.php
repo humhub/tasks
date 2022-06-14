@@ -279,10 +279,10 @@ class Task extends ContentActiveRecord implements Searchable
             'parent_task_id' => Yii::t('TasksModule.models_task', 'Parent Task'),
             'newItems' => Yii::t('TasksModule.models_task', 'Checklist Items'),
             'editItems' => Yii::t('TasksModule.models_task', 'Checklist Items'),
-            'assignedUsers' => Yii::t('TasksModule.models_task', 'Assigned user(s)'),
-            'responsibleUsers' => Yii::t('TasksModule.models_task', 'Responsible user(s)'),
+            'assignedUsers' => Yii::t('TasksModule.models_task', 'Assigned users'),
+            'responsibleUsers' => Yii::t('TasksModule.models_task', 'Responsible users'),
             'selectedReminders' => Yii::t('TasksModule.models_task', 'Reminders'),
-            'task_list_id' => Yii::t('TasksModule.base', 'List'),
+            'task_list_id' => Yii::t('TasksModule.base', 'Task List'),
         ];
     }
 

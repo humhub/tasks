@@ -97,11 +97,11 @@ class TaskFilterNavigation extends FilterNavigation
             'changeAction' => null,
             'type' => 'text',
             'options' => [
-                'label' => Yii::t('TasksModule.views_index_index', 'Filter tasks by title'),
+                'label' => Yii::t('TasksModule.views_index_index', 'Title'),
                 'style' => 'width:100%',
                 'data-action-keydown' => 'inputChange',
                 'data-action-keypress' => null,
-                'placeholder' => Yii::t('TasksModule.views_index_index', 'Filter tasks by title')
+                'placeholder' => Yii::t('TasksModule.views_index_index', 'Title')
             ],
             'sortOrder' => 100], static::FILTER_BLOCK_TITLE);
 
@@ -140,7 +140,7 @@ class TaskFilterNavigation extends FilterNavigation
             'title' => Yii::t('TasksModule.models_forms_TaskFilter', 'Status'),
             'class' => \humhub\modules\tasks\widgets\search\PickerFilterInput::class,
             'options' => [
-                'label' => Yii::t('TasksModule.base', 'Filter by status'),
+                'label' => Yii::t('TasksModule.base', 'Status'),
             ],
             'picker' => MultiSelect::class,
             'pickerOptions' => [
@@ -180,7 +180,7 @@ class TaskFilterNavigation extends FilterNavigation
             'category' => 'date_start',
             'class' => DateFilter::class,
             'filterOptions' => [
-                'label' => Yii::t('TasksModule.base', 'Filter by date'),
+                'label' => Yii::t('TasksModule.base', 'Date'),
                 'placeholder' =>  Yii::t('TasksModule.models_forms_TaskFilter', 'Start date'),
             ]], static::FILTER_BLOCK_DATEPICKER);
 
