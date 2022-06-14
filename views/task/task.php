@@ -6,36 +6,29 @@
  *
  */
 
+use humhub\modules\tasks\assets\Assets;
+use humhub\modules\tasks\widgets\lists\TaskListDetails;
+use humhub\modules\tasks\widgets\TaskHeader;
+use humhub\modules\tasks\widgets\TaskSubMenu;
+
 /* @var $this \humhub\modules\ui\view\components\View */
 /* @var $task \humhub\modules\tasks\models\Task */
 /* @var $contentContainer \humhub\modules\content\components\ContentContainerActiveRecord */
 
-
-use humhub\modules\tasks\widgets\ChangeStatusButton;
-use humhub\modules\tasks\widgets\lists\TaskListDetails;
-use humhub\modules\tasks\widgets\TaskSubMenu;
-use humhub\widgets\MarkdownView;
-use humhub\modules\content\widgets\WallEntryAddons;
-use humhub\modules\tasks\widgets\checklist\TaskChecklist;
-
-\humhub\modules\tasks\assets\Assets::register($this);
-
-$canEdit = $task->content->canEdit();
-
-$collapse = true;
+Assets::register($this);
 
 $this->registerJsConfig('task', [
     'text' => [
         'success.notification' => Yii::t('TasksModule.views_index_task', 'Task Users have been notified')
     ]
 ]);
-
 ?>
+<?= TaskHeader::widget() ?>
 <?= TaskSubMenu::widget() ?>
 <div id="task-container" class="panel panel-default task-details">
 
     <?= $this->render('task_header', [
-        'canEdit' => $canEdit,
+        'canEdit' => $task->content->canEdit(),
         'contentContainer' => $contentContainer,
         'task' => $task
     ]); ?>
@@ -46,5 +39,3 @@ $this->registerJsConfig('task', [
         </div>
     </div>
 </div>
-
-

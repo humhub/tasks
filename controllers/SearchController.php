@@ -35,7 +35,6 @@ class SearchController extends AbstractTaskController
     public function actionIndex()
     {
         return $this->render('index', [
-            'canEdit' =>$this->canManageTasks(),
             'filter' => new TaskFilter(['contentContainer' => $this->contentContainer, 'filters' => [TaskFilter::FILTER_ASSIGNED]])
         ]);
     }

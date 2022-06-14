@@ -11,6 +11,7 @@ use humhub\modules\tasks\widgets\lists\CompletedTaskListView;
 use humhub\modules\tasks\assets\Assets;
 use humhub\modules\tasks\widgets\lists\TaskListWidget;
 use humhub\modules\tasks\widgets\lists\UnsortedTaskListWidget;
+use humhub\modules\tasks\widgets\TaskHeader;
 use humhub\modules\tasks\widgets\TaskSubMenu;
 use humhub\widgets\Button;
 
@@ -22,18 +23,7 @@ use humhub\widgets\Button;
 
 Assets::register($this);
 ?>
-<div class="panel panel-default task-list-header">
-    <div class="panel-body clearfix">
-        <?= Button::success(Yii::t('TasksModule.base', 'Add task'))
-            ->action('task.list.editTask', TaskListUrl::addTaskListTask(null, $contentContainer))
-            ->icon('fa-plus')
-            ->right()
-            ->loader(false)
-            ->visible($canCreate) ?>
-        <h4><?= Yii::t('TasksModule.base', 'Tasks') ?></h4>
-        <div class="help-block"><?= Yii::t('TasksModule.base', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi esse obcaecati unde voluptatem! Assumenda, sed.') ?></div>
-    </div>
-</div>
+<?= TaskHeader::widget(['displayAddTask' => true, 'contentContainer' => $contentContainer]) ?>
 
 <div class="task-list" data-ui-widget="task.list.Root" data-ui-init="1" data-drop-list-url="<?= TaskListUrl::dropTaskList($contentContainer) ?>">
     <div class="task-list-tabs">
