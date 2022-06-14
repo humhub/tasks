@@ -8,9 +8,9 @@
 
 use humhub\modules\tasks\models\forms\TaskForm;
 use humhub\modules\tasks\models\lists\TaskList;
-use humhub\modules\content\widgets\ContentTagDropDown;
 use humhub\modules\content\widgets\richtext\RichTextField;
 use humhub\modules\tasks\permissions\ManageTasks;
+use humhub\modules\tasks\widgets\ContentTagDropDown;
 use humhub\modules\topic\widgets\TopicPicker;
 use humhub\modules\ui\form\widgets\ActiveForm;
 use humhub\modules\ui\form\widgets\ContentVisibilitySelect;
@@ -23,17 +23,15 @@ $canManage = $taskForm->contentContainer->can(ManageTasks::class);
 <div class="modal-body">
     <?= $form->field($taskForm->task, 'title')->textInput(); ?>
 
-    <?php if (TaskList::findByContainer($taskForm->contentContainer)->count()) : ?>
-        <?= $form->field($taskForm->task, 'task_list_id')->widget(ContentTagDropDown::class, [
-            'prompt' => Yii::t('TasksModule.base', 'Unsorted'),
-            'contentContainer' => $taskForm->contentContainer,
-            'options' => [
-                'data-ui-select2' => true,
-                'data-ui-select2-allow-new' => $canManage
-            ],
-            'tagClass' => TaskList::class
-        ]); ?>
-    <?php endif; ?>
+    <?= $form->field($taskForm->task, 'task_list_id')->widget(ContentTagDropDown::class, [
+        'prompt' => Yii::t('TasksModule.base', 'Unsorted'),
+        'contentContainer' => $taskForm->contentContainer,
+        'options' => [
+            'data-ui-select2' => true,
+            'data-ui-select2-allow-new' => $canManage
+        ],
+        'tagClass' => TaskList::class
+    ]); ?>
 
     <?= $form->field($taskForm->task, 'description')->widget(RichTextField::class) ?>
     <?= $form->field($taskForm, 'topics')->widget(TopicPicker::class, ['contentContainer' => $taskForm->task->content->container])->label(false) ?>

@@ -42,7 +42,7 @@ class TaskHeader extends Widget
         if ($this->displayAddTask &&
             $this->contentContainer &&
             $this->contentContainer->can(CreateTask::class)) {
-            TaskListUrl::addTaskListTask(null, $this->contentContainer);
+            return TaskListUrl::addTaskListTask(null, $this->contentContainer);
         }
 
         return null;
