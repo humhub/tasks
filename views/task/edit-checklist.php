@@ -31,4 +31,7 @@ use humhub\modules\tasks\widgets\AddItemsInput;
     <?php endforeach; ?>
 
     <?= AddItemsInput::widget(['name' => $taskForm->formName() . '[newItems][]']); ?>
+    <div class="help-block">
+        <?= Yii::t('TasksModule.base', 'Add checkpoints to the task to highlight the individual steps required to complete it.') ?>
+    </div>
 </div>

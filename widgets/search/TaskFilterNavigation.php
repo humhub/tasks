@@ -101,7 +101,7 @@ class TaskFilterNavigation extends FilterNavigation
                 'style' => 'width:100%',
                 'data-action-keydown' => 'inputChange',
                 'data-action-keypress' => null,
-                'placeholder' => Yii::t('TasksModule.views_index_index', 'Title')
+                'placeholder' => Yii::t('TasksModule.views_index_index', 'Filter by title')
             ],
             'sortOrder' => 100], static::FILTER_BLOCK_TITLE);
 
@@ -145,8 +145,7 @@ class TaskFilterNavigation extends FilterNavigation
             'picker' => MultiSelect::class,
             'pickerOptions' => [
                 'items' => TaskState::getStatusItems(),
-                'placeholder' =>  Yii::t('TasksModule.models_forms_TaskFilter', 'Filter status'),
-                'placeholderMore' =>  Yii::t('TasksModule.models_forms_TaskFilter', 'Filter status'),
+                'placeholderMore' =>  Yii::t('TasksModule.models_forms_TaskFilter', 'Filter by status'),
                 'name' => 'task-filter-state'
             ]],static::FILTER_BLOCK_PICKER);
 

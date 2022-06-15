@@ -16,6 +16,7 @@ use humhub\widgets\Button;
                 ->action('task.list.editTask', $addTaskUrl)
                 ->icon('fa-plus')
                 ->right()
+                ->style('margin:0 0 20px 20px')
                 ->loader(false) ?>
         <?php endif; ?>
         <h4><?= Yii::t('TasksModule.base', 'Tasks') ?></h4>
