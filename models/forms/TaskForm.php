@@ -255,7 +255,7 @@ class TaskForm extends Model implements TabbedFormModel
             'start_time' => Yii::t('TasksModule.models_forms_TaskForm', 'Start Time'),
             'end_time' => Yii::t('TasksModule.models_forms_TaskForm', 'End Time'),
             'timeZone' => Yii::t('TasksModule.models_forms_TaskForm', 'Time Zone'),
-            'is_public' => Yii::t('TasksModule.models_forms_TaskForm', 'Public'),
+            'is_public' => Yii::t('TasksModule.base', 'Additional options'),
         ]);
     }
 
