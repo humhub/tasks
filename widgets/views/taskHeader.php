@@ -20,6 +20,6 @@ use humhub\widgets\Button;
                 ->loader(false) ?>
         <?php endif; ?>
         <h4><?= Yii::t('TasksModule.base', 'Tasks') ?></h4>
-        <div class="help-block"><?= Yii::t('TasksModule.base', 'Create tasks, schedule individual and collaborative projects and assign other users in your network to tasks and activities. Use the various filters to sort and view tasks.') ?></div>
+        <div class="help-block"><?= Yii::t('TasksModule.base', 'Create and assign tasks - organize and schedule individual and collaborative projects.') ?></div>
     </div>
 </div>
