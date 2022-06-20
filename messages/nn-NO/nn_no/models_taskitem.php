@@ -1,6 +1,0 @@
-<?php
-
-return [
-    'Completed' => '',
-    'Title' => '',
-];
