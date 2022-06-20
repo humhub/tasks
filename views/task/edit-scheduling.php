@@ -54,10 +54,10 @@ $taskReminder = ArrayHelper::map($taskForm->task->getTaskReminder()->all(),'id',
     <div>
         <?= $form->field($taskForm->task, 'selectedReminders')->widget( MultiSelect::className(), [
                 'selection' => $taskReminder,
-                'placeholder' => Yii::t('TasksModule.views_index_edit', 'Add reminder'),
+                'placeholder' => Yii::t('TasksModule.base', 'Add reminder'),
                 'items' => $taskForm->getRemindModeItems(),
                 'url' => '#',
-                'placeholderMore' => Yii::t('TasksModule.views_index_edit', 'Add reminder')
+                'placeholderMore' => Yii::t('TasksModule.base', 'Add reminder')
             ]);
         ?>
     </div>

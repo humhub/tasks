@@ -92,25 +92,25 @@ class TaskFilterNavigation extends FilterNavigation
         $this->addFilter([
             'id' => TaskFilter::FILTER_TITLE,
             'category' => 'title',
-            'title' => Yii::t('TasksModule.models_forms_TaskFilter', 'Title'),
+            'title' => Yii::t('TasksModule.base', 'Title'),
             'class' => TextFilterInput::class,
             'changeAction' => null,
             'type' => 'text',
             'options' => [
-                'label' => Yii::t('TasksModule.views_index_index', 'Title'),
+                'label' => Yii::t('TasksModule.base', 'Title'),
                 'style' => 'width:100%',
                 'data-action-keydown' => 'inputChange',
                 'data-action-keypress' => null,
-                'placeholder' => Yii::t('TasksModule.views_index_index', 'Filter by title')
+                'placeholder' => Yii::t('TasksModule.base', 'Filter by title')
             ],
             'sortOrder' => 100], static::FILTER_BLOCK_TITLE);
 
         $this->addFilter([
             'id' => TaskFilter::FILTER_OVERDUE,
             'checked' => $this->filter->isFilterActive(TaskFilter::FILTER_OVERDUE),
-            'title' => Yii::t('TasksModule.models_forms_TaskFilter', 'Overdue'),
+            'title' => Yii::t('TasksModule.base', 'Overdue'),
             'class' => CheckboxFilterInput::class,
-            'options' => ['label' => Yii::t('TasksModule.views_index_index', 'Filter')],
+            'options' => ['label' => Yii::t('TasksModule.base', 'Filter')],
             'sortOrder' => 100], static::FILTER_BLOCK_CHECKBOX);
 
 
@@ -118,26 +118,26 @@ class TaskFilterNavigation extends FilterNavigation
             $this->addFilter([
                 'id' => TaskFilter::FILTER_ASSIGNED,
                 'checked' => $this->filter->isFilterActive(TaskFilter::FILTER_ASSIGNED),
-                'title' => Yii::t('TasksModule.models_forms_TaskFilter', 'I\'m assigned'),
+                'title' => Yii::t('TasksModule.base', 'I\'m assigned'),
                 'sortOrder' => 200], static::FILTER_BLOCK_CHECKBOX);
 
             $this->addFilter([
                 'id' => TaskFilter::FILTER_RESPONSIBLE,
                 'checked' => $this->filter->isFilterActive(TaskFilter::FILTER_RESPONSIBLE),
-                'title' => Yii::t('TasksModule.models_forms_TaskFilter', 'I\'m responsible'),
+                'title' => Yii::t('TasksModule.base', 'I\'m responsible'),
                 'sortOrder' => 300], static::FILTER_BLOCK_CHECKBOX);
 
             $this->addFilter([
                 'id' => TaskFilter::FILTER_MINE,
                 'checked' => $this->filter->isFilterActive(TaskFilter::FILTER_MINE),
-                'title' => Yii::t('TasksModule.models_forms_TaskFilter', 'Created by me'),
+                'title' => Yii::t('TasksModule.base', 'Created by me'),
                 'sortOrder' => 400], static::FILTER_BLOCK_CHECKBOX);
         }
 
         $this->addFilter([
             'id' => TaskFilter::FILTER_STATE,
             'category' => 'states',
-            'title' => Yii::t('TasksModule.models_forms_TaskFilter', 'Status'),
+            'title' => Yii::t('TasksModule.base', 'Status'),
             'class' => \humhub\modules\tasks\widgets\search\PickerFilterInput::class,
             'options' => [
                 'label' => Yii::t('TasksModule.base', 'Status'),
@@ -145,7 +145,7 @@ class TaskFilterNavigation extends FilterNavigation
             'picker' => MultiSelect::class,
             'pickerOptions' => [
                 'items' => TaskState::getStatusItems(),
-                'placeholderMore' =>  Yii::t('TasksModule.models_forms_TaskFilter', 'Filter by status'),
+                'placeholderMore' =>  Yii::t('TasksModule.base', 'Filter by status'),
                 'name' => 'task-filter-state'
             ]],static::FILTER_BLOCK_PICKER);
 
@@ -165,7 +165,7 @@ class TaskFilterNavigation extends FilterNavigation
             $this->addFilter([
                 'id' => TaskFilter::FILTER_SPACE,
                 'category' => 'spaces',
-                'title' => Yii::t('TasksModule.models_forms_TaskFilter', 'Spaces'),
+                'title' => Yii::t('TasksModule.base', 'Spaces'),
                 'class' => PickerFilterInput::class,
                 'picker' => SpacePickerField::class,
                 'pickerOptions' => [
@@ -180,7 +180,7 @@ class TaskFilterNavigation extends FilterNavigation
             'class' => DateFilter::class,
             'filterOptions' => [
                 'label' => Yii::t('TasksModule.base', 'Date'),
-                'placeholder' =>  Yii::t('TasksModule.models_forms_TaskFilter', 'Start date'),
+                'placeholder' =>  Yii::t('TasksModule.base', 'Start date'),
             ]], static::FILTER_BLOCK_DATEPICKER);
 
         $this->addFilter([
@@ -188,7 +188,7 @@ class TaskFilterNavigation extends FilterNavigation
             'category' => 'date_end',
             'class' => DateFilter::class,
             'filterOptions' => [
-                'placeholder' => Yii::t('TasksModule.models_forms_TaskFilter', 'End date'),
+                'placeholder' => Yii::t('TasksModule.base', 'End date'),
             ]], static::FILTER_BLOCK_DATEPICKER);
     }
 

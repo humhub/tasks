@@ -75,12 +75,12 @@ class TaskFilter extends Model
     public function attributeLabels()
     {
         return [
-            'title' => Yii::t('TasksModule.models_forms_TaskFilter', 'Filter tasks'),
-            'status' => Yii::t('TasksModule.models_forms_TaskFilter', 'Status'),
-            'overdue' => Yii::t('TasksModule.models_forms_TaskFilter', 'Overdue'),
-            'taskAssigned' => Yii::t('TasksModule.models_forms_TaskFilter', 'I\'m assigned'),
-            'taskResponsible' => Yii::t('TasksModule.models_forms_TaskFilter', 'I\'m responsible'),
-            'own' => Yii::t('TasksModule.models_forms_TaskFilter', 'Created by me'),
+            'title' => Yii::t('TasksModule.base', 'Filter tasks'),
+            'status' => Yii::t('TasksModule.base', 'Status'),
+            'overdue' => Yii::t('TasksModule.base', 'Overdue'),
+            'taskAssigned' => Yii::t('TasksModule.base', 'I\'m assigned'),
+            'taskResponsible' => Yii::t('TasksModule.base', 'I\'m responsible'),
+            'own' => Yii::t('TasksModule.base', 'Created by me'),
         ];
     }
 

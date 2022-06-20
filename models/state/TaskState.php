@@ -53,10 +53,10 @@ abstract class TaskState extends Component
     public static function getStatusItems()
     {
         return [
-            Task::STATUS_PENDING => Yii::t('TasksModule.views_index_index', 'Pending'),
-            Task::STATUS_IN_PROGRESS => Yii::t('TasksModule.views_index_index', 'In Progress'),
-            Task::STATUS_PENDING_REVIEW => Yii::t('TasksModule.views_index_index', 'In Review'),
-            Task::STATUS_COMPLETED => Yii::t('TasksModule.views_index_index', 'Completed'),
+            Task::STATUS_PENDING => Yii::t('TasksModule.base', 'Pending'),
+            Task::STATUS_IN_PROGRESS => Yii::t('TasksModule.base', 'In Progress'),
+            Task::STATUS_PENDING_REVIEW => Yii::t('TasksModule.base', 'In Review'),
+            Task::STATUS_COMPLETED => Yii::t('TasksModule.base', 'Completed'),
         ];
     }
 

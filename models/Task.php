@@ -265,23 +265,23 @@ class Task extends ContentActiveRecord implements Searchable
     {
         return [
             'id' => 'ID',
-            'title' => Yii::t('TasksModule.models_task', 'Title'),
-            'color' => Yii::t('TasksModule.models_task', 'Color'),
-            'description' => Yii::t('TasksModule.models_task', 'Description'),
-            'review' => Yii::t('TasksModule.models_task', 'Review by responsible user required'),
-            'request_sent' => Yii::t('TasksModule.models_task', 'Extend deadline request'),
-            'scheduling' => Yii::t('TasksModule.models_task', 'Scheduling'),
-            'all_day' => Yii::t('TasksModule.models_task', 'All Day'),
-            'start_datetime' => Yii::t('TasksModule.models_task', 'Start'),
-            'end_datetime' => Yii::t('TasksModule.models_task', 'End'),
-            'status' => Yii::t('TasksModule.models_task', 'Status'),
-            'cal_mode' => Yii::t('TasksModule.models_task', 'Add schedule to the space calendar'),
-            'parent_task_id' => Yii::t('TasksModule.models_task', 'Parent Task'),
-            'newItems' => Yii::t('TasksModule.models_task', 'Checklist Items'),
-            'editItems' => Yii::t('TasksModule.models_task', 'Checklist Items'),
-            'assignedUsers' => Yii::t('TasksModule.models_task', 'Assigned users'),
-            'responsibleUsers' => Yii::t('TasksModule.models_task', 'Responsible users'),
-            'selectedReminders' => Yii::t('TasksModule.models_task', 'Reminders'),
+            'title' => Yii::t('TasksModule.base', 'Title'),
+            'color' => Yii::t('TasksModule.base', 'Color'),
+            'description' => Yii::t('TasksModule.base', 'Description'),
+            'review' => Yii::t('TasksModule.base', 'Review by responsible user required'),
+            'request_sent' => Yii::t('TasksModule.base', 'Extend deadline request'),
+            'scheduling' => Yii::t('TasksModule.base', 'Scheduling'),
+            'all_day' => Yii::t('TasksModule.base', 'All Day'),
+            'start_datetime' => Yii::t('TasksModule.base', 'Start'),
+            'end_datetime' => Yii::t('TasksModule.base', 'End'),
+            'status' => Yii::t('TasksModule.base', 'Status'),
+            'cal_mode' => Yii::t('TasksModule.base', 'Add schedule to the space calendar'),
+            'parent_task_id' => Yii::t('TasksModule.base', 'Parent Task'),
+            'newItems' => Yii::t('TasksModule.base', 'Checklist Items'),
+            'editItems' => Yii::t('TasksModule.base', 'Checklist Items'),
+            'assignedUsers' => Yii::t('TasksModule.base', 'Assigned users'),
+            'responsibleUsers' => Yii::t('TasksModule.base', 'Responsible users'),
+            'selectedReminders' => Yii::t('TasksModule.base', 'Reminders'),
             'task_list_id' => Yii::t('TasksModule.base', 'Task List'),
         ];
     }
@@ -877,7 +877,7 @@ class Task extends ContentActiveRecord implements Searchable
     public function getBadge()
     {
         if ($this->schedule->isOverdue())
-            return Label::danger(Yii::t('TasksModule.views_index_index', 'Overdue'))->icon('fa fa-exclamation-triangle')->options(['style' => 'margin-right: 3px;'])->right();
+            return Label::danger(Yii::t('TasksModule.base', 'Overdue'))->icon('fa fa-exclamation-triangle')->options(['style' => 'margin-right: 3px;'])->right();
 
         return null;
     }
@@ -1034,23 +1034,23 @@ class Task extends ContentActiveRecord implements Searchable
     {
         switch ($this->status) {
             case self::STATUS_PENDING :
-                $labels[] = Label::defaultType(Yii::t('TasksModule.views_index_index', 'Pending'))->icon('fa fa-info-circle')->sortOrder(350);
+                $labels[] = Label::defaultType(Yii::t('TasksModule.base', 'Pending'))->icon('fa fa-info-circle')->sortOrder(350);
                 break;
             case self::STATUS_IN_PROGRESS :
-                $labels[] = Label::info(Yii::t('TasksModule.views_index_index', 'In Progress'))->icon('fa fa-edit')->sortOrder(350);
+                $labels[] = Label::info(Yii::t('TasksModule.base', 'In Progress'))->icon('fa fa-edit')->sortOrder(350);
                 break;
             case self::STATUS_PENDING_REVIEW :
-                $labels[] = Label::warning(Yii::t('TasksModule.views_index_index', 'Pending Review'))->icon('fa fa-exclamation-triangle')->sortOrder(350);
+                $labels[] = Label::warning(Yii::t('TasksModule.base', 'Pending Review'))->icon('fa fa-exclamation-triangle')->sortOrder(350);
                 break;
             case self::STATUS_COMPLETED :
-                $labels[] = Label::success(Yii::t('TasksModule.views_index_index', 'Completed'))->icon('fa fa-check-square')->sortOrder(350);
+                $labels[] = Label::success(Yii::t('TasksModule.base', 'Completed'))->icon('fa fa-check-square')->sortOrder(350);
                 break;
             default:
                 break;
         }
 
         if ($this->schedule->isOverdue())
-            $labels[] = Label::danger(Yii::t('TasksModule.views_index_index', 'Overdue'))->icon('fa fa-exclamation-triangle')->sortOrder(360);
+            $labels[] = Label::danger(Yii::t('TasksModule.base', 'Overdue'))->icon('fa fa-exclamation-triangle')->sortOrder(360);
 
         return parent::getLabels($labels, $includeContentName);
     }

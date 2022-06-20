@@ -190,15 +190,15 @@ class TaskController extends AbstractTaskController
         $task = $this->getTaskById($id);
 
         if( !$task->content->canView() && !$task->schedule->canRequestExtension() ) {
-            throw new HttpException(401, Yii::t('TasksModule.controller', 'You have insufficient permissions to perform that operation!'));
+            throw new HttpException(401, Yii::t('TasksModule.base', 'You have insufficient permissions to perform that operation!'));
         }
 
         if ($task->schedule->hasRequestedExtension()) {
-            $this->view->error(Yii::t('TasksModule.controller', 'Already requested'));
+            $this->view->error(Yii::t('TasksModule.base', 'Already requested'));
         } else {
             $task->schedule->sendExtensionRequest();
             $task->updateAttributes(['request_sent' => 1]);
-            $this->view->success(Yii::t('TasksModule.controller', 'Request sent'));
+            $this->view->success(Yii::t('TasksModule.base', 'Request sent'));
         }
 
         return $this->htmlRedirect(TaskUrl::viewTask($task));

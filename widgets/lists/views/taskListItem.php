@@ -97,13 +97,13 @@ $checkUrl = $task->state->getCheckUrl();
         $daysRemaining = $task->schedule->getDaysRemaining();
         if ($task->schedule->isOverdue()) {
             $daysRemaining = '-' . $daysRemaining;
-            $schedulingTitle = Yii::t('TasksModule.views_index_index', 'Overdue');
+            $schedulingTitle = Yii::t('TasksModule.base', 'Overdue');
             $schedulingColor = 'colorDanger';
         } elseif ($task->schedule->isDeadlineToday()) {
-            $schedulingTitle = Yii::t('TasksModule.views_index_index', 'Today');
+            $schedulingTitle = Yii::t('TasksModule.base', 'Today');
             $schedulingColor = 'colorWarning';
         } else {
-            $schedulingTitle = Yii::t('TasksModule.views_index_index', '{count,plural,=1{# day} other{# days}} remaining', ['count' => $daysRemaining]);
+            $schedulingTitle = Yii::t('TasksModule.base', '{count,plural,=1{# day} other{# days}} remaining', ['count' => $daysRemaining]);
             $schedulingColor = $daysRemaining > 1 ? '' : 'colorWarning';
         }
         ?>

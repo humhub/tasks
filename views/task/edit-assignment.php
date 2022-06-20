@@ -26,8 +26,8 @@ $responsible = $taskForm->task->taskResponsibleUsers;
         'id' => 'taskAssignedUserPicker',
         'selection' => $taskForm->task->taskAssignedUsers,
         'url' => $taskForm->getTaskAssignedPickerUrl(),
-        'placeholder' => Yii::t('TasksModule.views_index_edit', 'Assign users')
-    ])->hint(Yii::t('TasksModule.views_index_edit', 'If empty any user can complete the task.'),[]) ?>
+        'placeholder' => Yii::t('TasksModule.base', 'Assign users')
+    ])->hint(Yii::t('TasksModule.base', 'If empty any user can complete the task.'),[]) ?>
 
     <?= Link::userPickerSelfSelect('#taskAssignedUserPicker', Yii::t('TasksModule.base', 'Assign myself')); ?>
 
@@ -37,7 +37,7 @@ $responsible = $taskForm->task->taskResponsibleUsers;
         'id' => 'taskResponsibleUserPicker',
         'selection' => $responsible,
         'url' => $taskForm->getTaskResponsiblePickerUrl(),
-        'placeholder' => Yii::t('TasksModule.views_index_edit', 'Add responsible users'),
+        'placeholder' => Yii::t('TasksModule.base', 'Add responsible users'),
     ]) ?>
 
     <?= Link::userPickerSelfSelect('#taskResponsibleUserPicker', Yii::t('TasksModule.base', 'Assign myself')); ?>

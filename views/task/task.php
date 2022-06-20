@@ -19,7 +19,7 @@ Assets::register($this);
 
 $this->registerJsConfig('task', [
     'text' => [
-        'success.notification' => Yii::t('TasksModule.views_index_task', 'Task Users have been notified')
+        'success.notification' => Yii::t('TasksModule.base', 'Task Users have been notified')
     ]
 ]);
 ?>

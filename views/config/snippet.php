@@ -15,11 +15,11 @@ use \yii\helpers\Html;
 
 <div class="panel panel-default">
 
-    <div class="panel-heading"><?= Yii::t('TasksModule.config', '<strong>Tasks</strong>'); ?></div>
+    <div class="panel-heading"><?= Yii::t('TasksModule.base', '<strong>Tasks</strong>'); ?></div>
 
     <div class="panel-body">
         <?php $form = ActiveForm::begin(); ?>
-        <h4><?= Yii::t('TasksModule.config', 'Module Widget') ?></h4>
+        <h4><?= Yii::t('TasksModule.base', 'Module Widget') ?></h4>
 
         <?= $form->field($model, 'myTasksSnippetShow')->checkbox(); ?>
 
@@ -27,7 +27,7 @@ use \yii\helpers\Html;
 
         <?= $form->field($model, 'myTasksSnippetMaxItems')->input('number', ['min' => 1, 'max' => 30]) ?>
 
-        <h4><?= Yii::t('TasksModule.config', 'Main Navigation') ?></h4>
+        <h4><?= Yii::t('TasksModule.base', 'Main Navigation') ?></h4>
 
         <?= $form->field($model, 'showGlobalMenuItem')->checkbox(); ?>
 
