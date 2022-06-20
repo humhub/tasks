@@ -89,12 +89,12 @@ class SnippetModuleSettings extends Model
     public function attributeLabels()
     {
         return [
-            'myTasksSnippetShow' => Yii::t('TasksModule.config', 'Show snippet'),
-            'myTasksSnippetShowSpace' => Yii::t('TasksModule.config', 'Show snippet in Space'),
-            'myTasksSnippetMaxItems' => Yii::t('TasksModule.config', 'Max tasks items'),
-            'myTasksSnippetSortOrder' => Yii::t('TasksModule.config', 'Sort order'),
-            'showGlobalMenuItem' => Yii::t('TasksModule.config', 'Show global task menu item'),
-            'menuSortOrder' => Yii::t('TasksModule.config', 'Menu Item sort order'),
+            'myTasksSnippetShow' => Yii::t('TasksModule.base', 'Show widget on Dashboard'),
+            'myTasksSnippetShowSpace' => Yii::t('TasksModule.base', 'Show widget in Spaces'),
+            'myTasksSnippetMaxItems' => Yii::t('TasksModule.base', 'Maximum number of entries in widget'),
+            'myTasksSnippetSortOrder' => Yii::t('TasksModule.base', 'Sort order'),
+            'showGlobalMenuItem' => Yii::t('TasksModule.base', 'Add entry to main navigation'),
+            'menuSortOrder' => Yii::t('TasksModule.base', 'Sort Order'),
         ];
     }
 

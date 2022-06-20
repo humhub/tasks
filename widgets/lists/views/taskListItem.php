@@ -32,10 +32,11 @@ $checkUrl = $task->state->getCheckUrl();
 <?= Html::beginTag('div', $options) ?>
 
 <div class="task-list-task-title-bar">
+    <div>
     <span class="task-list-item-title">
 
          <?php if ($canManage && !$task->isCompleted()) : ?>
-             <i class="fa fa-bars task-moving-handler"></i>
+             <i class="fa fa-arrows task-moving-handler"></i>
          <?php endif; ?>
 
         <?php // We use an extra label in order to prevent click events on the actual label otherwise tasks could be accidentally finished ?>
@@ -96,13 +97,13 @@ $checkUrl = $task->state->getCheckUrl();
         $daysRemaining = $task->schedule->getDaysRemaining();
         if ($task->schedule->isOverdue()) {
             $daysRemaining = '-' . $daysRemaining;
-            $schedulingTitle = Yii::t('TasksModule.views_index_index', 'Overdue');
+            $schedulingTitle = Yii::t('TasksModule.base', 'Overdue');
             $schedulingColor = 'colorDanger';
         } elseif ($task->schedule->isDeadlineToday()) {
-            $schedulingTitle = Yii::t('TasksModule.views_index_index', 'Today');
+            $schedulingTitle = Yii::t('TasksModule.base', 'Today');
             $schedulingColor = 'colorWarning';
         } else {
-            $schedulingTitle = Yii::t('TasksModule.views_index_index', '{count,plural,=1{# day} other{# days}} remaining', ['count' => $daysRemaining]);
+            $schedulingTitle = Yii::t('TasksModule.base', '{count,plural,=1{# day} other{# days}} remaining', ['count' => $daysRemaining]);
             $schedulingColor = $daysRemaining > 1 ? '' : 'colorWarning';
         }
         ?>
@@ -126,6 +127,7 @@ $checkUrl = $task->state->getCheckUrl();
             <?= TaskUserList::widget(['users' => $task->taskAssignedUsers]) ?>
         </div>
     <?php endif; ?>
+    </div>
 </div>
 <?php if ($details) : ?>
     <?= TaskListDetails::widget(['task' => $task]) ?>

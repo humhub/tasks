@@ -68,7 +68,7 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
                 <?php if ($task->hasTaskResponsible()) : ?>
                     <div class="task-header-panel">
                         <div style="<?= $participantStyle ?>">
-                            <em><strong><?= Yii::t('TasksModule.views_index_index', 'Responsible') ?>:</strong></em><br>
+                            <em><strong><?= Yii::t('TasksModule.base', 'Responsible') ?>:</strong></em><br>
                             <?= TaskUserList::widget(['users' => $task->taskResponsibleUsers, 'type' => Task::USER_RESPONSIBLE])?>
                         </div>
                     </div>
@@ -78,16 +78,16 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
                 <?php if ($task->hasTaskAssigned()) : ?>
                     <div class="task-header-panel">
                         <div>
-                            <em><strong><?= Yii::t('TasksModule.views_index_index', 'Assigned') ?>:</strong></em><br>
+                            <em><strong><?= Yii::t('TasksModule.base', 'Assigned') ?>:</strong></em><br>
                             <?= TaskUserList::widget(['users' => $task->taskAssignedUsers])?>
                         </div>
                     </div>
                 <?php else : ?>
                     <div class="task-header-panel">
                         <div style="<?= $participantStyle ?>">
-                            <em><strong><?= Yii::t('TasksModule.views_index_index', 'Assigned') ?>:</strong></em><br>
+                            <em><strong><?= Yii::t('TasksModule.base', 'Assigned') ?>:</strong></em><br>
                             <div class="assigned-anyone">
-                                <?= Yii::t('TasksModule.views_index_index', 'Any user with a "Process unassigned tasks" permission can work on this task') ?>
+                                <?= Yii::t('TasksModule.base', 'Any user with a "Process unassigned tasks" permission can work on this task') ?>
                             </div>
                         </div>
                     </div>

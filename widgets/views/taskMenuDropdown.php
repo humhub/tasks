@@ -33,12 +33,12 @@ use humhub\modules\content\widgets\MoveContentLink;
                 </li>
                 <li>
                     <?= Link::asLink(Yii::t('TasksModule.base', 'Delete'))->action('ui.modal.post', $deleteUrl)->icon('fa-trash')
-                        ->confirm(Yii::t('TasksModule.views_index_edit', '<strong>Confirm</strong> task deletion'),
-                            Yii::t('TasksModule.views_index_edit', 'Do you really want to delete this task?'),
+                        ->confirm(Yii::t('TasksModule.base', '<strong>Confirm</strong> task deletion'),
+                            Yii::t('TasksModule.base', 'Do you really want to delete this task?'),
                             Yii::t('TasksModule.base', 'Delete'))->visible($canEdit); ?>
                 </li>
                 <li>
-                    <?= Button::asLink(Yii::t('TasksModule.views_index_index', 'Reset Task'), $resetUrl)->icon('fa-undo')->visible($canReset);?>
+                    <?= Button::asLink(Yii::t('TasksModule.base', 'Reset Task'), $resetUrl)->icon('fa-undo')->visible($canReset);?>
                 </li>
             </ul>
         </li>

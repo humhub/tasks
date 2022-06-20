@@ -17,7 +17,7 @@ use humhub\modules\tasks\helpers\TaskUrl;
 <div class="panel task-upcoming-snippet" id="task-my-tasks-snippet">
 
     <div class="panel-heading">
-        <i class="fa fa-tasks"></i> <?= Yii::t('TasksModule.widgets_views_myTasks', '<strong>Your</strong> tasks'); ?>
+        <i class="fa fa-tasks"></i> <?= Yii::t('TasksModule.base', '<strong>Your</strong> tasks'); ?>
         <small><a style="font-size:0.9em;color:<?= $this->theme->variable('info'); ?>" href="<?=  TaskUrl::globalView() ?>">(<?= Yii::t('TasksModule.base', 'view all'); ?>)</a></small>
         <?= PanelMenu::widget(['id' => 'task-my-tasks-snippet']); ?>
     </div>

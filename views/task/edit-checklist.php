@@ -10,7 +10,7 @@ use yii\bootstrap\Html;
 use humhub\modules\tasks\widgets\AddItemsInput;
 
 
-/* @var $form \humhub\widgets\ActiveForm */
+/* @var $form \humhub\modules\ui\form\widgets\ActiveForm */
 /* @var $taskForm \humhub\modules\tasks\models\forms\TaskForm */
 /* @var $item \humhub\modules\tasks\models\checklist\TaskItem */
 
@@ -22,7 +22,7 @@ use humhub\modules\tasks\widgets\AddItemsInput;
             <div class="input-group">
                 <?= Html::textInput($taskForm->formName() . '[editItems][' . $item->id . ']', $item->title, [
                     'class' => 'form-control task_item_old_input',
-                    'placeholder' => Yii::t('TasksModule.views_index_edit', 'Edit item (empty field will be removed)...')]) ?>
+                    'placeholder' => Yii::t('TasksModule.base', 'Edit item (empty field will be removed)...')]) ?>
                 <div class="input-group-addon" style="cursor:pointer;" data-action-click="removeTaskItem">
                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                 </div>
@@ -31,4 +31,7 @@ use humhub\modules\tasks\widgets\AddItemsInput;
     <?php endforeach; ?>
 
     <?= AddItemsInput::widget(['name' => $taskForm->formName() . '[newItems][]']); ?>
+    <div class="help-block">
+        <?= Yii::t('TasksModule.base', 'Add checkpoints to the task to highlight the individual steps required to complete it.') ?>
+    </div>
 </div>

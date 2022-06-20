@@ -42,7 +42,7 @@ class TaskReminderCategory extends NotificationCategory
      */
     public function getDescription()
     {
-        return Yii::t('TasksModule.notifications', 'Receive Notifications for Task Reminder.');
+        return Yii::t('TasksModule.base', 'Receive Notifications for Task Reminder.');
     }
 
     /**

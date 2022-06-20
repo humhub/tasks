@@ -13,22 +13,28 @@
 
 namespace humhub\modules\tasks\models\forms;
 
+use DateTime;
+use DateTimeZone;
 use humhub\libs\DbDateValidator;
 use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\space\models\Space;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\topic\models\Topic;
 use humhub\modules\ui\form\interfaces\TabbedFormModel;
-use Yii;
-use yii\base\Model;
-use DateTime;
-use DateTimeZone;
 use humhub\modules\tasks\models\scheduling\TaskReminder;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\content\models\Content;
 use humhub\modules\tasks\models\Task;
+use Yii;
+use yii\base\Model;
 use yii\web\HttpException;
 
+/**
+ * Class TaskForm
+ * @package humhub\modules\tasks\models\forms
+ *
+ * @property-read ContentContainerActiveRecord $contentContainer
+ */
 class TaskForm extends Model implements TabbedFormModel
 {
 
@@ -233,7 +239,7 @@ class TaskForm extends Model implements TabbedFormModel
     public function validateEndTime($attribute, $params)
     {
         if (new DateTime($this->start_date) >= new DateTime($this->end_date)) {
-            $this->addError($attribute, Yii::t('TasksModule.models_forms_TaskForm', 'End time must be after start time!'));
+            $this->addError($attribute, Yii::t('TasksModule.base', 'End time must be after start time!'));
         }
     }
 
@@ -243,23 +249,23 @@ class TaskForm extends Model implements TabbedFormModel
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(), [
-            'start_date' => Yii::t('TasksModule.models_forms_TaskForm', 'Start Date'),
-//            'type_id' => Yii::t('TasksModule.models_forms_TaskForm', 'Event Type'),
-            'end_date' => Yii::t('TasksModule.models_forms_TaskForm', 'End Date'),
-            'start_time' => Yii::t('TasksModule.models_forms_TaskForm', 'Start Time'),
-            'end_time' => Yii::t('TasksModule.models_forms_TaskForm', 'End Time'),
-            'timeZone' => Yii::t('TasksModule.models_forms_TaskForm', 'Time Zone'),
-            'is_public' => Yii::t('TasksModule.models_forms_TaskForm', 'Public'),
+            'start_date' => Yii::t('TasksModule.base', 'Start Date'),
+//            'type_id' => Yii::t('TasksModule.base', 'Event Type'),
+            'end_date' => Yii::t('TasksModule.base', 'End Date'),
+            'start_time' => Yii::t('TasksModule.base', 'Start Time'),
+            'end_time' => Yii::t('TasksModule.base', 'End Time'),
+            'timeZone' => Yii::t('TasksModule.base', 'Time Zone'),
+            'is_public' => Yii::t('TasksModule.base', 'Additional options'),
         ]);
     }
 
     public function getTitle()
     {
         if($this->task->isNewRecord) {
-           return Yii::t('TasksModule.views_index_edit', '<strong>Create</strong> new task');
+           return Yii::t('TasksModule.base', '<strong>New</strong> Task');
         }
 
-        return Yii::t('TasksModule.views_index_edit', '<strong>Edit</strong> task');
+        return Yii::t('TasksModule.base', '<strong>Edit</strong> task');
     }
 
     /**
@@ -437,14 +443,14 @@ class TaskForm extends Model implements TabbedFormModel
     public function getRemindModeItems()
     {
         return [
-            TaskReminder::REMIND_ONE_HOUR => Yii::t('TasksModule.models_taskReminder', 'At least 1 Hour before'),
-            TaskReminder::REMIND_TWO_HOURS => Yii::t('TasksModule.models_taskReminder', 'At least 2 Hours before'),
-            TaskReminder::REMIND_ONE_DAY => Yii::t('TasksModule.models_taskReminder', '1 Day before'),
-            TaskReminder::REMIND_TWO_DAYS => Yii::t('TasksModule.models_taskReminder', '2 Days before'),
-            TaskReminder::REMIND_ONE_WEEK => Yii::t('TasksModule.models_taskReminder', '1 Week before'),
-            TaskReminder::REMIND_TWO_WEEKS => Yii::t('TasksModule.models_taskReminder', '2 Weeks before'),
-            TaskReminder::REMIND_THREE_WEEKS => Yii::t('TasksModule.models_taskReminder', '3 Weeks before'),
-            TaskReminder::REMIND_ONE_MONTH => Yii::t('TasksModule.models_taskReminder', '1 Month before'),
+            TaskReminder::REMIND_ONE_HOUR => Yii::t('TasksModule.base', 'At least 1 Hour before'),
+            TaskReminder::REMIND_TWO_HOURS => Yii::t('TasksModule.base', 'At least 2 Hours before'),
+            TaskReminder::REMIND_ONE_DAY => Yii::t('TasksModule.base', '1 Day before'),
+            TaskReminder::REMIND_TWO_DAYS => Yii::t('TasksModule.base', '2 Days before'),
+            TaskReminder::REMIND_ONE_WEEK => Yii::t('TasksModule.base', '1 Week before'),
+            TaskReminder::REMIND_TWO_WEEKS => Yii::t('TasksModule.base', '2 Weeks before'),
+            TaskReminder::REMIND_THREE_WEEKS => Yii::t('TasksModule.base', '3 Weeks before'),
+            TaskReminder::REMIND_ONE_MONTH => Yii::t('TasksModule.base', '1 Month before'),
         ];
     }
 
@@ -452,13 +458,13 @@ class TaskForm extends Model implements TabbedFormModel
     {
         $tabs = [
             [
-                'label' => Yii::t('TasksModule.views_index_edit', 'Basic'),
+                'label' => Yii::t('TasksModule.base', 'General'),
                 'view' => 'edit-basic',
                 'linkOptions' => ['class' => 'tab-basic'],
                 'fields' => ['title', 'task_list_id', 'description', 'topics', 'is_public', 'scheduling'],
             ],
             [
-                'label' => Yii::t('TasksModule.views_index_edit', 'Scheduling'),
+                'label' => Yii::t('TasksModule.base', 'Scheduling'),
                 'view' => 'edit-scheduling',
                 'linkOptions' => ['class' => 'tab-scheduling'],
                 'fields' => ['all_day', 'start_date', 'start_time', 'end_date', 'end_time', 'selectedReminders', 'cal_mode'],
@@ -467,7 +473,7 @@ class TaskForm extends Model implements TabbedFormModel
 
         if ($this->getContentContainer() instanceof Space) {
             $tabs[] = [
-                'label' => Yii::t('TasksModule.views_index_edit', 'Assignment'),
+                'label' => Yii::t('TasksModule.base', 'Assignment'),
                 'view' => 'edit-assignment',
                 'linkOptions' => ['class' => 'tab-assignment'],
                 'fields' => ['assignedUsers', 'responsibleUsers', 'review'],
@@ -475,12 +481,12 @@ class TaskForm extends Model implements TabbedFormModel
         }
 
         $tabs[] = [
-            'label' => Yii::t('TasksModule.views_index_edit', 'Checklist'),
+            'label' => Yii::t('TasksModule.base', 'Checkpoints'),
             'view' => 'edit-checklist',
             'linkOptions' => ['class' => 'tab-checklist'],
         ];
         $tabs[] = [
-            'label' => Yii::t('TasksModule.views_index_edit', 'Files'),
+            'label' => Yii::t('TasksModule.base', 'Attachments'),
             'view' => 'edit-files',
             'linkOptions' => ['class' => 'tab-files'],
         ];

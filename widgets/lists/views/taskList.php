@@ -33,40 +33,37 @@ use yii\helpers\Html;
 
 <?= Html::beginTag('div', $options) ?>
 <div class="task-list-container collapsable" style="border-color:<?= Html::encode($color) ?>">
-    <div class="task-list-title-bar clearfix">
+    <div class="task-list-title-bar task-toggled-color clearfix">
+        <div>
 
         <?php if ($canSort) : ?>
-            <i class="fa fa-bars task-moving-handler"></i>
+            <i class="fa fa-arrows task-moving-handler"></i>
         <?php else: ?>
             <i class="fa fa-tasks"></i>
         <?php endif ?>
 
-        <?= Html::encode($title) ?> <small><?= !empty($tasks) ? '('.count($tasks).')' : '' ?></small> <i class="fa fa-caret-up toggleItems"></i>
+        <span class="task-list-title-text">
+            <?= Html::encode($title) ?> <small><?= !empty($tasks) ? '('.count($tasks).')' : '' ?></small>
+        </span>
 
         <?php if ($list instanceof TaskList) : ?>
-
-            <?php if ($canManage) : ?>
-                <span class="task-drag-icon tt" title="<?= Yii::t('TasksModule.base.views_index_index', 'Drag list') ?>"
-                      style="display:none">
-                        <i class="fa fa-arrows"></i>&nbsp;
-                    </span>
-            <?php endif; ?>
-
             <?= Button::asLink()->icon('fa-pencil')->xs()
                 ->action('task.list.edit', TaskListUrl::editTaskList($list))
                 ->loader(false)
-                ->cssClass('task-list-edit tt')->options(['title' => Yii::t('TasksModule.base', 'Edit list')])->style('display:none;')->visible($canManage) ?>
+                ->cssClass('task-list-edit tt task-toggled-color')->options(['title' => Yii::t('TasksModule.base', 'Edit list')])->visible($canManage) ?>
             <?= Button::asLink()->icon('fa-trash')->xs()
                 ->action('deleteList', TaskListUrl::deleteTaskList($list))->loader(false)
-                ->cssClass('task-list-edit tt')
-                ->options(['title' => Yii::t('TasksModule.base', 'Delete list')])->style('display:none;')->visible($canManage)->confirm() ?>
+                ->cssClass('task-list-edit tt task-toggled-color')
+                ->options(['title' => Yii::t('TasksModule.base', 'Delete list')])->visible($canManage)->confirm() ?>
 
         <?php endif; ?>
 
-        <?= Button::success()->icon('fa-plus')->xs()->right()
+        <i class="fa fa-caret-up toggleItems pull-right"></i>
+
+        <?= Button::success()->icon('fa-plus')->sm()->right()->style('margin-top:-3px')
             ->action('task.list.editTask', TaskListUrl::addTaskListTask($list))
             ->loader(false)->visible($canCreate)->cssClass('tt')->options(['title' => Yii::t('TasksModule.base', 'Add task')]) ?>
-
+        </div>
     </div>
 
     <div class="task-list-items">

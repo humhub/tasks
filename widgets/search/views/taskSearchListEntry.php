@@ -59,7 +59,19 @@ $image = $task->content->container instanceof Space
 
             <?= TaskBadge::widget(['task' => $task]) ?>
 
-            <div class="assigned-users pull-right" style="display: inline;border:0">
+            <div class="pull-right toggleTaskDetails hidden-xs"
+                 style="<?= (!$task->content->canEdit()) ? 'border-right:0;margin-right:0' : '' ?>">
+                <i class="fa fa-comment-o"></i> <?= \humhub\modules\comment\models\Comment::getCommentCount(Task::class, $task->id); ?>
+            </div>
+
+            <?php if ($task->review) : ?>
+                <div class="task-controls pull-right toggleTaskDetails">
+                    <i class="fa fa-eye tt hidden-xs tt"
+                       title="<?= Yii::t('TasksModule.base', 'This task requires to be reviewed by a responsible') ?>"></i>
+                </div>
+            <?php endif; ?>
+
+            <div class="task-controls assigned-users pull-right" style="display:inline">
                 <?= TaskUserList::widget(['users' => $task->taskResponsibleUsers, 'style' => 'border:2px solid ' . $this->theme->variable('info'), 'type' => Task::USER_RESPONSIBLE]) ?>
                 <?= TaskUserList::widget(['users' => $task->taskAssignedUsers]) ?>
             </div>

@@ -8,6 +8,8 @@
 
 namespace tasks;
 
+use Facebook\WebDriver\WebDriverKeys;
+
 /**
  * Inherited Methods
  * @method void wantToTest($text)
@@ -27,7 +29,13 @@ class AcceptanceTester extends \AcceptanceTester
 {
     use _generated\AcceptanceTesterActions;
 
-   /**
-    * Define custom actions here
-    */
+    public function fillContentTagDropDown($field, $value)
+    {
+        $this->seeElement('.field-' . $field);
+        $this->click('.field-' . $field . ' .select2');
+        $this->waitForElement('input.select2-search__field');
+        $select2Input = 'input.select2-search__field[aria-controls=select2-' . $field . '-results]';
+        $this->fillField($select2Input, $value);
+        $this->pressKey($select2Input, WebDriverKeys::ENTER);
+    }
 }

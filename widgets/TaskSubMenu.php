@@ -15,7 +15,7 @@ use Yii;
 
 class TaskSubMenu extends SettingsTabs
 {
-    public $options = ['id' => 'task-space-menu', 'style' => 'border-radius:4px;margin-bottom:0px;'];
+    public $options = ['id' => 'task-space-menu'];
 
     /**
      * @inheritdoc
@@ -26,12 +26,12 @@ class TaskSubMenu extends SettingsTabs
 
         $this->items = [
             [
-                'label' => Yii::t('TasksModule.base', 'Lists'),
+                'label' => Yii::t('TasksModule.base', 'Overview'),
                 'url' => TaskListUrl::taskListRoot($contentContainer),
                 'active' => $this->isCurrentRoute('tasks', 'list')
             ],
             [
-                'label' => Yii::t('TasksModule.base', 'Search'),
+                'label' => Yii::t('TasksModule.base', 'Filter'),
                 'url' => TaskListUrl::searchTask($contentContainer),
                 'active' => $this->isCurrentRoute('tasks', 'search')
             ],

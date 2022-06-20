@@ -54,7 +54,7 @@ class ProcessUnassignedTasks extends BasePermission
      */
     public function getTitle()
     {
-        return Yii::t('TasksModule.task', 'Process unassigned tasks');
+        return Yii::t('TasksModule.base', 'Process unassigned tasks');
     }
 
     /**
@@ -62,6 +62,6 @@ class ProcessUnassignedTasks extends BasePermission
      */
     public function getDescription()
     {
-        return Yii::t('TasksModule.task', 'Allows the user to process unassigned tasks');
+        return Yii::t('TasksModule.base', 'Allows the user to process unassigned tasks');
     }
 }

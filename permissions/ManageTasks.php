@@ -53,7 +53,7 @@ class ManageTasks extends BasePermission
      */
     public function getTitle()
     {
-        return Yii::t('TasksModule.task', 'Manage tasks');
+        return Yii::t('TasksModule.base', 'Manage tasks');
     }
 
     /**
@@ -61,6 +61,6 @@ class ManageTasks extends BasePermission
      */
     public function getDescription()
     {
-        return Yii::t('TasksModule.task', 'Allows the user to create, delete and edit tasks and lists and also sort tasks and lists');
+        return Yii::t('TasksModule.base', 'Allows the user to create, delete and edit tasks and lists and also sort tasks and lists');
     }
 }

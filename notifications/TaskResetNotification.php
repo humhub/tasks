@@ -46,7 +46,7 @@ class TaskResetNotification extends BaseNotification
 
     public function html()
     {
-        return Yii::t('TasksModule.notifications', '{userName} has re-opened task {task} in space {spaceName}.', [
+        return Yii::t('TasksModule.base', '{userName} has re-opened task {task} in space {spaceName}.', [
             '{userName}' => Html::tag('strong', Html::encode($this->originator->displayName)),
             '{task}' => Html::tag('strong', Html::encode($this->getContentInfo($this->source, false))),
             '{spaceName}' => Html::tag('strong', Html::encode($this->source->content->container->displayName))
@@ -58,7 +58,7 @@ class TaskResetNotification extends BaseNotification
      */
     public function getMailSubject()
     {
-        return Yii::t('TasksModule.notifications', '{userName} has re-opened task {task} in space {spaceName}.', [
+        return Yii::t('TasksModule.base', '{userName} has re-opened task {task} in space {spaceName}.', [
             '{userName}' => Html::encode($this->originator->displayName),
             '{task}' => Html::encode($this->getContentInfo($this->source, false)),
             '{spaceName}' => Html::encode($this->source->content->container->displayName)

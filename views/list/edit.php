@@ -15,7 +15,7 @@ $header = $model->isNewRecord ? Yii::t('TasksModule.base', '<strong>Create</stro
     <?php $form = ActiveForm::begin() ?>
         <div class="modal-body">
             <div id="event-color-field" class="form-group space-color-chooser-edit">
-                <?= $form->field($model, 'color')->widget(ColorPicker::class, ['container' => 'event-color-field'])->label(Yii::t('TasksModule.views_index_edit', 'Title and Color')); ?>
+                <?= $form->field($model, 'color')->widget(ColorPicker::class, ['container' => 'event-color-field'])->label(Yii::t('TasksModule.base', 'Title and Color')); ?>
 
                 <?= $form->field($model, 'name', ['template' => '
                                     {label}
@@ -26,7 +26,7 @@ $header = $model->isNewRecord ? Yii::t('TasksModule.base', '<strong>Create</stro
                                         {input}
                                     </div>
                                     {error}{hint}'
-                ])->textInput(['placeholder' => Yii::t('TasksModule.views_index_edit', 'Title of your task list'), 'maxlength' => true])->label(false) ?>
+                ])->textInput(['placeholder' => Yii::t('TasksModule.base', 'Title of your task list'), 'maxlength' => true])->label(false) ?>
 
                 <?= $form->field($model->addition, 'hide_if_completed')->checkbox() ?>
             </div>

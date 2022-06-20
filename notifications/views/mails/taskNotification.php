@@ -67,7 +67,7 @@ use yii\helpers\Url;
             humhub\widgets\mails\MailButtonList::widget(['buttons' => [
                 humhub\widgets\mails\MailButton::widget([
                     'url' => Url::to(['/content/perma', 'id' => $source->content->id], true),
-                    'text' => Yii::t('TasksModule.notifications', 'View Online')
+                    'text' => Yii::t('TasksModule.base', 'View Online')
                 ])
             ]]);
             ?>

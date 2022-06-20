@@ -9,7 +9,7 @@
 use humhub\modules\file\widgets\Upload;
 
 
-/* @var $form \humhub\widgets\ActiveForm */
+/* @var $form \humhub\modules\ui\form\widgets\ActiveForm */
 /* @var $taskForm \humhub\modules\calendar\models\forms\CalendarEntryForm */
 /* @var $taskForm \humhub\modules\tasks\models\forms\TaskForm */
 

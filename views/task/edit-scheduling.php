@@ -6,13 +6,13 @@
  *
  */
 
-use  humhub\modules\ui\form\widgets\MultiSelect;
+use humhub\modules\ui\form\widgets\MultiSelect;
 use humhub\modules\ui\form\widgets\TimePicker;
 use humhub\widgets\TimeZoneDropdownAddition;
 use humhub\modules\ui\form\widgets\DatePicker;
 use yii\helpers\ArrayHelper;
 
-/* @var $form \humhub\widgets\ActiveForm */
+/* @var $form \humhub\modules\ui\form\widgets\ActiveForm */
 /* @var $taskForm \humhub\modules\tasks\models\forms\TaskForm */
 
 $taskReminder = ArrayHelper::map($taskForm->task->getTaskReminder()->all(),'id','remind_mode');
@@ -54,10 +54,10 @@ $taskReminder = ArrayHelper::map($taskForm->task->getTaskReminder()->all(),'id',
     <div>
         <?= $form->field($taskForm->task, 'selectedReminders')->widget( MultiSelect::className(), [
                 'selection' => $taskReminder,
-                'placeholder' => Yii::t('TasksModule.views_index_edit', 'Add reminder'),
+                'placeholder' => Yii::t('TasksModule.base', 'Add reminder'),
                 'items' => $taskForm->getRemindModeItems(),
                 'url' => '#',
-                'placeholderMore' => Yii::t('TasksModule.views_index_edit', 'Add reminder')
+                'placeholderMore' => Yii::t('TasksModule.base', 'Add reminder')
             ]);
         ?>
     </div>

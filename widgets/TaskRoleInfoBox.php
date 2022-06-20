@@ -29,9 +29,9 @@ class TaskRoleInfoBox extends TaskInfoBox
          } else if($this->task->isTaskAssigned()) {
              return Icon::get('check')->color($this->view->theme->variable('success')).' '.Yii::t('TasksModule.base', 'You are assigned!');
          } else if($this->task->canProcess()) {
-            return  Icon::get('times')->color($this->view->theme->variable('danger')).' '.Yii::t('TasksModule.widgets_views_wallentry', 'Anyone can work on this task!');
+            return  Icon::get('times')->color($this->view->theme->variable('danger')).' '.Yii::t('TasksModule.base', 'Anyone can work on this task!');
          } else {
-             return  Icon::get('times')->color($this->view->theme->variable('danger')).' '.Yii::t('TasksModule.widgets_views_wallentry', 'This task can only be processed by assigned and responsible users.');
+             return  Icon::get('times')->color($this->view->theme->variable('danger')).' '.Yii::t('TasksModule.base', 'This task can only be processed by assigned and responsible users.');
          }
     }
 
