@@ -5,7 +5,7 @@ return array (
   'Global task menu item' => 'Tasks Hauptnavigation',
   'Max tasks items' => 'Maximale Aufgabenelemente',
   'Menu Item sort order' => 'Sortierung der Navigationspunkte',
-  'Show global task menu item' => 'Zum Navigationspunkt springen',
+  'Show global task menu item' => 'Zeige Navigationspunkt Aufgaben im Hauptmenü',
   'Show snippet' => 'Zeige Schnipsel',
   'Show snippet in Space' => 'Zeige Schnipsel im Space',
   'Shows a widget with tasks on the dashboard where you are assigned/responsible.' => 'Zeigt ein Widget mit Aufgaben auf dem Dashboard an, wo Du zugewiesen/verantwortlich bist.',
