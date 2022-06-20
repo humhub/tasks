@@ -60,8 +60,8 @@ class TaskItem extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => Yii::t('TasksModule.models_taskitem', 'Title'),
-            'completed' => Yii::t('TasksModule.models_taskitem', 'Completed'),
+            'title' => Yii::t('TasksModule.base', 'Title'),
+            'completed' => Yii::t('TasksModule.base', 'Completed'),
         ];
     }
 

@@ -72,14 +72,19 @@ humhub.module('task.list', function (module, require, $) {
     };
 
     Root.prototype.collapseAll = function(evt) {
+        var toggler = evt.$trigger;
         var $visible = this.$.find('.task-list-items.ui-sortable:visible');
-        if($visible.length) {
+        var collapse = $visible.length;
+        if (collapse) {
             $visible.siblings('.task-list-title-bar').click();
-            $('#toggle-lists').find('i').removeClass('fa-toggle-on').addClass('fa-toggle-off');
         } else {
             this.$.find('.task-list-items.ui-sortable:hidden').siblings('.task-list-title-bar').click();
-            $('#toggle-lists').find('i').removeClass('fa-toggle-off').addClass('fa-toggle-on');
         }
+        $('#toggle-lists').find('i')
+            .removeClass(collapse ? 'fa-toggle-on' : 'fa-toggle-off')
+            .addClass(collapse ? 'fa-toggle-off' : 'fa-toggle-on');
+        toggler.data(collapse ? 'title-collapse' : 'title-expand', toggler.text());
+        toggler.html(toggler.html().replace(/(<\/i> ).+$/, '$1' + toggler.data(collapse ? 'title-expand' : 'title-collapse')));
     };
 
     var TaskList = function (node, options) {
@@ -106,30 +111,16 @@ humhub.module('task.list', function (module, require, $) {
         });
 
         var $taskTitleBar = this.$.find('.task-list-title-bar');
-        $taskTitleBar.off('click').on('click', $.proxy(this.toggleItems, this))
-            .hover($.proxy(this.mouseOver, this), $.proxy(this.mouseOut, this)).disableSelection();
-
-        if(view.isSmall() || view.isMedium()) {
-            // show elements
-            this.$.find('.task-list-edit').show();
-        }
+        $taskTitleBar.off('click').on('click', $.proxy(this.toggleItems, this)).disableSelection();
 
         this.updated();
     };
 
-    TaskList.prototype.mouseOver = function (event, ui) {
-        this.$.find('.task-list-edit').show();
-    };
-
-    TaskList.prototype.mouseOut = function (event, ui) {
-        if(!view.isSmall() || view.isMedium()) {
-            this.$.find('.task-list-edit').hide();
-        }
-    };
-
     TaskList.prototype.toggleItems = function (evt) {
         var $target = $(evt.target);
-        if(!$target.is('.task-list-title-bar') && !$target.closest('.toggleItems').length) {
+        if (!$target.is('.task-list-title-bar') &&
+            !$target.closest('.toggleItems').length &&
+            !$target.closest('.task-list-title-text').length) {
             return;
         }
 
@@ -144,6 +135,7 @@ humhub.module('task.list', function (module, require, $) {
             this.$.find('.toggleItems').removeClass(upIcon).addClass(downIcon);
         }
 
+        $items.closest('.task-list-li').toggleClass('task-list-li-collapsed');
         $items.add(this.getItemsCompletedRoot()).slideToggle(100,"linear");
     };
 
@@ -448,14 +440,6 @@ humhub.module('task.list', function (module, require, $) {
         this.$.closest('li').fadeOut('fast', function() {$(this).remove()});
     };
 
-    var create = function (evt) {
-        modal.load(evt).then(function () {
-            modal.global.$.one('hidden.bs.modal', function() {
-                client.reload();
-            });
-        });
-    };
-
     var edit = function (evt) {
         modal.load(evt).then(function () {
             modal.global.$.one('hidden.bs.modal', function() {
@@ -516,7 +500,6 @@ humhub.module('task.list', function (module, require, $) {
         Task: Task,
         Root: Root,
         edit: edit,
-        create: create,
         editTask: editTask
     });
 })

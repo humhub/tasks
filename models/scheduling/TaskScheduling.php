@@ -192,7 +192,7 @@ class TaskScheduling extends Component
         if (!$this->task->scheduling)
             $result = '';
         else {
-            $result = Yii::t('TasksModule.views_index_index', 'Starting at');
+            $result = Yii::t('TasksModule.base', 'Starting at');
             if ($this->task->all_day) {
                 $result .= ' ' . Yii::$app->formatter->asDate($this->getStartDateTime(), $format);
             }
@@ -215,9 +215,9 @@ class TaskScheduling extends Component
         }
 
         if (!$this->task->scheduling)
-            $result = Yii::t('TasksModule.views_index_index', 'No Scheduling set for this Task');
+            $result = Yii::t('TasksModule.base', 'No Scheduling set for this Task');
         else {
-            $result = Yii::t('TasksModule.views_index_index', 'Deadline at');
+            $result = Yii::t('TasksModule.base', 'Deadline at');
             if ($this->task->all_day) {
                 $result .= ' ' . Yii::$app->formatter->asDate($this->getEndDateTime(), $format);
             }
@@ -328,8 +328,8 @@ class TaskScheduling extends Component
     public static function getCalModeItems()
     {
         return [
-            self::CAL_MODE_NONE => Yii::t('TasksModule.models_task', 'Don\'t add to calendar'),
-            self::CAL_MODE_SPACE => Yii::t('TasksModule.models_task', 'Add Deadline to space calendar'),
+            self::CAL_MODE_NONE => Yii::t('TasksModule.base', 'Don\'t add to calendar'),
+            self::CAL_MODE_SPACE => Yii::t('TasksModule.base', 'Add Deadline to space calendar'),
         ];
     }
 
@@ -337,10 +337,10 @@ class TaskScheduling extends Component
     {
         switch ($this->cal_mode) {
             case (self::CAL_MODE_NONE):
-                return Yii::t('TasksModule.models_task', 'Don\'t add to calendar');
+                return Yii::t('TasksModule.base', 'Don\'t add to calendar');
                 break;
             case (self::CAL_MODE_SPACE):
-                return Yii::t('TasksModule.models_task', 'Add to space calendar');
+                return Yii::t('TasksModule.base', 'Add to space calendar');
                 break;
             default:
                 return;
@@ -352,7 +352,7 @@ class TaskScheduling extends Component
      */
     public function getFullCalendarArray()
     {
-        $title = Yii::t('TasksModule.models_task', 'Deadline: ') . Html::encode($this->task->title);
+        $title = Yii::t('TasksModule.base', 'Deadline: ') . Html::encode($this->task->title);
 
 
         $result = [

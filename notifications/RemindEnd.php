@@ -52,7 +52,7 @@ class RemindEnd extends BaseNotification
 
     public function html()
     {
-        return Yii::t('TasksModule.notifications', 'Task {task} in space {spaceName} ends at {dateTime}.', [
+        return Yii::t('TasksModule.base', 'Task {task} in space {spaceName} ends at {dateTime}.', [
             '{task}' => Html::tag('strong', Html::encode($this->getContentInfo($this->source, false))),
             '{spaceName}' => Html::tag('strong', Html::encode($this->source->content->container->displayName)),
             '{dateTime}' => Html::encode($this->source->schedule->getFormattedEndDateTime())
@@ -65,7 +65,7 @@ class RemindEnd extends BaseNotification
      */
     public function getMailSubject()
     {
-        return Yii::t('TasksModule.notifications', 'Task {task} in space {spaceName} ends at {dateTime}.', [
+        return Yii::t('TasksModule.base', 'Task {task} in space {spaceName} ends at {dateTime}.', [
             '{task}' => Html::encode($this->getContentInfo($this->source, false)),
             '{spaceName}' => Html::encode($this->source->content->container->displayName),
             '{dateTime}' => Html::encode($this->source->schedule->getFormattedEndDateTime())

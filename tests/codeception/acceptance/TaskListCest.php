@@ -15,7 +15,7 @@ use yii\helpers\Url;
 class TaskListCest
 {
     
-    public function testInstallAndCreatSpaceEntry(AcceptanceTester $I)
+    public function testInstallAndCreateSpaceEntry(AcceptanceTester $I)
     {
         $I->amAdmin();
         $I->wantToTest('the creation of a task list');
@@ -28,17 +28,18 @@ class TaskListCest
 
         $I->amGoingTo('create a new task list');
         $I->click('Tasks', '.layout-nav-container');
-        $I->waitForText('Task Lists');
+        $I->waitForText('Overview');
 
-        $I->click('Add Task List');
-        $I->waitForText('Create task list', null, '#globalModal');
-        $I->fillField('#tasklist-name', 'My New Tasklist');
+        $I->click('Add');
+        $I->waitForText('New Task', null, '#globalModal');
+        $I->fillField('Task[title]', 'Test task with new list');
+        $I->fillContentTagDropDown('task-task_list_id', 'My New Tasklist');
         $I->click('Save', '#globalModal');
 
         $I->waitForText('My New Tasklist', null, '.task-list');
 
-        $I->click(Locator::elementAt('[data-action-click="task.list.editTask"]',1));
-        $I->waitForText('Create new task', null, '#globalModal');
+        $I->click(Locator::elementAt('[data-task-list-id=1] [data-action-click="task.list.editTask"]',1));
+        $I->waitForText('New Task', null, '#globalModal');
 
         $I->fillField('Task[title]', 'My First Task');
         $I->fillField('#task-description .humhub-ui-richtext', 'This is a test task!');
@@ -46,14 +47,13 @@ class TaskListCest
         $I->click('Save', '#globalModal');
         $I->waitForText('My First Task', null,'.task-list-task-title-bar');
 
-        $I->click('[data-task-id="1"]');
+        $I->jsClick('[data-task-id="2"] .toggleTaskDetails');
         $I->waitForText('This is a test task!');
         $I->see('Begin Task');
         $I->click('Begin Task');
         // Check for in progress badge
-        $I->waitForElementVisible('.label-info .fa-edit', null,'[data-task-id="1"]');
+        $I->waitForElementVisible('.label-info .fa-edit', null, '[data-task-id="2"]');
 
-        $I->click('[data-task-id="1"]');
         $I->waitForText('Finish Task');
         $I->click('Finish Task');
 
@@ -72,17 +72,18 @@ class TaskListCest
 
         $I->amGoingTo('create a new task list');
         $I->click('Tasks', '.layout-nav-container');
-        $I->waitForText('Task Lists');
+        $I->waitForText('Overview');
 
-        $I->click('Add Task List');
-        $I->waitForText('Create task list', null, '#globalModal');
-        $I->fillField('#tasklist-name', 'My New Tasklist');
+        $I->click('Add');
+        $I->waitForText('New Task', null, '#globalModal');
+        $I->fillField('Task[title]', 'Test task with new list');
+        $I->fillContentTagDropDown('task-task_list_id', 'My New Tasklist');
         $I->click('Save', '#globalModal');
 
         $I->waitForText('My New Tasklist', null, '.task-list');
 
-        $I->click(Locator::elementAt('[data-action-click="task.list.editTask"]',1));
-        $I->waitForText('Create new task', null, '#globalModal');
+        $I->click(Locator::elementAt('[data-task-list-id=1] [data-action-click="task.list.editTask"]',1));
+        $I->waitForText('New Task', null, '#globalModal');
 
         $I->fillField('Task[title]', 'My First Task');
         $I->fillField('#task-description .humhub-ui-richtext', 'This is a test task!');
@@ -90,14 +91,13 @@ class TaskListCest
         $I->click('Save', '#globalModal');
         $I->waitForText('My First Task', null,'.task-list-task-title-bar');
 
-        $I->click('[data-task-id="1"]');
+        $I->jsClick('[data-task-id="2"] .toggleTaskDetails');
         $I->waitForText('This is a test task!');
         $I->see('Begin Task');
         $I->click('Begin Task');
         // Check for in progress badge
-        $I->waitForElementVisible('.label-info .fa-edit', null,'[data-task-id="1"]');
+        $I->waitForElementVisible('.label-info .fa-edit', null, '[data-task-id="2"]');
 
-        $I->click('[data-task-id="1"]');
         $I->waitForText('Finish Task');
         $I->click('Finish Task');
 

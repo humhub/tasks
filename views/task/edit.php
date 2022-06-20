@@ -7,10 +7,10 @@
  */
 
 use humhub\modules\tasks\assets\Assets;
+use humhub\modules\ui\form\widgets\ActiveForm;
 use humhub\modules\ui\form\widgets\FormTabs;
 use humhub\widgets\ModalDialog;
 use humhub\widgets\ModalButton;
-use humhub\widgets\ActiveForm;
 
 /* @var $taskForm \humhub\modules\tasks\models\forms\TaskForm */
 

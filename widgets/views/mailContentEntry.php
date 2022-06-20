@@ -68,7 +68,7 @@ $module = Yii::$app->moduleManager->getModule('tasks');
                     </tr>
                     <tr>
                         <td height="15" style="font-size: 15px; line-height: 22px; font-family:Open Sans,Arial,Tahoma, Helvetica, sans-serif; color:<?= Yii::$app->view->theme->variable('text-color-soft2', '#aeaeae') ?>; font-weight:300; text-align:left; ">
-                        <?= Yii::t('TasksModule.views_mail', 'Your Reminder for task {task}', [
+                        <?= Yii::t('TasksModule.base', 'Your Reminder for task {task}', [
                             '{task}' => Html::encode($source->title)
                         ]);
                         ?>

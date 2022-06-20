@@ -6,12 +6,11 @@
  *
  */
 
-use humhub\modules\tasks\models\scheduling\TaskScheduling;
 use humhub\modules\user\widgets\UserPickerField;
 use humhub\widgets\Button;
 use humhub\widgets\Link;
 
-/* @var $form \humhub\widgets\ActiveForm */
+/* @var $form \humhub\modules\ui\form\widgets\ActiveForm */
 /* @var $taskForm \humhub\modules\tasks\models\forms\TaskForm */
 /* @var $responsible [] \humhub\modules\user\models\User */
 
@@ -27,10 +26,10 @@ $responsible = $taskForm->task->taskResponsibleUsers;
         'id' => 'taskAssignedUserPicker',
         'selection' => $taskForm->task->taskAssignedUsers,
         'url' => $taskForm->getTaskAssignedPickerUrl(),
-        'placeholder' => Yii::t('TasksModule.views_index_edit', 'Assign users')
-    ])->hint(Yii::t('TasksModule.views_index_edit', 'Leave empty to let anyone work on this task.'),[]) ?>
+        'placeholder' => Yii::t('TasksModule.base', 'Assign users')
+    ])->hint(Yii::t('TasksModule.base', 'If empty any user can complete the task.'),[]) ?>
 
-    <?= Link::userPickerSelfSelect('#taskAssignedUserPicker'); ?>
+    <?= Link::userPickerSelfSelect('#taskAssignedUserPicker', Yii::t('TasksModule.base', 'Assign myself')); ?>
 
     <br>
 
@@ -38,10 +37,10 @@ $responsible = $taskForm->task->taskResponsibleUsers;
         'id' => 'taskResponsibleUserPicker',
         'selection' => $responsible,
         'url' => $taskForm->getTaskResponsiblePickerUrl(),
-        'placeholder' => Yii::t('TasksModule.views_index_edit', 'Add responsible users'),
+        'placeholder' => Yii::t('TasksModule.base', 'Add responsible users'),
     ]) ?>
 
-    <?= Link::userPickerSelfSelect('#taskResponsibleUserPicker'); ?>
+    <?= Link::userPickerSelfSelect('#taskResponsibleUserPicker', Yii::t('TasksModule.base', 'Assign myself')); ?>
 
     <br>
     <?= $form->field($taskForm->task, 'review')->checkbox() ?>

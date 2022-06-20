@@ -30,10 +30,9 @@ $titleFilter = $title[0];
         <div class="col-md-12">
             <?= TextFilterInput::widget($title[0]) ?>
         </div>
-
     </div>
 
-<div class="filter-root clearfix" style="position:relative;padding-top:0;padding-bottom:0">
+<div class="filter-root clearfix">
     <div class="row task-bottom-panel">
         <?= FilterPanel::widget(['blocks' => $checkboxes, 'span' => 3]) ?>
         <?= FilterPanel::widget(['blocks' => $datePicker, 'span' => 3]) ?>
@@ -45,7 +44,5 @@ $titleFilter = $title[0];
     </div>
 
 </div>
-
-
 
 <?= Html::endTag('div') ?>
