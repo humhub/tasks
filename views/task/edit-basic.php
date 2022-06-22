@@ -28,7 +28,8 @@ $canManage = $taskForm->contentContainer->can(ManageTasks::class);
         'contentContainer' => $taskForm->contentContainer,
         'options' => [
             'data-ui-select2' => true,
-            'data-ui-select2-allow-new' => $canManage
+            'data-ui-select2-allow-new' => $canManage,
+            'data-ui-select2-new-sign' => '➕'
         ],
         'tagClass' => TaskList::class
     ]); ?>
