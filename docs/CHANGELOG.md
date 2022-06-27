@@ -6,6 +6,7 @@ Changelog
 - Enh #182: Allow update content topics
 - Enh #169: Use new tabbed form for auto active tab with first error field
 - Enh #140: Use widget ContentVisibiltySelect
+- Fix #190: Fix wrong scheduling information for completed tasks
 
 
 1.5.5  (March 13, 2022)
