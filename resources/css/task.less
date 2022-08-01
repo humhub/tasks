@@ -233,40 +233,6 @@
       width: 260px !important;
       display: inline-block;
     }
-
-    .dropdown-filter {
-      display: inline-block;
-
-      .form-group {
-        margin: -7px;
-
-        .form-control {
-          //display: initial !important;
-          //line-height: 16px;
-          //height: auto;
-          //width: 140px;
-          //max-width: 200px;
-          padding: 0 20px 0 8px;
-          margin-left: 12px;
-        }
-      }
-    }
-
-    .checkbox-filter {
-      display: inline-block;
-
-      .regular-checkbox:not(:checked) + .regular-checkbox-box {
-        background-color: #fff;
-      }
-
-      .form-group {
-        margin: 0;
-
-        .checkbox {
-          margin: 0 !important;
-        }
-      }
-    }
   }
 }
 
@@ -279,12 +245,6 @@
   padding: 0;
   margin: 0;
   height: auto !important;
-
-  //.task-item {
-  //  .regular-checkbox:checked + span {
-  //    text-decoration: line-through;
-  //  }
-  //}
 }
 
 .task-details {
@@ -567,12 +527,11 @@
     text-decoration: line-through;
     font-style: italic;
 
-    .regular-checkbox:checked + .regular-checkbox-box {
-      border: 2px solid #bdbdbd;
+    input[type=checkbox]:checked {
+      border-color: #bdbdbd;
       background: #bdbdbd;
     }
   }
-
 }
 
 #task-container {
@@ -616,9 +575,6 @@
       .toggleTaskDetails {
         font-size: 13px;
       }
-      .regular-checkbox-box {
-        margin: 3px 0 0 0;
-      }
       > div {
         padding: 3px 10px;
         .task-moving-handler {
@@ -635,10 +591,6 @@
     }
     .task-list-task-details {
       padding: 15px 0;
-    }
-
-    .task-list-item-title .label .regular-checkbox-box.disabled:nth-of-type(2) {
-      border: none !important;
     }
 
     .task-list-item-title .label {
