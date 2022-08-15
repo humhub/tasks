@@ -1,17 +1,14 @@
 Changelog
 =========
 
-1.7.0  (Unreleased)
------------------------
-- Enh #195: Remove deprecated checkbox "regular" style
-
-
-1.6.0  (Unreleased)
------------------------
+1.6.0-beta.1  (August 15, 2022)
+-------------------------------
+- Enh #187: Design Improvements
 - Enh #182: Allow update content topics
 - Enh #169: Use new tabbed form for auto active tab with first error field
 - Enh #140: Use widget ContentVisibiltySelect
 - Fix #190: Fix wrong scheduling information for completed tasks
+- Enh #195: Remove deprecated checkbox "regular" style
 
 
 1.5.5  (March 13, 2022)
