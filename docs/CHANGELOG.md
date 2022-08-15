@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.7.0  (Unreleased)
+-----------------------
+- Enh #195: Remove deprecated checkbox "regular" style
+
+
 1.6.0  (Unreleased)
 -----------------------
 - Enh #182: Allow update content topics
