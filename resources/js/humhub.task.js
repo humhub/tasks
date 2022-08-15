@@ -24,6 +24,7 @@ humhub.module('task', function (module, require, $) {
         this.initTimeInput();
         this.initScheduling();
         this.initAddTaskItem();
+        this.initTaskListSelector();
     };
 
     Form.prototype.initTimeInput = function(evt) {
@@ -139,6 +140,11 @@ humhub.module('task', function (module, require, $) {
         $newInputGroup.find('input').focus();
     };
 
+    Form.prototype.initTaskListSelector = function () {
+        this.$.find('[data-ui-select2][data-ui-select2-placeholder]').on('select2:open', function(e) {
+            $('.select2-container input').attr('placeholder', $(e.target).data('ui-select2-placeholder'));
+        });
+    }
 
     var deleteTask = function(evt) {
          var widget = Widget.closest(evt.$trigger);

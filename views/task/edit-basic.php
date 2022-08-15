@@ -29,7 +29,8 @@ $canManage = $taskForm->contentContainer->can(ManageTasks::class);
         'options' => [
             'data-ui-select2' => true,
             'data-ui-select2-allow-new' => $canManage,
-            'data-ui-select2-new-sign' => '➕'
+            'data-ui-select2-new-sign' => '➕',
+            'data-ui-select2-placeholder' => Yii::t('TasksModule.base', 'New list or search')
         ],
         'tagClass' => TaskList::class
     ]); ?>
