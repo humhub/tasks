@@ -21,7 +21,32 @@ use Yii;
  */
 class WallEntry extends WallStreamModuleEntryWidget
 {
+    /**
+     * Route to create a content
+     *
+     * @var string
+     */
+    public $createRoute = '/tasks/task/edit';
+
+    /**
+     * @inheritdoc
+     */
     public $editMode = self::EDIT_MODE_MODAL;
+
+    /**
+     * @inheritdoc
+     */
+    public $menuAction = 'task.list.editTask';
+
+    /**
+     * @inheritdoc
+     */
+    public $menuIcon = 'tasks';
+
+    /**
+     * @inheritdoc
+     */
+    public $menuSortOrder = 300;
 
     /**
      * @var Task

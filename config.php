@@ -26,6 +26,5 @@ return array(
         ['class' => 'humhub\modules\calendar\interfaces\CalendarService', 'event' => 'getItemTypes', 'callback' => ['humhub\modules\tasks\Events', 'onGetCalendarItemTypes']],
         ['class' => 'humhub\modules\calendar\interfaces\CalendarService', 'event' => 'findItems', 'callback' => ['humhub\modules\tasks\Events', 'onFindCalendarItems']],
         ['class' => 'humhub\modules\rest\Module', 'event' => 'restApiAddRules', 'callback' => ['humhub\modules\tasks\Events', 'onRestApiAddRules']],
-        ['class' => WallCreateContentMenu::class, 'event' => WallCreateContentMenu::EVENT_INIT, 'callback' => ['humhub\modules\tasks\Events', 'onInitWallCreateContentMenu']],
     ]
 );

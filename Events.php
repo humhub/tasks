@@ -9,13 +9,10 @@
 namespace humhub\modules\tasks;
 
 use humhub\modules\content\components\ContentContainerActiveRecord;
-use humhub\modules\content\widgets\WallCreateContentMenu;
 use humhub\modules\rest\Module as RestModule;
 use humhub\modules\space\models\Space;
 use humhub\modules\tasks\helpers\TaskListUrl;
 use humhub\modules\tasks\helpers\TaskUrl;
-use humhub\modules\tasks\permissions\CreateTask;
-use humhub\modules\ui\menu\MenuLink;
 use humhub\modules\user\models\User;
 use Yii;
 use humhub\modules\notification\models\Notification;
@@ -331,27 +328,6 @@ class Events
             ['pattern' => 'tasks/list/<id:\d+>', 'route' => 'tasks/rest/task-list/delete', 'verb' => 'DELETE'],
 
         ], 'tasks');
-    }
-
-    public static function onInitWallCreateContentMenu($event)
-    {
-        /* @var WallCreateContentMenu $menu */
-        $menu = $event->sender;
-
-        if ($menu->contentContainer &&
-            $menu->contentContainer->moduleManager->isEnabled('tasks') &&
-            $menu->contentContainer->getPermissionManager()->can(CreateTask::class)) {
-            $menu->addEntry(new MenuLink([
-                'label' => Yii::t('TasksModule.base', 'Task'),
-                'url' => '#',
-                'sortOrder' => 300,
-                'icon' => 'tasks',
-                'htmlOptions' => [
-                    'data-action-click' => 'task.list.editTask',
-                    'data-action-url' => TaskListUrl::addTaskListTask(null, $menu->contentContainer),
-                ],
-            ]));
-        }
     }
 
 }
