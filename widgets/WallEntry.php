@@ -41,11 +41,6 @@ class WallEntry extends WallStreamModuleEntryWidget
     /**
      * @inheritdoc
      */
-    public $menuIcon = 'tasks';
-
-    /**
-     * @inheritdoc
-     */
     public $menuSortOrder = 300;
 
     /**
