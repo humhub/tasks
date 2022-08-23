@@ -133,6 +133,11 @@ class Task extends ContentActiveRecord implements Searchable
      */
     public $checklist;
 
+    /**
+     * @inheritdoc
+     */
+    protected $createPermission = CreateTask::class;
+
     public function init()
     {
         $this->schedule = new TaskScheduling(['task' => $this]);
