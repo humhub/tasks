@@ -36,12 +36,12 @@ class WallEntry extends WallStreamModuleEntryWidget
     /**
      * @inheritdoc
      */
-    public $menuAction = 'task.list.editTask';
+    public $createFormMenuAction = 'task.list.editTask';
 
     /**
      * @inheritdoc
      */
-    public $menuSortOrder = 300;
+    public $createFormSortOrder = 300;
 
     /**
      * @var Task
