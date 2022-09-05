@@ -9,6 +9,7 @@ Changelog
 - Enh #140: Use widget ContentVisibiltySelect
 - Fix #190: Fix wrong scheduling information for completed tasks
 - Enh #195: Remove deprecated checkbox "regular" style
+- Enh #198: Menu for creating a Task from wall stream
 
 
 1.5.5  (March 13, 2022)

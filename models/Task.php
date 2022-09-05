@@ -138,6 +138,11 @@ class Task extends ContentActiveRecord implements Searchable
      */
     protected $createPermission = CreateTask::class;
 
+    /**
+     * @inheritdoc
+     */
+    protected $managePermission = ManageTasks::class;
+
     public function init()
     {
         $this->schedule = new TaskScheduling(['task' => $this]);
@@ -820,10 +825,8 @@ class Task extends ContentActiveRecord implements Searchable
      */
     public function canEdit()
     {
-        if($this->isNewRecord) {
-            return $this->content->container->can([CreateTask::class, ManageTasks::class]);
-        } else if(!$this->hasTaskResponsible()) {
-            return  $this->content->container->can([ManageTasks::class]);
+        if ($this->isNewRecord || !$this->hasTaskResponsible()) {
+            return $this->content->canEdit();
         }
 
         return  $this->isTaskResponsible();

@@ -9,6 +9,7 @@ namespace humhub\modules\tasks\widgets;
 
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\tasks\helpers\TaskListUrl;
+use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\permissions\CreateTask;
 use yii\base\Widget;
 
@@ -39,9 +40,7 @@ class TaskHeader extends Widget
 
     private function getAddTaskUrl(): ?string
     {
-        if ($this->displayAddTask &&
-            $this->contentContainer &&
-            $this->contentContainer->can(CreateTask::class)) {
+        if ($this->displayAddTask && (new Task($this->contentContainer))->content->canEdit()) {
             return TaskListUrl::addTaskListTask(null, $this->contentContainer);
         }
 

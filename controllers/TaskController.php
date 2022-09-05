@@ -43,10 +43,6 @@ class TaskController extends AbstractTaskController
     {
         $isNewTask = empty($id);
 
-        if($isNewTask && !$this->contentContainer->can([CreateTask::class, ManageTasks::class])) {
-            throw new HttpException(403);
-        }
-
         if ($isNewTask) {
             $taskForm = new TaskForm(['cal' => $cal, 'taskListId' =>  $listId]);
             $taskForm->createNew($this->contentContainer);
