@@ -23,6 +23,8 @@ humhub.module('task', function (module, require, $) {
     Form.prototype.init = function() {
         this.initTimeInput();
         this.initScheduling();
+        this.initAddTaskItem();
+        this.initTaskListSelector();
     };
 
     Form.prototype.initTimeInput = function(evt) {
@@ -101,6 +103,21 @@ humhub.module('task', function (module, require, $) {
         evt.$trigger.closest('.form-group').remove();
     };
 
+    Form.prototype.initAddTaskItem = function () {
+        var $this = this.$;
+        $(document).on('keypress', 'input[name="TaskForm[newItems][]"]', function (e) {
+            if (e.keyCode === 13) {
+                e.preventDefault();
+                if ($(this).data('task-item-added')) {
+                    $(this).closest('.form-group').next().find('input').focus();
+                } else {
+                    $this.find('[data-action-click=addTaskItem]').trigger('click');
+                    $(this).data('task-item-added', true);
+                }
+            }
+        });
+    }
+
     Form.prototype.addTaskItem = function (evt) {
         var $this = evt.$trigger;
         $this.prev('input').tooltip({
@@ -120,8 +137,14 @@ humhub.module('task', function (module, require, $) {
         });
         $this.removeAttr('data-action-click');
         $newInputGroup.fadeIn('fast');
+        $newInputGroup.find('input').focus();
     };
 
+    Form.prototype.initTaskListSelector = function () {
+        this.$.find('[data-ui-select2][data-ui-select2-placeholder]').on('select2:open', function(e) {
+            $('.select2-container input').attr('placeholder', $(e.target).data('ui-select2-placeholder'));
+        });
+    }
 
     var deleteTask = function(evt) {
          var widget = Widget.closest(evt.$trigger);
