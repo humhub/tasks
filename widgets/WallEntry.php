@@ -36,7 +36,7 @@ class WallEntry extends WallStreamModuleEntryWidget
     /**
      * @inheritdoc
      */
-    public $createFormMenuAction = 'task.list.editTask';
+    public $createFormMenuAction = 'task.list.addTask';
 
     /**
      * @inheritdoc
@@ -117,5 +117,13 @@ class WallEntry extends WallStreamModuleEntryWidget
         }
 
         return $controlsMenuEntries;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function registerCreateContentMenuAssets()
+    {
+        Assets::register($this->view);
     }
 }

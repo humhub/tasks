@@ -450,6 +450,12 @@ humhub.module('task.list', function (module, require, $) {
         });
     };
 
+    var addTask = function (evt) {
+        modal.load(evt, {data: {wall: 1}}).then(function () {
+            modal.global.$.one('submitted', onEditTaskSubmitted);
+        });
+    };
+
     var editTask = function (evt) {
         modal.load(evt).then(function () {
             modal.global.$.one('submitted', onEditTaskSubmitted);
@@ -457,7 +463,7 @@ humhub.module('task.list', function (module, require, $) {
     };
 
     var onEditTaskSubmitted = function (evt, response) {
-        if(response.reloadTask) {
+        if (response.reloadTask) {
             modal.global.close(true);
             var task = getTaskById(response.reloadTask);
             if(task) {
@@ -468,6 +474,10 @@ humhub.module('task.list', function (module, require, $) {
             response.reloadLists.forEach(function (listId) {
                 reloadList(listId)
             });
+        } else if (response.reloadWall) {
+            modal.global.close(true);
+            event.trigger('humhub:content:newEntry', response.output, this);
+            event.trigger('humhub:content:afterSubmit', response.output, this);
         } else {
             modal.global.$.one('submitted', onEditTaskSubmitted);
         }
@@ -500,6 +510,7 @@ humhub.module('task.list', function (module, require, $) {
         Task: Task,
         Root: Root,
         edit: edit,
+        addTask: addTask,
         editTask: editTask
     });
 })

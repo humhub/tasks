@@ -2,19 +2,19 @@
 
 namespace humhub\modules\tasks\controllers;
 
+use humhub\modules\stream\actions\StreamEntryResponse;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\user\models\User;
-use Yii;
-use yii\web\HttpException;
 use humhub\modules\content\components\ContentContainerControllerAccess;
 use humhub\modules\space\models\Space;
 use humhub\modules\tasks\models\forms\ItemDrop;
 use humhub\modules\tasks\models\forms\TaskForm;
-use humhub\modules\tasks\permissions\CreateTask;
-use humhub\modules\tasks\permissions\ManageTasks;
 use humhub\modules\user\models\UserPicker;
 use humhub\widgets\ModalClose;
 use humhub\modules\tasks\models\Task;
+use Yii;
+use yii\web\HttpException;
+use yii\web\Response;
 
 class TaskController extends AbstractTaskController
 {
@@ -34,38 +34,52 @@ class TaskController extends AbstractTaskController
      * @param bool $cal
      * @param bool $redirect
      * @param int|null $listId used while task creation and is ignored for edits
-     * @return string
+     * @param bool $wall True when a Task is created/updated from wall stream
+     * @return string|Response
      * @throws HttpException
      * @throws \yii\base\Exception
      * @throws \yii\base\InvalidConfigException
      */
-    public function actionEdit($id = null, $cal = false, $redirect = false, $listId = null)
+    public function actionEdit($id = null, $cal = false, $redirect = false, $listId = null, $wall = null)
     {
         $isNewTask = empty($id);
 
         if ($isNewTask) {
-            $taskForm = new TaskForm(['cal' => $cal, 'taskListId' =>  $listId]);
+            $taskForm = new TaskForm([
+                'cal' => $cal,
+                'wall' => $wall,
+                'taskListId' =>  $listId
+            ]);
             $taskForm->createNew($this->contentContainer);
         } else {
             $taskForm = new TaskForm([
                 'task' => Task::find()->contentContainer($this->contentContainer)->where(['task.id' => $id])->one(),
                 'cal' => $cal,
                 'redirect' => $redirect,
+                'wall' => $wall,
                 'taskListId' => $listId
             ]);
         }
 
-        if(!$taskForm->task) {
+        if (!$taskForm->task) {
             throw new HttpException(404);
         } else if(!$taskForm->task->content->canEdit()) {
             throw new HttpException(403);
         }
 
         if ($taskForm->load(Yii::$app->request->post()) && $taskForm->save()) {
-            if($cal) {
+            if ($cal) {
                 return ModalClose::widget(['saved' => true]);
-            } else if($redirect) {
+            } else if ($redirect) {
                 return $this->htmlRedirect(TaskUrl::viewTask($taskForm->task));
+            } else if ($wall) {
+                $entry = StreamEntryResponse::getAsArray($taskForm->task->content);
+                $entry['reloadWall'] = true;
+                // Rename 'output' in order to don't put it into global modal
+                $entry['content'] = $entry['output'];
+                unset($entry['output']);
+
+                return $this->asJson($entry);
             }
 
             return $this->asJson([
