@@ -26,17 +26,12 @@ class WallEntry extends WallStreamModuleEntryWidget
      *
      * @var string
      */
-    public $createRoute = '/tasks/task/edit';
+    public $createRoute = '/tasks/task/add-from-wall';
 
     /**
      * @inheritdoc
      */
     public $editMode = self::EDIT_MODE_MODAL;
-
-    /**
-     * @inheritdoc
-     */
-    public $createFormMenuAction = 'task.list.addTask';
 
     /**
      * @var Task
@@ -112,13 +107,5 @@ class WallEntry extends WallStreamModuleEntryWidget
         }
 
         return $controlsMenuEntries;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function registerCreateContentMenuAssets()
-    {
-        Assets::register($this->view);
     }
 }

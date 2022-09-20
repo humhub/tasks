@@ -61,7 +61,7 @@ use yii\helpers\Html;
         <i class="fa fa-caret-up toggleItems pull-right"></i>
 
         <?= Button::success()->icon('fa-plus')->sm()->right()->style('margin-top:-3px')
-            ->action('task.list.editTask', TaskListUrl::addTaskListTask($list))
+            ->action('ui.modal.load', TaskListUrl::addTaskListTask($list))
             ->loader(false)->visible($canCreate)->cssClass('tt')->options(['title' => Yii::t('TasksModule.base', 'Add task')]) ?>
         </div>
     </div>

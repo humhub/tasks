@@ -13,6 +13,7 @@ humhub.module('task', function (module, require, $) {
     var event = require('event');
     var action = require('action');
     var loader = require('ui.loader');
+    var taskList = require('task.list');
 
     var Form = function (node, options) {
         Widget.call(this, node, options);
@@ -25,6 +26,7 @@ humhub.module('task', function (module, require, $) {
         this.initScheduling();
         this.initAddTaskItem();
         this.initTaskListSelector();
+        this.initSubmitAction();
     };
 
     Form.prototype.initTimeInput = function(evt) {
@@ -145,6 +147,31 @@ humhub.module('task', function (module, require, $) {
             $('.select2-container input').attr('placeholder', $(e.target).data('ui-select2-placeholder'));
         });
     }
+
+    Form.prototype.initSubmitAction = function () {
+        modal.global.$.one('submitted', onTaskFormSubmitted);
+    }
+
+    var onTaskFormSubmitted = function (evt, response) {
+        if (response.reloadTask) {
+            modal.global.close(true);
+            var task = taskList.getTaskById(response.reloadTask);
+            if (task) {
+                task.reload();
+            }
+        } else if (response.reloadLists) {
+            modal.global.close(true);
+            response.reloadLists.forEach(function (listId) {
+                taskList.reloadList(listId)
+            });
+        } else if (response.reloadWall) {
+            modal.global.close(true);
+            event.trigger('humhub:content:newEntry', response.content, this);
+            event.trigger('humhub:content:afterSubmit', response.content, this);
+        } else {
+            modal.global.$.one('submitted', onTaskFormSubmitted);
+        }
+    };
 
     var deleteTask = function(evt) {
          var widget = Widget.closest(evt.$trigger);

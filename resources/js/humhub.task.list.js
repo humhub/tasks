@@ -450,39 +450,6 @@ humhub.module('task.list', function (module, require, $) {
         });
     };
 
-    var addTask = function (evt) {
-        modal.load(evt, {data: {wall: 1}}).then(function () {
-            modal.global.$.one('submitted', onEditTaskSubmitted);
-        });
-    };
-
-    var editTask = function (evt) {
-        modal.load(evt).then(function () {
-            modal.global.$.one('submitted', onEditTaskSubmitted);
-        });
-    };
-
-    var onEditTaskSubmitted = function (evt, response) {
-        if (response.reloadTask) {
-            modal.global.close(true);
-            var task = getTaskById(response.reloadTask);
-            if(task) {
-                task.reload();
-            }
-        } else if (response.reloadLists) {
-            modal.global.close(true);
-            response.reloadLists.forEach(function (listId) {
-                reloadList(listId)
-            });
-        } else if (response.reloadWall) {
-            modal.global.close(true);
-            event.trigger('humhub:content:newEntry', response.output, this);
-            event.trigger('humhub:content:afterSubmit', response.output, this);
-        } else {
-            modal.global.$.one('submitted', onEditTaskSubmitted);
-        }
-    };
-
     var reloadList = function (id) {
         var list = getListById(id);
         if (list) {
@@ -502,7 +469,6 @@ humhub.module('task.list', function (module, require, $) {
         return $node.length ? Widget.instance($node) : null;
     };
 
-
     module.export({
         TaskList: TaskList,
         CompletedTaskListView: CompletedTaskListView,
@@ -510,8 +476,7 @@ humhub.module('task.list', function (module, require, $) {
         Task: Task,
         Root: Root,
         edit: edit,
-        addTask: addTask,
-        editTask: editTask
+        getTaskById: getTaskById,
+        reloadList: reloadList
     });
-})
-;
+});

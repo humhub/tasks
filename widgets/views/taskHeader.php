@@ -13,7 +13,7 @@ use humhub\widgets\Button;
     <div class="panel-body clearfix">
         <?php if ($addTaskUrl) : ?>
             <?= Button::success(Yii::t('TasksModule.base', 'Add'))
-                ->action('task.list.editTask', $addTaskUrl)
+                ->action('ui.modal.load', $addTaskUrl)
                 ->icon('fa-plus')
                 ->right()
                 ->style('margin:0 0 20px 20px')

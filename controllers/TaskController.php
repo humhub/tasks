@@ -30,6 +30,23 @@ class TaskController extends AbstractTaskController
     }
 
     /**
+     * Add a Task from wall stream
+     *
+     * @param int|null $id
+     * @param bool $cal
+     * @param bool $redirect
+     * @param int|null $listId used while task creation and is ignored for edits
+     * @return string|Response
+     * @throws HttpException
+     * @throws \yii\base\Exception
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function actionAddFromWall($id = null, $cal = false, $redirect = false, $listId = null)
+    {
+        return $this->actionEdit($id, $cal, $redirect, $listId, true);
+    }
+
+    /**
      * @param int|null $id
      * @param bool $cal
      * @param bool $redirect
@@ -75,6 +92,7 @@ class TaskController extends AbstractTaskController
             } else if ($wall) {
                 $entry = StreamEntryResponse::getAsArray($taskForm->task->content);
                 $entry['reloadWall'] = true;
+                $entry['success'] = true;
                 // Rename 'output' in order to don't put it into global modal
                 $entry['content'] = $entry['output'];
                 unset($entry['output']);
