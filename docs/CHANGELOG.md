@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.6.0 (September 23, 2022)
+--------------------------
+- Enh #199 #200: Improved translator module compatibility
+- Updated translations
+
+
 1.6.0-beta.1  (August 15, 2022)
 -------------------------------
 - Enh #187: Design Improvements
