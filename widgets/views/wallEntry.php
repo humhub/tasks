@@ -28,7 +28,7 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
     <?php endif; ?>
 
     <?php if(!empty($task->description)) : ?>
-        <div data-ui-show-more style="margin-bottom:10px">
+        <div data-ui-markdown data-ui-show-more style="margin-bottom:10px">
             <?= RichText::output($task->description) ?>
         </div>
     <?php endif; ?>
