@@ -37,4 +37,17 @@ class Assets extends AssetBundle
         'js/humhub.task.checklist.js',
         'js/humhub.task.search.js',
     ];
+
+    /**
+     * @inheritdoc
+     */
+    public static function register($view)
+    {
+        $colorLink = $view->theme->variable('link');
+        $colorInfo = $view->theme->variable('info');
+        $view->registerCss('#task-space-menu li.active a{color:' . $colorLink . '}'
+            . '.task-overview #task-filter-nav .task-bottom-panel .filterInput[data-filter-type=checkbox] .fa.fa-check-square-o{border-color:' . $colorInfo . ';background:' . $colorInfo . '}');
+
+        return parent::register($view);
+    }
 }
