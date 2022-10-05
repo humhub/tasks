@@ -1,9 +1,12 @@
 Changelog
 =========
 
-1.6.1 (Unreleased)
-------------------
--Fix #203: Theme colors not properly used in overview checkboxes
+
+1.6.1 (October 5, 2022)
+-----------------------
+- Enh: Updated Translations
+- Fix #203: Theme colors not properly used in overview checkboxes
+
 
 1.6.0 (September 23, 2022)
 --------------------------
