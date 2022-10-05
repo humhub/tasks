@@ -43,9 +43,10 @@ class Assets extends AssetBundle
      */
     public static function register($view)
     {
-        $colorPrimary = $view->theme->variable('primary');
-        $view->registerCss('#task-space-menu li.active a{color:' . $colorPrimary . '}'
-            . '.task-overview #task-filter-nav .task-bottom-panel .filterInput[data-filter-type=checkbox] .fa.fa-check-square-o{border-color:' . $colorPrimary . ';background:' . $colorPrimary . '}');
+        $colorLink = $view->theme->variable('link');
+        $colorInfo = $view->theme->variable('info');
+        $view->registerCss('#task-space-menu li.active a{color:' . $colorLink . '}'
+            . '.task-overview #task-filter-nav .task-bottom-panel .filterInput[data-filter-type=checkbox] .fa.fa-check-square-o{border-color:' . $colorInfo . ';background:' . $colorInfo . '}');
 
         return parent::register($view);
     }
