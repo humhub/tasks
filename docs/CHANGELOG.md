@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.6.2 (October 6, 2022)
+-----------------------
+- Fix #207: additional style to hide from stream
+
 
 1.6.1 (October 5, 2022)
 -----------------------
