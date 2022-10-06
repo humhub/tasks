@@ -187,6 +187,11 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
         return $query;
     }
 
+    public static function hasCompletedLists(ContentContainerActiveRecord $container): bool
+    {
+        return self::findHiddenLists($container)->exists();
+    }
+
     /**
      * Deletes all tags by module id
      * @param ContentContainerActiveRecord|int $contentContainer

@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.6.3 (Unreleased)
+-----------------------
+- Fix #205: Hide empty list of completed tasks
+
+
 1.6.2 (October 6, 2022)
 -----------------------
 - Fix #207: additional style to hide from stream
