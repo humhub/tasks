@@ -170,6 +170,7 @@ return [
     'A widget is an element added to to the sidebar of a stream. In this case it provides users with a short overview of their tasks.' => '',
     'Add checkpoints to the task to highlight the individual steps required to complete it.' => '',
     'Choose if you want the module to appear in the main navigation.' => '',
+    'Completed lists' => '',
     'Configure the Tasks module to meet your specific requirements and needs. You can define individual settings and for instance decide whether a widget is displayed.' => '',
     'Create and assign tasks - organize and schedule individual and collaborative projects.' => '',
     'If empty any user can complete the task.' => '',

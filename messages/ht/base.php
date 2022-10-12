@@ -56,6 +56,7 @@ return [
     'Choose if you want the module to appear in the main navigation.' => '',
     'Color' => '',
     'Completed' => '',
+    'Completed lists' => '',
     'Configure the Tasks module to meet your specific requirements and needs. You can define individual settings and for instance decide whether a widget is displayed.' => '',
     'Continue Review' => '',
     'Create and assign tasks - organize and schedule individual and collaborative projects.' => '',

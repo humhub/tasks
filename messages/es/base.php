@@ -178,6 +178,7 @@ return [
     '{userName} works on task {task}.' => '{userName} está trabajando en la tarea {task}.',
     'A widget is an element added to to the sidebar of a stream. In this case it provides users with a short overview of their tasks.' => '',
     'Choose if you want the module to appear in the main navigation.' => '',
+    'Completed lists' => '',
     'Configure the Tasks module to meet your specific requirements and needs. You can define individual settings and for instance decide whether a widget is displayed.' => '',
     'New list or search' => '',
 ];
