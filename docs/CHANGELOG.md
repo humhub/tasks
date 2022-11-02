@@ -4,7 +4,7 @@ Changelog
 1.6.3 (Unreleased)
 -----------------------
 - Fix #205: Hide empty list of completed tasks
-
+- Fix #212: Fix filter "Overdue"
 
 1.6.2 (October 6, 2022)
 -----------------------
