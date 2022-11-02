@@ -109,10 +109,8 @@ class TaskFilterNavigation extends FilterNavigation
             'id' => TaskFilter::FILTER_OVERDUE,
             'checked' => $this->filter->isFilterActive(TaskFilter::FILTER_OVERDUE),
             'title' => Yii::t('TasksModule.base', 'Overdue'),
-            'class' => CheckboxFilterInput::class,
             'options' => ['label' => Yii::t('TasksModule.base', 'Filter')],
             'sortOrder' => 100], static::FILTER_BLOCK_CHECKBOX);
-
 
         if (!Yii::$app->user->isGuest && (!$this->filter->contentContainer || $this->filter->contentContainer instanceof Space)) {
             $this->addFilter([
