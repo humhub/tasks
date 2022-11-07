@@ -21,6 +21,16 @@ use Yii;
  */
 class WallEntry extends WallStreamModuleEntryWidget
 {
+    /**
+     * Route to create a content
+     *
+     * @var string
+     */
+    public $createRoute = '/tasks/task/add-from-wall';
+
+    /**
+     * @inheritdoc
+     */
     public $editMode = self::EDIT_MODE_MODAL;
 
     /**

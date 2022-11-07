@@ -68,7 +68,7 @@ $checkUrl = $task->state->getCheckUrl();
                 <ul class="dropdown-menu pull-right">
                     <li>
                         <?= Button::asLink(Yii::t('TasksModule.base', 'Edit task'))
-                            ->action('task.list.editTask', TaskUrl::editTask($task))
+                            ->action('ui.modal.load', TaskUrl::editTask($task))
                             ->icon('fa-pencil'); ?>
                     </li>
                     <li>

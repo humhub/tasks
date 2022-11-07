@@ -38,7 +38,7 @@ class TaskListCest
 
         $I->waitForText('My New Tasklist', null, '.task-list');
 
-        $I->click(Locator::elementAt('[data-task-list-id=1] [data-action-click="task.list.editTask"]',1));
+        $I->click(Locator::elementAt('[data-task-list-id=1] [data-action-click="ui.modal.load"]',1));
         $I->waitForText('New Task', null, '#globalModal');
 
         $I->fillField('Task[title]', 'My First Task');
@@ -82,7 +82,7 @@ class TaskListCest
 
         $I->waitForText('My New Tasklist', null, '.task-list');
 
-        $I->click(Locator::elementAt('[data-task-list-id=1] [data-action-click="task.list.editTask"]',1));
+        $I->click(Locator::elementAt('[data-task-list-id=1] [data-action-click="ui.modal.load"]',1));
         $I->waitForText('New Task', null, '#globalModal');
 
         $I->fillField('Task[title]', 'My First Task');

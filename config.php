@@ -1,5 +1,6 @@
 <?php
 
+use humhub\modules\content\widgets\WallCreateContentMenu;
 use humhub\widgets\TopMenu;
 use humhub\modules\space\widgets\Menu;
 use humhub\commands\IntegrityController;
@@ -27,4 +28,3 @@ return array(
         ['class' => 'humhub\modules\rest\Module', 'event' => 'restApiAddRules', 'callback' => ['humhub\modules\tasks\Events', 'onRestApiAddRules']],
     ]
 );
-?>

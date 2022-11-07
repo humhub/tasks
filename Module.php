@@ -9,7 +9,6 @@ use humhub\modules\tasks\permissions\ProcessUnassignedTasks;
 use humhub\modules\tasks\permissions\CreateTask;
 use humhub\modules\tasks\permissions\ManageTasks;
 use Yii;
-use yii\helpers\Url;
 use humhub\modules\user\models\User;
 use humhub\modules\space\models\Space;
 use humhub\modules\tasks\models\Task;
@@ -127,6 +126,14 @@ class Module extends ContentContainerModule
             new ManageTasks(),
             new ProcessUnassignedTasks(),
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getContentClasses(): array
+    {
+        return [Task::class];
     }
 
 }
