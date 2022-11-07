@@ -1,6 +1,12 @@
 Changelog
 =========
 
+
+1.7.0-beta.1 (November 7, 2022)
+-------------------------------
+- Enh #198: Implemented new HumHub v1.13 Content Form Support
+
+
 1.6.3 (November 7, 2022)
 ------------------------
 - Fix #205: Hide empty list of completed tasks
