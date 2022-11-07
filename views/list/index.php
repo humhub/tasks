@@ -7,6 +7,7 @@
  */
 
 use humhub\modules\tasks\helpers\TaskListUrl;
+use humhub\modules\tasks\models\lists\TaskList;
 use humhub\modules\tasks\widgets\lists\CompletedTaskListView;
 use humhub\modules\tasks\assets\Assets;
 use humhub\modules\tasks\widgets\lists\TaskListWidget;
@@ -19,7 +20,7 @@ use humhub\widgets\Button;
 /* @var $canManage boolean */
 /* @var $canCreate boolean */
 /* @var $contentContainer \humhub\modules\content\components\ContentContainerActiveRecord */
-/* @var $taskLists \humhub\modules\tasks\models\lists\TaskList[] */
+/* @var $taskLists TaskList[] */
 
 Assets::register($this);
 ?>
@@ -51,12 +52,13 @@ Assets::register($this);
         </div>
     </div>
 
+    <?php if (TaskList::hasCompletedLists($contentContainer)): ?>
     <div class="task-list-ul">
         <div class="task-list-li">
             <div class="closed-task-lists-container task-list-container" data-ui-widget="task.list.CompletedTaskListView" data-ui-init="1">
                 <div class="task-list-title-bar clearfix">
                     <div>
-                        <i class="fa fa-check-square-o"></i> <span class="task-list-title-text"><?= Yii::t('TasksModule.base', 'Completed') ?></span>
+                        <i class="fa fa-check-square-o"></i> <span class="task-list-title-text"><?= Yii::t('TasksModule.base', 'Completed lists') ?></span>
                     </div>
                 </div>
                 <div class="closed-task-list-view">
@@ -65,6 +67,7 @@ Assets::register($this);
             </div>
         </div>
     </div>
+    <?php endif; ?>
 
     <div class="task-list-empty empty" style="display:none">
         <?= Yii::t('TasksModule.base','No pending tasks found') ?>

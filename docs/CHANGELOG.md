@@ -1,6 +1,29 @@
 Changelog
 =========
 
+1.6.3 (November 7, 2022)
+------------------------
+- Fix #205: Hide empty list of completed tasks
+- Fix #212: Fix filter "Overdue"
+
+
+1.6.2 (October 6, 2022)
+-----------------------
+- Fix #207: additional style to hide from stream
+
+
+1.6.1 (October 5, 2022)
+-----------------------
+- Enh: Updated Translations
+- Fix #203: Theme colors not properly used in overview checkboxes
+
+
+1.6.0 (September 23, 2022)
+--------------------------
+- Enh #199 #200: Improved translator module compatibility
+- Updated translations
+
+
 1.6.0-beta.1  (August 15, 2022)
 -------------------------------
 - Enh #187: Design Improvements

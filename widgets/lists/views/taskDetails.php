@@ -55,7 +55,9 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
 
         <?php if(!empty($task->description)) : ?>
             <div class="task-details-body">
-                <?= RichText::output($task->description)?>
+                <div class="markdown-render">
+                    <?= RichText::output($task->description)?>
+                </div>
             </div>
         <?php endif; ?>
 
