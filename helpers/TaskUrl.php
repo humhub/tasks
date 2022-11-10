@@ -83,9 +83,9 @@ class TaskUrl extends Url
         return static::container($task)->createUrl(static::ROUTE_DELETE_TASK, ['id' => $task->id,'cal' => $cal, 'redirect' => $redirect]);
     }
 
-    public static function editTask(Task $task, $cal = null, $redirect = null, $listId = null)
+    public static function editTask(Task $task, $cal = null, $redirect = null, $listId = null, $wall = null)
     {
-        return static::container($task)->createUrl(static::ROUTE_EDIT_TASK, ['id' => $task->id, 'cal' => $cal, 'redirect' => $redirect, 'listId'=> $listId]);
+        return static::container($task)->createUrl(static::ROUTE_EDIT_TASK, ['id' => $task->id, 'cal' => $cal, 'redirect' => $redirect, 'listId'=> $listId, 'wall' => $wall]);
     }
 
     public static function proceedTask(Task $task, $status)

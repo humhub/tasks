@@ -94,6 +94,11 @@ class TaskForm extends Model implements TabbedFormModel
     public $redirect;
 
     /**
+     * @var boolean defines if the Task is created from wall stream
+     */
+    public $wall;
+
+    /**
      * @var integer
      */
     public $taskListId;
@@ -414,7 +419,7 @@ class TaskForm extends Model implements TabbedFormModel
 
     public function getSubmitUrl()
     {
-        return ($this->submitUrl) ? $this->submitUrl : TaskUrl::editTask($this->task, $this->cal, $this->redirect, $this->taskListId);
+        return ($this->submitUrl) ? $this->submitUrl : TaskUrl::editTask($this->task, $this->cal, $this->redirect, $this->taskListId, $this->wall);
     }
 
     public function getDeleteUrl()
