@@ -24,16 +24,18 @@ class TaskRoleInfoBox extends TaskInfoBox
 
     public function getValue()
     {
-         if ( $this->task->isTaskResponsible()) {
-             return Icon::get('check')->color($this->view->theme->variable('success')).' '.Yii::t('TasksModule.base', 'You are responsible!');
-         } else if($this->task->isTaskAssigned()) {
-             return Icon::get('check')->color($this->view->theme->variable('success')).' '.Yii::t('TasksModule.base', 'You are assigned!');
-         } else if($this->task->canProcess()) {
+        if ($this->task->hasTaskAssigned()) {
+            return TaskUserList::widget(['users' => $this->task->taskAssignedUsers]);
+        }
+
+        if ($this->task->isTaskResponsible()) {
+            return Icon::get('check')->color($this->view->theme->variable('success')).' '.Yii::t('TasksModule.base', 'You are responsible!');
+        } else if($this->task->isTaskAssigned()) {
+            return Icon::get('check')->color($this->view->theme->variable('success')).' '.Yii::t('TasksModule.base', 'You are assigned!');
+        } else if($this->task->canProcess()) {
             return  Icon::get('times')->color($this->view->theme->variable('danger')).' '.Yii::t('TasksModule.base', 'Anyone can work on this task!');
-         } else {
-             return  Icon::get('times')->color($this->view->theme->variable('danger')).' '.Yii::t('TasksModule.base', 'This task can only be processed by assigned and responsible users.');
-         }
+        } else {
+            return  Icon::get('times')->color($this->view->theme->variable('danger')).' '.Yii::t('TasksModule.base', 'This task can only be processed by assigned and responsible users.');
+        }
     }
-
-
 }

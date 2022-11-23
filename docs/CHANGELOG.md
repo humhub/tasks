@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.7.1 (Unreleased)
+-------------------------------
+- Enh #210: Print assigned users on wall stream
+
 
 1.7.0-beta.1 (November 7, 2022)
 -------------------------------
