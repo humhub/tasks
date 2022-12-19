@@ -136,4 +136,11 @@ class Module extends ContentContainerModule
         return [Task::class];
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function getContentContainerName(ContentContainerActiveRecord $container)
+    {
+        return Yii::t('TasksModule.base', 'Tasks');
+    }
 }
