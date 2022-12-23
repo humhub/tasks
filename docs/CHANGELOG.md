@@ -1,6 +1,11 @@
 Changelog
 =========
 
+
+1.7.2 (December 23, 2022)
+-------------------------
+- Enh #218: Fix endless loop in task permission checking 
+
 1.7.1 (December 23, 2022)
 -------------------------
 - Enh #210: Print assigned users on wall stream
