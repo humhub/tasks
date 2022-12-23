@@ -825,8 +825,10 @@ class Task extends ContentActiveRecord implements Searchable
      */
     public function canEdit()
     {
-        if ($this->isNewRecord || !$this->hasTaskResponsible()) {
-            return $this->content->canEdit();
+        if ($this->isNewRecord) {
+            return $this->content->container->can([CreateTask::class, ManageTasks::class]);
+        } else if (!$this->hasTaskResponsible()) {
+            return  $this->content->container->can([ManageTasks::class]);
         }
 
         return  $this->isTaskResponsible();
