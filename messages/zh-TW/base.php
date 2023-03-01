@@ -65,7 +65,7 @@ return array (
   'Delete' => '刪除帳戶',
   'Delete list' => '',
   'Delete task' => '',
-  'Description' => '',
+  'Description' => '描述',
   'Do not remind' => '',
   'Do you really want to delete this task?' => '',
   'Don\'t add to calendar' => '',
