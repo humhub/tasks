@@ -7,7 +7,6 @@
  */
 
 use humhub\modules\ui\form\widgets\MultiSelect;
-use humhub\modules\ui\form\widgets\TimePicker;
 use humhub\widgets\TimeZoneDropdownAddition;
 use humhub\modules\ui\form\widgets\DatePicker;
 use yii\helpers\ArrayHelper;
@@ -27,7 +26,7 @@ $taskReminder = ArrayHelper::map($taskForm->task->getTaskReminder()->all(),'id',
             <?= $form->field($taskForm, 'start_date')->widget(DatePicker::class, ['dateFormat' => Yii::$app->formatter->dateInputFormat, 'clientOptions' => [], 'options' => ['class' => 'form-control', 'autocomplete' => "off"]]) ?>
         </div>
         <div class="col-md-6 timeField" <?= !$taskForm->showTimeFields() ? 'style="opacity:0.2"' : '' ?>>
-            <?= $form->field($taskForm, 'start_time')->widget(TimePicker::class, ['disabled' => $taskForm->task->all_day]); ?>
+            <?= $form->field($taskForm, 'start_time')->input('time', ['disabled' => $taskForm->task->all_day]) ?>
         </div>
     </div>
 
@@ -36,7 +35,7 @@ $taskReminder = ArrayHelper::map($taskForm->task->getTaskReminder()->all(),'id',
             <?= $form->field($taskForm, 'end_date')->widget(DatePicker::class, ['dateFormat' => Yii::$app->formatter->dateInputFormat, 'clientOptions' => [], 'options' => ['class' => 'form-control',  'autocomplete' => "off"]]) ?>
         </div>
         <div class="col-md-6 timeField" <?= !$taskForm->showTimeFields() ? 'style="opacity:0.2"' : '' ?>>
-            <?= $form->field($taskForm, 'end_time')->widget(TimePicker::class, ['disabled' => $taskForm->task->all_day]); ?>
+            <?= $form->field($taskForm, 'end_time')->input('time', ['disabled' => $taskForm->task->all_day]) ?>
         </div>
     </div>
 
