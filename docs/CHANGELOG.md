@@ -1,6 +1,9 @@
 Changelog
 =========
 
+1.7.3 (Unreleased)
+-------------------------
+- Enh #225: Guest Mode - Do not show TopMenu Entry
 
 1.7.2 (December 23, 2022)
 -------------------------
