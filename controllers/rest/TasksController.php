@@ -41,7 +41,7 @@ class TasksController extends BaseContentController
 
     private function saveTask(TaskForm $taskForm): bool
     {
-        $data = $this->prepareRequestParams(Yii::$app->request->getBodyParams(), 'TaskForm', 'Task');
+        $data = Yii::$app->request->bodyParams;
         return $taskForm->load($data) &&
             $taskForm->save() &&
             (!method_exists($this, 'updateContent') || $this->updateContent($taskForm->task, $data));

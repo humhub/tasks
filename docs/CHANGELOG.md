@@ -4,6 +4,7 @@ Changelog
 1.7.3 (Unreleased)
 -------------------------
 - Enh #225: Guest Mode - Do not show TopMenu Entry
+- Enh #226: Removed unnecessary call of prepareRequestParams method from Rest Module
 
 1.7.2 (December 23, 2022)
 -------------------------
