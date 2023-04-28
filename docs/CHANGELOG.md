@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.7.3 (Unreleased)
--------------------------
+1.8.0 (April 28, 2023)
+----------------------
 - Enh #225: Guest Mode - Do not show TopMenu Entry
 - Enh #226: Removed unnecessary call of prepareRequestParams method from Rest Module
 - Enh #228: Added support for hidden tasks in stream
