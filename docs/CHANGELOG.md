@@ -5,6 +5,7 @@ Changelog
 -------------------------
 - Enh #225: Guest Mode - Do not show TopMenu Entry
 - Enh #226: Removed unnecessary call of prepareRequestParams method from Rest Module
+- Enh #228: Added support for hidden tasks in stream
 
 1.7.2 (December 23, 2022)
 -------------------------

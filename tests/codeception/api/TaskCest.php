@@ -2,6 +2,7 @@
 
 namespace tasks\api;
 
+use Codeception\Util\HttpCode;
 use tasks\ApiTester;
 use tests\codeception\_support\HumHubApiTestCest;
 use yii\web\UploadedFile;
@@ -21,7 +22,7 @@ class TaskCest extends HumHubApiTestCest
 
         $I->amGoingTo('create a task with error');
         $I->sendPost('tasks/container/1', ['Task' => ['scheduling' => 1]]);
-        $I->seeBadMessage('Start date cannot be blank');
+        $I->seeCodeResponseContainsJson(HttpCode::UNPROCESSABLE_ENTITY, ['message' => 'Validation failed']);
     }
 
     public function testGetTaskById(ApiTester $I)

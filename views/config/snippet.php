@@ -6,13 +6,14 @@
  * @license https://www.humhub.com/licences
  *
  */
-/* @var $this yii\web\View */
-/* @var $model \humhub\modules\tasks\models\SnippetModuleSettings */
 
+use humhub\modules\tasks\models\SnippetModuleSettings;
+use humhub\modules\ui\form\widgets\ContentHiddenCheckbox;
+use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use \yii\helpers\Html;
-?>
 
+/* @var $model SnippetModuleSettings */
+?>
 <div class="panel panel-default">
 
     <div class="panel-heading"><?= Yii::t('TasksModule.base', '<strong>Tasks</strong>'); ?></div>
@@ -21,6 +22,11 @@ use \yii\helpers\Html;
         <p><?= Yii::t('TasksModule.base', 'Configure the Tasks module to meet your specific requirements and needs. You can define individual settings and for instance decide whether a widget is displayed.') ?></p>
 
         <?php $form = ActiveForm::begin(); ?>
+
+        <h4><?= Yii::t('TasksModule.base', 'General Settings') ?></h4>
+        <?= $form->field($model, 'contentHiddenDefault')->widget(ContentHiddenCheckbox::class, [
+            'type' => ContentHiddenCheckbox::TYPE_GLOBAL,
+        ]) ?>
 
         <h4><?= Yii::t('TasksModule.base', 'Module Widget') ?></h4>
         <div class="help-block"><?= Yii::t('TasksModule.base', 'A widget is an element added to to the sidebar of a stream. In this case it provides users with a short overview of their tasks.') ?></div>

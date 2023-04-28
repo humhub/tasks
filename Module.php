@@ -4,6 +4,7 @@ namespace humhub\modules\tasks;
 
 use humhub\components\console\Application as ConsoleApplication;
 use humhub\modules\tasks\helpers\TaskUrl;
+use humhub\modules\tasks\models\forms\ConfigureContainerForm;
 use humhub\modules\tasks\models\lists\TaskList;
 use humhub\modules\tasks\permissions\ProcessUnassignedTasks;
 use humhub\modules\tasks\permissions\CreateTask;
@@ -50,6 +51,14 @@ class Module extends ContentContainerModule
             Space::class,
             User::class,
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getContentContainerConfigUrl(ContentContainerActiveRecord $container)
+    {
+        return TaskUrl::toContainerConfig($container);
     }
 
     /**
@@ -142,5 +151,15 @@ class Module extends ContentContainerModule
     public function getContentContainerName(ContentContainerActiveRecord $container)
     {
         return Yii::t('TasksModule.base', 'Tasks');
+    }
+
+    public function getContentHiddenGlobalDefault(): bool
+    {
+        return $this->settings->get('contentHiddenGlobalDefault', false);
+    }
+
+    public function getContentHiddenDefault(ContentContainerActiveRecord $contentContainer): bool
+    {
+        return (new ConfigureContainerForm(['contentContainer' => $contentContainer]))->contentHiddenDefault;
     }
 }
