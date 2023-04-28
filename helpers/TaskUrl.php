@@ -42,10 +42,16 @@ class TaskUrl extends Url
     const ROUTE_EXPORT = 'export';
 
     const ROUTE_CONFIG = '/tasks/config';
+    const ROUTE_CONTAINER_CONFIG = '/tasks/config-container';
 
     public static function toConfig()
     {
         return static::toRoute(static::ROUTE_CONFIG);
+    }
+
+    public static function toContainerConfig(ContentContainerActiveRecord $container)
+    {
+        return $container->createUrl(static::ROUTE_CONTAINER_CONFIG);
     }
 
     public static function globalView()

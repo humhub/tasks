@@ -9,6 +9,8 @@
 
 namespace humhub\modules\tasks\models;
 
+use humhub\components\SettingsManager;
+use humhub\modules\tasks\Module;
 use Yii;
 use \yii\base\Model;
 
@@ -40,16 +42,22 @@ class SnippetModuleSettings extends Model
     public $showGlobalMenuItem = 1;
     public $menuSortOrder = 500;
 
+    /**
+     * @var bool Default setting to hide tasks on stream
+     */
+    public bool $contentHiddenDefault = false;
 
     public function init()
     {
-        $module = Yii::$app->getModule('tasks');
-        $this->myTasksSnippetShow = $module->settings->get('myTasksSnippetShow', $this->myTasksSnippetShow);
-        $this->myTasksSnippetShowSpace = $module->settings->get('myTasksSnippetShowSpace', $this->myTasksSnippetShowSpace);
-        $this->myTasksSnippetMaxItems = $module->settings->get('myTasksSnippetMaxItems', $this->myTasksSnippetMaxItems);
-        $this->myTasksSnippetSortOrder = $module->settings->get('myTasksSnippetSortOrder', $this->myTasksSnippetSortOrder);
-        $this->showGlobalMenuItem = $module->settings->get('showGlobalMenuItem', $this->showGlobalMenuItem);
-        $this->menuSortOrder = $module->settings->get('menuSortOrder', $this->menuSortOrder);
+        $settings = $this->getSettings();
+
+        $this->myTasksSnippetShow = $settings->get('myTasksSnippetShow', $this->myTasksSnippetShow);
+        $this->myTasksSnippetShowSpace = $settings->get('myTasksSnippetShowSpace', $this->myTasksSnippetShowSpace);
+        $this->myTasksSnippetMaxItems = $settings->get('myTasksSnippetMaxItems', $this->myTasksSnippetMaxItems);
+        $this->myTasksSnippetSortOrder = $settings->get('myTasksSnippetSortOrder', $this->myTasksSnippetSortOrder);
+        $this->showGlobalMenuItem = $settings->get('showGlobalMenuItem', $this->showGlobalMenuItem);
+        $this->menuSortOrder = $settings->get('menuSortOrder', $this->menuSortOrder);
+        $this->contentHiddenDefault = $settings->get('contentHiddenGlobalDefault', $this->contentHiddenDefault);
     }
 
     public function showMyTasksSnippet()
@@ -77,7 +85,7 @@ class SnippetModuleSettings extends Model
     public function rules()
     {
         return [
-            [['myTasksSnippetShow', 'myTasksSnippetShowSpace', 'showGlobalMenuItem'],  'boolean'],
+            [['myTasksSnippetShow', 'myTasksSnippetShowSpace', 'showGlobalMenuItem', 'contentHiddenDefault'],  'boolean'],
             ['myTasksSnippetMaxItems',  'number', 'min' => 1, 'max' => 30],
             [['myTasksSnippetSortOrder', 'menuSortOrder'],  'number', 'min' => 0],
         ];
@@ -98,19 +106,30 @@ class SnippetModuleSettings extends Model
         ];
     }
 
-    public function save()
+    public function save(): bool
     {
-        if(!$this->validate()) {
+        if (!$this->validate()) {
             return false;
         }
 
-        $module = Yii::$app->getModule('tasks');
-        $module->settings->set('myTasksSnippetShow', $this->myTasksSnippetShow);
-        $module->settings->set('myTasksSnippetShowSpace', $this->myTasksSnippetShowSpace);
-        $module->settings->set('myTasksSnippetMaxItems', $this->myTasksSnippetMaxItems);
-        $module->settings->set('myTasksSnippetSortOrder', $this->myTasksSnippetSortOrder);
-        $module->settings->set('showGlobalMenuItem', $this->showGlobalMenuItem);
-        $module->settings->set('menuSortOrder', $this->menuSortOrder);
+        $settings = $this->getSettings();
+
+        $settings->set('myTasksSnippetShow', $this->myTasksSnippetShow);
+        $settings->set('myTasksSnippetShowSpace', $this->myTasksSnippetShowSpace);
+        $settings->set('myTasksSnippetMaxItems', $this->myTasksSnippetMaxItems);
+        $settings->set('myTasksSnippetSortOrder', $this->myTasksSnippetSortOrder);
+        $settings->set('showGlobalMenuItem', $this->showGlobalMenuItem);
+        $settings->set('menuSortOrder', $this->menuSortOrder);
+        $settings->set('contentHiddenGlobalDefault', $this->contentHiddenDefault);
+
         return true;
+    }
+
+    protected function getSettings(): SettingsManager
+    {
+        /* @var Module $module */
+        $module = Yii::$app->getModule('tasks');
+
+        return $module->settings;
     }
 }

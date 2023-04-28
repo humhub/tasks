@@ -13,6 +13,7 @@ use humhub\modules\tasks\permissions\ManageTasks;
 use humhub\modules\tasks\widgets\ContentTagDropDown;
 use humhub\modules\topic\widgets\TopicPicker;
 use humhub\modules\ui\form\widgets\ActiveForm;
+use humhub\modules\ui\form\widgets\ContentHiddenCheckbox;
 use humhub\modules\ui\form\widgets\ContentVisibilitySelect;
 
 /* @var $form ActiveForm */
@@ -40,4 +41,5 @@ $canManage = $taskForm->contentContainer->can(ManageTasks::class);
 
     <?= $form->field($taskForm, 'is_public')->widget(ContentVisibilitySelect::class, ['contentOwner' => 'task'])->label(true) ?>
     <?= $form->field($taskForm->task, 'scheduling')->checkbox(['data-action-change' => 'toggleScheduling']) ?>
+    <?= $form->field($taskForm, 'hidden')->widget(ContentHiddenCheckbox::class) ?>
 </div>

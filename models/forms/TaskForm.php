@@ -19,6 +19,7 @@ use humhub\libs\DbDateValidator;
 use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\space\models\Space;
 use humhub\modules\tasks\helpers\TaskUrl;
+use humhub\modules\tasks\Module;
 use humhub\modules\topic\models\Topic;
 use humhub\modules\ui\form\interfaces\TabbedFormModel;
 use humhub\modules\tasks\models\scheduling\TaskReminder;
@@ -129,6 +130,11 @@ class TaskForm extends Model implements TabbedFormModel
     public $topics = [];
 
     /**
+     * @var ?int Hide a task on the wall stream
+     */
+    public ?int $hidden = null;
+
+    /**
      * @inheritdoc
      */
     public function init()
@@ -143,6 +149,7 @@ class TaskForm extends Model implements TabbedFormModel
 
             $this->translateDateTimes($this->task->start_datetime, $this->task->end_datetime, Yii::$app->timeZone, $this->timeZone);
             $this->is_public = $this->task->content->visibility;
+            $this->hidden = $this->task->content->hidden;
 
             $this->topics = Topic::findByContent($this->task->content);
         }
@@ -171,7 +178,7 @@ class TaskForm extends Model implements TabbedFormModel
                 return $('#task-all_day').val() == 0;
             }"],
 
-            [['is_public'], 'integer'],
+            [['is_public', 'hidden'], 'integer'],
             [['newItems', 'editItems', 'topics'], 'safe'],
         ];
     }
@@ -220,7 +227,7 @@ class TaskForm extends Model implements TabbedFormModel
     public function checkAllDay()
     {
         Yii::$app->formatter->timeZone = $this->timeZone;
-        
+
         if($this->task->all_day) {
             $date = new DateTime('now', new DateTimeZone($this->timeZone));
             $date->setTime(0,0);
@@ -281,9 +288,12 @@ class TaskForm extends Model implements TabbedFormModel
      */
     public function createNew(ContentContainerActiveRecord $contentContainer)
     {
+        /* @var Module $module */
+        $module = Yii::$app->getModule('tasks');
         $this->task = new Task($contentContainer, Content::VISIBILITY_PRIVATE, ['task_list_id' => $this->taskListId]);
         $this->task->scenario = Task::SCENARIO_EDIT;
         $this->is_public = ($this->task->content->visibility != null) ? $this->task->content->visibility : Content::VISIBILITY_PRIVATE;
+        $this->hidden = $module->getContentHiddenDefault($contentContainer);
     }
 
     /**
@@ -308,6 +318,7 @@ class TaskForm extends Model implements TabbedFormModel
         }
 
         $this->task->content->visibility = $this->is_public;
+        $this->task->content->hidden = $this->hidden;
 
         if(!$this->task->load($data)) {
             return false;
@@ -466,7 +477,7 @@ class TaskForm extends Model implements TabbedFormModel
                 'label' => Yii::t('TasksModule.base', 'General'),
                 'view' => 'edit-basic',
                 'linkOptions' => ['class' => 'tab-basic'],
-                'fields' => ['title', 'task_list_id', 'description', 'topics', 'is_public', 'scheduling'],
+                'fields' => ['title', 'task_list_id', 'description', 'topics', 'is_public', 'scheduling', 'hidden'],
             ],
             [
                 'label' => Yii::t('TasksModule.base', 'Scheduling'),
