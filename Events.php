@@ -192,7 +192,7 @@ class Events
         foreach (TaskItem::find()->all() as $taskItem) {
             if ($taskItem->task === null) {
                 if ($integrityController->showFix("Deleting task item id " . $taskItem->id . " without existing task!")) {
-                    $taskItem->delete();
+                    $taskItem->hardDelete();
                 }
             }
         }
