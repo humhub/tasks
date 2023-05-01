@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.8.1 (Unreleased)
-----------------------
+1.8.1 (May 1, 2023)
+-------------------
 - Fix #230: Hard delete tasks on disable module
 
 1.8.0 (April 28, 2023)
