@@ -75,7 +75,7 @@ class Module extends ContentContainerModule
     public function disable()
     {
         foreach (Task::find()->all() as $task) {
-            $task->delete();
+            $task->hardDelete();
         }
 
         foreach (TaskList::find()->all() as $taskList) {
@@ -96,7 +96,7 @@ class Module extends ContentContainerModule
         parent::disableContentContainer($container);
 
         foreach (Task::find()->contentContainer($container)->all() as $task) {
-            $task->delete();
+            $task->hardDelete();
         }
 
         foreach (TaskList::findByContainer($container)->all() as $taskList) {
