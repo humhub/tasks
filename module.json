@@ -1,7 +1,7 @@
 {
     "id": "tasks",
     "name": "Tasks",
-    "description": "Simple taskmanager for your spaces.",
+    "description": "Intuitive task management tool with many basic and advanced features.",
     "keywords": ["task", "todo"],
     "version": "1.8.1",
     "homepage": "https://github.com/humhub/tasks",
