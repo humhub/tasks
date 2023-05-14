@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.8.2 (Unreleased)
+-------------------
+- Fix #232: Set All Icons color to @text-color-main (#555)
+
 1.8.1 (May 1, 2023)
 -------------------
 - Fix #230: Hard delete tasks on disable module
