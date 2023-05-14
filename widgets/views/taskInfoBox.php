@@ -9,11 +9,12 @@
 
 $value = is_array($value) ? $value : [$value];
 
+use Yii;
 use humhub\libs\Html;
 use humhub\modules\ui\icon\widgets\Icon; ?>
 
 <div class="task-info <?= $cssClass ?>">
-    <strong><?= Icon::get($icon)->color($iconColor)?> <?= Html::encode($title) ?>
+    <strong><?= Icon::get($icon)->color(Yii::$app->view->theme->variable('text-color-main'))?> <?= Html::encode($title) ?>
     </strong><br>
     <span class="task-info-text <?= $textClass ?>">
         <?php foreach ($value as $val) : ?>
@@ -23,5 +24,3 @@ use humhub\modules\ui\icon\widgets\Icon; ?>
         <?php endforeach; ?>
     </span>
 </div>
-
-
