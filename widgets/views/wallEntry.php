@@ -8,13 +8,14 @@
 
 /* @var $task \humhub\modules\tasks\models\Task */
 
+use Yii;
 use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\tasks\widgets\TaskRoleInfoBox;
 use humhub\modules\ui\icon\widgets\Icon;
 use humhub\widgets\ModalButton;
 use humhub\modules\tasks\widgets\TaskPercentageBar;
 
-$color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
+$color = Yii::$app->view->theme->variable('text-color-main');
 
 ?>
 <div class="wall-entry-task task">
@@ -44,5 +45,3 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
     <?php endif; ?>
 
 </div>
-
-
