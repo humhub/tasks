@@ -9,7 +9,6 @@
 
 $value = is_array($value) ? $value : [$value];
 
-use Yii;
 use humhub\libs\Html;
 use humhub\modules\ui\icon\widgets\Icon; ?>
 
