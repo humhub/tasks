@@ -4,6 +4,7 @@ Changelog
 1.8.2 (Unreleased)
 -------------------
 - Fix #232: Set All Icons color to @text-color-main (#555)
+- Fix #234: Fix using of Yii on view files
 
 1.8.1 (May 1, 2023)
 -------------------

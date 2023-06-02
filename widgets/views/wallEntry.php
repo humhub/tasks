@@ -8,7 +8,6 @@
 
 /* @var $task \humhub\modules\tasks\models\Task */
 
-use Yii;
 use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\tasks\widgets\TaskRoleInfoBox;
 use humhub\modules\ui\icon\widgets\Icon;
