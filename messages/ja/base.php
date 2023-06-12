@@ -14,7 +14,7 @@ return array (
   '<strong>New</strong> Task' => '<strong>新しい</strong> タスク',
   '<strong>Task</strong> Overview' => '<strong>タスク</strong> の概要',
   '<strong>Tasks</strong>' => '<strong>タスク</strong>',
-  '<strong>Tasks</strong> module configuration' => '',
+  '<strong>Tasks</strong> module configuration' => '<strong>タスク</strong> モジュールの構成',
   '<strong>Your</strong> tasks' => '<strong>あなたの</strong> タスク',
   'A widget is an element added to to the sidebar of a stream. In this case it provides users with a short overview of their tasks.' => 'ウィジェットはストリームのサイドバーに追加される要素です。 この場合ユーザーにタスクの簡単な概要を提供します。',
   'Accept Task' => 'タスクを許可',
