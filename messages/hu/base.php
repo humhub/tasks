@@ -14,7 +14,7 @@ return array (
   '<strong>New</strong> Task' => '<strong>Új</strong> feladat',
   '<strong>Task</strong> Overview' => '<strong>Feladat</strong> áttekintése',
   '<strong>Tasks</strong>' => '<strong>Feladatok</strong>',
-  '<strong>Tasks</strong> module configuration' => '',
+  '<strong>Tasks</strong> module configuration' => '<strong>Feladatok</strong> modul konfigurációja',
   '<strong>Your</strong> tasks' => '<strong>Saját</strong> feladataid',
   'A widget is an element added to to the sidebar of a stream. In this case it provides users with a short overview of their tasks.' => 'A widget egy hírfolyam oldalsávjához hozzáadott elem. Ebben az esetben a felhasználóknak rövid áttekintést nyújtanak feladataikról.',
   'Accept Task' => 'Feladat elfogadása',
