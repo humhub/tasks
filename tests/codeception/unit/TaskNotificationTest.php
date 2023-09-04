@@ -26,7 +26,7 @@ class TaskNotificationTest extends TaskTestCase
         $space4 = Space::findOne(4);
 
         $task = $this->createTask($space4, 'Task1', null, ['review' => 1, 'status' => Task::STATUS_PENDING_REVIEW]);
-        $this->assertHasNoNotification(ReviewRejectedNotification::class, $task);
+        static::assertHasNoNotification(ReviewRejectedNotification::class, $task);
 
         $task->addTaskAssigned(User::findOne(3));
         $task->addTaskAssigned(User::findOne(1));
@@ -36,9 +36,9 @@ class TaskNotificationTest extends TaskTestCase
         $this->assertTrue($task->state->revert());
         $this->assertEquals(Task::STATUS_IN_PROGRESS, $task->status);
 
-        $this->assertEqualsNotificationCount(1,ReviewRejectedNotification::class, $task, null, 3);
-        $this->assertEqualsNotificationCount(1,ReviewRejectedNotification::class, $task, null, 1);
-        $this->assertEqualsNotificationCount(0,ReviewRejectedNotification::class, $task, null, 2);
+        static::assertEqualsNotificationCount(1,ReviewRejectedNotification::class, $task, null, 3);
+        static::assertEqualsNotificationCount(1,ReviewRejectedNotification::class, $task, null, 1);
+        static::assertEqualsNotificationCount(0,ReviewRejectedNotification::class, $task, null, 2);
     }
 
     public function testResetNotification()
@@ -47,7 +47,7 @@ class TaskNotificationTest extends TaskTestCase
         $space4 = Space::findOne(4);
 
         $task = $this->createTask($space4, 'Task1',null, ['status' => Task::STATUS_COMPLETED]);
-        $this->assertHasNoNotification(TaskResetNotification::class, $task);
+        static::assertHasNoNotification(TaskResetNotification::class, $task);
 
         $task->addTaskAssigned(User::findOne(2));
         $task->addTaskResponsible(User::findOne(3));
@@ -57,9 +57,9 @@ class TaskNotificationTest extends TaskTestCase
 
         $this->assertTrue($task->state->reset());
 
-        $this->assertEqualsNotificationCount(1, TaskResetNotification::class, $task, null, 1);
-        $this->assertEqualsNotificationCount(0, TaskResetNotification::class, $task, null, 3);
-        $this->assertEqualsNotificationCount(1, TaskResetNotification::class, $task, null, 2);
+        static::assertEqualsNotificationCount(1, TaskResetNotification::class, $task, null, 1);
+        static::assertEqualsNotificationCount(0, TaskResetNotification::class, $task, null, 3);
+        static::assertEqualsNotificationCount(1, TaskResetNotification::class, $task, null, 2);
     }
 
     public function testAssignedNotification()
@@ -69,7 +69,7 @@ class TaskNotificationTest extends TaskTestCase
 
         $task = $this->createTask($space4, 'Task1');
 
-        $this->assertHasNoNotification(AssignedNotification::class, $task, null, 3);
+        static::assertHasNoNotification(AssignedNotification::class, $task, null, 3);
 
         $task->addTaskAssigned(User::findOne(3));
         $this->assertHasNotification(AssignedNotification::class, $task, null, 3);
@@ -82,7 +82,7 @@ class TaskNotificationTest extends TaskTestCase
 
         $task = $this->createTask($space4, 'Task1');
 
-        $this->assertHasNoNotification(AddResponsibleNotification::class, $task);
+        static::assertHasNoNotification(AddResponsibleNotification::class, $task);
 
         $task->addTaskResponsible(User::findOne(1));
         $task->refresh();

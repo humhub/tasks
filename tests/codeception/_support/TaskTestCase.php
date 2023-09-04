@@ -39,7 +39,7 @@ class TaskTestCase extends HumHubDbTestCase
         return $task;
     }
 
-    public function assertHasNoNotification($class, ActiveRecord $source, $originator_id = null, $target_id = null, $msg = '')
+    public static function assertHasNoNotification($class, ActiveRecord $source, $originator_id = null, $target_id = null, $msg = '')
     {
         $notificationQuery = Notification::find()->where(['class' => $class, 'source_class' => $source->className(), 'source_pk' => $source->getPrimaryKey()]);
 
@@ -51,10 +51,10 @@ class TaskTestCase extends HumHubDbTestCase
             $notificationQuery->andWhere(['user_id' => $target_id]);
         }
 
-        $this->assertEmpty($notificationQuery->all(), $msg);
+        static::assertEmpty($notificationQuery->all(), $msg);
     }
 
-    public function assertEqualsNotificationCount($count, $class, ActiveRecord $source, $originator_id = null, $target_id = null, $msg = '')
+    public static function assertEqualsNotificationCount($count, $class, ActiveRecord $source, $originator_id = null, $target_id = null, $msg = '')
     {
         $notificationQuery = Notification::find()->where(['class' => $class, 'source_class' => $source->className(), 'source_pk' => $source->getPrimaryKey()]);
 
@@ -66,6 +66,6 @@ class TaskTestCase extends HumHubDbTestCase
             $notificationQuery->andWhere(['user_id' => $target_id]);
         }
 
-        $this->assertEquals($count, $notificationQuery->count(), $msg);
+        static::assertEquals($count, $notificationQuery->count(), $msg);
     }
 }
