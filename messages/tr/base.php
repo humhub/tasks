@@ -112,7 +112,7 @@ return array (
   'Overdue' => '',
   'Overview' => 'Genel Bakış',
   'Parent Task' => '',
-  'Pending' => '',
+  'Pending' => 'Onay bekliyor',
   'Pending Review' => '',
   'Process unassigned tasks' => '',
   'Ready For Review' => '',
