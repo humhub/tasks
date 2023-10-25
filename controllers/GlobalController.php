@@ -19,7 +19,10 @@ class GlobalController extends AbstractTaskController
 {
     public $requireContainer = false;
 
-    public function getAccessRules()
+    /**
+     * @inheritdoc
+     */
+    protected function getAccessRules()
     {
         return [
             [ControllerAccess::RULE_LOGGED_IN_ONLY]

@@ -7,6 +7,7 @@ Changelog
 - Fix #234: Fix using of Yii on view files
 - Fix #236: Fix pagination design
 - Enh #238: Tests for `next` version
+- Fix #242: Fix visibility of the method `Controller::getAccessRules()`
 
 1.8.1 (May 1, 2023)
 -------------------
