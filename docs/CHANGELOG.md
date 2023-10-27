@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.9.0 (Unreleased)
+-------------------
+- Fix #243: Fix visibility of the method `Controller::getAccessRules()`
+- 
 1.8.2 (Unreleased)
 -------------------
 - Fix #232: Set All Icons color to @text-color-main (#555)
