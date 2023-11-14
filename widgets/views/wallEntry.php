@@ -30,14 +30,14 @@ $hasItems = $task->hasItems()
     <?php endif; ?>
 
     <?php if(!empty($task->description) || $hasItems) : ?>
-        <div data-ui-markdown data-ui-show-more>
+        <div data-ui-show-more>
             <?php if(!empty($task->description)) : ?>
-                <div style="margin-bottom:10px">
+                <div data-ui-markdown style="margin-bottom:10px">
                     <?= RichText::output($task->description) ?>
                 </div>
             <?php endif; ?>
             <?php if($hasItems) : ?>
-                <div style="overflow-x:hidden">
+                <div class="task-details-body" style="overflow-x:hidden">
                     <?= TaskChecklist::widget(['task' => $task]) ?>
                 </div>
             <?php endif; ?>
