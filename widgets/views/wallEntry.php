@@ -13,6 +13,7 @@ use humhub\modules\tasks\widgets\TaskRoleInfoBox;
 use humhub\modules\ui\icon\widgets\Icon;
 use humhub\widgets\ModalButton;
 use humhub\modules\tasks\widgets\TaskPercentageBar;
+use humhub\modules\tasks\widgets\checklist\TaskChecklist;
 
 $color = Yii::$app->view->theme->variable('text-color-main');
 
@@ -27,9 +28,18 @@ $color = Yii::$app->view->theme->variable('text-color-main');
        <?= TaskPercentageBar::widget(['task' => $task, 'filterResult' => false]) ?>
     <?php endif; ?>
 
-    <?php if(!empty($task->description)) : ?>
-        <div data-ui-markdown data-ui-show-more style="margin-bottom:10px">
-            <?= RichText::output($task->description) ?>
+    <?php if(!empty($task->description) || $task->hasItems()) : ?>
+        <div data-ui-markdown data-ui-show-more>
+            <?php if(!empty($task->description)) : ?>
+                <div style="margin-bottom:10px">
+                    <?= RichText::output($task->description) ?>
+                </div>
+            <?php endif; ?>
+            <?php if($task->hasItems()) : ?>
+                <div style="overflow-x:hidden">
+                    <?= TaskChecklist::widget(['task' => $task]) ?>
+                </div>
+            <?php endif; ?>
         </div>
     <?php endif; ?>
 
