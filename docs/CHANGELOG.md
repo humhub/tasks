@@ -8,6 +8,7 @@ Changelog
 - Fix #236: Fix pagination design
 - Enh #238: Tests for `next` version
 - Fix #242: Fix visibility of the method `Controller::getAccessRules()`
+- Fix #245: Fix memory usage on integrity check
 
 1.8.1 (May 1, 2023)
 -------------------
