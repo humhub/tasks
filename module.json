@@ -3,10 +3,10 @@
     "name": "Tasks",
     "description": "Intuitive task management tool with many basic and advanced features.",
     "keywords": ["task", "todo"],
-    "version": "1.9.0",
+    "version": "1.8.3",
     "homepage": "https://github.com/humhub/tasks",
     "humhub": {
-        "minVersion": "1.15"
+        "minVersion": "1.14"
     },
     "screenshots": ["assets/screen1.jpg", "assets/screen2.jpg"]
 }

@@ -1,9 +1,9 @@
 Changelog
 =========
 
-1.9.0 (Unreleased)
+1.8.3 (Unreleased)
 -------------------
-- Fix #237: Update tests to v1.15
+- Fix #237: Update tests for compatibility with v1.15
 
 1.8.2 (Unreleased)
 -------------------
