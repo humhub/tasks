@@ -6,11 +6,9 @@ namespace tasks;
 
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\content\models\Content;
-use humhub\modules\notification\models\Notification;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\models\lists\TaskList;
 use tests\codeception\_support\HumHubDbTestCase;
-use yii\db\ActiveRecord;
 
 class TaskTestCase extends HumHubDbTestCase
 {
@@ -37,35 +35,5 @@ class TaskTestCase extends HumHubDbTestCase
         $this->assertTrue($task->save());
         $task->refresh();
         return $task;
-    }
-
-    public function assertHasNoNotification($class, ActiveRecord $source, $originator_id = null, $target_id = null, $msg = '')
-    {
-        $notificationQuery = Notification::find()->where(['class' => $class, 'source_class' => $source->className(), 'source_pk' => $source->getPrimaryKey()]);
-
-        if ($originator_id != null) {
-            $notificationQuery->andWhere(['originator_user_id' => $originator_id]);
-        }
-
-        if($target_id != null) {
-            $notificationQuery->andWhere(['user_id' => $target_id]);
-        }
-
-        $this->assertEmpty($notificationQuery->all(), $msg);
-    }
-
-    public function assertEqualsNotificationCount($count, $class, ActiveRecord $source, $originator_id = null, $target_id = null, $msg = '')
-    {
-        $notificationQuery = Notification::find()->where(['class' => $class, 'source_class' => $source->className(), 'source_pk' => $source->getPrimaryKey()]);
-
-        if ($originator_id != null) {
-            $notificationQuery->andWhere(['originator_user_id' => $originator_id]);
-        }
-
-        if($target_id != null) {
-            $notificationQuery->andWhere(['user_id' => $target_id]);
-        }
-
-        $this->assertEquals($count, $notificationQuery->count(), $msg);
     }
 }

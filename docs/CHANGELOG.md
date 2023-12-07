@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.8.3 (Unreleased)
+-------------------
+- Fix #237: Update tests for compatibility with v1.15
+
 1.8.2 (Unreleased)
 -------------------
 - Fix #232: Set All Icons color to @text-color-main (#555)
