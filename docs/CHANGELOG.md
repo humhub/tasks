@@ -1,13 +1,15 @@
 Changelog
 =========
 
-1.8.2 (Unreleased)
--------------------
+1.8.4 (December 21, 2023)
+-------------------------
+- Fix #237: Update tests for compatibility with v1.15
 - Fix #232: Set All Icons color to @text-color-main (#555)
 - Fix #234: Fix using of Yii on view files
 - Fix #236: Fix pagination design
 - Enh #238: Tests for `next` version
 - Fix #242: Fix visibility of the method `Controller::getAccessRules()`
+- Fix #245: Fix memory usage on integrity check
 
 1.8.1 (May 1, 2023)
 -------------------

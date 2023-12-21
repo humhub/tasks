@@ -189,7 +189,7 @@ class Events
         $integrityController->showTestHeadline("Tasks Module - Entries (" . Task::find()->count() . " entries)");
 
         // check for taskItems without task
-        foreach (TaskItem::find()->all() as $taskItem) {
+        foreach (TaskItem::find()->each() as $taskItem) {
             if ($taskItem->task === null) {
                 if ($integrityController->showFix("Deleting task item id " . $taskItem->id . " without existing task!")) {
                     $taskItem->hardDelete();
@@ -198,7 +198,7 @@ class Events
         }
 
         // check for task responsible users without task or existing user
-        foreach (TaskUser::find()->all() as $taskUser) {
+        foreach (TaskUser::find()->each() as $taskUser) {
             if ($taskUser->task === null) {
                 if ($integrityController->showFix("Deleting task user user id " . $taskUser->id . " without existing task!")) {
                     $taskUser->delete();
@@ -213,7 +213,7 @@ class Events
 
         $integrityController->showTestHeadline("Tasks Module (" . Task::find()->count() . " entries)");
 
-        foreach (Task::find()->all() as $task) {
+        foreach (Task::find()->each() as $task) {
             if ($task->task_list_id != null && !$task->list) {
                 if ($integrityController->showFix("Reset task list for task" . $task->id . " with invalid task_list_setting!")) {
                     $task->updateAttributes(['task_list_id' => new Expression('NULL')]);
@@ -222,7 +222,7 @@ class Events
         }
 
 //        // check for task responsible users without task or existing user
-//        foreach (TaskResponsible::find()->all() as $taskResponsible) {
+//        foreach (TaskResponsible::find()->each() as $taskResponsible) {
 //            if ($taskResponsible->task === null) {
 //                if ($integrityController->showFix("Deleting task responsible user id " . $taskResponsible->id . " without existing task!")) {
 //                    $taskResponsible->delete();
@@ -236,7 +236,7 @@ class Events
 //        }
 
 //        // check for task assigned users without task or existing user
-//        foreach (TaskAssigned::find()->all() as $taskAssigned) {
+//        foreach (TaskAssigned::find()->each() as $taskAssigned) {
 //            if ($taskAssigned->task === null) {
 //                if ($integrityController->showFix("Deleting task assigned user id " . $taskAssigned->id . " without existing task!")) {
 //                    $taskAssigned->delete();
@@ -250,7 +250,7 @@ class Events
 //        }
 
         // check for task reminders without task
-        foreach (TaskReminder::find()->all() as $taskReminder) {
+        foreach (TaskReminder::find()->each() as $taskReminder) {
             if ($taskReminder->task === null) {
                 if ($integrityController->showFix("Deleting task reminder id " . $taskReminder->id . " without existing task!")) {
                     $taskReminder->delete();
