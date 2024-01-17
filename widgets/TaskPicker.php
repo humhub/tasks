@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
@@ -8,9 +9,10 @@
 
 namespace humhub\modules\tasks\widgets;
 
+use humhub\modules\friendship\Module as FriendshipModule;
 use Yii;
 use yii\helpers\Html;
-use \yii\helpers\Url;
+use yii\helpers\Url;
 
 /**
  * TaskPickerWidget displays a task picker instead of an input field.
@@ -38,7 +40,6 @@ use \yii\helpers\Url;
  */
 class TaskPicker extends \yii\base\Widget
 {
-
     /**
      * Id of input element which should replaced
      *
@@ -91,10 +92,10 @@ class TaskPicker extends \yii\base\Widget
      * @var string for input placeholder attribute.
      */
     public $placeholderText = "";
-    
+
     /**
      * Used to transfer additional data to the server
-     * @var type 
+     * @var type
      */
     public $data = null;
 
@@ -139,27 +140,27 @@ class TaskPicker extends \yii\base\Widget
                     'placeholderText' => $this->placeholderText,
         ]);
     }
-    
+
     /**
      * Creates a json task array used in the taskpicker js frontend.
      * The $cfg is used to specify the filter values the following values are available:
-     * 
+     *
      * query - (ActiveQuery) The initial query which is used to append additional filters. - default = User Friends if friendship module is enabled else User::find()
-     * 
+     *
      * active - (boolean) Specifies if only active task should be included in the result - default = true
-     * 
+     *
      * maxResults - (int) The max number of entries returned in the array - default = 10
-     * 
+     *
      * keyword - (string) A keyword which filters task by title and description
-     * 
+     *
      * permission - (BasePermission) An additional permission filter
-     * 
+     *
      * fillQuery - (ActiveQuery) Can be used to fill the result array if the initial query does not return the maxResults, these results will have a lower priority
-     * 
+     *
      * fillUser - (boolean) When set to true and no fillQuery is given the result is filled with User::find() results
-     * 
+     *
      * disableFillUser - Specifies if the results of the fillQuery should be disabled in the taskpicker results - default = true
-     * 
+     *
      * @param type $cfg filter configuration
      * @return type json representation used by the taskpicker
      */
@@ -178,8 +179,9 @@ class TaskPicker extends \yii\base\Widget
         $cfg = ($cfg == null) ? $defaultCfg : array_merge($defaultCfg, $cfg);
 
         //If no initial query is given we use getFriends if friendship module is enabled otherwise all tasks
-        if(!isset($cfg['query'])) {
-            $cfg['query'] = (Yii::$app->getModule('friendship')->getIsEnabled())
+        if (!isset($cfg['query'])) {
+            $module = Yii::$app->getModule('friendship');
+            $cfg['query'] = ($module instanceof FriendshipModule && $module->isFriendshipEnabled())
                     ? Yii::$app->task->getIdentity()->getFriends()
                     : UserFilter::find();
         }
@@ -189,8 +191,7 @@ class TaskPicker extends \yii\base\Widget
         $jsonResult = self::asJSON($task, $cfg['permission'], 2);
 
         //Fill the result with additional tasks if it's allowed and the result count less than maxResult
-        if(count($task) < $cfg['maxResult'] && (isset($cfg['fillQuery']) || $cfg['fillUser']) ) {
-
+        if (count($task) < $cfg['maxResult'] && (isset($cfg['fillQuery']) || $cfg['fillUser'])) {
             //Filter out tasks by means of the fillQuery or default the fillQuery
             $fillQuery = (isset($cfg['fillQuery'])) ? $cfg['fillQuery'] : UserFilter::find();
             UserFilter::addKeywordFilter($fillQuery, $cfg['keyword'], ($cfg['maxResult'] - count($task)));
@@ -204,26 +205,26 @@ class TaskPicker extends \yii\base\Widget
 
         return $jsonResult;
     }
-    
+
     /**
      * Assambles all task Ids of the given $tasks into an array
-     * 
+     *
      * @param array $tasks array of task models
      * @return array task id array
      */
     private static function getTaskIdArray($tasks)
     {
         $result = [];
-        foreach($tasks as $task) {
+        foreach ($tasks as $task) {
             $result[] = $task->id;
         }
         return $result;
     }
-    
+
     /**
      * Creates an json result with task information arrays. A task will be marked
      * as disabled, if the permission check fails on this task.
-     * 
+     *
      * @param type $tasks
      * @param type $permission
      * @return type
@@ -246,7 +247,7 @@ class TaskPicker extends \yii\base\Widget
     /**
      * Creates an single task-information array for a given task. A task will be marked
      * as disabled, if the permission check fails on this task.
-     * 
+     *
      * @param type $task
      * @param type $permission
      * @return type
@@ -254,15 +255,15 @@ class TaskPicker extends \yii\base\Widget
     private static function createJSONTaskInfo($task, $permission = null, $priority = null)
     {
         $disabled = false;
-        
-        if($permission != null && $permission instanceof \humhub\libs\BasePermission) {
+
+        if ($permission != null && $permission instanceof \humhub\libs\BasePermission) {
             $disabled = !$task->getPermissionManager()->can($permission);
-        } else if($permission != null) {
+        } elseif ($permission != null) {
             $disabled = $permission;
         }
-        
+
         $priority = ($priority == null) ? 0 : $priority;
-        
+
         $text = Html::encode($task->title);
         $taskInfo = [];
         $taskInfo['id'] = $task->id;
@@ -270,5 +271,3 @@ class TaskPicker extends \yii\base\Widget
         return $taskInfo;
     }
 }
-
-?>

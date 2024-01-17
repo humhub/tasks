@@ -6,7 +6,7 @@
     "version": "1.8.4",
     "homepage": "https://github.com/humhub/tasks",
     "humhub": {
-        "minVersion": "1.14"
+        "minVersion": "1.16"
     },
     "screenshots": ["resources/screen1.jpg", "resources/screen2.jpg", "resources/screen3.jpg", "resources/screen4.jpg", "resources/screen5.jpg", "resources/screen6.jpg", "resources/screen7.jpg", "resources/screen8.jpg", "resources/screen9.jpg", "resources/screen10.jpg", "resources/screen11.jpg", "resources/screen12.jpg", "resources/screen13.jpg"]
 }
