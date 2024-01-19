@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.8.5 (Unreleased)
+-------------------------
+- Fix #249: Fix replaced method `friendship\Module::isEnabled()`
+
 1.8.4 (December 21, 2023)
 -------------------------
 - Fix #237: Update tests for compatibility with v1.15
