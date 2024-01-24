@@ -14,7 +14,7 @@ return array (
   '<strong>New</strong> Task' => '<strong>Nueva</strong> tarea',
   '<strong>Task</strong> Overview' => 'Vista general de las <strong>Tareas</strong>',
   '<strong>Tasks</strong>' => '<strong>Tareas</strong>',
-  '<strong>Tasks</strong> module configuration' => '',
+  '<strong>Tasks</strong> module configuration' => 'Configuración del módulo <strong>Tareas</strong>',
   '<strong>Your</strong> tasks' => '<strong>Tus</strong> tareas',
   'A widget is an element added to to the sidebar of a stream. In this case it provides users with a short overview of their tasks.' => 'Un widget es un elemento que se añade a la barra lateral de un flujo. En este caso proporciona a los usuarios una descripción corta de sus tareas.',
   'Accept Task' => 'Aceptar tarea',
