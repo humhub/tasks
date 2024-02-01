@@ -67,6 +67,13 @@ $checkUrl = $task->state->getCheckUrl();
                 </button>
                 <ul class="dropdown-menu pull-right">
                     <li>
+                        <?= Button::asLink(Yii::t('TasksModule.base', 'Permalink'))
+                            ->options(['data' => [
+                                'action-click' => 'content.permalink',
+                                'content-permalink' => TaskUrl::viewTask($task, true)]])
+                            ->icon('link') ?>
+                    </li>
+                    <li>
                         <?= Button::asLink(Yii::t('TasksModule.base', 'Edit task'))
                             ->action('ui.modal.load', TaskUrl::editTask($task))
                             ->icon('fa-pencil'); ?>
@@ -135,5 +142,3 @@ $checkUrl = $task->state->getCheckUrl();
     <?= TaskListDetails::widget(['task' => $task]) ?>
 <?php endif; ?>
 <?= Html::endTag('div') ?>
-
-

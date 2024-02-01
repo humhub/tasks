@@ -74,9 +74,9 @@ class TaskUrl extends Url
         return static::toRoute([static::ROUTE_EXPORT, 'format' => 'xlsx', 'container' => $container]);
     }
 
-    public static function viewTask(Task $task)
+    public static function viewTask(Task $task, $scheme = false)
     {
-        return static::container($task)->createUrl(static::ROUTE_VIEW_TASK, ['id' => $task->id]);
+        return static::container($task)->createUrl(static::ROUTE_VIEW_TASK, ['id' => $task->id], $scheme);
     }
 
     public static function viewTaskModal(Task $task, $cal = null)
