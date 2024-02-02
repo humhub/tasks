@@ -4,7 +4,7 @@ Changelog
 1.8.5 (Unreleased)
 -------------------------
 - Fix #249: Fix replaced method `friendship\Module::isEnabled()`
-- Enh #241: Permalinks in tasks overview
+- Enh #241: Integrate wall entry context menu for task on details and list pages
 
 1.8.4 (December 21, 2023)
 -------------------------

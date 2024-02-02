@@ -172,9 +172,8 @@ class TaskController extends AbstractTaskController
             throw new HttpException(403);
         }
 
-        return $this->render("task", [
-            'task' => $task,
-            'contentContainer' => $this->contentContainer
+        return $this->render('task', [
+            'task' => $task
         ]);
     }
 

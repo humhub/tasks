@@ -7,13 +7,14 @@
  */
 
 use humhub\modules\tasks\assets\Assets;
+use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\widgets\lists\TaskListDetails;
 use humhub\modules\tasks\widgets\TaskHeader;
 use humhub\modules\tasks\widgets\TaskSubMenu;
+use humhub\modules\ui\view\components\View;
 
-/* @var $this \humhub\modules\ui\view\components\View */
-/* @var $task \humhub\modules\tasks\models\Task */
-/* @var $contentContainer \humhub\modules\content\components\ContentContainerActiveRecord */
+/* @var $this View */
+/* @var $task Task */
 
 Assets::register($this);
 
@@ -27,15 +28,11 @@ $this->registerJsConfig('task', [
 <?= TaskSubMenu::widget() ?>
 <div id="task-container" class="panel panel-default task-details">
 
-    <?= $this->render('task_header', [
-        'canEdit' => $task->content->canEdit(),
-        'contentContainer' => $contentContainer,
-        'task' => $task
-    ]); ?>
+    <?= $this->render('task_header', ['task' => $task]) ?>
 
     <div class="panel-body task-list-items">
         <div class="cleafix task-list-item">
-            <?= TaskListDetails::widget(['task' => $task])?>
+            <?= TaskListDetails::widget(['task' => $task]) ?>
         </div>
     </div>
 </div>
