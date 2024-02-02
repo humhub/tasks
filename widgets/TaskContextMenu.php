@@ -23,12 +23,6 @@ class TaskContextMenu extends WallEntryControls
 {
     /**
      * @inheritdoc
-     * Use this plugin for methods like `makePublicLink`, `lockComments`, `pin`, etc.
-     */
-    public $jsWidget = 'stream.StreamEntry';
-
-    /**
-     * @inheritdoc
      */
     public $template = 'taskContextMenu';
 
