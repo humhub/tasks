@@ -4,6 +4,7 @@ namespace humhub\modules\tasks\controllers;
 
 use humhub\modules\stream\actions\StreamEntryResponse;
 use humhub\modules\tasks\helpers\TaskUrl;
+use humhub\modules\tasks\widgets\TaskDetails;
 use humhub\modules\user\models\User;
 use humhub\modules\content\components\ContentContainerControllerAccess;
 use humhub\modules\space\models\Space;
@@ -172,10 +173,24 @@ class TaskController extends AbstractTaskController
             throw new HttpException(403);
         }
 
-        return $this->render("task", [
-            'task' => $task,
-            'contentContainer' => $this->contentContainer
+        return $this->render('task', [
+            'task' => $task
         ]);
+    }
+
+    public function actionLoadAjaxTask($id)
+    {
+        $task = Task::find()->contentContainer($this->contentContainer)->where(['task.id' => $id])->one();
+
+        if(!$task) {
+            throw new HttpException(404);
+        }
+
+        if(!$task->content->canView()) {
+            throw new HttpException(403);
+        }
+
+        return TaskDetails::widget(['task' => $task]);
     }
 
     public function actionModal($id, $cal)

@@ -5,6 +5,7 @@ Changelog
 -------------------------
 - Fix #249: Fix replaced method `friendship\Module::isEnabled()`
 - Enh #229: Disable main navigation by default
+- Enh #241: Integrate wall entry context menu for task on details and list pages
 
 1.8.4 (December 21, 2023)
 -------------------------

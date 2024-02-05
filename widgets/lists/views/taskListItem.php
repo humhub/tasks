@@ -8,22 +8,19 @@
 
 use humhub\modules\comment\models\Comment;
 
-use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\widgets\lists\TaskListDetails;
 use humhub\modules\tasks\widgets\TaskBadge;
+use humhub\modules\tasks\widgets\TaskContextMenu;
 use humhub\modules\tasks\widgets\TaskUserList;
-use humhub\widgets\Link;
-use humhub\widgets\Button;
 use humhub\modules\tasks\models\Task;
-use humhub\modules\content\widgets\MoveContentLink;
+use humhub\modules\ui\view\components\View;
 use yii\helpers\Html;
 
-/* @var $this \humhub\modules\ui\view\components\View */
-/* @var $task \humhub\modules\tasks\models\Task */
+/* @var $this View */
+/* @var $task Task */
 /* @var $options array */
 /* @var $details boolean */
 /* @var $canManage boolean */
-/* @var $contentContainer \humhub\modules\content\components\ContentActiveRecord */
 
 $checkUrl = $task->state->getCheckUrl();
 
@@ -53,38 +50,9 @@ $checkUrl = $task->state->getCheckUrl();
 
     </span>
 
-    <?php if ($task->content->canEdit()) : ?>
-        <div class="task-controls end pull-right">
-            <div class="btn-group">
-                <?= Link::none()->icon('fa-ellipsis-v')
-                    ->cssClass('dropdown-toggle')
-                    ->options([
-                        'data-toggle' => 'dropdown',
-                        'haspopup' => 'true',
-                        'aria-expanded' => 'false'
-                    ])->sm()->loader(false) ?>
-                <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu pull-right">
-                    <li>
-                        <?= Button::asLink(Yii::t('TasksModule.base', 'Edit task'))
-                            ->action('ui.modal.load', TaskUrl::editTask($task))
-                            ->icon('fa-pencil'); ?>
-                    </li>
-                    <li>
-                        <?= MoveContentLink::widget(['model' => $task]) ?>
-                    </li>
-                    <li>
-                        <?= Button::asLink(Yii::t('TasksModule.base', 'Delete task'))
-                            ->action('task.deleteTask', TaskUrl::deleteTask($task))
-                            ->icon('fa-trash')->confirm(); ?>
-                    </li>
-                </ul>
-            </div>
-
-
-        </div>
-    <?php endif; ?>
+    <div class="task-controls end pull-right">
+        <?= TaskContextMenu::widget(['task' => $task, 'mode' => 'list']) ?>
+    </div>
 
     <div class="task-controls pull-right toggleTaskDetails hidden-xs"
          style="<?= (!$task->content->canEdit()) ? 'border-right:0;margin-right:0' : '' ?>">
@@ -135,5 +103,3 @@ $checkUrl = $task->state->getCheckUrl();
     <?= TaskListDetails::widget(['task' => $task]) ?>
 <?php endif; ?>
 <?= Html::endTag('div') ?>
-
-
