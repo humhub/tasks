@@ -68,6 +68,7 @@ class TaskContextMenu extends WallEntryControls
     {
         $params = parent::getViewParams();
         $params['toggler'] = $this->getToggler();
+        $params['task'] = $this->task;
         return $params;
     }
 
@@ -75,6 +76,7 @@ class TaskContextMenu extends WallEntryControls
     {
         $this->renderOptions->disableControlsEntryEdit();
         $this->renderOptions->disableControlsEntryDelete();
+        $this->renderOptions->disableControlsEntryPin();
 
         if ($this->task->content->canEdit()) {
             $this->addEntry(new MenuLink([

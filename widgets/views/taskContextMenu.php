@@ -6,14 +6,16 @@
  */
 
 use humhub\libs\Html;
+use humhub\modules\tasks\models\Task;
 use humhub\modules\ui\menu\MenuEntry;
 use humhub\widgets\Link;
 
 /* @var MenuEntry[] $entries */
 /* @var array $options */
 /* @var Link $toggler */
+/* @var Task $task */
 ?>
-<div data-ui-widget="stream.StreamEntry">
+<div data-ui-widget="stream.StreamEntry" data-content-key="<?= $task->content->id ?>">
     <div class="stream-entry-loader"></div>
     <?= Html::beginTag('ul', $options) ?>
     <li class="dropdown">
