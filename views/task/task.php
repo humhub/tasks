@@ -7,8 +7,10 @@
  */
 
 use humhub\modules\tasks\assets\Assets;
+use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\widgets\lists\TaskListDetails;
+use humhub\modules\tasks\widgets\TaskDetails;
 use humhub\modules\tasks\widgets\TaskHeader;
 use humhub\modules\tasks\widgets\TaskSubMenu;
 use humhub\modules\ui\view\components\View;
@@ -26,13 +28,4 @@ $this->registerJsConfig('task', [
 ?>
 <?= TaskHeader::widget() ?>
 <?= TaskSubMenu::widget() ?>
-<div id="task-container" class="panel panel-default task-details">
-
-    <?= $this->render('task_header', ['task' => $task]) ?>
-
-    <div class="panel-body task-list-items">
-        <div class="cleafix task-list-item">
-            <?= TaskListDetails::widget(['task' => $task]) ?>
-        </div>
-    </div>
-</div>
+<?= TaskDetails::widget(['task' => $task]) ?>

@@ -26,7 +26,7 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
     </div>
 
     <div class="task-head">
-        <div>
+        <div class="task-list-item-title">
             <strong><?= Icon::get($icon)->color($color)?> <?= Html::encode($task->title) ?></strong>
         </div>
     </div>
