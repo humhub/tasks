@@ -7,12 +7,21 @@
 
 namespace humhub\modules\tasks\controllers;
 
+use humhub\modules\content\components\ContentContainerControllerAccess;
+use humhub\modules\space\models\Space;
 use humhub\modules\tasks\models\forms\ConfigureContainerForm;
 use humhub\modules\content\components\ContentContainerController;
 use Yii;
 
 class ConfigContainerController extends ContentContainerController
 {
+    /**
+     * @inheritdoc
+     */
+    protected function getAccessRules()
+    {
+        return [[ContentContainerControllerAccess::RULE_USER_GROUP_ONLY => [Space::USERGROUP_ADMIN]]];
+    }
 
     public function actionIndex()
     {
