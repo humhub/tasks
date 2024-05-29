@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.9.0 (Unreleased)
+----------------------
+- Fix #257: Update module resources path
+
 1.8.5 (March 14, 2024)
 ----------------------
 - Fix #249: Fix replaced method `friendship\Module::isEnabled()`
