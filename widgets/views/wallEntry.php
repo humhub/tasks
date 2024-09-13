@@ -14,8 +14,7 @@ use humhub\modules\ui\icon\widgets\Icon;
 use humhub\widgets\ModalButton;
 use humhub\modules\tasks\widgets\TaskPercentageBar;
 
-$color = Yii::$app->view->theme->variable('text-color-main');
-
+$color = 'var(--text-color-main)';
 ?>
 <div class="wall-entry-task task">
 
