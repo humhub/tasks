@@ -15,10 +15,7 @@ use humhub\modules\ui\icon\widgets\Icon;
 
 /* @var $task Task */
 
-$icon = 'fa-tasks';
 $participantStyle = 'display:inline-block;';
-$color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
-
 ?>
 <div class="panel-heading clearfix">
     <div class="pull-right">
@@ -27,7 +24,7 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
 
     <div class="task-head">
         <div class="task-list-item-title">
-            <strong><?= Icon::get($icon)->color($color)?> <?= Html::encode($task->title) ?></strong>
+            <strong><?= Icon::get('fa-tasks')->color($task->getColor('var(--info)'))?> <?= Html::encode($task->title) ?></strong>
         </div>
     </div>
 
