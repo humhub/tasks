@@ -30,7 +30,7 @@ $hasItems = $task->hasItems()
     <?php endif; ?>
 
     <?php if(!empty($task->description) || $hasItems) : ?>
-        <div data-ui-show-more>
+        <div data-ui-show-more data-collapse-at="180">
             <?php if(!empty($task->description)) : ?>
                 <div data-ui-markdown style="margin-bottom:10px">
                     <?= RichText::output($task->description) ?>
