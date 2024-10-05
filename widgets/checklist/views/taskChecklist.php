@@ -17,7 +17,7 @@ use humhub\modules\tasks\widgets\checklist\TaskChecklistItem;
 ?>
 
 <div class="task-checklist">
-    <label><strong><i class="fa fa-check-square-o"></i> <?= Yii::t('TasksModule.base', 'Checklist:') ?></strong></label>
+    <label style="margin-bottom:16px"><strong><i class="fa fa-check-square-o"></i> <?= Yii::t('TasksModule.base', 'Checklist:') ?></strong></label>
     <?= Html::beginTag('ul', $options) ?>
         <?php foreach ($items as $item): ?>
             <?= TaskChecklistItem::widget(['item' => $item, 'task' => $task]); ?>
