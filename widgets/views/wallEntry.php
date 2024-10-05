@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
@@ -44,7 +45,7 @@ $hasItems = $task->hasItems()
         </div>
     <?php endif; ?>
 
-    <div class="crearfix" style="margin-top:10px">
+    <div class="clearfix" style="margin-top:10px">
         <?= TaskRoleInfoBox::widget(['task' => $task, 'iconColor' => $color]) ?>
     </div>
 
