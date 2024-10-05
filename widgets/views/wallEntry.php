@@ -16,9 +16,8 @@ use humhub\widgets\ModalButton;
 use humhub\modules\tasks\widgets\TaskPercentageBar;
 use humhub\modules\tasks\widgets\checklist\TaskChecklist;
 
-$color = Yii::$app->view->theme->variable('text-color-main');
+$color = 'var(--text-color-main)';
 $hasItems = $task->hasItems()
-
 ?>
 <div class="wall-entry-task task">
 

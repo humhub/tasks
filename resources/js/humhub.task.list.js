@@ -391,6 +391,24 @@ humhub.module('task.list', function (module, require, $) {
         });
     };
 
+    Task.prototype.reloadEntry = function (entry) {
+        if (!entry) {
+            return;
+        }
+
+        var row = entry.parent('div.task-list-item');
+        row.loader();
+
+        return client.get(row.$.data('reload-url')).then(function (response) {
+            row.$.html($(response.response).html());
+            return response;
+        }).catch(function (err) {
+            module.log.error(err, true);
+        }).finally(function () {
+            row.loader(false);
+        });
+    }
+
     Task.prototype.isCompleted = function () {
         return this.isStatus(STATUS_COMPLETED);
     };

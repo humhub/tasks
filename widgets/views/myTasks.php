@@ -18,17 +18,16 @@ use humhub\modules\tasks\helpers\TaskUrl;
 
     <div class="panel-heading">
         <i class="fa fa-tasks"></i> <?= Yii::t('TasksModule.base', '<strong>Your</strong> tasks'); ?>
-        <small><a style="font-size:0.9em;color:<?= $this->theme->variable('info'); ?>" href="<?=  TaskUrl::globalView() ?>">(<?= Yii::t('TasksModule.base', 'view all'); ?>)</a></small>
+        <small><a style="font-size:0.9em;color:var(--info)" href="<?=  TaskUrl::globalView() ?>">(<?= Yii::t('TasksModule.base', 'view all'); ?>)</a></small>
         <?= PanelMenu::widget(['id' => 'task-my-tasks-snippet']); ?>
     </div>
 
-    <div class="panel-body" style="padding:0px;">
+    <div class="panel-body" style="padding:0px">
         <hr style="margin:0px">
         <ul class="media-list">
             <?php foreach ($taskEntries as $entry) : ?>
-                <?php $color = $entry->getColor() ? $entry->getColor() : $this->theme->variable('info') ?>
                 <a href="<?= $entry->getUrl() ?>">
-                    <li style="border-left: 3px solid <?= Html::encode($color) ?>">
+                    <li style="border-left: 3px solid <?= Html::encode($entry->getColor('var(--info)')) ?>">
                         <div class="media">
                             <div class="media-body text-break">
                                 <?=  $entry->getBadge() ?>
@@ -48,4 +47,3 @@ use humhub\modules\tasks\helpers\TaskUrl;
     </div>
 
 </div>
-

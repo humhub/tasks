@@ -45,7 +45,7 @@ class Events
             $module = Yii::$app->getModule('tasks');
 
 
-            if (!(int)$module->settings->get('showGlobalMenuItem', 1) || Yii::$app->user->isGuest) {
+            if (!$module->settings->get('showGlobalMenuItem', false) || Yii::$app->user->isGuest) {
                 return;
             }
 

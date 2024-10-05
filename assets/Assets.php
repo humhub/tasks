@@ -46,10 +46,8 @@ class Assets extends AssetBundle
     public static function register($view)
     {
         if ($view->context instanceof ListController || $view->context instanceof SearchController) {
-            $colorLink = $view->theme->variable('link');
-            $colorInfo = $view->theme->variable('info');
-            $view->registerCss('#task-space-menu li.active a{color:' . $colorLink . '}'
-                . '.task-overview #task-filter-nav .task-bottom-panel .filterInput[data-filter-type=checkbox] .fa.fa-check-square-o{border-color:' . $colorInfo . ';background:' . $colorInfo . '}');
+            $view->registerCss('#task-space-menu li.active a{color:var(--link)}'
+                . '.task-overview #task-filter-nav .task-bottom-panel .filterInput[data-filter-type=checkbox] .fa.fa-check-square-o{border-color:var(--info);background:var(--info)}');
         }
 
         return parent::register($view);

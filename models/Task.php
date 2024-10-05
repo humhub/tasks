@@ -1104,11 +1104,10 @@ class Task extends ContentActiveRecord implements Searchable
         }
     }
 
-    public function getColor()
+    public function getColor($default = null): ?string
     {
-        if($this->task_list_id && $this->list) {
-            return $this->list->getColor();
-        }
+        $color = $this->task_list_id && $this->list ? $this->list->getColor() : null;
+        return $color ?: $default;
     }
 
     private function hasNewTaskList(): bool

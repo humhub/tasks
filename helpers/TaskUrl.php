@@ -15,6 +15,7 @@ class TaskUrl extends Url
 {
     const ROUTE_VIEW_TASK = '/tasks/task/view';
     const ROUTE_VIEW_TASK_MODAL = '/tasks/task/modal';
+    const ROUTE_RELOAD_TASK = '/tasks/task/load-ajax-task';
 
     const ROUTE_DELETE_TASK = '/tasks/task/delete';
     const ROUTE_EDIT_TASK = '/tasks/task/edit';
@@ -74,14 +75,19 @@ class TaskUrl extends Url
         return static::toRoute([static::ROUTE_EXPORT, 'format' => 'xlsx', 'container' => $container]);
     }
 
-    public static function viewTask(Task $task)
+    public static function viewTask(Task $task, $scheme = false)
     {
-        return static::container($task)->createUrl(static::ROUTE_VIEW_TASK, ['id' => $task->id]);
+        return static::container($task)->createUrl(static::ROUTE_VIEW_TASK, ['id' => $task->id], $scheme);
     }
 
     public static function viewTaskModal(Task $task, $cal = null)
     {
         return static::container($task)->createUrl(static::ROUTE_VIEW_TASK_MODAL, ['id' => $task->id, 'cal' => $cal]);
+    }
+
+    public static function reloadTask(Task $task)
+    {
+        return static::container($task)->createUrl(static::ROUTE_RELOAD_TASK, ['id' => $task->id]);
     }
 
     public static function deleteTask(Task $task, $cal = null, $redirect = null)

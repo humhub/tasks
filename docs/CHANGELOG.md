@@ -1,6 +1,18 @@
 Changelog
 =========
 
+1.8.6 (Unreleased)
+----------------------
+- Enh #258: By default, enabled "Mobile" notification types for those enabled for "Web"
+- Enh #259: Replace theme variables with CSS variables
+
+1.8.5 (March 14, 2024)
+----------------------
+- Fix #249: Fix replaced method `friendship\Module::isEnabled()`
+- Enh #229: Disable main navigation by default
+- Enh #241: Integrate wall entry context menu for task on details and list pages
+- Fix #253: Space configuration checks permissions insufficiently
+
 1.8.4 (December 21, 2023)
 -------------------------
 - Fix #237: Update tests for compatibility with v1.15
