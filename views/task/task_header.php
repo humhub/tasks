@@ -13,24 +13,20 @@ use humhub\modules\tasks\widgets\TaskContextMenu;
 use humhub\modules\tasks\widgets\TaskUserList;
 use humhub\modules\ui\icon\widgets\Icon;
 
-/* @var $contentContainer \humhub\modules\content\components\ContentContainerActiveRecord */
-/* @var $task \humhub\modules\tasks\models\Task */
-/* @var $canEdit boolean */
-/* @var $collapse boolean */
+/* @var $task Task */
 
-$icon = 'fa-tasks';
 $participantStyle = 'display:inline-block;';
-$color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
-
 ?>
 <div class="panel-heading clearfix">
-    <div class="task-head">
-        <div>
-            <strong><?= Icon::get($icon)->color($color)?> <?= Html::encode($task->title) ?></strong>
-        </div>
+    <div class="pull-right">
+        <?= TaskContextMenu::widget(['task' => $task]) ?>
     </div>
 
-    <?= TaskContextMenu::widget(['task' => $task, 'contentContainer' => $contentContainer]) ?>
+    <div class="task-head">
+        <div class="task-list-item-title">
+            <strong><?= Icon::get('fa-tasks')->color($task->getColor('var(--info)'))?> <?= Html::encode($task->title) ?></strong>
+        </div>
+    </div>
 
     <div class="row clearfix">
         <div class="col-sm-12 media">

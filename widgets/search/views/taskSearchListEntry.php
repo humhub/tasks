@@ -15,14 +15,11 @@ use humhub\modules\tasks\widgets\TaskPercentageBar;
 use humhub\modules\tasks\widgets\TaskUserList;
 use humhub\modules\space\widgets\Image as SpaceImage;
 use humhub\modules\user\widgets\Image as UserImage;
-use humhub\widgets\Button;
 
 /* @var $task \humhub\modules\tasks\models\Task */
 /* @var $canEdit boolean */
 /* @var $filterResult boolean */
 /* @var $contentContainer \humhub\modules\content\components\ContentContainerActiveRecord */
-
-$color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
 
 $image = $task->content->container instanceof Space
     ? SpaceImage::widget([
@@ -72,7 +69,7 @@ $image = $task->content->container instanceof Space
             <?php endif; ?>
 
             <div class="task-controls assigned-users pull-right" style="display:inline">
-                <?= TaskUserList::widget(['users' => $task->taskResponsibleUsers, 'style' => 'border:2px solid ' . $this->theme->variable('info'), 'type' => Task::USER_RESPONSIBLE]) ?>
+                <?= TaskUserList::widget(['users' => $task->taskResponsibleUsers, 'style' => 'border:2px solid var(--info)', 'type' => Task::USER_RESPONSIBLE]) ?>
                 <?= TaskUserList::widget(['users' => $task->taskAssignedUsers]) ?>
             </div>
 

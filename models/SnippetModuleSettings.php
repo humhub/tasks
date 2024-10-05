@@ -39,7 +39,7 @@ class SnippetModuleSettings extends Model
     /**
      * @var int defines if the global task menu item should be displayed
      */
-    public $showGlobalMenuItem = 1;
+    public $showGlobalMenuItem = false;
     public $menuSortOrder = 500;
 
     /**

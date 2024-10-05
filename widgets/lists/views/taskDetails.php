@@ -1,19 +1,21 @@
 <?php
-/* @var $this \humhub\modules\ui\view\components\View */
 
-use humhub\modules\comment\widgets\Comments;
 use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\content\widgets\WallEntryAddons;
 use humhub\modules\tasks\helpers\TaskUrl;
+use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\widgets\ChangeStatusButton;
 use humhub\modules\tasks\widgets\TaskInfoBox;
 use humhub\modules\tasks\widgets\checklist\TaskChecklist;
 use humhub\modules\tasks\widgets\TaskRoleInfoBox;
 use humhub\modules\topic\models\Topic;
 use humhub\modules\topic\widgets\TopicLabel;
+use humhub\modules\ui\view\components\View;
 use humhub\widgets\Button;
 
-/* @var $task \humhub\modules\tasks\models\Task */
+
+/* @var $this View */
+/* @var $task Task */
 
 $scheduleTextClass = '';
 
@@ -21,7 +23,7 @@ if (($task->schedule->isOverdue())) {
     $scheduleTextClass = 'colorDanger';
 }
 
-$color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
+$color = $task->getColor('var(--info)');
 ?>
 
 <div class="task-list-task-details">
