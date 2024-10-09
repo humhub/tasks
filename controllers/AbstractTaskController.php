@@ -53,7 +53,7 @@ abstract class AbstractTaskController extends ContentContainerController
         $query = $filterModel->query();
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query
+            'query' => $query,
         ]);
 
         $exporter = new SpreadsheetExport([
@@ -82,20 +82,20 @@ abstract class AbstractTaskController extends ContentContainerController
             'description',
             [
                 'attribute' => 'Container',
-                'value' => $this->getRelatedContainer()
+                'value' => $this->getRelatedContainer(),
             ],
             [
                 'attribute' => 'ContainerType',
                 'value' =>  function ($model) {
                     /* @var $model \humhub\modules\tasks\models\Task */
                     return (new \ReflectionClass($model->content->container))->getShortName();
-                }
+                },
             ],
             [
                 'attribute' => 'ContainerId',
                 'value' =>  function ($model) {
                     return $model->content->container->id;
-                }
+                },
             ],
             [
                 'class' => DateTimeColumn::class,
@@ -121,24 +121,24 @@ abstract class AbstractTaskController extends ContentContainerController
             'status',
             [
                 'attribute' => 'Checklist',
-                'value' => $this->getTaskItems($relationsData)
+                'value' => $this->getTaskItems($relationsData),
             ],
             [
                 'attribute' => 'Assigned Users',
-                'value' => $this->getAssignedUsers($relationsData)
+                'value' => $this->getAssignedUsers($relationsData),
             ],
             [
                 'attribute' => 'Responsible Users',
-                'value' => $this->getResponsibleUsers($relationsData)
+                'value' => $this->getResponsibleUsers($relationsData),
             ],
             [
                 'attribute' => 'Comments',
-                'value' => $this->getComments()
+                'value' => $this->getComments(),
             ],
             'color',
             [
                 'attribute' => 'review',
-                'label' => 'Review required'
+                'label' => 'Review required',
             ],
             'scheduling',
             'all_day',
@@ -147,7 +147,7 @@ abstract class AbstractTaskController extends ContentContainerController
             'request_sent',
             [
                 'attribute' => 'task_list_id',
-                'label' => 'Task List'
+                'label' => 'Task List',
             ],
         ];
     }

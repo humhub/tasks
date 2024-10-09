@@ -15,7 +15,6 @@ use humhub\modules\tasks\controllers\SearchController;
 
 class Assets extends AssetBundle
 {
-
     /**
      * @inheritDoc
      */

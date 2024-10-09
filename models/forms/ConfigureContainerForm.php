@@ -25,8 +25,10 @@ class ConfigureContainerForm extends Model
     {
         parent::init();
 
-        $this->contentHiddenDefault = (bool) $this->getSettings()->get('contentHiddenDefault',
-            $this->getModule()->getContentHiddenGlobalDefault());
+        $this->contentHiddenDefault = (bool) $this->getSettings()->get(
+            'contentHiddenDefault',
+            $this->getModule()->getContentHiddenGlobalDefault(),
+        );
     }
 
     public function getModule(): Module

@@ -10,7 +10,7 @@ use humhub\modules\space\widgets\Sidebar as SpaceSidebar;
 use humhub\modules\space\models\Membership;
 use humhub\modules\user\widgets\ProfileMenu;
 
-return array(
+return [
     'id' => 'tasks',
     'class' => 'humhub\modules\tasks\Module',
     'namespace' => 'humhub\modules\tasks',
@@ -26,5 +26,5 @@ return array(
         ['class' => 'humhub\modules\calendar\interfaces\CalendarService', 'event' => 'getItemTypes', 'callback' => ['humhub\modules\tasks\Events', 'onGetCalendarItemTypes']],
         ['class' => 'humhub\modules\calendar\interfaces\CalendarService', 'event' => 'findItems', 'callback' => ['humhub\modules\tasks\Events', 'onFindCalendarItems']],
         ['class' => 'humhub\modules\rest\Module', 'event' => 'restApiAddRules', 'callback' => ['humhub\modules\tasks\Events', 'onRestApiAddRules']],
-    ]
-);
+    ],
+];

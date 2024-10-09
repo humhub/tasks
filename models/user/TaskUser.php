@@ -19,15 +19,14 @@ use humhub\components\ActiveRecord;
  * This is the model class for table "task_user".
  *
  * The followings are the available columns in table 'task_user':
- * @property integer $id
- * @property integer $task_id
- * @property integer $user_id
- * @property integer $user_type
+ * @property int $id
+ * @property int $task_id
+ * @property int $user_id
+ * @property int $user_type
  */
 
 class TaskUser extends ActiveRecord
 {
-
     public $sendNotificationOnCreation = true;
 
     /**
@@ -58,7 +57,7 @@ class TaskUser extends ActiveRecord
             'id' => 'ID',
             'task_id' => 'Task',
             'user_id' => 'User',
-            'user_type' => 'User Type'
+            'user_type' => 'User Type',
         ];
     }
 
@@ -77,7 +76,7 @@ class TaskUser extends ActiveRecord
 
     public function afterSave($insert, $changedAttributes)
     {
-        if($insert) {
+        if ($insert) {
             $this->notifyCreated();
         }
 
@@ -91,7 +90,7 @@ class TaskUser extends ActiveRecord
      */
     public function notifyCreated()
     {
-        if(!$this->sendNotificationOnCreation) {
+        if (!$this->sendNotificationOnCreation) {
             return;
         }
 
@@ -99,14 +98,14 @@ class TaskUser extends ActiveRecord
         $target = $this->user;
         $from = Yii::$app->user->getIdentity();
 
-        if($target->is($from)) {
+        if ($target->is($from)) {
             return;
         }
 
-        if($this->user_type === Task::USER_ASSIGNED) {
+        if ($this->user_type === Task::USER_ASSIGNED) {
             AssignedNotification::instance()->about($source)->delete($target);
             AssignedNotification::instance()->from($from)->about($source)->send($target);
-        } else if($this->user_type === Task::USER_RESPONSIBLE) {
+        } elseif ($this->user_type === Task::USER_RESPONSIBLE) {
             AddResponsibleNotification::instance()->about($source)->delete($target);
             AddResponsibleNotification::instance()->from($from)->about($source)->send($target);
         }

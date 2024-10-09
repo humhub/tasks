@@ -1,8 +1,6 @@
 <?php
 
-
 namespace humhub\modules\tasks\widgets\lists;
-
 
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\tasks\helpers\TaskListUrl;
@@ -20,7 +18,7 @@ class CompletedTaskListItem extends JsWidget
     public $taskList;
 
     /**
-     * @var boolean
+     * @var bool
      */
     public $canEdit;
 
@@ -34,28 +32,28 @@ class CompletedTaskListItem extends JsWidget
      */
     public function run()
     {
-        if($this->canEdit === null && $this->contentContainer) {
+        if ($this->canEdit === null && $this->contentContainer) {
             $this->canEdit = $this->contentContainer->can(ManageTasks::class);
         }
 
         return $this->render('completedTaskListItem', [
             'canEdit' => $this->canEdit,
             'taskList' => $this->taskList,
-            'options' => $this->getOptions()
+            'options' => $this->getOptions(),
         ]);
     }
 
     public function getAttributes()
     {
         return [
-            'class' => 'media'
+            'class' => 'media',
         ];
     }
 
     public function getData()
     {
         return [
-            'reload-url' => TaskListUrl::reloadCompletedTaskList($this->taskList)
+            'reload-url' => TaskListUrl::reloadCompletedTaskList($this->taskList),
         ];
     }
 

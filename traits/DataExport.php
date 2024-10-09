@@ -31,7 +31,7 @@ trait DataExport
      */
     private function getTaskItems($relationsData)
     {
-        return function($model, $key) use ($relationsData) {
+        return function ($model, $key) use ($relationsData) {
             $items = ArrayHelper::map($relationsData[$key]['items'], 'id', 'title');
             return implode(', ', $items);
         };
@@ -45,7 +45,7 @@ trait DataExport
      */
     private function getAssignedUsers($relationsData)
     {
-        return function($model, $key) use ($relationsData) {
+        return function ($model, $key) use ($relationsData) {
             $usersInfo = $this->getUsersInfo($key, $relationsData, Task::USER_ASSIGNED);
             $users = ArrayHelper::map($usersInfo, 'id', 'fullname');
             return implode(', ', $users);
@@ -60,7 +60,7 @@ trait DataExport
      */
     private function getResponsibleUsers($relationsData)
     {
-        return function($model, $key) use ($relationsData) {
+        return function ($model, $key) use ($relationsData) {
             $usersInfo = $this->getUsersInfo($key, $relationsData, Task::USER_RESPONSIBLE);
             $users = ArrayHelper::map($usersInfo, 'id', 'fullname');
             return implode(', ', $users);
@@ -78,9 +78,9 @@ trait DataExport
             $commentsCount = Comment::GetCommentCount(get_class($model), $key);
             $comments = Comment::GetCommentsLimited(get_class($model), $key, $commentsCount);
 
-            $messages = array_map(function($comment) {
+            $messages = array_map(function ($comment) {
                 /* @var $comment Comment */
-                return $comment->createdBy ? $comment->createdBy->getDisplayName().': '.$comment->message : $comment->message;
+                return $comment->createdBy ? $comment->createdBy->getDisplayName() . ': ' . $comment->message : $comment->message;
             }, $comments);
 
             return implode(' | ', $messages);
@@ -116,7 +116,7 @@ trait DataExport
             if (key_exists($uniqueKey, $taskUsers)) {
                 $info[] = [
                     'id' => $profile['user_id'],
-                    'fullname' => "{$profile['firstname']} {$profile['lastname']}"
+                    'fullname' => "{$profile['firstname']} {$profile['lastname']}",
                 ];
             }
         }, $profiles);

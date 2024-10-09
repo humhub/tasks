@@ -19,7 +19,6 @@ use yii\web\Response;
 
 class TaskController extends AbstractTaskController
 {
-
     public $hideSidebar = true;
 
     /**
@@ -29,7 +28,7 @@ class TaskController extends AbstractTaskController
     {
         return [
             [ContentContainerControllerAccess::RULE_USER_GROUP_ONLY => [Space::USERGROUP_MEMBER, User::USERGROUP_SELF]],
-            [ContentContainerControllerAccess::RULE_SPACE_ONLY => ['task-assigned-picker', 'task-responsible-picker']]
+            [ContentContainerControllerAccess::RULE_SPACE_ONLY => ['task-assigned-picker', 'task-responsible-picker']],
         ];
     }
 
@@ -69,7 +68,7 @@ class TaskController extends AbstractTaskController
             $taskForm = new TaskForm([
                 'cal' => $cal,
                 'wall' => $wall,
-                'taskListId' =>  $listId
+                'taskListId' =>  $listId,
             ]);
             $taskForm->createNew($this->contentContainer);
         } else {
@@ -78,22 +77,22 @@ class TaskController extends AbstractTaskController
                 'cal' => $cal,
                 'redirect' => $redirect,
                 'wall' => $wall,
-                'taskListId' => $listId
+                'taskListId' => $listId,
             ]);
         }
 
         if (!$taskForm->task) {
             throw new HttpException(404);
-        } else if(!$taskForm->task->content->canEdit()) {
+        } elseif (!$taskForm->task->content->canEdit()) {
             throw new HttpException(403);
         }
 
         if ($taskForm->load(Yii::$app->request->post()) && $taskForm->save()) {
             if ($cal) {
                 return ModalClose::widget(['saved' => true]);
-            } else if ($redirect) {
+            } elseif ($redirect) {
                 return $this->htmlRedirect(TaskUrl::viewTask($taskForm->task));
-            } else if ($wall) {
+            } elseif ($wall) {
                 $entry = StreamEntryResponse::getAsArray($taskForm->task->content);
                 $entry['reloadWall'] = true;
                 $entry['success'] = true;
@@ -108,7 +107,7 @@ class TaskController extends AbstractTaskController
                 'reloadLists' => $taskForm->reloadListId,
                 'reloadTask' => empty($taskForm->reloadListId) ? $taskForm->task->id : false,
                 // Workaround for humhub modal bug in v1.2.5
-                'output' => '<div class="modal-dialog"><div class="modal-content"></div></div></div>'
+                'output' => '<div class="modal-dialog"><div class="modal-content"></div></div></div>',
             ]);
         }
 
@@ -120,7 +119,7 @@ class TaskController extends AbstractTaskController
         $this->forcePostRequest();
         $task = $this->getTaskById($id);
 
-        if(!$task->state->canProceed($status)) {
+        if (!$task->state->canProceed($status)) {
             throw new HttpException(403);
         }
 
@@ -132,7 +131,7 @@ class TaskController extends AbstractTaskController
         $this->forcePostRequest();
         $task = $this->getTaskById($id);
 
-        if(!$task->state->canRevert($status)) {
+        if (!$task->state->canRevert($status)) {
             throw new HttpException(403);
         }
 
@@ -146,7 +145,7 @@ class TaskController extends AbstractTaskController
         return $this->asJson(UserPicker::filter([
             'query' => $query,
             'keyword' => $keyword,
-            'fillUser' => true
+            'fillUser' => true,
         ]));
     }
 
@@ -157,7 +156,7 @@ class TaskController extends AbstractTaskController
         return $this->asJson(UserPicker::filter([
             'keyword' => $keyword,
             'query' => $query,
-            'fillUser' => true
+            'fillUser' => true,
         ]));
     }
 
@@ -165,16 +164,16 @@ class TaskController extends AbstractTaskController
     {
         $task = Task::find()->contentContainer($this->contentContainer)->where(['task.id' => $id])->one();
 
-        if(!$task) {
+        if (!$task) {
             throw new HttpException(404);
         }
 
-        if(!$task->content->canView()) {
+        if (!$task->content->canView()) {
             throw new HttpException(403);
         }
 
         return $this->render('task', [
-            'task' => $task
+            'task' => $task,
         ]);
     }
 
@@ -182,11 +181,11 @@ class TaskController extends AbstractTaskController
     {
         $task = Task::find()->contentContainer($this->contentContainer)->where(['task.id' => $id])->one();
 
-        if(!$task) {
+        if (!$task) {
             throw new HttpException(404);
         }
 
-        if(!$task->content->canView()) {
+        if (!$task->content->canView()) {
             throw new HttpException(403);
         }
 
@@ -197,14 +196,14 @@ class TaskController extends AbstractTaskController
     {
         $task = $this->getTaskById($id);
 
-        if(!$task->content->canView()) {
+        if (!$task->content->canView()) {
             throw new HttpException(403);
         }
 
         return $this->renderAjax('modal', [
             'task' => $task,
             'editUrl' => TaskUrl::editTask($task, $cal),
-            'canManageEntries' => $task->content->canEdit()
+            'canManageEntries' => $task->content->canEdit(),
         ]);
     }
 
@@ -213,14 +212,14 @@ class TaskController extends AbstractTaskController
         $this->forcePostRequest();
         $task = $this->getTaskById($id);
 
-        if(!$task->content->canEdit()) {
+        if (!$task->content->canEdit()) {
             throw new HttpException(403);
         }
 
         $task->delete();
 
         return $this->asJson([
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -235,7 +234,7 @@ class TaskController extends AbstractTaskController
     {
         $task = $this->getTaskById($id);
 
-        if( !$task->content->canView() && !$task->schedule->canRequestExtension() ) {
+        if (!$task->content->canView() && !$task->schedule->canRequestExtension()) {
             throw new HttpException(401, Yii::t('TasksModule.base', 'You have insufficient permissions to perform that operation!'));
         }
 
