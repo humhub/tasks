@@ -16,5 +16,5 @@ class TaskItemFixture extends ActiveFixture
 {
     public $modelClass = TaskItem::class;
     public $dataFile = '@tasks/tests/codeception/fixtures/data/taskItem.php';
-   
+
 }

@@ -36,7 +36,7 @@ class CompletedTaskListView extends Widget
             'query' => TaskList::findHiddenLists($this->contentContainer),
             'pagination' => [
                 'pageSize' => 10,
-                'route' => TaskListUrl::ROUTE_LOAD_CLOSED_LISTS
+                'route' => TaskListUrl::ROUTE_LOAD_CLOSED_LISTS,
             ],
         ]);
 
@@ -45,16 +45,16 @@ class CompletedTaskListView extends Widget
             'itemView' => '@tasks/widgets/lists/views/_closedItem',
             'viewParams' => [
                 'contentContainer' => $this->contentContainer,
-                'canEdit' => $this->contentContainer->can(ManageTasks::class)
+                'canEdit' => $this->contentContainer->can(ManageTasks::class),
             ],
             'options' => [
                 'tag' => 'ul',
-                'class' => 'media-list'
+                'class' => 'media-list',
             ],
             'itemOptions' => [
-                'tag' => 'li'
+                'tag' => 'li',
             ],
-            'layout' => "{items}\n<li class=\"pagination-container\">{pager}</li>"
+            'layout' => "{items}\n<li class=\"pagination-container\">{pager}</li>",
         ]);
     }
 

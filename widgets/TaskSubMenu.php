@@ -8,7 +8,6 @@
 
 namespace humhub\modules\tasks\widgets;
 
-
 use humhub\modules\tasks\helpers\TaskListUrl;
 use humhub\widgets\SettingsTabs;
 use Yii;
@@ -28,12 +27,12 @@ class TaskSubMenu extends SettingsTabs
             [
                 'label' => Yii::t('TasksModule.base', 'Overview'),
                 'url' => TaskListUrl::taskListRoot($contentContainer),
-                'active' => $this->isCurrentRoute('tasks', 'list')
+                'active' => $this->isCurrentRoute('tasks', 'list'),
             ],
             [
                 'label' => Yii::t('TasksModule.base', 'Filter'),
                 'url' => TaskListUrl::searchTask($contentContainer),
-                'active' => $this->isCurrentRoute('tasks', 'search')
+                'active' => $this->isCurrentRoute('tasks', 'search'),
             ],
         ];
 

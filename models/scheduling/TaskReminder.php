@@ -15,15 +15,16 @@ use humhub\modules\notification\models\Notification;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\notifications\RemindEnd;
 use humhub\modules\tasks\notifications\RemindStart;
+
 /**
  * This is the model class for table "task_reminder".
  *
  * The followings are the available columns in table 'task_reminder':
- * @property integer $id
- * @property integer $task_id
- * @property integer $remind_mode
- * @property integer $start_reminder_sent
- * @property integer $end_reminder_sent
+ * @property int $id
+ * @property int $task_id
+ * @property int $remind_mode
+ * @property int $start_reminder_sent
+ * @property int $end_reminder_sent
  * @property Task $task
  */
 class TaskReminder extends ActiveRecord
@@ -36,15 +37,15 @@ class TaskReminder extends ActiveRecord
     /**
      * Remind Mode
      */
-    const REMIND_NONE = 0;
-    const REMIND_ONE_HOUR = 1;
-    const REMIND_TWO_HOURS = 2;
-    const REMIND_ONE_DAY = 3;
-    const REMIND_TWO_DAYS = 4;
-    const REMIND_ONE_WEEK = 5;
-    const REMIND_TWO_WEEKS = 6;
-    const REMIND_THREE_WEEKS = 7;
-    const REMIND_ONE_MONTH = 8;
+    public const REMIND_NONE = 0;
+    public const REMIND_ONE_HOUR = 1;
+    public const REMIND_TWO_HOURS = 2;
+    public const REMIND_ONE_DAY = 3;
+    public const REMIND_TWO_DAYS = 4;
+    public const REMIND_ONE_WEEK = 5;
+    public const REMIND_TWO_WEEKS = 6;
+    public const REMIND_THREE_WEEKS = 7;
+    public const REMIND_ONE_MONTH = 8;
 
     /**
      * @var array all given remind modes as array
@@ -57,7 +58,7 @@ class TaskReminder extends ActiveRecord
         self::REMIND_TWO_DAYS,
         self::REMIND_TWO_WEEKS,
         self::REMIND_THREE_WEEKS,
-        self::REMIND_ONE_MONTH
+        self::REMIND_ONE_MONTH,
     ];
 
     /**
@@ -115,7 +116,7 @@ class TaskReminder extends ActiveRecord
 
     public function getRemindMode()
     {
-        switch ($this->remind_mode){
+        switch ($this->remind_mode) {
             case (self::REMIND_NONE):
                 return Yii::t('TasksModule.base', 'Do not remind');
                 break;
@@ -150,8 +151,9 @@ class TaskReminder extends ActiveRecord
 
     public function canSendRemind(DateTime $now, DateTime $dateTime)
     {
-        if ($now === '' || $dateTime === '')
+        if ($now === '' || $dateTime === '') {
             return false;
+        }
 
         $modifiedStart = clone $dateTime;
         $modifiedEnd = clone $dateTime;
@@ -209,10 +211,11 @@ class TaskReminder extends ActiveRecord
                 break;
         }
 
-        if ($modifiedEnd > $now && $modifiedStart <= $now)
+        if ($modifiedEnd > $now && $modifiedStart <= $now) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     /**

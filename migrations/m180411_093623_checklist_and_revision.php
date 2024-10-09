@@ -23,7 +23,7 @@ class m180411_093623_checklist_and_revision extends Migration
     {
         try {
             $this->dropColumn('task', 'percent');
-        } catch(\Throwable $e) {
+        } catch (\Throwable $e) {
             Yii::error($e);
         }
 
@@ -61,7 +61,7 @@ class m180411_093623_checklist_and_revision extends Migration
             'task_id' => 'int(11) NOT NULL',
             'remind_mode' => 'tinyint(4) DEFAULT 0',
             'start_reminder_sent' => 'tinyint(4) NOT NULL DEFAULT 0',
-            'end_reminder_sent' => 'tinyint(4) NOT NULL DEFAULT 0'
+            'end_reminder_sent' => 'tinyint(4) NOT NULL DEFAULT 0',
         ], '');
 
         $this->addForeignKey('fk-task-reminder-task-id', 'task_reminder', 'task_id', 'task', 'id', 'CASCADE');

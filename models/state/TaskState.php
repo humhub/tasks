@@ -1,14 +1,11 @@
 <?php
 
-
 namespace humhub\modules\tasks\models\state;
-
 
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\Task;
 use Yii;
 use yii\base\Component;
-
 
 /**
  * Class TaskState
@@ -17,11 +14,11 @@ use yii\base\Component;
  */
 abstract class TaskState extends Component
 {
-    const STATES = [
+    public const STATES = [
         Task::STATUS_PENDING => PendingState::class,
         Task::STATUS_IN_PROGRESS => InProgressState::class,
         Task::STATUS_PENDING_REVIEW => PendingReviewState::class,
-        Task::STATUS_COMPLETED => CompletedState::class
+        Task::STATUS_COMPLETED => CompletedState::class,
     ];
 
     public static $status;
@@ -40,7 +37,7 @@ abstract class TaskState extends Component
 
         return Yii::createObject([
             'class' => $stateClass,
-            'task' => $task
+            'task' => $task,
         ]);
     }
 
@@ -77,7 +74,7 @@ abstract class TaskState extends Component
             case Task::STATUS_PENDING_REVIEW:
                 $statusLabel = Yii::t('TasksModule.base', 'Finish Task');
                 break;
-            default :
+            default:
                 $statusLabel = '';
         }
 
@@ -86,13 +83,13 @@ abstract class TaskState extends Component
 
     public function proceed($newStatus = null)
     {
-        if($newStatus instanceof TaskState) {
+        if ($newStatus instanceof TaskState) {
             $newStatus = $newStatus->getStatusId();
         } else {
             $newStatus = ($newStatus) ? $newStatus : $this->getDefaultProceedStatusId();
         }
 
-        if(!array_key_exists($newStatus, static::STATES) || !$this->canProceed($newStatus)) {
+        if (!array_key_exists($newStatus, static::STATES) || !$this->canProceed($newStatus)) {
             return false;
         }
 
@@ -103,7 +100,7 @@ abstract class TaskState extends Component
 
     public function reset()
     {
-        if($this->canRevert(Task::STATUS_PENDING)) {
+        if ($this->canRevert(Task::STATUS_PENDING)) {
             $this->revert(Task::STATUS_PENDING);
             return true;
         }
@@ -111,14 +108,15 @@ abstract class TaskState extends Component
         return false;
     }
 
-    public function canProceed($newStatus = null, $user = null) {
-        if($newStatus instanceof TaskState) {
+    public function canProceed($newStatus = null, $user = null)
+    {
+        if ($newStatus instanceof TaskState) {
             $newStatus = $newStatus->getStatusId();
         } else {
             $newStatus = ($newStatus) ? $newStatus : $this->getDefaultProceedStatusId();
         }
 
-        if(!in_array($newStatus, $this->getProceedStatuses($user))) {
+        if (!in_array($newStatus, $this->getProceedStatuses($user))) {
             return false;
         }
 
@@ -134,11 +132,11 @@ abstract class TaskState extends Component
     {
         $result = $this->proceedConfig($user);
 
-        if(!$this->task->review) {
+        if (!$this->task->review) {
             unset($result[Task::STATUS_PENDING_REVIEW]);
         }
 
-        if(!$this->getStateInstance(Task::STATUS_COMPLETED)->canCompleteTask($user)) {
+        if (!$this->getStateInstance(Task::STATUS_COMPLETED)->canCompleteTask($user)) {
             unset($result[Task::STATUS_COMPLETED]);
         }
 
@@ -147,7 +145,7 @@ abstract class TaskState extends Component
 
     protected function getDefaultProceedStatusId()
     {
-        if(static::$defaultProceedStatus) {
+        if (static::$defaultProceedStatus) {
             return static::$defaultProceedStatus;
         }
 
@@ -164,13 +162,13 @@ abstract class TaskState extends Component
 
     public function revert($newStatus = null)
     {
-        if($newStatus instanceof TaskState) {
+        if ($newStatus instanceof TaskState) {
             $newStatus = $newStatus->getStatusId();
         } else {
             $newStatus = ($newStatus) ? $newStatus : $this->getDefaultRevertStatusId();
         }
 
-        if(!array_key_exists($newStatus, static::STATES) || !$this->canRevert($newStatus)) {
+        if (!array_key_exists($newStatus, static::STATES) || !$this->canRevert($newStatus)) {
             return false;
         }
 
@@ -181,13 +179,13 @@ abstract class TaskState extends Component
 
     public function canRevert($newStatus = null, $user = null)
     {
-        if($newStatus instanceof TaskState) {
+        if ($newStatus instanceof TaskState) {
             $newStatus = $newStatus->getStatusId();
         } else {
             $newStatus = ($newStatus) ? $newStatus : $this->getDefaultRevertStatusId();
         }
 
-        if(!in_array($newStatus, $this->getRevertStatuses($user))) {
+        if (!in_array($newStatus, $this->getRevertStatuses($user))) {
             return false;
         }
 
@@ -203,7 +201,7 @@ abstract class TaskState extends Component
     {
         $result = $this->revertConfig($user);
 
-        if(!$this->task->review) {
+        if (!$this->task->review) {
             unset($result[Task::STATUS_PENDING_REVIEW]);
         }
 
@@ -212,7 +210,7 @@ abstract class TaskState extends Component
 
     protected function getDefaultRevertStatusId()
     {
-        if(static::$defaultRevertStatus) {
+        if (static::$defaultRevertStatus) {
             return static::$defaultRevertStatus;
         }
 
@@ -236,10 +234,10 @@ abstract class TaskState extends Component
      */
     public function getStateInstance($newState)
     {
-        if($newState) {
+        if ($newState) {
             return Yii::createObject([
                 'class' => static::STATES[$newState],
-                'task' => $this->task
+                'task' => $this->task,
             ]);
         }
 
@@ -248,9 +246,9 @@ abstract class TaskState extends Component
 
     public function getCheckUrl()
     {
-        if($this->canProceed(Task::STATUS_COMPLETED)) {
+        if ($this->canProceed(Task::STATUS_COMPLETED)) {
             return $this->getStateInstance(Task::STATUS_COMPLETED)->getProceedUrl();
-        } else if ($this->canProceed(Task::STATUS_PENDING_REVIEW)) {
+        } elseif ($this->canProceed(Task::STATUS_PENDING_REVIEW)) {
             return $this->getStateInstance(Task::STATUS_PENDING_REVIEW)->getProceedUrl();
         }
 
@@ -292,12 +290,12 @@ abstract class TaskState extends Component
         return static::$status;
     }
 
-    protected abstract function proceedConfig($user = null);
-    protected abstract function revertConfig($user = null);
+    abstract protected function proceedConfig($user = null);
+    abstract protected function revertConfig($user = null);
 
-    public abstract function checkRevertRules($newStatus = null, $user = null);
-    public abstract function checkProceedRules($newStatus = null, $user = null);
+    abstract public function checkRevertRules($newStatus = null, $user = null);
+    abstract public function checkProceedRules($newStatus = null, $user = null);
 
-    public abstract function afterProceed(TaskState $oldState);
-    public abstract function afterRevert(TaskState $oldState);
+    abstract public function afterProceed(TaskState $oldState);
+    abstract public function afterRevert(TaskState $oldState);
 }

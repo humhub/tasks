@@ -8,12 +8,10 @@
 
 namespace humhub\modules\tasks\models\lists;
 
-
 use humhub\modules\content\components\ActiveQueryContent;
 
 interface TaskListInterface
 {
-
     public function getId();
 
     /**

@@ -13,7 +13,6 @@
 
 namespace humhub\modules\tasks\widgets\checklist;
 
-
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\Task;
 use humhub\widgets\JsWidget;
@@ -46,7 +45,7 @@ class TaskChecklist extends JsWidget
      */
     public function run()
     {
-        if(!count($this->task->items)) {
+        if (!count($this->task->items)) {
             return '';
         }
 
@@ -60,7 +59,7 @@ class TaskChecklist extends JsWidget
     public function getAttributes()
     {
         return [
-            'class' => 'task-items'
+            'class' => 'task-items',
         ];
     }
 
@@ -73,7 +72,7 @@ class TaskChecklist extends JsWidget
             'task-id' => $this->task->id,
             'drop-url' =>  TaskUrl::dropChecklistItem($this->task),
             'can-edit' => $this->canEdit,
-            'can-resort' => $this->task->canResortItems()
+            'can-resort' => $this->task->canResortItems(),
         ];
     }
 

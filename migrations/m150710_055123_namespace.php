@@ -5,7 +5,6 @@ use humhub\components\Migration;
 
 class m150710_055123_namespace extends Migration
 {
-
     public function up()
     {
         $this->renameClass('Task', humhub\modules\tasks\models\Task::className());

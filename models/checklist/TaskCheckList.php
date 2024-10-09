@@ -15,7 +15,6 @@ use humhub\modules\tasks\models\Task;
  */
 class TaskCheckList extends Component implements Sortable
 {
-
     /**
      * @var Task
      */
@@ -42,12 +41,12 @@ class TaskCheckList extends Component implements Sortable
         $items = $this->task->items;
 
         // make sure no invalid index is given
-        if($moveItem->sort_order === $newIndex) {
+        if ($moveItem->sort_order === $newIndex) {
             return;
-        } else if($newIndex < 0) {
+        } elseif ($newIndex < 0) {
             $newIndex = 0;
-        } else if($newIndex >= count($items)) {
-            $newIndex = count($items) -1;
+        } elseif ($newIndex >= count($items)) {
+            $newIndex = count($items) - 1;
         }
 
         array_splice($items, $moveItem->sort_order, 1);
@@ -62,7 +61,7 @@ class TaskCheckList extends Component implements Sortable
 
     public function afterSave($insert)
     {
-        if(!$insert) {
+        if (!$insert) {
             $this->updateItems();
         }
     }
@@ -77,7 +76,7 @@ class TaskCheckList extends Component implements Sortable
             /** @var $item TaskItem */
             if (!array_key_exists($item->id, $this->task->editItems)) {
                 $item->delete();
-            } else if ($item->title !== $this->task->editItems[$item->id]) {
+            } elseif ($item->title !== $this->task->editItems[$item->id]) {
                 $item->title = $this->task->editItems[$item->id];
                 $item->update();
             }

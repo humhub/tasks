@@ -4,11 +4,10 @@ use yii\db\Migration;
 
 class m141002_092800_fix_deadline extends Migration
 {
-
     public function up()
     {
         try {
-            $this->update('task', array('deadline' => new \yii\db\Expression('NULL')), 'deadline = "" OR deadline = "0000-00-00 00:00:00"');
+            $this->update('task', ['deadline' => new \yii\db\Expression('NULL')], 'deadline = "" OR deadline = "0000-00-00 00:00:00"');
         } catch (\Exception $ex) {
 
         }

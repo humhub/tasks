@@ -13,7 +13,6 @@ use humhub\modules\activity\components\BaseActivity;
 
 class TaskStartActivity extends BaseActivity
 {
-
     public $moduleId = 'tasks';
     public $viewName = "taskStart";
 

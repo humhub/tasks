@@ -14,7 +14,6 @@ use yii\helpers\Url;
 
 class TaskListCest
 {
-    
     public function testInstallAndCreateSpaceEntry(AcceptanceTester $I)
     {
         $I->amAdmin();
@@ -38,14 +37,14 @@ class TaskListCest
 
         $I->waitForText('My New Tasklist', null, '.task-list');
 
-        $I->click(Locator::elementAt('[data-task-list-id=1] [data-action-click="ui.modal.load"]',1));
+        $I->click(Locator::elementAt('[data-task-list-id=1] [data-action-click="ui.modal.load"]', 1));
         $I->waitForText('New Task', null, '#globalModal');
 
         $I->fillField('Task[title]', 'My First Task');
         $I->fillField('#task-description .humhub-ui-richtext', 'This is a test task!');
 
         $I->click('Save', '#globalModal');
-        $I->waitForText('My First Task', null,'.task-list-task-title-bar');
+        $I->waitForText('My First Task', null, '.task-list-task-title-bar');
 
         $I->jsClick('[data-task-id="2"] .toggleTaskDetails');
         $I->waitForText('This is a test task!');
@@ -57,7 +56,7 @@ class TaskListCest
         $I->waitForText('Finish Task');
         $I->click('Finish Task');
 
-        $I->waitForText('My First Task', null,'.tasks-completed');
+        $I->waitForText('My First Task', null, '.tasks-completed');
     }
 
     public function testInstallAndCreatUserEntry(AcceptanceTester $I)
@@ -82,14 +81,14 @@ class TaskListCest
 
         $I->waitForText('My New Tasklist', null, '.task-list');
 
-        $I->click(Locator::elementAt('[data-task-list-id=1] [data-action-click="ui.modal.load"]',1));
+        $I->click(Locator::elementAt('[data-task-list-id=1] [data-action-click="ui.modal.load"]', 1));
         $I->waitForText('New Task', null, '#globalModal');
 
         $I->fillField('Task[title]', 'My First Task');
         $I->fillField('#task-description .humhub-ui-richtext', 'This is a test task!');
 
         $I->click('Save', '#globalModal');
-        $I->waitForText('My First Task', null,'.task-list-task-title-bar');
+        $I->waitForText('My First Task', null, '.task-list-task-title-bar');
 
         $I->jsClick('[data-task-id="2"] .toggleTaskDetails');
         $I->waitForText('This is a test task!');
@@ -101,7 +100,7 @@ class TaskListCest
         $I->waitForText('Finish Task');
         $I->click('Finish Task');
 
-        $I->waitForText('My First Task', null,'.tasks-completed');
+        $I->waitForText('My First Task', null, '.tasks-completed');
     }
 
     private function enableProfileModule(AcceptanceTester $I)

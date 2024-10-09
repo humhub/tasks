@@ -34,24 +34,23 @@ use humhub\widgets\Label;
 use humhub\modules\tasks\widgets\WallEntry;
 use humhub\modules\tasks\permissions\ManageTasks;
 
-
 /**
  * This is the model class for table "task".
  *
  * The followings are the available columns in table 'task':
- * @property integer $id
+ * @property int $id
  * @property string $title
  * @property string $color
  * @property string $description
- * @property integer $review
- * @property integer $request_sent
- * @property integer $scheduling
- * @property integer $all_day
+ * @property int $review
+ * @property int $request_sent
+ * @property int $scheduling
+ * @property int $all_day
  * @property string $start_datetime
  * @property string $end_datetime
- * @property integer $status
- * @property integer $cal_mode
- * @property integer $task_list_id
+ * @property int $status
+ * @property int $cal_mode
+ * @property int $task_list_id
  * @property string $time_zone The timeZone this entry was saved, note the dates itself are always saved in app timeZone
  * @property string $uid uid field used by calendar integration
  *
@@ -63,8 +62,7 @@ use humhub\modules\tasks\permissions\ManageTasks;
  */
 class Task extends ContentActiveRecord implements Searchable
 {
-
-    const SCENARIO_EDIT = 'edit';
+    public const SCENARIO_EDIT = 'edit';
 
     /**
      * @inheritdocs
@@ -90,16 +88,16 @@ class Task extends ContentActiveRecord implements Searchable
     /**
      * Status
      */
-    const STATUS_PENDING = 1;
-    const STATUS_IN_PROGRESS = 2;
-    const STATUS_PENDING_REVIEW = 3;
-    const STATUS_COMPLETED = 5;
-    const STATUS_ALL = 4;
+    public const STATUS_PENDING = 1;
+    public const STATUS_IN_PROGRESS = 2;
+    public const STATUS_PENDING_REVIEW = 3;
+    public const STATUS_COMPLETED = 5;
+    public const STATUS_ALL = 4;
 
     /**
      * @deprecated
      */
-    const STATUS_OPEN = 1;
+    public const STATUS_OPEN = 1;
 
     /**
      * @var array all given statuses as array
@@ -108,14 +106,14 @@ class Task extends ContentActiveRecord implements Searchable
         self::STATUS_PENDING,
         self::STATUS_IN_PROGRESS,
         self::STATUS_PENDING_REVIEW,
-        self::STATUS_COMPLETED
+        self::STATUS_COMPLETED,
     ];
 
     /**
      * User Types
      */
-    const USER_ASSIGNED = 0;
-    const USER_RESPONSIBLE = 1;
+    public const USER_ASSIGNED = 0;
+    public const USER_RESPONSIBLE = 1;
 
 
     /**
@@ -148,12 +146,12 @@ class Task extends ContentActiveRecord implements Searchable
         $this->schedule = new TaskScheduling(['task' => $this]);
         $this->checklist = new TaskCheckList(['task' => $this]);
 
-        if($this->status == null) {
+        if ($this->status == null) {
             $this->status = static::STATUS_PENDING;
         }
         $this->updateState();
 
-        if(!$this->all_day) {
+        if (!$this->all_day) {
             $this->all_day = 1;
         }
 
@@ -201,8 +199,8 @@ class Task extends ContentActiveRecord implements Searchable
 
     public function __set($name, $value)
     {
-        parent::__set($name,$value);
-        if($name == 'status') {
+        parent::__set($name, $value);
+        if ($name == 'status') {
             $this->updateState();
         }
     }
@@ -254,7 +252,7 @@ class Task extends ContentActiveRecord implements Searchable
             [['cal_mode'], 'in', 'range' => TaskScheduling::$calModes],
             [['assignedUsers', 'description', 'responsibleUsers', 'selectedReminders'], 'safe'],
             [['title'], 'string', 'max' => 255],
-            [['task_list_id'], 'validateTaskList']
+            [['task_list_id'], 'validateTaskList'],
         ];
     }
 
@@ -262,8 +260,8 @@ class Task extends ContentActiveRecord implements Searchable
     {
         if ($this->task_list_id && !$this->hasNewTaskList()) {
             $taskList = TaskList::findByContainer($this->content->container)->where(['id' => $this->task_list_id]);
-            if(!$taskList->exists()) {
-                $this->addError('task_list_id',  Yii::t('TasksModule.base', 'Invalid task list selection.'));
+            if (!$taskList->exists()) {
+                $this->addError('task_list_id', Yii::t('TasksModule.base', 'Invalid task list selection.'));
             }
         }
     }
@@ -343,7 +341,7 @@ class Task extends ContentActiveRecord implements Searchable
     {
         if (!$user && !Yii::$app->user->isGuest) {
             $user = Yii::$app->user->getIdentity();
-        } else if (!$user) {
+        } elseif (!$user) {
             return [];
         }
 
@@ -409,22 +407,22 @@ class Task extends ContentActiveRecord implements Searchable
     /**
      * Saves new items (if set) and updates items given edititems (if set)
      *
-     * @param boolean $insert
+     * @param bool $insert
      * @param array $changedAttributes
-     * @return boolean
+     * @return bool
      * @throws \yii\base\Exception
      */
     public function afterSave($insert, $changedAttributes)
     {
         parent::afterSave($insert, $changedAttributes);
 
-        if($this->scenario === self::SCENARIO_EDIT) {
+        if ($this->scenario === self::SCENARIO_EDIT) {
             $oldTaskUsers = $this->taskUsers;
 
             TaskUser::deleteAll(['task_id' => $this->id]);
 
             // Auto assign the user for his own tasks
-            if($this->content->container instanceof User) {
+            if ($this->content->container instanceof User) {
                 $this->assignedUsers = [$this->content->container->guid];
             }
 
@@ -432,11 +430,11 @@ class Task extends ContentActiveRecord implements Searchable
                 foreach ($this->assignedUsers as $guid) {
                     $user = User::findOne(['guid' => $guid]);
 
-                    if(!$user) {
+                    if (!$user) {
                         continue;
                     }
 
-                    $oldAssigned = array_filter($oldTaskUsers, function($taskUser) use ($user) {
+                    $oldAssigned = array_filter($oldTaskUsers, function ($taskUser) use ($user) {
                         /** @var $taskUser TaskUser */
                         return $taskUser->user_id === $user->id && $taskUser->user_type === Task::USER_ASSIGNED;
                     });
@@ -449,11 +447,11 @@ class Task extends ContentActiveRecord implements Searchable
                 foreach ($this->responsibleUsers as $guid) {
                     $user = User::findOne(['guid' => $guid]);
 
-                    if(!$user) {
+                    if (!$user) {
                         continue;
                     }
 
-                    $oldResponsible = array_filter($oldTaskUsers, function($taskUser) use ($user) {
+                    $oldResponsible = array_filter($oldTaskUsers, function ($taskUser) use ($user) {
                         /** @var $taskUser TaskUser */
                         return $taskUser->user_id === $user->id && $taskUser->user_type === Task::USER_RESPONSIBLE;
                     });
@@ -469,7 +467,7 @@ class Task extends ContentActiveRecord implements Searchable
 
         }
 
-        if($this->list && $this->list->addition) {
+        if ($this->list && $this->list->addition) {
             $this->list->addition->updateAttributes(['updated_at' => date('Y-m-d G:i:s')]);
         }
     }
@@ -478,7 +476,7 @@ class Task extends ContentActiveRecord implements Searchable
     {
 
         foreach ($this->taskUsers as $taskUser) {
-            if(!$container->isMember($taskUser->user_id)) {
+            if (!$container->isMember($taskUser->user_id)) {
                 $taskUser->delete();
             }
         }
@@ -495,7 +493,7 @@ class Task extends ContentActiveRecord implements Searchable
     {
         $query = $this->hasMany(User::class, ['id' => 'user_id'])->via('assignedTaskUsers');
 
-        if($filterOutResponsibleUsers) {
+        if ($filterOutResponsibleUsers) {
             $responsible = $this->getTaskResponsibleUsers()->select(['id']);
             $query->where(['not in', 'user.id', $responsible]);
         }
@@ -507,7 +505,7 @@ class Task extends ContentActiveRecord implements Searchable
     {
         if (!$user && !Yii::$app->user->isGuest) {
             $user = Yii::$app->user->getIdentity();
-        } else if (!$user) {
+        } elseif (!$user) {
             return false;
         }
 
@@ -526,7 +524,7 @@ class Task extends ContentActiveRecord implements Searchable
             return false;
         }
 
-        if($this->content->container instanceof User && !$user->is($this->content->container)) {
+        if ($this->content->container instanceof User && !$user->is($this->content->container)) {
             return false;
         }
 
@@ -549,7 +547,7 @@ class Task extends ContentActiveRecord implements Searchable
      */
     public function afterDelete()
     {
-        if($this->list) {
+        if ($this->list) {
             $this->list->setAttributes(['updated_at' => date('Y-m-d G:i:s')]);
         }
 
@@ -618,7 +616,7 @@ class Task extends ContentActiveRecord implements Searchable
     {
         if (!$user && !Yii::$app->user->isGuest) {
             $user = Yii::$app->user->getIdentity();
-        } else if (!$user) {
+        } elseif (!$user) {
             return false;
         }
 
@@ -633,7 +631,7 @@ class Task extends ContentActiveRecord implements Searchable
     {
         if (!$user && !Yii::$app->user->isGuest) {
             $user = Yii::$app->user->getIdentity();
-        } else if (!$user) {
+        } elseif (!$user) {
             return false;
         }
 
@@ -653,7 +651,7 @@ class Task extends ContentActiveRecord implements Searchable
                 'task_id' => $this->id,
                 'user_id' => $user->id,
                 'user_type' => self::USER_RESPONSIBLE,
-                'sendNotificationOnCreation' => $sendNotification
+                'sendNotificationOnCreation' => $sendNotification,
             ]);
             return $taskResponsible->save();
         }
@@ -827,7 +825,7 @@ class Task extends ContentActiveRecord implements Searchable
     {
         if ($this->isNewRecord) {
             return $this->content->container->can([CreateTask::class, ManageTasks::class]);
-        } else if (!$this->hasTaskResponsible()) {
+        } elseif (!$this->hasTaskResponsible()) {
             return  $this->content->container->can([ManageTasks::class]);
         }
 
@@ -859,8 +857,7 @@ class Task extends ContentActiveRecord implements Searchable
             foreach ($notifications as $notification) {
                 $notification->delete();
             }
-        }
-        else {
+        } else {
             // delete specific old notifications
             $notifications = Notification::find()->where(['class' => $notificationClassName, 'source_class' => self::class, 'source_pk' => $this->id, 'space_id' => $this->content->container->id])->all();
             foreach ($notifications as $notification) {
@@ -886,8 +883,9 @@ class Task extends ContentActiveRecord implements Searchable
      */
     public function getBadge()
     {
-        if ($this->schedule->isOverdue())
+        if ($this->schedule->isOverdue()) {
             return Label::danger(Yii::t('TasksModule.base', 'Overdue'))->icon('fa fa-exclamation-triangle')->options(['style' => 'margin-right: 3px;'])->right();
+        }
 
         return null;
     }
@@ -909,7 +907,7 @@ class Task extends ContentActiveRecord implements Searchable
             'title' => $this->title,
             'description' => $this->description,
             'itemTitles' => trim($itemTitles),
-            'itemDescriptions' => trim($itemDescriptions)
+            'itemDescriptions' => trim($itemDescriptions),
         ];
     }
 
@@ -919,42 +917,43 @@ class Task extends ContentActiveRecord implements Searchable
      */
     public function canProcess($user = null)
     {
-        if(!$user && Yii::$app->user->isGuest) {
+        if (!$user && Yii::$app->user->isGuest) {
             return false;
         }
 
-        if(!$user) {
+        if (!$user) {
             $user = Yii::$app->user->getIdentity();
         }
 
-        if($this->isOwner($user)) {
+        if ($this->isOwner($user)) {
             return true;
         }
 
-        if($this->canManageTasks($user)) {
+        if ($this->canManageTasks($user)) {
             return true;
         }
 
         $permissionManager = new ContentContainerPermissionManager([
             'contentContainer' => $this->content->container,
-            'subject' => $user
+            'subject' => $user,
         ]);
 
         return (!$this->hasTaskAssigned() && $permissionManager->can(ProcessUnassignedTasks::class));
     }
 
-    public function canManageTasks($user = null) {
-        if(!$user && Yii::$app->user->isGuest) {
+    public function canManageTasks($user = null)
+    {
+        if (!$user && Yii::$app->user->isGuest) {
             return false;
         }
 
-        if(!$user) {
+        if (!$user) {
             $user = Yii::$app->user->getIdentity();
         }
 
         $permissionManager = new ContentContainerPermissionManager([
             'contentContainer' => $this->content->container,
-            'subject' => $user
+            'subject' => $user,
         ]);
 
         return $permissionManager->can(ManageTasks::class);
@@ -1008,7 +1007,7 @@ class Task extends ContentActiveRecord implements Searchable
      */
     public function getPercent()
     {
-//        $denominator = TaskItem::find()->where(['task_id' => $this->id])->count();
+        //        $denominator = TaskItem::find()->where(['task_id' => $this->id])->count();
         $denominator = $this->getItems()->count();
         // add STATUS_IN_PROGRESS and STATUS_COMPLETED
         $denominator += 2;
@@ -1016,19 +1015,21 @@ class Task extends ContentActiveRecord implements Searchable
         if ($this->review) {
             $denominator += 1;
         }
-        if ($denominator == 0)
+        if ($denominator == 0) {
             return 0;
+        }
 
 
         $counter = $this->getConfirmedCount();
-        if (self::isInProgress())
+        if (self::isInProgress()) {
             $counter += 1;
-        elseif (self::isCompleted() && !$this->review)
+        } elseif (self::isCompleted() && !$this->review) {
             $counter += 2;
-        elseif (self::isPendingReview() && $this->review)
+        } elseif (self::isPendingReview() && $this->review) {
             $counter += 2;
-        elseif (self::isCompleted() && $this->review)
+        } elseif (self::isCompleted() && $this->review) {
             $counter += 3;
+        }
 
         return $counter / $denominator * 100;
     }
@@ -1059,8 +1060,9 @@ class Task extends ContentActiveRecord implements Searchable
                 break;
         }
 
-        if ($this->schedule->isOverdue())
+        if ($this->schedule->isOverdue()) {
             $labels[] = Label::danger(Yii::t('TasksModule.base', 'Overdue'))->icon('fa fa-exclamation-triangle')->sortOrder(360);
+        }
 
         return parent::getLabels($labels, $includeContentName);
     }

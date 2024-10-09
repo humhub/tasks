@@ -4,7 +4,6 @@ use yii\db\Migration;
 
 class uninstall extends Migration
 {
-
     public function up()
     {
         try {
@@ -12,7 +11,8 @@ class uninstall extends Migration
             $this->dropFK('fk-task-item-task-id', 'task_item');
             $this->dropFK('fk-task-reminder-task-id', 'task_reminder');
             $this->dropFK('fk-task-list-setting-task-id', 'task_list_setting');
-        } catch(\Exception $e) {}
+        } catch (\Exception $e) {
+        }
 
         $this->dropTableSave('task');
         $this->dropTableSave('task_list_setting');
@@ -21,18 +21,20 @@ class uninstall extends Migration
         $this->dropTableSave('task_reminder');
     }
 
-    public function dropFK($name, $table) {
+    public function dropFK($name, $table)
+    {
         try {
             $this->dropForeignKey($name, $table);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             Yii::warning($e);
         }
     }
 
-    public function dropTableSave($name) {
+    public function dropTableSave($name)
+    {
         try {
             $this->dropTable($name);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             Yii::warning($e);
         }
     }

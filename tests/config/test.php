@@ -10,9 +10,6 @@ return [
     'modules' => ['tasks'],
     'fixtures' => [
         'default',
-        'task' => 'humhub\modules\tasks\tests\codeception\fixtures\TaskFixture'
-    ]
+        'task' => 'humhub\modules\tasks\tests\codeception\fixtures\TaskFixture',
+    ],
 ];
-
-
-

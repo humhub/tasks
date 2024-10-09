@@ -100,7 +100,7 @@ class TaskContextMenu extends WallEntryControls
                     'data-action-click-url' => TaskUrl::deleteTask($this->task),
                     'data-action-confirm-header' => Yii::t('TasksModule.base', '<strong>Confirm</strong> task deletion'),
                     'data-action-confirm' => Yii::t('TasksModule.base', 'Do you really want to delete this task?'),
-                    'data-action-confirm-text' => Yii::t('TasksModule.base', 'Delete')
+                    'data-action-confirm-text' => Yii::t('TasksModule.base', 'Delete'),
                 ],
             ]));
         }

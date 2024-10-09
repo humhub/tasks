@@ -13,7 +13,6 @@
 
 namespace humhub\modules\tasks\widgets\search;
 
-
 use humhub\components\Widget;
 use humhub\modules\tasks\models\forms\TaskFilter;
 use humhub\modules\tasks\models\Task;
@@ -40,7 +39,7 @@ class TaskSearchList extends Widget
             'query' => $this->filter->query(),
             'pagination' => [
                 'pageSize' => $module->searchPaginationSize,
-                'route' => '/tasks/global/filter'
+                'route' => '/tasks/global/filter',
             ],
         ]);
 
@@ -50,17 +49,17 @@ class TaskSearchList extends Widget
             'itemView' => '@tasks/widgets/search/views/_item',
             'viewParams' => [
                 'contentContainer' => $this->filter->contentContainer,
-                'canEdit' => $this->canEdit
+                'canEdit' => $this->canEdit,
             ],
-            'summary'=>'',
+            'summary' => '',
             'options' => [
                 'tag' => 'ul',
-                'class' => 'media-list'
+                'class' => 'media-list',
             ],
             'itemOptions' => [
-                'tag' => 'li'
+                'tag' => 'li',
             ],
-            'layout' => "{summary}\n{items}\n<div class=\"pagination-container\">{pager}</div>"
+            'layout' => "{summary}\n{items}\n<div class=\"pagination-container\">{pager}</div>",
         ]);
     }
 

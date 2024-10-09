@@ -10,8 +10,8 @@ class m151224_162440_fix_module_id_notifications extends Migration
 {
     public function up()
     {
-        $this->update('notification', ['module'=> 'tasks'], ['class' => 'humhub\modules\tasks\notifications\Assigned']);
-        $this->update('notification', ['module'=> 'tasks'], ['class' => 'humhub\modules\tasks\notifications\Finished']);
+        $this->update('notification', ['module' => 'tasks'], ['class' => 'humhub\modules\tasks\notifications\Assigned']);
+        $this->update('notification', ['module' => 'tasks'], ['class' => 'humhub\modules\tasks\notifications\Finished']);
     }
 
     public function down()

@@ -17,5 +17,5 @@ class TaskListSettingFixture extends ActiveFixture
 {
     public $modelClass = TaskListSettings::class;
     public $dataFile = '@tasks/tests/codeception/fixtures/data/taskListSetting.php';
-   
+
 }

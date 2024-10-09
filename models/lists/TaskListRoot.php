@@ -1,8 +1,6 @@
 <?php
 
-
 namespace humhub\modules\tasks\models\lists;
-
 
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\tasks\models\Sortable;
@@ -27,16 +25,16 @@ class TaskListRoot extends Component implements Sortable
         try {
             $taskList = TaskList::findOne(['id' => $tskListId]);
 
-            if($taskList->addition->sort_order === $newIndex) {
+            if ($taskList->addition->sort_order === $newIndex) {
                 return;
             }
 
             $taskLists = TaskList::findOverviewLists($this->contentContainer)->andWhere(['!=', 'content_tag.id', $taskList->id])->all();
 
             // make sure no invalid index is given
-            if($newIndex < 0) {
+            if ($newIndex < 0) {
                 $newIndex = 0;
-            } else if($newIndex >= count($taskLists)) {
+            } elseif ($newIndex >= count($taskLists)) {
                 $newIndex = count($taskLists);
             }
 

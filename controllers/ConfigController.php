@@ -18,7 +18,7 @@ use humhub\modules\tasks\models\SnippetModuleSettings;
 use yii\web\HttpException;
 
 /**
- * 
+ *
  */
 class ConfigController extends Controller
 {
@@ -42,7 +42,7 @@ class ConfigController extends Controller
         }
 
         return $this->render('snippet', [
-            'model' => $model
+            'model' => $model,
         ]);
     }
 }

@@ -55,7 +55,7 @@ class RemindStart extends BaseNotification
         return Yii::t('TasksModule.base', 'Task {task} in space {spaceName} starts at {dateTime}.', [
             '{task}' => Html::tag('strong', Html::encode($this->getContentInfo($this->source, false))),
             '{spaceName}' => Html::tag('strong', Html::encode($this->source->content->container->displayName)),
-            '{dateTime}' => Html::encode($this->source->schedule->getFormattedStartDateTime())
+            '{dateTime}' => Html::encode($this->source->schedule->getFormattedStartDateTime()),
         ]);
     }
 
@@ -67,7 +67,7 @@ class RemindStart extends BaseNotification
         return Yii::t('TasksModule.base', 'Task {task} in space {spaceName} starts at {dateTime}.', [
             '{task}' => Html::encode($this->getContentInfo($this->source, false)),
             '{spaceName}' => Html::encode($this->source->content->container->displayName),
-            '{dateTime}' => Html::encode($this->source->schedule->getFormattedStartDateTime())
+            '{dateTime}' => Html::encode($this->source->schedule->getFormattedStartDateTime()),
         ]);
     }
 }

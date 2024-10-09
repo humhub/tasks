@@ -24,17 +24,16 @@ use humhub\modules\content\interfaces\ContentOwner;
  */
 class MailContentEntry extends Widget
 {
-
     /**
-     * @var \humhub\modules\user\models\User content originator 
+     * @var \humhub\modules\user\models\User content originator
      */
     public $originator;
-    
+
     /**
-     * @var string|Viewable|ContentOwner content to render 
+     * @var string|Viewable|ContentOwner content to render
      */
     public $content;
-    
+
     /**
      * @var \humhub\modules\space\models\Space space of content (optional)
      */
@@ -44,14 +43,14 @@ class MailContentEntry extends Widget
      * @var ActiveRecord (optional)
      */
     public $source;
-    
-    /** 
-     * @var string content date 
+
+    /**
+     * @var string content date
      */
     public $date;
-    
+
     /**
-     * @var boolean if Notification is a Reminder
+     * @var bool if Notification is a Reminder
      */
     public $isReminder;
 
@@ -62,7 +61,7 @@ class MailContentEntry extends Widget
     {
         if (is_string($this->content)) {
             $content = $this->content;
-        } else if ($this->content instanceof Viewable) {
+        } elseif ($this->content instanceof Viewable) {
             try {
                 $renderer = new ViewPathRenderer(['parent' => true, 'subPath' => 'mail']);
                 $content =  $renderer->render($this->content);
@@ -72,12 +71,12 @@ class MailContentEntry extends Widget
         }
 
         return $this->render('mailContentEntry', [
-                    'originator' => $this->originator,
-                    'content' => $content,
-                    'space' => $this->space,
-                    'date' => $this->date,
-                    'isReminder' => $this->isReminder,
-                    'source' => $this->source
+            'originator' => $this->originator,
+            'content' => $content,
+            'space' => $this->space,
+            'date' => $this->date,
+            'isReminder' => $this->isReminder,
+            'source' => $this->source,
         ]);
     }
 

@@ -30,9 +30,9 @@ class TaskRoleInfoBox extends TaskInfoBox
 
         if ($this->task->isTaskResponsible()) {
             return Icon::get('check')->color($color) . ' ' . Yii::t('TasksModule.base', 'You are responsible!');
-        } elseif($this->task->isTaskAssigned()) {
+        } elseif ($this->task->isTaskAssigned()) {
             return Icon::get('check')->color($color) . ' ' . Yii::t('TasksModule.base', 'You are assigned!');
-        } elseif($this->task->canProcess()) {
+        } elseif ($this->task->canProcess()) {
             return Icon::get('times')->color($color) . ' ' . Yii::t('TasksModule.base', 'Anyone can work on this task!');
         } else {
             return Icon::get('times')->color($color) . ' ' . Yii::t('TasksModule.base', 'This task can only be processed by assigned and responsible users.');

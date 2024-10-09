@@ -25,14 +25,14 @@ class GlobalController extends AbstractTaskController
     protected function getAccessRules()
     {
         return [
-            [ControllerAccess::RULE_LOGGED_IN_ONLY]
+            [ControllerAccess::RULE_LOGGED_IN_ONLY],
         ];
     }
 
     public function actionIndex()
     {
         return $this->render('index', [
-            'filter' =>  new TaskFilter(['filters' => [TaskFilter::FILTER_ASSIGNED]])
+            'filter' =>  new TaskFilter(['filters' => [TaskFilter::FILTER_ASSIGNED]]),
         ]);
     }
 
@@ -43,7 +43,7 @@ class GlobalController extends AbstractTaskController
 
         return $this->asJson([
             'success' => true,
-            'result' => TaskSearchList::widget(['filter' => $filter])
+            'result' => TaskSearchList::widget(['filter' => $filter]),
         ]);
     }
 

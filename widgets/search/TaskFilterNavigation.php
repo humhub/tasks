@@ -23,15 +23,15 @@ use Yii;
 
 class TaskFilterNavigation extends FilterNavigation
 {
-    const PANEL_POSITION_TOP = 1;
-    const PANEL_POSITION_BOTTOM_LEFT = 2;
-    const PANEL_POSITION_BOTTOM_CENTER = 3;
-    const PANEL_POSITION_BOTTOM_RIGHT = 4;
+    public const PANEL_POSITION_TOP = 1;
+    public const PANEL_POSITION_BOTTOM_LEFT = 2;
+    public const PANEL_POSITION_BOTTOM_CENTER = 3;
+    public const PANEL_POSITION_BOTTOM_RIGHT = 4;
 
-    const FILTER_BLOCK_TITLE = 'title';
-    const FILTER_BLOCK_CHECKBOX = 'checkbox';
-    const FILTER_BLOCK_PICKER = 'picker';
-    const FILTER_BLOCK_DATEPICKER = 'datePicker';
+    public const FILTER_BLOCK_TITLE = 'title';
+    public const FILTER_BLOCK_CHECKBOX = 'checkbox';
+    public const FILTER_BLOCK_PICKER = 'picker';
+    public const FILTER_BLOCK_DATEPICKER = 'datePicker';
 
     public $jsWidget = 'task.search.TaskFilter';
 
@@ -101,7 +101,7 @@ class TaskFilterNavigation extends FilterNavigation
                 'style' => 'width:100%',
                 'data-action-keydown' => 'inputChange',
                 'data-action-keypress' => null,
-                'placeholder' => Yii::t('TasksModule.base', 'Filter by title')
+                'placeholder' => Yii::t('TasksModule.base', 'Filter by title'),
             ],
             'sortOrder' => 100], static::FILTER_BLOCK_TITLE);
 
@@ -144,17 +144,17 @@ class TaskFilterNavigation extends FilterNavigation
             'pickerOptions' => [
                 'items' => TaskState::getStatusItems(),
                 'placeholderMore' =>  Yii::t('TasksModule.base', 'Filter by status'),
-                'name' => 'task-filter-state'
-            ]],static::FILTER_BLOCK_PICKER);
+                'name' => 'task-filter-state',
+            ]], static::FILTER_BLOCK_PICKER);
 
 
-        if(!$this->filter->contentContainer) {
+        if (!$this->filter->contentContainer) {
             $memberships = MembershipSearch::findByUser(Yii::$app->user->identity)->all();
 
             $spaces = [];
             foreach ($memberships as $membership) {
                 /* @var Membership $membership */
-                if($membership->space->moduleManager->isEnabled('tasks')) {
+                if ($membership->space->moduleManager->isEnabled('tasks')) {
                     $spaces[] = $membership->space;
                 }
             }

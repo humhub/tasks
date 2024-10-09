@@ -26,7 +26,6 @@ use humhub\modules\tasks\widgets\MyTasks;
 use humhub\modules\tasks\models\user\TaskUser;
 use yii\db\Expression;
 
-
 /* @var $user \humhub\modules\user\models\User */
 
 /**
@@ -37,7 +36,6 @@ use yii\db\Expression;
  */
 class Events
 {
-
     public static function onTopMenuInit($event)
     {
         try {
@@ -221,33 +219,33 @@ class Events
             }
         }
 
-//        // check for task responsible users without task or existing user
-//        foreach (TaskResponsible::find()->each() as $taskResponsible) {
-//            if ($taskResponsible->task === null) {
-//                if ($integrityController->showFix("Deleting task responsible user id " . $taskResponsible->id . " without existing task!")) {
-//                    $taskResponsible->delete();
-//                }
-//            }
-//            if ($taskResponsible->user === null) {
-//                if ($integrityController->showFix("Deleting task responsible user id " . $taskResponsible->id . " without existing user!")) {
-//                    $taskResponsible->delete();
-//                }
-//            }
-//        }
+        //        // check for task responsible users without task or existing user
+        //        foreach (TaskResponsible::find()->each() as $taskResponsible) {
+        //            if ($taskResponsible->task === null) {
+        //                if ($integrityController->showFix("Deleting task responsible user id " . $taskResponsible->id . " without existing task!")) {
+        //                    $taskResponsible->delete();
+        //                }
+        //            }
+        //            if ($taskResponsible->user === null) {
+        //                if ($integrityController->showFix("Deleting task responsible user id " . $taskResponsible->id . " without existing user!")) {
+        //                    $taskResponsible->delete();
+        //                }
+        //            }
+        //        }
 
-//        // check for task assigned users without task or existing user
-//        foreach (TaskAssigned::find()->each() as $taskAssigned) {
-//            if ($taskAssigned->task === null) {
-//                if ($integrityController->showFix("Deleting task assigned user id " . $taskAssigned->id . " without existing task!")) {
-//                    $taskAssigned->delete();
-//                }
-//            }
-//            if ($taskAssigned->user === null) {
-//                if ($integrityController->showFix("Deleting task assigned user id " . $taskAssigned->id . " without existing user!")) {
-//                    $taskAssigned->delete();
-//                }
-//            }
-//        }
+        //        // check for task assigned users without task or existing user
+        //        foreach (TaskAssigned::find()->each() as $taskAssigned) {
+        //            if ($taskAssigned->task === null) {
+        //                if ($integrityController->showFix("Deleting task assigned user id " . $taskAssigned->id . " without existing task!")) {
+        //                    $taskAssigned->delete();
+        //                }
+        //            }
+        //            if ($taskAssigned->user === null) {
+        //                if ($integrityController->showFix("Deleting task assigned user id " . $taskAssigned->id . " without existing user!")) {
+        //                    $taskAssigned->delete();
+        //                }
+        //            }
+        //        }
 
         // check for task reminders without task
         foreach (TaskReminder::find()->each() as $taskReminder) {
@@ -287,7 +285,7 @@ class Events
                     }
                 }
             }
-        } catch(\Throwable $e) {
+        } catch (\Throwable $e) {
             Yii::error($e);
         }
     }

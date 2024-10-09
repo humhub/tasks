@@ -8,7 +8,6 @@
 
 namespace humhub\modules\tasks\controllers;
 
-
 use humhub\modules\content\components\ContentContainerControllerAccess;
 use humhub\modules\space\models\Space;
 use humhub\modules\tasks\models\lists\TaskListItemDrop;
@@ -54,11 +53,11 @@ class ListController extends AbstractTaskController
     {
         $taskList = ($id) ? $this->getTaskListById($id) : new TaskList($this->contentContainer);
 
-        if(!$taskList) {
+        if (!$taskList) {
             throw new HttpException(404);
         }
 
-        if($taskList->load(Yii::$app->request->post()) && $taskList->save()) {
+        if ($taskList->load(Yii::$app->request->post()) && $taskList->save()) {
             return ModalClose::widget();
         }
 
@@ -88,7 +87,7 @@ class ListController extends AbstractTaskController
     {
         $taskList = TaskList::findById($id, $this->contentContainer);
 
-        if(!$taskList) {
+        if (!$taskList) {
             throw new HttpException(404);
         }
 
@@ -106,7 +105,7 @@ class ListController extends AbstractTaskController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->asJson([
-                'success' => true
+                'success' => true,
             ]);
         }
 
@@ -127,9 +126,9 @@ class ListController extends AbstractTaskController
     public function actionShowMoreCompleted($id = null, $offset = 0)
     {
         /** @var $taskList TaskListInterface */
-        $taskList = $id ? TaskList::findById($id, $this->contentContainer) :  new UnsortedTaskList(['contentContainer' => $this->contentContainer]);
+        $taskList = $id ? TaskList::findById($id, $this->contentContainer) : new UnsortedTaskList(['contentContainer' => $this->contentContainer]);
 
-        if(!$taskList) {
+        if (!$taskList) {
             throw new HttpException(404);
         }
 
@@ -147,18 +146,18 @@ class ListController extends AbstractTaskController
         return $this->asJson([
             'tasks' => $result,
             'remainingCount' => $remainingCount,
-            'showMoreMessage' => Yii::t('TasksModule.base','Show {count} more completed {countTasks,plural,=1{task} other{tasks}}', ['count' => $remainingCount, 'countTasks' => $remainingCount])
+            'showMoreMessage' => Yii::t('TasksModule.base', 'Show {count} more completed {countTasks,plural,=1{task} other{tasks}}', ['count' => $remainingCount, 'countTasks' => $remainingCount]),
         ]);
     }
 
     public function actionLoadAjax($id = null)
     {
-        if(!$id) {
+        if (!$id) {
             return UnsortedTaskListWidget::widget(['canManage' =>  $this->canManageTasks(), 'canCreate' => $this->canCreateTask()]);
         }
 
         $taskList = TaskList::findById($id, $this->contentContainer);
-        if(!$taskList) {
+        if (!$taskList) {
             throw new HttpException(404);
         }
 

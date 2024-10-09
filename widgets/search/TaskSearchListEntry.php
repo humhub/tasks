@@ -13,7 +13,6 @@
 
 namespace humhub\modules\tasks\widgets\search;
 
-
 use humhub\components\Widget;
 
 class TaskSearchListEntry extends Widget
@@ -28,7 +27,7 @@ class TaskSearchListEntry extends Widget
         return $this->render('taskSearchListEntry', [
             'task' => $this->task,
             'filterResult' => $this->filterResult,
-            'contentContainer' => $this->contentContainer
+            'contentContainer' => $this->contentContainer,
         ]);
     }
 

@@ -25,7 +25,7 @@ class TaskDetails extends Widget
     {
         return $this->render('taskDetails', [
             'task' => $this->task,
-            'options' => $this->getOptions()
+            'options' => $this->getOptions(),
         ]);
     }
 
@@ -36,7 +36,7 @@ class TaskDetails extends Widget
             'class' => 'panel panel-default task-details',
             'data-reload-url' => TaskUrl::reloadTask($this->task),
             'data-ui-widget' => 'task.list.Task',
-            'data-ui-init' => true
+            'data-ui-init' => true,
         ];
     }
 }

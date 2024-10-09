@@ -19,7 +19,6 @@ use Yii;
  */
 class TaskReminderCategory extends NotificationCategory
 {
-
     /**
      * @inheritdoc
      */

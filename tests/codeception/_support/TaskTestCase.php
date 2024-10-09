@@ -1,8 +1,6 @@
 <?php
 
-
 namespace tasks;
-
 
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\content\models\Content;

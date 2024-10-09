@@ -1,4 +1,5 @@
 <?php
+
 namespace tasks;
 
 use humhub\modules\tasks\helpers\RestDefinitions;

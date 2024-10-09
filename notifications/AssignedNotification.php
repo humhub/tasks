@@ -42,12 +42,13 @@ class AssignedNotification extends BaseNotification
     {
         return new TaskNotificationCategory();
     }
-    
-    public function html() {
+
+    public function html()
+    {
         return Yii::t('TasksModule.base', '{userName} assigned you to task {task} in space {spaceName}.', [
             '{userName}' => Html::tag('strong', Html::encode($this->originator->displayName)),
             '{task}' => Html::tag('strong', Html::encode($this->getContentInfo($this->source, false))),
-            '{spaceName}' => Html::tag('strong', Html::encode($this->source->content->container->displayName))
+            '{spaceName}' => Html::tag('strong', Html::encode($this->source->content->container->displayName)),
         ]);
     }
 
@@ -59,7 +60,7 @@ class AssignedNotification extends BaseNotification
         return Yii::t('TasksModule.base', '{userName} assigned you to task {task} in space {spaceName}.', [
             '{userName}' => Html::encode($this->originator->displayName),
             '{task}' => Html::encode($this->getContentInfo($this->source, false)),
-            '{spaceName}' => Html::encode($this->source->content->container->displayName)
+            '{spaceName}' => Html::encode($this->source->content->container->displayName),
         ]);
     }
 }
