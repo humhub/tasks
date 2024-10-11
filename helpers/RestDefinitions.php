@@ -41,9 +41,9 @@ class RestDefinitions
             'created_by' => UserDefinitions::getUserShort($task->getOwner()),
             'content' => ContentDefinitions::getContent($task->content),
             'percentage' => $task->getPercent(),
-            'checklist' => array_map(function($item) {return $item->getAttributes();}, $task->items),
+            'checklist' => array_map(function ($item) {return $item->getAttributes();}, $task->items),
             'assigned_users' => static::getUsers($task->taskAssignedUsers),
-            'responsible_users' => static::getUsers($task->taskResponsibleUsers)
+            'responsible_users' => static::getUsers($task->taskResponsibleUsers),
         ];
     }
 
@@ -70,7 +70,7 @@ class RestDefinitions
             'contentcontainer_id' => $list->contentcontainer_id,
             'parent_id' => $list->parent_id,
             'color' => $list->color,
-            'settings' => static::getListSettings($list->addition)
+            'settings' => static::getListSettings($list->addition),
         ];
     }
 
@@ -78,7 +78,7 @@ class RestDefinitions
     {
         return [
             'hide_if_completed' => (int)$addition->hide_if_completed,
-            'sort_order' => (int)$addition->sort_order
+            'sort_order' => (int)$addition->sort_order,
         ];
     }
 

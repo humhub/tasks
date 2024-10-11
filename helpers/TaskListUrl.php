@@ -13,18 +13,18 @@ use Yii;
 
 class TaskListUrl extends TaskUrl
 {
-    const ROUTE_TASKLIST_ROOT = '/tasks/list';
+    public const ROUTE_TASKLIST_ROOT = '/tasks/list';
 
-    const ROUTE_EDIT_TASKLIST = '/tasks/list/edit';
-    const ROUTE_DELETE_TASKLIST = '/tasks/list/delete';
-    const ROUTE_RELOAD_TASKLIST = '/tasks/list/load-ajax';
-    const ROUTE_RELOAD_TASKLIST_TASK = '/tasks/list/load-ajax-task';
-    const ROUTE_RELOAD_COMPLETED_TASKLIST = '/tasks/list/load-completed';
-    const ROUTE_TASKLIST_LOAD_DETAILS = '/tasks/list/load-task-details';
-    const ROUTE_DROP_TASKLIST_TASK = '/tasks/list/drop-task';
-    const ROUTE_DROP_TASKLIST = '/tasks/list/drop-task-list';
+    public const ROUTE_EDIT_TASKLIST = '/tasks/list/edit';
+    public const ROUTE_DELETE_TASKLIST = '/tasks/list/delete';
+    public const ROUTE_RELOAD_TASKLIST = '/tasks/list/load-ajax';
+    public const ROUTE_RELOAD_TASKLIST_TASK = '/tasks/list/load-ajax-task';
+    public const ROUTE_RELOAD_COMPLETED_TASKLIST = '/tasks/list/load-completed';
+    public const ROUTE_TASKLIST_LOAD_DETAILS = '/tasks/list/load-task-details';
+    public const ROUTE_DROP_TASKLIST_TASK = '/tasks/list/drop-task';
+    public const ROUTE_DROP_TASKLIST = '/tasks/list/drop-task-list';
 
-    const ROUTE_LOAD_CLOSED_LISTS = '/tasks/list/load-closed-lists';
+    public const ROUTE_LOAD_CLOSED_LISTS = '/tasks/list/load-closed-lists';
 
 
     public static function taskListRoot(ContentContainerActiveRecord $container)

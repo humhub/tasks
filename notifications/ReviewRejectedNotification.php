@@ -49,7 +49,7 @@ class ReviewRejectedNotification extends BaseNotification
         return Yii::t('TasksModule.base', '{userName} has rejected task {task} in space {spaceName} as incomplete.', [
             '{userName}' => Html::tag('strong', Html::encode($this->originator->displayName)),
             '{task}' => Html::tag('strong', Html::encode($this->getContentInfo($this->source, false))),
-            '{spaceName}' => Html::tag('strong', Html::encode($this->source->content->container->displayName))
+            '{spaceName}' => Html::tag('strong', Html::encode($this->source->content->container->displayName)),
         ]);
     }
 
@@ -61,7 +61,7 @@ class ReviewRejectedNotification extends BaseNotification
         return Yii::t('TasksModule.base', '{userName} has rejected task {task} in space {spaceName} as incomplete.', [
             '{userName}' => Html::encode($this->originator->displayName),
             '{task}' => Html::encode($this->getContentInfo($this->source, false)),
-            '{spaceName}' => Html::encode($this->source->content->container->displayName)
+            '{spaceName}' => Html::encode($this->source->content->container->displayName),
         ]);
     }
 }

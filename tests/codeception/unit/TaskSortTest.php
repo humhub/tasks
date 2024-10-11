@@ -13,10 +13,8 @@ use DateTime;
 use humhub\modules\space\models\Space;
 use tasks\TaskTestCase;
 
-
 class TaskSortTest extends TaskTestCase
 {
-
     /**
      * Test find dates by open range query.
      */

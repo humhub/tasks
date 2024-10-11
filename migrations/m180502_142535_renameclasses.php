@@ -1,12 +1,9 @@
 <?php
 
 use humhub\components\Migration;
-
 use humhub\modules\tasks\activities\TaskCompletedActivity;
 use humhub\modules\tasks\notifications\AssignedNotification;
 use humhub\modules\tasks\notifications\TaskCompletedNotification;
-
-
 
 class m180502_142535_renameclasses extends Migration
 {

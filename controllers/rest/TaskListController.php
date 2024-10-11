@@ -52,7 +52,7 @@ class TaskListController extends BaseController
 
         $taskList = new TaskList($container);
 
-        if($taskList->load(Yii::$app->request->post()) && $taskList->save()) {
+        if ($taskList->load(Yii::$app->request->post()) && $taskList->save()) {
             return RestDefinitions::getTaskList($taskList);
         }
 
@@ -76,7 +76,7 @@ class TaskListController extends BaseController
 
         $this->checkContainerAccess($taskList->getContainer());
 
-        if($taskList->load(Yii::$app->request->post()) && $taskList->save()) {
+        if ($taskList->load(Yii::$app->request->post()) && $taskList->save()) {
             return RestDefinitions::getTaskList($taskList);
         }
 
@@ -110,7 +110,7 @@ class TaskListController extends BaseController
     /**
      * Get Container by ID
      *
-     * @param integer $id
+     * @param int $id
      * @return ContentContainerActiveRecord
      * @throws \yii\db\IntegrityException
      * @throws HttpException

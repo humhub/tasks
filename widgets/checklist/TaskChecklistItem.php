@@ -15,7 +15,6 @@
 
 namespace humhub\modules\tasks\widgets\checklist;
 
-
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\models\checklist\TaskItem;

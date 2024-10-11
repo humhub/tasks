@@ -131,7 +131,7 @@ class TasksController extends BaseContentController
 
         $status = Yii::$app->request->post('status', null);
 
-        if(!$task->state->canProceed($status)) {
+        if (!$task->state->canProceed($status)) {
             return $this->returnError(403, 'You are not allowed to change status of this task!');
         }
 
@@ -149,7 +149,7 @@ class TasksController extends BaseContentController
             return $this->returnError(404, 'Task not found!');
         }
 
-        if(!$task->state->canRevert(Task::STATUS_PENDING)) {
+        if (!$task->state->canRevert(Task::STATUS_PENDING)) {
             return $this->returnError(403, 'You are not allowed to revert this task!');
         }
 

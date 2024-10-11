@@ -1,8 +1,6 @@
 <?php
 
-
 namespace humhub\modules\tasks\models\state;
-
 
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\notifications\PendingReviewNotification;
@@ -19,8 +17,8 @@ class PendingReviewState extends TaskState
         return [
             Task::STATUS_COMPLETED => [
                 'label' => Yii::t('TasksModule.base', 'Accept Task'),
-                'icon' => 'fa-check-square-o'
-            ]
+                'icon' => 'fa-check-square-o',
+            ],
         ];
     }
 
@@ -29,8 +27,8 @@ class PendingReviewState extends TaskState
         return [
             Task::STATUS_IN_PROGRESS => [
                 'label' => Yii::t('TasksModule.base', 'Reject Task'),
-                'icon' => 'fa-times-circle-o'
-            ]
+                'icon' => 'fa-times-circle-o',
+            ],
         ];
     }
 

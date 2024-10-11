@@ -16,5 +16,5 @@ class TaskReminderFixture extends ActiveFixture
 {
     public $modelClass = TaskItem::class;
     public $dataFile = '@tasks/tests/codeception/fixtures/data/taskReminder.php';
-   
+
 }

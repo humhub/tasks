@@ -18,7 +18,6 @@ use humhub\modules\tasks\models\Task;
  */
 class TaskHelper
 {
-
     public static function isOverdue(Task $task)
     {
         if (!$task->hasDeadline()) {

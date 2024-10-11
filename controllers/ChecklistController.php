@@ -1,8 +1,6 @@
 <?php
 
-
 namespace humhub\modules\tasks\controllers;
-
 
 use humhub\modules\content\components\ContentContainerControllerAccess;
 use humhub\modules\space\models\Space;
@@ -19,21 +17,21 @@ class ChecklistController extends AbstractTaskController
     protected function getAccessRules()
     {
         return [
-            [ContentContainerControllerAccess::RULE_USER_GROUP_ONLY => [Space::USERGROUP_MEMBER, User::USERGROUP_SELF]]
+            [ContentContainerControllerAccess::RULE_USER_GROUP_ONLY => [Space::USERGROUP_MEMBER, User::USERGROUP_SELF]],
         ];
     }
 
     public function actionCheckItem($id, $taskId)
     {
         $model = new CheckForm(['itemId' => $id, 'taskId' => $taskId]);
-        if($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->asJson([
                 'success' => true,
                 'item' => [
                     'checked' => $model->checked,
                     'statusChanged' => $model->statusChanged,
-                    'sortOrder' => $model->item->sort_order
-                ]
+                    'sortOrder' => $model->item->sort_order,
+                ],
             ]);
         }
 

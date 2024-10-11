@@ -1,8 +1,6 @@
 <?php
 
-
 namespace humhub\modules\tasks\models\lists;
-
 
 use humhub\modules\content\components\ActiveQueryContent;
 use humhub\modules\tasks\models\Sortable;
@@ -63,11 +61,11 @@ class UnsortedTaskList extends Model implements TaskListInterface, Sortable
             // make sure no invalid index is given
             if ($newIndex < 0) {
                 $newIndex = 0;
-            } else if ($newIndex >= count($tasks) + 1) {
+            } elseif ($newIndex >= count($tasks) + 1) {
                 $newIndex = count($tasks) - 1;
             }
 
-            if($oldListId === null) {
+            if ($oldListId === null) {
                 array_splice($tasks, $task->sort_order, 1);
             }
             array_splice($tasks, $newIndex, 0, [$task]);
@@ -102,7 +100,7 @@ class UnsortedTaskList extends Model implements TaskListInterface, Sortable
 
     public function getId()
     {
-       return null;
+        return null;
     }
 
     public function getTitle()

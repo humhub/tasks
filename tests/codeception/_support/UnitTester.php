@@ -7,6 +7,7 @@
  */
 
 namespace tasks;
+
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\content\models\Content;
 use humhub\modules\tasks\models\Task;
@@ -31,7 +32,7 @@ class UnitTester extends \UnitTester
 {
     use _generated\UnitTesterActions;
 
-   /**
-    * Define custom actions here
-    */
+    /**
+     * Define custom actions here
+     */
 }
