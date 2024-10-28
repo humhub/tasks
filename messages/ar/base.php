@@ -1,5 +1,5 @@
 <?php
-return array (
+return [
   '1 Day before' => '',
   '1 Month before' => '',
   '1 Week before' => '',
@@ -18,7 +18,7 @@ return array (
   '<strong>Your</strong> tasks' => '',
   'A widget is an element added to to the sidebar of a stream. In this case it provides users with a short overview of their tasks.' => '',
   'Accept Task' => '',
-  'Add' => '',
+  'Add' => 'إضافة',
   'Add Deadline to space calendar' => '',
   'Add checkpoint...' => '',
   'Add checkpoints to the task to highlight the individual steps required to complete it.' => '',
@@ -180,4 +180,4 @@ return array (
   '{userName} reviewed task {task}.' => '',
   '{userName} started working on Task {task} in space {spaceName}.' => '',
   '{userName} works on task {task}.' => '',
-);
+];
