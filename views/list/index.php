@@ -28,13 +28,6 @@ Assets::register($this);
 
 <div class="task-list" data-ui-widget="task.list.Root" data-ui-init="1" data-drop-list-url="<?= TaskListUrl::dropTaskList($contentContainer) ?>">
     <div class="task-list-tabs">
-        <?= Button::defaultType(Yii::t('TasksModule.base', 'Collapse'))
-            ->icon('fa-toggle-on')
-            ->options(['data-title-expand' => Yii::t('TasksModule.base', 'Expand')])
-            ->id('toggle-lists')
-            ->action('collapseAll')
-            ->loader(false)
-            ->right() ?>
         <?= TaskSubMenu::widget() ?>
     </div>
 
