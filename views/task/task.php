@@ -11,7 +11,6 @@ use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\widgets\lists\TaskListDetails;
 use humhub\modules\tasks\widgets\TaskDetails;
-use humhub\modules\tasks\widgets\TaskHeader;
 use humhub\modules\tasks\widgets\TaskSubMenu;
 use humhub\modules\ui\view\components\View;
 
@@ -26,6 +25,5 @@ $this->registerJsConfig('task', [
     ]
 ]);
 ?>
-<?= TaskHeader::widget() ?>
 <?= TaskSubMenu::widget() ?>
 <?= TaskDetails::widget(['task' => $task]) ?>
