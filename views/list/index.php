@@ -12,7 +12,6 @@ use humhub\modules\tasks\widgets\lists\CompletedTaskListView;
 use humhub\modules\tasks\assets\Assets;
 use humhub\modules\tasks\widgets\lists\TaskListWidget;
 use humhub\modules\tasks\widgets\lists\UnsortedTaskListWidget;
-use humhub\modules\tasks\widgets\TaskHeader;
 use humhub\modules\tasks\widgets\TaskSubMenu;
 use humhub\widgets\Button;
 
@@ -24,17 +23,9 @@ use humhub\widgets\Button;
 
 Assets::register($this);
 ?>
-<?= TaskHeader::widget(['displayAddTask' => true, 'contentContainer' => $contentContainer]) ?>
 
 <div class="task-list" data-ui-widget="task.list.Root" data-ui-init="1" data-drop-list-url="<?= TaskListUrl::dropTaskList($contentContainer) ?>">
     <div class="task-list-tabs">
-        <?= Button::defaultType(Yii::t('TasksModule.base', 'Collapse'))
-            ->icon('fa-toggle-on')
-            ->options(['data-title-expand' => Yii::t('TasksModule.base', 'Expand')])
-            ->id('toggle-lists')
-            ->action('collapseAll')
-            ->loader(false)
-            ->right() ?>
         <?= TaskSubMenu::widget() ?>
     </div>
 

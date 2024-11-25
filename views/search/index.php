@@ -9,7 +9,6 @@
 use humhub\modules\tasks\assets\Assets;
 use humhub\modules\tasks\models\forms\TaskFilter;
 use humhub\modules\tasks\widgets\search\TaskSearchList;
-use humhub\modules\tasks\widgets\TaskHeader;
 use humhub\modules\tasks\widgets\TaskSubMenu;
 use humhub\modules\tasks\widgets\search\TaskFilterNavigation;
 
@@ -17,7 +16,6 @@ use humhub\modules\tasks\widgets\search\TaskFilterNavigation;
 
 Assets::register($this);
 ?>
-<?= TaskHeader::widget() ?>
 
 <div class="task-list-tabs">
     <?= TaskSubMenu::widget() ?>
