@@ -12,6 +12,7 @@ namespace humhub\modules\tasks\assets;
 use humhub\components\assets\AssetBundle;
 use humhub\modules\tasks\controllers\ListController;
 use humhub\modules\tasks\controllers\SearchController;
+use Yii;
 
 class Assets extends AssetBundle
 {
@@ -48,6 +49,14 @@ class Assets extends AssetBundle
             $view->registerCss('#task-space-menu li.active a{color:var(--link)}'
                 . '.task-overview #task-filter-nav .task-bottom-panel .filterInput[data-filter-type=checkbox] .fa.fa-check-square-o{border-color:var(--info);background:var(--info)}');
         }
+
+        $view->registerJsConfig([
+            'task' => [
+                'text' => [
+                    'success.delete' => Yii::t('base', 'Deleted'),
+                ],
+            ],
+        ]);
 
         return parent::register($view);
     }

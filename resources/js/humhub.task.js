@@ -192,6 +192,20 @@ humhub.module('task', function (module, require, $) {
         });
      };
 
+    var deleteTaskFromContext = function(evt) {
+        var widget = Widget.closest(evt.$trigger);
+        widget.$.fadeOut('fast');
+
+        client.post(evt).then(function() {
+            event.trigger('task.afterDelete');
+            $('#task-space-menu').find('a:first').click();
+            module.log.success(module.text('success.delete'));
+        }).catch(function(e) {
+            widget.$.fadeIn('fast');
+            module.log.error(e, true);
+        });
+     };
+
     /**
      * @param evt
      */
@@ -255,6 +269,7 @@ humhub.module('task', function (module, require, $) {
         init: init,
         Form: Form,
         deleteTask: deleteTask,
+        deleteTaskFromContext: deleteTaskFromContext,
         changeState: changeState,
         extensionrequest:extensionrequest
     });

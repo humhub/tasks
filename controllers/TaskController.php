@@ -73,7 +73,7 @@ class TaskController extends AbstractTaskController
             $taskForm->createNew($this->contentContainer);
         } else {
             $taskForm = new TaskForm([
-                'task' => Task::find()->contentContainer($this->contentContainer)->where(['task.id' => $id])->one(),
+                'task' => $this->getTaskById($id),
                 'cal' => $cal,
                 'redirect' => $redirect,
                 'wall' => $wall,
@@ -162,11 +162,7 @@ class TaskController extends AbstractTaskController
 
     public function actionView($id)
     {
-        $task = Task::find()->contentContainer($this->contentContainer)->where(['task.id' => $id])->one();
-
-        if (!$task) {
-            throw new HttpException(404);
-        }
+        $task = $this->getTaskById($id);
 
         if (!$task->content->canView()) {
             throw new HttpException(403);
@@ -179,11 +175,7 @@ class TaskController extends AbstractTaskController
 
     public function actionLoadAjaxTask($id)
     {
-        $task = Task::find()->contentContainer($this->contentContainer)->where(['task.id' => $id])->one();
-
-        if (!$task) {
-            throw new HttpException(404);
-        }
+        $task = $this->getTaskById($id);
 
         if (!$task->content->canView()) {
             throw new HttpException(403);
