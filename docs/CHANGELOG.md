@@ -6,6 +6,7 @@ Changelog
 - Enh #258: By default, enabled "Mobile" notification types for those enabled for "Web"
 - Enh #259: Replace theme variables with CSS variables
 - Enh #260: Use PHP CS Fixer
+- Fix #263: Fixed deleted tasks visibility, reload after deletion, reload after state change
 
 1.8.5 (March 14, 2024)
 ----------------------
