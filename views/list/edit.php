@@ -32,8 +32,8 @@ $header = $model->isNewRecord ? Yii::t('TasksModule.base', '<strong>Create</stro
             </div>
         </div>
         <div class="modal-footer">
-            <?= ModalButton::submitModal() ?>
             <?= ModalButton::cancel() ?>
+            <?= ModalButton::submitModal() ?>
         </div>
     <?php ActiveForm::end() ?>
 <?php ModalDialog::end() ?>

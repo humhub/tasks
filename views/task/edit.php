@@ -35,8 +35,8 @@ Assets::register($this);
 
         <div class="modal-footer">
             <div class="col-md-12 text-center">
-                <?= ModalButton::submitModal($taskForm->getSubmitUrl()); ?>
                 <?= ModalButton::cancel(); ?>
+                <?= ModalButton::submitModal($taskForm->getSubmitUrl()); ?>
             </div>
         </div>
 
