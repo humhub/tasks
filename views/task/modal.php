@@ -21,9 +21,9 @@ use humhub\widgets\ModalDialog;
         <?= $this->renderAjax('modal_entry', ['task' => $task])?>
     </div>
     <div class="modal-footer">
+        <?= ModalButton::cancel(Yii::t('TasksModule.base', 'Close')) ?>
         <?php if($canManageEntries): ?>
             <?= ModalButton::primary(Yii::t('TasksModule.base', 'Edit'))->load($editUrl)->loader(true); ?>
         <?php endif; ?>
-        <?= ModalButton::cancel(Yii::t('TasksModule.base', 'Close')) ?>
     </div>
 <?php ModalDialog::end(); ?>
