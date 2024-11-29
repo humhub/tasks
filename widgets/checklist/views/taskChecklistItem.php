@@ -25,7 +25,15 @@ $disabled = ($task->canCheckItems()) ? false : 'true';
 
             <div class="task-item-content">
 
-                <?= Html::checkBox('item[' . $item->id . ']', $item->completed, ['label' => $item->title, 'itemId' => $item->id, 'data-action-change' => 'check', 'disabled' => $disabled]); ?>
+                <?= Html::checkBox('item[' . $item->id . ']', $item->completed, [
+                    'label' => $item->title,
+                    'itemId' => $item->id,
+                    'data-action-change' => 'check',
+                    'disabled' => $disabled,
+                    'labelOptions' => [
+                        'class' => $item->completed ? 'item-finished' : '',
+                    ]
+                ]); ?>
 
                 <span class="task-drag-icon tt" title="<?= Yii::t('TasksModule.base', 'Drag entry')?>" style="display:none">
                     <i class="fa fa-arrows"></i>&nbsp;
