@@ -376,9 +376,9 @@ humhub.module('task.list', function (module, require, $) {
                     that.$.find('.task-list-task-details').hide();
                 }
 
-                if (that.isCompleted()) {
+                if (that.isCompleted() && that.parent()) {
                     that.parent().prependCompleted(that);
-                } else if(that.$.closest('.tasks-completed')) {
+                } else if(that.$.closest('.tasks-completed') && that.parent()) {
                     that.parent().prependPending(that);
                 }  else {
                     that.$.fadeIn();

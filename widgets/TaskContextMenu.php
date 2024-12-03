@@ -97,7 +97,7 @@ class TaskContextMenu extends WallEntryControls
                 'icon' => 'trash',
                 'sortOrder' => 300,
                 'htmlOptions' => [
-                    'data-action-click' => 'ui.modal.post',
+                    'data-action-click' => 'task.deleteTaskFromContext',
                     'data-action-click-url' => TaskUrl::deleteTask($this->task),
                     'data-action-confirm-header' => Yii::t('TasksModule.base', '<strong>Confirm</strong> task deletion'),
                     'data-action-confirm' => Yii::t('TasksModule.base', 'Do you really want to delete this task?'),
