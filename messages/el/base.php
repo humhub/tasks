@@ -1,11 +1,9 @@
 <?php
 
 return [
-    'Add' => 'Πρόσθεσε',
     'All Day' => 'Όλη μέρα',
     'Anyone can work on this task!' => 'Οποιοσδήποτε μπορεί να δουλέψει σε αυτό το task!',
     'Close' => 'Κλείσιμο',
-    'Collapse' => 'Χαμήλωσε',
     'Color' => 'Χρώμα',
     'Created by me' => 'Δημιουργήθηκε από εμένα',
     'Date' => 'Ημερομηνία',
@@ -16,7 +14,6 @@ return [
     'End Date' => 'Ημερομηνία λήξης',
     'End Time' => 'Τέλος χρόνου',
     'End time must be after start time!' => 'Η ώρα λήξης πρέπει να είναι μετά το χρόνο έναρξης!',
-    'Expand' => 'Επέκταση',
     'Filter' => 'Φίλτρο',
     'General' => 'Γενικά',
     'General Settings' => 'Γενικές Ρυθμίσεις',
@@ -89,7 +86,6 @@ return [
     'Completed lists' => '',
     'Configure the Tasks module to meet your specific requirements and needs. You can define individual settings and for instance decide whether a widget is displayed.' => '',
     'Continue Review' => '',
-    'Create and assign tasks - organize and schedule individual and collaborative projects.' => '',
     'Create tasks' => '',
     'Deadline at' => '',
     'Deadline: ' => '',

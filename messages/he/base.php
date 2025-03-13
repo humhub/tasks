@@ -2,10 +2,8 @@
 
 return [
     'Close' => 'סגור',
-    'Collapse' => 'סגור',
     'Delete' => 'מחק',
     'Edit' => 'עריכה',
-    'Expand' => 'הרחב',
     'Spaces' => 'אזורים',
     'Status' => 'סטָטוּס',
     'Time Zone' => 'אזור זמן',
@@ -29,7 +27,6 @@ return [
     '<strong>Your</strong> tasks' => '',
     'A widget is an element added to to the sidebar of a stream. In this case it provides users with a short overview of their tasks.' => '',
     'Accept Task' => '',
-    'Add' => '',
     'Add Deadline to space calendar' => '',
     'Add checkpoint...' => '',
     'Add checkpoints to the task to highlight the individual steps required to complete it.' => '',
@@ -66,7 +63,6 @@ return [
     'Completed lists' => '',
     'Configure the Tasks module to meet your specific requirements and needs. You can define individual settings and for instance decide whether a widget is displayed.' => '',
     'Continue Review' => '',
-    'Create and assign tasks - organize and schedule individual and collaborative projects.' => '',
     'Create tasks' => '',
     'Created by me' => '',
     'Date' => '',
