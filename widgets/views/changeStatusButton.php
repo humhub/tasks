@@ -1,7 +1,7 @@
 <?php
 /* @var $this \humhub\modules\ui\view\components\View */
 
-use humhub\widgets\Button;
+use humhub\widgets\bootstrap\Button;
 
 
 /* @var $task \humhub\modules\tasks\models\Task */

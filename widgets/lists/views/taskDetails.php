@@ -11,7 +11,7 @@ use humhub\modules\tasks\widgets\TaskRoleInfoBox;
 use humhub\modules\topic\models\Topic;
 use humhub\modules\topic\widgets\TopicLabel;
 use humhub\modules\ui\view\components\View;
-use humhub\widgets\Button;
+use humhub\widgets\bootstrap\Button;
 
 
 /* @var $this View */

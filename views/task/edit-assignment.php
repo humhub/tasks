@@ -7,10 +7,10 @@
  */
 
 use humhub\modules\user\widgets\UserPickerField;
-use humhub\widgets\Button;
-use humhub\widgets\Link;
+use humhub\widgets\bootstrap\Button;
+use humhub\widgets\bootstrap\Link;
 
-/* @var $form \humhub\modules\ui\form\widgets\ActiveForm */
+/* @var $form \humhub\widgets\form\ActiveForm */
 /* @var $taskForm \humhub\modules\tasks\models\forms\TaskForm */
 /* @var $responsible [] \humhub\modules\user\models\User */
 

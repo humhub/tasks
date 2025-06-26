@@ -8,7 +8,7 @@
 use humhub\libs\Html;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\ui\menu\MenuEntry;
-use humhub\widgets\Link;
+use humhub\widgets\bootstrap\Link;
 
 /* @var MenuEntry[] $entries */
 /* @var array $options */

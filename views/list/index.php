@@ -13,7 +13,6 @@ use humhub\modules\tasks\assets\Assets;
 use humhub\modules\tasks\widgets\lists\TaskListWidget;
 use humhub\modules\tasks\widgets\lists\UnsortedTaskListWidget;
 use humhub\modules\tasks\widgets\TaskSubMenu;
-use humhub\widgets\Button;
 
 /* @var $this \humhub\modules\ui\view\components\View */
 /* @var $canManage boolean */

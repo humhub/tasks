@@ -5,7 +5,7 @@
 /* @var $options array */
 
 use humhub\modules\tasks\helpers\TaskListUrl;
-use humhub\widgets\Button;
+use humhub\widgets\bootstrap\Button;
 use yii\helpers\Html;
 
 ?>

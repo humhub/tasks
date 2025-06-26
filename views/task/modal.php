@@ -5,7 +5,6 @@
  * @license https://www.humhub.com/licences
  *
  */
-use humhub\widgets\Button;
 use humhub\widgets\ModalButton;
 use humhub\widgets\ModalDialog;
 

@@ -13,7 +13,7 @@ use humhub\modules\content\widgets\WallEntryControls;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\ui\menu\MenuLink;
-use humhub\widgets\Link;
+use humhub\widgets\bootstrap\Link;
 use Yii;
 
 /**

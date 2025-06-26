@@ -2,7 +2,7 @@
 
 use humhub\modules\tasks\models\forms\ConfigureContainerForm;
 use humhub\modules\ui\form\widgets\ContentHiddenCheckbox;
-use humhub\widgets\Button;
+use humhub\widgets\bootstrap\Button;
 use humhub\widgets\form\ActiveForm;
 
 /* @var $model ConfigureContainerForm */
