@@ -5,7 +5,7 @@
 use humhub\modules\ui\form\widgets\ColorPicker;
 use humhub\widgets\ModalButton;
 use humhub\widgets\ModalDialog;
-use yii\bootstrap\ActiveForm;
+use humhub\widgets\form\ActiveForm;
 
 $header = $model->isNewRecord ? Yii::t('TasksModule.base', '<strong>Create</strong> task list') : Yii::t('TasksModule.base', '<strong>Edit</strong> task list')
 

@@ -7,7 +7,7 @@
  */
 
 use humhub\modules\tasks\assets\Assets;
-use humhub\modules\ui\form\widgets\ActiveForm;
+use humhub\widgets\form\ActiveForm;
 use humhub\modules\ui\form\widgets\FormTabs;
 use humhub\widgets\ModalDialog;
 use humhub\widgets\ModalButton;

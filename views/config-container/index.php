@@ -3,7 +3,7 @@
 use humhub\modules\tasks\models\forms\ConfigureContainerForm;
 use humhub\modules\ui\form\widgets\ContentHiddenCheckbox;
 use humhub\widgets\Button;
-use yii\bootstrap\ActiveForm;
+use humhub\widgets\form\ActiveForm;
 
 /* @var $model ConfigureContainerForm */
 ?>

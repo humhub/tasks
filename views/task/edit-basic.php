@@ -12,7 +12,7 @@ use humhub\modules\content\widgets\richtext\RichTextField;
 use humhub\modules\tasks\permissions\ManageTasks;
 use humhub\modules\tasks\widgets\ContentTagDropDown;
 use humhub\modules\topic\widgets\TopicPicker;
-use humhub\modules\ui\form\widgets\ActiveForm;
+use humhub\widgets\form\ActiveForm;
 use humhub\modules\ui\form\widgets\ContentHiddenCheckbox;
 use humhub\modules\ui\form\widgets\ContentVisibilitySelect;
 
