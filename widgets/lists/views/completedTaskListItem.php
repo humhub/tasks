@@ -16,7 +16,7 @@ use humhub\helpers\Html;
         <span class="task-list-title">
             <?= Html::encode($taskList->title); ?>
         </span>
-        <div class="pull-right task-controls end">
+        <div class="float-end task-controls end">
             <?= Button::asLink()
                 ->options(['class' => 'tt', 'title' => Yii::t('TasksModule.base', 'Delete')]
                 )->icon('trash')->right()->sm()->action('deleteList', TaskListUrl::deleteTaskList($taskList))->loader(false)->visible($canEdit)->confirm() ?>

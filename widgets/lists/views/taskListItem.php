@@ -51,11 +51,11 @@ $checkUrl = $task->state->getCheckUrl();
 
     </span>
 
-    <div class="task-controls end pull-right">
+    <div class="task-controls end float-end">
         <?= TaskContextMenu::widget(['task' => $task, 'mode' => 'list']) ?>
     </div>
 
-    <div class="task-controls pull-right toggleTaskDetails hidden-xs"
+    <div class="task-controls float-end toggleTaskDetails hidden-xs"
          style="<?= (!$task->content->canEdit()) ? 'border-right:0;margin-right:0' : '' ?>">
         <?= Icon::get('comment-o') ?> <?= Comment::getCommentCount(Task::class, $task->id); ?>
     </div>
@@ -79,14 +79,14 @@ $checkUrl = $task->state->getCheckUrl();
         }
         ?>
 
-        <div class="task-controls pull-right toggleTaskDetails hidden-xs">
+        <div class="task-controls float-end toggleTaskDetails hidden-xs">
             <?= Icon::get('clock-o')->tooltip($schedulingTitle)->class($schedulingColor) ?>
         </div>
 
     <?php endif; ?>
 
     <?php if ($task->review) : ?>
-        <div class="task-controls pull-right toggleTaskDetails">
+        <div class="task-controls float-end toggleTaskDetails">
             <?= Icon::get('eye')
                 ->class('d-none d-sm-inline')
                 ->tooltip(Yii::t('TasksModule.base', 'This task requires to be reviewed by a responsible'))
@@ -95,7 +95,7 @@ $checkUrl = $task->state->getCheckUrl();
     <?php endif; ?>
 
     <?php if ($task->hasTaskAssigned() || $task->hasTaskResponsible()) : ?>
-        <div class="task-controls assigned-users pull-right hidden-xs" style="display: inline;">
+        <div class="task-controls assigned-users float-end hidden-xs" style="display: inline;">
             <?= TaskUserList::widget(['users' => $task->taskResponsibleUsers, 'style' => 'border:2px solid var(--info)', 'type' => Task::USER_RESPONSIBLE]) ?>
             <?= TaskUserList::widget(['users' => $task->taskAssignedUsers]) ?>
         </div>

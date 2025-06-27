@@ -18,7 +18,7 @@ use humhub\modules\ui\icon\widgets\Icon;
 $participantStyle = 'display:inline-block;';
 ?>
 <div class="panel-heading clearfix">
-    <div class="pull-right">
+    <div class="float-end">
         <?= TaskContextMenu::widget(['task' => $task]) ?>
     </div>
 
@@ -48,7 +48,7 @@ $participantStyle = 'display:inline-block;';
                     </span>
                 <?php endif; ?>
 
-                <div class="pull-right">
+                <div class="float-end">
                     <?= TaskBadge::widget(['task' => $task]) ?>
 
                     <?php if ($task->content->isPublic()) : ?>

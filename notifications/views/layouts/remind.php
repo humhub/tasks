@@ -18,14 +18,14 @@
         <div class="media">
 
             <!-- show module image -->
-            <img class="media-object img-rounded pull-left"
+            <img class="media-object img-rounded float-start"
                  data-src="holder.js/32x32" alt="32x32"
                  style="width: 32px; height: 32px;"
                  src="<?= Yii::$app->moduleManager->getModule('tasks')->getImage(); ?>" />
 
             <!-- show space image -->
             <?php if ($space !== null) : ?>
-                <img class="media-object img-rounded img-space pull-left"
+                <img class="media-object img-rounded img-space float-start"
                      data-src="holder.js/20x20" alt="20x20"
                      style="width: 20px; height: 20px;"
                      src="<?= $space->getProfileImage()->getUrl(); ?>">

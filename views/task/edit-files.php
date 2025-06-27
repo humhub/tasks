@@ -23,7 +23,7 @@ $upload = Upload::withName();
             <?= $upload->button([
                 'label' => true,
                 'tooltip' => false,
-                'cssButtonClass' => 'btn-default btn-sm',
+                'cssButtonClass' => 'btn-light btn-sm',
                 'dropZone' => '#task-form',
                 'max' => Yii::$app->getModule('content')->maxAttachedFiles,
             ])?>

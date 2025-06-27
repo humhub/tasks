@@ -12,7 +12,7 @@ use humhub\widgets\bootstrap\Button;
 
 ?>
 
-<div class="btn-group pull-right task-change-state-button">
+<div class="btn-group float-end task-change-state-button">
     <?= Button::primary($primaryStateConfig['label'])->action('task.changeState', $primaryUrl)->sm()->icon($primaryStateConfig['icon'])->loader(true);?>
 
     <?php if(!empty($proceedConfig) || !empty($revertConfig)) : ?>

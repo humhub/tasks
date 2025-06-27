@@ -58,13 +58,13 @@ $image = $task->content->container instanceof Space
 
             <?= TaskBadge::widget(['task' => $task]) ?>
 
-            <div class="pull-right toggleTaskDetails hidden-xs"
+            <div class="float-end toggleTaskDetails hidden-xs"
                  style="<?= (!$task->content->canEdit()) ? 'border-right:0;margin-right:0' : '' ?>">
                 <?= Icon::get('comment-o') ?> <?= Comment::getCommentCount(Task::class, $task->id); ?>
             </div>
 
             <?php if ($task->review) : ?>
-                <div class="task-controls pull-right toggleTaskDetails">
+                <div class="task-controls float-end toggleTaskDetails">
                 <?= Icon::get('eye')
                     ->class('d-none d-sm-inline')
                     ->tooltip(Yii::t('TasksModule.base', 'This task requires to be reviewed by a responsible'))
@@ -72,13 +72,13 @@ $image = $task->content->container instanceof Space
                 </div>
             <?php endif; ?>
 
-            <div class="task-controls assigned-users pull-right" style="display:inline">
+            <div class="task-controls assigned-users float-end" style="display:inline">
                 <?= TaskUserList::widget(['users' => $task->taskResponsibleUsers, 'style' => 'border:2px solid var(--info)', 'type' => Task::USER_RESPONSIBLE]) ?>
                 <?= TaskUserList::widget(['users' => $task->taskAssignedUsers]) ?>
             </div>
 
             <?php if ($task->isInProgress()) : ?>
-                <div class="task-controls  pull-right hidden-xs" style="width:50px;height:24px;display:inline-block;padding-top:5px;">
+                <div class="task-controls  float-end hidden-xs" style="width:50px;height:24px;display:inline-block;padding-top:5px;">
                     <?= TaskPercentageBar::widget(['task' => $task, 'filterResult' => $filterResult]) ?>
                 </div>
             <?php endif; ?>
