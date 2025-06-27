@@ -38,9 +38,9 @@ $image = $task->content->container instanceof Space
 ?>
 
 
-<div class="media task" data-task-url="<?= TaskUrl::viewTask($task) ?>">
+<div class="d-flex task" data-task-url="<?= TaskUrl::viewTask($task) ?>">
     <div class="task-head">
-        <div class="media-body clearfix">
+        <div class="flex-grow-1 clearfix">
 
             <?php if(!$contentContainer) : ?>
 
@@ -51,7 +51,7 @@ $image = $task->content->container instanceof Space
             <?php endif ?>
 
             <div style="margin-right:2px;display:inline-block">
-                <h4 class="media-heading" style="display:inline-block">
+                <h4 class="mt-0" style="display:inline-block">
                     <?= Html::encode($task->title); ?>
                 </h4>
             </div>

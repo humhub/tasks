@@ -6,6 +6,8 @@
  *
  */
 
+use humhub\modules\ui\icon\widgets\Icon;
+
 /* @var $name String */
 ?>
 
@@ -15,7 +17,7 @@
                class="form-control task_item_new_input contentForm"
                placeholder="<?= Yii::t('TasksModule.base', 'Add checkpoint...') ?>">
         <div class="input-group-text addTaskItemButton" data-action-click="addTaskItem" style="cursor:pointer">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            <?= Icon::get('plus') ?>
         </div>
     </div>
 </div>

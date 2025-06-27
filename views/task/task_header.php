@@ -30,8 +30,8 @@ $participantStyle = 'display:inline-block;';
     </div>
 
     <div class="row clearfix">
-        <div class="col-md-12 media">
-            <div class="media-body clearfix">
+        <div class="col-md-12 d-flex">
+            <div class="flex-grow-1 clearfix">
                 <?php if ($task->scheduling) : ?>
                     <h2 style="margin:5px 0 0 0;">
                         <?= $task->schedule->getFormattedStartDateTime() ?>

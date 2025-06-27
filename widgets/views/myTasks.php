@@ -25,12 +25,12 @@ use humhub\modules\ui\icon\widgets\Icon;
 
     <div class="panel-body" style="padding:0px">
         <hr style="margin:0px">
-        <ul class="media-list">
+        <div class="hh-list">
             <?php foreach ($taskEntries as $entry) : ?>
-                <a href="<?= $entry->getUrl() ?>">
-                    <li style="border-left: 3px solid <?= Html::encode($entry->getColor('var(--info)')) ?>">
-                        <div class="media">
-                            <div class="media-body text-break">
+                <a class="d-flex" href="<?= $entry->getUrl() ?>">
+                    <div style="border-left: 3px solid <?= Html::encode($entry->getColor('var(--info)')) ?>">
+                        <div class="d-flex">
+                            <div class="flex-grow-1 text-break">
                                 <?=  $entry->getBadge() ?>
                                 <strong>
                                     <?= Helpers::trimText(Html::encode($entry->getTitle()), 60) ?>
@@ -40,11 +40,11 @@ use humhub\modules\ui\icon\widgets\Icon;
                                 <span class="time"><?= $entry->schedule->getFormattedDateTime() ?></span>
                             </div>
                         </div>
-                    </li>
+                    </div>
                 </a>
             <?php endforeach; ?>
 
-        </ul>
+        </div>
     </div>
 
 </div>

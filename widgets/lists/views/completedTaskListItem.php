@@ -12,7 +12,7 @@ use humhub\helpers\Html;
 
 <?= Html::beginTag('div', $options)?>
 
-    <div class="media-body">
+    <div class="flex-grow-1">
         <span class="task-list-title">
             <?= Html::encode($taskList->title); ?>
         </span>

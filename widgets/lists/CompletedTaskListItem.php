@@ -46,7 +46,7 @@ class CompletedTaskListItem extends JsWidget
     public function getAttributes()
     {
         return [
-            'class' => 'media',
+            'class' => 'd-flex',
         ];
     }
 

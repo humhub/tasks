@@ -54,11 +54,12 @@ class TaskSearchList extends Widget
             ],
             'summary' => '',
             'options' => [
-                'tag' => 'ul',
-                'class' => 'media-list',
+                'tag' => 'div',
+                'class' => 'hh-list',
             ],
             'itemOptions' => [
-                'tag' => 'li',
+                'tag' => 'div',
+                'class' => 'd-flex',
             ],
             'layout' => "{summary}\n{items}\n<div class=\"pagination-container\">{pager}</div>",
         ]);

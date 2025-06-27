@@ -18,7 +18,7 @@ use humhub\widgets\TimeAgo;
 ?>
 <li class="<?php if ($isNew) : ?>new<?php endif; ?>" data-notification-id="<?= $record->id ?>">
     <a href="<?= $url; ?>">
-        <div class="media">
+        <div class="d-flex">
 
             <!-- show module image -->
             <img class="rounded float-start"
@@ -35,7 +35,7 @@ use humhub\widgets\TimeAgo;
                  <?php endif; ?>
 
             <!-- show content -->
-            <div class="media-body">
+            <div class="flex-grow-1">
 
                 <?= $content; ?>
 
