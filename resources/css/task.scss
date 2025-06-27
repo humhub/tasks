@@ -5,8 +5,8 @@
  *
  */
 
-@tasks-text-color: #555;
-@tasks-info-color: #21A1B3;
+$tasks-text-color: #555;
+$tasks-info-color: #21A1B3;
 
 #task-assignment-info {
   margin: 5px 0 0;
@@ -91,7 +91,7 @@
         box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
         border-radius: 4px;
         padding: 20px;
-        color: @tasks-text-color;
+        color: $tasks-text-color;
         font-size: 13px;
       }
     }
@@ -153,7 +153,7 @@
     display: block;
     font-size: 13px;
     font-weight: bold;
-    color: @tasks-text-color;
+    color: $tasks-text-color;
   }
 
   #task-filter-nav {
@@ -335,13 +335,13 @@
     padding: 20px;
   }
   h4 {
-    color: @tasks-text-color;
+    color: $tasks-text-color;
     font-weight: 600;
     margin-top: 0;
   }
   .form-text {
     &, &:hover {
-      color: @tasks-text-color !important;
+      color: $tasks-text-color !important;
       font-size: 13px;
     }
   }
@@ -371,7 +371,7 @@
     }
     &.active {
       a {
-        color: @tasks-info-color;
+        color: $tasks-info-color;
       }
     }
   }
@@ -493,7 +493,7 @@
     background: #F9F9F9;
   }
   .task-toggled-color {
-    color: @tasks-info-color;
+    color: $tasks-info-color;
   }
   &.task-list-li-collapsed {
     .task-toggled-color {
@@ -569,7 +569,7 @@
       margin: 0 -10px;
       .fa {
         &.fa-arrows, &.fa-ellipsis-v {
-          color: @tasks-info-color;
+          color: $tasks-info-color;
         }
       }
       .toggleTaskDetails {

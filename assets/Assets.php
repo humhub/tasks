@@ -25,7 +25,7 @@ class Assets extends AssetBundle
      * @inheritDoc
      */
     public $css = [
-        'css/task.css',
+        'css/task.min.css',
     ];
 
     // We have to use the timeentry lib for the duration since the TimePicker widget uses an older version without maxHour setting...
