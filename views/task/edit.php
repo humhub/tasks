@@ -7,39 +7,29 @@
  */
 
 use humhub\modules\tasks\assets\Assets;
-use humhub\widgets\form\ActiveForm;
-use humhub\modules\ui\form\widgets\FormTabs;
-use humhub\widgets\ModalDialog;
-use humhub\widgets\ModalButton;
+use humhub\widgets\bootstrap\FormTabs;
+use humhub\widgets\modal\Modal;
+use humhub\widgets\modal\ModalButton;
 
 /* @var $taskForm \humhub\modules\tasks\models\forms\TaskForm */
 
 Assets::register($this);
 ?>
 
-<?php ModalDialog::begin(['header' => $taskForm->getTitle(), 'closable' => false]) ?>
+<?php $form = Modal::beginFormDialog([
+        'title' => $taskForm->getTitle(),
+        'closable' => false,
+        'closeButton' => false,
+        'form' => ['enableClientValidation' => false, 'acknowledge' => true],
+        'footer' => ModalButton::cancel() . ModalButton::save(null, $taskForm->getSubmitUrl()),
+    ]) ?>
+    <div id="task-form" data-ui-widget="task.Form" data-ui-init>
 
-    <?php $form = ActiveForm::begin(['enableClientValidation' => false, 'acknowledge' => true]); ?>
+        <?= FormTabs::widget([
+            'viewPath' => '@tasks/views/task',
+            'params' => ['form' => $form, 'taskForm' => $taskForm],
+            'form' => $taskForm,
+        ]); ?>
 
-        <div id="task-form" data-ui-widget="task.Form" data-ui-init>
-
-            <?= FormTabs::widget([
-                'viewPath' => '@tasks/views/task',
-                'params' => ['form' => $form, 'taskForm' => $taskForm],
-                'form' => $taskForm,
-            ]); ?>
-
-        </div>
-
-        <hr>
-
-        <div class="modal-footer">
-            <div class="col-md-12 text-center">
-                <?= ModalButton::cancel(); ?>
-                <?= ModalButton::submitModal($taskForm->getSubmitUrl()); ?>
-            </div>
-        </div>
-
-    <?php ActiveForm::end(); ?>
-
-<?php ModalDialog::end() ?>
+    </div>
+<?php Modal::endFormDialog() ?>

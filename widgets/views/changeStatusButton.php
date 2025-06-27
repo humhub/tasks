@@ -17,24 +17,23 @@ use humhub\widgets\bootstrap\Button;
 
     <?php if(!empty($proceedConfig) || !empty($revertConfig)) : ?>
         <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="caret"></span>
             <span class="sr-only">Toggle Dropdown</span>
         </button>
         <ul class="dropdown-menu">
             <?php foreach($proceedConfig as $status => $config) : ?>
                 <?php $status = $task->state->getStateInstance($status) ?>
-                <li>
+                <li class="dropdown-item">
                     <?= Button::asLink($config['label'])->action('task.changeState', $status->getProceedUrl())->icon($config['icon']);?>
                 </li>
             <?php endforeach; ?>
 
             <?php if(!empty($proceedConfig) && !empty($revertConfig)) : ?>
-                <li role="separator" class="divider"></li>
+                <li><hr class="dropdown-divider"></li>
             <?php endif; ?>
 
             <?php foreach($revertConfig as $status => $config) : ?>
                 <?php $status = $task->state->getStateInstance($status) ?>
-                <li>
+                <li class="dropdown-item">
                     <?= Button::asLink($config['label'])->action('task.changeState', $status->getRevertUrl())->icon($config['icon']);?>
                 </li>
             <?php endforeach; ?>

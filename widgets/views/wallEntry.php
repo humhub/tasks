@@ -11,7 +11,7 @@
 use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\tasks\widgets\TaskRoleInfoBox;
 use humhub\modules\ui\icon\widgets\Icon;
-use humhub\widgets\ModalButton;
+use humhub\widgets\modal\ModalButton;
 use humhub\modules\tasks\widgets\TaskPercentageBar;
 
 $color = 'var(--text-color-main)';

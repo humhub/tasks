@@ -1,7 +1,7 @@
 <?php
 
 use humhub\modules\tasks\models\forms\ConfigureContainerForm;
-use humhub\modules\ui\form\widgets\ContentHiddenCheckbox;
+use humhub\widgets\form\ContentHiddenCheckbox;
 use humhub\widgets\bootstrap\Button;
 use humhub\widgets\form\ActiveForm;
 

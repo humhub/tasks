@@ -112,7 +112,7 @@ class TaskContextMenu extends WallEntryControls
     private function getToggler(): Link
     {
         if ($this->mode === 'details') {
-            return Link::asLink('<span class="caret"></span>')->icon('cog');
+            return Link::asLink()->icon('cog');
         }
 
         return Link::asLink()->icon('ellipsis-v');

@@ -20,9 +20,9 @@ use humhub\widgets\bootstrap\Link;
     <?= Html::beginTag('ul', $options) ?>
     <li class="dropdown">
         <?= $toggler->cssClass('dropdown-toggle')->options(['data-toggle' => 'dropdown']) ?>
-        <ul class="dropdown-menu pull-right">
+        <ul class="dropdown-menu dropdown-menu-end">
             <?php foreach ($entries as $entry) : ?>
-                <li><?= $entry->render() ?></li>
+                <li class="dropdown-item"><?= $entry->render() ?></li>
             <?php endforeach; ?>
         </ul>
     </li>

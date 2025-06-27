@@ -13,8 +13,8 @@ use humhub\modules\tasks\permissions\ManageTasks;
 use humhub\modules\tasks\widgets\ContentTagDropDown;
 use humhub\modules\topic\widgets\TopicPicker;
 use humhub\widgets\form\ActiveForm;
-use humhub\modules\ui\form\widgets\ContentHiddenCheckbox;
-use humhub\modules\ui\form\widgets\ContentVisibilitySelect;
+use humhub\widgets\form\ContentHiddenCheckbox;
+use humhub\widgets\form\ContentVisibilitySelect;
 
 /* @var $form ActiveForm */
 /* @var $taskForm TaskForm */

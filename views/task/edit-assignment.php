@@ -9,6 +9,7 @@
 use humhub\modules\user\widgets\UserPickerField;
 use humhub\widgets\bootstrap\Button;
 use humhub\widgets\bootstrap\Link;
+use humhub\widgets\bootstrap\Alert;
 
 /* @var $form \humhub\widgets\form\ActiveForm */
 /* @var $taskForm \humhub\modules\tasks\models\forms\TaskForm */
@@ -49,11 +50,11 @@ $responsible = $taskForm->task->taskResponsibleUsers;
         <?= Button::info()->icon('info-circle')->sm()->right()->options(['data-toggle' => 'collapse', 'data-target' => '#task-assignment-info'])->loader(false) ?>
     </div>
 
-    <div id="task-assignment-info" class="alert alert-default collapse">
+    <?= Alert::beginInfo()->id('task-assignment-info') ?>
         <?= Yii::t('TasksModule.base', '<strong>Assigned users</strong> are allowed to process this task.') ?>
         <?= Yii::t('TasksModule.base', 'If no assigned user is selected, every space member with the permission to process unassigned tasks can process the task.') ?>
         <?= Yii::t('TasksModule.base', 'In case the review option is active, a <strong>responsible user</strong> will have to review and either reject or confirm this task before completion.') ?>
-    </div>
+    <?= Alert::end() ?>
 
 
 </div>
