@@ -10,9 +10,9 @@ use humhub\modules\tasks\helpers\TaskListUrl;
 use humhub\modules\tasks\models\lists\TaskList;
 use humhub\modules\tasks\widgets\lists\TaskListItem;
 use humhub\widgets\bootstrap\Button;
-use yii\helpers\Html;
+use humhub\helpers\Html;
 
-/* @var $this \humhub\modules\ui\view\components\View */
+/* @var $this \humhub\components\View */
 /* @var $list \humhub\modules\tasks\models\lists\TaskListInterface */
 /* @var $title string */
 /* @var $color string */

@@ -9,12 +9,9 @@
 
 namespace humhub\modules\tasks\integration\calendar;
 
-use DateTime;
 use humhub\modules\tasks\models\Task;
-use humhub\widgets\Label;
 use Yii;
 use yii\base\Component;
-use yii\helpers\Url;
 
 /**
  * Created by PhpStorm.

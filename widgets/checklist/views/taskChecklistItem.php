@@ -6,13 +6,13 @@
  *
  */
 
-/* @var $this \yii\web\View */
+/* @var $this \humhub\components\View */
 /* @var $task \humhub\modules\tasks\models\Task */
 /* @var $item \humhub\modules\tasks\models\checklist\TaskItem */
 
 /* @var $options array */
 
-use humhub\libs\Html;
+use humhub\helpers\Html;
 
 $disabled = ($task->canCheckItems()) ? false : 'true';
 ?>

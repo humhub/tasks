@@ -8,7 +8,7 @@
 
 namespace humhub\modules\tasks\widgets;
 
-use humhub\libs\Html;
+use humhub\helpers\Html;
 use humhub\modules\content\widgets\WallEntryControls;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\Task;

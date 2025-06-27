@@ -1,12 +1,12 @@
 <?php
-/* @var $this \humhub\modules\ui\view\components\View */
+/* @var $this \humhub\components\View */
 /* @var $taskList \humhub\modules\tasks\models\lists\TaskList */
 /* @var $canEdit boolean */
 /* @var $options array */
 
 use humhub\modules\tasks\helpers\TaskListUrl;
 use humhub\widgets\bootstrap\Button;
-use yii\helpers\Html;
+use humhub\helpers\Html;
 
 ?>
 

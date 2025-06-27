@@ -7,7 +7,7 @@
  */
 
 use humhub\widgets\PanelMenu;
-use yii\helpers\Html;
+use humhub\helpers\Html;
 use humhub\libs\Helpers;
 use humhub\modules\tasks\helpers\TaskUrl;
 

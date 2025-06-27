@@ -13,8 +13,8 @@ use humhub\modules\tasks\widgets\TaskBadge;
 use humhub\modules\tasks\widgets\TaskContextMenu;
 use humhub\modules\tasks\widgets\TaskUserList;
 use humhub\modules\tasks\models\Task;
-use humhub\modules\ui\view\components\View;
-use yii\helpers\Html;
+use humhub\components\View;
+use humhub\helpers\Html;
 
 /* @var $this View */
 /* @var $task Task */

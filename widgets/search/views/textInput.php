@@ -6,9 +6,9 @@
  *
  */
 
-use yii\bootstrap\Html;
+use humhub\helpers\Html;
 
-/* @var $this \humhub\modules\ui\view\components\View */
+/* @var $this \humhub\components\View */
 /* @var $options array */
 ?>
 <div class="form-group">

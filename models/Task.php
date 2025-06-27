@@ -31,7 +31,7 @@ use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\user\models\User;
 use humhub\modules\search\interfaces\Searchable;
-use humhub\widgets\Label;
+use humhub\widgets\bootstrap\Badge;
 use humhub\modules\tasks\widgets\WallEntry;
 use humhub\modules\tasks\permissions\ManageTasks;
 
@@ -885,7 +885,7 @@ class Task extends ContentActiveRecord implements Searchable
     public function getBadge()
     {
         if ($this->schedule->isOverdue()) {
-            return Label::danger(Yii::t('TasksModule.base', 'Overdue'))->icon('fa fa-exclamation-triangle')->options(['style' => 'margin-right: 3px;'])->right();
+            return Badge::danger(Yii::t('TasksModule.base', 'Overdue'))->icon('exclamation-triangle')->cssClass(['class' => 'me-1'])->right();
         }
 
         return null;
@@ -1040,29 +1040,29 @@ class Task extends ContentActiveRecord implements Searchable
      *
      * @param array $labels
      * @param bool $includeContentName
-     * @return Label[]|string[]
+     * @return Badge[]|string[]
      */
     public function getLabels($labels = [], $includeContentName = true)
     {
         switch ($this->status) {
             case self::STATUS_PENDING :
-                $labels[] = Label::defaultType(Yii::t('TasksModule.base', 'Pending'))->icon('fa fa-info-circle')->sortOrder(350);
+                $labels[] = Badge::defaultType(Yii::t('TasksModule.base', 'Pending'))->icon('info-circle')->sortOrder(350);
                 break;
             case self::STATUS_IN_PROGRESS :
-                $labels[] = Label::info(Yii::t('TasksModule.base', 'In Progress'))->icon('fa fa-edit')->sortOrder(350);
+                $labels[] = Badge::info(Yii::t('TasksModule.base', 'In Progress'))->icon('edit')->sortOrder(350);
                 break;
             case self::STATUS_PENDING_REVIEW :
-                $labels[] = Label::warning(Yii::t('TasksModule.base', 'Pending Review'))->icon('fa fa-exclamation-triangle')->sortOrder(350);
+                $labels[] = Badge::warning(Yii::t('TasksModule.base', 'Pending Review'))->icon('exclamation-triangle')->sortOrder(350);
                 break;
             case self::STATUS_COMPLETED :
-                $labels[] = Label::success(Yii::t('TasksModule.base', 'Completed'))->icon('fa fa-check-square')->sortOrder(350);
+                $labels[] = Badge::success(Yii::t('TasksModule.base', 'Completed'))->icon('check-square')->sortOrder(350);
                 break;
             default:
                 break;
         }
 
         if ($this->schedule->isOverdue()) {
-            $labels[] = Label::danger(Yii::t('TasksModule.base', 'Overdue'))->icon('fa fa-exclamation-triangle')->sortOrder(360);
+            $labels[] = Badge::danger(Yii::t('TasksModule.base', 'Overdue'))->icon('exclamation-triangle')->sortOrder(360);
         }
 
         return parent::getLabels($labels, $includeContentName);

@@ -12,7 +12,7 @@ use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\widgets\lists\TaskListDetails;
 use humhub\modules\tasks\widgets\TaskDetails;
 use humhub\modules\tasks\widgets\TaskSubMenu;
-use humhub\modules\ui\view\components\View;
+use humhub\components\View;
 
 /* @var $this View */
 /* @var $task Task */

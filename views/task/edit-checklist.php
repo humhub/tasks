@@ -6,7 +6,7 @@
  *
  */
 
-use yii\bootstrap\Html;
+use humhub\helpers\Html;
 use humhub\modules\tasks\widgets\AddItemsInput;
 
 

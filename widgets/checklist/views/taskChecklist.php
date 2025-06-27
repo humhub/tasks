@@ -6,12 +6,12 @@
  *
  */
 
-/* @var $this \yii\web\View */
+/* @var $this \humhub\components\View */
 /* @var $task \humhub\modules\tasks\models\Task */
 /* @var $items \humhub\modules\tasks\models\checklist\TaskItem[] */
 /* @var $options array */
 
-use humhub\libs\Html;
+use humhub\helpers\Html;
 use humhub\modules\tasks\widgets\checklist\TaskChecklistItem;
 
 ?>

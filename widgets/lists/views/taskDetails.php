@@ -9,8 +9,8 @@ use humhub\modules\tasks\widgets\TaskInfoBox;
 use humhub\modules\tasks\widgets\checklist\TaskChecklist;
 use humhub\modules\tasks\widgets\TaskRoleInfoBox;
 use humhub\modules\topic\models\Topic;
-use humhub\modules\topic\widgets\TopicLabel;
-use humhub\modules\ui\view\components\View;
+use humhub\modules\topic\widgets\TopicBadge;
+use humhub\components\View;
 use humhub\widgets\bootstrap\Button;
 
 
@@ -51,7 +51,7 @@ $color = $task->getColor('var(--info)');
 
         <div class="task-list-task-topics">
             <?php foreach (Topic::findByContent($task->content)->all() as $topic) : ?>
-                <?= TopicLabel::forTopic($topic) ?>
+                <?= TopicBadge::forTopic($topic) ?>
             <?php endforeach; ?>
         </div>
 

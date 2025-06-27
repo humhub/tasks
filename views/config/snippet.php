@@ -9,7 +9,7 @@
 
 use humhub\modules\tasks\models\SnippetModuleSettings;
 use humhub\modules\ui\form\widgets\ContentHiddenCheckbox;
-use yii\helpers\Html;
+use humhub\helpers\Html;
 use humhub\widgets\form\ActiveForm;
 
 /* @var $model SnippetModuleSettings */

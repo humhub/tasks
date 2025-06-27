@@ -6,7 +6,7 @@
  *
  */
 
-use humhub\libs\Html;
+use humhub\helpers\Html;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\widgets\TaskBadge;
 use humhub\modules\tasks\widgets\TaskContextMenu;

@@ -9,8 +9,7 @@
 
 namespace humhub\modules\tasks\models\search;
 
-use Yii;
-use yii\helpers\Html;
+use humhub\helpers\Html;
 
 /**
  * This class can be used to filter results for a task picker search query by calling the static
