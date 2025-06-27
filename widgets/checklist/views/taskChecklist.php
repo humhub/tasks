@@ -13,11 +13,12 @@
 
 use humhub\helpers\Html;
 use humhub\modules\tasks\widgets\checklist\TaskChecklistItem;
+use humhub\modules\ui\icon\widgets\Icon;
 
 ?>
 
 <div class="task-checklist">
-    <label><strong><i class="fa fa-check-square-o"></i> <?= Yii::t('TasksModule.base', 'Checklist:') ?></strong></label>
+    <label><strong><?= Icon::get('check-square-o') ?> <?= Yii::t('TasksModule.base', 'Checklist:') ?></strong></label>
     <?= Html::beginTag('ul', $options) ?>
         <?php foreach ($items as $item): ?>
             <?= TaskChecklistItem::widget(['item' => $item, 'task' => $task]); ?>

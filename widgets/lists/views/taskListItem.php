@@ -15,6 +15,7 @@ use humhub\modules\tasks\widgets\TaskUserList;
 use humhub\modules\tasks\models\Task;
 use humhub\components\View;
 use humhub\helpers\Html;
+use humhub\modules\ui\icon\widgets\Icon;
 
 /* @var $this View */
 /* @var $task Task */
@@ -33,7 +34,7 @@ $checkUrl = $task->state->getCheckUrl();
     <span class="task-list-item-title">
 
          <?php if ($canManage && !$task->isCompleted()) : ?>
-             <i class="fa fa-arrows task-moving-handler"></i>
+            <?= Icon::get('arrows')->class('task-moving-handler') ?>
          <?php endif; ?>
 
         <?php // We use an extra label in order to prevent click events on the actual label otherwise tasks could be accidentally finished ?>
@@ -56,7 +57,7 @@ $checkUrl = $task->state->getCheckUrl();
 
     <div class="task-controls pull-right toggleTaskDetails hidden-xs"
          style="<?= (!$task->content->canEdit()) ? 'border-right:0;margin-right:0' : '' ?>">
-        <i class="fa fa-comment-o"></i> <?= Comment::getCommentCount(Task::class, $task->id); ?>
+        <?= Icon::get('comment-o') ?> <?= Comment::getCommentCount(Task::class, $task->id); ?>
     </div>
 
     <?php if ($task->scheduling) : ?>
@@ -79,15 +80,17 @@ $checkUrl = $task->state->getCheckUrl();
         ?>
 
         <div class="task-controls pull-right toggleTaskDetails hidden-xs">
-            <i class="fa fa-clock-o tt <?= $schedulingColor ?>" title="<?= $schedulingTitle ?>"></i>
+            <?= Icon::get('clock-o')->tooltip($schedulingTitle)->class($schedulingColor) ?>
         </div>
 
     <?php endif; ?>
 
     <?php if ($task->review) : ?>
         <div class="task-controls pull-right toggleTaskDetails">
-            <i class="fa fa-eye tt hidden-xs tt"
-               title="<?= Yii::t('TasksModule.base', 'This task requires to be reviewed by a responsible') ?>"></i>
+            <?= Icon::get('eye')
+                ->class('d-none d-sm-inline')
+                ->tooltip(Yii::t('TasksModule.base', 'This task requires to be reviewed by a responsible'))
+            ?>
         </div>
     <?php endif; ?>
 

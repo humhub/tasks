@@ -39,7 +39,7 @@ $color = 'var(--text-color-main)';
     <br>
 
     <?php if ($task->canView()) : ?>
-        <?= ModalButton::primary(Yii::t('TasksModule.base', 'Open Task'))->icon('fa-eye')->close()->link($task->getUrl())->sm() ?>
+        <?= ModalButton::primary(Yii::t('TasksModule.base', 'Open Task'))->icon('eye')->close()->link($task->getUrl())->sm() ?>
     <?php endif; ?>
 
 </div>

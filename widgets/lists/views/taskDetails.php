@@ -36,13 +36,13 @@ $color = $task->getColor('var(--info)');
             <?= TaskInfoBox::widget([
                 'title' => Yii::t('TasksModule.base', 'Scheduling'),
                 'value' => $task->schedule->getFormattedDateTime(),
-                'icon' => 'fa-clock-o',
+                'icon' => 'clock-o',
                 'iconColor' => $color,
                 'textClass' => $scheduleTextClass]) ?>
 
             <?php if ($task->schedule->canRequestExtension()): ?>
                 <div style="display:inline-block;vertical-align:bottom;">
-                    <?= Button::primary()->icon('fa-calendar-plus-o')->xs()->cssClass('tt')->link(TaskUrl::requestExtension($task))->options(['title' => Yii::t('TasksModule.base', 'Request extension')]) ?>
+                    <?= Button::primary()->icon('calendar-plus-o')->sm()->cssClass('tt')->link(TaskUrl::requestExtension($task))->options(['title' => Yii::t('TasksModule.base', 'Request extension')]) ?>
                 </div>
             <?php endif; ?>
 

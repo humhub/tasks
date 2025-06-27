@@ -13,6 +13,7 @@
 /* @var $options array */
 
 use humhub\helpers\Html;
+use humhub\modules\ui\widgets\Icon;
 
 $disabled = ($task->canCheckItems()) ? false : 'true';
 ?>
@@ -36,7 +37,7 @@ $disabled = ($task->canCheckItems()) ? false : 'true';
                 ]); ?>
 
                 <span class="task-drag-icon tt" title="<?= Yii::t('TasksModule.base', 'Drag entry')?>" style="display:none">
-                    <i class="fa fa-arrows"></i>&nbsp;
+                    <?= Icon::get('arrows') ?>&nbsp;
                 </span>
 
             </div>

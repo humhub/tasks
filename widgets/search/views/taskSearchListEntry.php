@@ -15,6 +15,8 @@ use humhub\modules\tasks\widgets\TaskPercentageBar;
 use humhub\modules\tasks\widgets\TaskUserList;
 use humhub\modules\space\widgets\Image as SpaceImage;
 use humhub\modules\user\widgets\Image as UserImage;
+use humhub\modules\ui\icon\widgets\Icon;
+use humhub\modules\comment\models\Comment;
 
 /* @var $task \humhub\modules\tasks\models\Task */
 /* @var $canEdit boolean */
@@ -58,13 +60,15 @@ $image = $task->content->container instanceof Space
 
             <div class="pull-right toggleTaskDetails hidden-xs"
                  style="<?= (!$task->content->canEdit()) ? 'border-right:0;margin-right:0' : '' ?>">
-                <i class="fa fa-comment-o"></i> <?= \humhub\modules\comment\models\Comment::getCommentCount(Task::class, $task->id); ?>
+                <?= Icon::get('comment-o') ?> <?= Comment::getCommentCount(Task::class, $task->id); ?>
             </div>
 
             <?php if ($task->review) : ?>
                 <div class="task-controls pull-right toggleTaskDetails">
-                    <i class="fa fa-eye tt hidden-xs tt"
-                       title="<?= Yii::t('TasksModule.base', 'This task requires to be reviewed by a responsible') ?>"></i>
+                <?= Icon::get('eye')
+                    ->class('d-none d-sm-inline')
+                    ->tooltip(Yii::t('TasksModule.base', 'This task requires to be reviewed by a responsible'))
+                ?> 
                 </div>
             <?php endif; ?>
 

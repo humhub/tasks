@@ -10,6 +10,7 @@ use humhub\widgets\PanelMenu;
 use humhub\helpers\Html;
 use humhub\libs\Helpers;
 use humhub\modules\tasks\helpers\TaskUrl;
+use humhub\modules\ui\icon\widgets\Icon;
 
 /* @var $taskEntries \humhub\modules\tasks\models\Task[] */
 
@@ -17,7 +18,7 @@ use humhub\modules\tasks\helpers\TaskUrl;
 <div class="panel task-upcoming-snippet" id="task-my-tasks-snippet">
 
     <div class="panel-heading">
-        <i class="fa fa-tasks"></i> <?= Yii::t('TasksModule.base', '<strong>Your</strong> tasks'); ?>
+        <?= Icon::get('tasks') ?> <?= Yii::t('TasksModule.base', '<strong>Your</strong> tasks'); ?>
         <small><a style="font-size:0.9em;color:var(--info)" href="<?=  TaskUrl::globalView() ?>">(<?= Yii::t('TasksModule.base', 'view all'); ?>)</a></small>
         <?= PanelMenu::widget(['id' => 'task-my-tasks-snippet']); ?>
     </div>

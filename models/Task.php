@@ -227,7 +227,7 @@ class Task extends ContentActiveRecord implements Searchable
      */
     public function getIcon()
     {
-        return 'fa-tasks';
+        return 'tasks';
     }
 
     /**
@@ -1046,7 +1046,7 @@ class Task extends ContentActiveRecord implements Searchable
     {
         switch ($this->status) {
             case self::STATUS_PENDING :
-                $labels[] = Badge::defaultType(Yii::t('TasksModule.base', 'Pending'))->icon('info-circle')->sortOrder(350);
+                $labels[] = Badge::light(Yii::t('TasksModule.base', 'Pending'))->icon('info-circle')->sortOrder(350);
                 break;
             case self::STATUS_IN_PROGRESS :
                 $labels[] = Badge::info(Yii::t('TasksModule.base', 'In Progress'))->icon('edit')->sortOrder(350);

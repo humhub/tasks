@@ -36,7 +36,7 @@ class TaskCalendar extends Component
         $event->addType(static::ITEM_TYPE_KEY, [
             'title' => Yii::t('TasksModule.base', 'Task'),
             'color' => static::DEFAULT_COLOR,
-            'icon' => 'fa-tasks',
+            'icon' => 'tasks',
         ]);
     }
 

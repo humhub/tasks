@@ -13,6 +13,7 @@ use humhub\modules\tasks\assets\Assets;
 use humhub\modules\tasks\widgets\lists\TaskListWidget;
 use humhub\modules\tasks\widgets\lists\UnsortedTaskListWidget;
 use humhub\modules\tasks\widgets\TaskSubMenu;
+use humhub\modules\ui\icon\widgets\Icon;
 
 /* @var $this \humhub\modules\ui\view\components\View */
 /* @var $canManage boolean */
@@ -48,7 +49,7 @@ Assets::register($this);
             <div class="closed-task-lists-container task-list-container" data-ui-widget="task.list.CompletedTaskListView" data-ui-init="1">
                 <div class="task-list-title-bar clearfix">
                     <div>
-                        <i class="fa fa-check-square-o"></i> <span class="task-list-title-text"><?= Yii::t('TasksModule.base', 'Completed lists') ?></span>
+                        <?= Icon::get('check-square-o') ?> <span class="task-list-title-text"><?= Yii::t('TasksModule.base', 'Completed lists') ?></span>
                     </div>
                 </div>
                 <div class="closed-task-list-view">

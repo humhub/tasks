@@ -24,7 +24,7 @@ $participantStyle = 'display:inline-block;';
 
     <div class="task-head">
         <div class="task-list-item-title">
-            <strong><?= Icon::get('fa-tasks')->color($task->getColor('var(--info)'))?> <?= Html::encode($task->title) ?></strong>
+            <strong><?= Icon::get('tasks')->color($task->getColor('var(--info)'))?> <?= Html::encode($task->title) ?></strong>
         </div>
     </div>
 

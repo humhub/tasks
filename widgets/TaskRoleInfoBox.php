@@ -13,7 +13,7 @@ class TaskRoleInfoBox extends TaskInfoBox
      */
     public $task;
 
-    public $icon = 'fa-users';
+    public $icon = 'users';
 
     public function getTitle()
     {

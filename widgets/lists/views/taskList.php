@@ -11,6 +11,7 @@ use humhub\modules\tasks\models\lists\TaskList;
 use humhub\modules\tasks\widgets\lists\TaskListItem;
 use humhub\widgets\bootstrap\Button;
 use humhub\helpers\Html;
+use humhub\modules\ui\widgets\Icon;
 
 /* @var $this \humhub\components\View */
 /* @var $list \humhub\modules\tasks\models\lists\TaskListInterface */
@@ -37,9 +38,9 @@ use humhub\helpers\Html;
         <div>
 
         <?php if ($canSort) : ?>
-            <i class="fa fa-arrows task-moving-handler"></i>
+            <?= Icon::get('arrows')->class('task-moving-handler') ?>
         <?php else: ?>
-            <i class="fa fa-tasks"></i>
+            <?= Icon::get('tasks') ?>
         <?php endif ?>
 
         <span class="task-list-title-text">
@@ -47,20 +48,20 @@ use humhub\helpers\Html;
         </span>
 
         <?php if ($list instanceof TaskList) : ?>
-            <?= Button::asLink()->icon('fa-pencil')->xs()
+            <?= Button::asLink()->icon('pencil')->sm()
                 ->action('task.list.edit', TaskListUrl::editTaskList($list))
                 ->loader(false)
                 ->cssClass('task-list-edit tt task-toggled-color')->options(['title' => Yii::t('TasksModule.base', 'Edit list')])->visible($canManage) ?>
-            <?= Button::asLink()->icon('fa-trash')->xs()
+            <?= Button::asLink()->icon('trash')->sm()
                 ->action('deleteList', TaskListUrl::deleteTaskList($list))->loader(false)
                 ->cssClass('task-list-edit tt task-toggled-color')
                 ->options(['title' => Yii::t('TasksModule.base', 'Delete list')])->visible($canManage)->confirm() ?>
 
         <?php endif; ?>
 
-        <i class="fa fa-caret-up toggleItems pull-right"></i>
+        <?= Icon::get('caret-up')->class('toggleItems')->right() ?>
 
-        <?= Button::success()->icon('fa-plus')->sm()->right()->style('margin-top:-3px')
+        <?= Button::success()->icon('plus')->sm()->right()->style('margin-top:-3px')
             ->action('ui.modal.load', TaskListUrl::addTaskListTask($list))
             ->loader(false)->visible($canCreate)->cssClass('tt')->options(['title' => Yii::t('TasksModule.base', 'Add task')]) ?>
         </div>
@@ -81,8 +82,8 @@ use humhub\helpers\Html;
         <?php if ($completedTasksCount > count($completedTasks)) : ?>
             <?php $remainingCount = $completedTasksCount - count($completedTasks); ?>
             <div class="task-list-task-completed-show-more">
-                <?= Button::asLink('<i class="fa fa-chevron-down"></i> ' . Yii::t('TasksModule.base', 'Show {count} more completed {countTasks,plural,=1{task} other{tasks}}', ['count' => $remainingCount, 'countTasks' => $remainingCount]))
-                    ->action('showMoreCompleted', TaskListUrl::showMore($list))->cssClass('showMoreCompleted')->loader(true) ?>
+                <?= Button::asLink(Yii::t('TasksModule.base', 'Show {count} more completed {countTasks,plural,=1{task} other{tasks}}', ['count' => $remainingCount, 'countTasks' => $remainingCount]))
+                    ->icon('chevron-down')->action('showMoreCompleted', TaskListUrl::showMore($list))->cssClass('showMoreCompleted')->loader(true) ?>
             </div>
         <?php endif; ?>
 

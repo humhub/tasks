@@ -19,10 +19,10 @@ use humhub\helpers\Html;
         <div class="pull-right task-controls end">
             <?= Button::asLink()
                 ->options(['class' => 'tt', 'title' => Yii::t('TasksModule.base', 'Delete')]
-                )->icon('fa-trash')->right()->xs()->action('deleteList', TaskListUrl::deleteTaskList($taskList))->loader(false)->visible($canEdit)->confirm() ?>
+                )->icon('trash')->right()->sm()->action('deleteList', TaskListUrl::deleteTaskList($taskList))->loader(false)->visible($canEdit)->confirm() ?>
             <?= Button::asLink()
                 ->options(['class' => 'tt', 'title' => Yii::t('TasksModule.base', 'Edit'), 'style' => 'margin-left:2px']
-                )->icon('fa-pencil')->right()->xs()->action('task.list.edit', TaskListUrl::editTaskList($taskList))->loader(false)->visible($canEdit) ?>
+                )->icon('pencil')->right()->sm()->action('task.list.edit', TaskListUrl::editTaskList($taskList))->loader(false)->visible($canEdit) ?>
         </div>
     </div>
 
