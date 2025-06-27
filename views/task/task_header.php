@@ -12,12 +12,13 @@ use humhub\modules\tasks\widgets\TaskBadge;
 use humhub\modules\tasks\widgets\TaskContextMenu;
 use humhub\modules\tasks\widgets\TaskUserList;
 use humhub\modules\ui\icon\widgets\Icon;
+use humhub\widgets\bootstrap\Badge;
 
 /* @var $task Task */
 
 $participantStyle = 'display:inline-block;';
 ?>
-<div class="panel-heading clearfix">
+<div class="panel-heading clearfix container">
     <div class="float-end">
         <?= TaskContextMenu::widget(['task' => $task]) ?>
     </div>
@@ -29,7 +30,7 @@ $participantStyle = 'display:inline-block;';
     </div>
 
     <div class="row clearfix">
-        <div class="col-sm-12 media">
+        <div class="col-md-12 media">
             <div class="media-body clearfix">
                 <?php if ($task->scheduling) : ?>
                     <h2 style="margin:5px 0 0 0;">
@@ -52,7 +53,7 @@ $participantStyle = 'display:inline-block;';
                     <?= TaskBadge::widget(['task' => $task]) ?>
 
                     <?php if ($task->content->isPublic()) : ?>
-                        <span class="label label-info"><?= Yii::t('SpaceModule.base', 'Public') ?></span>
+                        <?= Badge::info(Yii::t('SpaceModule.base', 'Public')) ?>
                     <?php endif; ?>
                 </div>
             </div>

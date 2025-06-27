@@ -19,10 +19,10 @@ $disabled = ($task->canCheckItems()) ? false : 'true';
 ?>
 <?= Html::beginTag('li', $options) ?>
 
-<div class="task-item" id="item-<?= $item->id ?>">
+<div class="task-item container" id="item-<?= $item->id ?>">
 
     <div class="row">
-        <div class="col-md-12" style="padding-right: 0;">
+        <div class="col-lg-12" style="padding-right: 0;">
 
             <div class="task-item-content">
 
@@ -36,7 +36,7 @@ $disabled = ($task->canCheckItems()) ? false : 'true';
                     ]
                 ]); ?>
 
-                <span class="task-drag-icon tt" title="<?= Yii::t('TasksModule.base', 'Drag entry')?>" style="display:none">
+                <span class="task-drag-icon tt d-none" title="<?= Yii::t('TasksModule.base', 'Drag entry')?>">
                     <?= Icon::get('arrows') ?>&nbsp;
                 </span>
 

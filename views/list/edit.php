@@ -14,13 +14,13 @@ $title = $model->isNewRecord ? Yii::t('TasksModule.base', '<strong>Create</stron
         'title' => $title,
         'footer' => ModalButton::cancel() . ModalButton::save(),
     ])?>
-    <div id="event-color-field" class="form-group space-color-chooser-edit">
+    <div id="event-color-field" class="mb-3 space-color-chooser-edit">
         <?= $form->field($model, 'color')->colorInput()->label(Yii::t('TasksModule.base', 'Title and Color')); ?>
 
         <?= $form->field($model, 'name', ['template' => '
                             {label}
                             <div class="input-group">
-                                <span class="input-group-addon">
+                                <span class="input-group-text">
                                     <i></i>
                                 </span>
                                 {input}

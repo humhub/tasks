@@ -58,7 +58,7 @@ $image = $task->content->container instanceof Space
 
             <?= TaskBadge::widget(['task' => $task]) ?>
 
-            <div class="float-end toggleTaskDetails hidden-xs"
+            <div class="float-end toggleTaskDetails d-none d-sm-block"
                  style="<?= (!$task->content->canEdit()) ? 'border-right:0;margin-right:0' : '' ?>">
                 <?= Icon::get('comment-o') ?> <?= Comment::getCommentCount(Task::class, $task->id); ?>
             </div>
@@ -78,7 +78,7 @@ $image = $task->content->container instanceof Space
             </div>
 
             <?php if ($task->isInProgress()) : ?>
-                <div class="task-controls  float-end hidden-xs" style="width:50px;height:24px;display:inline-block;padding-top:5px;">
+                <div class="task-controls  float-end d-none d-sm-inline" style="width:50px;height:24px;padding-top:5px;">
                     <?= TaskPercentageBar::widget(['task' => $task, 'filterResult' => $filterResult]) ?>
                 </div>
             <?php endif; ?>

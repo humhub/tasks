@@ -19,7 +19,7 @@ use humhub\widgets\bootstrap\Link;
     <div class="stream-entry-loader"></div>
     <?= Html::beginTag('ul', $options) ?>
     <li class="dropdown">
-        <?= $toggler->cssClass('dropdown-toggle')->options(['data-toggle' => 'dropdown']) ?>
+        <?= $toggler->cssClass('dropdown-toggle')->options(['data-bs-toggle' => 'dropdown']) ?>
         <ul class="dropdown-menu dropdown-menu-end">
             <?php foreach ($entries as $entry) : ?>
                 <li class="dropdown-item"><?= $entry->render() ?></li>

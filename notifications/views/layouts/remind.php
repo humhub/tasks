@@ -6,6 +6,9 @@
  *
  */
 
+use humhub\widgets\bootstrap\Badge;
+use humhub\widgets\TimeAgo;
+
 /** @var \humhub\modules\user\models\User $originator */
 /** @var \humhub\modules\space\models\Space $space */
 /** @var \humhub\modules\notification\models\Notification $record */
@@ -18,14 +21,14 @@
         <div class="media">
 
             <!-- show module image -->
-            <img class="media-object img-rounded float-start"
+            <img class="rounded float-start"
                  data-src="holder.js/32x32" alt="32x32"
                  style="width: 32px; height: 32px;"
                  src="<?= Yii::$app->moduleManager->getModule('tasks')->getImage(); ?>" />
 
             <!-- show space image -->
             <?php if ($space !== null) : ?>
-                <img class="media-object img-rounded img-space float-start"
+                <img class="rounded img-space float-start"
                      data-src="holder.js/20x20" alt="20x20"
                      style="width: 20px; height: 20px;"
                      src="<?= $space->getProfileImage()->getUrl(); ?>">
@@ -36,9 +39,9 @@
 
                 <?= $content; ?>
 
-                <br> <?php echo humhub\widgets\TimeAgo::widget(['timestamp' => $record->created_at]); ?> 
-                <?php if ($isNew) : ?> <span class="label label-danger"><?= Yii::t('NotificationModule.views_notificationLayout', 'New'); ?></span><?php endif; ?>
-                <span class="label label-info"><?= Yii::t('TasksModule.base', 'Reminder'); ?></span>
+                <br> <?= TimeAgo::widget(['timestamp' => $record->created_at]); ?> 
+                <?= ($isNew) ? Badge::danger(Yii::t('NotificationModule.views_notificationLayout', 'New')) : '' ?>
+                <?= Badge::info(Yii::t('TasksModule.base', 'Reminder')) ?>
             </div>
 
         </div>

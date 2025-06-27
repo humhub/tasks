@@ -60,7 +60,7 @@ Assets::register($this);
     </div>
     <?php endif; ?>
 
-    <div class="task-list-empty empty" style="display:none">
+    <div class="task-list-empty empty d-none">
         <?= Yii::t('TasksModule.base','No pending tasks found') ?>
     </div>
 </div>

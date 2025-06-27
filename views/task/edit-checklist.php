@@ -16,22 +16,20 @@ use humhub\modules\tasks\widgets\AddItemsInput;
 
 ?>
 
-<div class="modal-body">
-    <?php foreach ($taskForm->task->items as $item) : ?>
-        <div class="form-group">
-            <div class="input-group">
-                <?= Html::textInput($taskForm->formName() . '[editItems][' . $item->id . ']', $item->title, [
-                    'class' => 'form-control task_item_old_input',
-                    'placeholder' => Yii::t('TasksModule.base', 'Edit item (empty field will be removed)...')]) ?>
-                <div class="input-group-addon" style="cursor:pointer;" data-action-click="removeTaskItem">
-                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                </div>
+<?php foreach ($taskForm->task->items as $item) : ?>
+    <div class="mb-3">
+        <div class="input-group">
+            <?= Html::textInput($taskForm->formName() . '[editItems][' . $item->id . ']', $item->title, [
+                'class' => 'form-control task_item_old_input',
+                'placeholder' => Yii::t('TasksModule.base', 'Edit item (empty field will be removed)...')]) ?>
+            <div class="input-group-text" style="cursor:pointer;" data-action-click="removeTaskItem">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
             </div>
         </div>
-    <?php endforeach; ?>
-
-    <?= AddItemsInput::widget(['name' => $taskForm->formName() . '[newItems][]']); ?>
-    <div class="help-block">
-        <?= Yii::t('TasksModule.base', 'Add checkpoints to the task to highlight the individual steps required to complete it.') ?>
     </div>
+<?php endforeach; ?>
+
+<?= AddItemsInput::widget(['name' => $taskForm->formName() . '[newItems][]']); ?>
+<div class="form-text">
+    <?= Yii::t('TasksModule.base', 'Add checkpoints to the task to highlight the individual steps required to complete it.') ?>
 </div>

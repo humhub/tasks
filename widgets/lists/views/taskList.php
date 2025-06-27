@@ -73,7 +73,7 @@ use humhub\modules\ui\widgets\Icon;
         <?php endforeach; ?>
     </div>
 
-    <div class="task-list-items tasks-completed" style="<?= (!$completedTasksCount) ? 'display:none' : '' ?>">
+    <div class="task-list-items tasks-completed<?= (!$completedTasksCount) ? ' d-none' : '' ?>">
 
         <?php foreach ($completedTasks as $task) : ?>
             <?= TaskListItem::widget(['task' => $task]) ?>
