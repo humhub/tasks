@@ -11,7 +11,7 @@ use humhub\modules\tasks\models\lists\TaskList;
 use humhub\modules\tasks\widgets\lists\TaskListItem;
 use humhub\widgets\bootstrap\Button;
 use humhub\helpers\Html;
-use humhub\modules\ui\icon\cwidgets\Icon;
+use humhub\modules\ui\icon\widgets\Icon;
 
 /* @var $this \humhub\components\View */
 /* @var $list \humhub\modules\tasks\models\lists\TaskListInterface */
