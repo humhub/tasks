@@ -61,10 +61,10 @@ class TaskElementVariable extends BaseContentRecordElementVariable
                 ];
             }
 
-            foreach ($record->assignedTaskUsers as $user) {
+            foreach ($record->taskAssignedUsers as $user) {
                 $this->assignedUsers[] = UserElementVariable::instance($this->elementContent)->setRecord($user);
             }
-            foreach ($record->taskResponsible as $user) {
+            foreach ($record->taskResponsibleUsers as $user) {
                 $this->responsibleUsers[] = UserElementVariable::instance($this->elementContent)->setRecord($user);
             }
             $this->isReviewRequired = $record->review;
