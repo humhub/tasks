@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.8.7 (Unreleased)
+------------------------
+- Enh #266: Extension for module "Custom Pages"
+
 1.8.6 (December 3, 2024)
 ------------------------
 - Enh #258: By default, enabled "Mobile" notification types for those enabled for "Web"
