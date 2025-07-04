@@ -37,7 +37,7 @@ class TaskElement extends BaseContentRecordElement
     public function attributeLabels()
     {
         return [
-            'contentRecordId' => Yii::t('TasksModule.base', 'Task ID'),
+            'contentId' => Yii::t('TasksModule.base', 'Task content ID'),
         ];
     }
 
