@@ -83,10 +83,10 @@ $tasks-info-color: #21A1B3;
     .hh-list {
       margin-bottom: 0;
 
-      li:last-of-type {
+      > div:last-of-type {
         border-bottom: 0;
       }
-      li, .empty {
+      > div, .empty {
         background: var(--hh-background-color-main);
         box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
         border-radius: 4px;
