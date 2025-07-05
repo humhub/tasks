@@ -64,5 +64,4 @@ class TaskSearchList extends Widget
             'layout' => "{summary}\n{items}\n<div class=\"pagination-container\">{pager}</div>",
         ]);
     }
-
 }

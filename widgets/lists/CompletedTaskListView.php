@@ -54,7 +54,6 @@ class CompletedTaskListView extends Widget
             ],
             'itemOptions' => [
                 'tag' => 'div',
-                'class' => 'd-flex',
             ],
             'layout' => "{items}\n<li class=\"pagination-container\">{pager}</li>",
         ]);
