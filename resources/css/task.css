@@ -12,12 +12,12 @@
   padding-left: 5px;
 }
 #task-container .panel-heading {
-  background-color: #f7f7f7;
+  background-color: var(--hh-background-color-secondary);
 }
 #task-container .panel-heading .task-header-panel {
   padding-right: 10px;
   float: left;
-  border-right: 2px solid #ededed;
+  border-right: 2px solid var(--hh-background-color-page);
   padding-left: 10px;
 }
 #task-container .panel-heading .task-header-panel strong {
@@ -39,15 +39,15 @@
   font-size: 14px;
   font-style: italic;
   margin: 2px;
-  color: #7a7a7a;
+  color: var(--hh-text-color-secondary);
 }
 #task-container .panel-heading .d-flex .updated {
-  color: #bebebe;
+  color: var(--hh-text-color-soft3);
   font-size: 11px;
   font-weight: bold;
 }
 #task-container .panel-heading .d-flex .author a {
-  color: #bebebe;
+  color: var(--hh-text-color-soft3);
   font-size: 11px;
 }
 
@@ -64,7 +64,7 @@
   border-bottom: 0;
 }
 .task-overview #filter-tasks-list .hh-list li, .task-overview #filter-tasks-list .hh-list .empty {
-  background: #FFF;
+  background: var(--hh-background-color-main);
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
   border-radius: 4px;
   padding: 20px;
@@ -84,7 +84,7 @@
 }
 .task-overview .hh-list .summary, .task-overview .hh-list .empty {
   font-size: 12px;
-  color: #bac2c7;
+  color: var(--hh-text-color-soft3);
   padding-left: 10px;
 }
 .task-overview .hh-list .pagination {
@@ -115,7 +115,7 @@
   color: #555;
 }
 .task-overview #task-filter-nav {
-  background: #FFF;
+  background: var(--hh-background-color-main);
   border-radius: 4px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
   padding: 20px;
@@ -163,15 +163,15 @@
   width: 18px;
   height: 18px;
   margin: 0 4px -4px -5px;
-  border: 2px solid #D7D7D7;
+  border: 2px solid var(----hh-background3);
   border-radius: 4px;
 }
 .task-overview #task-filter-nav .task-bottom-panel .filterInput[data-filter-type=checkbox] .fa:before {
   content: "";
 }
 .task-overview #task-filter-nav .task-bottom-panel .filterInput[data-filter-type=checkbox] .fa.fa-check-square-o {
-  border-color: #21A1B3;
-  background: #21A1B3;
+  border-color: var(--info);
+  background: var(--info);
 }
 .task-overview #task-filter-nav .task-bottom-panel .filterInput.task-date-picker {
   margin: 0;
@@ -200,7 +200,7 @@
 }
 .task-details h2 {
   font-size: 17px;
-  color: #919191;
+  color: var(--hh-text-color-soft2);
   font-weight: 300;
   margin-top: 0;
 }
@@ -245,7 +245,7 @@
   border-left: 0 !important;
 }
 .closed-task-list-view li:hover {
-  background-color: #fff8e0 !important;
+  background-color: var(--hh-background-color-warning) !important;
   border-left: 0 !important;
 }
 
@@ -272,14 +272,14 @@
 #task-space-menu {
   background: none;
   padding: 0 0 8px 0;
-  border-bottom: 1px solid #D7D7D7;
+  border-bottom: 1px solid var(--hh-background3);
 }
 #task-space-menu li a {
   background: none;
   border-top: 0 !important;
   border-left: 0 !important;
   border-bottom: 0 !important;
-  border-right: 1px solid #C4C4C4;
+  border-right: 1px solid var(--hh-background4);
   border-radius: 0;
   padding: 3px 8px;
 }
@@ -297,7 +297,7 @@
   background: none;
   border: none;
   box-shadow: none;
-  color: #435F6F !important;
+  color: var(--primary) !important;
   font-weight: 600;
   font-size: 13px;
 }
@@ -313,7 +313,7 @@
   margin-left: 22px;
 }
 .task-list .fa-bars {
-  color: #9b9b9b;
+  color: var(--hh-text-color-soft2);
 }
 .task-list .task-list-title-bar.collapsable {
   cursor: pointer;
@@ -332,8 +332,8 @@
 }
 
 .task-list .pagination-container {
-  background-color: #f7f7f7;
-  border-bottom: 1px solid #ddd;
+  background-color: var(--hh-background-color-secondary);
+  border-bottom: 1px solid var(--background3);
   border-radius: 4px;
 }
 .task-list .pagination-container li {
@@ -359,7 +359,7 @@
   display: none;
 }
 .task-list-container .task-list-title-bar > div:hover {
-  background: #F0F0F0;
+  background: var(--hh-background-color-page);
   border-radius: 4px;
 }
 .task-list-container .task-list-title-bar > div:hover .task-moving-handler, .task-list-container .task-list-title-bar > div:hover .task-list-edit {
@@ -367,7 +367,7 @@
 }
 
 .task-list-title-bar {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--hh-background3);
   padding: 10px 0;
   margin: 0 10px;
 }
@@ -386,33 +386,33 @@
 
 .task-list-li {
   margin-bottom: 8px;
-  background: #FFF;
+  background: var(--hh-background-color-main);
   border-radius: 4px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--background3);
 }
 .task-list-li .closed-task-lists-container {
-  background: #F9F9F9;
+  background: var(--hh-background-color-secondary);
 }
 .task-list-li .task-toggled-color {
   color: #21A1B3;
 }
 .task-list-li.task-list-li-collapsed .task-toggled-color {
-  color: #000;
+  color: var(--hh-text-color-highlight);
 }
 .task-list-li.task-list-li-collapsed .task-list-title-bar {
   border-bottom: none;
 }
 
 .ui-sortable-helper {
-  background-color: white;
-  border: 1px solid #ddd;
+  background-color: var(--hh-background-color-main);
+  border: 1px solid var(--background3);
 }
 
 .task-checklist ul {
   margin-left: 10px;
 }
 .task-checklist .task-item:hover {
-  background: #f7f7f7;
+  background: var(--hh-background-color-main);
 }
 .task-checklist .task-item-content {
   margin-left: 8px;
