@@ -163,7 +163,7 @@
   width: 18px;
   height: 18px;
   margin: 0 4px -4px -5px;
-  border: 2px solid var(----hh-background3);
+  border: 2px solid var(--hh-background3);
   border-radius: 4px;
 }
 .task-overview #task-filter-nav .task-bottom-panel .filterInput[data-filter-type=checkbox] .fa:before {

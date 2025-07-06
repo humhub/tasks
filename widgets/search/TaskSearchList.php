@@ -59,7 +59,6 @@ class TaskSearchList extends Widget
             ],
             'itemOptions' => [
                 'tag' => 'div',
-                'class' => 'd-flex',
             ],
             'layout' => "{summary}\n{items}\n<div class=\"pagination-container\">{pager}</div>",
         ]);
