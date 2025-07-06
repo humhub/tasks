@@ -39,8 +39,8 @@ $image = $task->content->container instanceof Space
 
 
 <div class="d-flex task" data-task-url="<?= TaskUrl::viewTask($task) ?>">
-    <div class="task-head">
-        <div class="flex-grow-1 clearfix">
+    <div class="task-head flex-grow-1">
+        <div class="clearfix">
 
             <?php if(!$contentContainer) : ?>
 
