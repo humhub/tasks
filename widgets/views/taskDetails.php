@@ -5,10 +5,10 @@
  * @license https://www.humhub.com/licences
  */
 
+use humhub\components\View;
 use humhub\helpers\Html;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\widgets\lists\TaskListDetails;
-use humhub\components\View;
 
 /* @var $this View */
 /* @var $task Task */

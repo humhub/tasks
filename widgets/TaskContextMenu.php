@@ -8,12 +8,10 @@
 
 namespace humhub\modules\tasks\widgets;
 
-use humhub\helpers\Html;
 use humhub\modules\content\widgets\WallEntryControls;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\ui\menu\MenuLink;
-use humhub\widgets\bootstrap\Link;
 use Yii;
 
 /**
@@ -25,11 +23,7 @@ class TaskContextMenu extends WallEntryControls
     /**
      * @inheritdoc
      */
-    public $template = 'taskContextMenu';
-
     public ?Task $task = null;
-
-    public string $mode = 'details';
 
     public ?string $align = null;
 
@@ -55,20 +49,9 @@ class TaskContextMenu extends WallEntryControls
     /**
      * @inheritdoc
      */
-    public function getAttributes()
-    {
-        $attrs = parent::getAttributes();
-        Html::addCssClass($attrs, 'task-preferences');
-        return $attrs;
-    }
-
-    /**
-     * @inheritdoc
-     */
     protected function getViewParams()
     {
         $params = parent::getViewParams();
-        $params['toggler'] = $this->getToggler();
         $params['task'] = $this->task;
         return $params;
     }
@@ -107,14 +90,5 @@ class TaskContextMenu extends WallEntryControls
         }
 
         parent::initControls();
-    }
-
-    private function getToggler(): Link
-    {
-        if ($this->mode === 'details') {
-            return Link::asLink()->icon('cog');
-        }
-
-        return Link::asLink()->icon('ellipsis-v');
     }
 }

@@ -17,19 +17,20 @@ Assets::register($this);
 ?>
 
 <?php $form = Modal::beginFormDialog([
-        'title' => $taskForm->getTitle(),
-        'closable' => false,
-        'closeButton' => false,
-        'form' => ['enableClientValidation' => false, 'acknowledge' => true],
-        'footer' => ModalButton::cancel() . ModalButton::save(null, $taskForm->getSubmitUrl()),
-    ]) ?>
+    'title' => $taskForm->getTitle(),
+    'closable' => false,
+    'closeButton' => false,
+    'form' => ['enableClientValidation' => false, 'acknowledge' => true],
+    'size' => Modal::SIZE_LARGE,
+    'footer' => ModalButton::cancel() . ModalButton::save(null, $taskForm->getSubmitUrl()),
+]) ?>
     <div id="task-form" data-ui-widget="task.Form" data-ui-init>
 
         <?= FormTabs::widget([
             'viewPath' => '@tasks/views/task',
             'params' => ['form' => $form, 'taskForm' => $taskForm],
             'form' => $taskForm,
-        ]); ?>
+        ]) ?>
 
     </div>
 <?php Modal::endFormDialog() ?>

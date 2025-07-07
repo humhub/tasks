@@ -7,16 +7,16 @@
  */
 
 use humhub\helpers\Html;
+use humhub\modules\comment\models\Comment;
 use humhub\modules\space\models\Space;
+use humhub\modules\space\widgets\Image as SpaceImage;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\widgets\TaskBadge;
 use humhub\modules\tasks\widgets\TaskPercentageBar;
 use humhub\modules\tasks\widgets\TaskUserList;
-use humhub\modules\space\widgets\Image as SpaceImage;
-use humhub\modules\user\widgets\Image as UserImage;
 use humhub\modules\ui\icon\widgets\Icon;
-use humhub\modules\comment\models\Comment;
+use humhub\modules\user\widgets\Image as UserImage;
 
 /* @var $task \humhub\modules\tasks\models\Task */
 /* @var $canEdit boolean */
@@ -68,17 +68,17 @@ $image = $task->content->container instanceof Space
                 <?= Icon::get('eye')
                     ->class('d-none d-sm-inline')
                     ->tooltip(Yii::t('TasksModule.base', 'This task requires to be reviewed by a responsible'))
-                ?> 
+                ?>
                 </div>
             <?php endif; ?>
 
-            <div class="task-controls assigned-users float-end" style="display:inline">
+            <div class="task-controls assigned-users float-end d-inline">
                 <?= TaskUserList::widget(['users' => $task->taskResponsibleUsers, 'style' => 'border:2px solid var(--info)', 'type' => Task::USER_RESPONSIBLE]) ?>
                 <?= TaskUserList::widget(['users' => $task->taskAssignedUsers]) ?>
             </div>
 
             <?php if ($task->isInProgress()) : ?>
-                <div class="task-controls  float-end d-none d-sm-inline" style="width:50px;height:24px;padding-top:5px;">
+                <div class="task-controls float-end d-none d-sm-inline-block pt-3" style="width:50px; height:24px;">
                     <?= TaskPercentageBar::widget(['task' => $task, 'filterResult' => $filterResult]) ?>
                 </div>
             <?php endif; ?>

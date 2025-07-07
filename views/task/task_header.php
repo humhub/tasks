@@ -18,20 +18,20 @@ use humhub\widgets\bootstrap\Badge;
 
 $participantStyle = 'display:inline-block;';
 ?>
-<div class="panel-heading clearfix container">
-    <div class="float-end">
-        <?= TaskContextMenu::widget(['task' => $task]) ?>
-    </div>
 
+<div class="panel-heading container">
     <div class="task-head">
+        <div class="float-end">
+            <?= TaskContextMenu::widget(['task' => $task]) ?>
+        </div>
         <div class="task-list-item-title">
             <strong><?= Icon::get('tasks')->color($task->getColor('var(--info)'))?> <?= Html::encode($task->title) ?></strong>
         </div>
     </div>
 
-    <div class="row clearfix">
-        <div class="col-md-12 d-flex">
-            <div class="flex-grow-1 clearfix">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="clearfix">
                 <?php if ($task->scheduling) : ?>
                     <h2 style="margin:5px 0 0 0;">
                         <?= $task->schedule->getFormattedStartDateTime() ?>
@@ -60,7 +60,7 @@ $participantStyle = 'display:inline-block;';
 
             <hr>
 
-            <div class="task-header-panel-container clearfix">
+            <div class="task-header-panel-container">
                 <!--        Responsible Task User-->
                 <?php if ($task->hasTaskResponsible()) : ?>
                     <div class="task-header-panel">

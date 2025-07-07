@@ -55,7 +55,7 @@ class CompletedTaskListView extends Widget
             'itemOptions' => [
                 'tag' => 'div',
             ],
-            'layout' => "{items}\n<li class=\"pagination-container\">{pager}</li>",
+            'layout' => "{items}\n<li class=\"pagination-container stream-end\">{pager}</li>",
         ]);
     }
 

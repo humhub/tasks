@@ -6,12 +6,12 @@
  *
  */
 
+use humhub\helpers\Html;
 use humhub\modules\tasks\helpers\TaskListUrl;
 use humhub\modules\tasks\models\lists\TaskList;
 use humhub\modules\tasks\widgets\lists\TaskListItem;
-use humhub\widgets\bootstrap\Button;
-use humhub\helpers\Html;
 use humhub\modules\ui\icon\widgets\Icon;
+use humhub\widgets\bootstrap\Button;
 
 /* @var $this \humhub\components\View */
 /* @var $list \humhub\modules\tasks\models\lists\TaskListInterface */
@@ -73,7 +73,7 @@ use humhub\modules\ui\icon\widgets\Icon;
         <?php endforeach; ?>
     </div>
 
-    <div class="task-list-items tasks-completed<?= (!$completedTasksCount) ? ' d-none' : '' ?>">
+    <div class="task-list-items tasks-completed<?= $completedTasksCount ? '' : ' d-none' ?>">
 
         <?php foreach ($completedTasks as $task) : ?>
             <?= TaskListItem::widget(['task' => $task]) ?>

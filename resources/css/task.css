@@ -41,12 +41,12 @@
   margin: 2px;
   color: var(--hh-text-color-secondary);
 }
-#task-container .panel-heading .d-flex .updated {
+#task-container .panel-heading .updated {
   color: var(--hh-text-color-soft3);
   font-size: 11px;
   font-weight: bold;
 }
-#task-container .panel-heading .d-flex .author a {
+#task-container .panel-heading .author a {
   color: var(--hh-text-color-soft3);
   font-size: 11px;
 }
@@ -550,6 +550,9 @@
   border-right: none;
   padding-right: 0;
 }
+.task-controls.end .nav-pills.preferences {
+  position: static;
+}
 
 .task-controls .fa {
   font-size: 14px;
@@ -580,12 +583,3 @@
   font-size: 14px;
   font-weight: 500;
 }
-
-.nav-pills.task-preferences {
-  position: inherit;
-  top: 0;
-  left: 0;
-}
-.nav-pills.task-preferences .dropdown .dropdown-toggle i {
-  font-weight: normal;
-}/*# sourceMappingURL=task.css.map */
