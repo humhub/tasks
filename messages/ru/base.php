@@ -177,4 +177,5 @@ return [
     'Completed lists' => '',
     'Configure the Tasks module to meet your specific requirements and needs. You can define individual settings and for instance decide whether a widget is displayed.' => '',
     'New list or search' => '',
+    'Task content ID' => '',
 ];

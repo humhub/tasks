@@ -177,4 +177,5 @@ return [
     '{userName} reviewed task {task}.' => '{userName} átnézte a feladatot {task}.',
     '{userName} started working on Task {task} in space {spaceName}.' => '{userName} dolgozni kezdett a {task} feladaton a {spaceName} közösségben.',
     '{userName} works on task {task}.' => '{userName} dolgozik a feladaton {task}.',
+    'Task content ID' => '',
 ];

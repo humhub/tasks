@@ -153,6 +153,7 @@ return [
     'Starting at' => '',
     'Task List' => '',
     'Task Users have been notified' => '',
+    'Task content ID' => '',
     'Task {task} in space {spaceName} ends at {dateTime}.' => '',
     'Task {task} in space {spaceName} starts at {dateTime}.' => '',
     'This task can only be processed by assigned and responsible users.' => '',

@@ -174,6 +174,7 @@ return [
     'Starting at' => '',
     'Task List' => '',
     'Task Users have been notified' => '',
+    'Task content ID' => '',
     'Title of your task list' => '',
     'ending Review' => '',
     '{count,plural,=1{# day} other{# days}} remaining' => '',
