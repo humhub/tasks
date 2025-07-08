@@ -1,18 +1,18 @@
 {
   "name": "humhub-modules-task",
   "version": "1.0.0",
-  "description": "HumHub Task module",
+  "description": "HumHub Tasks module",
   "directories": {
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/humhub/task.git"
+    "url": "git+https://github.com/humhub/tasks.git"
   },
   "license": "AGPL-3.0",
   "bugs": {
-    "url": "https://github.com/humhub/task/issues"
+    "url": "https://github.com/humhub/tasks/issues"
   },
-  "homepage": "https://github.com/humhub/task/docs/#readme",
+  "homepage": "https://github.com/humhub/tasks",
   "devDependencies": {
     "grunt": "^1.5.3",
     "grunt-contrib-cssmin": "^3.0.0",
