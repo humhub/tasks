@@ -24,11 +24,10 @@ use humhub\modules\ui\icon\widgets\Icon;
     </div>
 
     <div class="panel-body" style="padding:0px">
-        <hr style="margin:0px">
         <div class="hh-list">
             <?php foreach ($taskEntries as $entry) : ?>
                 <a class="d-flex" href="<?= $entry->getUrl() ?>">
-                    <div style="border-left: 3px solid <?= Html::encode($entry->getColor('var(--info)')) ?>">
+                    <div>
                         <div class="d-flex">
                             <div class="flex-grow-1 text-break">
                                 <?=  $entry->getBadge() ?>
