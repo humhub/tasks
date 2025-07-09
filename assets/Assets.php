@@ -25,7 +25,7 @@ class Assets extends AssetBundle
      * @inheritDoc
      */
     public $css = [
-        'css/task.min.css',
+        'css/tasks.min.css',
     ];
 
     // We have to use the timeentry lib for the duration since the TimePicker widget uses an older version without maxHour setting...
@@ -34,10 +34,10 @@ class Assets extends AssetBundle
      */
     public $js = [
         'js/jquery.ui.touch-punch.min.js',  // Add jQuery fix for using sortable() on mobile devices - Homepage: http://touchpunch.furf.com/
-        'js/humhub.task.js',
-        'js/humhub.task.list.js',
-        'js/humhub.task.checklist.js',
-        'js/humhub.task.search.js',
+        'js/humhub.tasks.js',
+        'js/humhub.tasks.list.js',
+        'js/humhub.tasks.checklist.js',
+        'js/humhub.tasks.search.js',
     ];
 
     /**

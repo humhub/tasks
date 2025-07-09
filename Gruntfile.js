@@ -8,14 +8,14 @@ module.exports = function (grunt) {
             },
             dev: {
                 files: {
-                    'resources/css/task.css': 'resources/css/task.scss'
+                    'resources/css/tasks.css': 'resources/css/tasks.scss'
                 }
             }
         },
         cssmin: {
             target: {
                 files: {
-                    'resources/css/task.min.css': ['resources/css/task.css']
+                    'resources/css/tasks.min.css': ['resources/css/tasks.css']
                 }
             }
         },
