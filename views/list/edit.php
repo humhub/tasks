@@ -3,19 +3,19 @@
 /* @var $model \humhub\modules\tasks\models\lists\TaskList */
 
 use humhub\modules\ui\form\widgets\ColorPicker;
-use humhub\widgets\modal\ModalButton;
 use humhub\widgets\modal\Modal;
+use humhub\widgets\modal\ModalButton;
 
 $title = $model->isNewRecord ? Yii::t('TasksModule.base', '<strong>Create</strong> task list') : Yii::t('TasksModule.base', '<strong>Edit</strong> task list')
 
 ?>
 
 <?php $form = Modal::beginFormDialog([
-        'title' => $title,
-        'footer' => ModalButton::cancel() . ModalButton::save(),
-    ])?>
+    'title' => $title,
+    'footer' => ModalButton::cancel() . ModalButton::save()->submit(),
+])?>
     <div id="event-color-field" class="mb-3 space-color-chooser-edit">
-        <?= $form->field($model, 'color')->colorInput()->label(Yii::t('TasksModule.base', 'Title and Color')); ?>
+        <?= $form->field($model, 'color')->colorInput()->label(Yii::t('TasksModule.base', 'Title and Color')) ?>
 
         <?= $form->field($model, 'name', ['template' => '
                             {label}

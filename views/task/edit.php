@@ -22,7 +22,7 @@ Assets::register($this);
     'closeButton' => false,
     'form' => ['enableClientValidation' => false, 'acknowledge' => true],
     'size' => Modal::SIZE_LARGE,
-    'footer' => ModalButton::cancel() . ModalButton::save(null, $taskForm->getSubmitUrl()),
+    'footer' => ModalButton::cancel() . ModalButton::save()->submit($taskForm->getSubmitUrl()),
 ]) ?>
     <div id="task-form" data-ui-widget="task.Form" data-ui-init>
 
