@@ -61,9 +61,15 @@ use humhub\widgets\bootstrap\Button;
 
         <?= Icon::get('caret-up')->class('toggleItems')->right() ?>
 
-        <?= Button::success()->icon('plus')->sm()->right()->style('margin-top:-3px')
+        <?= Button::success()
+            ->icon('plus')
+            ->sm()
+            ->right()
+            ->style('margin-top:-3px')
             ->action('ui.modal.load', TaskListUrl::addTaskListTask($list))
-            ->loader(false)->visible($canCreate)->cssClass('tt')->options(['title' => Yii::t('TasksModule.base', 'Add task')]) ?>
+            ->loader(false)
+            ->visible($canCreate)
+            ->tooltip(Yii::t('TasksModule.base', 'Add task')) ?>
         </div>
     </div>
 

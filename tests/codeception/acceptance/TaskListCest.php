@@ -30,7 +30,7 @@ class TaskListCest
         $I->click('Tasks', '.layout-nav-container');
         $I->waitForText('Overview');
 
-        $I->click('Add');
+        $I->click('button[data-action-click-url="/s/space-1/tasks/task/edit"]'); // "Add" button
         $I->waitForText('New Task', null, '#globalModal');
         $I->fillField('Task[title]', 'Test task with new list');
         $I->fillContentTagDropDown('task-task_list_id', 'My New Tasklist');
@@ -52,7 +52,7 @@ class TaskListCest
         $I->see('Begin Task');
         $I->click('Begin Task');
         // Check for in progress badge
-        $I->waitForElementVisible('.label-info .fa-edit', null, '[data-task-id="2"]');
+        $I->waitForElementVisible('.text-bg-info.badge .fa-pencil', null, '[data-task-id="2"]');
 
         $I->waitForText('Finish Task');
         $I->click('Finish Task');
@@ -74,7 +74,7 @@ class TaskListCest
         $I->click('Tasks', '.layout-nav-container');
         $I->waitForText('Overview');
 
-        $I->click('Add');
+        $I->click('button[data-action-click-url="/u/user1/tasks/task/edit"]'); // "Add" button
         $I->waitForText('New Task', null, '#globalModal');
         $I->fillField('Task[title]', 'Test task with new list');
         $I->fillContentTagDropDown('task-task_list_id', 'My New Tasklist');
@@ -96,7 +96,7 @@ class TaskListCest
         $I->see('Begin Task');
         $I->click('Begin Task');
         // Check for in progress badge
-        $I->waitForElementVisible('.label-info .fa-edit', null, '[data-task-id="2"]');
+        $I->waitForElementVisible('.text-bg-info.badge .fa-pencil', null, '[data-task-id="2"]');
 
         $I->waitForText('Finish Task');
         $I->click('Finish Task');

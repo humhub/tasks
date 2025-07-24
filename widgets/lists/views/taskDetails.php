@@ -1,16 +1,16 @@
 <?php
 
+use humhub\components\View;
 use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\content\widgets\WallEntryAddons;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\widgets\ChangeStatusButton;
-use humhub\modules\tasks\widgets\TaskInfoBox;
 use humhub\modules\tasks\widgets\checklist\TaskChecklist;
+use humhub\modules\tasks\widgets\TaskInfoBox;
 use humhub\modules\tasks\widgets\TaskRoleInfoBox;
 use humhub\modules\topic\models\Topic;
 use humhub\modules\topic\widgets\TopicBadge;
-use humhub\components\View;
 use humhub\widgets\bootstrap\Button;
 
 
@@ -42,7 +42,11 @@ $color = $task->getColor('var(--info)');
 
             <?php if ($task->schedule->canRequestExtension()): ?>
                 <div style="display:inline-block;vertical-align:bottom;">
-                    <?= Button::primary()->icon('calendar-plus-o')->sm()->cssClass('tt')->link(TaskUrl::requestExtension($task))->options(['title' => Yii::t('TasksModule.base', 'Request extension')]) ?>
+                    <?= Button::primary()
+                        ->icon('calendar-plus-o')
+                        ->sm()
+                        ->link(TaskUrl::requestExtension($task))
+                        ->tooltip(Yii::t('TasksModule.base', 'Request extension')) ?>
                 </div>
             <?php endif; ?>
 
