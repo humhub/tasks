@@ -176,5 +176,6 @@ return [
     'Show widget on Dashboard' => '',
     'Starting at' => '',
     'Task List' => '',
+    'Task content ID' => '',
     'Title of your task list' => '',
 ];

@@ -177,4 +177,5 @@ return [
     'Responsible users' => '',
     'Show widget in Spaces' => '',
     'Show widget on Dashboard' => '',
+    'Task content ID' => '',
 ];

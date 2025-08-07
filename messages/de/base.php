@@ -177,4 +177,5 @@ return [
     '{userName} reviewed task {task}.' => '{userName} hat die Aufgabe {task} überprüft.',
     '{userName} started working on Task {task} in space {spaceName}.' => '{userName} hat begonnen, an der Aufgabe {task} im Space {spaceName} zu arbeiten.',
     '{userName} works on task {task}.' => '{userName} arbeitet an der Aufgabe {task}.',
+    'Task content ID' => '',
 ];

@@ -147,6 +147,7 @@ return [
     'Task' => '',
     'Task List' => '',
     'Task Users have been notified' => '',
+    'Task content ID' => '',
     'Task {task} in space {spaceName} ends at {dateTime}.' => '',
     'Task {task} in space {spaceName} starts at {dateTime}.' => '',
     'Tasks: Reminder' => '',

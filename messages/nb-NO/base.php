@@ -163,6 +163,7 @@ return [
     'Start date' => '',
     'Starting at' => '',
     'Task List' => '',
+    'Task content ID' => '',
     'Task {task} in space {spaceName} ends at {dateTime}.' => '',
     'Task {task} in space {spaceName} starts at {dateTime}.' => '',
     'Title and Color' => '',

@@ -12,6 +12,8 @@ namespace humhub\modules\tasks;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\rest\Module as RestModule;
 use humhub\modules\space\models\Space;
+use humhub\modules\tasks\extensions\custom_pages\elements\TaskElement;
+use humhub\modules\tasks\extensions\custom_pages\elements\TasksElement;
 use humhub\modules\tasks\helpers\TaskListUrl;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\user\models\User;
@@ -327,6 +329,14 @@ class Events
             ['pattern' => 'tasks/list/<id:\d+>', 'route' => 'tasks/rest/task-list/delete', 'verb' => 'DELETE'],
 
         ], 'tasks');
+    }
+
+    public static function onCustomPagesTemplateElementTypeServiceInit($event)
+    {
+        /* @var \humhub\modules\custom_pages\modules\template\services\ElementTypeService $elementTypeService */
+        $elementTypeService = $event->sender;
+        $elementTypeService->addType(TaskElement::class);
+        $elementTypeService->addType(TasksElement::class);
     }
 
 }

@@ -5,6 +5,14 @@ Changelog
 ------------------------
 - Enh #268: Migration to Bootstrap 5 for HumHub 1.18
 
+1.8.8 (Unreleased)
+--------------------
+- Enh #267: Use content ID in the "Custom Pages" extension
+
+1.8.7 (July 1, 2025)
+--------------------
+- Enh #266: Extension for module "Custom Pages"
+
 1.8.6 (December 3, 2024)
 ------------------------
 - Enh #258: By default, enabled "Mobile" notification types for those enabled for "Web"

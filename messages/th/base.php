@@ -177,4 +177,5 @@ return [
     'Show widget in Spaces' => '',
     'Show widget on Dashboard' => '',
     'Task List' => '',
+    'Task content ID' => '',
 ];
