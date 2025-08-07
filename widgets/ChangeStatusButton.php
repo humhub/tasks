@@ -4,7 +4,6 @@ namespace humhub\modules\tasks\widgets;
 
 use humhub\components\Widget;
 use humhub\modules\tasks\models\Task;
-use humhub\widgets\Button;
 
 class ChangeStatusButton extends Widget
 {

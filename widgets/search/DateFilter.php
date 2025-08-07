@@ -10,7 +10,7 @@
 namespace humhub\modules\tasks\widgets\search;
 
 use humhub\modules\ui\filter\widgets\FilterInput;
-use humhub\libs\Html;
+use humhub\helpers\Html;
 
 class DateFilter extends FilterInput
 {

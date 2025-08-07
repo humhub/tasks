@@ -11,7 +11,7 @@
 use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\tasks\widgets\TaskRoleInfoBox;
 use humhub\modules\ui\icon\widgets\Icon;
-use humhub\widgets\ModalButton;
+use humhub\widgets\modal\ModalButton;
 use humhub\modules\tasks\widgets\TaskPercentageBar;
 
 $color = 'var(--text-color-main)';
@@ -39,7 +39,7 @@ $color = 'var(--text-color-main)';
     <br>
 
     <?php if ($task->canView()) : ?>
-        <?= ModalButton::primary(Yii::t('TasksModule.base', 'Open Task'))->icon('fa-eye')->close()->link($task->getUrl())->sm() ?>
+        <?= ModalButton::primary(Yii::t('TasksModule.base', 'Open Task'))->icon('eye')->close()->link($task->getUrl())->sm() ?>
     <?php endif; ?>
 
 </div>

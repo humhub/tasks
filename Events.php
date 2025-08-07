@@ -54,7 +54,7 @@ class Events
             $event->sender->addItem([
                 'label' => Yii::t('TasksModule.base', 'Tasks'),
                 'id' => 'tasks-global',
-                'icon' => '<i class="fa fa-tasks"></i>',
+                'icon' => 'tasks',
                 'url' => TaskUrl::globalView(),
                 'sortOrder' => $module->settings->get('menuSortOrder', 500),
                 'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'tasks' && Yii::$app->controller->id == 'global'),
@@ -150,7 +150,7 @@ class Events
                     'label' => Yii::t('TasksModule.base', 'Tasks'),
                     'group' => 'modules',
                     'url' => TaskListUrl::taskListRoot($space),
-                    'icon' => '<i class="fa fa-tasks"></i>',
+                    'icon' => 'tasks',
                     'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'tasks'),
                 ]);
             }
@@ -168,7 +168,7 @@ class Events
                 $event->sender->addItem([
                     'label' => Yii::t('TasksModule.base', 'Tasks'),
                     'url' => TaskListUrl::taskListRoot($user),
-                    'icon' => '<i class="fa fa-tasks"></i>',
+                    'icon' => 'tasks',
                     'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'tasks'),
                 ]);
             }

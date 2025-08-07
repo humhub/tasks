@@ -1,5 +1,5 @@
 <?php
-/* @var $this \humhub\modules\ui\view\components\View */
+/* @var $this \humhub\components\View */
 /* @var $title string */
 /* @var $value string */
 /* @var $icon string */
@@ -9,7 +9,7 @@
 
 $value = is_array($value) ? $value : [$value];
 
-use humhub\libs\Html;
+use humhub\helpers\Html;
 use humhub\modules\ui\icon\widgets\Icon;
 ?>
 

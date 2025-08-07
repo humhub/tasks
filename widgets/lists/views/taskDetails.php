@@ -1,17 +1,17 @@
 <?php
 
+use humhub\components\View;
 use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\content\widgets\WallEntryAddons;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\widgets\ChangeStatusButton;
-use humhub\modules\tasks\widgets\TaskInfoBox;
 use humhub\modules\tasks\widgets\checklist\TaskChecklist;
+use humhub\modules\tasks\widgets\TaskInfoBox;
 use humhub\modules\tasks\widgets\TaskRoleInfoBox;
 use humhub\modules\topic\models\Topic;
-use humhub\modules\topic\widgets\TopicLabel;
-use humhub\modules\ui\view\components\View;
-use humhub\widgets\Button;
+use humhub\modules\topic\widgets\TopicBadge;
+use humhub\widgets\bootstrap\Button;
 
 
 /* @var $this View */
@@ -36,13 +36,17 @@ $color = $task->getColor('var(--info)');
             <?= TaskInfoBox::widget([
                 'title' => Yii::t('TasksModule.base', 'Scheduling'),
                 'value' => $task->schedule->getFormattedDateTime(),
-                'icon' => 'fa-clock-o',
+                'icon' => 'clock-o',
                 'iconColor' => $color,
                 'textClass' => $scheduleTextClass]) ?>
 
             <?php if ($task->schedule->canRequestExtension()): ?>
                 <div style="display:inline-block;vertical-align:bottom;">
-                    <?= Button::primary()->icon('fa-calendar-plus-o')->xs()->cssClass('tt')->link(TaskUrl::requestExtension($task))->options(['title' => Yii::t('TasksModule.base', 'Request extension')]) ?>
+                    <?= Button::primary()
+                        ->icon('calendar-plus-o')
+                        ->sm()
+                        ->link(TaskUrl::requestExtension($task))
+                        ->tooltip(Yii::t('TasksModule.base', 'Request extension')) ?>
                 </div>
             <?php endif; ?>
 
@@ -51,7 +55,7 @@ $color = $task->getColor('var(--info)');
 
         <div class="task-list-task-topics">
             <?php foreach (Topic::findByContent($task->content)->all() as $topic) : ?>
-                <?= TopicLabel::forTopic($topic) ?>
+                <?= TopicBadge::forTopic($topic) ?>
             <?php endforeach; ?>
         </div>
 

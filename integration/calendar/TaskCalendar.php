@@ -9,12 +9,9 @@
 
 namespace humhub\modules\tasks\integration\calendar;
 
-use DateTime;
 use humhub\modules\tasks\models\Task;
-use humhub\widgets\Label;
 use Yii;
 use yii\base\Component;
-use yii\helpers\Url;
 
 /**
  * Created by PhpStorm.
@@ -39,7 +36,7 @@ class TaskCalendar extends Component
         $event->addType(static::ITEM_TYPE_KEY, [
             'title' => Yii::t('TasksModule.base', 'Task'),
             'color' => static::DEFAULT_COLOR,
-            'icon' => 'fa-tasks',
+            'icon' => 'tasks',
         ]);
     }
 

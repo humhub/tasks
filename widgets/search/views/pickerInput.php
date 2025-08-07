@@ -9,7 +9,7 @@
 /* @var $pickerOptions array */
 /* @var $options array */
 
-use humhub\libs\Html;
+use humhub\helpers\Html;
 
 ?>
 <?= isset($options['label']) ? Html::label($options['label']) : '' ?>

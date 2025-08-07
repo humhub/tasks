@@ -12,7 +12,7 @@ use yii\helpers\Html;
 use humhub\modules\ui\filter\widgets\FilterPanel;
 use humhub\modules\tasks\widgets\search\TextFilterInput;
 
-/* @var $this \humhub\modules\ui\view\components\View */
+/* @var $this \humhub\components\View */
 /* @var $panels [] */
 /* @var $options [] */
 
@@ -25,14 +25,14 @@ $titleFilter = $title[0];
 ?>
 
 <?= Html::beginTag('div', $options) ?>
-
+<div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-lg-12">
             <?= TextFilterInput::widget($title[0]) ?>
         </div>
     </div>
-
-<div class="filter-root clearfix">
+</div>
+<div class="filter-root clearfix container">
     <div class="row task-bottom-panel">
         <?= FilterPanel::widget(['blocks' => $checkboxes, 'span' => 3]) ?>
         <?= FilterPanel::widget(['blocks' => $datePicker, 'span' => 3]) ?>

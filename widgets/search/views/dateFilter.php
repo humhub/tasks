@@ -6,10 +6,10 @@
  *
  */
 
-use humhub\libs\Html;
+use humhub\helpers\Html;
 use humhub\modules\ui\form\widgets\DatePicker;
 
-/* @var $this \humhub\modules\ui\view\components\View */
+/* @var $this \humhub\components\View */
 ?>
 <?= isset($options['label']) ? Html::label($options['label']) : '' ?>
 <?= DatePicker::widget([

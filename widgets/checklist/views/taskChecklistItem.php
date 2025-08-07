@@ -6,22 +6,24 @@
  *
  */
 
-/* @var $this \yii\web\View */
+/* @var $this \humhub\components\View */
 /* @var $task \humhub\modules\tasks\models\Task */
 /* @var $item \humhub\modules\tasks\models\checklist\TaskItem */
 
 /* @var $options array */
 
-use humhub\libs\Html;
+use humhub\helpers\Html;
+use humhub\modules\ui\icon\widgets\Icon;
 
 $disabled = ($task->canCheckItems()) ? false : 'true';
 ?>
+
 <?= Html::beginTag('li', $options) ?>
 
-<div class="task-item" id="item-<?= $item->id ?>">
+<div class="task-item container" id="item-<?= $item->id ?>">
 
     <div class="row">
-        <div class="col-md-12" style="padding-right: 0;">
+        <div class="col-lg-12" style="padding-right: 0;">
 
             <div class="task-item-content">
 
@@ -32,11 +34,11 @@ $disabled = ($task->canCheckItems()) ? false : 'true';
                     'disabled' => $disabled,
                     'labelOptions' => [
                         'class' => $item->completed ? 'item-finished' : '',
-                    ]
-                ]); ?>
+                    ],
+                ]) ?>
 
-                <span class="task-drag-icon tt" title="<?= Yii::t('TasksModule.base', 'Drag entry')?>" style="display:none">
-                    <i class="fa fa-arrows"></i>&nbsp;
+                <span class="task-drag-icon tt d-none" title="<?= Yii::t('TasksModule.base', 'Drag entry') ?>">
+                    <?= Icon::get('arrows') ?>&nbsp;
                 </span>
 
             </div>

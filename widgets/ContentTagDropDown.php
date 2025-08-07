@@ -8,7 +8,7 @@
 
 namespace humhub\modules\tasks\widgets;
 
-use humhub\libs\Html;
+use humhub\helpers\Html;
 
 class ContentTagDropDown extends \humhub\modules\content\widgets\ContentTagDropDown
 {

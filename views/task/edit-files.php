@@ -9,7 +9,7 @@
 use humhub\modules\file\widgets\Upload;
 
 
-/* @var $form \humhub\modules\ui\form\widgets\ActiveForm */
+/* @var $form \humhub\widgets\form\ActiveForm */
 /* @var $taskForm \humhub\modules\calendar\models\forms\CalendarEntryForm */
 /* @var $taskForm \humhub\modules\tasks\models\forms\TaskForm */
 
@@ -17,19 +17,19 @@ $upload = Upload::withName();
 
 ?>
 
-<div class="modal-body">
+<div class="container">
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-lg-2">
             <?= $upload->button([
                 'label' => true,
                 'tooltip' => false,
-                'cssButtonClass' => 'btn-default btn-sm',
+                'cssButtonClass' => 'btn-light btn-sm',
                 'dropZone' => '#task-form',
                 'max' => Yii::$app->getModule('content')->maxAttachedFiles,
             ])?>
         </div>
-        <div class="col-md-1"></div>
-        <div class="col-md-9">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-9">
             <?= $upload->preview([
                 'options' => ['style' => 'margin-top:10px'],
                 'model' => $taskForm->task,
