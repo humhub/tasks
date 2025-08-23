@@ -24,7 +24,7 @@ use humhub\modules\tasks\widgets\lists\TaskListItem;
 use humhub\modules\tasks\widgets\lists\TaskListWidget;
 use humhub\modules\tasks\widgets\lists\UnsortedTaskListWidget;
 use humhub\modules\user\models\User;
-use humhub\widgets\ModalClose;
+use humhub\widgets\modal\ModalClose;
 use Yii;
 use yii\web\HttpException;
 

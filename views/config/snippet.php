@@ -8,9 +8,9 @@
  */
 
 use humhub\modules\tasks\models\SnippetModuleSettings;
-use humhub\modules\ui\form\widgets\ContentHiddenCheckbox;
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use humhub\widgets\form\ContentHiddenCheckbox;
+use humhub\helpers\Html;
+use humhub\widgets\form\ActiveForm;
 
 /* @var $model SnippetModuleSettings */
 ?>
@@ -29,7 +29,7 @@ use yii\widgets\ActiveForm;
         ]) ?>
 
         <h4><?= Yii::t('TasksModule.base', 'Module Widget') ?></h4>
-        <div class="help-block"><?= Yii::t('TasksModule.base', 'A widget is an element added to to the sidebar of a stream. In this case it provides users with a short overview of their tasks.') ?></div>
+        <div class="form-text"><?= Yii::t('TasksModule.base', 'A widget is an element added to to the sidebar of a stream. In this case it provides users with a short overview of their tasks.') ?></div>
 
         <?= $form->field($model, 'myTasksSnippetShow')->checkbox(); ?>
 
@@ -38,7 +38,7 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'myTasksSnippetMaxItems')->input('number', ['min' => 1, 'max' => 30]) ?>
 
         <h4><?= Yii::t('TasksModule.base', 'Main Navigation') ?></h4>
-        <div class="help-block"><?= Yii::t('TasksModule.base', 'Choose if you want the module to appear in the main navigation.') ?></div>
+        <div class="form-text"><?= Yii::t('TasksModule.base', 'Choose if you want the module to appear in the main navigation.') ?></div>
 
         <?= $form->field($model, 'showGlobalMenuItem')->checkbox(); ?>
 

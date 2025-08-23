@@ -6,7 +6,7 @@
  *
  */
 
-use yii\helpers\Html;
+use humhub\helpers\Html;
 
 echo Yii::t('TasksModule.base', '{userName} works on task {task}.', [
         '{userName}' => Html::tag('strong', Html::encode($originator->displayName)),

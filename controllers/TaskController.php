@@ -11,8 +11,9 @@ use humhub\modules\space\models\Space;
 use humhub\modules\tasks\models\forms\ItemDrop;
 use humhub\modules\tasks\models\forms\TaskForm;
 use humhub\modules\user\models\UserPicker;
-use humhub\widgets\ModalClose;
+use humhub\widgets\modal\ModalClose;
 use humhub\modules\tasks\models\Task;
+use humhub\widgets\modal\Modal;
 use Yii;
 use yii\web\HttpException;
 use yii\web\Response;
@@ -107,7 +108,7 @@ class TaskController extends AbstractTaskController
                 'reloadLists' => $taskForm->reloadListId,
                 'reloadTask' => empty($taskForm->reloadListId) ? $taskForm->task->id : false,
                 // Workaround for humhub modal bug in v1.2.5
-                'output' => '<div class="modal-dialog"><div class="modal-content"></div></div></div>',
+                'output' => Modal::widget(),
             ]);
         }
 

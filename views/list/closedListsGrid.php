@@ -1,5 +1,5 @@
 <?php
-/* @var $this \humhub\modules\ui\view\components\View */
+/* @var $this \humhub\components\View */
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
 use humhub\widgets\GridView;

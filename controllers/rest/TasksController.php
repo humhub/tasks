@@ -43,9 +43,9 @@ class TasksController extends BaseContentController
     private function saveTask(TaskForm $taskForm): bool
     {
         $data = Yii::$app->request->bodyParams;
-        return $taskForm->load($data) &&
-            $taskForm->save() &&
-            (!method_exists($this, 'updateContent') || $this->updateContent($taskForm->task, $data));
+        return $taskForm->load($data)
+            && $taskForm->save()
+            && (!method_exists($this, 'updateContent') || $this->updateContent($taskForm->task, $data));
     }
 
     public function actionCreate($containerId)
@@ -57,8 +57,8 @@ class TasksController extends BaseContentController
         /** @var ContentContainerActiveRecord $container */
         $container = $containerRecord->getPolymorphicRelation();
 
-        if (! in_array(get_class($container), Yii::$app->getModule('tasks')->getContentContainerTypes()) ||
-            ! $container->permissionManager->can([CreateTask::class, ManageTasks::class])) {
+        if (! in_array(get_class($container), Yii::$app->getModule('tasks')->getContentContainerTypes())
+            || ! $container->permissionManager->can([CreateTask::class, ManageTasks::class])) {
             return $this->returnError(403, 'You are not allowed to create task!');
         }
 

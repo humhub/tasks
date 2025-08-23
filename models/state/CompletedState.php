@@ -28,11 +28,11 @@ class CompletedState extends TaskState
         return [
             Task::STATUS_PENDING_REVIEW => [
                 'label' => Yii::t('TasksModule.base', 'Continue Review'),
-                'icon' => 'fa-eye',
+                'icon' => 'eye',
             ],
             Task::STATUS_PENDING => [
                 'label' => Yii::t('TasksModule.base', 'Reset Task'),
-                'icon' => 'fa-undo',
+                'icon' => 'undo',
             ],
         ];
     }

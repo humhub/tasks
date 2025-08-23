@@ -12,8 +12,7 @@ namespace humhub\modules\tasks\notifications;
 use Yii;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\notification\components\BaseNotification;
-use humhub\modules\space\models\Space;
-use yii\helpers\Html;
+use humhub\helpers\Html;
 
 /**
  * Notifies an admin about reported content
