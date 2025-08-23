@@ -44,7 +44,7 @@ $responsible = $taskForm->task->taskResponsibleUsers;
 <?= $form->field($taskForm->task, 'review')->checkbox() ?>
 
 <div class="clearfix">
-    <?= Button::info()->icon('info-circle')->sm()->right()->options(['data-bs-toggle' => 'collapse', 'data-bs-target' => '#task-assignment-info'])->loader(false) ?>
+    <?= Button::accent()->icon('info-circle')->sm()->right()->options(['data-bs-toggle' => 'collapse', 'data-bs-target' => '#task-assignment-info'])->loader(false) ?>
 </div>
 
 <div id="task-assignment-info" class="alert alert-default collapse">

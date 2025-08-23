@@ -19,7 +19,7 @@ $cssClass = $right ? 'float-end' : '';
 <?php if ($task->status == Task::STATUS_PENDING && $includePending) : ?>
     <?= Badge::light(Yii::t('TasksModule.base', 'Pending'))->cssClass($cssClass)->icon('info-circle') ?>
 <?php elseif ($task->status == Task::STATUS_IN_PROGRESS) : ?>
-    <?= Badge::info(Yii::t('TasksModule.base', 'In Progress'))->cssClass($cssClass)->icon('edit') ?>
+    <?= Badge::accent(Yii::t('TasksModule.base', 'In Progress'))->cssClass($cssClass)->icon('edit') ?>
 <?php elseif ($task->status == Task::STATUS_PENDING_REVIEW) : ?>
     <?= Badge::warning(Yii::t('TasksModule.base', 'Pending Review'))->cssClass($cssClass)->icon('eye') ?>
 <?php elseif ($task->status == Task::STATUS_COMPLETED  && $includeCompleted) : ?>

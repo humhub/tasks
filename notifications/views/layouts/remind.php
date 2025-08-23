@@ -41,7 +41,7 @@ use humhub\widgets\TimeAgo;
 
                 <br> <?= TimeAgo::widget(['timestamp' => $record->created_at]) ?>
                 <?= $isNew ? Badge::danger(Yii::t('NotificationModule.views_notificationLayout', 'New')) : '' ?>
-                <?= Badge::info(Yii::t('TasksModule.base', 'Reminder')) ?>
+                <?= Badge::accent(Yii::t('TasksModule.base', 'Reminder')) ?>
             </div>
 
         </div>

@@ -53,7 +53,7 @@ $participantStyle = 'display:inline-block;';
                     <?= TaskBadge::widget(['task' => $task]) ?>
 
                     <?php if ($task->content->isPublic()) : ?>
-                        <?= Badge::info(Yii::t('SpaceModule.base', 'Public')) ?>
+                        <?= Badge::accent(Yii::t('SpaceModule.base', 'Public')) ?>
                     <?php endif; ?>
                 </div>
             </div>

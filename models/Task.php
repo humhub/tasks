@@ -1049,7 +1049,7 @@ class Task extends ContentActiveRecord implements Searchable
                 $labels[] = Badge::light(Yii::t('TasksModule.base', 'Pending'))->icon('info-circle')->sortOrder(350);
                 break;
             case self::STATUS_IN_PROGRESS :
-                $labels[] = Badge::info(Yii::t('TasksModule.base', 'In Progress'))->icon('edit')->sortOrder(350);
+                $labels[] = Badge::accent(Yii::t('TasksModule.base', 'In Progress'))->icon('edit')->sortOrder(350);
                 break;
             case self::STATUS_PENDING_REVIEW :
                 $labels[] = Badge::warning(Yii::t('TasksModule.base', 'Pending Review'))->icon('exclamation-triangle')->sortOrder(350);
