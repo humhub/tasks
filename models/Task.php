@@ -381,8 +381,8 @@ class Task extends ContentActiveRecord implements Searchable
     public function beforeSave($insert)
     {
         $this->schedule->beforeSave();
-        return $this->saveTaskList() &&
-            parent::beforeSave($insert);
+        return $this->saveTaskList()
+            && parent::beforeSave($insert);
     }
 
     /**
