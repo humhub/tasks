@@ -49,13 +49,13 @@ class CompletedTaskListView extends Widget
                 'canEdit' => $this->contentContainer->can(ManageTasks::class),
             ],
             'options' => [
-                'tag' => 'ul',
-                'class' => 'media-list',
+                'tag' => 'div',
+                'class' => 'hh-list',
             ],
             'itemOptions' => [
-                'tag' => 'li',
+                'tag' => 'div',
             ],
-            'layout' => "{items}\n<li class=\"pagination-container\">{pager}</li>",
+            'layout' => "{items}\n<li class=\"pagination-container stream-end\">{pager}</li>",
         ]);
     }
 

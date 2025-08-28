@@ -19,7 +19,7 @@ use humhub\widgets\mails\MailButton;
  *
  */
 
-/* @var $this yii\web\View */
+/* @var $this humhub\components\View */
 /* @var $viewable \humhub\modules\notification\components\BaseNotification */
 /* @var $url string */
 /* @var $date string */

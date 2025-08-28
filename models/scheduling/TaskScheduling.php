@@ -19,7 +19,7 @@ use humhub\modules\tasks\notifications\ChangedDateTimeNotification;
 use humhub\modules\tasks\notifications\ExtensionRequestNotification;
 use Yii;
 use yii\base\Component;
-use yii\helpers\Html;
+use humhub\helpers\Html;
 
 /**
  * Class TaskScheduling

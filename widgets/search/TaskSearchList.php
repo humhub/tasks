@@ -16,7 +16,6 @@ namespace humhub\modules\tasks\widgets\search;
 
 use humhub\components\Widget;
 use humhub\modules\tasks\models\forms\TaskFilter;
-use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\Module;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -54,14 +53,13 @@ class TaskSearchList extends Widget
             ],
             'summary' => '',
             'options' => [
-                'tag' => 'ul',
-                'class' => 'media-list',
+                'tag' => 'div',
+                'class' => 'hh-list',
             ],
             'itemOptions' => [
-                'tag' => 'li',
+                'tag' => 'div',
             ],
-            'layout' => "{summary}\n{items}\n<div class=\"pagination-container\">{pager}</div>",
+            'layout' => "{summary}\n{items}\n<div class=\"pagination-container stream-end\">{pager}</div>",
         ]);
     }
-
 }

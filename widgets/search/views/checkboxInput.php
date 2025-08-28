@@ -6,7 +6,7 @@
  *
  */
 
-use yii\helpers\Html;
+use humhub\helpers\Html;
 
 /* @var $options array */
 /* @var $title string */
