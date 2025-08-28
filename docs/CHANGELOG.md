@@ -1,12 +1,10 @@
 Changelog
 =========
 
-1.9.0 (Unreleased)
-------------------------
+1.9.0 (August 29, 2025)
+-----------------------
+- Fix #257: Update module resources path
 - Enh #268: Migration to Bootstrap 5 for HumHub 1.18
-
-1.8.8 (Unreleased)
---------------------
 - Enh #267: Use content ID in the "Custom Pages" extension
 
 1.8.7 (July 1, 2025)
