@@ -5,6 +5,7 @@ Changelog
 -----------------------
 - Fix #257: Update module resources path
 - Enh #268: Migration to Bootstrap 5 for HumHub 1.18
+- Fix #243: Fix visibility of the method `Controller::getAccessRules()`
 - Enh #267: Use content ID in the "Custom Pages" extension
 
 1.8.7 (July 1, 2025)
