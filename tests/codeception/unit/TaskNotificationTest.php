@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2017 HumHub GmbH & Co. KG
@@ -36,9 +37,9 @@ class TaskNotificationTest extends TaskTestCase
         $this->assertTrue($task->state->revert());
         $this->assertEquals(Task::STATUS_IN_PROGRESS, $task->status);
 
-        $this->assertEqualsNotificationCount(1,ReviewRejectedNotification::class, $task, null, 3);
-        $this->assertEqualsNotificationCount(1,ReviewRejectedNotification::class, $task, null, 1);
-        $this->assertEqualsNotificationCount(0,ReviewRejectedNotification::class, $task, null, 2);
+        $this->assertEqualsNotificationCount(1, ReviewRejectedNotification::class, $task, null, 3);
+        $this->assertEqualsNotificationCount(1, ReviewRejectedNotification::class, $task, null, 1);
+        $this->assertEqualsNotificationCount(0, ReviewRejectedNotification::class, $task, null, 2);
     }
 
     public function testResetNotification()
@@ -46,7 +47,7 @@ class TaskNotificationTest extends TaskTestCase
         $this->becomeUser('User2');
         $space4 = Space::findOne(4);
 
-        $task = $this->createTask($space4, 'Task1',null, ['status' => Task::STATUS_COMPLETED]);
+        $task = $this->createTask($space4, 'Task1', null, ['status' => Task::STATUS_COMPLETED]);
         $this->assertHasNoNotification(TaskResetNotification::class, $task);
 
         $task->addTaskAssigned(User::findOne(2));

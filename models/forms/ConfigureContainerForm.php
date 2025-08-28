@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2023 HumHub GmbH & Co. KG
@@ -25,8 +26,10 @@ class ConfigureContainerForm extends Model
     {
         parent::init();
 
-        $this->contentHiddenDefault = (bool) $this->getSettings()->get('contentHiddenDefault',
-            $this->getModule()->getContentHiddenGlobalDefault());
+        $this->contentHiddenDefault = (bool) $this->getSettings()->get(
+            'contentHiddenDefault',
+            $this->getModule()->getContentHiddenGlobalDefault(),
+        );
     }
 
     public function getModule(): Module

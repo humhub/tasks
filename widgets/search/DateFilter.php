@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
@@ -9,7 +10,7 @@
 namespace humhub\modules\tasks\widgets\search;
 
 use humhub\modules\ui\filter\widgets\FilterInput;
-use humhub\libs\Html;
+use humhub\helpers\Html;
 
 class DateFilter extends FilterInput
 {

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2022 HumHub GmbH & Co. KG
@@ -7,7 +8,7 @@
 
 namespace humhub\modules\tasks\widgets;
 
-use humhub\libs\Html;
+use humhub\helpers\Html;
 
 class ContentTagDropDown extends \humhub\modules\content\widgets\ContentTagDropDown
 {

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
@@ -12,7 +13,6 @@
  */
 
 namespace humhub\modules\tasks\widgets;
-
 
 use humhub\components\Widget;
 use humhub\modules\tasks\models\Task;
@@ -39,7 +39,7 @@ class TaskBadge extends Widget
             'task' => $this->task,
             'right' => $this->right,
             'includePending' => $this->includePending,
-            'includeCompleted' => $this->includeCompleted
+            'includeCompleted' => $this->includeCompleted,
         ]);
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
@@ -24,21 +25,20 @@ use Yii;
  */
 class SearchController extends AbstractTaskController
 {
-
     /**
      * @inheritdoc
      */
     protected function getAccessRules()
     {
         return [
-            [ContentContainerControllerAccess::RULE_USER_GROUP_ONLY => [Space::USERGROUP_MEMBER, User::USERGROUP_SELF]]
+            [ContentContainerControllerAccess::RULE_USER_GROUP_ONLY => [Space::USERGROUP_MEMBER, User::USERGROUP_SELF]],
         ];
     }
 
     public function actionIndex()
     {
         return $this->render('index', [
-            'filter' => new TaskFilter(['contentContainer' => $this->contentContainer, 'filters' => [TaskFilter::FILTER_ASSIGNED]])
+            'filter' => new TaskFilter(['contentContainer' => $this->contentContainer, 'filters' => [TaskFilter::FILTER_ASSIGNED]]),
         ]);
     }
 
@@ -49,7 +49,7 @@ class SearchController extends AbstractTaskController
 
         return $this->asJson([
             'success' => true,
-            'output' => TaskSearchList::widget(['filter' => $filter, 'canEdit' => $this->canManageTasks()])
+            'output' => TaskSearchList::widget(['filter' => $filter, 'canEdit' => $this->canManageTasks()]),
         ]);
     }
 

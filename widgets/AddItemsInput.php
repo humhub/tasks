@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
@@ -19,7 +20,6 @@ use humhub\components\Widget;
  */
 class AddItemsInput extends Widget
 {
-    
     public $name;
 
     public function run()
@@ -28,5 +28,3 @@ class AddItemsInput extends Widget
     }
 
 }
-
-?>

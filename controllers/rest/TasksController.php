@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2019 HumHub GmbH & Co. KG
@@ -42,9 +43,9 @@ class TasksController extends BaseContentController
     private function saveTask(TaskForm $taskForm): bool
     {
         $data = Yii::$app->request->bodyParams;
-        return $taskForm->load($data) &&
-            $taskForm->save() &&
-            (!method_exists($this, 'updateContent') || $this->updateContent($taskForm->task, $data));
+        return $taskForm->load($data)
+            && $taskForm->save()
+            && (!method_exists($this, 'updateContent') || $this->updateContent($taskForm->task, $data));
     }
 
     public function actionCreate($containerId)
@@ -56,8 +57,8 @@ class TasksController extends BaseContentController
         /** @var ContentContainerActiveRecord $container */
         $container = $containerRecord->getPolymorphicRelation();
 
-        if (! in_array(get_class($container), Yii::$app->getModule('tasks')->getContentContainerTypes()) ||
-            ! $container->permissionManager->can([CreateTask::class, ManageTasks::class])) {
+        if (! in_array(get_class($container), Yii::$app->getModule('tasks')->getContentContainerTypes())
+            || ! $container->permissionManager->can([CreateTask::class, ManageTasks::class])) {
             return $this->returnError(403, 'You are not allowed to create task!');
         }
 
@@ -131,7 +132,7 @@ class TasksController extends BaseContentController
 
         $status = Yii::$app->request->post('status', null);
 
-        if(!$task->state->canProceed($status)) {
+        if (!$task->state->canProceed($status)) {
             return $this->returnError(403, 'You are not allowed to change status of this task!');
         }
 
@@ -149,7 +150,7 @@ class TasksController extends BaseContentController
             return $this->returnError(404, 'Task not found!');
         }
 
-        if(!$task->state->canRevert(Task::STATUS_PENDING)) {
+        if (!$task->state->canRevert(Task::STATUS_PENDING)) {
             return $this->returnError(403, 'You are not allowed to revert this task!');
         }
 

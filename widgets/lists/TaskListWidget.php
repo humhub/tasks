@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
@@ -88,7 +89,7 @@ class TaskListWidget extends JsWidget
             'task-list-id' => $this->list->getId(),
             'can-manage' => $this->canManage,
             'reload-url' => TaskListUrl::reloadTaskList($this->list),
-            'drop-task-url' => TaskListUrl::dropTaskListTask($this->list)
+            'drop-task-url' => TaskListUrl::dropTaskListTask($this->list),
         ];
     }
 }

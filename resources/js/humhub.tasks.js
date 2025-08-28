@@ -45,11 +45,11 @@ humhub.module('task', function (module, require, $) {
         var $checkBox = modal.global.$.find('#task-scheduling');
         var $calMode = modal.global.$.find('.field-task-cal_mode');
         if($checkBox.prop('checked')) {
-            $schedulingTab.show();
-            $calMode.show();
+            $schedulingTab.removeClass('d-none');
+            $calMode.removeClass('d-none');
         } else {
-            $schedulingTab.hide();
-            $calMode.hide();
+            $schedulingTab.addClass('d-none');
+            $calMode.addClass('d-none');
         }
 
         var $startInput  = $('#taskform-start_date');
@@ -72,11 +72,11 @@ humhub.module('task', function (module, require, $) {
         var $schedulingTab = modal.global.$.find('.tab-scheduling');
         var $calMode = modal.global.$.find('.field-task-cal_mode');
         if (evt.$trigger.prop('checked')) {
-            $schedulingTab.show();
-            $calMode.show();
+            $schedulingTab.removeClass('d-none');
+            $calMode.removeClass('d-none')
         } else {
-            $schedulingTab.hide();
-            $calMode.hide();
+            $schedulingTab.addClass('d-none');
+            $calMode.addClass('d-none');
         }
     };
 
@@ -102,7 +102,7 @@ humhub.module('task', function (module, require, $) {
     };
 
     Form.prototype.removeTaskItem = function (evt) {
-        evt.$trigger.closest('.form-group').remove();
+        evt.$trigger.closest('.mb-3').remove();
     };
 
     Form.prototype.initAddTaskItem = function () {
@@ -111,7 +111,7 @@ humhub.module('task', function (module, require, $) {
             if (e.keyCode === 13) {
                 e.preventDefault();
                 if ($(this).data('task-item-added')) {
-                    $(this).closest('.form-group').next().find('input').focus();
+                    $(this).closest('.mb-3').next().find('input').focus();
                 } else {
                     $this.find('[data-action-click=addTaskItem]').trigger('click');
                     $(this).data('task-item-added', true);
@@ -127,18 +127,18 @@ humhub.module('task', function (module, require, $) {
             container: 'body'
         });
 
-        var $newInputGroup = $this.closest('.form-group').clone(false);
+        var $newInputGroup = $this.closest('.mb-3').clone(false);
         var $input = $newInputGroup.find('input');
 
         $input.val('');
-        $newInputGroup.hide();
-        $this.closest('.form-group').after($newInputGroup);
-        $this.children('span').removeClass('glyphicon-plus').addClass('glyphicon-trash');
+        $newInputGroup.addClass('d-none');
+        $this.closest('.mb-3').after($newInputGroup);
+        $this.children('span').removeClass('fa-plus').addClass('fa-trash');
         $this.off('click.humhub-action').on('click', function () {
-            $this.closest('.form-group').remove();
+            $this.closest('.mb-3').remove();
         });
         $this.removeAttr('data-action-click');
-        $newInputGroup.fadeIn('fast');
+        $newInputGroup.removeClass('d-none');
         $newInputGroup.find('input').focus();
     };
 
@@ -176,7 +176,7 @@ humhub.module('task', function (module, require, $) {
     var deleteTask = function(evt) {
          var widget = Widget.closest(evt.$trigger);
 
-        widget.$.fadeOut('fast');
+        widget.$.addClass('d-none');
 
         client.post(evt).then(function() {
             // in case the modal delete was clicked
@@ -187,7 +187,21 @@ humhub.module('task', function (module, require, $) {
 
             event.trigger('task.afterDelete')
         }).catch(function(e) {
-            widget.$.fadeIn('fast');
+            widget.$.removeClass('d-none');
+            module.log.error(e, true);
+        });
+     };
+
+    var deleteTaskFromContext = function(evt) {
+        var widget = Widget.closest(evt.$trigger);
+        widget.$.addClass('d-none');
+
+        client.post(evt).then(function() {
+            event.trigger('task.afterDelete');
+            $('#task-space-menu').find('a:first').click();
+            module.log.success(module.text('success.delete'));
+        }).catch(function(e) {
+            widget.$.removeClass('d-none');
             module.log.error(e, true);
         });
      };
@@ -201,7 +215,7 @@ humhub.module('task', function (module, require, $) {
             if(response.success) {
                 var dropdownLink = Widget.closest(evt.$trigger);
                 dropdownLink.reload().then(function() {
-                    dropdownLink.hide();
+                    dropdownLink.addClass('d-none');
                     module.log.success('request sent');
                 });
             } else {
@@ -255,6 +269,7 @@ humhub.module('task', function (module, require, $) {
         init: init,
         Form: Form,
         deleteTask: deleteTask,
+        deleteTaskFromContext: deleteTaskFromContext,
         changeState: changeState,
         extensionrequest:extensionrequest
     });

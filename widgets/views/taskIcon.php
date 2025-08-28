@@ -7,6 +7,7 @@
  */
 
 use humhub\modules\tasks\models\Task;
+use humhub\modules\ui\icon\widgets\Icon;
 
 /** @var $task Task **/
 /** @var $this \humhub\components\View **/
@@ -15,15 +16,15 @@ use humhub\modules\tasks\models\Task;
 
 ?>
 <?php if ($task->status == Task::STATUS_PENDING && in_array(TASK::STATUS_PENDING, $include)) : ?>
-    <i class="fa fa-info-circle colorSuccess tt" title="<?= Yii::t('TasksModule.base', 'Pending') ?>"></i>
+    <?= Icon::get('info-circle')->class('colorSuccess')->tooltip(Yii::t('TasksModule.base', 'Pending')) ?>
 <?php elseif ($task->status == Task::STATUS_IN_PROGRESS && in_array(TASK::STATUS_IN_PROGRESS, $include)) : ?>
-    <i class="fa fa-edit colorPrimary tt" title="<?= Yii::t('TasksModule.base', 'In Progress') ?>"></i>
+    <?= Icon::get('edit')->class('colorPrimary')->tooltip(Yii::t('TasksModule.base', 'In Progress')) ?>
 <?php elseif ($task->status == Task::STATUS_PENDING_REVIEW && in_array(TASK::STATUS_PENDING_REVIEW, $include)) : ?>
-    <i class="fa fa-eye colorPrimary tt" title="<?= Yii::t('TasksModule.base', 'ending Review') ?>"></i>
+    <?= Icon::get('eye')->class('colorPrimary')->tooltip(Yii::t('TasksModule.base', 'Pending Review')) ?>
 <?php elseif ($task->status == Task::STATUS_COMPLETED && in_array(TASK::STATUS_COMPLETED, $include)) : ?>
-    <i class="fa fa-check-square colorSuccess tt" title="<?= Yii::t('TasksModule.base', 'Completed') ?>"></i>
+    <?= Icon::get('check-square')->class('colorSuccess')->tooltip(Yii::t('TasksModule.base', 'Completed')) ?>
 <?php endif; ?>
 
 <?php if ($includeOverdue && $task->isOverdue()) : ?>
-    <i class="fa fa-exclamation-triangle colorDanger tt" title="<?= Yii::t('TasksModule.base', 'Overdue') ?>"></i>
+    <?= Icon::get('exclamation-triangle')->class('colorDanger')->tooltip(Yii::t('TasksModule.base', 'Overdue')) ?>
 <?php endif; ?>

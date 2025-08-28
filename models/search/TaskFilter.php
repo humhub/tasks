@@ -18,38 +18,37 @@ use humhub\modules\tasks\models\Task;
  */
 class TaskFilter extends Task
 {
-
     /**
      * Default implementation for user picker filter.
-     * 
+     *
      * @param type $keywords
      * @param type $maxResults
      * @param type $friendsOnly
      * @param type $permission
-     * @deprecated since 1.2 use 
+     * @deprecated since 1.2 use
      * @return type
      */
     public function getTaskPickerResult($keywords = null, $maxResults = null, $permission = null)
     {
-            //We don't use the permission here for filtering since we include user with no permission as disabled in the result.
-            //The problem here is we do not prefer users with permission in the query.
-            $tasks = $this->getTaskByFilter($keywords, $maxResults);
-            return TaskPicker::asJSON($tasks, $permission);
+        //We don't use the permission here for filtering since we include user with no permission as disabled in the result.
+        //The problem here is we do not prefer users with permission in the query.
+        $tasks = $this->getTaskByFilter($keywords, $maxResults);
+        return TaskPicker::asJSON($tasks, $permission);
     }
-    
-//    private function containsUser($userArr, $user)
-//    {
-//        foreach($userArr as $currentUser) {
-//            if($currentUser->id === $user->id) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
+
+    //    private function containsUser($userArr, $user)
+    //    {
+    //        foreach($userArr as $currentUser) {
+    //            if($currentUser->id === $user->id) {
+    //                return true;
+    //            }
+    //        }
+    //        return false;
+    //    }
 
     /**
      * Searches for all active users by the given keyword and permission.
-     * 
+     *
      * @param type $keywords
      * @param type $maxResults
      * @param type $permission
@@ -60,13 +59,13 @@ class TaskFilter extends Task
         return static::filter(Task::find(), $keywords, $maxResults, $permission);
     }
 
-    
+
     /**
      * Returns an array of user models filtered by a $keyword and $permission. These filters
      * are added to the provided $query. The $keyword filter can be used to filter the users
      * by email, username, firstname, lastname and title. By default this functions does not
      * consider inactive user.
-     * 
+     *
      * @param type $query
      * @param type $keywords
      * @param type $maxResults
@@ -82,11 +81,11 @@ class TaskFilter extends Task
 
     public static function addQueryFilter($query, $keywords = null, $maxResults = null)
     {
-        
+
         if ($maxResults != null) {
             $query->limit($maxResults);
         }
-        
+
         return $query;
     }
 
@@ -94,7 +93,7 @@ class TaskFilter extends Task
     /**
      * Returns a subset of the given array containing all users of the given set
      * which are permitted. If the permission is null this method returns the
-     * 
+     *
      * @param type $users
      * @param type $permission
      * @return type

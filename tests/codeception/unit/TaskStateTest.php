@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2017 HumHub GmbH & Co. KG
@@ -19,15 +20,14 @@ use humhub\modules\tasks\permissions\ManageTasks;
 use humhub\modules\user\models\User;
 use tasks\TaskTestCase;
 
-
 class TaskStateTest extends TaskTestCase
 {
     public function _before()
     {
         parent::_before();
         $space4 = Space::findOne(4);
-        $this->setContentContainerPermission($space4,Space::USERGROUP_ADMIN,ManageTasks::class, BasePermission::STATE_DENY);
-        $this->setContentContainerPermission($space4,Space::USERGROUP_MODERATOR,ManageTasks::class, BasePermission::STATE_DENY);
+        $this->setContentContainerPermission($space4, Space::USERGROUP_ADMIN, ManageTasks::class, BasePermission::STATE_DENY);
+        $this->setContentContainerPermission($space4, Space::USERGROUP_MODERATOR, ManageTasks::class, BasePermission::STATE_DENY);
     }
 
     public function testResetTask()
@@ -49,7 +49,7 @@ class TaskStateTest extends TaskTestCase
         $this->becomeUser('User2');
         $space4 = Space::findOne(4);
 
-        $task = $this->createTask($space4, 'Task1',null,['review' => 1, 'status' => Task::STATUS_COMPLETED]);
+        $task = $this->createTask($space4, 'Task1', null, ['review' => 1, 'status' => Task::STATUS_COMPLETED]);
 
         // Set User2 as responsible
         $task->addTaskResponsible($user2);
@@ -118,7 +118,7 @@ class TaskStateTest extends TaskTestCase
         $this->becomeUser('User1');
         $space4 = Space::findOne(4);
 
-        $task = $this->createTask($space4, 'Task1',null,['review' => 1]);
+        $task = $this->createTask($space4, 'Task1', null, ['review' => 1]);
 
         // Set User2 as responsible
         $task->addTaskResponsible(User::findOne(['id' => 3]));
@@ -200,22 +200,22 @@ class TaskStateTest extends TaskTestCase
         $this->becomeUser('User1');
         $space4 = Space::findOne(4);
 
-        $task = $this->createTask($space4, 'Task1',null,['review' => 0]);
+        $task = $this->createTask($space4, 'Task1', null, ['review' => 0]);
 
         // Any space member can process task
-        $this->assertEquals(Task::STATUS_PENDING,  $task->status);
+        $this->assertEquals(Task::STATUS_PENDING, $task->status);
         $this->assertTrue($task->state->canProceed(null, $user1));
         $this->assertTrue($task->state->canProceed(null, $user2));
         $this->assertFalse($task->state->canProceed(null, $user3));
         $this->assertTrue($task->state->proceed());
 
-        $this->assertEquals(Task::STATUS_IN_PROGRESS,  $task->status);
+        $this->assertEquals(Task::STATUS_IN_PROGRESS, $task->status);
         $this->assertTrue($task->state->canProceed(null, $user1));
         $this->assertTrue($task->state->canProceed(null, $user2));
         $this->assertFalse($task->state->canProceed(null, $user3));
         $this->assertTrue($task->state->proceed());
 
-        $this->assertEquals(Task::STATUS_COMPLETED,  $task->status);
+        $this->assertEquals(Task::STATUS_COMPLETED, $task->status);
         $this->assertFalse($task->state->canProceed(null, $user1));
         $this->assertFalse($task->state->canProceed(null, $user2));
         $this->assertFalse($task->state->canProceed(null, $user3));
@@ -226,7 +226,7 @@ class TaskStateTest extends TaskTestCase
         $this->assertFalse($task->state->canRevert(null, $user3));
         $this->assertTrue($task->state->revert());
 
-        $this->assertEquals(Task::STATUS_PENDING,  $task->status);
+        $this->assertEquals(Task::STATUS_PENDING, $task->status);
     }
 
 
@@ -239,7 +239,7 @@ class TaskStateTest extends TaskTestCase
         $this->becomeUser('User1');
         $space4 = Space::findOne(4);
 
-        $task = $this->createTask($space4, 'Task1',null,['review' => 0, 'status' => Task::STATUS_COMPLETED]);
+        $task = $this->createTask($space4, 'Task1', null, ['review' => 0, 'status' => Task::STATUS_COMPLETED]);
 
         // Set User2 as responsible
         $task->addTaskResponsible($admin);

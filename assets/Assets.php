@@ -12,10 +12,10 @@ namespace humhub\modules\tasks\assets;
 use humhub\components\assets\AssetBundle;
 use humhub\modules\tasks\controllers\ListController;
 use humhub\modules\tasks\controllers\SearchController;
+use Yii;
 
 class Assets extends AssetBundle
 {
-
     /**
      * @inheritDoc
      */
@@ -25,7 +25,7 @@ class Assets extends AssetBundle
      * @inheritDoc
      */
     public $css = [
-        'css/task.css',
+        'css/tasks.min.css',
     ];
 
     // We have to use the timeentry lib for the duration since the TimePicker widget uses an older version without maxHour setting...
@@ -34,10 +34,10 @@ class Assets extends AssetBundle
      */
     public $js = [
         'js/jquery.ui.touch-punch.min.js',  // Add jQuery fix for using sortable() on mobile devices - Homepage: http://touchpunch.furf.com/
-        'js/humhub.task.js',
-        'js/humhub.task.list.js',
-        'js/humhub.task.checklist.js',
-        'js/humhub.task.search.js',
+        'js/humhub.tasks.js',
+        'js/humhub.tasks.list.js',
+        'js/humhub.tasks.checklist.js',
+        'js/humhub.tasks.search.js',
     ];
 
     /**
@@ -46,11 +46,17 @@ class Assets extends AssetBundle
     public static function register($view)
     {
         if ($view->context instanceof ListController || $view->context instanceof SearchController) {
-            $colorLink = $view->theme->variable('link');
-            $colorInfo = $view->theme->variable('info');
-            $view->registerCss('#task-space-menu li.active a{color:' . $colorLink . '}'
-                . '.task-overview #task-filter-nav .task-bottom-panel .filterInput[data-filter-type=checkbox] .fa.fa-check-square-o{border-color:' . $colorInfo . ';background:' . $colorInfo . '}');
+            $view->registerCss('#task-space-menu li.active a{color:var(--link)}'
+                . '.task-overview #task-filter-nav .task-bottom-panel .filterInput[data-filter-type=checkbox] .fa.fa-check-square-o{border-color:var(--info);background:var(--info)}');
         }
+
+        $view->registerJsConfig([
+            'task' => [
+                'text' => [
+                    'success.delete' => Yii::t('base', 'Deleted'),
+                ],
+            ],
+        ]);
 
         return parent::register($view);
     }

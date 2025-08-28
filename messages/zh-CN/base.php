@@ -1,10 +1,8 @@
 <?php
 
 return [
-    'Add' => '增加',
     'All Day' => '全天',
     'Close' => '关闭',
-    'Collapse' => '折叠',
     'Color' => '颜色',
     'Created by me' => '我创建的',
     'Date' => '日期',
@@ -13,7 +11,6 @@ return [
     'Edit' => '编辑',
     'End Date' => '结束日期',
     'End time must be after start time!' => '结束时间必须晚于开始时间！',
-    'Expand' => '展开',
     'Filter' => '筛选',
     'General' => '一般',
     'General Settings' => '一般设置',
@@ -79,7 +76,6 @@ return [
     'Completed lists' => '',
     'Configure the Tasks module to meet your specific requirements and needs. You can define individual settings and for instance decide whether a widget is displayed.' => '',
     'Continue Review' => '',
-    'Create and assign tasks - organize and schedule individual and collaborative projects.' => '',
     'Create tasks' => '',
     'Deadline at' => '',
     'Deadline: ' => '',
@@ -149,6 +145,7 @@ return [
     'Task' => '',
     'Task List' => '',
     'Task Users have been notified' => '',
+    'Task content ID' => '',
     'Task {task} in space {spaceName} ends at {dateTime}.' => '',
     'Task {task} in space {spaceName} starts at {dateTime}.' => '',
     'Tasks: Reminder' => '',

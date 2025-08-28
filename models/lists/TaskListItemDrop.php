@@ -1,6 +1,5 @@
 <?php
 
-
 namespace humhub\modules\tasks\models\lists;
 
 use humhub\modules\tasks\models\forms\ItemDrop;
@@ -19,7 +18,7 @@ class TaskListItemDrop extends ItemDrop
 
     public function getSortableModel()
     {
-        if(!$this->model && !$this->modelId) {
+        if (!$this->model && !$this->modelId) {
             return new UnsortedTaskList(['contentContainer' => $this->contentContainer]);
         }
 

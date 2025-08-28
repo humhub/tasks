@@ -1,9 +1,22 @@
 Changelog
 =========
 
-1.9.0 (Unreleased)
-----------------------
+1.9.0 (August 29, 2025)
+-----------------------
 - Fix #257: Update module resources path
+- Enh #268: Migration to Bootstrap 5 for HumHub 1.18
+- Enh #267: Use content ID in the "Custom Pages" extension
+
+1.8.7 (July 1, 2025)
+--------------------
+- Enh #266: Extension for module "Custom Pages"
+
+1.8.6 (December 3, 2024)
+------------------------
+- Enh #258: By default, enabled "Mobile" notification types for those enabled for "Web"
+- Enh #259: Replace theme variables with CSS variables
+- Enh #260: Use PHP CS Fixer
+- Fix #263: Fixed deleted tasks visibility, reload after deletion, reload after state change
 
 1.8.5 (March 14, 2024)
 ----------------------

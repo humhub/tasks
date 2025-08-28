@@ -11,8 +11,7 @@ namespace humhub\modules\tasks\notifications;
 
 use Yii;
 use humhub\modules\notification\components\BaseNotification;
-use humhub\modules\space\models\Space;
-use yii\helpers\Html;
+use humhub\helpers\Html;
 
 /**
  * Notifies an admin about reported content
@@ -49,7 +48,7 @@ class ReviewSuccessNotification extends BaseNotification
         return Yii::t('TasksModule.base', '{userName} marked Task {task} in space {spaceName} as completed.', [
             '{userName}' => Html::tag('strong', Html::encode($this->originator->displayName)),
             '{task}' => Html::tag('strong', Html::encode($this->getContentInfo($this->source, false))),
-            '{spaceName}' => Html::tag('strong', Html::encode($this->source->content->container->displayName))
+            '{spaceName}' => Html::tag('strong', Html::encode($this->source->content->container->displayName)),
         ]);
     }
 
@@ -61,7 +60,7 @@ class ReviewSuccessNotification extends BaseNotification
         return Yii::t('TasksModule.base', '{userName} marked Task {task} in space {spaceName} as completed.', [
             '{userName}' => Html::encode($this->originator->displayName),
             '{task}' => Html::encode($this->getContentInfo($this->source, false)),
-            '{spaceName}' => Html::encode($this->source->content->container->displayName)
+            '{spaceName}' => Html::encode($this->source->content->container->displayName),
         ]);
     }
 }

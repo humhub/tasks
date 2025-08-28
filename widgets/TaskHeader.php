@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2022 HumHub GmbH & Co. KG
@@ -34,7 +35,7 @@ class TaskHeader extends Widget
     public function run()
     {
         return $this->render('taskHeader', [
-            'addTaskUrl' => $this->getAddTaskUrl()
+            'addTaskUrl' => $this->getAddTaskUrl(),
         ]);
     }
 

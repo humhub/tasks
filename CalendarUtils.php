@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
@@ -17,15 +18,14 @@ use DateTime;
  */
 class CalendarUtils
 {
-
-    const DATE_FORMAT = 'Y-m-d';
+    public const DATE_FORMAT = 'Y-m-d';
 
     /**
      *
      * @param DateTime $date1
      * @param DateTime $date2
      * @param type $endDateMomentAfter
-     * @return boolean
+     * @return bool
      */
     public static function isFullDaySpan(DateTime $date1, DateTime $date2, $endDateMomentAfter = false)
     {

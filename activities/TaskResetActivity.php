@@ -13,7 +13,6 @@ use humhub\modules\activity\components\BaseActivity;
 
 class TaskResetActivity extends BaseActivity
 {
-
     public $moduleId = 'tasks';
     public $viewName = "taskReset";
 

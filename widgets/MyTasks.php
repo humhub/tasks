@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
@@ -20,7 +21,6 @@ use humhub\modules\content\components\ContentContainerActiveRecord;
  */
 class MyTasks extends Widget
 {
-
     /**
      * ContentContainer to limit tasks to. (Optional)
      *
@@ -38,7 +38,7 @@ class MyTasks extends Widget
     public function run()
     {
         $settings = SnippetModuleSettings::instantiate();
-        $taskEntries = Task::findUserTasks(null,  $this->contentContainer, $settings->myTasksSnippetMaxItems);
+        $taskEntries = Task::findUserTasks(null, $this->contentContainer, $settings->myTasksSnippetMaxItems);
 
         if (empty($taskEntries)) {
             return;

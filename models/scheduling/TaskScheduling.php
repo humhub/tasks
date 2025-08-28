@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
@@ -18,7 +19,7 @@ use humhub\modules\tasks\notifications\ChangedDateTimeNotification;
 use humhub\modules\tasks\notifications\ExtensionRequestNotification;
 use Yii;
 use yii\base\Component;
-use yii\helpers\Html;
+use humhub\helpers\Html;
 
 /**
  * Class TaskScheduling
@@ -28,19 +29,18 @@ use yii\helpers\Html;
  */
 class TaskScheduling extends Component
 {
-
     /**
      * Cal Modes
      */
-    const CAL_MODE_NONE = 0;
-    const CAL_MODE_SPACE = 1;
+    public const CAL_MODE_NONE = 0;
+    public const CAL_MODE_SPACE = 1;
 
     /**
      * @var array all given cal modes as array
      */
     public static $calModes = [
         self::CAL_MODE_NONE,
-        self::CAL_MODE_SPACE
+        self::CAL_MODE_SPACE,
     ];
 
     /**
@@ -49,7 +49,7 @@ class TaskScheduling extends Component
     public $task;
 
     /**
-     * @return boolean weather or not this item spans exactly over a whole day
+     * @return bool weather or not this item spans exactly over a whole day
      */
     public function isAllDay()
     {
@@ -57,7 +57,7 @@ class TaskScheduling extends Component
             return true;
         }
 
-        return (boolean) $this->task->all_day;
+        return (bool) $this->task->all_day;
     }
 
     public function isOverdue()
@@ -81,7 +81,7 @@ class TaskScheduling extends Component
 
     public function beforeSave()
     {
-        if($this->task->scenario === Task::SCENARIO_EDIT) {
+        if ($this->task->scenario === Task::SCENARIO_EDIT) {
             if (!$this->task->scheduling) {
                 $this->task->start_datetime = null;
                 $this->task->end_datetime = null;
@@ -98,7 +98,7 @@ class TaskScheduling extends Component
 
     public function afterSave($insert, $changedAttributes)
     {
-        if($this->task->scenario === Task::SCENARIO_EDIT) {
+        if ($this->task->scenario === Task::SCENARIO_EDIT) {
             TaskReminder::deleteAll(['task_id' => $this->task->id]);
 
             if (!empty($this->task->selectedReminders)) {
@@ -189,14 +189,13 @@ class TaskScheduling extends Component
             Yii::$app->formatter->timeZone = $timeZone;
         }
 
-        if (!$this->task->scheduling)
+        if (!$this->task->scheduling) {
             $result = '';
-        else {
+        } else {
             $result = Yii::t('TasksModule.base', 'Starting at');
             if ($this->task->all_day) {
                 $result .= ' ' . Yii::$app->formatter->asDate($this->getStartDateTime(), $format);
-            }
-            else {
+            } else {
                 $result .= ' ' . Yii::$app->formatter->asDatetime($this->getStartDateTime(), $format);
             }
         }
@@ -214,14 +213,13 @@ class TaskScheduling extends Component
             Yii::$app->formatter->timeZone = $timeZone;
         }
 
-        if (!$this->task->scheduling)
+        if (!$this->task->scheduling) {
             $result = Yii::t('TasksModule.base', 'No Scheduling set for this Task');
-        else {
+        } else {
             $result = Yii::t('TasksModule.base', 'Deadline at');
             if ($this->task->all_day) {
                 $result .= ' ' . Yii::$app->formatter->asDate($this->getEndDateTime(), $format);
-            }
-            else {
+            } else {
                 $result .= ' ' . Yii::$app->formatter->asDatetime($this->getEndDateTime(), $format);
             }
         }
@@ -256,11 +254,11 @@ class TaskScheduling extends Component
             return false;
         }
 
-        if($this->task->isCompleted() || $this->task->isPendingReview()) {
+        if ($this->task->isCompleted() || $this->task->isPendingReview()) {
             return false;
         }
 
-        if($this->hasRequestedExtension()) {
+        if ($this->hasRequestedExtension()) {
             return false;
         }
 
@@ -269,7 +267,7 @@ class TaskScheduling extends Component
 
     public function hasRequestedExtension()
     {
-        return (boolean)($this->task->request_sent);
+        return (bool)($this->task->request_sent);
     }
 
     /**
@@ -278,8 +276,9 @@ class TaskScheduling extends Component
      */
     public function notifyDateTimeChanged()
     {
-        if ($this->task->isCompleted())
+        if ($this->task->isCompleted()) {
             return;
+        }
         // remove old notifications
         $this->task->deleteOldNotifications(ChangedDateTimeNotification::className());
 
@@ -296,8 +295,9 @@ class TaskScheduling extends Component
     {
         $end = $this->getEndDateTime();
         if ($this->isAllDay()) {
-            if ($end === $this->getEndDateTime()->setTime('00', '00', '00'))
-                $end->modify('-1 day'); // revert modifications for all-day events integrated via interface
+            if ($end === $this->getEndDateTime()->setTime('00', '00', '00')) {
+                $end->modify('-1 day');
+            } // revert modifications for all-day events integrated via interface
         }
         $interval = $this->getStartDateTime()->diff($end, true);
         return $interval->days + 1;
@@ -307,8 +307,9 @@ class TaskScheduling extends Component
     {
         $end = $this->getEndDateTime();
         if ($this->isAllDay()) {
-            if ($end === $this->getEndDateTime()->setTime('00', '00', '00'))
-                $end->modify('-1 day'); // revert modifications for all-day events integrated via interface
+            if ($end === $this->getEndDateTime()->setTime('00', '00', '00')) {
+                $end->modify('-1 day');
+            } // revert modifications for all-day events integrated via interface
         }
         $interval = (new DateTime())->diff($end, true);
         return $interval->days + 1;
@@ -356,9 +357,9 @@ class TaskScheduling extends Component
 
 
         $result = [
-//            'id' => $this->id,
+            //            'id' => $this->id,
             'title' => $title,
-//            'editable' => ($this->content->canEdit() || self::isTaskResponsible()),
+            //            'editable' => ($this->content->canEdit() || self::isTaskResponsible()),
             'editable' => false,
             //'color' => $color ? $color : TaskCalendar::DEFAULT_COLOR,
             'allDay' => $this->task->all_day,
@@ -371,7 +372,7 @@ class TaskScheduling extends Component
 
         $color = Html::encode($this->task->getColor());
 
-        if($color) {
+        if ($color) {
             $result['color'] = $color;
         }
 

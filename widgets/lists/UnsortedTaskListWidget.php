@@ -1,8 +1,6 @@
 <?php
 
-
 namespace humhub\modules\tasks\widgets\lists;
-
 
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\tasks\models\lists\UnsortedTaskList;
@@ -28,7 +26,7 @@ class UnsortedTaskListWidget extends TaskListWidget
 
     public function init()
     {
-        if(!$this->contentContainer) {
+        if (!$this->contentContainer) {
             $this->contentContainer = Yii::$app->controller->contentContainer;
         }
         $this->list = new UnsortedTaskList(['contentContainer' => $this->contentContainer]);
@@ -46,12 +44,12 @@ class UnsortedTaskListWidget extends TaskListWidget
         return $result;
     }
 
-    protected  function getColor()
+    protected function getColor()
     {
         return 'inherit';
     }
 
-    protected  function getListId()
+    protected function getListId()
     {
         return null;
     }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
@@ -13,7 +14,6 @@
 
 namespace humhub\modules\tasks\models\forms;
 
-
 use humhub\modules\tasks\models\Sortable;
 use humhub\modules\tasks\models\Task;
 use yii\base\Model;
@@ -26,7 +26,7 @@ class ItemDrop extends Model
     public $model;
 
     /**
-     * @var integer
+     * @var int
      */
     public $modelId;
 
@@ -36,19 +36,19 @@ class ItemDrop extends Model
     public $modelClass;
 
     /**
-     * @var integer
+     * @var int
      */
     public $index;
 
     /**
-     * @var integer
+     * @var int
      */
     public $itemId;
 
 
     public function getSortableModel()
     {
-        if(!$this->model) {
+        if (!$this->model) {
             $this->model = call_user_func("$this->modelClass::findOne", ['id' => $this->modelId]);
         }
 
@@ -64,7 +64,7 @@ class ItemDrop extends Model
     public function rules()
     {
         return [
-            [['modelId', 'itemId', 'index'], 'integer']
+            [['modelId', 'itemId', 'index'], 'integer'],
         ];
     }
 
