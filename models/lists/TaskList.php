@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
@@ -7,7 +8,6 @@
  */
 
 namespace humhub\modules\tasks\models\lists;
-
 
 use humhub\modules\content\components\ActiveQueryContent;
 use humhub\modules\content\components\ContentContainerActiveRecord;
@@ -29,15 +29,15 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
 
     public $additionClass = TaskListSettings::class;
 
-    const FILTER_STATUS_INCLUDE = 'status';
-    const FILTER_STATUS_EXCLUDE = 'status';
+    public const FILTER_STATUS_INCLUDE = 'status';
+    public const FILTER_STATUS_EXCLUDE = 'status';
 
     public function afterSave($insert, $changedAttributes)
     {
         // TODO: this can be removed after v1.2.6
         $this->addition->setTag($this);
 
-        if($insert) {
+        if ($insert) {
             $root = new TaskListRoot(['contentContainer' => $this->getContainer()]);
             $root->moveItemIndex($this->id, 0);
         }
@@ -114,7 +114,7 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
     {
         $query = static::findByContainer($container);
 
-        if(isset($filters[static::FILTER_STATUS_EXCLUDE])) {
+        if (isset($filters[static::FILTER_STATUS_EXCLUDE])) {
             $includes =  Task::$statuses;
             $excludes = is_array($filters[static::FILTER_STATUS_EXCLUDE]) ? $filters[static::FILTER_STATUS_EXCLUDE] : [$filters[static::FILTER_STATUS_EXCLUDE]];
             foreach ($excludes as $exclude) {
@@ -124,15 +124,16 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
             $filters[static::FILTER_STATUS_INCLUDE] = $includes;
         }
 
-        if(isset($filters[static::FILTER_STATUS_INCLUDE])) {
+        if (isset($filters[static::FILTER_STATUS_INCLUDE])) {
             $query->leftJoin('task', 'task.task_list_id=content_tag.id');
             $includes = is_array($filters[static::FILTER_STATUS_INCLUDE]) ? $filters[static::FILTER_STATUS_INCLUDE] : [$filters[static::FILTER_STATUS_INCLUDE]];
 
             $query->andWhere(
                 ['OR',
                     ['IS', 'task.id', new Expression("NULL")],
-                    ['IN', 'task.status', $includes]
-                ]);
+                    ['IN', 'task.status', $includes],
+                ],
+            );
         }
 
         return $query;
@@ -154,8 +155,8 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
             ['OR',
                 ['IN', 'task.status', $includes],
                 ['IS', 'task.id', new Expression("NULL")],
-                ['task_list_setting.hide_if_completed' => '0']
-            ]
+                ['task_list_setting.hide_if_completed' => '0'],
+            ],
         );
 
         $query->orderBy(['task_list_setting.sort_order' => SORT_ASC]);
@@ -178,11 +179,11 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
             ['AND',
                 ['NOT EXISTS', $subQuery],
                 ['IS NOT', 't.id', new Expression("NULL")],
-                ['task_list_setting.hide_if_completed' => '1']
-            ]
+                ['task_list_setting.hide_if_completed' => '1'],
+            ],
         );
 
-       $query->orderBy(['task_list_setting.updated_at' => SORT_ASC, 'task_list_setting.id' => SORT_DESC])->distinct();
+        $query->orderBy(['task_list_setting.updated_at' => SORT_ASC, 'task_list_setting.id' => SORT_DESC])->distinct();
 
         return $query;
     }
@@ -200,7 +201,7 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
     {
         $instance = new static();
 
-        if($contentContainer) {
+        if ($contentContainer) {
             $container_id = $contentContainer instanceof ContentContainerActiveRecord ? $contentContainer->contentcontainer_id : $contentContainer;
             static::deleteAll(['module_id' => $instance->module_id, 'contentcontainer_id' => $container_id]);
         } else {
@@ -216,7 +217,7 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
     {
         $instance = new static();
 
-        if($contentContainer) {
+        if ($contentContainer) {
             $container_id = $contentContainer instanceof ContentContainerActiveRecord ? $contentContainer->contentcontainer_id : $contentContainer;
             static::deleteAll(['type' => $instance->type, 'contentcontainer_id' => $container_id]);
         } else {
@@ -248,7 +249,7 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
             // make sure no invalid index is given
             if ($newIndex < 0) {
                 $newIndex = 0;
-            } else if ($newIndex >= count($tasks) + 1) {
+            } elseif ($newIndex >= count($tasks) + 1) {
                 $newIndex = count($tasks) - 1;
             }
 
@@ -277,7 +278,7 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
 
     public function getId()
     {
-       return $this->id;
+        return $this->id;
     }
 
     public function getTitle()

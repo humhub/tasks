@@ -4,7 +4,6 @@ use yii\db\Migration;
 
 class m141002_084750_fix_default extends Migration
 {
-
     public function up()
     {
         $this->alterColumn('task', 'percent', "smallint(6) NOT NULL DEFAULT 0");

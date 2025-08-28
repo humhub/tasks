@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
@@ -7,7 +8,6 @@
  */
 
 namespace humhub\modules\tasks\widgets\lists;
-
 
 use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\content\components\ContentContainerActiveRecord;
@@ -68,7 +68,7 @@ class TaskListItem extends JsWidget
             'task' => $this->task,
             'details' => $this->details,
             'canManage' => $this->canManage,
-            'options' => $this->getOptions()
+            'options' => $this->getOptions(),
         ]);
     }
 
@@ -78,7 +78,7 @@ class TaskListItem extends JsWidget
     public function getAttributes()
     {
         return [
-            'class' => 'task-list-item'
+            'class' => 'task-list-item',
         ];
     }
 
@@ -92,7 +92,7 @@ class TaskListItem extends JsWidget
             'content-id' =>  $this->task->content->id,
             'reload-url' => TaskListUrl::reloadTaskListTask($this->task),
             'load-details-url' =>  TaskListUrl::loadTaskDetails($this->task),
-            'task-status' => $this->task->status
+            'task-status' => $this->task->status,
         ];
     }
 }

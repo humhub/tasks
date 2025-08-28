@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
@@ -12,7 +13,6 @@
  */
 
 namespace humhub\modules\tasks\widgets;
-
 
 use humhub\components\Widget;
 use humhub\modules\tasks\models\Task;
@@ -34,7 +34,7 @@ class TaskPercentageBar extends Widget
     {
         return $this->render('taskPercentageBar', [
             'task' => $this->task,
-            'filterResult' => $this->filterResult
+            'filterResult' => $this->filterResult,
         ]);
     }
 

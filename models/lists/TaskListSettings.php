@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
@@ -8,16 +9,15 @@
 
 namespace humhub\modules\tasks\models\lists;
 
-
 use humhub\modules\content\models\ContentTagAddition;
 use Yii;
 
 /**
- * @property integer $id
- * @property integer $sort_order
- * @property integer $tag_id
- * @property integer $hide_if_completed
- * @property integer $updated_at
+ * @property int $id
+ * @property int $sort_order
+ * @property int $tag_id
+ * @property int $hide_if_completed
+ * @property int $updated_at
  */
 class TaskListSettings extends ContentTagAddition
 {
@@ -32,14 +32,14 @@ class TaskListSettings extends ContentTagAddition
     public function rules()
     {
         return [
-            [['hide_if_completed', 'updated_at'], 'safe']
+            [['hide_if_completed', 'updated_at'], 'safe'],
         ];
     }
 
     public function attributeLabels()
     {
         return [
-            'hide_if_completed' => Yii::t('TasksModule.base', 'Hide this list once all tasks are completed')
+            'hide_if_completed' => Yii::t('TasksModule.base', 'Hide this list once all tasks are completed'),
         ];
     }
 
@@ -48,7 +48,7 @@ class TaskListSettings extends ContentTagAddition
      */
     public function init()
     {
-        if($this->hide_if_completed === null) {
+        if ($this->hide_if_completed === null) {
             $this->hide_if_completed = 1;
         }
     }

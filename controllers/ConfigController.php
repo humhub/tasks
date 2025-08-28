@@ -15,7 +15,7 @@ use humhub\modules\tasks\models\SnippetModuleSettings;
 use Yii;
 
 /**
- * 
+ *
  */
 class ConfigController extends Controller
 {
@@ -39,7 +39,7 @@ class ConfigController extends Controller
         }
 
         return $this->render('snippet', [
-            'model' => $model
+            'model' => $model,
         ]);
     }
 }

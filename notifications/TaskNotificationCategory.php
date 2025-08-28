@@ -9,12 +9,8 @@
 
 namespace humhub\modules\tasks\notifications;
 
-use Yii;
 use humhub\modules\notification\components\NotificationCategory;
-use humhub\modules\notification\targets\BaseTarget;
-use humhub\modules\notification\targets\MailTarget;
-use humhub\modules\notification\targets\WebTarget;
-use humhub\modules\notification\targets\MobileTarget;
+use Yii;
 
 /**
  * SpaceMemberNotificationCategory
@@ -23,7 +19,6 @@ use humhub\modules\notification\targets\MobileTarget;
  */
 class TaskNotificationCategory extends NotificationCategory
 {
-
     /**
      * @inheritdoc
      */
@@ -44,19 +39,4 @@ class TaskNotificationCategory extends NotificationCategory
     {
         return Yii::t('TasksModule.base', 'Receive Notifications for Tasks (Deadline Updates, Status changes ...).');
     }
-
-    /**
-     * @inheritdoc
-     */
-    public function getDefaultSetting(BaseTarget $target)
-    {
-        if($target instanceof WebTarget || $target instanceof MailTarget) {
-            return true;
-        }  else if ($target instanceof MobileTarget) {
-            return false;
-        }
-
-        return $target->defaultSetting;
-    }
-
 }

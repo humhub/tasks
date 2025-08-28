@@ -4,11 +4,10 @@ use yii\db\Migration;
 
 class m131023_165214_initial extends Migration
 {
-
     public function up()
     {
 
-        $this->createTable('task', array(
+        $this->createTable('task', [
             'id' => 'pk',
             'title' => 'text NOT NULL',
             'deathline' => 'datetime DEFAULT NULL',
@@ -19,9 +18,9 @@ class m131023_165214_initial extends Migration
             'created_by' => 'int(11) NOT NULL',
             'updated_at' => 'datetime NOT NULL',
             'updated_by' => 'int(11) NOT NULL',
-                ), '');
+        ], '');
 
-        $this->createTable('task_user', array(
+        $this->createTable('task_user', [
             'id' => 'pk',
             'user_id' => 'int(11) NOT NULL',
             'task_id' => 'int(11) NOT NULL',
@@ -29,7 +28,7 @@ class m131023_165214_initial extends Migration
             'created_by' => 'int(11) NOT NULL',
             'updated_at' => 'datetime NOT NULL',
             'updated_by' => 'int(11) NOT NULL',
-                ), '');
+        ], '');
     }
 
     public function down()

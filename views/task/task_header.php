@@ -6,35 +6,32 @@
  *
  */
 
-use humhub\libs\Html;
+use humhub\helpers\Html;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\widgets\TaskBadge;
 use humhub\modules\tasks\widgets\TaskContextMenu;
 use humhub\modules\tasks\widgets\TaskUserList;
 use humhub\modules\ui\icon\widgets\Icon;
+use humhub\widgets\bootstrap\Badge;
 
-/* @var $contentContainer \humhub\modules\content\components\ContentContainerActiveRecord */
-/* @var $task \humhub\modules\tasks\models\Task */
-/* @var $canEdit boolean */
-/* @var $collapse boolean */
+/* @var $task Task */
 
-$icon = 'fa-tasks';
 $participantStyle = 'display:inline-block;';
-$color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
-
 ?>
-<div class="panel-heading clearfix">
+
+<div class="panel-heading container">
     <div class="task-head">
-        <div>
-            <strong><?= Icon::get($icon)->color($color)?> <?= Html::encode($task->title) ?></strong>
+        <div class="float-end">
+            <?= TaskContextMenu::widget(['task' => $task]) ?>
+        </div>
+        <div class="task-list-item-title">
+            <strong><?= Icon::get('tasks')->color($task->getColor('var(--info)'))?> <?= Html::encode($task->title) ?></strong>
         </div>
     </div>
 
-    <?= TaskContextMenu::widget(['task' => $task, 'contentContainer' => $contentContainer]) ?>
-
-    <div class="row clearfix">
-        <div class="col-sm-12 media">
-            <div class="media-body clearfix">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="clearfix">
                 <?php if ($task->scheduling) : ?>
                     <h2 style="margin:5px 0 0 0;">
                         <?= $task->schedule->getFormattedStartDateTime() ?>
@@ -52,18 +49,18 @@ $color = $task->getColor() ? $task->getColor() : $this->theme->variable('info');
                     </span>
                 <?php endif; ?>
 
-                <div class="pull-right">
+                <div class="float-end">
                     <?= TaskBadge::widget(['task' => $task]) ?>
 
                     <?php if ($task->content->isPublic()) : ?>
-                        <span class="label label-info"><?= Yii::t('SpaceModule.base', 'Public') ?></span>
+                        <?= Badge::accent(Yii::t('SpaceModule.base', 'Public')) ?>
                     <?php endif; ?>
                 </div>
             </div>
 
             <hr>
 
-            <div class="task-header-panel-container clearfix">
+            <div class="task-header-panel-container">
                 <!--        Responsible Task User-->
                 <?php if ($task->hasTaskResponsible()) : ?>
                     <div class="task-header-panel">

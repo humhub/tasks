@@ -16,16 +16,16 @@ namespace humhub\modules\tasks\models\forms;
 use DateTime;
 use DateTimeZone;
 use humhub\libs\DbDateValidator;
+use humhub\modules\content\components\ContentContainerActiveRecord;
+use humhub\modules\content\models\Content;
 use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\space\models\Space;
 use humhub\modules\tasks\helpers\TaskUrl;
+use humhub\modules\tasks\models\scheduling\TaskReminder;
+use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\Module;
 use humhub\modules\topic\models\Topic;
 use humhub\modules\ui\form\interfaces\TabbedFormModel;
-use humhub\modules\tasks\models\scheduling\TaskReminder;
-use humhub\modules\content\components\ContentContainerActiveRecord;
-use humhub\modules\content\models\Content;
-use humhub\modules\tasks\models\Task;
 use Yii;
 use yii\base\Model;
 use yii\web\HttpException;
@@ -38,9 +38,8 @@ use yii\web\HttpException;
  */
 class TaskForm extends Model implements TabbedFormModel
 {
-
     /**
-     * @var integer Content visibility
+     * @var int Content visibility
      */
     public $is_public;
 
@@ -85,22 +84,22 @@ class TaskForm extends Model implements TabbedFormModel
     public $timeZone;
 
     /**
-     * @var boolean defines if the request came from a calendar
+     * @var bool defines if the request came from a calendar
      */
     public $cal;
 
     /**
-     * @var boolean defines if the request should be redirected after success
+     * @var bool defines if the request should be redirected after success
      */
     public $redirect;
 
     /**
-     * @var boolean defines if the Task is created from wall stream
+     * @var bool defines if the Task is created from wall stream
      */
     public $wall;
 
     /**
-     * @var integer
+     * @var int
      */
     public $taskListId;
 
@@ -143,7 +142,7 @@ class TaskForm extends Model implements TabbedFormModel
 
         if ($this->task) {
             $this->task->scenario = Task::SCENARIO_EDIT;
-            if($this->task->all_day) {
+            if ($this->task->all_day) {
                 $this->timeZone = $this->task->time_zone;
             }
 
@@ -167,12 +166,12 @@ class TaskForm extends Model implements TabbedFormModel
             [['end_date'], DbDateValidator::class, 'format' => $this->getDateFormat(), 'timeAttribute' => 'end_time', 'timeZone' => $this->timeZone],
             [['end_date'], 'validateEndTime'],
 
-            [['start_date', 'end_date'], 'required', 'when' => function($model) {
+            [['start_date', 'end_date'], 'required', 'when' => function ($model) {
                 return $model->task->scheduling == 1;
             }, 'whenClient' => "function (attribute, value) {
                 return $('#task-scheduling').val() == 1;
             }"],
-            [['start_time', 'end_time'], 'required', 'when' => function($model) {
+            [['start_time', 'end_time'], 'required', 'when' => function ($model) {
                 return $model->task->all_day == 0;
             }, 'whenClient' => "function (attribute, value) {
                 return $('#task-all_day').val() == 0;
@@ -228,9 +227,9 @@ class TaskForm extends Model implements TabbedFormModel
     {
         Yii::$app->formatter->timeZone = $this->timeZone;
 
-        if($this->task->all_day) {
+        if ($this->task->all_day) {
             $date = new DateTime('now', new DateTimeZone($this->timeZone));
-            $date->setTime(0,0);
+            $date->setTime(0, 0);
 
             $this->start_time = $this->getAsTime($date);
             $date->setTime(23, 59);
@@ -262,7 +261,7 @@ class TaskForm extends Model implements TabbedFormModel
     {
         return array_merge(parent::attributeLabels(), [
             'start_date' => Yii::t('TasksModule.base', 'Start Date'),
-//            'type_id' => Yii::t('TasksModule.base', 'Event Type'),
+            //            'type_id' => Yii::t('TasksModule.base', 'Event Type'),
             'end_date' => Yii::t('TasksModule.base', 'End Date'),
             'start_time' => Yii::t('TasksModule.base', 'Start Time'),
             'end_time' => Yii::t('TasksModule.base', 'End Time'),
@@ -273,8 +272,8 @@ class TaskForm extends Model implements TabbedFormModel
 
     public function getTitle()
     {
-        if($this->task->isNewRecord) {
-           return Yii::t('TasksModule.base', '<strong>New</strong> Task');
+        if ($this->task->isNewRecord) {
+            return Yii::t('TasksModule.base', '<strong>New</strong> Task');
         }
 
         return Yii::t('TasksModule.base', '<strong>Edit</strong> task');
@@ -309,18 +308,18 @@ class TaskForm extends Model implements TabbedFormModel
     public function load($data, $formName = null)
     {
         // Make sure the timeZone is loaded prior to validation rule built
-        if(isset($data[$this->formName()])) {
+        if (isset($data[$this->formName()])) {
             $this->timeZone = $data[$this->formName()]['timeZone'] ?? $this->timeZone;
         }
 
-        if(parent::load($data) && !empty($this->timeZone)) {
+        if (parent::load($data) && !empty($this->timeZone)) {
             $this->task->time_zone = $this->timeZone;
         }
 
         $this->task->content->visibility = $this->is_public;
         $this->task->content->hidden = $this->hidden;
 
-        if(!$this->task->load($data)) {
+        if (!$this->task->load($data)) {
             return false;
         }
 
@@ -338,11 +337,11 @@ class TaskForm extends Model implements TabbedFormModel
         $this->task->setEditItems($this->editItems);
         $this->task->setNewItems($this->newItems);
 
-        if(!$this->validate()) {
+        if (!$this->validate()) {
             return false;
         }
 
-        if(!$this->task->content->canEdit()) {
+        if (!$this->task->content->canEdit()) {
             throw new HttpException(403);
         }
 
@@ -356,7 +355,7 @@ class TaskForm extends Model implements TabbedFormModel
         // We save the list ids to reload in the view this has to be called before $task->save()!
         $this->reloadListId = $this->getListIdsToReload();
 
-        if($this->task->save()) {
+        if ($this->task->save()) {
             RichText::postProcess($this->task->description, $this->task);
             // Required for attached files
             $this->task->fileManager->attach(Yii::$app->request->post('fileList'));
@@ -376,10 +375,10 @@ class TaskForm extends Model implements TabbedFormModel
     private function getListIdsToReload()
     {
         $result = false;
-        if(!$this->task->isNewRecord && $this->task->isAttributeChanged('task_list_id', false)) {
+        if (!$this->task->isNewRecord && $this->task->isAttributeChanged('task_list_id', false)) {
             $result = [$this->task->task_list_id];
             $result[] = $this->task->getOldAttribute('task_list_id');
-        } else if($this->task->isNewRecord) {
+        } elseif ($this->task->isNewRecord) {
             $result = [$this->task->task_list_id];
         }
         return $result;
@@ -399,7 +398,7 @@ class TaskForm extends Model implements TabbedFormModel
      */
     public function translateDateTimes($start = null, $end = null, $sourceTimeZone = null, $targetTimeZone = null, $dateFormat = 'php:Y-m-d H:i:s e')
     {
-        if(!$start) {
+        if (!$start) {
             return;
         }
 
@@ -484,7 +483,7 @@ class TaskForm extends Model implements TabbedFormModel
                 'view' => 'edit-scheduling',
                 'linkOptions' => ['class' => 'tab-scheduling'],
                 'fields' => ['all_day', 'start_date', 'start_time', 'end_date', 'end_time', 'selectedReminders', 'cal_mode'],
-            ]
+            ],
         ];
 
         if ($this->getContentContainer() instanceof Space) {

@@ -6,12 +6,12 @@
  *
  */
 
-use yii\bootstrap\Html;
+use humhub\helpers\Html;
 
-/* @var $this \humhub\modules\ui\view\components\View */
+/* @var $this \humhub\components\View */
 /* @var $options array */
 ?>
-<div class="form-group">
+<div class="mb-3">
     <?= isset($options['label']) ? Html::label($options['label']) : '' ?>
     <?= Html::textInput(null,null, $options) ?>
 </div>

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace humhub\modules\tasks\models\state;
-
 
 use humhub\modules\tasks\activities\TaskStartActivity;
 use humhub\modules\tasks\models\Task;
@@ -25,11 +23,11 @@ class InProgressState extends TaskState
         return [
             Task::STATUS_PENDING_REVIEW => [
                 'label' => Yii::t('TasksModule.base', 'Ready For Review'),
-                'icon' => 'fa-eye'
+                'icon' => 'eye',
             ],
             Task::STATUS_COMPLETED => [
                 'label' =>  Yii::t('TasksModule.base', 'Finish Task'),
-                'icon' => 'fa-check-square-o'
+                'icon' => 'check-square-o',
             ],
         ];
     }
@@ -37,7 +35,7 @@ class InProgressState extends TaskState
     protected function revertConfig($user = null)
     {
         return [
-            Task::STATUS_PENDING => ['label' => Yii::t('TasksModule.base', 'Reset Task'), 'icon' => 'fa-undo']
+            Task::STATUS_PENDING => ['label' => Yii::t('TasksModule.base', 'Reset Task'), 'icon' => 'undo'],
         ];
     }
 

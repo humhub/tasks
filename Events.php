@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
@@ -11,6 +12,8 @@ namespace humhub\modules\tasks;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\rest\Module as RestModule;
 use humhub\modules\space\models\Space;
+use humhub\modules\tasks\extensions\custom_pages\elements\TaskElement;
+use humhub\modules\tasks\extensions\custom_pages\elements\TasksElement;
 use humhub\modules\tasks\helpers\TaskListUrl;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\user\models\User;
@@ -26,7 +29,6 @@ use humhub\modules\tasks\widgets\MyTasks;
 use humhub\modules\tasks\models\user\TaskUser;
 use yii\db\Expression;
 
-
 /* @var $user \humhub\modules\user\models\User */
 
 /**
@@ -37,7 +39,6 @@ use yii\db\Expression;
  */
 class Events
 {
-
     public static function onTopMenuInit($event)
     {
         try {
@@ -45,7 +46,7 @@ class Events
             $module = Yii::$app->getModule('tasks');
 
 
-            if (!(int)$module->settings->get('showGlobalMenuItem', 1) || Yii::$app->user->isGuest) {
+            if (!$module->settings->get('showGlobalMenuItem', false) || Yii::$app->user->isGuest) {
                 return;
             }
 
@@ -53,7 +54,7 @@ class Events
             $event->sender->addItem([
                 'label' => Yii::t('TasksModule.base', 'Tasks'),
                 'id' => 'tasks-global',
-                'icon' => '<i class="fa fa-tasks"></i>',
+                'icon' => 'tasks',
                 'url' => TaskUrl::globalView(),
                 'sortOrder' => $module->settings->get('menuSortOrder', 500),
                 'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'tasks' && Yii::$app->controller->id == 'global'),
@@ -149,7 +150,7 @@ class Events
                     'label' => Yii::t('TasksModule.base', 'Tasks'),
                     'group' => 'modules',
                     'url' => TaskListUrl::taskListRoot($space),
-                    'icon' => '<i class="fa fa-tasks"></i>',
+                    'icon' => 'tasks',
                     'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'tasks'),
                 ]);
             }
@@ -167,7 +168,7 @@ class Events
                 $event->sender->addItem([
                     'label' => Yii::t('TasksModule.base', 'Tasks'),
                     'url' => TaskListUrl::taskListRoot($user),
-                    'icon' => '<i class="fa fa-tasks"></i>',
+                    'icon' => 'tasks',
                     'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'tasks'),
                 ]);
             }
@@ -189,7 +190,7 @@ class Events
         $integrityController->showTestHeadline("Tasks Module - Entries (" . Task::find()->count() . " entries)");
 
         // check for taskItems without task
-        foreach (TaskItem::find()->all() as $taskItem) {
+        foreach (TaskItem::find()->each() as $taskItem) {
             if ($taskItem->task === null) {
                 if ($integrityController->showFix("Deleting task item id " . $taskItem->id . " without existing task!")) {
                     $taskItem->hardDelete();
@@ -198,7 +199,7 @@ class Events
         }
 
         // check for task responsible users without task or existing user
-        foreach (TaskUser::find()->all() as $taskUser) {
+        foreach (TaskUser::find()->each() as $taskUser) {
             if ($taskUser->task === null) {
                 if ($integrityController->showFix("Deleting task user user id " . $taskUser->id . " without existing task!")) {
                     $taskUser->delete();
@@ -213,7 +214,7 @@ class Events
 
         $integrityController->showTestHeadline("Tasks Module (" . Task::find()->count() . " entries)");
 
-        foreach (Task::find()->all() as $task) {
+        foreach (Task::find()->each() as $task) {
             if ($task->task_list_id != null && !$task->list) {
                 if ($integrityController->showFix("Reset task list for task" . $task->id . " with invalid task_list_setting!")) {
                     $task->updateAttributes(['task_list_id' => new Expression('NULL')]);
@@ -221,36 +222,36 @@ class Events
             }
         }
 
-//        // check for task responsible users without task or existing user
-//        foreach (TaskResponsible::find()->all() as $taskResponsible) {
-//            if ($taskResponsible->task === null) {
-//                if ($integrityController->showFix("Deleting task responsible user id " . $taskResponsible->id . " without existing task!")) {
-//                    $taskResponsible->delete();
-//                }
-//            }
-//            if ($taskResponsible->user === null) {
-//                if ($integrityController->showFix("Deleting task responsible user id " . $taskResponsible->id . " without existing user!")) {
-//                    $taskResponsible->delete();
-//                }
-//            }
-//        }
+        //        // check for task responsible users without task or existing user
+        //        foreach (TaskResponsible::find()->each() as $taskResponsible) {
+        //            if ($taskResponsible->task === null) {
+        //                if ($integrityController->showFix("Deleting task responsible user id " . $taskResponsible->id . " without existing task!")) {
+        //                    $taskResponsible->delete();
+        //                }
+        //            }
+        //            if ($taskResponsible->user === null) {
+        //                if ($integrityController->showFix("Deleting task responsible user id " . $taskResponsible->id . " without existing user!")) {
+        //                    $taskResponsible->delete();
+        //                }
+        //            }
+        //        }
 
-//        // check for task assigned users without task or existing user
-//        foreach (TaskAssigned::find()->all() as $taskAssigned) {
-//            if ($taskAssigned->task === null) {
-//                if ($integrityController->showFix("Deleting task assigned user id " . $taskAssigned->id . " without existing task!")) {
-//                    $taskAssigned->delete();
-//                }
-//            }
-//            if ($taskAssigned->user === null) {
-//                if ($integrityController->showFix("Deleting task assigned user id " . $taskAssigned->id . " without existing user!")) {
-//                    $taskAssigned->delete();
-//                }
-//            }
-//        }
+        //        // check for task assigned users without task or existing user
+        //        foreach (TaskAssigned::find()->each() as $taskAssigned) {
+        //            if ($taskAssigned->task === null) {
+        //                if ($integrityController->showFix("Deleting task assigned user id " . $taskAssigned->id . " without existing task!")) {
+        //                    $taskAssigned->delete();
+        //                }
+        //            }
+        //            if ($taskAssigned->user === null) {
+        //                if ($integrityController->showFix("Deleting task assigned user id " . $taskAssigned->id . " without existing user!")) {
+        //                    $taskAssigned->delete();
+        //                }
+        //            }
+        //        }
 
         // check for task reminders without task
-        foreach (TaskReminder::find()->all() as $taskReminder) {
+        foreach (TaskReminder::find()->each() as $taskReminder) {
             if ($taskReminder->task === null) {
                 if ($integrityController->showFix("Deleting task reminder id " . $taskReminder->id . " without existing task!")) {
                     $taskReminder->delete();
@@ -287,7 +288,7 @@ class Events
                     }
                 }
             }
-        } catch(\Throwable $e) {
+        } catch (\Throwable $e) {
             Yii::error($e);
         }
     }
@@ -328,6 +329,14 @@ class Events
             ['pattern' => 'tasks/list/<id:\d+>', 'route' => 'tasks/rest/task-list/delete', 'verb' => 'DELETE'],
 
         ], 'tasks');
+    }
+
+    public static function onCustomPagesTemplateElementTypeServiceInit($event)
+    {
+        /* @var \humhub\modules\custom_pages\modules\template\services\ElementTypeService $elementTypeService */
+        $elementTypeService = $event->sender;
+        $elementTypeService->addType(TaskElement::class);
+        $elementTypeService->addType(TasksElement::class);
     }
 
 }

@@ -33,7 +33,7 @@ class ManageTasks extends BasePermission
         Space::USERGROUP_OWNER,
         Space::USERGROUP_ADMIN,
         Space::USERGROUP_MODERATOR,
-        User::USERGROUP_SELF
+        User::USERGROUP_SELF,
     ];
 
     /**
@@ -45,7 +45,7 @@ class ManageTasks extends BasePermission
         User::USERGROUP_SELF,
         User::USERGROUP_FRIEND,
         User::USERGROUP_USER,
-        User::USERGROUP_GUEST
+        User::USERGROUP_GUEST,
     ];
 
     /**

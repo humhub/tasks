@@ -16,7 +16,7 @@ use yii\helpers\Url;
  *
  */
 
-/* @var $this yii\web\View */
+/* @var $this humhub\components\View */
 /* @var $viewable humhub\modules\user\notifications\Mentioned */
 /* @var $url string */
 /* @var $date string */

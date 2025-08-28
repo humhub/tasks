@@ -13,36 +13,37 @@ use yii\helpers\Url;
 
 class TaskUrl extends Url
 {
-    const ROUTE_VIEW_TASK = '/tasks/task/view';
-    const ROUTE_VIEW_TASK_MODAL = '/tasks/task/modal';
+    public const ROUTE_VIEW_TASK = '/tasks/task/view';
+    public const ROUTE_VIEW_TASK_MODAL = '/tasks/task/modal';
+    public const ROUTE_RELOAD_TASK = '/tasks/task/load-ajax-task';
 
-    const ROUTE_DELETE_TASK = '/tasks/task/delete';
-    const ROUTE_EDIT_TASK = '/tasks/task/edit';
+    public const ROUTE_DELETE_TASK = '/tasks/task/delete';
+    public const ROUTE_EDIT_TASK = '/tasks/task/edit';
 
-    const ROUTE_PROCEED_TASK = '/tasks/task/proceed';
-    const ROUTE_REVERT_TASK = '/tasks/task/revert';
+    public const ROUTE_PROCEED_TASK = '/tasks/task/proceed';
+    public const ROUTE_REVERT_TASK = '/tasks/task/revert';
 
-    const ROUTE_TASK_SEARCH_FILTER = '/tasks/search/filter-tasks';
-    const ROUTE_TASK_SEARCH_ROOT = '/tasks/search';
+    public const ROUTE_TASK_SEARCH_FILTER = '/tasks/search/filter-tasks';
+    public const ROUTE_TASK_SEARCH_ROOT = '/tasks/search';
 
-    const ROUTE_PICKER_ASSIGNED = '/tasks/task/task-assigned-picker';
+    public const ROUTE_PICKER_ASSIGNED = '/tasks/task/task-assigned-picker';
 
-    const ROUTE_PICKER_RESPONSIBLE = '/tasks/task/task-responsible-picker';
+    public const ROUTE_PICKER_RESPONSIBLE = '/tasks/task/task-responsible-picker';
 
-    const ROUTE_REQUEST_EXTENSION = '/tasks/task/extend';
+    public const ROUTE_REQUEST_EXTENSION = '/tasks/task/extend';
 
-    const ROUTE_RESET_TASK = '/tasks/task/reset';
+    public const ROUTE_RESET_TASK = '/tasks/task/reset';
 
-    const ROUTE_DROP_CHECKLIST_ITEM = '/tasks/task/drop';
-    const ROUTE_CHECK_CHECKLIST_ITEM = '/tasks/checklist/check-item';
+    public const ROUTE_DROP_CHECKLIST_ITEM = '/tasks/task/drop';
+    public const ROUTE_CHECK_CHECKLIST_ITEM = '/tasks/checklist/check-item';
 
-    const ROUTE_GLOBAL = '/tasks/global';
-    const ROUTE_GLOBAL_FILTER = '/tasks/global/filter';
+    public const ROUTE_GLOBAL = '/tasks/global';
+    public const ROUTE_GLOBAL_FILTER = '/tasks/global/filter';
 
-    const ROUTE_EXPORT = 'export';
+    public const ROUTE_EXPORT = 'export';
 
-    const ROUTE_CONFIG = '/tasks/config';
-    const ROUTE_CONTAINER_CONFIG = '/tasks/config-container';
+    public const ROUTE_CONFIG = '/tasks/config';
+    public const ROUTE_CONTAINER_CONFIG = '/tasks/config-container';
 
     public static function toConfig()
     {
@@ -74,14 +75,19 @@ class TaskUrl extends Url
         return static::toRoute([static::ROUTE_EXPORT, 'format' => 'xlsx', 'container' => $container]);
     }
 
-    public static function viewTask(Task $task)
+    public static function viewTask(Task $task, $scheme = false)
     {
-        return static::container($task)->createUrl(static::ROUTE_VIEW_TASK, ['id' => $task->id]);
+        return static::container($task)->createUrl(static::ROUTE_VIEW_TASK, ['id' => $task->id], $scheme);
     }
 
     public static function viewTaskModal(Task $task, $cal = null)
     {
         return static::container($task)->createUrl(static::ROUTE_VIEW_TASK_MODAL, ['id' => $task->id, 'cal' => $cal]);
+    }
+
+    public static function reloadTask(Task $task)
+    {
+        return static::container($task)->createUrl(static::ROUTE_RELOAD_TASK, ['id' => $task->id]);
     }
 
     public static function deleteTask(Task $task, $cal = null, $redirect = null)
@@ -91,7 +97,7 @@ class TaskUrl extends Url
 
     public static function editTask(Task $task, $cal = null, $redirect = null, $listId = null, $wall = null)
     {
-        return static::container($task)->createUrl(static::ROUTE_EDIT_TASK, ['id' => $task->id, 'cal' => $cal, 'redirect' => $redirect, 'listId'=> $listId, 'wall' => $wall]);
+        return static::container($task)->createUrl(static::ROUTE_EDIT_TASK, ['id' => $task->id, 'cal' => $cal, 'redirect' => $redirect, 'listId' => $listId, 'wall' => $wall]);
     }
 
     public static function proceedTask(Task $task, $status)
@@ -154,16 +160,16 @@ class TaskUrl extends Url
         $result = null;
 
         /** @var $result ContentContainerActiveRecord */
-        if(Yii::$app->controller instanceof ContentContainerController) {
+        if (Yii::$app->controller instanceof ContentContainerController) {
             $result = Yii::$app->controller->contentContainer;
         }
 
-        if($obj instanceof ContentActiveRecord) {
+        if ($obj instanceof ContentActiveRecord) {
             // We prefer using the cached controller container, in the future the contents container should be cached
-            if(!$result || $result->contentcontainer_id !== $obj->content->contentcontainer_id) {
+            if (!$result || $result->contentcontainer_id !== $obj->content->contentcontainer_id) {
                 $result = $obj->content->container;
             }
-        } else if($obj instanceof TaskListInterface) {
+        } elseif ($obj instanceof TaskListInterface) {
             $result = $obj->container;
         }
 

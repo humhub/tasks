@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: buddha
@@ -7,7 +8,6 @@
  */
 
 namespace humhub\modules\tasks\models;
-
 
 interface Sortable
 {

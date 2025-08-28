@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2017 HumHub GmbH & Co. KG
@@ -14,10 +15,8 @@ use humhub\modules\tasks\models\Task;
 use humhub\modules\user\models\User;
 use tasks\TaskTestCase;
 
-
 class TaskQueryTest extends TaskTestCase
 {
-
     /**
      * Test find dates by open range query.
      */
@@ -51,22 +50,22 @@ class TaskQueryTest extends TaskTestCase
         $this->createTask(Space::findOne(4), 'Task1', null, [
             'scheduling' => 1,
             'start_datetime' => date('Y-m-d H:i:s', strtotime('-10 days')),
-            'end_datetime' => date('Y-m-d H:i:s', strtotime('+10 days'))
+            'end_datetime' => date('Y-m-d H:i:s', strtotime('+10 days')),
         ]);
         $this->createTask(Space::findOne(4), 'Task2', null, [
             'scheduling' => 1,
             'start_datetime' => date('Y-m-d H:i:s', strtotime('-20 days')),
-            'end_datetime' => date('Y-m-d H:i:s', strtotime('+20 days'))
+            'end_datetime' => date('Y-m-d H:i:s', strtotime('+20 days')),
         ]);
         $this->createTask(Space::findOne(4), 'Task3', null, [
             'scheduling' => 1,
             'start_datetime' => date('Y-m-d H:i:s', strtotime('-5 days')),
-            'end_datetime' => date('Y-m-d H:i:s', strtotime('+10 days'))
+            'end_datetime' => date('Y-m-d H:i:s', strtotime('+10 days')),
         ]);
         $this->createTask(Space::findOne(4), 'Task4', null, [
             'scheduling' => 1,
             'start_datetime' => date('Y-m-d H:i:s', strtotime('-10 days')),
-            'end_datetime' => date('Y-m-d H:i:s', strtotime('+5 days'))
+            'end_datetime' => date('Y-m-d H:i:s', strtotime('+5 days')),
         ]);
 
         $this->assertEquals(4, Task::find()->count());
@@ -86,7 +85,7 @@ class TaskQueryTest extends TaskTestCase
         $taskFilter->load([
             'TaskFilter' => [
                 'date_end' => date($dateFormat, strtotime('+8 days')),
-            ]
+            ],
         ]);
         $taskFilter->query();
         $this->assertEquals(1, $taskFilter->query()->count());
@@ -97,7 +96,7 @@ class TaskQueryTest extends TaskTestCase
             'TaskFilter' => [
                 'date_start' => date($dateFormat, strtotime('-10 days')),
                 'date_end' => date($dateFormat, strtotime('+10 days')),
-            ]
+            ],
         ]);
         $this->assertEquals(3, $taskFilter->query()->count());
         $tasks = $taskFilter->query()->select('title')->indexBy('id')->column();

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: buddha
@@ -8,12 +9,10 @@
 
 namespace humhub\modules\tasks\models\lists;
 
-
 use humhub\modules\content\components\ActiveQueryContent;
 
 interface TaskListInterface
 {
-
     public function getId();
 
     /**

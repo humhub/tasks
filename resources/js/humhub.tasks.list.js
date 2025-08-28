@@ -136,7 +136,7 @@ humhub.module('task.list', function (module, require, $) {
         }
 
         $items.closest('.task-list-li').toggleClass('task-list-li-collapsed');
-        $items.add(this.getItemsCompletedRoot()).slideToggle(100,"linear");
+        $items.add(this.getItemsCompletedRoot()).toggleClass('d-none');
     };
 
 
@@ -219,26 +219,26 @@ humhub.module('task.list', function (module, require, $) {
 
     TaskList.prototype.prependPending = function (task) {
         var $task = task instanceof $ ? task : task.$;
-        $task.hide();
+        $task.addClass('d-none');
         var $pendingContainer = this.getItemsRoot();
         $pendingContainer.prepend($task);
-        $pendingContainer.show();
-        $task.fadeIn();
+        $pendingContainer.removeClass('d-none');
+        $task.removeClass('d-none');
     };
 
     TaskList.prototype.prependCompleted = function (task) {
         var $task = task instanceof $ ? task : task.$;
-        $task.hide();
+        $task.addClass('d-none');
         var $completedContainer = this.getItemsCompletedRoot();
         $completedContainer.prepend($task);
 
-        $completedContainer.show();
-        $task.fadeIn();
+        $completedContainer.removeClass('d-none');
+        $task.removeClass('d-none');
     };
 
     TaskList.prototype.appendCompleted = function (task) {
         var $task = task instanceof $ ? task : task.$;
-        $task.hide();
+        $task.addClass('d-none');
         var $completedContainer = this.getItemsCompletedRoot();
         var $lastCompleted = $completedContainer.find('.task-list-item').last();
 
@@ -248,8 +248,8 @@ humhub.module('task.list', function (module, require, $) {
             $completedContainer.prepend($task)
         }
 
-        $completedContainer.show();
-        $task.fadeIn();
+        $completedContainer.removeClass('d-none');
+        $task.removeClass('d-none');
     };
 
     TaskList.prototype.deleteList = function(evt) {
@@ -272,7 +272,7 @@ humhub.module('task.list', function (module, require, $) {
     TaskList.prototype.updated = function() {
         var $itemRoot = this.getItemsRoot();
         if(!$itemRoot.find('.task-list-item, .task-list-empty').length) {
-            var $empty = $('.task-list-empty:first').clone().show();
+            var $empty = $('.task-list-empty:first').clone().removeClass('d-none');
             $itemRoot.append($empty);
         } else if($itemRoot.find('.task-list-item').length) {
             $itemRoot.find('.task-list-empty').remove();
@@ -332,7 +332,7 @@ humhub.module('task.list', function (module, require, $) {
             that.loadDetailsBlock = true;
             that.loadDetails();
         } else if($details.length) {
-            $details.slideToggle('fast');
+            $details.toggleClass('d-none');
         }
     };
 
@@ -367,21 +367,21 @@ humhub.module('task.list', function (module, require, $) {
 
         client.html(this.options.reloadUrl).then(function (response) {
             if (response.html) {
-                that.$.fadeOut();
-                var $newRoot = $(response.html).hide();
+                that.$.addClass('d-none');
+                var $newRoot = $(response.html).addClass('d-none');
                 that.$.replaceWith($newRoot);
                 that.$ = $newRoot;
 
                 if(!detailsVisible) {
-                    that.$.find('.task-list-task-details').hide();
+                    that.$.find('.task-list-task-details').addClass('d-none');
                 }
 
-                if (that.isCompleted()) {
+                if (that.isCompleted() && that.parent()) {
                     that.parent().prependCompleted(that);
-                } else if(that.$.closest('.tasks-completed')) {
+                } else if(that.$.closest('.tasks-completed') && that.parent()) {
                     that.parent().prependPending(that);
                 }  else {
-                    that.$.fadeIn();
+                    that.$.removeClass('d-none');
                 }
                 that.init();
             }
@@ -390,6 +390,24 @@ humhub.module('task.list', function (module, require, $) {
             that.updated();
         });
     };
+
+    Task.prototype.reloadEntry = function (entry) {
+        if (!entry) {
+            return;
+        }
+
+        var row = entry.parent('div.task-list-item');
+        row.loader();
+
+        return client.get(row.$.data('reload-url')).then(function (response) {
+            row.$.html($(response.response).html());
+            return response;
+        }).catch(function (err) {
+            module.log.error(err, true);
+        }).finally(function () {
+            row.loader(false);
+        });
+    }
 
     Task.prototype.isCompleted = function () {
         return this.isStatus(STATUS_COMPLETED);
@@ -442,7 +460,7 @@ humhub.module('task.list', function (module, require, $) {
 
     var edit = function (evt) {
         modal.load(evt).then(function () {
-            modal.global.$.one('hidden.bs.modal', function() {
+            modal.global.$.one('.d-none.bs.modal', function() {
                 Widget.closest(evt.$trigger).reload();
             });
         }).catch(function(e) {

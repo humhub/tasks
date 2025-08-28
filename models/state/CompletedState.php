@@ -1,8 +1,6 @@
 <?php
 
-
 namespace humhub\modules\tasks\models\state;
-
 
 use humhub\modules\tasks\activities\TaskCompletedActivity;
 use humhub\modules\tasks\activities\TaskReviewedActivity;
@@ -30,11 +28,11 @@ class CompletedState extends TaskState
         return [
             Task::STATUS_PENDING_REVIEW => [
                 'label' => Yii::t('TasksModule.base', 'Continue Review'),
-                'icon' => 'fa-eye'
+                'icon' => 'eye',
             ],
             Task::STATUS_PENDING => [
                 'label' => Yii::t('TasksModule.base', 'Reset Task'),
-                'icon' => 'fa-undo'
+                'icon' => 'undo',
             ],
         ];
     }
@@ -53,13 +51,13 @@ class CompletedState extends TaskState
 
     public function canCompleteTask($user = null)
     {
-        if($this->task->isTaskResponsible($user)
+        if ($this->task->isTaskResponsible($user)
             || $this->task->isOwner($user)
             || $this->task->canManageTasks($user)) {
             return true;
         }
 
-        if(!$this->task->review) {
+        if (!$this->task->review) {
             return $this->task->isTaskAssigned($user) || $this->task->canProcess($user);
         }
 

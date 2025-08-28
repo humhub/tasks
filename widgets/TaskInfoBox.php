@@ -1,11 +1,8 @@
 <?php
 
-
 namespace humhub\modules\tasks\widgets;
 
-
 use humhub\components\Widget;
-use humhub\modules\tasks\models\Task;
 
 class TaskInfoBox extends Widget
 {
@@ -37,8 +34,8 @@ class TaskInfoBox extends Widget
     {
         parent::init();
 
-        if(!$this->iconColor) {
-            $this->iconColor = $this->view->theme->variable('info');
+        if (!$this->iconColor) {
+            $this->iconColor = 'var(--info)';
         }
     }
 

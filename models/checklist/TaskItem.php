@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
@@ -12,16 +13,17 @@ use Yii;
 use humhub\components\ActiveRecord;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\permissions\ManageTasks;
+
 /**
  * This is the model class for table "task_item".
  *
  * The followings are the available columns in table 'task_item':
- * @property integer $id
- * @property integer $task_id
+ * @property int $id
+ * @property int $task_id
  * @property string $title
  * @property string $description
- * @property integer $completed
- * @property integer $sort_order
+ * @property int $completed
+ * @property int $sort_order
  *
  * @property Task $task
  */
@@ -73,13 +75,13 @@ class TaskItem extends ActiveRecord
 
     public static function filterValidItems($itemArr)
     {
-        if($itemArr == null) {
+        if ($itemArr == null) {
             return [];
         }
 
         $result = [];
         foreach ($itemArr as $key => $itemText) {
-            if($itemText != null && $itemText !== '') {
+            if ($itemText != null && $itemText !== '') {
                 $result[$key] = $itemText;
             }
         }

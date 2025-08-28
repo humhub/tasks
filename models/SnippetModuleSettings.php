@@ -12,17 +12,17 @@ namespace humhub\modules\tasks\models;
 use humhub\components\SettingsManager;
 use humhub\modules\tasks\Module;
 use Yii;
-use \yii\base\Model;
+use yii\base\Model;
 
 class SnippetModuleSettings extends Model
 {
     /**
-     * @var boolean determines if the dashboard widget should be shown or not (default true)
+     * @var bool determines if the dashboard widget should be shown or not (default true)
      */
     public $myTasksSnippetShow = true;
 
     /**
-     * @var boolean determines if the space sidebar widget should be shown or not (default true)
+     * @var bool determines if the space sidebar widget should be shown or not (default true)
      */
     public $myTasksSnippetShowSpace = true;
 
@@ -39,7 +39,7 @@ class SnippetModuleSettings extends Model
     /**
      * @var int defines if the global task menu item should be displayed
      */
-    public $showGlobalMenuItem = 1;
+    public $showGlobalMenuItem = false;
     public $menuSortOrder = 500;
 
     /**
@@ -76,7 +76,7 @@ class SnippetModuleSettings extends Model
      */
     public static function instantiate()
     {
-        return new self;
+        return new self();
     }
 
     /**

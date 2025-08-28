@@ -7,23 +7,25 @@
  */
 
 use humhub\modules\tasks\models\Task;
+use humhub\widgets\bootstrap\Badge;
 
 /** @var $task Task **/
 /** @var $includePending boolean **/
 /** @var $includeCompleted boolean **/
 /** @var $right boolean **/
 
+$cssClass = $right ? 'float-end' : '';
 ?>
 <?php if ($task->status == Task::STATUS_PENDING && $includePending) : ?>
-    <div class="label label-default <?= $right ? 'pull-right' : '' ?>"><?= '<i class="fa fa-info-circle"></i> ' . Yii::t('TasksModule.base', 'Pending'); ?></div>
+    <?= Badge::light(Yii::t('TasksModule.base', 'Pending'))->cssClass($cssClass)->icon('info-circle') ?>
 <?php elseif ($task->status == Task::STATUS_IN_PROGRESS) : ?>
-    <div class="label label-info <?= $right ? 'pull-right' : '' ?>"><?= '<i class="fa fa-edit"></i> ' . Yii::t('TasksModule.base', 'In Progress'); ?></div>
+    <?= Badge::accent(Yii::t('TasksModule.base', 'In Progress'))->cssClass($cssClass)->icon('edit') ?>
 <?php elseif ($task->status == Task::STATUS_PENDING_REVIEW) : ?>
-    <div class="label label-warning <?= $right ? 'pull-right' : '' ?>"><?= '<i class="fa fa-eye"></i> ' . Yii::t('TasksModule.base', 'Pending Review'); ?></div>
+    <?= Badge::warning(Yii::t('TasksModule.base', 'Pending Review'))->cssClass($cssClass)->icon('eye') ?>
 <?php elseif ($task->status == Task::STATUS_COMPLETED  && $includeCompleted) : ?>
-    <div class="label label-success <?= $right ? 'pull-right' : '' ?>"><?= '<i class="fa fa-check-square"></i> ' . Yii::t('TasksModule.base', 'Completed'); ?></div>
+    <?= Badge::success(Yii::t('TasksModule.base', 'Completed'))->cssClass($cssClass)->icon('check-square') ?>
 <?php endif; ?>
 
 <?php if ($task->isOverdue()) : ?>
-    <div id="taskDeadlineStatus" class="label label-danger <?= $right ? 'pull-right' : '' ?>" <?= $right ? 'style="margin-right: 3px;"' : '' ?> ><?= '<i class="fa fa-exclamation-triangle"></i> ' . Yii::t('TasksModule.base', 'Overdue'); ?></div>
+    <?= Badge::danger(Yii::t('TasksModule.base', 'Overdue'))->id('taskDeadlineStatus')->cssClass($cssClass . $right ? ' me-1"' : '')->icon('exclamation-triangle') ?>
 <?php endif; ?>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2017 HumHub GmbH & Co. KG
@@ -26,8 +27,8 @@ namespace tasks;
 class FunctionalTester extends \FunctionalTester
 {
     use _generated\FunctionalTesterActions;
-    
-   /**
-    * Define custom actions here
-    */
+
+    /**
+     * Define custom actions here
+     */
 }

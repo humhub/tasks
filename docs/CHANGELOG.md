@@ -1,17 +1,40 @@
 Changelog
 =========
 
-1.9.0 (Unreleased)
--------------------
+1.9.0 (August 29, 2025)
+-----------------------
+- Fix #257: Update module resources path
+- Enh #268: Migration to Bootstrap 5 for HumHub 1.18
 - Fix #243: Fix visibility of the method `Controller::getAccessRules()`
-- 
-1.8.2 (Unreleased)
--------------------
+- Enh #267: Use content ID in the "Custom Pages" extension
+
+1.8.7 (July 1, 2025)
+--------------------
+- Enh #266: Extension for module "Custom Pages"
+
+1.8.6 (December 3, 2024)
+------------------------
+- Enh #258: By default, enabled "Mobile" notification types for those enabled for "Web"
+- Enh #259: Replace theme variables with CSS variables
+- Enh #260: Use PHP CS Fixer
+- Fix #263: Fixed deleted tasks visibility, reload after deletion, reload after state change
+
+1.8.5 (March 14, 2024)
+----------------------
+- Fix #249: Fix replaced method `friendship\Module::isEnabled()`
+- Enh #229: Disable main navigation by default
+- Enh #241: Integrate wall entry context menu for task on details and list pages
+- Fix #253: Space configuration checks permissions insufficiently
+
+1.8.4 (December 21, 2023)
+-------------------------
+- Fix #237: Update tests for compatibility with v1.15
 - Fix #232: Set All Icons color to @text-color-main (#555)
 - Fix #234: Fix using of Yii on view files
 - Fix #236: Fix pagination design
 - Enh #238: Tests for `next` version
 - Fix #242: Fix visibility of the method `Controller::getAccessRules()`
+- Fix #245: Fix memory usage on integrity check
 
 1.8.1 (May 1, 2023)
 -------------------
