@@ -43,10 +43,12 @@ $participantStyle = 'display:inline-block;';
                     <?= Html::containerLink($task->content->createdBy) ?>
                 </span>
                 <?php if ($task->content->updated_at !== null) : ?>
-                    &middot <span class="tt updated"
-                            title="<?= Yii::$app->formatter->asDateTime($task->content->updated_at) ?>">
-                        <?= Yii::t('ContentModule.base', 'Updated') ?>
-                    </span>
+                    &middot
+                    <?= Html::tag('span', Yii::t('ContentModule.base', 'Updated'), [
+                        'class' => 'tt updated',
+                        'title' => Yii::$app->formatter->asDateTime($task->content->updated_at),
+                        'data-bs-toggle' => 'tooltip',
+                    ]) ?>
                 <?php endif; ?>
 
                 <div class="float-end">
