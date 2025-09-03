@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.9.1 (Unreleased)
+-----------------------
+- Fix #271: Update tooltip to Bootstrap 5
+
 1.9.0 (August 29, 2025)
 -----------------------
 - Fix #257: Update module resources path

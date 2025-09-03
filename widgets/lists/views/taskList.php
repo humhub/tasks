@@ -51,11 +51,15 @@ use humhub\widgets\bootstrap\Button;
             <?= Button::asLink()->icon('pencil')->sm()
                 ->action('task.list.edit', TaskListUrl::editTaskList($list))
                 ->loader(false)
-                ->cssClass('task-list-edit tt task-toggled-color')->options(['title' => Yii::t('TasksModule.base', 'Edit list')])->visible($canManage) ?>
+                ->cssClass('task-list-edit task-toggled-color')
+                ->tooltip(Yii::t('TasksModule.base', 'Edit list'))
+                ->visible($canManage) ?>
             <?= Button::asLink()->icon('trash')->sm()
                 ->action('deleteList', TaskListUrl::deleteTaskList($list))->loader(false)
-                ->cssClass('task-list-edit tt task-toggled-color')
-                ->options(['title' => Yii::t('TasksModule.base', 'Delete list')])->visible($canManage)->confirm() ?>
+                ->cssClass('task-list-edit task-toggled-color')
+                ->tooltip(Yii::t('TasksModule.base', 'Delete list'))
+                ->visible($canManage)
+                ->confirm() ?>
 
         <?php endif; ?>
 

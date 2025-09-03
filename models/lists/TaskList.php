@@ -15,6 +15,7 @@ use humhub\modules\content\models\ContentContainer;
 use humhub\modules\content\models\ContentTag;
 use humhub\modules\tasks\models\Sortable;
 use humhub\modules\tasks\models\Task;
+use Yii;
 use yii\db\ActiveQuery;
 use yii\db\Expression;
 
@@ -31,6 +32,16 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
 
     public const FILTER_STATUS_INCLUDE = 'status';
     public const FILTER_STATUS_EXCLUDE = 'status';
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        $labels = parent::attributeLabels();
+        $labels['color'] = Yii::t('TasksModule.base', 'Title and Color');
+        return $labels;
+    }
 
     public function afterSave($insert, $changedAttributes)
     {

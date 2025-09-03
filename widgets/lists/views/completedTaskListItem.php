@@ -18,11 +18,20 @@ use humhub\helpers\Html;
         </span>
         <div class="float-end task-controls end">
             <?= Button::asLink()
-                ->options(['class' => 'tt', 'title' => Yii::t('TasksModule.base', 'Delete')]
-                )->icon('trash')->right()->sm()->action('deleteList', TaskListUrl::deleteTaskList($taskList))->loader(false)->visible($canEdit)->confirm() ?>
+                ->tooltip(Yii::t('TasksModule.base', 'Delete'))
+                ->icon('trash')
+                ->right()->sm()
+                ->action('deleteList', TaskListUrl::deleteTaskList($taskList))
+                ->loader(false)
+                ->visible($canEdit)
+                ->confirm() ?>
             <?= Button::asLink()
-                ->options(['class' => 'tt', 'title' => Yii::t('TasksModule.base', 'Edit'), 'style' => 'margin-left:2px']
-                )->icon('pencil')->right()->sm()->action('task.list.edit', TaskListUrl::editTaskList($taskList))->loader(false)->visible($canEdit) ?>
+                ->tooltip(Yii::t('TasksModule.base', 'Edit'))
+                ->icon('pencil')
+                ->right()->sm()->cssClass('me-2')
+                ->action('task.list.edit', TaskListUrl::editTaskList($taskList))
+                ->loader(false)
+                ->visible($canEdit) ?>
         </div>
     </div>
 

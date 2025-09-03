@@ -13,7 +13,6 @@
 /* @var $options array */
 
 use humhub\helpers\Html;
-use humhub\modules\ui\icon\widgets\Icon;
 
 $disabled = ($task->canCheckItems()) ? false : 'true';
 ?>
@@ -21,12 +20,9 @@ $disabled = ($task->canCheckItems()) ? false : 'true';
 <?= Html::beginTag('li', $options) ?>
 
 <div class="task-item container" id="item-<?= $item->id ?>">
-
     <div class="row">
         <div class="col-lg-12" style="padding-right: 0;">
-
             <div class="task-item-content">
-
                 <?= Html::checkBox('item[' . $item->id . ']', $item->completed, [
                     'label' => $item->title,
                     'itemId' => $item->id,
@@ -36,15 +32,9 @@ $disabled = ($task->canCheckItems()) ? false : 'true';
                         'class' => $item->completed ? 'item-finished' : '',
                     ],
                 ]) ?>
-
-                <span class="task-drag-icon tt d-none" title="<?= Yii::t('TasksModule.base', 'Drag entry') ?>">
-                    <?= Icon::get('arrows') ?>&nbsp;
-                </span>
-
             </div>
         </div>
     </div>
-
 </div>
 
 <?= Html::endTag('li') ?>
