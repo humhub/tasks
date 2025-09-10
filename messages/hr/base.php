@@ -42,7 +42,6 @@ return [
     'Description' => 'Opis',
     'Do you really want to delete this task?' => 'Želite li stvarno izbrisati taj zadatak?',
     'Don\'t add to calendar' => 'Ne dodavaj u kalendar',
-    'Drag entry' => 'Povuci unos',
     'Edit' => 'Uredi',
     'Edit item (empty field will be removed)...' => 'Uredi stavku (prazno polje će biti uklonjeno) ...',
     'Edit list' => 'Uredi popis',
@@ -176,6 +175,5 @@ return [
     'Task Users have been notified' => '',
     'Task content ID' => '',
     'Title of your task list' => '',
-    'ending Review' => '',
     '{count,plural,=1{# day} other{# days}} remaining' => '',
 ];
