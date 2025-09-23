@@ -30,7 +30,7 @@ class TaskListCest
         $I->click('Tasks', '.layout-nav-container');
         $I->waitForText('Overview');
 
-        $I->click('Add');
+        $I->jsClick('[data-original-title="Add task"]');
         $I->waitForText('New Task', null, '#globalModal');
         $I->fillField('Task[title]', 'Test task with new list');
         $I->fillContentTagDropDown('task-task_list_id', 'My New Tasklist');
@@ -74,7 +74,7 @@ class TaskListCest
         $I->click('Tasks', '.layout-nav-container');
         $I->waitForText('Overview');
 
-        $I->click('Add');
+        $I->jsClick('[data-original-title="Add task"]');
         $I->waitForText('New Task', null, '#globalModal');
         $I->fillField('Task[title]', 'Test task with new list');
         $I->fillContentTagDropDown('task-task_list_id', 'My New Tasklist');

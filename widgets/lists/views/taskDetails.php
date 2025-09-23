@@ -14,7 +14,6 @@ use humhub\modules\topic\widgets\TopicLabel;
 use humhub\modules\ui\view\components\View;
 use humhub\widgets\Button;
 
-
 /* @var $this View */
 /* @var $task Task */
 
@@ -54,8 +53,9 @@ $color = $task->getColor('var(--info)');
             <?php endif ?>
             <?= TaskInfoBox::widget([
                 'title' => Yii::t('TasksModule.base', 'Scheduling') . ':',
-                'value' => Yii::t('TasksModule.base', 'Start') . ' ' . $task->schedule->getFormattedStartDateTime()
-                    . '<br>'
+                'value' => ($task->scheduling
+                    ? Yii::t('TasksModule.base', 'Start') . ' ' . $task->schedule->getFormattedStartDateTime()
+                    . '<br>' : '')
                     . Html::tag('span', $task->schedule->getFormattedDateTime(), ['class' => $scheduleTextClass]),
                 'icon' => 'clock-o',
                 'iconColor' => $color]) ?>
