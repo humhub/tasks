@@ -115,6 +115,7 @@ class Task extends ContentActiveRecord implements Searchable
      */
     public const USER_ASSIGNED = 0;
     public const USER_RESPONSIBLE = 1;
+    public const USER_AUTHOR = 2;
 
 
     /**

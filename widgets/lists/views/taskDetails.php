@@ -1,5 +1,6 @@
 <?php
 
+use humhub\libs\Html;
 use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\content\widgets\WallEntryAddons;
 use humhub\modules\tasks\helpers\TaskUrl;
@@ -7,7 +8,7 @@ use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\widgets\ChangeStatusButton;
 use humhub\modules\tasks\widgets\TaskInfoBox;
 use humhub\modules\tasks\widgets\checklist\TaskChecklist;
-use humhub\modules\tasks\widgets\TaskRoleInfoBox;
+use humhub\modules\tasks\widgets\TaskUserList;
 use humhub\modules\topic\models\Topic;
 use humhub\modules\topic\widgets\TopicLabel;
 use humhub\modules\ui\view\components\View;
@@ -32,13 +33,32 @@ $color = $task->getColor('var(--info)');
 
 
         <div class="task-list-task-infos">
-            <?= TaskRoleInfoBox::widget(['task' => $task, 'iconColor' => $color]) ?>
             <?= TaskInfoBox::widget([
-                'title' => Yii::t('TasksModule.base', 'Scheduling'),
-                'value' => $task->schedule->getFormattedDateTime(),
-                'icon' => 'fa-clock-o',
-                'iconColor' => $color,
-                'textClass' => $scheduleTextClass]) ?>
+                'title' => Yii::t('TasksModule.base', 'Task ID') . ':',
+                'value' => $task->id,
+                'icon' => 'info-circle',
+                'iconColor' => $color]) ?>
+            <?php if ($task->hasTaskResponsible()) : ?>
+                <?= TaskInfoBox::widget([
+                    'title' => Yii::t('TasksModule.base', 'Responsible') . ':',
+                    'value' => TaskUserList::widget(['users' => $task->taskResponsibleUsers, 'type' => Task::USER_RESPONSIBLE]),
+                    'icon' => 'user',
+                    'iconColor' => $color]) ?>
+            <?php endif ?>
+            <?php if ($task->hasTaskAssigned()) : ?>
+                <?= TaskInfoBox::widget([
+                    'title' => Yii::t('TasksModule.base', 'Assignments') . ':',
+                    'value' => TaskUserList::widget(['users' => $task->taskAssignedUsers]),
+                    'icon' => 'users',
+                    'iconColor' => $color]) ?>
+            <?php endif ?>
+            <?= TaskInfoBox::widget([
+                'title' => Yii::t('TasksModule.base', 'Scheduling') . ':',
+                'value' => Yii::t('TasksModule.base', 'Start') . ' ' . $task->schedule->getFormattedStartDateTime()
+                    . '<br>'
+                    . Html::tag('span', $task->schedule->getFormattedDateTime(), ['class' => $scheduleTextClass]),
+                'icon' => 'clock-o',
+                'iconColor' => $color]) ?>
 
             <?php if ($task->schedule->canRequestExtension()): ?>
                 <div style="display:inline-block;vertical-align:bottom;">
