@@ -1,6 +1,7 @@
 <?php
 /* @var $this \humhub\modules\ui\view\components\View */
 
+use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\widgets\Button;
 
 
@@ -38,6 +39,17 @@ use humhub\widgets\Button;
                     <?= Button::asLink($config['label'])->action('task.changeState', $status->getRevertUrl())->icon($config['icon']);?>
                 </li>
             <?php endforeach; ?>
+
+            <?php if ($task->schedule->canRequestExtension()): ?>
+                <?php if(!empty($proceedConfig) || !empty($revertConfig)) : ?>
+                    <li role="separator" class="divider"></li>
+                <?php endif ?>
+                <li>
+                    <?= Button::asLink(Yii::t('TasksModule.base', 'Request extension'))
+                        ->icon('calendar-o')
+                        ->link(TaskUrl::requestExtension($task)) ?>
+                </li>
+            <?php endif ?>
         </ul>
 
     <?php endif; ?>

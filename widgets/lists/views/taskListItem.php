@@ -45,6 +45,7 @@ $checkUrl = $task->state->getCheckUrl();
         ]); ?>
 
         <span class="toggleTaskDetails"><?= Html::encode($task->title) ?></span>
+        <span style="margin-left:10px"><strong>ID:</strong> <?= $task->id ?></span>
 
         <?= TaskBadge::widget(['task' => $task, 'includePending' => false, 'includeCompleted' => false]) ?>
 

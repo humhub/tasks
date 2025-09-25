@@ -273,10 +273,24 @@
   }
 }
 
+.task-infos {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .task-info {
+  flex: 1;
   display: inline-block;
-  margin-right: 10px;
-  vertical-align: top;
+  padding: 0 10px 10px 0;
+  white-space: nowrap;
+  &.task-info-id {
+    flex: 0.5;
+  }
+
+  > strong {
+    display: block;
+    margin-bottom: 5px;
+  }
 
   .task-info-text {
     font-size: 13px;
@@ -558,10 +572,6 @@
 
       .task-details-body {
         margin: 10px 0;
-      }
-
-      .task-list-task-infos {
-        margin-bottom: 10px;
       }
     }
 
