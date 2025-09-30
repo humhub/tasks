@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.8.8 (Unreleased)
---------------------
+1.8.8 (September 30, 2025)
+--------------------------
 - Enh #267: Use content ID in the "Custom Pages" extension
 - Enh #272: Update tasks overview
 
