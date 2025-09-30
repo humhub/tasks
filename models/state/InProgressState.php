@@ -22,7 +22,7 @@ class InProgressState extends TaskState
     {
         return [
             Task::STATUS_PENDING_REVIEW => [
-                'label' => Yii::t('TasksModule.base', 'Ready For Review'),
+                'label' => Yii::t('TasksModule.base', 'Request Review'),
                 'icon' => 'fa-eye',
             ],
             Task::STATUS_COMPLETED => [

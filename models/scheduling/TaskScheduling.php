@@ -11,9 +11,7 @@ namespace humhub\modules\tasks\models\scheduling;
 
 use DateTime;
 use DateTimeZone;
-use humhub\modules\tasks\CalendarUtils;
 use humhub\modules\tasks\helpers\TaskUrl;
-use humhub\modules\tasks\integration\calendar\TaskCalendar;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\notifications\ChangedDateTimeNotification;
 use humhub\modules\tasks\notifications\ExtensionRequestNotification;
@@ -216,7 +214,7 @@ class TaskScheduling extends Component
         if (!$this->task->scheduling) {
             $result = Yii::t('TasksModule.base', 'No Scheduling set for this Task');
         } else {
-            $result = Yii::t('TasksModule.base', 'Deadline at');
+            $result = Yii::t('TasksModule.base', 'Deadline');
             if ($this->task->all_day) {
                 $result .= ' ' . Yii::$app->formatter->asDate($this->getEndDateTime(), $format);
             } else {
