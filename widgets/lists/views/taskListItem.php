@@ -44,13 +44,15 @@ $checkUrl = $task->state->getCheckUrl();
             ]); ?>
 
             <span class="toggleTaskDetails"><?= Html::encode($task->title) ?></span>
+            <span style="margin-left:10px"><strong>ID:</strong> <?= $task->id ?></span>
 
             <?= TaskBadge::widget(['task' => $task, 'includePending' => false, 'includeCompleted' => false]) ?>
         </div>
 
         <?php if ($task->hasTaskAssigned() || $task->hasTaskResponsible()) : ?>
             <div class="task-controls assigned-users d-none d-sm-block">
-                <?= TaskUserList::widget(['users' => $task->taskResponsibleUsers, 'style' => 'border:2px solid var(--info)', 'type' => Task::USER_RESPONSIBLE]) ?>
+                <?= TaskUserList::widget(['users' => [$task->createdBy], 'style' => 'border:2px solid var(--primary)', 'type' => Task::USER_AUTHOR]) ?>
+                <?= TaskUserList::widget(['users' => $task->taskResponsibleUsers, 'style' => 'border:2px solid var(--accent)', 'type' => Task::USER_RESPONSIBLE]) ?>
                 <?= TaskUserList::widget(['users' => $task->taskAssignedUsers]) ?>
             </div>
         <?php endif; ?>

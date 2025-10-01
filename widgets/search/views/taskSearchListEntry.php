@@ -73,7 +73,7 @@ $image = $task->content->container instanceof Space
             <?php endif; ?>
 
             <div class="task-controls assigned-users float-end d-inline">
-                <?= TaskUserList::widget(['users' => $task->taskResponsibleUsers, 'style' => 'border:2px solid var(--info)', 'type' => Task::USER_RESPONSIBLE]) ?>
+                <?= TaskUserList::widget(['users' => $task->taskResponsibleUsers, 'style' => 'border:2px solid var(--accent)', 'type' => Task::USER_RESPONSIBLE]) ?>
                 <?= TaskUserList::widget(['users' => $task->taskAssignedUsers]) ?>
             </div>
 

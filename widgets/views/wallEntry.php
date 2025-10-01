@@ -6,21 +6,18 @@
  *
  */
 
-/* @var $task \humhub\modules\tasks\models\Task */
-
+use humhub\components\View;
 use humhub\modules\content\widgets\richtext\RichText;
-use humhub\modules\tasks\widgets\TaskRoleInfoBox;
-use humhub\modules\ui\icon\widgets\Icon;
 use humhub\widgets\modal\ModalButton;
+use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\widgets\TaskPercentageBar;
+
+/* @var $this View */
+/* @var $task Task */
 
 $color = 'var(--text-color-main)';
 ?>
 <div class="wall-entry-task task">
-
-    <h1>
-        <?= Icon::get('clock-o')->color($color) ?> <?= $task->schedule->getFormattedDateTime() ?>
-    </h1>
 
     <?php if($task->getItems()->count()) : ?>
        <?= TaskPercentageBar::widget(['task' => $task, 'filterResult' => false]) ?>
@@ -32,9 +29,7 @@ $color = 'var(--text-color-main)';
         </div>
     <?php endif; ?>
 
-    <div class="crearfix">
-        <?= TaskRoleInfoBox::widget(['task' => $task, 'iconColor' => $color]) ?>
-    </div>
+    <?= $this->render('@tasks/widgets/views/taskInfos', ['task' => $task]) ?>
 
     <br>
 

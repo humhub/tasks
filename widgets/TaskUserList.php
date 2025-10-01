@@ -4,8 +4,6 @@ namespace humhub\modules\tasks\widgets;
 
 use humhub\components\Widget;
 use humhub\modules\tasks\models\Task;
-use humhub\modules\tasks\models\user\TaskUser;
-use Yii;
 
 class TaskUserList extends Widget
 {
