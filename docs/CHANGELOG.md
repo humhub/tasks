@@ -4,6 +4,7 @@ Changelog
 1.9.1 (Unreleased)
 -----------------------
 - Fix #271: Update tooltip to Bootstrap 5
+- Fix #274: Improved Module Test GitHub Actions
 
 1.9.0 (August 29, 2025)
 -----------------------
