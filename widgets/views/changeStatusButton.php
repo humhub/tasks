@@ -1,10 +1,10 @@
 <?php
-/* @var $this \humhub\components\View */
 
+use humhub\modules\tasks\models\Task;
 use humhub\widgets\bootstrap\Button;
+use humhub\modules\tasks\helpers\TaskUrl;
 
-
-/* @var $task \humhub\modules\tasks\models\Task */
+/* @var $task Task */
 /* @var $primaryStateConfig array */
 /* @var $primaryUrl string */
 /* @var $proceedConfig array */
@@ -37,6 +37,17 @@ use humhub\widgets\bootstrap\Button;
                     <?= Button::asLink($config['label'])->action('task.changeState', $status->getRevertUrl())->icon($config['icon']);?>
                 </li>
             <?php endforeach; ?>
+
+            <?php if ($task->schedule->canRequestExtension()): ?>
+                <?php if(!empty($proceedConfig) || !empty($revertConfig)) : ?>
+                    <li role="separator" class="divider"></li>
+                <?php endif ?>
+                <li>
+                    <?= Button::asLink(Yii::t('TasksModule.base', 'Request extension'))
+                        ->icon('calendar-o')
+                        ->link(TaskUrl::requestExtension($task)) ?>
+                </li>
+            <?php endif ?>
         </ul>
 
     <?php endif; ?>

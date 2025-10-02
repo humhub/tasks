@@ -10,7 +10,6 @@ use humhub\helpers\Html;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\widgets\TaskBadge;
 use humhub\modules\tasks\widgets\TaskContextMenu;
-use humhub\modules\tasks\widgets\TaskUserList;
 use humhub\modules\ui\icon\widgets\Icon;
 use humhub\widgets\bootstrap\Badge;
 
@@ -25,31 +24,39 @@ $participantStyle = 'display:inline-block;';
             <?= TaskContextMenu::widget(['task' => $task]) ?>
         </div>
         <div class="task-list-item-title">
-            <strong><?= Icon::get('tasks')->color($task->getColor('var(--info)'))?> <?= Html::encode($task->title) ?></strong>
+            <strong><?= Icon::get('tasks')->color($task->getColor('var(--accent)'))?> <?= Html::encode($task->title) ?></strong>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
             <div class="clearfix">
-                <?php if ($task->scheduling) : ?>
-                    <h2 style="margin:5px 0 0 0;">
-                        <?= $task->schedule->getFormattedStartDateTime() ?>
-                        -
-                        <?= $task->schedule->getFormattedEndDateTime() ?>
-                    </h2>
-                <?php endif; ?>
-                <span class="author">
+                <span class="small">
                     <?= Html::containerLink($task->content->createdBy) ?>
+
+                    <?php if ($task->content->updated_at !== null) : ?>
+                        &middot;
+                        <span class="tt"
+                            title="<?= Html::encode(Yii::t('ContentModule.base', 'Updated') . ': '
+                                . Yii::$app->formatter->asDateTime($task->content->updated_at)) ?>">
+                            <?= Yii::$app->formatter->asDate($task->content->updated_at, 'medium') ?>
+                        </span>
+                    <?php endif; ?>
+
+                    <?php if ($task->scheduling || !$task->content->isPublic()) : ?>
+                        &middot;
+                        <span class="text-muted">
+                        <?php if ($task->scheduling) : ?>
+                            <?= Icon::get('clock-o')->tooltip($task->schedule->getFormattedStartDateTime()
+                                . ' - ' . $task->schedule->getFormattedEndDateTime()) ?>
+                        <?php endif; ?>
+
+                        <?php if (!$task->content->isPublic()) : ?>
+                            <?= Icon::get('lock')->tooltip(Yii::t('SpaceModule.base', 'Private')) ?>
+                        <?php endif; ?>
+                        </span>
+                    <?php endif; ?>
                 </span>
-                <?php if ($task->content->updated_at !== null) : ?>
-                    &middot
-                    <?= Html::tag('span', Yii::t('ContentModule.base', 'Updated'), [
-                        'class' => 'tt updated',
-                        'title' => Yii::$app->formatter->asDateTime($task->content->updated_at),
-                        'data-bs-toggle' => 'tooltip',
-                    ]) ?>
-                <?php endif; ?>
 
                 <div class="float-end">
                     <?= TaskBadge::widget(['task' => $task]) ?>
@@ -58,40 +65,6 @@ $participantStyle = 'display:inline-block;';
                         <?= Badge::accent(Yii::t('SpaceModule.base', 'Public')) ?>
                     <?php endif; ?>
                 </div>
-            </div>
-
-            <hr>
-
-            <div class="task-header-panel-container">
-                <!--        Responsible Task User-->
-                <?php if ($task->hasTaskResponsible()) : ?>
-                    <div class="task-header-panel">
-                        <div style="<?= $participantStyle ?>">
-                            <em><strong><?= Yii::t('TasksModule.base', 'Responsible') ?>:</strong></em><br>
-                            <?= TaskUserList::widget(['users' => $task->taskResponsibleUsers, 'type' => Task::USER_RESPONSIBLE])?>
-                        </div>
-                    </div>
-                <?php endif ?>
-
-                <!--        Assigned Task User-->
-                <?php if ($task->hasTaskAssigned()) : ?>
-                    <div class="task-header-panel">
-                        <div>
-                            <em><strong><?= Yii::t('TasksModule.base', 'Assigned') ?>:</strong></em><br>
-                            <?= TaskUserList::widget(['users' => $task->taskAssignedUsers])?>
-                        </div>
-                    </div>
-                <?php else : ?>
-                    <div class="task-header-panel">
-                        <div style="<?= $participantStyle ?>">
-                            <em><strong><?= Yii::t('TasksModule.base', 'Assigned') ?>:</strong></em><br>
-                            <div class="assigned-anyone">
-                                <?= Yii::t('TasksModule.base', 'Any user with a "Process unassigned tasks" permission can work on this task') ?>
-                            </div>
-                        </div>
-                    </div>
-                <?php endif ?>
-
             </div>
         </div>
     </div>
