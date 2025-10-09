@@ -137,7 +137,7 @@ class TaskFilterNavigation extends FilterNavigation
             'id' => TaskFilter::FILTER_STATE,
             'category' => 'states',
             'title' => Yii::t('TasksModule.base', 'Status'),
-            'class' => \humhub\modules\tasks\widgets\search\PickerFilterInput::class,
+            'class' => PickerFilterInput::class,
             'options' => [
                 'label' => Yii::t('TasksModule.base', 'Status'),
             ],
