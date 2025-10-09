@@ -5,6 +5,7 @@ Changelog
 -----------------------
 - Fix #271: Update tooltip to Bootstrap 5
 - Fix #274: Improved Module Test GitHub Actions
+- Enh #277: Improved filter url parameters
 
 1.9.0 (August 29, 2025)
 -----------------------
