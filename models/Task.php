@@ -339,7 +339,7 @@ class Task extends ContentActiveRecord implements Searchable
      * @throws \Throwable
      * @throws \yii\base\Exception
      */
-    public static function findUserTasks(User $user = null, $container = null, $limit = 5)
+    public static function findUserTasks(?User $user = null, $container = null, $limit = 5)
     {
         if (!$user && !Yii::$app->user->isGuest) {
             $user = Yii::$app->user->getIdentity();
@@ -474,9 +474,11 @@ class Task extends ContentActiveRecord implements Searchable
         }
     }
 
-    public function afterMove(ContentContainerActiveRecord $container = null)
+    /**
+     * @inheritdoc
+     */
+    public function afterMove(?ContentContainerActiveRecord $container = null)
     {
-
         foreach ($this->taskUsers as $taskUser) {
             if (!$container->isMember($taskUser->user_id)) {
                 $taskUser->delete();
