@@ -52,7 +52,7 @@ class TaskListCest
         $I->see('Begin Task');
         $I->click('Begin Task');
         // Check for in progress badge
-        $I->waitForElementVisible('.text-bg-info.badge .fa-pencil', 10, '[data-task-id="2"]');
+        $I->waitForElementVisible('.text-bg-accent.badge .fa-pencil', 10, '[data-task-id="2"]');
 
         $I->waitForText('Finish Task');
         $I->click('Finish Task');
@@ -96,7 +96,7 @@ class TaskListCest
         $I->see('Begin Task');
         $I->click('Begin Task');
         // Check for in progress badge
-        $I->waitForElementVisible('.text-bg-info.badge .fa-pencil', 10, '[data-task-id="2"]');
+        $I->waitForElementVisible('.text-bg-accent.badge .fa-pencil', 10, '[data-task-id="2"]');
 
         $I->waitForText('Finish Task');
         $I->click('Finish Task');
