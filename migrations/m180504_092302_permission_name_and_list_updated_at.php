@@ -21,7 +21,7 @@ class m180504_092302_permission_name_and_list_updated_at extends Migration
                 $this->insertSilent('contentcontainer_permission', array_merge($row, ['class' => ManageTasks::class, 'permission_id' => ManageTasks::class]));
                 $this->insertSilent('contentcontainer_permission', array_merge($row, ['class' => ProcessUnassignedTasks::class, 'permission_id' => ProcessUnassignedTasks::class]));
             }
-        } catch (Exception $e) {
+        } catch (Exception) {
 
         }
 

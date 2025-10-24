@@ -17,10 +17,9 @@ trait DataExport
      */
     private function getRelatedContainer()
     {
-        return function ($model) {
+        return fn($model) =>
             /* @var $model Task */
-            return $model->content->container->getDisplayName();
-        };
+            $model->content->container->getDisplayName();
     }
 
     /**
@@ -75,13 +74,12 @@ trait DataExport
     private function getComments()
     {
         return function ($model, $key) {
-            $commentsCount = Comment::GetCommentCount(get_class($model), $key);
-            $comments = Comment::GetCommentsLimited(get_class($model), $key, $commentsCount);
+            $commentsCount = Comment::GetCommentCount($model::class, $key);
+            $comments = Comment::GetCommentsLimited($model::class, $key, $commentsCount);
 
-            $messages = array_map(function ($comment) {
+            $messages = array_map(fn($comment) =>
                 /* @var $comment Comment */
-                return $comment->createdBy ? $comment->createdBy->getDisplayName() . ': ' . $comment->message : $comment->message;
-            }, $comments);
+                $comment->createdBy ? $comment->createdBy->getDisplayName() . ': ' . $comment->message : $comment->message, $comments);
 
             return implode(' | ', $messages);
         };
@@ -90,7 +88,7 @@ trait DataExport
     private function prepareData($key, $initialData, $subKey = null)
     {
         $data = [];
-        array_map(function ($item) use (&$data, $key, $subKey) {
+        array_map(function ($item) use (&$data, $key, $subKey): void {
             $data[$item[$key]] = $subKey ? $item[$subKey] : $item;
         }, $initialData);
         return $data;
@@ -100,7 +98,7 @@ trait DataExport
     {
         $profiles = $this->prepareData('id', $data[$key]['users'], 'profile');
         $taskUsers = [];
-        array_map(function ($user) use (&$taskUsers) {
+        array_map(function ($user) use (&$taskUsers): void {
             $uniqueKey = "{$user['user_id']}_{$user['user_type']}";
             $taskUsers[$uniqueKey] = $user;
         }, $data[$key]['taskUsers']);
@@ -111,9 +109,9 @@ trait DataExport
     private function prepareUsersInfo($profiles, $taskUsers, $userType)
     {
         $info = [];
-        array_map(function ($profile) use (&$info, $taskUsers, $userType) {
+        array_map(function ($profile) use (&$info, $taskUsers, $userType): void {
             $uniqueKey = "{$profile['user_id']}_{$userType}";
-            if (key_exists($uniqueKey, $taskUsers)) {
+            if (array_key_exists($uniqueKey, $taskUsers)) {
                 $info[] = [
                     'id' => $profile['user_id'],
                     'fullname' => "{$profile['firstname']} {$profile['lastname']}",

@@ -42,7 +42,7 @@ class RestDefinitions
             'created_by' => UserDefinitions::getUserShort($task->getOwner()),
             'content' => ContentDefinitions::getContent($task->content),
             'percentage' => $task->getPercent(),
-            'checklist' => array_map(function ($item) {return $item->getAttributes();}, $task->items),
+            'checklist' => array_map(fn($item) => $item->getAttributes(), $task->items),
             'assigned_users' => static::getUsers($task->taskAssignedUsers),
             'responsible_users' => static::getUsers($task->taskResponsibleUsers),
         ];

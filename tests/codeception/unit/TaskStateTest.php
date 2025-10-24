@@ -38,7 +38,7 @@ class TaskStateTest extends TaskTestCase
         $task = $this->createTask($space4, 'Task1', null, ['review' => 0, 'status' => Task::STATUS_COMPLETED]);
         $this->assertTrue($task->state->reset());
         $this->assertEquals(Task::STATUS_PENDING, $task->status);
-        $this->assertEquals(PendingState::class, get_class($task->state));
+        $this->assertEquals(PendingState::class, $task->state::class);
     }
 
     public function testReviewRevertStateProcess()
@@ -59,7 +59,7 @@ class TaskStateTest extends TaskTestCase
         $this->becomeUser('User1');
 
         $this->assertEquals(Task::STATUS_COMPLETED, $task->status);
-        $this->assertEquals(CompletedState::class, get_class($task->state));
+        $this->assertEquals(CompletedState::class, $task->state::class);
         $this->assertFalse($task->state->canProceed());
 
         // Current logged in user can not revert
@@ -70,7 +70,7 @@ class TaskStateTest extends TaskTestCase
         $this->assertTrue($task->state->canRevert());
         $this->assertTrue($task->state->revert());
         $this->assertEquals(Task::STATUS_PENDING_REVIEW, $task->status);
-        $this->assertEquals(PendingReviewState::class, get_class($task->state));
+        $this->assertEquals(PendingReviewState::class, $task->state::class);
 
         // Assigned user can't revert in review state
         $this->assertFalse($task->state->canRevert(null, $user1));
@@ -79,14 +79,14 @@ class TaskStateTest extends TaskTestCase
         $this->assertTrue($task->state->canRevert());
         $this->assertTrue($task->state->revert());
         $this->assertEquals(Task::STATUS_IN_PROGRESS, $task->status);
-        $this->assertEquals(InProgressState::class, get_class($task->state));
+        $this->assertEquals(InProgressState::class, $task->state::class);
 
         // Assigned user and responsible users can revert
         $this->assertTrue($task->state->canRevert(null, $user1));
         $this->assertTrue($task->state->canRevert());
         $this->assertTrue($task->state->revert());
         $this->assertEquals(Task::STATUS_PENDING, $task->status);
-        $this->assertEquals(PendingState::class, get_class($task->state));
+        $this->assertEquals(PendingState::class, $task->state::class);
     }
 
     public function testSimpleStateProcess()
@@ -97,19 +97,19 @@ class TaskStateTest extends TaskTestCase
         $task = $this->createTask($space4, 'Task1');
 
         $this->assertEquals(Task::STATUS_PENDING, $task->status);
-        $this->assertEquals(PendingState::class, get_class($task->state));
+        $this->assertEquals(PendingState::class, $task->state::class);
 
         // Make sure the state also works with afterFind
         $task = Task::findOne(['id' => $task->id]);
         $this->assertEquals(Task::STATUS_PENDING, $task->status);
-        $this->assertEquals(PendingState::class, get_class($task->state));
+        $this->assertEquals(PendingState::class, $task->state::class);
 
         $this->assertTrue($task->state->proceed());
         $this->assertEquals(Task::STATUS_IN_PROGRESS, $task->status);
-        $this->assertEquals(InProgressState::class, get_class($task->state));
+        $this->assertEquals(InProgressState::class, $task->state::class);
 
         $this->assertTrue($task->state->proceed());
-        $this->assertEquals(CompletedState::class, get_class($task->state));
+        $this->assertEquals(CompletedState::class, $task->state::class);
         $this->assertEquals(Task::STATUS_COMPLETED, $task->status);
     }
 
@@ -125,15 +125,15 @@ class TaskStateTest extends TaskTestCase
         $task->refresh();
 
         $this->assertEquals(Task::STATUS_PENDING, $task->status);
-        $this->assertEquals(PendingState::class, get_class($task->state));
+        $this->assertEquals(PendingState::class, $task->state::class);
 
         $this->assertTrue($task->state->proceed());
         $this->assertEquals(Task::STATUS_IN_PROGRESS, $task->status);
-        $this->assertEquals(InProgressState::class, get_class($task->state));
+        $this->assertEquals(InProgressState::class, $task->state::class);
 
         $this->assertTrue($task->state->proceed());
         $this->assertEquals(Task::STATUS_PENDING_REVIEW, $task->status);
-        $this->assertEquals(PendingReviewState::class, get_class($task->state));
+        $this->assertEquals(PendingReviewState::class, $task->state::class);
 
         // Make sure assigned user can't proceed anymore
         $this->assertFalse($task->state->proceed());
@@ -142,7 +142,7 @@ class TaskStateTest extends TaskTestCase
         $this->becomeUser('User2');
         $this->assertTrue($task->state->proceed());
         $this->assertEquals(Task::STATUS_COMPLETED, $task->status);
-        $this->assertEquals(CompletedState::class, get_class($task->state));
+        $this->assertEquals(CompletedState::class, $task->state::class);
     }
 
     public function testPendingTaskChangePermissions()
@@ -260,6 +260,6 @@ class TaskStateTest extends TaskTestCase
 
         $this->assertTrue($task->state->revert());
         $this->assertEquals(Task::STATUS_PENDING, $task->status);
-        $this->assertEquals(PendingState::class, get_class($task->state));
+        $this->assertEquals(PendingState::class, $task->state::class);
     }
 }
