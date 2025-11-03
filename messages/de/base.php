@@ -179,5 +179,6 @@ return [
     '{userName} works on task {task}.' => '{userName} arbeitet an der Aufgabe {task}.',
     'Task content ID' => '',
     "Archived" => "Archiviert",
-    "List: {name}" => "Liste: {name}"
+    "List: {name}" => "Liste: {name}",
+    "Due Date" => "Fälligkeitsdatum"
 ];

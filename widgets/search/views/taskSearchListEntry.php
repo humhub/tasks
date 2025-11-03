@@ -87,4 +87,12 @@ $image = $task->content->container instanceof Space
 
         </div>
     </div>
+    <div>
+        <?php if ($task->scheduling): ?>
+            <div style="margin-top: 1rem;">
+                <span><b><?= Yii::t("TasksModule.base", "Due Date") . ": " ?></b></span>
+                <span><?= $task->schedule->getFormattedDateTime() ?></span>
+            </div>
+        <?php endif; ?>
+    </div>
 </div>
