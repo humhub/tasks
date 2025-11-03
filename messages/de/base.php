@@ -178,5 +178,6 @@ return [
     '{userName} started working on Task {task} in space {spaceName}.' => '{userName} hat begonnen, an der Aufgabe {task} im Space {spaceName} zu arbeiten.',
     '{userName} works on task {task}.' => '{userName} arbeitet an der Aufgabe {task}.',
     'Task content ID' => '',
-    "Archived" => "Archiviert"
+    "Archived" => "Archiviert",
+    "List: {name}" => "Liste: {name}"
 ];

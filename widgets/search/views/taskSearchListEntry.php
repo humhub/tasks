@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
@@ -26,12 +27,14 @@ $image = $task->content->container instanceof Space
         'space' => $task->content->container,
         'width' => '24',
         'showTooltip' => true,
-        'link' => true])
+        'link' => true
+    ])
     : UserImage::widget([
         'user' => $task->content->container,
         'width' => '24',
         'showTooltip' => true,
-        'link' => true]);
+        'link' => true
+    ]);
 
 ?>
 
@@ -40,7 +43,7 @@ $image = $task->content->container instanceof Space
     <div class="task-head">
         <div class="media-body clearfix">
 
-            <?php if(!$contentContainer) : ?>
+            <?php if (!$contentContainer) : ?>
 
                 <div class="task-controls" style="display:inline">
                     <?= $image ?>
@@ -52,19 +55,22 @@ $image = $task->content->container instanceof Space
                 <h4 class="media-heading" style="display:inline-block">
                     <?= Html::encode($task->title); ?>
                 </h4>
+                <?php if ($task->list): ?>
+                    <span> (<?= Yii::t("TasksModule.base", "List: {name}", ["name" => $task->list->name]) ?>)</span>
+                <?php endif; ?>
             </div>
 
             <?= TaskBadge::widget(['task' => $task]) ?>
 
             <div class="pull-right toggleTaskDetails hidden-xs"
-                 style="<?= (!$task->content->canEdit()) ? 'border-right:0;margin-right:0' : '' ?>">
+                style="<?= (!$task->content->canEdit()) ? 'border-right:0;margin-right:0' : '' ?>">
                 <i class="fa fa-comment-o"></i> <?= \humhub\modules\comment\models\Comment::getCommentCount(Task::class, $task->id); ?>
             </div>
 
             <?php if ($task->review) : ?>
                 <div class="task-controls pull-right toggleTaskDetails">
                     <i class="fa fa-eye tt hidden-xs tt"
-                       title="<?= Yii::t('TasksModule.base', 'This task requires to be reviewed by a responsible') ?>"></i>
+                        title="<?= Yii::t('TasksModule.base', 'This task requires to be reviewed by a responsible') ?>"></i>
                 </div>
             <?php endif; ?>
 

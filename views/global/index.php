@@ -3,7 +3,6 @@
 use humhub\modules\tasks\assets\Assets;
 use humhub\modules\tasks\widgets\search\TaskSearchList;
 use humhub\modules\tasks\widgets\search\TaskFilterNavigation;
-use humhub\modules\tasks\models\forms\TaskFilter;
 
 /* @var $this \humhub\modules\ui\view\components\View */
 /* @var $filter TaskFilter */
@@ -25,4 +24,3 @@ Assets::register($this);
         </div>
     </div>
 </div>
-
