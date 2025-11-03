@@ -9,12 +9,10 @@
 
 namespace humhub\modules\tasks\widgets\lists;
 
-use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\tasks\helpers\TaskListUrl;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\models\lists\TaskListInterface;
 use humhub\widgets\JsWidget;
-use Yii;
 
 class TaskListWidget extends JsWidget
 {
