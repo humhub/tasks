@@ -104,33 +104,38 @@ class TaskFilterNavigation extends FilterNavigation
                 'data-action-keypress' => null,
                 'placeholder' => Yii::t('TasksModule.base', 'Filter by title'),
             ],
-            'sortOrder' => 100], static::FILTER_BLOCK_TITLE);
+            'sortOrder' => 100
+        ], static::FILTER_BLOCK_TITLE);
 
         $this->addFilter([
             'id' => TaskFilter::FILTER_OVERDUE,
             'checked' => $this->filter->isFilterActive(TaskFilter::FILTER_OVERDUE),
             'title' => Yii::t('TasksModule.base', 'Overdue'),
             'options' => ['label' => Yii::t('TasksModule.base', 'Filter')],
-            'sortOrder' => 100], static::FILTER_BLOCK_CHECKBOX);
+            'sortOrder' => 100
+        ], static::FILTER_BLOCK_CHECKBOX);
 
         if (!Yii::$app->user->isGuest && (!$this->filter->contentContainer || $this->filter->contentContainer instanceof Space)) {
             $this->addFilter([
                 'id' => TaskFilter::FILTER_ASSIGNED,
                 'checked' => $this->filter->isFilterActive(TaskFilter::FILTER_ASSIGNED),
                 'title' => Yii::t('TasksModule.base', 'I\'m assigned'),
-                'sortOrder' => 200], static::FILTER_BLOCK_CHECKBOX);
+                'sortOrder' => 200
+            ], static::FILTER_BLOCK_CHECKBOX);
 
             $this->addFilter([
                 'id' => TaskFilter::FILTER_RESPONSIBLE,
                 'checked' => $this->filter->isFilterActive(TaskFilter::FILTER_RESPONSIBLE),
                 'title' => Yii::t('TasksModule.base', 'I\'m responsible'),
-                'sortOrder' => 300], static::FILTER_BLOCK_CHECKBOX);
+                'sortOrder' => 300
+            ], static::FILTER_BLOCK_CHECKBOX);
 
             $this->addFilter([
                 'id' => TaskFilter::FILTER_MINE,
                 'checked' => $this->filter->isFilterActive(TaskFilter::FILTER_MINE),
                 'title' => Yii::t('TasksModule.base', 'Created by me'),
-                'sortOrder' => 400], static::FILTER_BLOCK_CHECKBOX);
+                'sortOrder' => 400
+            ], static::FILTER_BLOCK_CHECKBOX);
         }
 
         $this->addFilter([
@@ -146,8 +151,16 @@ class TaskFilterNavigation extends FilterNavigation
                 'items' => TaskState::getStatusItems(),
                 'placeholderMore' =>  Yii::t('TasksModule.base', 'Filter by status'),
                 'name' => 'task-filter-state',
-            ]], static::FILTER_BLOCK_PICKER);
+            ]
+        ], static::FILTER_BLOCK_PICKER);
 
+        $this->addFilter([
+            "id" => TaskFilter::FILTER_ARCHIVED,
+            "title" => Yii::t("TasksModule.base", "Archived"),
+            "options" => [
+                "label" => Yii::t("TasksModule.base", "Show archived?")
+            ]
+        ], static::FILTER_BLOCK_CHECKBOX);
 
         if (!$this->filter->contentContainer) {
             $memberships = MembershipSearch::findByUser(Yii::$app->user->identity)->all();
@@ -170,7 +183,8 @@ class TaskFilterNavigation extends FilterNavigation
                 'pickerOptions' => [
                     'name' => 'task-filter-spaces',
                     'defaultResults' => $spaces,
-                ]], static::FILTER_BLOCK_PICKER);
+                ]
+            ], static::FILTER_BLOCK_PICKER);
         }
 
         $this->addFilter([
@@ -180,7 +194,8 @@ class TaskFilterNavigation extends FilterNavigation
             'filterOptions' => [
                 'label' => Yii::t('TasksModule.base', 'Date'),
                 'placeholder' =>  Yii::t('TasksModule.base', 'Start date'),
-            ]], static::FILTER_BLOCK_DATEPICKER);
+            ]
+        ], static::FILTER_BLOCK_DATEPICKER);
 
         $this->addFilter([
             'id' => TaskFilter::FILTER_DATE_END,
@@ -188,7 +203,8 @@ class TaskFilterNavigation extends FilterNavigation
             'class' => DateFilter::class,
             'filterOptions' => [
                 'placeholder' => Yii::t('TasksModule.base', 'End date'),
-            ]], static::FILTER_BLOCK_DATEPICKER);
+            ]
+        ], static::FILTER_BLOCK_DATEPICKER);
     }
 
     public function getData()

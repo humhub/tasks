@@ -25,7 +25,7 @@ class UnsortedTaskList extends Model implements TaskListInterface, Sortable
      */
     public function getNonCompletedTasks()
     {
-        return $this->getTasks()->where(['!=', 'task.status', Task::STATUS_COMPLETED])->orderBy(['sort_order' => SORT_ASC, 'task.updated_at' => SORT_DESC]);
+        return $this->getTasks()->where(['!=', 'task.status', Task::STATUS_COMPLETED])->andWhere(["content.archived" => 0])->orderBy(['sort_order' => SORT_ASC, 'task.updated_at' => SORT_DESC]);
     }
 
     /**

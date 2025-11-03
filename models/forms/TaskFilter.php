@@ -35,6 +35,7 @@ class TaskFilter extends Model
     public const FILTER_SPACE = 'spaces';
     public const FILTER_DATE_START = 'date_start';
     public const FILTER_DATE_END = 'date_end';
+    public const FILTER_ARCHIVED = "archived";
 
     public $filters = [];
 
@@ -88,13 +89,19 @@ class TaskFilter extends Model
     {
         $this->validate();
 
-        $query = Task::find()->readable()->andWhere('content.archived = 0');
+        $query = Task::find()->readable();
+
+        if ($this->isFilterActive(static::FILTER_ARCHIVED)) {
+            $query->andWhere("content.archived = 1");
+        } else {
+            $query->andWhere("content.archived = 0");
+        }
 
 
         if ($this->contentContainer) {
             $query->contentContainer($this->contentContainer);
         } elseif (!empty($this->spaces)) {
-            $query->joinWith(['content', 'content.contentContainer', 'content.createdBy']);
+            $query->joinWith(['content.contentContainer', 'content.createdBy']);
             $query->andWhere(['IN', 'contentcontainer.guid', $this->spaces]);
         } else {
             // exclude archived content from global view
@@ -134,12 +141,15 @@ class TaskFilter extends Model
 
         if (! empty($this->date_start) && ! empty($this->date_end)) {
             $query->andWhere(
-                ['or',
-                    ['and',
+                [
+                    'or',
+                    [
+                        'and',
                         CalendarUtils::getStartCriteria($this->date_start, 'start_datetime', '>='),
                         CalendarUtils::getStartCriteria($this->date_end, 'start_datetime', '<='),
                     ],
-                    ['and',
+                    [
+                        'and',
                         CalendarUtils::getEndCriteria($this->date_start, 'end_datetime', '>='),
                         CalendarUtils::getEndCriteria($this->date_end, 'end_datetime', '<='),
                     ],

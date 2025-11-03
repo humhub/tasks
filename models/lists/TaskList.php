@@ -11,7 +11,6 @@ namespace humhub\modules\tasks\models\lists;
 
 use humhub\modules\content\components\ActiveQueryContent;
 use humhub\modules\content\components\ContentContainerActiveRecord;
-use humhub\modules\content\models\ContentContainer;
 use humhub\modules\content\models\ContentTag;
 use humhub\modules\tasks\models\Sortable;
 use humhub\modules\tasks\models\Task;
@@ -50,7 +49,7 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
      */
     public function getTasks()
     {
-        return Task::find()->andWhere(['task_list_id' => $this->id])->readable();
+        return Task::find()->where(['task_list_id' => $this->id])->andWhere(["content.archived" => 0])->readable();
     }
 
     public function load($data, $formName = null)
@@ -65,7 +64,7 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
      */
     public function getNonCompletedTasks()
     {
-        return $this->getTasks()->where(['!=', 'task.status', Task::STATUS_COMPLETED])->orderBy(['sort_order' => SORT_ASC, 'updated_at' => SORT_DESC]);
+        return $this->getTasks()->andWhere(['!=', 'task.status', Task::STATUS_COMPLETED])->orderBy(['sort_order' => SORT_ASC, 'updated_at' => SORT_DESC]);
     }
 
     /**
@@ -92,7 +91,7 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
      */
     public function getTasksByStatus($status)
     {
-        return $this->getTasks()->where(['task.status' => $status]);
+        return $this->getTasks()->andWhere(['task.status' => $status]);
     }
 
     /**
@@ -129,7 +128,8 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
             $includes = is_array($filters[static::FILTER_STATUS_INCLUDE]) ? $filters[static::FILTER_STATUS_INCLUDE] : [$filters[static::FILTER_STATUS_INCLUDE]];
 
             $query->andWhere(
-                ['OR',
+                [
+                    'OR',
                     ['IS', 'task.id', new Expression("NULL")],
                     ['IN', 'task.status', $includes],
                 ],
@@ -152,7 +152,8 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
         $includes =  [Task::STATUS_IN_PROGRESS, Task::STATUS_PENDING_REVIEW, Task::STATUS_PENDING];
 
         $query->andWhere(
-            ['OR',
+            [
+                'OR',
                 ['IN', 'task.status', $includes],
                 ['IS', 'task.id', new Expression("NULL")],
                 ['task_list_setting.hide_if_completed' => '0'],
@@ -176,7 +177,8 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
         $subQuery = Task::find()->where('task.task_list_id = content_tag.id')->andWhere(['IN', 'task.status', $includes]);
 
         $query->andWhere(
-            ['AND',
+            [
+                'AND',
                 ['NOT EXISTS', $subQuery],
                 ['IS NOT', 't.id', new Expression("NULL")],
                 ['task_list_setting.hide_if_completed' => '1'],

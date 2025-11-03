@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
@@ -44,23 +45,23 @@ Assets::register($this);
     </div>
 
     <?php if (TaskList::hasCompletedLists($contentContainer)): ?>
-    <div class="task-list-ul">
-        <div class="task-list-li">
-            <div class="closed-task-lists-container task-list-container" data-ui-widget="task.list.CompletedTaskListView" data-ui-init="1">
-                <div class="task-list-title-bar clearfix">
-                    <div>
-                        <i class="fa fa-check-square-o"></i> <span class="task-list-title-text"><?= Yii::t('TasksModule.base', 'Completed lists') ?></span>
+        <div class="task-list-ul">
+            <div class="task-list-li">
+                <div class="closed-task-lists-container task-list-container" data-ui-widget="task.list.CompletedTaskListView" data-ui-init="1">
+                    <div class="task-list-title-bar clearfix">
+                        <div>
+                            <i class="fa fa-check-square-o"></i> <span class="task-list-title-text"><?= Yii::t('TasksModule.base', 'Completed lists') ?></span>
+                        </div>
                     </div>
-                </div>
-                <div class="closed-task-list-view">
-                    <?= CompletedTaskListView::widget(['contentContainer' => $contentContainer]) ?>
+                    <div class="closed-task-list-view">
+                        <?= CompletedTaskListView::widget(['contentContainer' => $contentContainer]) ?>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     <?php endif; ?>
 
     <div class="task-list-empty empty" style="display:none">
-        <?= Yii::t('TasksModule.base','No pending tasks found') ?>
+        <?= Yii::t('TasksModule.base', 'No pending tasks found') ?>
     </div>
 </div>
