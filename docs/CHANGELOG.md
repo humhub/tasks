@@ -6,6 +6,7 @@ Changelog
 - Fix #271: Update tooltip to Bootstrap 5
 - Enh #274: Improved Module Test GitHub Actions
 - Enh #279: Implemented `module-coding-standards`
+- Enh #283: Do not show scheduling when not set
 
 1.9.0 (August 29, 2025)
 -----------------------

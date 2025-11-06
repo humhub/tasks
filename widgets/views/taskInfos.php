@@ -41,7 +41,7 @@ $color = $task->getColor('var(--accent)');
         ]) ?>
     <?php endif ?>
 
-    <?= TaskInfoBox::widget([
+    <?= $task->scheduling ? TaskInfoBox::widget([
         'title' => Yii::t('TasksModule.base', 'Scheduling'),
         'value' => ($task->scheduling
             ? Yii::t('TasksModule.base', 'Start') . ' ' . $task->schedule->getFormattedStartDateTime()
@@ -51,5 +51,5 @@ $color = $task->getColor('var(--accent)');
             ]),
         'icon' => 'clock-o',
         'cssClass' => 'task-info-scheduling',
-    ]) ?>
+    ]) : '' ?>
 </div>
