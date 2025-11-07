@@ -434,9 +434,9 @@ class Task extends ContentActiveRecord implements Searchable
                         continue;
                     }
 
-                    $oldAssigned = array_filter($oldTaskUsers, fn($taskUser) =>
+                    $oldAssigned = array_filter($oldTaskUsers, fn($taskUser)
                         /** @var $taskUser TaskUser */
-                        $taskUser->user_id === $user->id && $taskUser->user_type === Task::USER_ASSIGNED);
+                        => $taskUser->user_id === $user->id && $taskUser->user_type === Task::USER_ASSIGNED);
 
                     $this->addTaskAssigned($guid, empty($oldAssigned));
                 }
@@ -450,9 +450,9 @@ class Task extends ContentActiveRecord implements Searchable
                         continue;
                     }
 
-                    $oldResponsible = array_filter($oldTaskUsers, fn($taskUser) =>
+                    $oldResponsible = array_filter($oldTaskUsers, fn($taskUser)
                         /** @var $taskUser TaskUser */
-                        $taskUser->user_id === $user->id && $taskUser->user_type === Task::USER_RESPONSIBLE);
+                        => $taskUser->user_id === $user->id && $taskUser->user_type === Task::USER_RESPONSIBLE);
 
                     $this->addTaskResponsible($guid, empty($oldResponsible));
                 }
