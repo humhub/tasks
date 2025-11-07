@@ -17,9 +17,9 @@ trait DataExport
      */
     private function getRelatedContainer()
     {
-        return fn($model) =>
+        return fn($model)
             /* @var $model Task */
-            $model->content->container->getDisplayName();
+            => $model->content->container->getDisplayName();
     }
 
     /**
@@ -77,9 +77,9 @@ trait DataExport
             $commentsCount = Comment::GetCommentCount($model::class, $key);
             $comments = Comment::GetCommentsLimited($model::class, $key, $commentsCount);
 
-            $messages = array_map(fn($comment) =>
+            $messages = array_map(fn($comment)
                 /* @var $comment Comment */
-                $comment->createdBy ? $comment->createdBy->getDisplayName() . ': ' . $comment->message : $comment->message, $comments);
+                => $comment->createdBy ? $comment->createdBy->getDisplayName() . ': ' . $comment->message : $comment->message, $comments);
 
             return implode(' | ', $messages);
         };
