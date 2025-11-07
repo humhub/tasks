@@ -75,10 +75,7 @@ class UnsortedTaskList extends Model implements TaskListInterface, Sortable
             }
 
             $transaction->commit();
-        } catch (\Exception $e) {
-            $transaction->rollBack();
-            throw $e;
-        } catch (\Throwable $e) {
+        } catch (\Exception|\Throwable $e) {
             $transaction->rollBack();
             throw $e;
         }

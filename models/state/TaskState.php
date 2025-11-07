@@ -33,7 +33,7 @@ abstract class TaskState extends Component
     public static function getState($task)
     {
         $states = static::STATES;
-        $stateClass = isset($states[$task->status]) ? $states[$task->status] : $states[Task::STATUS_PENDING];
+        $stateClass = $states[$task->status] ?? $states[Task::STATUS_PENDING];
 
         return Yii::createObject([
             'class' => $stateClass,
@@ -86,7 +86,7 @@ abstract class TaskState extends Component
         if ($newStatus instanceof TaskState) {
             $newStatus = $newStatus->getStatusId();
         } else {
-            $newStatus = ($newStatus) ? $newStatus : $this->getDefaultProceedStatusId();
+            $newStatus = $newStatus ?: $this->getDefaultProceedStatusId();
         }
 
         if (!array_key_exists($newStatus, static::STATES) || !$this->canProceed($newStatus)) {
@@ -113,7 +113,7 @@ abstract class TaskState extends Component
         if ($newStatus instanceof TaskState) {
             $newStatus = $newStatus->getStatusId();
         } else {
-            $newStatus = ($newStatus) ? $newStatus : $this->getDefaultProceedStatusId();
+            $newStatus = $newStatus ?: $this->getDefaultProceedStatusId();
         }
 
         if (!in_array($newStatus, $this->getProceedStatuses($user))) {
@@ -165,7 +165,7 @@ abstract class TaskState extends Component
         if ($newStatus instanceof TaskState) {
             $newStatus = $newStatus->getStatusId();
         } else {
-            $newStatus = ($newStatus) ? $newStatus : $this->getDefaultRevertStatusId();
+            $newStatus = $newStatus ?: $this->getDefaultRevertStatusId();
         }
 
         if (!array_key_exists($newStatus, static::STATES) || !$this->canRevert($newStatus)) {
@@ -182,7 +182,7 @@ abstract class TaskState extends Component
         if ($newStatus instanceof TaskState) {
             $newStatus = $newStatus->getStatusId();
         } else {
-            $newStatus = ($newStatus) ? $newStatus : $this->getDefaultRevertStatusId();
+            $newStatus = $newStatus ?: $this->getDefaultRevertStatusId();
         }
 
         if (!in_array($newStatus, $this->getRevertStatuses($user))) {

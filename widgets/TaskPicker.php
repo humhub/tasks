@@ -192,13 +192,13 @@ class TaskPicker extends \yii\base\Widget
         if (count($task) < $cfg['maxResult'] && (isset($cfg['fillQuery']) || $cfg['fillUser'])) {
 
             //Filter out tasks by means of the fillQuery or default the fillQuery
-            $fillQuery = (isset($cfg['fillQuery'])) ? $cfg['fillQuery'] : UserFilter::find();
+            $fillQuery = $cfg['fillQuery'] ?? UserFilter::find();
             UserFilter::addKeywordFilter($fillQuery, $cfg['keyword'], ($cfg['maxResult'] - count($task)));
             $fillQuery->andFilterWhere(['not in', 'id', self::getUserIdArray($task)]);
             $fillUser = $fillQuery->all();
 
             //Either the additional tasks are disabled (by default) or we disable them by permission
-            $disableCondition = (isset($cfg['permission'])) ? $cfg['permission'] : $cfg['disableFillUser'];
+            $disableCondition = $cfg['permission'] ?? $cfg['disableFillUser'];
             $jsonResult = array_merge($jsonResult, TaskPicker::asJSON($fillUser, $disableCondition, 1));
         }
 

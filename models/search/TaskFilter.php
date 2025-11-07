@@ -32,7 +32,7 @@ class TaskFilter extends Task
     {
         //We don't use the permission here for filtering since we include user with no permission as disabled in the result.
         //The problem here is we do not prefer users with permission in the query.
-        $tasks = $this->getTaskByFilter($keywords, $maxResults);
+        $tasks = static::getTaskByFilter($keywords, $maxResults);
         return TaskPicker::asJSON($tasks, $permission);
     }
 

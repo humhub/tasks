@@ -19,7 +19,7 @@ use Yii;
  *
  * @property-read Task|null $record
  */
-class TaskElement extends BaseContentRecordElement
+class TaskElement extends BaseContentRecordElement implements \Stringable
 {
     protected const RECORD_CLASS = Task::class;
 
@@ -41,7 +41,7 @@ class TaskElement extends BaseContentRecordElement
         ];
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return Html::encode($this->record?->title);
     }
