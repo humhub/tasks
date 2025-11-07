@@ -57,7 +57,7 @@ class TasksController extends BaseContentController
         /** @var ContentContainerActiveRecord $container */
         $container = $containerRecord->getPolymorphicRelation();
 
-        if (! in_array(get_class($container), Yii::$app->getModule('tasks')->getContentContainerTypes())
+        if (! in_array($container::class, Yii::$app->getModule('tasks')->getContentContainerTypes())
             || ! $container->permissionManager->can([CreateTask::class, ManageTasks::class])) {
             return $this->returnError(403, 'You are not allowed to create task!');
         }
@@ -65,8 +65,8 @@ class TasksController extends BaseContentController
         $taskParams = Yii::$app->request->post('Task', []);
 
         $taskForm = new TaskForm([
-            'cal' => isset($taskParams['cal_mode']) ? $taskParams['cal_mode'] : null,
-            'taskListId' => isset($taskParams['task_list_id']) ? $taskParams['task_list_id'] : null,
+            'cal' => $taskParams['cal_mode'] ?? null,
+            'taskListId' => $taskParams['task_list_id'] ?? null,
             'dateFormat' => 'php:Y-m-d',
             'timeFormat' => 'php:H:i',
         ]);

@@ -166,14 +166,10 @@ class TaskForm extends Model implements TabbedFormModel
             [['end_date'], DbDateValidator::class, 'format' => $this->getDateFormat(), 'timeAttribute' => 'end_time', 'timeZone' => $this->timeZone],
             [['end_date'], 'validateEndTime'],
 
-            [['start_date', 'end_date'], 'required', 'when' => function ($model) {
-                return $model->task->scheduling == 1;
-            }, 'whenClient' => "function (attribute, value) {
+            [['start_date', 'end_date'], 'required', 'when' => fn($model) => $model->task->scheduling == 1, 'whenClient' => "function (attribute, value) {
                 return $('#task-scheduling').val() == 1;
             }"],
-            [['start_time', 'end_time'], 'required', 'when' => function ($model) {
-                return $model->task->all_day == 0;
-            }, 'whenClient' => "function (attribute, value) {
+            [['start_time', 'end_time'], 'required', 'when' => fn($model) => $model->task->all_day == 0, 'whenClient' => "function (attribute, value) {
                 return $('#task-all_day').val() == 0;
             }"],
 
@@ -184,20 +180,12 @@ class TaskForm extends Model implements TabbedFormModel
 
     public function getDateFormat()
     {
-        if (isset($this->dateFormat)) {
-            return $this->dateFormat;
-        }
-
-        return Yii::$app->formatter->dateInputFormat;
+        return $this->dateFormat ?? Yii::$app->formatter->dateInputFormat;
     }
 
     public function getTimeFormat()
     {
-        if (isset($this->timeFormat)) {
-            return $this->timeFormat;
-        }
-
-        return Yii::$app->formatter->isShowMeridiem() ? 'h:mm a' : 'php:H:i';
+        return $this->timeFormat ?? Yii::$app->formatter->isShowMeridiem() ? 'h:mm a' : 'php:H:i';
     }
 
     public function getTimeLocale()
@@ -429,7 +417,7 @@ class TaskForm extends Model implements TabbedFormModel
 
     public function getSubmitUrl()
     {
-        return ($this->submitUrl) ? $this->submitUrl : TaskUrl::editTask($this->task, $this->cal, $this->redirect, $this->taskListId, $this->wall);
+        return $this->submitUrl ?: TaskUrl::editTask($this->task, $this->cal, $this->redirect, $this->taskListId, $this->wall);
     }
 
     public function getDeleteUrl()

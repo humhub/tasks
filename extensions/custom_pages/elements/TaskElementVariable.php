@@ -20,12 +20,12 @@ class TaskElementVariable extends BaseContentRecordElementVariable
     public string $description;
     public bool $isScheduled;
     public bool $allDay;
-    public ?string $startDateTime;
-    public ?string $endDateTime;
+    public ?string $startDateTime = null;
+    public ?string $endDateTime = null;
     public bool $isAddedToCalendar;
     public string $timeZone;
-    public ?string $listName;
-    public ?string $listColor;
+    public ?string $listName = null;
+    public ?string $listColor = null;
     public array $checkPoints = [];
 
     /**

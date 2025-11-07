@@ -86,16 +86,13 @@ abstract class AbstractTaskController extends ContentContainerController
             ],
             [
                 'attribute' => 'ContainerType',
-                'value' =>  function ($model) {
+                'value' =>  fn($model) =>
                     /* @var $model \humhub\modules\tasks\models\Task */
-                    return (new \ReflectionClass($model->content->container))->getShortName();
-                },
+                    (new \ReflectionClass($model->content->container))->getShortName(),
             ],
             [
                 'attribute' => 'ContainerId',
-                'value' =>  function ($model) {
-                    return $model->content->container->id;
-                },
+                'value' =>  fn($model) => $model->content->container->id,
             ],
             [
                 'class' => DateTimeColumn::class,

@@ -11,7 +11,7 @@ class uninstall extends Migration
             $this->dropFK('fk-task-item-task-id', 'task_item');
             $this->dropFK('fk-task-reminder-task-id', 'task_reminder');
             $this->dropFK('fk-task-list-setting-task-id', 'task_list_setting');
-        } catch (\Exception $e) {
+        } catch (\Exception) {
         }
 
         $this->dropTableSave('task');

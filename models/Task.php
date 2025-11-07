@@ -241,9 +241,7 @@ class Task extends ContentActiveRecord implements Searchable
         return [
             [['title'], 'required'],
             [['color'], 'string', 'max' => 7],
-            [['start_datetime', 'end_datetime'], 'required', 'when' => function ($model) {
-                return $model->scheduling == 1;
-            }, 'whenClient' => "function (attribute, value) {
+            [['start_datetime', 'end_datetime'], 'required', 'when' => fn($model) => $model->scheduling == 1, 'whenClient' => "function (attribute, value) {
                 return $('#task-scheduling').val() == 1;
             }"],
             [['start_datetime'], 'default', 'value' => null],
@@ -436,10 +434,9 @@ class Task extends ContentActiveRecord implements Searchable
                         continue;
                     }
 
-                    $oldAssigned = array_filter($oldTaskUsers, function ($taskUser) use ($user) {
+                    $oldAssigned = array_filter($oldTaskUsers, fn($taskUser) =>
                         /** @var $taskUser TaskUser */
-                        return $taskUser->user_id === $user->id && $taskUser->user_type === Task::USER_ASSIGNED;
-                    });
+                        $taskUser->user_id === $user->id && $taskUser->user_type === Task::USER_ASSIGNED);
 
                     $this->addTaskAssigned($guid, empty($oldAssigned));
                 }
@@ -453,10 +450,9 @@ class Task extends ContentActiveRecord implements Searchable
                         continue;
                     }
 
-                    $oldResponsible = array_filter($oldTaskUsers, function ($taskUser) use ($user) {
+                    $oldResponsible = array_filter($oldTaskUsers, fn($taskUser) =>
                         /** @var $taskUser TaskUser */
-                        return $taskUser->user_id === $user->id && $taskUser->user_type === Task::USER_RESPONSIBLE;
-                    });
+                        $taskUser->user_id === $user->id && $taskUser->user_type === Task::USER_RESPONSIBLE);
 
                     $this->addTaskResponsible($guid, empty($oldResponsible));
                 }
@@ -513,9 +509,7 @@ class Task extends ContentActiveRecord implements Searchable
             return false;
         }
 
-        $taskAssigned = array_filter($this->assignedTaskUsers, function (TaskUser $p) use ($user) {
-            return $p->user_id == $user->id;
-        });
+        $taskAssigned = array_filter($this->assignedTaskUsers, fn(TaskUser $p) => $p->user_id == $user->id);
 
         return !empty($taskAssigned);
     }
@@ -624,9 +618,7 @@ class Task extends ContentActiveRecord implements Searchable
             return false;
         }
 
-        $taskResponsible = array_filter($this->taskResponsible, function (TaskUser $p) use ($user) {
-            return $p->user_id == $user->id;
-        });
+        $taskResponsible = array_filter($this->taskResponsible, fn(TaskUser $p) => $p->user_id == $user->id);
 
         return !empty($taskResponsible);
     }
@@ -715,7 +707,7 @@ class Task extends ContentActiveRecord implements Searchable
 
     public function addItem($itemText)
     {
-        if (trim($itemText) === '') {
+        if (trim((string) $itemText) === '') {
             return;
         }
 
@@ -1118,7 +1110,7 @@ class Task extends ContentActiveRecord implements Searchable
 
     private function hasNewTaskList(): bool
     {
-        return !empty($this->task_list_id) && !preg_match('/^\d+$/', $this->task_list_id);
+        return !empty($this->task_list_id) && !preg_match('/^\d+$/', (string) $this->task_list_id);
     }
 
     private function saveTaskList(): bool
