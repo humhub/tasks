@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.9.1 (Unreleased)
------------------------
+1.9.1 (November 18, 2025)
+-------------------------
 - Fix #271: Update tooltip to Bootstrap 5
 - Enh #274: Improved Module Test GitHub Actions
 - Enh #279: Implemented `module-coding-standards`
