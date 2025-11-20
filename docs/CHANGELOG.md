@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.9.2 - (Unreleased)
+---------------------------
+- Enh #289: Convert swagger docs to OpenAPI 3.0
+
 1.9.1 (November 18, 2025)
 -------------------------
 - Fix #271: Update tooltip to Bootstrap 5
