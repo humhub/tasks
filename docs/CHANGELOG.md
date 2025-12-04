@@ -4,6 +4,7 @@ Changelog
 1.9.2 - (Unreleased)
 ---------------------------
 - Enh #289: Convert swagger docs to OpenAPI 3.0
+- Fix: Use `MailStyleHelper` for safe email inline styling
 
 1.9.1 (November 18, 2025)
 -------------------------
