@@ -11,7 +11,7 @@
     "version": "1.9.2",
     "homepage": "https://github.com/humhub/tasks",
     "humhub": {
-        "minVersion": "1.18-beta.6"
+        "minVersion": "1.18"
     },
     "screenshots": [
         "resources/screenshot1.png",
