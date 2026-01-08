@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.9.2 - (Unreleased)
----------------------------
+1.9.2 (January 8, 2026)
+-----------------------
 - Enh #289: Convert swagger docs to OpenAPI 3.0
 - Fix #291: Use `MailStyleHelper` for safe email inline styling
 - Fix #296: Compatibility with HumHub 1.18-beta.6
