@@ -20,7 +20,7 @@ class TaskSubMenu extends SettingsTabs
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         $contentContainer = Yii::$app->controller->contentContainer;
 

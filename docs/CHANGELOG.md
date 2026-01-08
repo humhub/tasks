@@ -5,6 +5,7 @@ Changelog
 ---------------------------
 - Enh #289: Convert swagger docs to OpenAPI 3.0
 - Fix #291: Use `MailStyleHelper` for safe email inline styling
+- Fix #296: Compatibility with HumHub 1.18-beta.6
 
 1.9.1 (November 18, 2025)
 -------------------------
