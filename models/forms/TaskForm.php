@@ -185,7 +185,7 @@ class TaskForm extends Model implements TabbedFormModel
 
     public function getTimeFormat()
     {
-        return $this->timeFormat ?? Yii::$app->formatter->isShowMeridiem() ? 'h:mm a' : 'php:H:i';
+        return $this->timeFormat ?? (Yii::$app->formatter->isShowMeridiem() ? 'h:mm a' : 'php:H:i');
     }
 
     public function getTimeLocale()
