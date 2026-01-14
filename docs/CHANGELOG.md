@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.9.3 (Unreleased)
+-----------------------
+- Fix #297: Fix custom time format
+
 1.9.2 (January 8, 2026)
 -----------------------
 - Enh #289: Convert swagger docs to OpenAPI 3.0
