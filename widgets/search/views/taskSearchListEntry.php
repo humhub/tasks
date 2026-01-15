@@ -7,7 +7,7 @@
  */
 
 use humhub\helpers\Html;
-use humhub\modules\comment\models\Comment;
+use humhub\modules\comment\services\CommentListService;
 use humhub\modules\space\models\Space;
 use humhub\modules\space\widgets\Image as SpaceImage;
 use humhub\modules\tasks\helpers\TaskUrl;
@@ -60,7 +60,7 @@ $image = $task->content->container instanceof Space
 
             <div class="float-end toggleTaskDetails d-none d-sm-block"
                  style="<?= (!$task->content->canEdit()) ? 'border-right:0;margin-right:0' : '' ?>">
-                <?= Icon::get('comment-o') ?> <?= Comment::getCommentCount(Task::class, $task->id); ?>
+                <?= Icon::get('comment-o') ?> <?= CommentListService::create($task)->getCount() ?>
             </div>
 
             <?php if ($task->review) : ?>

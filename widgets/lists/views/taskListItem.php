@@ -8,7 +8,7 @@
 
 use humhub\components\View;
 use humhub\helpers\Html;
-use humhub\modules\comment\models\Comment;
+use humhub\modules\comment\services\CommentListService;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\widgets\lists\TaskListDetails;
 use humhub\modules\tasks\widgets\TaskBadge;
@@ -89,7 +89,7 @@ $checkUrl = $task->state->getCheckUrl();
 
         <div class="task-controls toggleTaskDetails d-none d-sm-block"
              style="<?= (!$task->content->canEdit()) ? 'border-right:0;margin-right:0' : '' ?>">
-            <?= Icon::get('comment-o') ?> <?= Comment::getCommentCount(Task::class, $task->id); ?>
+            <?= Icon::get('comment-o') ?> <?= CommentListService::create($task)->getCount() ?>
         </div>
 
         <div class="task-controls end">
