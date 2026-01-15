@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.10.0 (Unreleased)
+-----------------------
+- Fix #298: Update for HumHub 1.19
+
 1.9.3 (Unreleased)
 -----------------------
 - Fix #297: Fix custom time format
