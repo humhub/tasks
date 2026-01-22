@@ -4,6 +4,7 @@ Changelog
 1.9.3 (Unreleased)
 -----------------------
 - Fix #297: Fix custom time format
+- Enh #302: Improve topic url of hidden tasks on stream
 
 1.9.2 (January 8, 2026)
 -----------------------

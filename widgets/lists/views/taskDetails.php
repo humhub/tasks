@@ -20,7 +20,7 @@ use humhub\modules\topic\widgets\TopicBadge;
 
         <div class="task-list-task-topics">
             <?php foreach (Topic::findByContent($task->content)->all() as $topic) : ?>
-                <?= TopicBadge::forTopic($topic) ?>
+                <?= TopicBadge::topic($topic, $task->content) ?>
             <?php endforeach; ?>
         </div>
 
