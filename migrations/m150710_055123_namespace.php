@@ -9,8 +9,10 @@ class m150710_055123_namespace extends Migration
     {
         $this->renameClass('Task', humhub\modules\tasks\models\Task::className());
 
-        $this->update('activity', ['class' => 'humhub\modules\content\activities\ContentCreated', 'module' => 'content'], ['class' => 'TaskCreated']);
-        $this->update('activity', ['class' => 'humhub\modules\tasks\activities\Finished', 'module' => 'tasks'], ['class' => 'TaskFinished']);
+        if ($this->db->getTableSchema('activity', true)->getColumn('module') !== null) {
+            $this->update('activity', ['class' => 'humhub\modules\content\activities\ContentCreated', 'module' => 'content'], ['class' => 'TaskCreated']);
+            $this->update('activity', ['class' => 'humhub\modules\tasks\activities\Finished', 'module' => 'tasks'], ['class' => 'TaskFinished']);
+        }
 
         $this->update('notification', ['class' => 'humhub\modules\tasks\notification\Assigned'], ['class' => 'TaskAssignedNotification']);
         $this->update('notification', ['class' => 'humhub\modules\tasks\notification\Finished'], ['class' => 'TaskFinishedNotification']);
