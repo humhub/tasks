@@ -2,7 +2,9 @@
 
 namespace humhub\modules\tasks\models\state;
 
+use humhub\modules\activity\services\ActivityManager;
 use humhub\modules\tasks\activities\TaskCompletedActivity;
+use humhub\modules\tasks\activities\TaskResetActivity;
 use humhub\modules\tasks\activities\TaskReviewedActivity;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\notifications\TaskCompletedNotification;
@@ -87,14 +89,13 @@ class CompletedState extends TaskState
             if ($this->task->hasTaskResponsible()) {
                 ReviewSuccessNotification::instance()->from($user)->about($this->task)->sendBulk($this->task->taskResponsibleUsers);
             }
-
-            TaskReviewedActivity::instance()->from($user)->about($this->task)->create();
+            ActivityManager::dispatch(TaskReviewedActivity::class, $this->task, $user);
         } else {
             if ($this->task->hasTaskResponsible()) {
                 TaskCompletedNotification::instance()->from($user)->about($this->task)->sendBulk($this->task->taskResponsibleUsers);
             }
 
-            TaskCompletedActivity::instance()->from($user)->about($this->task)->create();
+            ActivityManager::dispatch(TaskCompletedActivity::class, $this->task, $user);
         }
     }
 

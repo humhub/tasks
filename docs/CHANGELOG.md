@@ -4,6 +4,7 @@ Changelog
 1.10.0 (Unreleased)
 -----------------------
 - Fix #298: Update for HumHub 1.19
+- Enh #298: Migrate to new Activity Manager
 
 1.9.3 (Unreleased)
 -----------------------
