@@ -16,11 +16,10 @@ use humhub\modules\ui\icon\widgets\Icon;
 
 ?>
 <div class="panel task-upcoming-snippet" id="task-my-tasks-snippet">
-
+    <?= PanelMenu::widget(['id' => 'task-my-tasks-snippet']) ?>
     <div class="panel-heading">
         <?= Icon::get('tasks') ?> <?= Yii::t('TasksModule.base', '<strong>Your</strong> tasks'); ?>
         <small><a style="font-size:0.9em;color:var(--info)" href="<?=  TaskUrl::globalView() ?>">(<?= Yii::t('TasksModule.base', 'view all'); ?>)</a></small>
-        <?= PanelMenu::widget(['id' => 'task-my-tasks-snippet']); ?>
     </div>
 
     <div class="panel-body" style="padding:0px">
