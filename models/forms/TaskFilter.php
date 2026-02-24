@@ -17,11 +17,11 @@
 namespace humhub\modules\tasks\models\forms;
 
 use humhub\libs\DbDateValidator;
-use humhub\modules\tasks\CalendarUtils;
-use Yii;
-use humhub\modules\tasks\models\Task;
 use humhub\modules\content\components\ContentContainerActiveRecord;
+use humhub\modules\tasks\helpers\CalendarUtils;
+use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\models\user\TaskUser;
+use Yii;
 use yii\base\Model;
 
 class TaskFilter extends Model
