@@ -41,7 +41,7 @@ class TaskCalendar extends Component
     }
 
     /**
-     * @param $event \humhub\modules\calendar\interfaces\CalendarItemsEvent
+     * @param $event \humhub\modules\calendar\interfaces\event\CalendarItemsEvent
      */
     public static function addItems($event)
     {
