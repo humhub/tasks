@@ -9,6 +9,7 @@ Changelog
 1.9.3 (Unreleased)
 -----------------------
 - Fix #297: Fix custom time format
+- Fix #304: Fix sidebar menu
 
 1.9.2 (January 8, 2026)
 -----------------------

@@ -7,7 +7,7 @@
  *
  */
 
-namespace humhub\modules\tasks;
+namespace humhub\modules\tasks\helpers;
 
 use DateTime;
 
