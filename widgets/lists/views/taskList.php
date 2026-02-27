@@ -12,6 +12,7 @@ use humhub\modules\tasks\models\lists\TaskList;
 use humhub\modules\tasks\widgets\lists\TaskListItem;
 use humhub\modules\ui\icon\widgets\Icon;
 use humhub\widgets\bootstrap\Button;
+use humhub\widgets\bootstrap\Link;
 
 /* @var $this \humhub\components\View */
 /* @var $list \humhub\modules\tasks\models\lists\TaskListInterface */
@@ -48,13 +49,13 @@ use humhub\widgets\bootstrap\Button;
         </span>
 
         <?php if ($list instanceof TaskList) : ?>
-            <?= Button::asLink()->icon('pencil')->sm()
+            <?= Link::to()->icon('pencil')->sm()
                 ->action('task.list.edit', TaskListUrl::editTaskList($list))
                 ->loader(false)
                 ->cssClass('task-list-edit task-toggled-color')
                 ->tooltip(Yii::t('TasksModule.base', 'Edit list'))
                 ->visible($canManage) ?>
-            <?= Button::asLink()->icon('trash')->sm()
+            <?= Link::to()->icon('trash')->sm()
                 ->action('deleteList', TaskListUrl::deleteTaskList($list))->loader(false)
                 ->cssClass('task-list-edit task-toggled-color')
                 ->tooltip(Yii::t('TasksModule.base', 'Delete list'))
@@ -92,7 +93,7 @@ use humhub\widgets\bootstrap\Button;
         <?php if ($completedTasksCount > count($completedTasks)) : ?>
             <?php $remainingCount = $completedTasksCount - count($completedTasks); ?>
             <div class="task-list-task-completed-show-more">
-                <?= Button::asLink(Yii::t('TasksModule.base', 'Show {count} more completed {countTasks,plural,=1{task} other{tasks}}', ['count' => $remainingCount, 'countTasks' => $remainingCount]))
+                <?= Link::to(Yii::t('TasksModule.base', 'Show {count} more completed {countTasks,plural,=1{task} other{tasks}}', ['count' => $remainingCount, 'countTasks' => $remainingCount]))
                     ->icon('chevron-down')->action('showMoreCompleted', TaskListUrl::showMore($list))->cssClass('showMoreCompleted')->loader(true) ?>
             </div>
         <?php endif; ?>

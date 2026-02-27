@@ -5,7 +5,7 @@
 /* @var $options array */
 
 use humhub\modules\tasks\helpers\TaskListUrl;
-use humhub\widgets\bootstrap\Button;
+use humhub\widgets\bootstrap\Link;
 use humhub\helpers\Html;
 
 ?>
@@ -17,7 +17,7 @@ use humhub\helpers\Html;
             <?= Html::encode($taskList->title); ?>
         </span>
         <div class="float-end task-controls end">
-            <?= Button::asLink()
+            <?= Link::to()
                 ->tooltip(Yii::t('TasksModule.base', 'Delete'))
                 ->icon('trash')
                 ->right()->sm()
@@ -25,7 +25,7 @@ use humhub\helpers\Html;
                 ->loader(false)
                 ->visible($canEdit)
                 ->confirm() ?>
-            <?= Button::asLink()
+            <?= Link::to()
                 ->tooltip(Yii::t('TasksModule.base', 'Edit'))
                 ->icon('pencil')
                 ->right()->sm()->cssClass('me-2')
