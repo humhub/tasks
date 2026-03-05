@@ -5,6 +5,7 @@ Changelog
 -----------------------
 - Fix #297: Fix custom time format
 - Fix #304: Fix sidebar menu
+- Fix #310: Fix checklist item encoding
 
 1.9.2 (January 8, 2026)
 -----------------------
