@@ -24,7 +24,7 @@ $disabled = ($task->canCheckItems()) ? false : 'true';
         <div class="col-lg-12" style="padding-right: 0;">
             <div class="task-item-content">
                 <?= Html::checkBox('item[' . $item->id . ']', $item->completed, [
-                    'label' => $item->title,
+                    'label' => Html::encode($item->title),
                     'itemId' => $item->id,
                     'data-action-change' => 'check',
                     'disabled' => $disabled,
