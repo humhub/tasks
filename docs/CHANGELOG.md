@@ -1,8 +1,11 @@
 Changelog
 =========
 
-1.9.3 (Unreleased)
+1.9.3 (March 5, 2026)
 -----------------------
+
+> This release also fixes a [security](https://github.com/humhub/tasks/security/advisories/GHSA-jr53-752q-pccw) issue.
+
 - Fix #297: Fix custom time format
 - Fix #304: Fix sidebar menu
 - Fix #310: Fix checklist item encoding
