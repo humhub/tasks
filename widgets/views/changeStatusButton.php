@@ -16,9 +16,10 @@ use humhub\modules\tasks\helpers\TaskUrl;
     <?= Button::primary($primaryStateConfig['label'])->action('task.changeState', $primaryUrl)->sm()->icon($primaryStateConfig['icon'])->loader(true);?>
 
     <?php if(!empty($proceedConfig) || !empty($revertConfig)) : ?>
-        <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="sr-only">Toggle Dropdown</span>
-        </button>
+        <?= Button::primary()
+            ->options(['data-bs-toggle' => 'dropdown', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'])
+            ->cssClass('dropdown-toggle')->sm()
+            ->loader(false) ?>
         <ul class="dropdown-menu">
             <?php foreach($proceedConfig as $status => $config) : ?>
                 <?php $status = $task->state->getStateInstance($status) ?>

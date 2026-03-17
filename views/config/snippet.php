@@ -8,8 +8,8 @@
  */
 
 use humhub\modules\tasks\models\SnippetModuleSettings;
+use humhub\widgets\bootstrap\Button;
 use humhub\widgets\form\ContentHiddenCheckbox;
-use humhub\helpers\Html;
 use humhub\widgets\form\ActiveForm;
 
 /* @var $model SnippetModuleSettings */
@@ -45,8 +45,7 @@ use humhub\widgets\form\ActiveForm;
         <?= $form->field($model, 'menuSortOrder')->input('number', ['min' => 0]) ?>
 
         <hr>
-
-        <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'data-ui-loader' => '']) ?>
+        <?= Button::save()->submit() ?>
         <?php ActiveForm::end(); ?>
     </div>
 </div>
