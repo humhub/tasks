@@ -10,11 +10,12 @@ use humhub\helpers\Html;
 /* @var $users User[] */
 /* @var $style string */
 /* @var $type int */
+/* @var $size int */
 ?>
 <?php foreach ($users as $user): ?>
     <?= Image::widget([
         'user' => $user,
-        'width' => '24',
+        'width' => $size,
         'showTooltip' => true,
         'imageOptions' => ['style' => $style],
         'tooltipText' => match ($type) {

@@ -84,6 +84,46 @@ $tasks-info-color: #21A1B3;
         .hh-list {
             margin-bottom: 0;
 
+            > div {
+                margin-bottom: 6px;
+                .d-flex > div {
+                    margin-right: 8px;
+                    &:last-child {
+                        margin-right: 0;
+                    }
+                }
+            }
+            .task-item-info {
+                display: flex;
+                flex-wrap: wrap !important;
+                font-size: 95%;
+                > div {
+                    text-wrap: nowrap;
+                    margin-right: 10px;
+                }
+                .text-accent {
+                    color: var(--accent);
+                }
+            }
+            .task-users, .task-progress {
+                border-right: 1px solid #eee;
+                padding-right: 8px;
+                margin: 4px 8px 4px 0;
+            }
+            .task-progress {
+                width: 50px;
+                padding-top: 9px;
+            }
+            .nav-pills.preferences {
+                position: relative;
+                right: 0;
+                top: 3px;
+                .dropdown .dropdown-toggle::after {
+                    width: 25px;
+                    height: 25px;
+                }
+            }
+
             > div:not(.pagination-container):last-of-type {
                 border-bottom: 0;
             }
@@ -92,9 +132,13 @@ $tasks-info-color: #21A1B3;
                 background: var(--hh-background-color-main);
                 box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
                 border-radius: 4px;
-                padding: 20px;
+                padding: 8px;
                 color: $tasks-text-color;
                 font-size: 13px;
+            }
+
+            .nav-pills .dropdown-menu li a {
+                color: var(--hh-primary-contrast);
             }
         }
     }

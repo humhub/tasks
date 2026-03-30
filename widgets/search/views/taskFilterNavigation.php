@@ -25,14 +25,12 @@ $titleFilter = $title[0];
 ?>
 
 <?= Html::beginTag('div', $options) ?>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <?= TextFilterInput::widget($title[0]) ?>
-        </div>
+<div class="row">
+    <div class="col-lg-12">
+        <?= TextFilterInput::widget($title[0]) ?>
     </div>
 </div>
-<div class="filter-root clearfix container">
+<div class="filter-root clearfix">
     <div class="row task-bottom-panel">
         <?= FilterPanel::widget(['blocks' => $checkboxes, 'span' => 3]) ?>
         <?= FilterPanel::widget(['blocks' => $datePicker, 'span' => 3]) ?>
