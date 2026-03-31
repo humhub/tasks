@@ -37,10 +37,9 @@ $taskResponsibleUsers = $task->taskResponsibleUsers;
 $taskAssignedUsers = $task->taskAssignedUsers;
 ?>
 <div class="float-end ms-2">
-<?= TaskContextMenu::widget(['task' => $task]) ?>
+<?= TaskContextMenu::widget(['task' => $task, 'cal' => 'filter']) ?>
 </div>
 <div class="task d-flex flex-wrap" data-task-url="<?= TaskUrl::viewTask($task) ?>">
-
     <div class="d-flex flex-grow-1">
         <?php if (!$contentContainer) : ?>
             <div><?= $image ?></div>

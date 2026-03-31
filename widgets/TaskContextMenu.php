@@ -27,6 +27,8 @@ class TaskContextMenu extends WallEntryControls
 
     public ?string $align = null;
 
+    public ?string $cal = null;
+
     /**
      * @inheritdoc
      */
@@ -70,7 +72,7 @@ class TaskContextMenu extends WallEntryControls
                 'sortOrder' => 100,
                 'htmlOptions' => [
                     'data-action-click' => 'ui.modal.post',
-                    'data-action-click-url' => TaskUrl::editTask($this->task),
+                    'data-action-click-url' => TaskUrl::editTask($this->task, $this->cal),
                 ],
             ]));
 
