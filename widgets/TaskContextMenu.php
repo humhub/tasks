@@ -29,6 +29,10 @@ class TaskContextMenu extends WallEntryControls
 
     public ?string $cal = null;
 
+    // Wraps the controls to data-ui-widget="stream.StreamEntry" to make some actions working,
+    // when the context menu is opened on not wall stream.
+    public $jsWidget = 'stream.StreamEntry';
+
     /**
      * @inheritdoc
      */
@@ -63,6 +67,7 @@ class TaskContextMenu extends WallEntryControls
         $this->renderOptions->disableControlsEntryEdit();
         $this->renderOptions->disableControlsEntryDelete();
         $this->renderOptions->disableControlsEntryPin();
+        $this->renderOptions->disableControlsEntryArchive();
 
         if ($this->task->content->canEdit()) {
             $this->addEntry(new MenuLink([

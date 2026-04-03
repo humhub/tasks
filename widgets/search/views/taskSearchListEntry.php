@@ -17,7 +17,9 @@ use humhub\modules\tasks\widgets\TaskPercentageBar;
 use humhub\modules\tasks\widgets\TaskStatus;
 use humhub\modules\tasks\widgets\TaskUserList;
 use humhub\modules\ui\icon\widgets\Icon;
+use humhub\modules\user\models\User;
 use humhub\modules\user\widgets\Image as UserImage;
+use humhub\widgets\bootstrap\Link;
 
 /* @var $task Task */
 /* @var $canEdit boolean */
@@ -35,9 +37,10 @@ $image = $task->content->container instanceof Space
 
 $taskResponsibleUsers = $task->taskResponsibleUsers;
 $taskAssignedUsers = $task->taskAssignedUsers;
+$taskContainer = $task->content->container;
 ?>
 <div class="float-end ms-2">
-<?= TaskContextMenu::widget(['task' => $task, 'cal' => 'filter']) ?>
+    <?= TaskContextMenu::widget(['task' => $task, 'cal' => 'filter']) ?>
 </div>
 <div class="task d-flex flex-wrap" data-task-url="<?= TaskUrl::viewTask($task) ?>">
     <div class="d-flex flex-grow-1">
@@ -51,6 +54,20 @@ $taskAssignedUsers = $task->taskAssignedUsers;
                 <?php if ($task->task_list_id) : ?>
                     <div data-bs-title="<?= Html::encode(Yii::t('TasksModule.base', 'List: {list}', ['list' => $task->list->title])) ?>" data-bs-toggle="tooltip">
                         <?= Icon::get('list-ul') . ' ' . $task->list->title ?>
+                    </div>
+                <?php endif; ?>
+
+                <?php if ($taskContainer instanceof Space) : ?>
+                    <div>
+                        <?= Link::to($taskContainer->displayName, $taskContainer->getUrl())
+                            ->icon('dot-circle-o')
+                            ->tooltip(Yii::t('TasksModule.base', 'Space : {space}', ['space' => $taskContainer->displayName])) ?>
+                    </div>
+                <?php elseif ($taskContainer instanceof User) : ?>
+                    <div>
+                        <?= Link::to($taskContainer->displayName, $taskContainer->getUrl())
+                            ->icon('user')
+                            ->tooltip(Yii::t('TasksModule.base', 'User : {user}', ['user' => $taskContainer->displayName])) ?>
                     </div>
                 <?php endif; ?>
 

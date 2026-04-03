@@ -27,6 +27,7 @@ use yii\base\Model;
 class TaskFilter extends Model
 {
     public const FILTER_TITLE = 'title';
+    public const FILTER_DEADLINE = 'deadline';
     public const FILTER_OVERDUE = 'overdue';
     public const FILTER_ASSIGNED = 'assigned';
     public const FILTER_RESPONSIBLE = 'responsible';
@@ -35,16 +36,16 @@ class TaskFilter extends Model
     public const FILTER_SPACE = 'spaces';
     public const FILTER_DATE_START = 'date_start';
     public const FILTER_DATE_END = 'date_end';
+    public const FILTER_SORT = 'sort';
+    public const FILTER_LIST = 'list';
 
     public $filters = [];
-
     public $states = [];
-
     public $spaces = [];
-
     public $date_start;
-
     public $date_end;
+    public $sort;
+    public $list = [];
 
 
     /**
@@ -66,7 +67,7 @@ class TaskFilter extends Model
     {
         return [
             [['title', 'date_start', 'date_end'], 'string'],
-            [['filters', 'states', 'spaces'], 'safe'],
+            [['filters', 'states', 'spaces', 'sort', 'list'], 'safe'],
             [['date_start'], DbDateValidator::class],
             [['date_end'], DbDateValidator::class],
         ];
@@ -101,6 +102,10 @@ class TaskFilter extends Model
             $query->andWhere('space.status = 1 OR space.status IS NULL');
         }
 
+        if ($this->isFilterActive(static::FILTER_DEADLINE)) {
+            $query->andWhere('DATE(task.end_datetime) = CURDATE()');
+        }
+
         if ($this->isFilterActive(static::FILTER_OVERDUE)) {
             $query->andWhere('task.end_datetime < DATE(NOW())');
             $query->andWhere(['!=', 'task.status', Task::STATUS_COMPLETED]);
@@ -108,6 +113,10 @@ class TaskFilter extends Model
 
         if (!empty($this->states)) {
             $query->andWhere(['in', 'task.status', $this->states]);
+        }
+
+        if (!empty($this->list)) {
+            $query->andWhere(['in', 'task.task_list_id', $this->list]);
         }
 
         if (!empty($this->title)) {
@@ -151,7 +160,25 @@ class TaskFilter extends Model
             $query->andWhere(CalendarUtils::getEndCriteria($this->date_end, 'end_datetime'));
         }
 
-        $query->orderBy(['task.status' => SORT_ASC, 'task.scheduling' => SORT_DESC, 'task.end_datetime' => SORT_ASC]);
+        switch ($this->sort) {
+            case 'deadline':
+                $query->andWhere(['!=', 'task.status', Task::STATUS_COMPLETED])
+                    ->andWhere(['task.scheduling' => 1])
+                    ->orderBy(['task.end_datetime' => SORT_ASC]);
+                break;
+            case 'new':
+                $query->orderBy(['task.start_datetime' => SORT_DESC]);
+                break;
+            case 'old':
+                $query->orderBy(['task.start_datetime' => SORT_ASC]);
+                break;
+            default:
+                $query->orderBy([
+                    'task.status' => SORT_ASC,
+                    'task.scheduling' => SORT_DESC,
+                    'task.end_datetime' => SORT_ASC,
+                ]);
+        }
 
         return $query;
     }

@@ -117,11 +117,7 @@ $tasks-info-color: #21A1B3;
             .nav-pills.preferences {
                 position: relative;
                 right: 0;
-                top: 3px;
-                .dropdown .dropdown-toggle::after {
-                    width: 25px;
-                    height: 25px;
-                }
+                top: 8px;
             }
 
             > div:not(.pagination-container):last-of-type {
@@ -232,7 +228,8 @@ $tasks-info-color: #21A1B3;
         .filter-panel {
             vertical-align: top;
             width: auto !important;
-            padding: 0 40px;
+            padding: 0 40px 0 0;
+            border: none;
 
             &:first-child {
                 padding-left: 0;
@@ -240,6 +237,22 @@ $tasks-info-color: #21A1B3;
 
             &:last-child {
                 padding-right: 0;
+            }
+            ul.filter-list li {
+                input[type=text], .select2 {
+                    margin-bottom: 10px;
+                    width: 100%;
+                }
+            }
+            .select2 .select2-selection {
+                min-height: 45px;
+                .select2-selection__rendered {
+                    line-height: 28px;
+                }
+                .select2-selection__choice {
+                    min-height: 30px;
+                    padding: 0 4px;
+                }
             }
         }
 
@@ -269,8 +282,8 @@ $tasks-info-color: #21A1B3;
                     }
 
                     &.fa-check-square-o {
-                        border-color: var(--info);
-                        background: var(--info);
+                        border-color: var(--accent);
+                        background: var(--accent);
                     }
                 }
             }
