@@ -19,6 +19,7 @@ namespace humhub\modules\tasks\models\forms;
 use humhub\libs\DbDateValidator;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\tasks\helpers\CalendarUtils;
+use humhub\modules\tasks\models\lists\TaskList;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\models\user\TaskUser;
 use Yii;
@@ -116,7 +117,10 @@ class TaskFilter extends Model
         }
 
         if (!empty($this->list)) {
-            $query->andWhere(['in', 'task.task_list_id', $this->list]);
+            $query->andWhere(['in', 'task.task_list_id', TaskList::find()
+                ->select('content_tag.id')
+                ->orderBy('content_tag.id')
+                ->andWhere(['content_tag.name' => $this->list])]);
         }
 
         if (!empty($this->title)) {

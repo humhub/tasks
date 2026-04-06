@@ -9,6 +9,7 @@
 
 namespace humhub\modules\tasks\widgets\search;
 
+use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\content\helpers\ContentContainerHelper;
 use humhub\modules\space\models\Membership;
 use humhub\modules\space\models\Space;
@@ -199,6 +200,16 @@ class TaskFilterNavigation extends FilterNavigation
                 ]], static::FILTER_BLOCK_COL4);
         }
 
+        $taskLists = TaskList::find()
+            ->select('content_tag.name')
+            ->distinct('content_tag.name')
+            ->indexBy('content_tag.name')
+            ->orderBy('content_tag.name');
+
+        if ($this->filter->contentContainer instanceof ContentContainerActiveRecord) {
+            $taskLists->andWhere(['content_tag.contentcontainer_id' => $this->filter->contentContainer->contentcontainer_id]);
+        }
+
         $this->addFilter([
             'id' => TaskFilter::FILTER_LIST,
             'category' => 'list',
@@ -208,11 +219,7 @@ class TaskFilterNavigation extends FilterNavigation
             ],
             'picker' => MultiSelect::class,
             'pickerOptions' => [
-                'items' => TaskList::find()
-                    ->select('content_tag.name')
-                    ->indexBy('content_tag.id')
-                    ->orderBy('content_tag.name')
-                    ->column(),
+                'items' => $taskLists->column(),
                 'placeholderMore' =>  Yii::t('TasksModule.base', 'Select (All)'),
                 'name' => 'task-filter-list',
             ]], static::FILTER_BLOCK_COL4);
