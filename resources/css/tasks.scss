@@ -174,20 +174,10 @@ $tasks-info-color: #21A1B3;
         }
     }
 
-
-    #task-export-button {
-        float: right;
-    }
-
     @media (max-width: 767px) {
         #task-filter-nav {
             overflow: auto;
         }
-
-        #task-export-button {
-            float: none;
-        }
-
     }
 
     label {
@@ -223,16 +213,9 @@ $tasks-info-color: #21A1B3;
             vertical-align: top;
             width: auto !important;
             min-width: 200px;
-            padding: 0 16px 0 0;
+            padding-top: 0;
+            padding-bottom: 0;
             border: none;
-
-            &:first-child {
-                padding-left: 0;
-            }
-
-            &:last-child {
-                padding-right: 0;
-            }
             ul.filter-list > li {
                 input[type=text], .select2 {
                     margin: 5px 5px 10px 0;
@@ -258,8 +241,6 @@ $tasks-info-color: #21A1B3;
         }
 
         .task-bottom-panel {
-            margin: 16px 0;
-
             .filterInput {
                 margin: 5px;
 

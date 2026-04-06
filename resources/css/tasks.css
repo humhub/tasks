@@ -135,15 +135,9 @@
 .task-overview .hh-list .pagination li:hover {
   border: 0;
 }
-.task-overview #task-export-button {
-  float: right;
-}
 @media (max-width: 767px) {
   .task-overview #task-filter-nav {
     overflow: auto;
-  }
-  .task-overview #task-export-button {
-    float: none;
   }
 }
 .task-overview label {
@@ -174,14 +168,9 @@
   vertical-align: top;
   width: auto !important;
   min-width: 200px;
-  padding: 0 16px 0 0;
+  padding-top: 0;
+  padding-bottom: 0;
   border: none;
-}
-.task-overview #task-filter-nav .filter-panel:first-child {
-  padding-left: 0;
-}
-.task-overview #task-filter-nav .filter-panel:last-child {
-  padding-right: 0;
 }
 .task-overview #task-filter-nav .filter-panel ul.filter-list > li input[type=text], .task-overview #task-filter-nav .filter-panel ul.filter-list > li .select2 {
   margin: 5px 5px 10px 0;
@@ -200,9 +189,6 @@
 }
 .task-overview #task-filter-nav #task-filter-loader {
   padding-top: 12px;
-}
-.task-overview #task-filter-nav .task-bottom-panel {
-  margin: 16px 0;
 }
 .task-overview #task-filter-nav .task-bottom-panel .filterInput {
   margin: 5px;
