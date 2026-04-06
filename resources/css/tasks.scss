@@ -139,10 +139,9 @@ $tasks-info-color: #21A1B3;
         }
     }
 
-    li {
+    .filter-list > li {
         cursor: pointer;
         margin-bottom: 4px;
-
         &:last-child {
             border-bottom: 0;
         }
@@ -213,14 +212,9 @@ $tasks-info-color: #21A1B3;
 
             .filterInput {
                 font-size: 13px;
-                margin: 5px;
             }
 
-            .filterInput.task-date-picker, .select2-search__field {
-                font-size: 14px;
-            }
-
-            ul.filter-list li {
+            ul.filter-list > li {
                 padding: 2px 0;
             }
         }
@@ -228,7 +222,8 @@ $tasks-info-color: #21A1B3;
         .filter-panel {
             vertical-align: top;
             width: auto !important;
-            padding: 0 40px 0 0;
+            min-width: 200px;
+            padding: 0 16px 0 0;
             border: none;
 
             &:first-child {
@@ -238,20 +233,18 @@ $tasks-info-color: #21A1B3;
             &:last-child {
                 padding-right: 0;
             }
-            ul.filter-list li {
+            ul.filter-list > li {
                 input[type=text], .select2 {
-                    margin-bottom: 10px;
-                    width: 100%;
+                    margin: 5px 5px 10px 0;
                 }
             }
-            .select2 .select2-selection {
-                min-height: 45px;
-                .select2-selection__rendered {
-                    line-height: 28px;
+            ul.filter-list .select2 li {
+                padding: 0 2px;
+                img {
+                    margin-bottom: 1px;
                 }
-                .select2-selection__choice {
-                    min-height: 30px;
-                    padding: 0 4px;
+                .space-acronym {
+                    margin-top: 2px;
                 }
             }
         }
@@ -289,15 +282,8 @@ $tasks-info-color: #21A1B3;
             }
 
             .filterInput.task-date-picker {
-                margin: 0;
-                height: 45px;
-                width: 200px;
+                margin-left: 0;
             }
-        }
-
-        .select2 {
-            width: 260px !important;
-            display: inline-block;
         }
     }
 }

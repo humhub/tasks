@@ -109,11 +109,11 @@
 .task-overview #filter-tasks-list .hh-list .nav-pills .dropdown-menu li a {
   color: var(--hh-primary-contrast);
 }
-.task-overview li {
+.task-overview .filter-list > li {
   cursor: pointer;
   margin-bottom: 4px;
 }
-.task-overview li:last-child {
+.task-overview .filter-list > li:last-child {
   border-bottom: 0;
 }
 .task-overview .hh-list .progress {
@@ -166,18 +166,15 @@
 }
 .task-overview #task-filter-nav .filter-root .filterInput {
   font-size: 13px;
-  margin: 5px;
 }
-.task-overview #task-filter-nav .filter-root .filterInput.task-date-picker, .task-overview #task-filter-nav .filter-root .select2-search__field {
-  font-size: 14px;
-}
-.task-overview #task-filter-nav .filter-root ul.filter-list li {
+.task-overview #task-filter-nav .filter-root ul.filter-list > li {
   padding: 2px 0;
 }
 .task-overview #task-filter-nav .filter-panel {
   vertical-align: top;
   width: auto !important;
-  padding: 0 40px 0 0;
+  min-width: 200px;
+  padding: 0 16px 0 0;
   border: none;
 }
 .task-overview #task-filter-nav .filter-panel:first-child {
@@ -186,19 +183,17 @@
 .task-overview #task-filter-nav .filter-panel:last-child {
   padding-right: 0;
 }
-.task-overview #task-filter-nav .filter-panel ul.filter-list li input[type=text], .task-overview #task-filter-nav .filter-panel ul.filter-list li .select2 {
-  margin-bottom: 10px;
-  width: 100%;
+.task-overview #task-filter-nav .filter-panel ul.filter-list > li input[type=text], .task-overview #task-filter-nav .filter-panel ul.filter-list > li .select2 {
+  margin: 5px 5px 10px 0;
 }
-.task-overview #task-filter-nav .filter-panel .select2 .select2-selection {
-  min-height: 45px;
+.task-overview #task-filter-nav .filter-panel ul.filter-list .select2 li {
+  padding: 0 2px;
 }
-.task-overview #task-filter-nav .filter-panel .select2 .select2-selection .select2-selection__rendered {
-  line-height: 28px;
+.task-overview #task-filter-nav .filter-panel ul.filter-list .select2 li img {
+  margin-bottom: 1px;
 }
-.task-overview #task-filter-nav .filter-panel .select2 .select2-selection .select2-selection__choice {
-  min-height: 30px;
-  padding: 0 4px;
+.task-overview #task-filter-nav .filter-panel ul.filter-list .select2 li .space-acronym {
+  margin-top: 2px;
 }
 .task-overview #task-filter-nav .task-filter-picker-container {
   width: 200px;
@@ -227,13 +222,7 @@
   background: var(--accent);
 }
 .task-overview #task-filter-nav .task-bottom-panel .filterInput.task-date-picker {
-  margin: 0;
-  height: 45px;
-  width: 200px;
-}
-.task-overview #task-filter-nav .select2 {
-  width: 260px !important;
-  display: inline-block;
+  margin-left: 0;
 }
 
 #task-list-loader {
