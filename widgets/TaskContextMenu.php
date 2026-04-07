@@ -67,7 +67,6 @@ class TaskContextMenu extends WallEntryControls
         $this->renderOptions->disableControlsEntryEdit();
         $this->renderOptions->disableControlsEntryDelete();
         $this->renderOptions->disableControlsEntryPin();
-        $this->renderOptions->disableControlsEntryArchive();
 
         if ($this->task->content->canEdit()) {
             $this->addEntry(new MenuLink([
@@ -97,5 +96,16 @@ class TaskContextMenu extends WallEntryControls
         }
 
         parent::initControls();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getData()
+    {
+        return array_merge(parent::getData(), [
+            // Used for stream.StreamEntry for js actions of context menu items
+            'content-key' => $this->task->content->id,
+        ]);
     }
 }
