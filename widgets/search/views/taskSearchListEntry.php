@@ -37,7 +37,7 @@ $image = $task->content->container instanceof Space
 
 $taskResponsibleUsers = $task->taskResponsibleUsers;
 $taskAssignedUsers = $task->taskAssignedUsers;
-$taskContainer = $task->content->container;
+$taskContainer = $contentContainer === null ? $task->content->container : null;
 ?>
 <div class="float-end ms-2">
     <?= TaskContextMenu::widget(['task' => $task, 'cal' => 'filter']) ?>
