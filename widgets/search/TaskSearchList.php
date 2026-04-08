@@ -15,6 +15,7 @@
 namespace humhub\modules\tasks\widgets\search;
 
 use humhub\components\Widget;
+use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\forms\TaskFilter;
 use humhub\modules\tasks\Module;
 use Yii;
@@ -43,7 +44,7 @@ class TaskSearchList extends Widget
             ],
         ]);
 
-        return  ListView::widget([
+        return ListView::widget([
             'dataProvider' => $tasksProvider,
             'emptyText' => Yii::t('TasksModule.base', 'No results found for the given filter.'),
             'itemView' => '@tasks/widgets/search/views/_item',
@@ -55,9 +56,11 @@ class TaskSearchList extends Widget
             'options' => [
                 'tag' => 'div',
                 'class' => 'hh-list',
+                'data-reload-task-url' => TaskUrl::reloadFilterTask($this->filter->contentContainer),
             ],
             'itemOptions' => [
                 'tag' => 'div',
+                'data-ui-widget' => 'task.search.TaskSearchListItem',
             ],
             'layout' => "{summary}\n{items}\n<div class=\"pagination-container stream-end\">{pager}</div>",
         ]);

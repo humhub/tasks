@@ -133,8 +133,29 @@ humhub.module('task.search', function (module, require, $) {
 
     object.inherits(TaskSearchListItem, Widget);
 
+    TaskSearchListItem.prototype.reloadEntry = function (entry) {
+        if (!entry) {
+            return;
+        }
+
+        const list = entry.$.closest('[data-reload-task-url]');
+        const row = entry.parent('[data-ui-widget="task.search.TaskFilterItem"]');
+        const data = {id: row.data('key')};
+
+        row.loader();
+
+        return client.get(list.data('reload-task-url'), {data}).then(function (response) {
+            row.$.html(response.response);
+            return response;
+        }).catch(function (err) {
+            module.log.error(err, true);
+        }).finally(function () {
+            row.loader(false);
+        });
+    }
+
     module.export({
-        TaskFilter: TaskFilter,
-        TaskSearchListItem: TaskSearchListItem
+        TaskFilter,
+        TaskSearchListItem
     });
 });

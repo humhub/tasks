@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.9.4 (Unreleased)
+-----------------------
+- Enh #313: Improve filter list view
+
 1.9.3 (March 5, 2026)
 -----------------------
 

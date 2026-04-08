@@ -7,82 +7,109 @@
  */
 
 use humhub\helpers\Html;
-use humhub\modules\comment\models\Comment;
+use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\space\models\Space;
 use humhub\modules\space\widgets\Image as SpaceImage;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\Task;
-use humhub\modules\tasks\widgets\TaskBadge;
+use humhub\modules\tasks\widgets\TaskContextMenu;
 use humhub\modules\tasks\widgets\TaskPercentageBar;
+use humhub\modules\tasks\widgets\TaskStatus;
 use humhub\modules\tasks\widgets\TaskUserList;
 use humhub\modules\ui\icon\widgets\Icon;
+use humhub\modules\user\models\User;
 use humhub\modules\user\widgets\Image as UserImage;
+use humhub\widgets\bootstrap\Link;
 
-/* @var $task \humhub\modules\tasks\models\Task */
+/* @var $task Task */
 /* @var $canEdit boolean */
 /* @var $filterResult boolean */
-/* @var $contentContainer \humhub\modules\content\components\ContentContainerActiveRecord */
+/* @var $contentContainer ContentContainerActiveRecord */
 
+$imageOptions = [
+    'width' => '40',
+    'showTooltip' => true,
+    'link' => true
+];
 $image = $task->content->container instanceof Space
-    ? SpaceImage::widget([
-        'space' => $task->content->container,
-        'width' => '24',
-        'showTooltip' => true,
-        'link' => true])
-    : UserImage::widget([
-        'user' => $task->content->container,
-        'width' => '24',
-        'showTooltip' => true,
-        'link' => true]);
+    ? SpaceImage::widget(['space' => $task->content->container] + $imageOptions)
+    : UserImage::widget(['user' => $task->content->container] + $imageOptions);
 
+$taskResponsibleUsers = $task->taskResponsibleUsers;
+$taskAssignedUsers = $task->taskAssignedUsers;
+$taskContainer = $contentContainer === null ? $task->content->container : null;
 ?>
+<div class="float-end ms-2">
+    <?= TaskContextMenu::widget(['task' => $task, 'cal' => 'filter']) ?>
+</div>
+<div class="task d-flex flex-wrap" data-task-url="<?= TaskUrl::viewTask($task) ?>">
+    <div class="d-flex flex-grow-1">
+        <?php if (!$contentContainer) : ?>
+            <div><?= $image ?></div>
+        <?php endif ?>
 
+        <div class="flex-fill">
+            <h4 class="mt-0 mb-1"><?= Html::encode($task->title) ?></h4>
+            <div class="task-item-info flex-nowrap">
+                <?php if ($task->task_list_id) : ?>
+                    <div data-bs-title="<?= Html::encode(Yii::t('TasksModule.base', 'List: {list}', ['list' => $task->list->title])) ?>" data-bs-toggle="tooltip">
+                        <?= Icon::get('list-ul') . ' ' . $task->list->title ?>
+                    </div>
+                <?php endif; ?>
 
-<div class="d-flex task" data-task-url="<?= TaskUrl::viewTask($task) ?>">
-    <div class="task-head flex-grow-1">
-        <div class="clearfix">
+                <?php if ($taskContainer instanceof Space) : ?>
+                    <div>
+                        <?= Link::to($taskContainer->displayName, $taskContainer->getUrl())
+                            ->icon('dot-circle-o')
+                            ->tooltip(Yii::t('TasksModule.base', 'Space : {space}', ['space' => $taskContainer->displayName])) ?>
+                    </div>
+                <?php elseif ($taskContainer instanceof User) : ?>
+                    <div>
+                        <?= Link::to($taskContainer->displayName, $taskContainer->getUrl())
+                            ->icon('user')
+                            ->tooltip(Yii::t('TasksModule.base', 'User : {user}', ['user' => $taskContainer->displayName])) ?>
+                    </div>
+                <?php endif; ?>
 
-            <?php if(!$contentContainer) : ?>
-
-                <div class="task-controls" style="display:inline">
-                    <?= $image ?>
-                </div>
-
-            <?php endif ?>
-
-            <div style="margin-right:2px;display:inline-block">
-                <h4 class="mt-0" style="display:inline-block">
-                    <?= Html::encode($task->title); ?>
-                </h4>
+                <?php if ($task->scheduling) : ?>
+                    <div data-bs-title="<?= Html::encode($task->schedule->getFormattedDateTime()) ?>" data-bs-toggle="tooltip">
+                        <?= Icon::get('clock-o')->tooltip('123') . ' '
+                            . ($task->all_day
+                                ? Yii::$app->formatter->asDate($task->schedule->getEndDateTime(), 'short')
+                                : Yii::$app->formatter->asDatetime($task->schedule->getEndDateTime(), 'short'));
+                        ?>
+                    </div>
+                <?php endif; ?>
+                <div><?= TaskStatus::widget(['task' => $task]) ?></div>
             </div>
-
-            <?= TaskBadge::widget(['task' => $task]) ?>
-
-            <div class="float-end toggleTaskDetails d-none d-sm-block"
-                 style="<?= (!$task->content->canEdit()) ? 'border-right:0;margin-right:0' : '' ?>">
-                <?= Icon::get('comment-o') ?> <?= Comment::getCommentCount(Task::class, $task->id); ?>
-            </div>
-
-            <?php if ($task->review) : ?>
-                <div class="task-controls float-end toggleTaskDetails">
-                <?= Icon::get('eye')
-                    ->class('d-none d-sm-inline')
-                    ->tooltip(Yii::t('TasksModule.base', 'This task requires to be reviewed by a responsible'))
-                ?>
-                </div>
-            <?php endif; ?>
-
-            <div class="task-controls assigned-users float-end d-inline">
-                <?= TaskUserList::widget(['users' => $task->taskResponsibleUsers, 'style' => 'border:2px solid var(--accent)', 'type' => Task::USER_RESPONSIBLE]) ?>
-                <?= TaskUserList::widget(['users' => $task->taskAssignedUsers]) ?>
-            </div>
-
-            <?php if ($task->isInProgress()) : ?>
-                <div class="task-controls float-end d-none d-sm-inline-block pt-3" style="width:50px; height:24px;">
-                    <?= TaskPercentageBar::widget(['task' => $task, 'filterResult' => $filterResult]) ?>
-                </div>
-            <?php endif; ?>
-
         </div>
+    </div>
+
+    <div class="d-flex">
+        <?php if ($task->isInProgress()) : ?>
+            <div class="task-progress d-none d-sm-inline-block">
+                <?= TaskPercentageBar::widget(['task' => $task, 'filterResult' => $filterResult]) ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if ($taskResponsibleUsers !== []) : ?>
+            <div class="task-users">
+                <?= TaskUserList::widget([
+                    'users' => $taskResponsibleUsers,
+                    'size' => 32,
+                    'style' => 'border:2px solid var(--accent)',
+                    'type' => Task::USER_RESPONSIBLE,
+                ]) ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if ($taskAssignedUsers !== []) : ?>
+            <div class="task-users">
+                <?= TaskUserList::widget([
+                    'users' => $taskAssignedUsers,
+                    'size' => 32,
+                ]) ?>
+            </div>
+        <?php endif; ?>
     </div>
 </div>
