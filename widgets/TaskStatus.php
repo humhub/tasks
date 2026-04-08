@@ -48,7 +48,7 @@ class TaskStatus extends Widget
             $options['id'] = $id;
         }
 
-        return Html::tag('span', Icon::get($icon) . ' ' .Html::encode($text), $options);
+        return Html::tag('span', Icon::get($icon) . ' ' . Html::encode($text), $options);
     }
 
 }
