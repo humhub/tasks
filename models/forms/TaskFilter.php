@@ -164,25 +164,18 @@ class TaskFilter extends Model
             $query->andWhere(CalendarUtils::getEndCriteria($this->date_end, 'end_datetime'));
         }
 
-        switch ($this->sort) {
-            case 'deadline':
-                $query->andWhere(['!=', 'task.status', Task::STATUS_COMPLETED])
-                    ->andWhere(['task.scheduling' => 1])
-                    ->orderBy(['task.end_datetime' => SORT_ASC]);
-                break;
-            case 'new':
-                $query->orderBy(['task.start_datetime' => SORT_DESC]);
-                break;
-            case 'old':
-                $query->orderBy(['task.start_datetime' => SORT_ASC]);
-                break;
-            default:
-                $query->orderBy([
-                    'task.status' => SORT_ASC,
-                    'task.scheduling' => SORT_DESC,
-                    'task.end_datetime' => SORT_ASC,
-                ]);
-        }
+        match ($this->sort) {
+            'deadline' => $query->andWhere(['!=', 'task.status', Task::STATUS_COMPLETED])
+                ->andWhere(['task.scheduling' => 1])
+                ->orderBy(['task.end_datetime' => SORT_ASC]),
+            'new' => $query->orderBy(['task.start_datetime' => SORT_DESC]),
+            'old' => $query->orderBy(['task.start_datetime' => SORT_ASC]),
+            default => $query->orderBy([
+                'task.status' => SORT_ASC,
+                'task.scheduling' => SORT_DESC,
+                'task.end_datetime' => SORT_ASC,
+            ]),
+        };
 
         return $query;
     }

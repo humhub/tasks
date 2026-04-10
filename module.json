@@ -8,7 +8,7 @@
         "project",
         "management"
     ],
-    "version": "1.9.4",
+    "version": "1.9.5",
     "homepage": "https://github.com/humhub/tasks",
     "humhub": {
         "minVersion": "1.18.0-beta.6",
