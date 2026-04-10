@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.9.5 (Unreleased)
+------------------
+- Enh: Automated code refactoring for HumHub 1.18.0-beta.6 using Rector
+
 1.9.4 (April 8, 2026)
 ---------------------
 - Enh #313: Improve filter list view
