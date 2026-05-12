@@ -6,36 +6,28 @@
  *
  */
 
+use humhub\components\View;
+use humhub\modules\notification\components\BaseNotification;
+use humhub\modules\space\models\Space;
+use humhub\modules\user\models\User;
+use yii\db\ActiveRecord;
 use yii\helpers\Url;
 use humhub\modules\tasks\widgets\MailContentEntry;
 use humhub\widgets\mails\MailHeadline;
 use humhub\widgets\mails\MailButtonList;
 use humhub\widgets\mails\MailButton;
 
-/**
- * @link https://www.humhub.org/
- * @copyright Copyright (c) 2017 HumHub GmbH & Co. KG
- * @license https://www.humhub.com/licences
- *
- */
-
-/* @var $this humhub\components\View */
-/* @var $viewable \humhub\modules\notification\components\BaseNotification */
-/* @var $url string */
+/* @var $this View */
+/* @var $viewable BaseNotification */
 /* @var $date string */
-/* @var $isNew boolean */
-/* @var $originator \humhub\modules\user\models\User */
-/* @var $source yii\db\ActiveRecord */
-/* @var $contentContainer \humhub\modules\content\components\ContentContainerActiveRecord */
-/* @var $space humhub\modules\space\models\Space */
-/* @var $record \humhub\modules\notification\models\Notification */
+/* @var $originator User */
+/* @var $source ActiveRecord */
+/* @var $space Space */
 /* @var $html string */
-/* @var $text string */
+
+$contentRecord = $viewable->source;
 ?>
-<?php $this->beginContent('@notification/views/layouts/mail.php', $_params_); ?>
-
-<?php $contentRecord = $viewable->source ?>
-
+<?php $this->beginContent('@notification/views/layouts/mail.php') ?>
     <table width="100%" border="0" cellspacing="0" cellpadding="0" align="left">
         <tr>
             <td>
@@ -48,7 +40,7 @@ use humhub\widgets\mails\MailButton;
         </tr>
         <tr>
             <td>
-                <?=  MailContentEntry::widget([
+                <?= MailContentEntry::widget([
                     'originator' => $originator,
                     'content' => $html,
                     'date' => $date,
@@ -69,8 +61,7 @@ use humhub\widgets\mails\MailButton;
                         'url' => Url::to(['/content/perma', 'id' => $source->content->id], true),
                         'text' => Yii::t('ContentModule.notifications_mails', 'View Online')
                     ])
-                ]]);
-                ?>
+                ]]) ?>
             </td>
         </tr>
     </table>
