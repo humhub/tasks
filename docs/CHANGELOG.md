@@ -1,10 +1,10 @@
 Changelog
 =========
 
-1.9.5 (Unreleased)
-------------------
+1.9.5 (May 15, 2026)
+--------------------
 - Enh: Automated code refactoring for HumHub 1.18.0-beta.6 using Rector
-- Fix #316: Yii2 2.0.55 compatibility
+- Fix #317: Yii2 2.0.55 compatibility
 
 1.9.4 (April 8, 2026)
 ---------------------
