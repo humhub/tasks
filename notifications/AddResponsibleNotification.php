@@ -58,9 +58,9 @@ class AddResponsibleNotification extends BaseNotification
     public function getMailSubject()
     {
         return Yii::t('TasksModule.base', '{userName} assigned you as responsible person in task {task} from space {spaceName}.', [
-            '{userName}' => Html::encode($this->originator->displayName),
-            '{task}' => Html::encode($this->getContentInfo($this->source, false)),
-            '{spaceName}' => Html::encode($this->source->content->container->displayName),
+            '{userName}' => $this->originator->displayName,
+            '{task}' => Html::decode($this->getContentInfo($this->source, false)),
+            '{spaceName}' => $this->source->content->container->displayName,
         ]);
     }
 }

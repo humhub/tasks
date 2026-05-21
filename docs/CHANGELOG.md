@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.9.6 (Unreleased)
+--------------------
+- Enh #318: Fix html encoding in email subjects
+
 1.9.5 (May 15, 2026)
 --------------------
 - Enh: Automated code refactoring for HumHub 1.18.0-beta.6 using Rector

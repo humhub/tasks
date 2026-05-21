@@ -64,9 +64,9 @@ class RemindStart extends BaseNotification
     public function getMailSubject()
     {
         return Yii::t('TasksModule.base', 'Task {task} in space {spaceName} starts at {dateTime}.', [
-            '{task}' => Html::encode($this->getContentInfo($this->source, false)),
-            '{spaceName}' => Html::encode($this->source->content->container->displayName),
-            '{dateTime}' => Html::encode($this->source->schedule->getFormattedStartDateTime()),
+            '{task}' => Html::decode($this->getContentInfo($this->source, false)),
+            '{spaceName}' => $this->source->content->container->displayName,
+            '{dateTime}' => $this->source->schedule->getFormattedStartDateTime(),
         ]);
     }
 }
