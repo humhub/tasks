@@ -6,38 +6,32 @@
  *
  */
 
+use humhub\components\View;
+use humhub\modules\space\models\Space;
 use humhub\modules\tasks\widgets\MailContentEntry;
+use humhub\modules\user\models\User;
+use humhub\modules\user\notifications\Mentioned;
+use humhub\widgets\mails\MailButton;
+use humhub\widgets\mails\MailButtonList;
+use humhub\widgets\mails\MailHeadline;
+use yii\db\ActiveRecord;
 use yii\helpers\Url;
 
-/**
- * @link https://www.humhub.org/
- * @copyright Copyright (c) 2017 HumHub GmbH & Co. KG
- * @license https://www.humhub.com/licences
- *
- */
-
-/* @var $this humhub\components\View */
-/* @var $viewable humhub\modules\user\notifications\Mentioned */
-/* @var $url string */
+/* @var $this View */
+/* @var $viewable Mentioned */
 /* @var $date string */
-/* @var $isNew boolean */
-/* @var $originator \humhub\modules\user\models\User */
-/* @var $source yii\db\ActiveRecord */
-/* @var $contentContainer \humhub\modules\content\components\ContentContainerActiveRecord */
-/* @var $space humhub\modules\space\models\Space */
-/* @var $record \humhub\modules\notification\models\Notification */
+/* @var $originator User */
+/* @var $source ActiveRecord */
+/* @var $space Space */
 /* @var $html string */
-/* @var $text string */
+
+$contentRecord = $viewable->source;
 ?>
-<?php $this->beginContent('@notification/views/layouts/mail.php', $_params_); ?>
-
-<?php $contentRecord = $viewable->source ?>
-
+<?php $this->beginContent('@notification/views/layouts/mail.php') ?>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" align="left">
     <tr>
         <td>
-            <?=
-            humhub\widgets\mails\MailHeadline::widget([
+            <?= MailHeadline::widget([
                 'level' => 3,
                 'text' => $contentRecord->getContentName().':',
                 'style' => 'text-transform:capitalize;'
@@ -47,14 +41,14 @@ use yii\helpers\Url;
     </tr>
     <tr>
         <td>
-            <?=  MailContentEntry::widget([
+            <?= MailContentEntry::widget([
                 'originator' => $originator,
                 'content' => $html,
                 'date' => $date,
                 'space' => $space,
                 'isReminder' => false,
                 'source' => $source
-            ])  ?>
+            ]) ?>
         </td>
     </tr>
     <tr>
@@ -63,14 +57,12 @@ use yii\helpers\Url;
     </tr>
     <tr>
         <td>
-            <?=
-            humhub\widgets\mails\MailButtonList::widget(['buttons' => [
-                humhub\widgets\mails\MailButton::widget([
+            <?= MailButtonList::widget(['buttons' => [
+                MailButton::widget([
                     'url' => Url::to(['/content/perma', 'id' => $source->content->id], true),
                     'text' => Yii::t('TasksModule.base', 'View Online')
                 ])
-            ]]);
-            ?>
+            ]]) ?>
         </td>
     </tr>
 </table>

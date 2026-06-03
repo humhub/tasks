@@ -168,6 +168,11 @@ humhub.module('task', function (module, require, $) {
             modal.global.close(true);
             event.trigger('humhub:content:newEntry', response.content, this);
             event.trigger('humhub:content:afterSubmit', response.content, this);
+        } else if (response.reloadFilter) {
+            const filter = Widget.instance('#task-filter-nav')
+            if (filter) {
+                filter.loadUpdate();
+            }
         } else {
             modal.global.$.one('submitted', onTaskFormSubmitted);
         }

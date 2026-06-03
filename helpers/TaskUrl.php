@@ -39,6 +39,7 @@ class TaskUrl extends Url
 
     public const ROUTE_GLOBAL = '/tasks/global';
     public const ROUTE_GLOBAL_FILTER = '/tasks/global/filter';
+    public const ROUTE_GLOBAL_FILTER_RELOAD_TASK = '/tasks/global/reload-filter-task';
 
     public const ROUTE_EXPORT = 'export';
 
@@ -63,6 +64,11 @@ class TaskUrl extends Url
     public static function globalFilter($container = null)
     {
         return static::toRoute([static::ROUTE_GLOBAL_FILTER, 'container' => $container]);
+    }
+
+    public static function reloadFilterTask(?ContentContainerActiveRecord $container = null)
+    {
+        return static::toRoute([static::ROUTE_GLOBAL_FILTER_RELOAD_TASK, 'container' => $container]);
     }
 
     public static function exportCsv($container = null)

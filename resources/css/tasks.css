@@ -60,6 +60,41 @@
 .task-overview #filter-tasks-list .hh-list {
   margin-bottom: 0;
 }
+.task-overview #filter-tasks-list .hh-list > div {
+  margin-bottom: 6px;
+}
+.task-overview #filter-tasks-list .hh-list > div .d-flex > div {
+  margin-right: 8px;
+}
+.task-overview #filter-tasks-list .hh-list > div .d-flex > div:last-child {
+  margin-right: 0;
+}
+.task-overview #filter-tasks-list .hh-list .task-item-info {
+  display: flex;
+  flex-wrap: wrap !important;
+  font-size: 95%;
+}
+.task-overview #filter-tasks-list .hh-list .task-item-info > div {
+  text-wrap: nowrap;
+  margin-right: 10px;
+}
+.task-overview #filter-tasks-list .hh-list .task-item-info .text-accent {
+  color: var(--accent);
+}
+.task-overview #filter-tasks-list .hh-list .task-users, .task-overview #filter-tasks-list .hh-list .task-progress {
+  border-right: 1px solid #eee;
+  padding-right: 8px;
+  margin: 4px 8px 4px 0;
+}
+.task-overview #filter-tasks-list .hh-list .task-progress {
+  width: 50px;
+  padding-top: 9px;
+}
+.task-overview #filter-tasks-list .hh-list .nav-pills.preferences {
+  position: relative;
+  right: 0;
+  top: 8px;
+}
 .task-overview #filter-tasks-list .hh-list > div:not(.pagination-container):last-of-type {
   border-bottom: 0;
 }
@@ -67,15 +102,18 @@
   background: var(--hh-background-color-main);
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
   border-radius: 4px;
-  padding: 20px;
+  padding: 8px;
   color: #555;
   font-size: 13px;
 }
-.task-overview li {
+.task-overview #filter-tasks-list .hh-list .nav-pills .dropdown-menu li a {
+  color: var(--hh-primary-contrast);
+}
+.task-overview .filter-list > li {
   cursor: pointer;
   margin-bottom: 4px;
 }
-.task-overview li:last-child {
+.task-overview .filter-list > li:last-child {
   border-bottom: 0;
 }
 .task-overview .hh-list .progress {
@@ -97,15 +135,9 @@
 .task-overview .hh-list .pagination li:hover {
   border: 0;
 }
-.task-overview #task-export-button {
-  float: right;
-}
 @media (max-width: 767px) {
   .task-overview #task-filter-nav {
     overflow: auto;
-  }
-  .task-overview #task-export-button {
-    float: none;
   }
 }
 .task-overview label {
@@ -128,33 +160,35 @@
 }
 .task-overview #task-filter-nav .filter-root .filterInput {
   font-size: 13px;
-  margin: 5px;
 }
-.task-overview #task-filter-nav .filter-root .filterInput.task-date-picker, .task-overview #task-filter-nav .filter-root .select2-search__field {
-  font-size: 14px;
-}
-.task-overview #task-filter-nav .filter-root ul.filter-list li {
+.task-overview #task-filter-nav .filter-root ul.filter-list > li {
   padding: 2px 0;
 }
 .task-overview #task-filter-nav .filter-panel {
   vertical-align: top;
   width: auto !important;
-  padding: 0 40px;
+  min-width: 200px;
+  padding-top: 0;
+  padding-bottom: 0;
+  border: none;
 }
-.task-overview #task-filter-nav .filter-panel:first-child {
-  padding-left: 0;
+.task-overview #task-filter-nav .filter-panel ul.filter-list > li input[type=text], .task-overview #task-filter-nav .filter-panel ul.filter-list > li .select2 {
+  margin: 5px 5px 10px 0;
 }
-.task-overview #task-filter-nav .filter-panel:last-child {
-  padding-right: 0;
+.task-overview #task-filter-nav .filter-panel ul.filter-list .select2 li {
+  padding: 0 2px;
+}
+.task-overview #task-filter-nav .filter-panel ul.filter-list .select2 li img {
+  margin-bottom: 1px;
+}
+.task-overview #task-filter-nav .filter-panel ul.filter-list .select2 li .space-acronym {
+  margin-top: 2px;
 }
 .task-overview #task-filter-nav .task-filter-picker-container {
   width: 200px;
 }
 .task-overview #task-filter-nav #task-filter-loader {
   padding-top: 12px;
-}
-.task-overview #task-filter-nav .task-bottom-panel {
-  margin: 16px 0;
 }
 .task-overview #task-filter-nav .task-bottom-panel .filterInput {
   margin: 5px;
@@ -170,17 +204,11 @@
   content: "";
 }
 .task-overview #task-filter-nav .task-bottom-panel .filterInput[data-filter-type=checkbox] .fa.fa-check-square-o {
-  border-color: var(--info);
-  background: var(--info);
+  border-color: var(--accent);
+  background: var(--accent);
 }
 .task-overview #task-filter-nav .task-bottom-panel .filterInput.task-date-picker {
-  margin: 0;
-  height: 45px;
-  width: 200px;
-}
-.task-overview #task-filter-nav .select2 {
-  width: 260px !important;
-  display: inline-block;
+  margin-left: 0;
 }
 
 #task-list-loader {

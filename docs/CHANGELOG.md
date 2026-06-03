@@ -6,10 +6,23 @@ Changelog
 - Fix #298: Update for HumHub 1.19
 - Enh #298: Migrate to new Activity Manager
 
-1.9.3 (Unreleased)
+1.9.5 (May 15, 2026)
+--------------------
+- Enh: Automated code refactoring for HumHub 1.18.0-beta.6 using Rector
+- Fix #317: Yii2 2.0.55 compatibility
+
+1.9.4 (April 8, 2026)
+---------------------
+- Enh #313: Improve filter list view
+
+1.9.3 (March 5, 2026)
 -----------------------
+
+> This release also fixes a [security](https://github.com/humhub/tasks/security/advisories/GHSA-jr53-752q-pccw) issue.
+
 - Fix #297: Fix custom time format
 - Fix #304: Fix sidebar menu
+- Fix #310: Fix checklist item encoding
 
 1.9.2 (January 8, 2026)
 -----------------------

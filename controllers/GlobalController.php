@@ -9,12 +9,13 @@
 
 namespace humhub\modules\tasks\controllers;
 
-use humhub\modules\content\components\ContentContainerController;
-use Yii;
 use humhub\components\access\ControllerAccess;
-use humhub\components\Controller;
 use humhub\modules\tasks\models\forms\TaskFilter;
+use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\widgets\search\TaskSearchList;
+use humhub\modules\tasks\widgets\search\TaskSearchListEntry;
+use Yii;
+use yii\web\NotFoundHttpException;
 
 class GlobalController extends AbstractTaskController
 {
@@ -45,6 +46,20 @@ class GlobalController extends AbstractTaskController
         return $this->asJson([
             'success' => true,
             'result' => TaskSearchList::widget(['filter' => $filter]),
+        ]);
+    }
+
+    public function actionReloadFilterTask(int $id)
+    {
+        $task = Task::findOne($id);
+        if (!$task) {
+            throw new NotFoundHttpException('Task not found!');
+        }
+
+        return TaskSearchListEntry::widget([
+            'task' => $task,
+            'contentContainer' => $this->contentContainer,
+            'filterResult' => true,
         ]);
     }
 

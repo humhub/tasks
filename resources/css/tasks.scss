@@ -84,6 +84,42 @@ $tasks-info-color: #21A1B3;
         .hh-list {
             margin-bottom: 0;
 
+            > div {
+                margin-bottom: 6px;
+                .d-flex > div {
+                    margin-right: 8px;
+                    &:last-child {
+                        margin-right: 0;
+                    }
+                }
+            }
+            .task-item-info {
+                display: flex;
+                flex-wrap: wrap !important;
+                font-size: 95%;
+                > div {
+                    text-wrap: nowrap;
+                    margin-right: 10px;
+                }
+                .text-accent {
+                    color: var(--accent);
+                }
+            }
+            .task-users, .task-progress {
+                border-right: 1px solid #eee;
+                padding-right: 8px;
+                margin: 4px 8px 4px 0;
+            }
+            .task-progress {
+                width: 50px;
+                padding-top: 9px;
+            }
+            .nav-pills.preferences {
+                position: relative;
+                right: 0;
+                top: 8px;
+            }
+
             > div:not(.pagination-container):last-of-type {
                 border-bottom: 0;
             }
@@ -92,17 +128,20 @@ $tasks-info-color: #21A1B3;
                 background: var(--hh-background-color-main);
                 box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
                 border-radius: 4px;
-                padding: 20px;
+                padding: 8px;
                 color: $tasks-text-color;
                 font-size: 13px;
+            }
+
+            .nav-pills .dropdown-menu li a {
+                color: var(--hh-primary-contrast);
             }
         }
     }
 
-    li {
+    .filter-list > li {
         cursor: pointer;
         margin-bottom: 4px;
-
         &:last-child {
             border-bottom: 0;
         }
@@ -135,20 +174,10 @@ $tasks-info-color: #21A1B3;
         }
     }
 
-
-    #task-export-button {
-        float: right;
-    }
-
     @media (max-width: 767px) {
         #task-filter-nav {
             overflow: auto;
         }
-
-        #task-export-button {
-            float: none;
-        }
-
     }
 
     label {
@@ -173,14 +202,9 @@ $tasks-info-color: #21A1B3;
 
             .filterInput {
                 font-size: 13px;
-                margin: 5px;
             }
 
-            .filterInput.task-date-picker, .select2-search__field {
-                font-size: 14px;
-            }
-
-            ul.filter-list li {
+            ul.filter-list > li {
                 padding: 2px 0;
             }
         }
@@ -188,14 +212,23 @@ $tasks-info-color: #21A1B3;
         .filter-panel {
             vertical-align: top;
             width: auto !important;
-            padding: 0 40px;
-
-            &:first-child {
-                padding-left: 0;
+            min-width: 200px;
+            padding-top: 0;
+            padding-bottom: 0;
+            border: none;
+            ul.filter-list > li {
+                input[type=text], .select2 {
+                    margin: 5px 5px 10px 0;
+                }
             }
-
-            &:last-child {
-                padding-right: 0;
+            ul.filter-list .select2 li {
+                padding: 0 2px;
+                img {
+                    margin-bottom: 1px;
+                }
+                .space-acronym {
+                    margin-top: 2px;
+                }
             }
         }
 
@@ -208,8 +241,6 @@ $tasks-info-color: #21A1B3;
         }
 
         .task-bottom-panel {
-            margin: 16px 0;
-
             .filterInput {
                 margin: 5px;
 
@@ -225,22 +256,15 @@ $tasks-info-color: #21A1B3;
                     }
 
                     &.fa-check-square-o {
-                        border-color: var(--info);
-                        background: var(--info);
+                        border-color: var(--accent);
+                        background: var(--accent);
                     }
                 }
             }
 
             .filterInput.task-date-picker {
-                margin: 0;
-                height: 45px;
-                width: 200px;
+                margin-left: 0;
             }
-        }
-
-        .select2 {
-            width: 260px !important;
-            display: inline-block;
         }
     }
 }

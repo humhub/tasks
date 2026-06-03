@@ -27,6 +27,12 @@ class TaskContextMenu extends WallEntryControls
 
     public ?string $align = null;
 
+    public ?string $cal = null;
+
+    // Wraps the controls to data-ui-widget="stream.StreamEntry" to make some actions working,
+    // when the context menu is opened on not wall stream.
+    public $jsWidget = 'stream.StreamEntry';
+
     /**
      * @inheritdoc
      */
@@ -70,7 +76,7 @@ class TaskContextMenu extends WallEntryControls
                 'sortOrder' => 100,
                 'htmlOptions' => [
                     'data-action-click' => 'ui.modal.post',
-                    'data-action-click-url' => TaskUrl::editTask($this->task),
+                    'data-action-click-url' => TaskUrl::editTask($this->task, $this->cal),
                 ],
             ]));
 
@@ -90,5 +96,16 @@ class TaskContextMenu extends WallEntryControls
         }
 
         parent::initControls();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getData()
+    {
+        return array_merge(parent::getData(), [
+            // Used for stream.StreamEntry for js actions of context menu items
+            'content-key' => $this->task->content->id,
+        ]);
     }
 }

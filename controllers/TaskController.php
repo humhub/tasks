@@ -90,7 +90,10 @@ class TaskController extends AbstractTaskController
 
         if ($taskForm->load(Yii::$app->request->post()) && $taskForm->save()) {
             if ($cal) {
-                return ModalClose::widget(['saved' => true]);
+                $output = ModalClose::widget(['saved' => true]);
+                return $cal === 'filter'
+                    ? $this->asJson(['reloadFilter' => true, 'output' => $output])
+                    : $output;
             } elseif ($redirect) {
                 return $this->htmlRedirect(TaskUrl::viewTask($taskForm->task));
             } elseif ($wall) {
