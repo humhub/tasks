@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.10.0 (Unreleased)
------------------------
+1.10.0 (June 5, 2026)
+---------------------
 - Fix #298: Update for HumHub 1.19
 - Enh #298: Migrate to new Activity Manager
 
