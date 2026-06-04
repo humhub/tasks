@@ -13,4 +13,3 @@ jobs:
     with:
       module-id: tasks
       use-rest-module: true
-      rest-module-branch: develop
