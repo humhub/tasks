@@ -6,15 +6,16 @@
  *
  */
 
+use humhub\modules\notification\models\Notification;
+use humhub\modules\space\models\Space;
 use humhub\widgets\bootstrap\Badge;
 use humhub\widgets\TimeAgo;
 
-/** @var \humhub\modules\user\models\User $originator */
-/** @var \humhub\modules\space\models\Space $space */
-/** @var \humhub\modules\notification\models\Notification $record */
-/** @var boolean $isNew */
-/** @var string $content */
-
+/* @var Space $space */
+/* @var Notification $record */
+/* @var boolean $isNew */
+/* @var string $content */
+/* @var string $url */
 ?>
 <li<?= $isNew ? ' class="new"' : '' ?> data-notification-id="<?= $record->id ?>">
     <a href="<?= $url ?>">

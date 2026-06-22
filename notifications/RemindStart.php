@@ -32,14 +32,22 @@ class RemindStart extends BaseNotification
     public $moduleId = 'tasks';
 
     /**
-     * @inheritdoc
-     */
-    public $viewName = "remind.php";
-
-    /**
      * @var Task
      */
     public $source;
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        if (Yii::$app->request->isConsoleRequest) {
+            // Use this layout only for Email mode
+            $this->viewName = 'remind';
+        }
+
+        parent::init();
+    }
 
     /**
      * @inheritdoc
