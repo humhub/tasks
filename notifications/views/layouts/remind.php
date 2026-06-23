@@ -31,7 +31,7 @@ use humhub\widgets\TimeAgo;
                 <img class="rounded img-space float-start"
                      data-src="holder.js/20x20" alt="20x20"
                      style="width: 20px; height: 20px;"
-                     src="<?= $space->getProfileImage()->getUrl() ?>">
+                     src="<?= $space->image->getUrl() ?>">
                  <?php endif; ?>
 
             <!-- show content -->
