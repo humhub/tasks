@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.10.1 (Unreleased)
+---------------------
+- Fix #324: Update user image
+
 1.10.0 (June 5, 2026)
 ---------------------
 - Fix #298: Update for HumHub 1.19
