@@ -9,10 +9,10 @@
 
 namespace humhub\modules\tasks\notifications;
 
-use Yii;
-use humhub\modules\tasks\models\Task;
-use humhub\modules\notification\components\BaseNotification;
 use humhub\helpers\Html;
+use humhub\modules\notification\components\BaseNotification;
+use humhub\modules\tasks\models\Task;
+use Yii;
 
 /**
  * Notifies an admin about reported content
@@ -34,7 +34,7 @@ class RemindEnd extends BaseNotification
     /**
      * @inheritdoc
      */
-    public $viewName = "remind";
+    public $viewName = 'remind';
 
     /**
      * @var Task
@@ -56,7 +56,6 @@ class RemindEnd extends BaseNotification
             '{spaceName}' => Html::tag('strong', Html::encode($this->source->content->container->displayName)),
             '{dateTime}' => Html::encode($this->source->schedule->getFormattedEndDateTime()),
         ]);
-
     }
 
     /**

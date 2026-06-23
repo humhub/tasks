@@ -9,10 +9,10 @@
 
 namespace humhub\modules\tasks\notifications;
 
+use humhub\helpers\Html;
+use humhub\modules\notification\components\BaseNotification;
 use humhub\modules\tasks\models\Task;
 use Yii;
-use humhub\modules\notification\components\BaseNotification;
-use humhub\helpers\Html;
 
 /**
  * Notifies an admin about reported content
@@ -32,22 +32,14 @@ class RemindStart extends BaseNotification
     public $moduleId = 'tasks';
 
     /**
+     * @inheritdoc
+     */
+    public $viewName = 'remind';
+
+    /**
      * @var Task
      */
     public $source;
-
-    /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        if (Yii::$app->request->isConsoleRequest) {
-            // Use this layout only for Email mode
-            $this->viewName = 'remind';
-        }
-
-        parent::init();
-    }
 
     /**
      * @inheritdoc

@@ -8,11 +8,13 @@
 use humhub\components\View;
 use humhub\modules\notification\models\Notification;
 use humhub\modules\space\models\Space;
+use humhub\modules\user\models\User;
 
 /* @var View $this */
 /* @var string $html */
 /* @var bool $isNew */
 /* @var Space $space */
+/* @var User $originator */
 /* @var Notification $record */
 /* @var string $url */
 ?>
@@ -21,6 +23,7 @@ use humhub\modules\space\models\Space;
     'space' => $space,
     'url' => $url,
     'record' => $record,
+    'originator' => $originator,
 ]) ?>
     <?= $html ?>
 <?php $this->endContent() ?>

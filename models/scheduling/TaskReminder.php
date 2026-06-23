@@ -49,20 +49,6 @@ class TaskReminder extends ActiveRecord
     public const REMIND_ONE_MONTH = 8;
 
     /**
-     * @var array all given remind modes as array
-     */
-    public static $remindModes = [
-        self::REMIND_NONE,
-        self::REMIND_ONE_HOUR,
-        self::REMIND_TWO_HOURS,
-        self::REMIND_ONE_DAY,
-        self::REMIND_TWO_DAYS,
-        self::REMIND_TWO_WEEKS,
-        self::REMIND_THREE_WEEKS,
-        self::REMIND_ONE_MONTH,
-    ];
-
-    /**
      * @return string the associated database table name
      */
     public static function tableName()
@@ -78,7 +64,7 @@ class TaskReminder extends ActiveRecord
         return [
             [['task_id', 'remind_mode'], 'required'],
             [['task_id', 'start_reminder_sent', 'end_reminder_sent'], 'integer'],
-            [['remind_mode'], 'in', 'range' => self::$remindModes],
+            [['remind_mode'], 'in', 'range' => array_keys(self::getRemindModeItems())],
         ];
     }
 
@@ -115,41 +101,6 @@ class TaskReminder extends ActiveRecord
         ];
     }
 
-    public function getRemindMode()
-    {
-        switch ($this->remind_mode) {
-            case (self::REMIND_NONE):
-                return Yii::t('TasksModule.base', 'Do not remind');
-                break;
-            case (self::REMIND_ONE_HOUR):
-                return Yii::t('TasksModule.base', 'At least 1 Hour before');
-                break;
-            case (self::REMIND_TWO_HOURS):
-                return Yii::t('TasksModule.base', 'At least 2 Hours before');
-                break;
-            case (self::REMIND_ONE_DAY):
-                return Yii::t('TasksModule.base', '1 Day before');
-                break;
-            case (self::REMIND_TWO_DAYS):
-                return Yii::t('TasksModule.base', '2 Days before');
-                break;
-            case (self::REMIND_ONE_WEEK):
-                return Yii::t('TasksModule.base', '1 Week before');
-                break;
-            case (self::REMIND_TWO_WEEKS):
-                return Yii::t('TasksModule.base', '2 Weeks before');
-                break;
-            case (self::REMIND_THREE_WEEKS):
-                return Yii::t('TasksModule.base', '3 Weeks before');
-                break;
-            case (self::REMIND_ONE_MONTH):
-                return Yii::t('TasksModule.base', '1 Month before');
-                break;
-            default:
-                return;
-        }
-    }
-
     public function canSendRemind(DateTime $now, DateTime $dateTime)
     {
         if ($now === '' || $dateTime === '') {
@@ -160,9 +111,6 @@ class TaskReminder extends ActiveRecord
         $modifiedEnd = clone $dateTime;
 
         switch ($this->remind_mode) {
-            case self::REMIND_NONE :
-                return false;
-                break;
             case self::REMIND_ONE_HOUR :
                 $modifiedStart = $modifiedStart->modify('-2 hours');
                 $modifiedEnd = $modifiedEnd->modify('-1 hour');
@@ -209,14 +157,9 @@ class TaskReminder extends ActiveRecord
                 break;
             default:
                 return false;
-                break;
         }
 
-        if ($modifiedEnd > $now && $modifiedStart <= $now) {
-            return true;
-        } else {
-            return false;
-        }
+        return $modifiedEnd > $now && $modifiedStart <= $now;
     }
 
     /**
