@@ -92,6 +92,7 @@ return [
     'In Progress' => '',
     'In Review' => '',
     'In case the review option is active, a <strong>responsible user</strong> will have to review and either reject or confirm this task before completion.' => '',
+    'Info' => '',
     'Invalid task list selection.' => '',
     'Let Task Review' => '',
     'List: {list}' => '',
