@@ -17,11 +17,13 @@ use humhub\modules\user\models\User;
 /* @var User $originator */
 /* @var Notification $record */
 /* @var string $url */
+/* @var string $relativeUrl */
 ?>
 <?php $this->beginContent('@tasks/notifications/views/layouts/remind.php', [
     'isNew' => $isNew,
     'space' => $space,
     'url' => $url,
+    'relativeUrl' => $relativeUrl,
     'record' => $record,
     'originator' => $originator,
 ]) ?>

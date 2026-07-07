@@ -21,6 +21,7 @@ use humhub\widgets\TimeAgo;
 /* @var boolean $isNew */
 /* @var string $content */
 /* @var string $url */
+/* @var string $relativeUrl */
 ?>
 <a
     class="d-flex<?= $isNew ? ' new' : '' ?>"
