@@ -9,10 +9,10 @@
 
 namespace humhub\modules\tasks\notifications;
 
+use humhub\helpers\Html;
+use humhub\modules\notification\components\BaseNotification;
 use humhub\modules\tasks\models\Task;
 use Yii;
-use humhub\modules\notification\components\BaseNotification;
-use humhub\helpers\Html;
 
 /**
  * Notifies an admin about reported content
@@ -34,7 +34,7 @@ class RemindStart extends BaseNotification
     /**
      * @inheritdoc
      */
-    public $viewName = "remind.php";
+    public $viewName = 'remind';
 
     /**
      * @var Task
