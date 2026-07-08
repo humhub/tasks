@@ -10,6 +10,10 @@ Changelog
 - Fix #298: Update for HumHub 1.19
 - Enh #298: Migrate to new Activity Manager
 
+1.9.6 (July 8, 2026)
+--------------------
+- Fix #322: Fix reminder notification
+
 1.9.5 (May 15, 2026)
 --------------------
 - Enh: Automated code refactoring for HumHub 1.18.0-beta.6 using Rector
