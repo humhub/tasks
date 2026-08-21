@@ -351,27 +351,24 @@ class TaskScheduling extends Component
      */
     public function getFullCalendarArray()
     {
-        $title = Yii::t('TasksModule.base', 'Deadline: ') . Html::encode($this->task->title);
-
-
         $result = [
             //            'id' => $this->id,
-            'title' => $title,
+            'title' => Yii::t('TasksModule.base', 'Deadline: ') . Html::encode($this->task->title),
             //            'editable' => ($this->content->canEdit() || self::isTaskResponsible()),
             'editable' => false,
             //'color' => $color ? $color : TaskCalendar::DEFAULT_COLOR,
             'allDay' => $this->task->all_day,
             //'updateUrl' => $this->task->content->container->createUrl('/tasks/task/edit-ajax', ['id' => $this->task->id]),
-            'viewUrl' => TaskUrl::viewTaskModal($this->task, 1),
-            'openUrl' => TaskUrl::viewTask($this->task),
+            'openUrl' => TaskUrl::viewTaskModal($this->task, 1),
+            'viewMode' => \humhub\modules\calendar\interfaces\fullcalendar\FullCalendarEventIF::VIEW_MODE_MODAL,
             'start' => $this->getStartDateTime(),
             'end' => $this->getEndDateTime(),
         ];
 
-        $color = Html::encode($this->task->getColor());
+        $color = $this->task->getColor();
 
         if ($color) {
-            $result['color'] = $color;
+            $result['color'] = Html::encode($color);
         }
 
         return $result;
