@@ -32,7 +32,13 @@ $checkUrl = $task->state->getCheckUrl();
         <div class="task-list-item-title flex-grow-1">
 
              <?php if ($canManage && !$task->isCompleted()) : ?>
-                <?= Icon::get('arrows')->class('task-moving-handler') ?>
+                <?= Icon::get('arrows', ['htmlOptions' => [
+                    'class' => 'task-moving-handler',
+                    'role' => 'button',
+                    'tabindex' => '0',
+                    'aria-hidden' => 'false',
+                    'aria-label' => Yii::t('TasksModule.base', 'Reorder task. Use the up and down arrow keys while focused to move.'),
+                ]]) ?>
              <?php endif; ?>
 
             <?php // We use an extra label in order to prevent click events on the actual label otherwise tasks could be accidentally finished ?>
@@ -58,7 +64,8 @@ $checkUrl = $task->state->getCheckUrl();
         <?php endif; ?>
 
         <?php if ($task->review) : ?>
-            <div class="task-controls toggleTaskDetails">
+            <div class="task-controls toggleTaskDetails" role="button" tabindex="0"
+                 aria-label="<?= Html::encode(Yii::t('TasksModule.base', 'This task requires to be reviewed by a responsible. Show task details.')) ?>">
                 <?= Icon::get('eye')
                     ->class('d-none d-sm-inline')
                     ->tooltip(Yii::t('TasksModule.base', 'This task requires to be reviewed by a responsible')) ?>
@@ -82,14 +89,18 @@ $checkUrl = $task->state->getCheckUrl();
                 $schedulingColor = $daysRemaining > 1 ? '' : 'colorWarning';
             }
             ?>
-            <div class="task-controls toggleTaskDetails d-none d-sm-block">
+            <div class="task-controls toggleTaskDetails d-none d-sm-block" role="button" tabindex="0"
+                 aria-label="<?= Html::encode($schedulingTitle . ' - ' . Yii::t('TasksModule.base', 'Show task details')) ?>">
                 <?= Icon::get('clock-o')->tooltip($schedulingTitle)->class($schedulingColor) ?>
             </div>
         <?php endif; ?>
 
+        <?php $commentCount = Comment::getCommentCount(Task::class, $task->id); ?>
         <div class="task-controls toggleTaskDetails d-none d-sm-block"
+             role="button" tabindex="0"
+             aria-label="<?= Html::encode(Yii::t('TasksModule.base', '{count,plural,=0{No comments} =1{# comment} other{# comments}} - Show task details', ['count' => $commentCount])) ?>"
              style="<?= (!$task->content->canEdit()) ? 'border-right:0;margin-right:0' : '' ?>">
-            <?= Icon::get('comment-o') ?> <?= Comment::getCommentCount(Task::class, $task->id); ?>
+            <?= Icon::get('comment-o') ?> <?= $commentCount; ?>
         </div>
 
         <div class="task-controls end">
