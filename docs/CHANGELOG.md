@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.9.7 (Unreleased)
+--------------------
+- Fix #329: Make action elements focusable in task list via keyboard
+
 1.9.6 (July 8, 2026)
 --------------------
 - Fix #322: Fix reminder notification

@@ -512,23 +512,62 @@ $tasks-info-color: #21A1B3;
     .task-list-title-bar > div {
         margin: 0 -10px;
 
-        .task-moving-handler, .task-list-edit {
+        // The moving handle is the first focusable control in this row, so
+        // it has to stay part of the layout (opacity, not display:none) to
+        // remain reachable by itself. The edit/delete links come right
+        // after it and can stay display:none like before: focusing the
+        // handle already makes the row match :focus-within below, which
+        // reveals them in time for the next Tab press to land on them.
+        .task-moving-handler {
+            opacity: 0;
+        }
+
+        .task-list-edit {
             display: none;
         }
 
         padding: 7px 10px;
 
-        &:hover {
+        &:hover, &:focus-within {
             background: var(--hh-background-color-page);
             border-radius: 4px;
 
-            .task-moving-handler, .task-list-edit {
+            .task-moving-handler {
+                opacity: 1;
+            }
+
+            .task-list-edit {
                 display: inline-block;
             }
         }
     }
 }
 
+// Keyboard focus affordance for the icon-only controls (list/task reordering
+// handle and the expand/collapse toggle) that act as buttons but aren't
+// natively focusable elements. The padding + negative margin gives the
+// focus ring some breathing room around the small glyph without shifting
+// the surrounding layout (the negative margin cancels the padding out).
+.task-moving-handler,
+.task-list-toggle,
+.task-list-edit {
+    &.fa, .fa {
+        padding: 2px;
+        margin: -2px;
+        border-radius: 4px;
+    }
+    &.fa:focus-visible, &:focus-visible .fa {
+        outline: none;
+        box-shadow: 0 0 0 2px var(--accent);
+    }
+}
+.toggleTaskDetails[role="button"] {
+    border-radius: 4px;
+    &:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 2px var(--accent);
+    }
+}
 
 .task-list-title-bar {
     border-bottom: 1px solid var(--hh-background3);
@@ -649,15 +688,17 @@ $tasks-info-color: #21A1B3;
                 padding: 3px 10px;
 
                 .task-moving-handler {
-                    display: none;
+                    // Hidden until hover/focus, but kept in the layout (not display:none)
+                    // so the control stays part of the keyboard tab order.
+                    opacity: 0;
                 }
 
-                &:hover {
+                &:hover, &:focus-within {
                     background: #F0F0F0;
                     border-radius: 4px;
 
                     .task-moving-handler {
-                        display: inline-block;
+                        opacity: 1;
                     }
                 }
             }

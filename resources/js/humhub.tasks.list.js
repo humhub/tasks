@@ -39,6 +39,82 @@ humhub.module('task.list', function (module, require, $) {
             placeholder: "task-list-state-highlight",
             update: $.proxy(this.dropItem, this)
         });
+
+        this.initKeyboardAccessibility();
+    };
+
+    /**
+     * Makes the icon-only controls (expand/collapse toggle, task details
+     * toggles and the drag handles used for reordering) reachable and
+     * operable via keyboard, in addition to the existing mouse/touch
+     * interactions. Bound once on the root element so it keeps working for
+     * lists/tasks that get reloaded or added later on.
+     */
+    Root.prototype.initKeyboardAccessibility = function () {
+        var that = this;
+
+        // Enter/Space activates any of our button-like controls the same
+        // way a click would (expand/collapse toggle, task details toggles).
+        // The moving handle is excluded here since it is operated with the
+        // arrow keys below instead of being "clicked".
+        this.$.on('keydown', '[role="button"][tabindex]:not(.task-moving-handler)', function (evt) {
+            if (evt.keyCode === 13 || evt.keyCode === 32) {
+                evt.preventDefault();
+                $(this).trigger('click');
+            }
+        });
+
+        // Arrow Up/Down reorders the focused task (or task list) while
+        // keeping the focus on the same handle, mirroring the drag & drop
+        // behaviour provided by jQuery UI Sortable for mouse/touch users.
+        this.$.on('keydown', '.task-moving-handler', function (evt) {
+            that.moveItemByKeyboard(evt);
+        });
+    };
+
+    Root.prototype.moveItemByKeyboard = function (evt) {
+        var KEY_ARROW_UP = 38;
+        var KEY_ARROW_DOWN = 40;
+
+        if (evt.keyCode !== KEY_ARROW_UP && evt.keyCode !== KEY_ARROW_DOWN) {
+            return;
+        }
+
+        var $handle = $(evt.currentTarget);
+        var isTask = !!$handle.closest('.task-list-item').length;
+        var $item = isTask ? $handle.closest('.task-list-item') : $handle.closest('.task-list-li');
+
+        if (!$item.length) {
+            return;
+        }
+
+        var selector = isTask ? '.task-list-item' : '.task-list-li';
+        var $sibling = (evt.keyCode === KEY_ARROW_UP) ? $item.prev(selector) : $item.next(selector);
+
+        if (!$sibling.length) {
+            return;
+        }
+
+        evt.preventDefault();
+
+        if (evt.keyCode === KEY_ARROW_UP) {
+            $item.insertBefore($sibling);
+        } else {
+            $item.insertAfter($sibling);
+        }
+
+        if (isTask) {
+            var itemWidget = Widget.instance($item);
+            var listWidget = itemWidget && itemWidget.parent();
+            if (listWidget) {
+                listWidget.dropItem(evt, {item: $item});
+            }
+        } else {
+            this.dropItem(evt, {item: $item});
+        }
+
+        // Keep the focus on the handle so the user can keep reordering.
+        $handle.trigger('focus');
     };
 
     Root.prototype.dropItem = function (event, ui) {
@@ -120,7 +196,8 @@ humhub.module('task.list', function (module, require, $) {
         var $target = $(evt.target);
         if (!$target.is('.task-list-title-bar') &&
             !$target.closest('.toggleItems').length &&
-            !$target.closest('.task-list-title-text').length) {
+            !$target.closest('.task-list-title-text').length &&
+            !$target.closest('.task-list-toggle').length) {
             return;
         }
 
@@ -128,6 +205,7 @@ humhub.module('task.list', function (module, require, $) {
 
         var downIcon =  'fa-caret-up';
         var upIcon ='fa-caret-down';
+        var willExpand = !$items.is(':visible');
 
         if($items.is(':visible')) {
             this.$.find('.toggleItems').removeClass(downIcon).addClass(upIcon);
@@ -137,6 +215,8 @@ humhub.module('task.list', function (module, require, $) {
 
         $items.closest('.task-list-li').toggleClass('task-list-li-collapsed');
         $items.add(this.getItemsCompletedRoot()).toggleClass('d-none');
+
+        this.$.find('.task-list-toggle').attr('aria-expanded', willExpand ? 'true' : 'false');
     };
 
 

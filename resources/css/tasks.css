@@ -397,15 +397,47 @@
   margin: 0 -10px;
   padding: 7px 10px;
 }
-.task-list-container .task-list-title-bar > div .task-moving-handler, .task-list-container .task-list-title-bar > div .task-list-edit {
+.task-list-container .task-list-title-bar > div .task-moving-handler {
+  opacity: 0;
+}
+.task-list-container .task-list-title-bar > div .task-list-edit {
   display: none;
 }
-.task-list-container .task-list-title-bar > div:hover {
+.task-list-container .task-list-title-bar > div:hover, .task-list-container .task-list-title-bar > div:focus-within {
   background: var(--hh-background-color-page);
   border-radius: 4px;
 }
-.task-list-container .task-list-title-bar > div:hover .task-moving-handler, .task-list-container .task-list-title-bar > div:hover .task-list-edit {
+.task-list-container .task-list-title-bar > div:hover .task-moving-handler, .task-list-container .task-list-title-bar > div:focus-within .task-moving-handler {
+  opacity: 1;
+}
+.task-list-container .task-list-title-bar > div:hover .task-list-edit, .task-list-container .task-list-title-bar > div:focus-within .task-list-edit {
   display: inline-block;
+}
+
+.task-moving-handler.fa, .task-moving-handler .fa,
+.task-list-toggle.fa,
+.task-list-toggle .fa,
+.task-list-edit.fa,
+.task-list-edit .fa {
+  padding: 2px;
+  margin: -2px;
+  border-radius: 4px;
+}
+.task-moving-handler.fa:focus-visible, .task-moving-handler:focus-visible .fa,
+.task-list-toggle.fa:focus-visible,
+.task-list-toggle:focus-visible .fa,
+.task-list-edit.fa:focus-visible,
+.task-list-edit:focus-visible .fa {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.toggleTaskDetails[role=button] {
+  border-radius: 4px;
+}
+.toggleTaskDetails[role=button]:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--accent);
 }
 
 .task-list-title-bar {
@@ -505,14 +537,14 @@
   padding: 3px 10px;
 }
 .task-list-items .task-list-item .task-list-task-title-bar > div .task-moving-handler {
-  display: none;
+  opacity: 0;
 }
-.task-list-items .task-list-item .task-list-task-title-bar > div:hover {
+.task-list-items .task-list-item .task-list-task-title-bar > div:hover, .task-list-items .task-list-item .task-list-task-title-bar > div:focus-within {
   background: #F0F0F0;
   border-radius: 4px;
 }
-.task-list-items .task-list-item .task-list-task-title-bar > div:hover .task-moving-handler {
-  display: inline-block;
+.task-list-items .task-list-item .task-list-task-title-bar > div:hover .task-moving-handler, .task-list-items .task-list-item .task-list-task-title-bar > div:focus-within .task-moving-handler {
+  opacity: 1;
 }
 .task-list-items .task-list-item .task-list-task-details {
   padding: 15px 0;
