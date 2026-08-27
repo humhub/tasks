@@ -41,16 +41,8 @@ humhub.module('task', function (module, require, $) {
     };
 
     Form.prototype.initScheduling = function(evt) {
-        var $schedulingTab = modal.global.$.find('.tab-scheduling');
         var $checkBox = modal.global.$.find('#task-scheduling');
-        var $calMode = modal.global.$.find('.field-task-cal_mode');
-        if($checkBox.prop('checked')) {
-            $schedulingTab.removeClass('d-none');
-            $calMode.removeClass('d-none');
-        } else {
-            $schedulingTab.addClass('d-none');
-            $calMode.addClass('d-none');
-        }
+        this.setSchedulingTabVisible($checkBox.prop('checked'));
 
         var $startInput  = $('#taskform-start_date');
         var $endInput= $('#taskform-end_date');
@@ -69,15 +61,24 @@ humhub.module('task', function (module, require, $) {
     };
 
     Form.prototype.toggleScheduling = function(evt) {
+        this.setSchedulingTabVisible(evt.$trigger.prop('checked'));
+    };
+
+    /**
+     * Shows/hides the "Scheduling" tab. Also marks it "disabled" while hidden,
+     * so Bootstrap's arrow-key tab navigation skips it instead of getting
+     * stuck on a tab that isn't visible.
+     */
+    Form.prototype.setSchedulingTabVisible = function (visible) {
         var $schedulingTab = modal.global.$.find('.tab-scheduling');
         var $calMode = modal.global.$.find('.field-task-cal_mode');
-        if (evt.$trigger.prop('checked')) {
-            $schedulingTab.removeClass('d-none');
-            $calMode.removeClass('d-none')
-        } else {
-            $schedulingTab.addClass('d-none');
-            $calMode.addClass('d-none');
-        }
+
+        $schedulingTab
+            .toggleClass('d-none', !visible) // hide the tab visually
+            .toggleClass('disabled', !visible) // Bootstrap skips "disabled" tabs when cycling with arrow keys
+            .attr('aria-disabled', visible ? null : 'true') // announce the disabled state to screen readers
+            .attr('tabindex', visible ? null : '-1'); // keep it out of the normal Tab-key order too
+        $calMode.toggleClass('d-none', !visible);
     };
 
     Form.prototype.toggleDateTime = function(evt) {

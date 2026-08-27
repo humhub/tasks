@@ -4,6 +4,7 @@ Changelog
 1.9.7 (Unreleased)
 --------------------
 - Fix #329: Make action elements focusable in task list via keyboard
+- Fix #328: Fix keyboard navigation (Tab/arrow keys) between tabs in the task creation/edit modal form
 
 1.9.6 (July 8, 2026)
 --------------------
