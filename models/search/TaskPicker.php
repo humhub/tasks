@@ -59,6 +59,7 @@ class TaskPicker
 
         $cfg = ($cfg == null) ? $defaultCfg : array_merge($defaultCfg, $cfg);
 
+        //If no initial query is given we use getFriends if friendship module is enabled otherwise all tasks
         $cfg['query'] ??= TaskFilter::find();
 
         //Filter the initial query and disable task without the given permission

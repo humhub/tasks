@@ -177,6 +177,7 @@ class TaskPicker extends \yii\base\Widget
 
         $cfg = ($cfg == null) ? $defaultCfg : array_merge($defaultCfg, $cfg);
 
+        //If no initial query is given we use getFriends if friendship module is enabled otherwise all tasks
         $cfg['query'] ??= (Yii::$app->getModule('friendship')->settings->get('enable'))
                 ? Yii::$app->task->getIdentity()->getFriends()
                 : UserFilter::find();
