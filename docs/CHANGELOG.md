@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.9.7 (Unreleased)
---------------------
+1.9.7 (September 8, 2026)
+-------------------------
 - Fix #329: Make action elements focusable in task list via keyboard
 - Fix #328: Fix keyboard navigation (Tab/arrow keys) between tabs in the task creation/edit modal form
 - Enh: Automated code refactoring for HumHub 1.18.0-beta.6 using Rector
