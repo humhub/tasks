@@ -8,11 +8,10 @@
         "project",
         "management"
     ],
-    "version": "1.9.7",
+    "version": "1.10.2",
     "homepage": "https://github.com/humhub/tasks",
     "humhub": {
-        "minVersion": "1.18.0-beta.6",
-        "maxVersion": "1.18"
+        "minVersion": "1.19"
     },
     "screenshots": [
         "resources/screenshot1.png",

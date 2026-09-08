@@ -1,6 +1,5 @@
 <?php
 
-use humhub\modules\content\widgets\WallCreateContentMenu;
 use humhub\widgets\TopMenu;
 use humhub\modules\space\widgets\Menu;
 use humhub\commands\IntegrityController;

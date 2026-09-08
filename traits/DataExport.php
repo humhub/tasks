@@ -3,9 +3,8 @@
 namespace humhub\modules\tasks\traits;
 
 use humhub\modules\comment\models\Comment;
+use humhub\modules\comment\services\CommentListService;
 use humhub\modules\tasks\models\Task;
-use PhpOffice\PhpSpreadsheet\Shared\Date;
-use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use yii\helpers\ArrayHelper;
 
 trait DataExport
@@ -74,8 +73,8 @@ trait DataExport
     private function getComments()
     {
         return function ($model, $key) {
-            $commentsCount = Comment::GetCommentCount($model::class, $key);
-            $comments = Comment::GetCommentsLimited($model::class, $key, $commentsCount);
+            $service = CommentListService::create($model);
+            $comments = $service->getLimited($service->getCount());
 
             $messages = array_map(fn($comment)
                 /* @var $comment Comment */

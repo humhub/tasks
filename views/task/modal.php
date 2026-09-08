@@ -6,23 +6,20 @@
  *
  */
 
+use humhub\components\View;
+use humhub\modules\tasks\models\Task;
 use humhub\widgets\modal\Modal;
 use humhub\widgets\modal\ModalButton;
 
-/* @var $this \humhub\components\View */
-/* @var $task \humhub\modules\tasks\models\Task  */
-/* @var $canManageEntries boolean  */
-/* @var $editUrl string  */
-
+/* @var $this View */
+/* @var $task Task */
+/* @var $canManageEntries boolean */
+/* @var $editUrl string */
 ?>
-
 <?php Modal::beginDialog([
     'size' => Modal::SIZE_LARGE,
-    'closable' => true,
-    'closeButton' => true,
-    'footer' =>
-        ModalButton::cancel(Yii::t('TasksModule.base', 'Close')) .
-        ($canManageEntries ? ModalButton::primary(Yii::t('TasksModule.base', 'Edit'))->load($editUrl)->loader(true) : ''),
-]); ?>
-    <?= $this->renderAjax('modal_entry', ['task' => $task])?>
-<?php Modal::endDialog(); ?>
+    'footer' => ModalButton::cancel(Yii::t('TasksModule.base', 'Close'))
+        . ($canManageEntries ? ModalButton::primary(Yii::t('TasksModule.base', 'Edit'))->load($editUrl) : ''),
+]) ?>
+    <?= $this->renderAjax('modal_entry', ['task' => $task]) ?>
+<?php Modal::endDialog() ?>

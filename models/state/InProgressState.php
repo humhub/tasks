@@ -2,6 +2,7 @@
 
 namespace humhub\modules\tasks\models\state;
 
+use humhub\modules\activity\services\ActivityManager;
 use humhub\modules\tasks\activities\TaskStartActivity;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\notifications\InProgressNotification;
@@ -66,7 +67,7 @@ class InProgressState extends TaskState
             InProgressNotification::instance()->from($user)->about($this->task)->sendBulk($this->task->taskResponsibleUsers);
         }
 
-        TaskStartActivity::instance()->from($user)->about($this->task)->create();
+        ActivityManager::dispatch(TaskStartActivity::class, $this->task, $user);
     }
 
     public function afterRevert(TaskState $oldState)

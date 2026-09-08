@@ -11,15 +11,12 @@ namespace humhub\modules\tasks\models;
 
 use Colors\RandomColor;
 use humhub\modules\content\components\ActiveQueryContent;
+use humhub\modules\content\components\ContentActiveRecord;
+use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\content\components\ContentContainerPermissionManager;
+use humhub\modules\notification\models\Notification;
 use humhub\modules\space\models\Space;
 use humhub\modules\tasks\helpers\TaskUrl;
-use humhub\modules\tasks\permissions\CreateTask;
-use humhub\modules\tasks\permissions\ProcessUnassignedTasks;
-use Yii;
-use yii\db\ActiveQuery;
-use yii\db\Expression;
-use humhub\modules\notification\models\Notification;
 use humhub\modules\tasks\models\checklist\TaskCheckList;
 use humhub\modules\tasks\models\checklist\TaskItem;
 use humhub\modules\tasks\models\lists\TaskList;
@@ -27,13 +24,15 @@ use humhub\modules\tasks\models\scheduling\TaskReminder;
 use humhub\modules\tasks\models\scheduling\TaskScheduling;
 use humhub\modules\tasks\models\state\TaskState;
 use humhub\modules\tasks\models\user\TaskUser;
-use humhub\modules\content\components\ContentContainerActiveRecord;
-use humhub\modules\content\components\ContentActiveRecord;
-use humhub\modules\user\models\User;
-use humhub\modules\search\interfaces\Searchable;
-use humhub\widgets\bootstrap\Badge;
-use humhub\modules\tasks\widgets\WallEntry;
+use humhub\modules\tasks\permissions\CreateTask;
 use humhub\modules\tasks\permissions\ManageTasks;
+use humhub\modules\tasks\permissions\ProcessUnassignedTasks;
+use humhub\modules\tasks\widgets\WallEntry;
+use humhub\modules\user\models\User;
+use humhub\widgets\bootstrap\Badge;
+use Yii;
+use yii\db\ActiveQuery;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "task".
@@ -61,7 +60,7 @@ use humhub\modules\tasks\permissions\ManageTasks;
  * @property User[] $taskResponsibleUsers
  * @property User[] $taskAssignedUsers
  */
-class Task extends ContentActiveRecord implements Searchable
+class Task extends ContentActiveRecord
 {
     public const SCENARIO_EDIT = 'edit';
 
@@ -291,6 +290,16 @@ class Task extends ContentActiveRecord implements Searchable
             'responsibleUsers' => Yii::t('TasksModule.base', 'Responsible users'),
             'selectedReminders' => Yii::t('TasksModule.base', 'Reminders'),
             'task_list_id' => Yii::t('TasksModule.base', 'Task List'),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeHints()
+    {
+        return [
+            'assignedUsers' => Yii::t('TasksModule.base', 'If empty any user can complete the task.'),
         ];
     }
 

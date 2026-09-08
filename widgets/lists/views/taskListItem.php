@@ -8,7 +8,7 @@
 
 use humhub\components\View;
 use humhub\helpers\Html;
-use humhub\modules\comment\models\Comment;
+use humhub\modules\comment\services\CommentListService;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\widgets\lists\TaskListDetails;
 use humhub\modules\tasks\widgets\TaskBadge;
@@ -95,7 +95,7 @@ $checkUrl = $task->state->getCheckUrl();
             </div>
         <?php endif; ?>
 
-        <?php $commentCount = Comment::getCommentCount(Task::class, $task->id); ?>
+        <?php $commentCount = CommentListService::create($task)->getCount(); ?>
         <div class="task-controls toggleTaskDetails d-none d-sm-block"
              role="button" tabindex="0"
              aria-label="<?= Html::encode(Yii::t('TasksModule.base', '{count,plural,=0{No comments} =1{# comment} other{# comments}} - Show task details', ['count' => $commentCount])) ?>"

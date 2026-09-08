@@ -9,27 +9,32 @@
 
 namespace humhub\modules\tasks;
 
+use humhub\commands\IntegrityController;
+use humhub\helpers\ControllerHelper;
 use humhub\modules\content\components\ContentContainerActiveRecord;
+use humhub\modules\dashboard\widgets\Sidebar as DashboardSidebar;
+use humhub\modules\notification\models\Notification;
 use humhub\modules\rest\Module as RestModule;
-use humhub\modules\space\models\Space;
+use humhub\modules\space\widgets\Menu as SpaceMenu;
+use humhub\modules\space\widgets\Sidebar as SpaceSidebar;
 use humhub\modules\tasks\extensions\custom_pages\elements\TaskElement;
 use humhub\modules\tasks\extensions\custom_pages\elements\TasksElement;
 use humhub\modules\tasks\helpers\TaskListUrl;
 use humhub\modules\tasks\helpers\TaskUrl;
-use humhub\modules\user\models\User;
-use Yii;
-use humhub\modules\notification\models\Notification;
 use humhub\modules\tasks\jobs\SendReminder;
 use humhub\modules\tasks\models\SnippetModuleSettings;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\models\checklist\TaskItem;
 use humhub\modules\tasks\models\scheduling\TaskReminder;
+use humhub\modules\tasks\models\user\TaskUser;
 use humhub\modules\tasks\integration\calendar\TaskCalendar;
 use humhub\modules\tasks\widgets\MyTasks;
-use humhub\modules\tasks\models\user\TaskUser;
+use humhub\modules\ui\menu\MenuLink;
+use humhub\modules\user\models\User;
+use humhub\modules\user\widgets\ProfileMenu;
+use humhub\widgets\TopMenu;
+use Yii;
 use yii\db\Expression;
-
-/* @var $user \humhub\modules\user\models\User */
 
 /**
  * Created by PhpStorm.
@@ -45,28 +50,29 @@ class Events
             /* @var $module Module */
             $module = Yii::$app->getModule('tasks');
 
-
             if (!$module->settings->get('showGlobalMenuItem', false) || Yii::$app->user->isGuest) {
                 return;
             }
 
+            /* @var TopMenu $menu */
+            $menu = $event->sender;
+
             // Is Module enabled on this workspace?
-            $event->sender->addItem([
+            $menu->addEntry(new MenuLink([
                 'label' => Yii::t('TasksModule.base', 'Tasks'),
                 'id' => 'tasks-global',
                 'icon' => 'tasks',
                 'url' => TaskUrl::globalView(),
                 'sortOrder' => $module->settings->get('menuSortOrder', 500),
-                'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'tasks' && Yii::$app->controller->id == 'global'),
-            ]);
+                'isActive' => ControllerHelper::isActivePath('tasks', 'global'),
+            ]));
         } catch (\Throwable $e) {
             Yii::error($e);
         }
     }
 
     /**
-     * @param $event \humhub\modules\calendar\interfaces\CalendarItemTypesEvent
-     * @return mixed
+     * @param $event \humhub\modules\calendar\interfaces\event\CalendarItemTypesEvent
      */
     public static function onGetCalendarItemTypes($event)
     {
@@ -83,7 +89,7 @@ class Events
     }
 
     /**
-     * @param $event \humhub\modules\calendar\interfaces\CalendarItemsEvent;
+     * @param $event \humhub\modules\calendar\interfaces\event\CalendarItemsEvent;
      */
     public static function onFindCalendarItems($event)
     {
@@ -109,7 +115,9 @@ class Events
             $settings = SnippetModuleSettings::instantiate();
 
             if ($settings->showMyTasksSnippet()) {
-                $event->sender->addWidget(MyTasks::class, ['limit' => $settings->myTasksSnippetMaxItems], ['sortOrder' => $settings->myTasksSnippetSortOrder]);
+                /* @var DashboardSidebar $sidebar */
+                $sidebar = $event->sender;
+                $sidebar->addWidget(MyTasks::class, ['limit' => $settings->myTasksSnippetMaxItems], ['sortOrder' => $settings->myTasksSnippetSortOrder]);
             }
         } catch (\Throwable $e) {
             Yii::error($e);
@@ -123,15 +131,17 @@ class Events
                 return;
             }
 
-            /* @var $space Space */
-            $space = $event->sender->space;
+            /* @var SpaceSidebar $sidebar */
+            $sidebar = $event->sender;
 
-            if ($space->moduleManager->isEnabled('tasks') && $space->isMember()) {
+            if ($sidebar->space->moduleManager->isEnabled('tasks') && $sidebar->space->isMember()) {
                 $settings = SnippetModuleSettings::instantiate();
                 if ($settings->showMyTasksSnippetSpace()) {
-                    $event->sender->addWidget(MyTasks::class, [
-                        'contentContainer' => $space,
-                        'limit' => $settings->myTasksSnippetMaxItems], ['sortOrder' => $settings->myTasksSnippetSortOrder]);
+                    $sidebar->addWidget(
+                        MyTasks::class,
+                        ['contentContainer' => $sidebar->space, 'limit' => $settings->myTasksSnippetMaxItems],
+                        ['sortOrder' => $settings->myTasksSnippetSortOrder],
+                    );
                 }
             }
         } catch (\Throwable $e) {
@@ -142,17 +152,16 @@ class Events
     public static function onSpaceMenuInit($event)
     {
         try {
-            /* @var $space Space */
-            $space = $event->sender->space;
+            /* @var SpaceMenu $menu */
+            $menu = $event->sender;
 
-            if ($space->moduleManager->isEnabled('tasks') && $space->isMember()) {
-                $event->sender->addItem([
+            if ($menu->space->moduleManager->isEnabled('tasks') && $menu->space->isMember()) {
+                $menu->addEntry(new MenuLink([
                     'label' => Yii::t('TasksModule.base', 'Tasks'),
-                    'group' => 'modules',
-                    'url' => TaskListUrl::taskListRoot($space),
+                    'url' => TaskListUrl::taskListRoot($menu->space),
                     'icon' => 'tasks',
-                    'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'tasks'),
-                ]);
+                    'isActive' => ControllerHelper::isActivePath('tasks'),
+                ]));
             }
         } catch (\Throwable $e) {
             Yii::error($e);
@@ -161,16 +170,17 @@ class Events
 
     public static function onProfileMenuInit($event)
     {
-        /* @var $user User */
         try {
-            $user = $event->sender->user;
-            if ($user->moduleManager->isEnabled('tasks')) {
-                $event->sender->addItem([
+            /* @var ProfileMenu $menu */
+            $menu = $event->sender;
+
+            if ($menu->user->moduleManager->isEnabled('tasks')) {
+                $menu->addEntry(new MenuLink([
                     'label' => Yii::t('TasksModule.base', 'Tasks'),
-                    'url' => TaskListUrl::taskListRoot($user),
+                    'url' => TaskListUrl::taskListRoot($menu->user),
                     'icon' => 'tasks',
-                    'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'tasks'),
-                ]);
+                    'isActive' => ControllerHelper::isActivePath('tasks'),
+                ]));
             }
         } catch (\Throwable $e) {
             Yii::error($e);
@@ -186,6 +196,7 @@ class Events
      */
     public static function onIntegrityCheck($event)
     {
+        /* @var IntegrityController $integrityController */
         $integrityController = $event->sender;
         $integrityController->showTestHeadline("Tasks Module - Entries (" . Task::find()->count() . " entries)");
 

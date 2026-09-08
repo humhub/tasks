@@ -1,19 +1,14 @@
 <?php
 
-/**
- * @link https://www.humhub.org/
- * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
- * @license https://www.humhub.com/licences
- *
- */
-
 namespace humhub\modules\tasks\activities;
 
-use humhub\modules\activity\components\BaseActivity;
+use humhub\modules\activity\components\BaseContentActivity;
+use Yii;
 
-class TaskStartActivity extends BaseActivity
+class TaskStartActivity extends BaseContentActivity
 {
-    public $moduleId = 'tasks';
-    public $viewName = "taskStart";
-
+    protected function getMessage(array $params): string
+    {
+        return Yii::t('TasksModule.base', '{displayName} works on task "{contentTitle}".', $params);
+    }
 }
