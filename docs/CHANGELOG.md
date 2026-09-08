@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.10.2 (Unreleased)
--------------------
+1.10.2 (September 8, 2026)
+--------------------------
 - Fix: Task rendering in a modal window opened from the Calendar module
 - Fix: Replace unsupported `pull-right` class with `float-end`
 
