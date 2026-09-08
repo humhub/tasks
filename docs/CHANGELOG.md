@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.10.2 (Unreleased)
+-------------------
+- Fix: Task rendering in a modal window opened from the Calendar module
+- Fix: Replace unsupported `pull-right` class with `float-end`
+
 1.10.1 (July 8, 2026)
 ---------------------
 - Enh #325: Add aria-label attribute for icon-only buttons
