@@ -48,8 +48,6 @@ class TaskListSettings extends ContentTagAddition
      */
     public function init()
     {
-        if ($this->hide_if_completed === null) {
-            $this->hide_if_completed = 1;
-        }
+        $this->hide_if_completed ??= 1;
     }
 }

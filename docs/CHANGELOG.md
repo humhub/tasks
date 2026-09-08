@@ -10,6 +10,12 @@ Changelog
 - Fix #298: Update for HumHub 1.19
 - Enh #298: Migrate to new Activity Manager
 
+1.9.7 (September 8, 2026)
+-------------------------
+- Fix #329: Make action elements focusable in task list via keyboard
+- Fix #328: Fix keyboard navigation (Tab/arrow keys) between tabs in the task creation/edit modal form
+- Enh: Automated code refactoring for HumHub 1.18.0-beta.6 using Rector
+
 1.9.6 (July 8, 2026)
 --------------------
 - Fix #322: Fix reminder notification
@@ -102,34 +108,28 @@ Changelog
 -------------------------
 - Enh #210: Print assigned users on wall stream
 
-
 1.7.0-beta.1 (November 7, 2022)
 -------------------------------
 - Enh #198: Implemented new HumHub v1.13 Content Form Support
-
 
 1.6.3 (November 7, 2022)
 ------------------------
 - Fix #205: Hide empty list of completed tasks
 - Fix #212: Fix filter "Overdue"
 
-
 1.6.2 (October 6, 2022)
 -----------------------
 - Fix #207: additional style to hide from stream
-
 
 1.6.1 (October 5, 2022)
 -----------------------
 - Enh: Updated Translations
 - Fix #203: Theme colors not properly used in overview checkboxes
 
-
 1.6.0 (September 23, 2022)
 --------------------------
 - Enh #199 #200: Improved translator module compatibility
 - Updated translations
-
 
 1.6.0-beta.1  (August 15, 2022)
 -------------------------------
@@ -140,7 +140,6 @@ Changelog
 - Fix #190: Fix wrong scheduling information for completed tasks
 - Enh #195: Remove deprecated checkbox "regular" style
 - Enh #198: Menu for creating a Task from wall stream
-
 
 1.5.5  (March 13, 2022)
 -----------------------
@@ -160,32 +159,26 @@ Changelog
 - Fix #147: Fix checkpoints strikethrough style
 - Fix #150: Fix access to search profile tasks
 
-
 1.5.3  (April 13, 2021)
 -----------------------
 - Fix #143: Fix translation syntax error
-
 
 1.5.2  (April 8, 2021)
 ----------------------
 - Fix #221: Fix call of console commands when REST API module doesn't exist
 
-
 1.5.1 (April 7, 2021)
 ---------------------
 - Enh: Allow to change topics from the edit form
-
 
 1.5.0 (December, 17, 2020)
 --------------------------
 - Fix: Remove gap between comments
 - Chg: Add process permissions to users with ManageTasks and task owner
 
-
 1.4.2 (November, 13, 2020)
 --------------------------
 - Fix: Responsive task filter
-
 
 1.4.1 (November, 11, 2020)
 --------------------------
@@ -299,29 +292,24 @@ Changelog
 --------------------
 - Fix: PHP 7.2 compatibility issues
 
-
 1.1.8 (June 13, 2018)
 ----------------------
 - Fix #70 Task with no responsible user can be edited by each member
 - Chng: Disallow default Managetask permission for Usergrup Members
 - Fix # 69 removed invalid message source
 
-
 1.1.7 (May 29, 2018)
 -----------------------
 - Fix # 69 removed invalid message source
-
 
 1.1.6 (May 25, 2018)
 -----------------------
 - Fix reminder not sent
 - Fix assignment notifications are sent for already existing assignments
 
-
 1.1.4 (May 24, 2018)
 -----------------------
 - Fix removed invalid full day span check
-
 
 1.1.3 (May 24, 2018)
 -----------------------

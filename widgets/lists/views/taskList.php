@@ -39,7 +39,13 @@ use humhub\widgets\bootstrap\Link;
         <div>
 
         <?php if ($canSort) : ?>
-            <?= Icon::get('arrows')->class('task-moving-handler') ?>
+            <?= Icon::get('arrows', ['htmlOptions' => [
+                'class' => 'task-moving-handler',
+                'role' => 'button',
+                'tabindex' => '0',
+                'aria-hidden' => 'false',
+                'aria-label' => Yii::t('TasksModule.base', 'Reorder task list. Use the up and down arrow keys while focused to move.'),
+            ]]) ?>
         <?php else: ?>
             <?= Icon::get('tasks') ?>
         <?php endif ?>
@@ -64,17 +70,25 @@ use humhub\widgets\bootstrap\Link;
 
         <?php endif; ?>
 
-        <?= Icon::get('caret-up')->class('toggleItems')->right() ?>
+        <span class="float-end d-inline-flex align-items-center">
+            <?= Button::success()
+                ->icon('plus')
+                ->sm()
+                ->style('margin-top:-3px')
+                ->action('ui.modal.load', TaskListUrl::addTaskListTask($list))
+                ->loader(false)
+                ->visible($canCreate)
+                ->tooltip(Yii::t('TasksModule.base', 'Add task')) ?>
 
-        <?= Button::success()
-            ->icon('plus')
-            ->sm()
-            ->right()
-            ->style('margin-top:-3px')
-            ->action('ui.modal.load', TaskListUrl::addTaskListTask($list))
-            ->loader(false)
-            ->visible($canCreate)
-            ->tooltip(Yii::t('TasksModule.base', 'Add task')) ?>
+            <?= Icon::get('caret-up', ['htmlOptions' => [
+                'class' => 'task-list-toggle toggleItems ms-4',
+                'role' => 'button',
+                'tabindex' => '0',
+                'aria-hidden' => 'false',
+                'aria-expanded' => 'true',
+                'aria-label' => Yii::t('TasksModule.base', 'Toggle task list'),
+            ]]) ?>
+        </span>
         </div>
     </div>
 
