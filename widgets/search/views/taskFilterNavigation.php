@@ -28,7 +28,7 @@ use humhub\modules\tasks\widgets\search\TextFilterInput;
         <?= FilterPanel::widget(['blocks' => $panels[TaskFilterNavigation::PANEL_POSITION_COL3]]) ?>
         <?= FilterPanel::widget(['blocks' => $panels[TaskFilterNavigation::PANEL_POSITION_COL4]]) ?>
     </div>
-    <div id="task-export-button" class="pull-right">
+    <div id="task-export-button" class="float-end">
         <?= ExportButton::widget(['filter' => 'TaskFilter']) ?>
     </div>
 </div>
