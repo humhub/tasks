@@ -7,7 +7,6 @@ use humhub\components\export\SpreadsheetExport;
 use humhub\modules\content\components\ContentContainerController;
 use humhub\modules\tasks\models\forms\TaskFilter;
 use humhub\modules\tasks\models\Task;
-use humhub\modules\tasks\permissions\CreateTask;
 use humhub\modules\tasks\permissions\ManageTasks;
 use humhub\modules\tasks\traits\DataExport;
 use Yii;
@@ -29,7 +28,7 @@ abstract class AbstractTaskController extends ContentContainerController
 
     protected function canCreateTask()
     {
-        return $this->contentContainer->can(CreateTask::class);
+        return (new Task($this->contentContainer))->content->canEdit();
     }
 
     protected function canManageTasks()
