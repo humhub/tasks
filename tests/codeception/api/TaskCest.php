@@ -5,6 +5,7 @@ namespace tasks\api;
 use Codeception\Util\HttpCode;
 use tasks\ApiTester;
 use tests\codeception\_support\HumHubApiTestCest;
+use Yii;
 use yii\web\UploadedFile;
 
 class TaskCest extends HumHubApiTestCest
@@ -139,5 +140,39 @@ class TaskCest extends HumHubApiTestCest
 
         $I->sendDelete('tasks/task/1/remove-file/2');
         $I->seeNotFoundMessage('Could not find requested content record or file!');
+    }
+
+    public function testCreateTaskOnOtherUserProfile(ApiTester $I)
+    {
+        if (!$this->isRestModuleEnabled()) {
+            return;
+        }
+
+        $I->wantTo('create a task on profile of another user');
+
+        $I->amGoingTo('create a task as admin without "Manage All Content" permission');
+        Yii::$app->getModule('admin')->enableManageAllContentPermission = false;
+        $I->amAdmin();
+        $I->createTask('Task on User1 profile', 'Task content', ['containerId' => 2]);
+        $I->seeForbiddenMessage('You are not allowed to create task!');
+
+        $I->amGoingTo('create a task as admin with "Manage All Content" permission');
+        Yii::$app->getModule('admin')->enableManageAllContentPermission = true;
+        $I->createTask('Task on User1 profile', 'Task content', ['containerId' => 2]);
+        $I->seeLastCreatedTaskDefinition();
+        $I->seeResponseContainsJson(['content' => ['metadata' => ['contentcontainer_id' => 2]]]);
+    }
+
+    public function testCannotCreateTaskOnOtherUserProfileAsRegularUser(ApiTester $I)
+    {
+        if (!$this->isRestModuleEnabled()) {
+            return;
+        }
+
+        $I->wantTo('not create a task on profile of another user as regular user');
+        Yii::$app->getModule('admin')->enableManageAllContentPermission = true;
+        $I->amUser1();
+        $I->createTask('Task on User2 profile', 'Task content', ['containerId' => 3]);
+        $I->seeForbiddenMessage('You are not allowed to create task!');
     }
 }

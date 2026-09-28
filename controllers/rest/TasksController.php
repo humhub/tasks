@@ -15,8 +15,6 @@ use humhub\modules\rest\components\BaseContentController;
 use humhub\modules\tasks\helpers\RestDefinitions;
 use humhub\modules\tasks\models\forms\TaskForm;
 use humhub\modules\tasks\models\Task;
-use humhub\modules\tasks\permissions\CreateTask;
-use humhub\modules\tasks\permissions\ManageTasks;
 use Yii;
 
 class TasksController extends BaseContentController
@@ -57,8 +55,7 @@ class TasksController extends BaseContentController
         /** @var ContentContainerActiveRecord $container */
         $container = $containerRecord->getPolymorphicRelation();
 
-        if (! in_array($container::class, Yii::$app->getModule('tasks')->getContentContainerTypes())
-            || ! $container->permissionManager->can([CreateTask::class, ManageTasks::class])) {
+        if (!in_array($container::class, Yii::$app->getModule('tasks')->getContentContainerTypes())) {
             return $this->returnError(403, 'You are not allowed to create task!');
         }
 
@@ -72,8 +69,8 @@ class TasksController extends BaseContentController
         ]);
         $taskForm->createNew($container);
 
-        if (! $taskForm->task->content->canEdit()) {
-            return $this->returnError(403, 'You are not allowed to edit this task!');
+        if (!$taskForm->task->content->canEdit()) {
+            return $this->returnError(403, 'You are not allowed to create task!');
         }
 
         if ($this->saveTask($taskForm)) {
