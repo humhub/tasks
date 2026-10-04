@@ -37,11 +37,11 @@ class TaskCheckList extends Component implements Sortable
 
     public function moveItemIndex($itemId, $newIndex)
     {
-        $moveItem = TaskItem::findOne(['id' => $itemId]);
+        $moveItem = TaskItem::findOne(['id' => $itemId, 'task_id' => $this->task->id]);
         $items = $this->task->items;
 
         // make sure no invalid index is given
-        if ($moveItem->sort_order === $newIndex) {
+        if (!$moveItem || $moveItem->sort_order === $newIndex) {
             return;
         } elseif ($newIndex < 0) {
             $newIndex = 0;

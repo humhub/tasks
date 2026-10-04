@@ -36,6 +36,17 @@ class TaskList extends ContentTag implements TaskListInterface, Sortable
     /**
      * @inheritdoc
      */
+    public function rules()
+    {
+        return array_merge(parent::rules(), [
+            // These attributes are set internally and must not be loaded from user input
+            [['!module_id', '!type', '!parent_id'], 'safe'],
+        ]);
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         $labels = parent::attributeLabels();
