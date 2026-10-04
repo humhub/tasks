@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.10.3 (Unreleased)
+-------------------
+- Fix #256: Allow task creation via REST API and list button for users with "Manage All Content" permission
+- Fix: Refined drag and drop sorting
+
 1.10.2 (September 8, 2026)
 --------------------------
 - Fix: Task rendering in a modal window opened from the Calendar module
@@ -14,6 +19,10 @@ Changelog
 ---------------------
 - Fix #298: Update for HumHub 1.19
 - Enh #298: Migrate to new Activity Manager
+1.9.8 (Unreleased)
+------------------
+- Fix #256: Allow task creation via REST API and list button for users with "Manage All Content" permission
+- Fix: Refined drag and drop sorting
 
 1.9.7 (September 8, 2026)
 -------------------------

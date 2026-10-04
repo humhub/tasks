@@ -12,7 +12,6 @@ use humhub\modules\tasks\models\forms\ItemDrop;
 use humhub\modules\tasks\models\forms\TaskForm;
 use humhub\modules\user\models\UserPicker;
 use humhub\widgets\modal\ModalClose;
-use humhub\modules\tasks\models\Task;
 use humhub\widgets\modal\Modal;
 use Yii;
 use yii\web\HttpException;
@@ -247,7 +246,13 @@ class TaskController extends AbstractTaskController
 
     public function actionDrop($taskId)
     {
-        $dropModel = new ItemDrop(['modelClass' => Task::class, 'modelId' => $taskId]);
+        $task = $this->getTaskById($taskId);
+
+        if (!$task->canResortItems()) {
+            throw new HttpException(403);
+        }
+
+        $dropModel = new ItemDrop(['model' => $task]);
 
         if ($dropModel->load(Yii::$app->request->post()) && $dropModel->save()) {
             $result = [];

@@ -3,6 +3,7 @@
 namespace humhub\modules\tasks\models\lists;
 
 use humhub\modules\tasks\models\forms\ItemDrop;
+use humhub\modules\tasks\models\Task;
 
 class TaskListItemDrop extends ItemDrop
 {
@@ -12,16 +13,33 @@ class TaskListItemDrop extends ItemDrop
 
     public function save()
     {
-        $this->getSortableModel()->moveItemIndex($this->itemId, $this->index);
+        $task = Task::find()
+            ->contentContainer($this->contentContainer)
+            ->readable()
+            ->andWhere(['task.id' => $this->itemId])
+            ->one();
+
+        if (!$task || !$task->content->canEdit()) {
+            return false;
+        }
+
+        $sortableModel = $this->getSortableModel();
+        if (!$sortableModel) {
+            return false;
+        }
+
+        $sortableModel->moveItemIndex($task->id, $this->index);
         return true;
     }
 
     public function getSortableModel()
     {
-        if (!$this->model && !$this->modelId) {
-            return new UnsortedTaskList(['contentContainer' => $this->contentContainer]);
+        if (!$this->model) {
+            $this->model = $this->modelId
+                ? TaskList::findById($this->modelId, $this->contentContainer)
+                : new UnsortedTaskList(['contentContainer' => $this->contentContainer]);
         }
 
-        return parent::getSortableModel();
+        return $this->model;
     }
 }
