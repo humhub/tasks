@@ -5,6 +5,7 @@ Changelog
 -------------------
 - Fix #256: Allow task creation via REST API and list button for users with "Manage All Content" permission
 - Fix: Refined drag and drop sorting
+- Fix: Refined task list API handling
 
 1.10.2 (September 8, 2026)
 --------------------------
@@ -23,6 +24,7 @@ Changelog
 ------------------
 - Fix #256: Allow task creation via REST API and list button for users with "Manage All Content" permission
 - Fix: Refined drag and drop sorting
+- Fix: Refined task list API handling
 
 1.9.7 (September 8, 2026)
 -------------------------
