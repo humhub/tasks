@@ -14,6 +14,7 @@ use humhub\modules\rest\components\BaseController;
 use humhub\modules\space\models\Space;
 use humhub\modules\tasks\helpers\RestDefinitions;
 use humhub\modules\tasks\models\lists\TaskList;
+use humhub\modules\tasks\permissions\ManageTasks;
 use humhub\modules\user\models\User;
 use Yii;
 use yii\web\HttpException;
@@ -51,6 +52,10 @@ class TaskListController extends BaseController
     {
         $container = $this->getContainerById($containerId);
 
+        if (!$this->canManageTasks($container)) {
+            return $this->returnError(403, 'You are not allowed to create task list!');
+        }
+
         $taskList = new TaskList($container);
 
         if ($taskList->load(Yii::$app->request->post()) && $taskList->save()) {
@@ -77,6 +82,10 @@ class TaskListController extends BaseController
 
         $this->checkContainerAccess($taskList->getContainer());
 
+        if (!$this->canManageTasks($taskList->getContainer())) {
+            return $this->returnError(403, 'You are not allowed to update this task list!');
+        }
+
         if ($taskList->load(Yii::$app->request->post()) && $taskList->save()) {
             return RestDefinitions::getTaskList($taskList);
         }
@@ -99,6 +108,10 @@ class TaskListController extends BaseController
         }
 
         $this->checkContainerAccess($list->getContainer());
+
+        if (!$this->canManageTasks($list->getContainer())) {
+            return $this->returnError(403, 'You are not allowed to delete this task list!');
+        }
 
         if ($list->delete()) {
             return $this->returnSuccess('Task list successfully deleted!');
@@ -151,5 +164,10 @@ class TaskListController extends BaseController
         if ($container instanceof Space && !$container->isAdmin() && !$container->isMember(Yii::$app->user->id)) {
             throw new HttpException(401, 'You have no access to the space container!');
         }
+    }
+
+    private function canManageTasks($container): bool
+    {
+        return Yii::$app->user->isAdmin() || $container->can(ManageTasks::class);
     }
 }
