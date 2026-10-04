@@ -4,6 +4,7 @@ Changelog
 1.9.8 (Unreleased)
 ------------------
 - Fix #256: Allow task creation via REST API and list button for users with "Manage All Content" permission
+- Fix: Refined drag and drop sorting
 
 1.9.7 (September 8, 2026)
 -------------------------

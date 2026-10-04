@@ -16,4 +16,13 @@ class TaskListRootItemDrop extends ItemDrop
     {
         return new TaskListRoot(['contentContainer' => $this->contentContainer]);
     }
+
+    public function save()
+    {
+        if (!TaskList::findById($this->itemId, $this->contentContainer)) {
+            return false;
+        }
+
+        return parent::save();
+    }
 }
