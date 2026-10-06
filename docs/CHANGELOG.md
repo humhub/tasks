@@ -6,6 +6,7 @@ Changelog
 - Fix #256: Allow task creation via REST API and list button for users with "Manage All Content" permission
 - Fix: Refined drag and drop sorting
 - Fix: Refined task list API handling
+- Fix #338: PHP 8.5 error on editing a task without a time zone; Removed the unused and broken TaskPicker and `tasks/search/json`
 
 1.10.2 (September 8, 2026)
 --------------------------

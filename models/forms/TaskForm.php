@@ -142,7 +142,7 @@ class TaskForm extends Model implements TabbedFormModel
 
         if ($this->task) {
             $this->task->scenario = Task::SCENARIO_EDIT;
-            if ($this->task->all_day) {
+            if ($this->task->all_day && $this->task->time_zone) {
                 $this->timeZone = $this->task->time_zone;
             }
 
