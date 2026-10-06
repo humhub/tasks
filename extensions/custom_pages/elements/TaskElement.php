@@ -8,7 +8,7 @@
 
 namespace humhub\modules\tasks\extensions\custom_pages\elements;
 
-use humhub\libs\Html;
+use humhub\helpers\Html;
 use humhub\modules\custom_pages\modules\template\elements\BaseContentRecordElement;
 use humhub\modules\custom_pages\modules\template\elements\BaseElementVariable;
 use humhub\modules\tasks\models\Task;

@@ -1,19 +1,14 @@
 <?php
 
-/**
- * @link https://www.humhub.org/
- * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
- * @license https://www.humhub.com/licences
- *
- */
-
 namespace humhub\modules\tasks\activities;
 
-use humhub\modules\activity\components\BaseActivity;
+use humhub\modules\activity\components\BaseContentActivity;
+use Yii;
 
-class TaskResetActivity extends BaseActivity
+class TaskResetActivity extends BaseContentActivity
 {
-    public $moduleId = 'tasks';
-    public $viewName = "taskReset";
-
+    protected function getMessage(array $params): string
+    {
+        return Yii::t('TasksModule.base', '{displayName} reset task "{contentTitle}".', $params);
+    }
 }

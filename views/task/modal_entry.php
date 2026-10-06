@@ -6,20 +6,16 @@
  *
  */
 
-use humhub\modules\content\widgets\PinLink;
+use humhub\modules\content\widgets\stream\StreamEntryWidget;
+use humhub\modules\content\widgets\stream\WallStreamEntryOptions;
 use humhub\modules\stream\assets\StreamAsset;
-use humhub\modules\stream\actions\Stream;
+use humhub\modules\tasks\models\Task;
 
-/* @var $task \humhub\modules\tasks\models\Task */
-/* @var $collapse boolean */
+/* @var $task Task */
+
+StreamAsset::register($this);
 ?>
-<?php StreamAsset::register($this); ?>
-
 <div data-action-component="stream.SimpleStream">
-    <?= Stream::renderEntry($task, [
-        'controlsOptions' => [
-            'prevent' => [PinLink::class]
-        ]
-    ])?>
+    <?= StreamEntryWidget::renderStreamEntry($task, (new WallStreamEntryOptions())->disableControlsEntryPin()) ?>
 </div>
 

@@ -3,6 +3,7 @@
 use humhub\modules\tasks\models\Task;
 use humhub\widgets\bootstrap\Button;
 use humhub\modules\tasks\helpers\TaskUrl;
+use humhub\widgets\bootstrap\Link;
 
 /* @var $task Task */
 /* @var $primaryStateConfig array */
@@ -13,7 +14,7 @@ use humhub\modules\tasks\helpers\TaskUrl;
 ?>
 
 <div class="btn-group float-end task-change-state-button">
-    <?= Button::primary($primaryStateConfig['label'])->action('task.changeState', $primaryUrl)->sm()->icon($primaryStateConfig['icon'])->loader(true);?>
+    <?= Button::primary($primaryStateConfig['label'])->action('task.changeState', $primaryUrl)->sm()->icon($primaryStateConfig['icon']) ?>
 
     <?php if(!empty($proceedConfig) || !empty($revertConfig)) : ?>
         <?= Button::primary()
@@ -24,7 +25,7 @@ use humhub\modules\tasks\helpers\TaskUrl;
             <?php foreach($proceedConfig as $status => $config) : ?>
                 <?php $status = $task->state->getStateInstance($status) ?>
                 <li class="dropdown-item">
-                    <?= Button::asLink($config['label'])->action('task.changeState', $status->getProceedUrl())->icon($config['icon']);?>
+                    <?= Link::to($config['label'])->action('task.changeState', $status->getProceedUrl())->icon($config['icon']);?>
                 </li>
             <?php endforeach; ?>
 
@@ -35,7 +36,7 @@ use humhub\modules\tasks\helpers\TaskUrl;
             <?php foreach($revertConfig as $status => $config) : ?>
                 <?php $status = $task->state->getStateInstance($status) ?>
                 <li class="dropdown-item">
-                    <?= Button::asLink($config['label'])->action('task.changeState', $status->getRevertUrl())->icon($config['icon']);?>
+                    <?= Link::to($config['label'])->action('task.changeState', $status->getRevertUrl())->icon($config['icon']);?>
                 </li>
             <?php endforeach; ?>
 
@@ -44,7 +45,7 @@ use humhub\modules\tasks\helpers\TaskUrl;
                     <li role="separator" class="divider"></li>
                 <?php endif ?>
                 <li>
-                    <?= Button::asLink(Yii::t('TasksModule.base', 'Request extension'))
+                    <?= Link::to(Yii::t('TasksModule.base', 'Request extension'))
                         ->icon('calendar-o')
                         ->link(TaskUrl::requestExtension($task)) ?>
                 </li>

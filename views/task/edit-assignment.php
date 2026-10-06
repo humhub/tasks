@@ -8,7 +8,6 @@
 
 use humhub\modules\user\widgets\UserPickerField;
 use humhub\widgets\bootstrap\Button;
-use humhub\widgets\bootstrap\Link;
 
 /* @var $form \humhub\widgets\form\ActiveForm */
 /* @var $taskForm \humhub\modules\tasks\models\forms\TaskForm */
@@ -24,9 +23,8 @@ $responsible = $taskForm->task->taskResponsibleUsers;
     'selection' => $taskForm->task->taskAssignedUsers,
     'url' => $taskForm->getTaskAssignedPickerUrl(),
     'placeholder' => Yii::t('TasksModule.base', 'Assign users'),
-])->hint(Yii::t('TasksModule.base', 'If empty any user can complete the task.'), []) ?>
-
-<?= Link::userPickerSelfSelect('#taskAssignedUserPicker', Yii::t('TasksModule.base', 'Assign myself')); ?>
+    'selfSelect' => Yii::t('TasksModule.base', 'Assign myself'),
+]) ?>
 
 <br>
 
@@ -35,16 +33,24 @@ $responsible = $taskForm->task->taskResponsibleUsers;
     'selection' => $responsible,
     'url' => $taskForm->getTaskResponsiblePickerUrl(),
     'placeholder' => Yii::t('TasksModule.base', 'Add responsible users'),
+    'selfSelect' => Yii::t('TasksModule.base', 'Assign myself'),
 ]) ?>
-
-<?= Link::userPickerSelfSelect('#taskResponsibleUserPicker', Yii::t('TasksModule.base', 'Assign myself')); ?>
 
 <br>
 
 <?= $form->field($taskForm->task, 'review')->checkbox() ?>
 
 <div class="clearfix">
-    <?= Button::accent()->icon('info-circle')->sm()->right()->options(['data-bs-toggle' => 'collapse', 'data-bs-target' => '#task-assignment-info'])->loader(false) ?>
+    <?= Button::accent()
+        ->icon('info-circle')
+        ->sm()
+        ->right()
+        ->options([
+            'aria-label' => Yii::t('TasksModule.base', 'Info'),
+            'data-bs-toggle' => 'collapse',
+            'data-bs-target' => '#task-assignment-info',
+        ])
+        ->loader(false) ?>
 </div>
 
 <div id="task-assignment-info" class="alert alert-default collapse">

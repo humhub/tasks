@@ -2,6 +2,7 @@
 
 namespace humhub\modules\tasks\models\state;
 
+use humhub\modules\activity\services\ActivityManager;
 use humhub\modules\tasks\activities\TaskResetActivity;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\notifications\TaskResetNotification;
@@ -56,7 +57,7 @@ class PendingState extends TaskState
         $user = Yii::$app->user->getIdentity();
 
         TaskResetNotification::instance()->from($user)->about($this->task)->sendBulk($this->task->users);
-        TaskResetActivity::instance()->from($user)->about($this->task)->create();
+        ActivityManager::dispatch(TaskResetActivity::class, $this->task, $user);
     }
 
     public function checkRevertRules($newStatus = null, $user = null)

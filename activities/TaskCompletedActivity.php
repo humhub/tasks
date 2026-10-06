@@ -1,19 +1,14 @@
 <?php
 
-/**
- * @link https://www.humhub.org/
- * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
- * @license https://www.humhub.com/licences
- *
- */
-
 namespace humhub\modules\tasks\activities;
 
-use humhub\modules\activity\components\BaseActivity;
+use humhub\modules\activity\components\BaseContentActivity;
+use Yii;
 
-class TaskCompletedActivity extends BaseActivity
+class TaskCompletedActivity extends BaseContentActivity
 {
-    public $moduleId = 'tasks';
-    public $viewName = "taskCompleted";
-
+    protected function getMessage(array $params): string
+    {
+        return Yii::t('TasksModule.base', '{displayName} completed task "{contentTitle}".', $params);
+    }
 }
