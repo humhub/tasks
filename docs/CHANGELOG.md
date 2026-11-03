@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.11.0 (Unreleased)
+-------------------
+- Enh: Compatibility with the core picker that replaces Select2 (humhub/humhub#8677)
+
 1.10.3 (October 13, 2026)
 -------------------------
 - Fix #256: Allow task creation via REST API and list button for users with "Manage All Content" permission
