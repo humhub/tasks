@@ -28,10 +28,8 @@ $canManage = $taskForm->contentContainer->can(ManageTasks::class);
     'prompt' => Yii::t('TasksModule.base', 'Unsorted'),
     'contentContainer' => $taskForm->contentContainer,
     'options' => [
-        'data-ui-select2' => true,
-        'data-ui-select2-allow-new' => $canManage,
-        'data-ui-select2-new-sign' => '➕',
-        'data-ui-select2-placeholder' => Yii::t('TasksModule.base', 'New list or search'),
+        'data-picker-allow-new' => $canManage,
+        'data-picker-placeholder' => Yii::t('TasksModule.base', 'New list or search'),
     ],
     'tagClass' => TaskList::class,
 ]) ?>

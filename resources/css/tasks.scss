@@ -217,17 +217,8 @@ $tasks-info-color: #21A1B3;
             padding-bottom: 0;
             border: none;
             ul.filter-list > li {
-                input[type=text], .select2 {
+                input[type=text], .picker-host {
                     margin: 5px 5px 10px 0;
-                }
-            }
-            ul.filter-list .select2 li {
-                padding: 0 2px;
-                img {
-                    margin-bottom: 1px;
-                }
-                .space-acronym {
-                    margin-top: 2px;
                 }
             }
         }

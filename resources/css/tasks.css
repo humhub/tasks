@@ -172,17 +172,8 @@
   padding-bottom: 0;
   border: none;
 }
-.task-overview #task-filter-nav .filter-panel ul.filter-list > li input[type=text], .task-overview #task-filter-nav .filter-panel ul.filter-list > li .select2 {
+.task-overview #task-filter-nav .filter-panel ul.filter-list > li input[type=text], .task-overview #task-filter-nav .filter-panel ul.filter-list > li .picker-host {
   margin: 5px 5px 10px 0;
-}
-.task-overview #task-filter-nav .filter-panel ul.filter-list .select2 li {
-  padding: 0 2px;
-}
-.task-overview #task-filter-nav .filter-panel ul.filter-list .select2 li img {
-  margin-bottom: 1px;
-}
-.task-overview #task-filter-nav .filter-panel ul.filter-list .select2 li .space-acronym {
-  margin-top: 2px;
 }
 .task-overview #task-filter-nav .task-filter-picker-container {
   width: 200px;
