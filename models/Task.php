@@ -1049,16 +1049,16 @@ class Task extends ContentActiveRecord
     public function getLabels($labels = [], $includeContentName = true)
     {
         switch ($this->status) {
-            case self::STATUS_PENDING :
+            case self::STATUS_PENDING:
                 $labels[] = Badge::light(Yii::t('TasksModule.base', 'Pending'))->icon('info-circle')->sortOrder(350);
                 break;
-            case self::STATUS_IN_PROGRESS :
+            case self::STATUS_IN_PROGRESS:
                 $labels[] = Badge::accent(Yii::t('TasksModule.base', 'In Progress'))->icon('edit')->sortOrder(350);
                 break;
-            case self::STATUS_PENDING_REVIEW :
+            case self::STATUS_PENDING_REVIEW:
                 $labels[] = Badge::warning(Yii::t('TasksModule.base', 'Pending Review'))->icon('exclamation-triangle')->sortOrder(350);
                 break;
-            case self::STATUS_COMPLETED :
+            case self::STATUS_COMPLETED:
                 $labels[] = Badge::success(Yii::t('TasksModule.base', 'Completed'))->icon('check-square')->sortOrder(350);
                 break;
             default:
