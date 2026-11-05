@@ -16,15 +16,15 @@ use humhub\modules\ui\icon\widgets\Icon;
 
 ?>
 <?php if ($task->status == Task::STATUS_PENDING && in_array(TASK::STATUS_PENDING, $include)) : ?>
-    <?= Icon::get('info-circle')->class('colorSuccess')->tooltip(Yii::t('TasksModule.base', 'Pending')) ?>
+    <?= Icon::get('info-circle')->class('text-success')->tooltip(Yii::t('TasksModule.base', 'Pending')) ?>
 <?php elseif ($task->status == Task::STATUS_IN_PROGRESS && in_array(TASK::STATUS_IN_PROGRESS, $include)) : ?>
-    <?= Icon::get('edit')->class('colorPrimary')->tooltip(Yii::t('TasksModule.base', 'In Progress')) ?>
+    <?= Icon::get('edit')->class('text-primary')->tooltip(Yii::t('TasksModule.base', 'In Progress')) ?>
 <?php elseif ($task->status == Task::STATUS_PENDING_REVIEW && in_array(TASK::STATUS_PENDING_REVIEW, $include)) : ?>
-    <?= Icon::get('eye')->class('colorPrimary')->tooltip(Yii::t('TasksModule.base', 'Pending Review')) ?>
+    <?= Icon::get('eye')->class('text-primary')->tooltip(Yii::t('TasksModule.base', 'Pending Review')) ?>
 <?php elseif ($task->status == Task::STATUS_COMPLETED && in_array(TASK::STATUS_COMPLETED, $include)) : ?>
-    <?= Icon::get('check-square')->class('colorSuccess')->tooltip(Yii::t('TasksModule.base', 'Completed')) ?>
+    <?= Icon::get('check-square')->class('text-success')->tooltip(Yii::t('TasksModule.base', 'Completed')) ?>
 <?php endif; ?>
 
 <?php if ($includeOverdue && $task->isOverdue()) : ?>
-    <?= Icon::get('exclamation-triangle')->class('colorDanger')->tooltip(Yii::t('TasksModule.base', 'Overdue')) ?>
+    <?= Icon::get('exclamation-triangle')->class('text-danger')->tooltip(Yii::t('TasksModule.base', 'Overdue')) ?>
 <?php endif; ?>

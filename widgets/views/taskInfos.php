@@ -47,7 +47,7 @@ $color = $task->getColor('var(--accent)');
             ? Yii::t('TasksModule.base', 'Start') . ' ' . $task->schedule->getFormattedStartDateTime()
             . '<br>' : '')
             . Html::tag('span', $task->schedule->getFormattedDateTime(), [
-                'class' => $task->schedule->isOverdue() ? 'colorDanger' : '',
+                'class' => $task->schedule->isOverdue() ? 'text-danger' : '',
             ]),
         'icon' => 'clock-o',
         'cssClass' => 'task-info-scheduling',

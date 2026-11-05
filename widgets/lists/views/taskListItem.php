@@ -76,17 +76,17 @@ $checkUrl = $task->state->getCheckUrl();
             <?php
             if ($task->isCompleted()) {
                 $schedulingTitle = Yii::t('TasksModule.base', 'Completed');
-                $schedulingColor = 'colorSuccess';
+                $schedulingColor = 'text-success';
             } elseif ($task->schedule->isOverdue()) {
                 $schedulingTitle = Yii::t('TasksModule.base', 'Overdue');
-                $schedulingColor = 'colorDanger';
+                $schedulingColor = 'text-danger';
             } elseif ($task->schedule->isDeadlineToday()) {
                 $schedulingTitle = Yii::t('TasksModule.base', 'Today');
-                $schedulingColor = 'colorWarning';
+                $schedulingColor = 'text-warning';
             } else {
                 $daysRemaining = $task->schedule->getDaysRemaining();
                 $schedulingTitle = Yii::t('TasksModule.base', '{count,plural,=1{# day} other{# days}} remaining', ['count' => $daysRemaining]);
-                $schedulingColor = $daysRemaining > 1 ? '' : 'colorWarning';
+                $schedulingColor = $daysRemaining > 1 ? '' : 'text-warning';
             }
             ?>
             <div class="task-controls toggleTaskDetails d-none d-sm-block" role="button" tabindex="0"
