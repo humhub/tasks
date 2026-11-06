@@ -20,13 +20,13 @@ $tasks-info-color: #21A1B3;
     }
 
     .panel-heading {
-        background-color: var(--hh-background-color-secondary);
+        background-color: var(--bs-tertiary-bg);
 
         .task-header-panel {
             padding-right: 10px;
             float: left;
 
-            border-right: 2px solid var(--hh-background-color-page);
+            border-right: 2px solid var(--bs-secondary-bg);
             padding-left: 10px;
 
             strong {
@@ -54,19 +54,19 @@ $tasks-info-color: #21A1B3;
             font-size: 14px;
             font-style: italic;
             margin: 2px;
-            color: var(--hh-text-color-secondary);
+            color: var(--bs-secondary-color);
         }
     }
 
     .panel-heading {
         .updated {
-            color: var(--hh-text-color-soft3);
+            color: var(--bs-tertiary-color);
             font-size: 11px;
             font-weight: bold;
         }
 
         .author a {
-            color: var(--hh-text-color-soft3);
+            color: var(--bs-tertiary-color);
             font-size: 11px;
         }
     }
@@ -102,7 +102,7 @@ $tasks-info-color: #21A1B3;
                     margin-right: 10px;
                 }
                 .text-accent {
-                    color: var(--accent);
+                    color: var(--bs-accent);
                 }
             }
             .task-users, .task-progress {
@@ -125,7 +125,7 @@ $tasks-info-color: #21A1B3;
             }
 
             > div:not(.pagination-container), .empty {
-                background: var(--hh-background-color-main);
+                background: var(--bs-body-bg);
                 box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
                 border-radius: 4px;
                 padding: 8px;
@@ -156,7 +156,7 @@ $tasks-info-color: #21A1B3;
 
         .summary, .empty {
             font-size: 12px;
-            color: var(--hh-text-color-soft3);
+            color: var(--bs-tertiary-color);
             padding-left: 10px;
         }
 
@@ -188,7 +188,7 @@ $tasks-info-color: #21A1B3;
     }
 
     #task-filter-nav {
-        background: var(--hh-background-color-main);
+        background: var(--bs-body-bg);
         border-radius: 4px;
         box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
         padding: 20px;
@@ -239,7 +239,7 @@ $tasks-info-color: #21A1B3;
                     width: 18px;
                     height: 18px;
                     margin: 0 4px -4px -5px;
-                    border: 2px solid var(--hh-background3);
+                    border: 2px solid var(--hh-border-color-strong);
                     border-radius: 4px;
 
                     &:before {
@@ -247,8 +247,8 @@ $tasks-info-color: #21A1B3;
                     }
 
                     &.fa-check-square-o {
-                        border-color: var(--accent);
-                        background: var(--accent);
+                        border-color: var(--bs-accent);
+                        background: var(--bs-accent);
                     }
                 }
             }
@@ -279,7 +279,7 @@ $tasks-info-color: #21A1B3;
 
     h2 {
         font-size: 17px;
-        color: var(--hh-text-color-soft2);
+        color: var(--bs-tertiary-color);
         font-weight: 300;
         margin-top: 0;
     }
@@ -364,7 +364,7 @@ $tasks-info-color: #21A1B3;
     }
 
     li:hover {
-        background-color: var(--hh-background-color-warning) !important;
+        background-color: var(--bs-warning-bg-subtle) !important;
         border-left: 0 !important;
     }
 }
@@ -397,7 +397,7 @@ $tasks-info-color: #21A1B3;
 #task-space-menu {
     background: none;
     padding: 0 0 8px 0;
-    border-bottom: 1px solid var(--hh-background3);
+    border-bottom: 1px solid var(--hh-border-color-strong);
 
     li {
         a {
@@ -405,7 +405,7 @@ $tasks-info-color: #21A1B3;
             border-top: 0 !important;
             border-left: 0 !important;
             border-bottom: 0 !important;
-            border-right: 1px solid var(--hh-background4);
+            border-right: 1px solid var(--bs-tertiary-color);
             border-radius: 0;
             padding: 3px 8px;
         }
@@ -431,7 +431,7 @@ $tasks-info-color: #21A1B3;
         background: none;
         border: none;
         box-shadow: none;
-        color: var(--primary) !important;
+        color: var(--bs-primary) !important;
         font-weight: 600;
         font-size: 13px;
     }
@@ -451,7 +451,7 @@ $tasks-info-color: #21A1B3;
     }
 
     .fa-bars {
-        color: var(--hh-text-color-soft2);
+        color: var(--bs-tertiary-color);
     }
 
     .task-list-title-bar.collapsable {
@@ -477,8 +477,8 @@ $tasks-info-color: #21A1B3;
 }
 
 .task-list .pagination-container {
-    background-color: var(--hh-background-color-secondary);
-    border-bottom: 1px solid var(--background3);
+    background-color: var(--bs-tertiary-bg);
+    border-bottom: 1px solid var(--hh-border-color-strong);
     border-radius: 4px;
 
     li {
@@ -520,7 +520,7 @@ $tasks-info-color: #21A1B3;
         padding: 7px 10px;
 
         &:hover, &:focus-within {
-            background: var(--hh-background-color-page);
+            background: var(--bs-secondary-bg);
             border-radius: 4px;
 
             .task-moving-handler {
@@ -549,19 +549,19 @@ $tasks-info-color: #21A1B3;
     }
     &.fa:focus-visible, &:focus-visible .fa {
         outline: none;
-        box-shadow: 0 0 0 2px var(--accent);
+        box-shadow: 0 0 0 2px var(--bs-accent);
     }
 }
 .toggleTaskDetails[role="button"] {
     border-radius: 4px;
     &:focus-visible {
         outline: none;
-        box-shadow: 0 0 0 2px var(--accent);
+        box-shadow: 0 0 0 2px var(--bs-accent);
     }
 }
 
 .task-list-title-bar {
-    border-bottom: 1px solid var(--hh-background3);
+    border-bottom: 1px solid var(--hh-border-color-strong);
     padding: 10px 0;
     margin: 0 10px;
 
@@ -582,12 +582,12 @@ $tasks-info-color: #21A1B3;
 
 .task-list-li {
     margin-bottom: 8px;
-    background: var(--hh-background-color-main);
+    background: var(--bs-body-bg);
     border-radius: 4px;
-    border: 1px solid var(--background3);
+    border: 1px solid var(--hh-border-color-strong);
 
     .closed-task-lists-container {
-        background: var(--hh-background-color-secondary);
+        background: var(--bs-tertiary-bg);
     }
 
     .task-toggled-color {
@@ -596,7 +596,7 @@ $tasks-info-color: #21A1B3;
 
     &.task-list-li-collapsed {
         .task-toggled-color {
-            color: var(--hh-text-color-highlight);
+            color: var(--bs-emphasis-color);
         }
 
         .task-list-title-bar {
@@ -606,8 +606,8 @@ $tasks-info-color: #21A1B3;
 }
 
 .ui-sortable-helper {
-    background-color: var(--hh-background-color-main);
-    border: 1px solid var(--background3);
+    background-color: var(--bs-body-bg);
+    border: 1px solid var(--hh-border-color-strong);
 }
 
 .task-checklist {
@@ -616,7 +616,7 @@ $tasks-info-color: #21A1B3;
     }
 
     .task-item:hover {
-        background: var(--hh-background-color-main)
+        background: var(--bs-body-bg)
     }
 
     .task-item-content {

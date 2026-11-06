@@ -12,12 +12,12 @@
   padding-left: 5px;
 }
 #task-container .panel-heading {
-  background-color: var(--hh-background-color-secondary);
+  background-color: var(--bs-tertiary-bg);
 }
 #task-container .panel-heading .task-header-panel {
   padding-right: 10px;
   float: left;
-  border-right: 2px solid var(--hh-background-color-page);
+  border-right: 2px solid var(--bs-secondary-bg);
   padding-left: 10px;
 }
 #task-container .panel-heading .task-header-panel strong {
@@ -39,15 +39,15 @@
   font-size: 14px;
   font-style: italic;
   margin: 2px;
-  color: var(--hh-text-color-secondary);
+  color: var(--bs-secondary-color);
 }
 #task-container .panel-heading .updated {
-  color: var(--hh-text-color-soft3);
+  color: var(--bs-tertiary-color);
   font-size: 11px;
   font-weight: bold;
 }
 #task-container .panel-heading .author a {
-  color: var(--hh-text-color-soft3);
+  color: var(--bs-tertiary-color);
   font-size: 11px;
 }
 
@@ -79,7 +79,7 @@
   margin-right: 10px;
 }
 .task-overview #filter-tasks-list .hh-list .task-item-info .text-accent {
-  color: var(--accent);
+  color: var(--bs-accent);
 }
 .task-overview #filter-tasks-list .hh-list .task-users, .task-overview #filter-tasks-list .hh-list .task-progress {
   border-right: 1px solid #eee;
@@ -99,7 +99,7 @@
   border-bottom: 0;
 }
 .task-overview #filter-tasks-list .hh-list > div:not(.pagination-container), .task-overview #filter-tasks-list .hh-list .empty {
-  background: var(--hh-background-color-main);
+  background: var(--bs-body-bg);
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
   border-radius: 4px;
   padding: 8px;
@@ -122,7 +122,7 @@
 }
 .task-overview .hh-list .summary, .task-overview .hh-list .empty {
   font-size: 12px;
-  color: var(--hh-text-color-soft3);
+  color: var(--bs-tertiary-color);
   padding-left: 10px;
 }
 .task-overview .hh-list .pagination {
@@ -147,7 +147,7 @@
   color: #555;
 }
 .task-overview #task-filter-nav {
-  background: var(--hh-background-color-main);
+  background: var(--bs-body-bg);
   border-radius: 4px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
   padding: 20px;
@@ -188,15 +188,15 @@
   width: 18px;
   height: 18px;
   margin: 0 4px -4px -5px;
-  border: 2px solid var(--hh-background3);
+  border: 2px solid var(--hh-border-color-strong);
   border-radius: 4px;
 }
 .task-overview #task-filter-nav .task-bottom-panel .filterInput[data-filter-type=checkbox] .fa:before {
   content: "";
 }
 .task-overview #task-filter-nav .task-bottom-panel .filterInput[data-filter-type=checkbox] .fa.fa-check-square-o {
-  border-color: var(--accent);
-  background: var(--accent);
+  border-color: var(--bs-accent);
+  background: var(--bs-accent);
 }
 .task-overview #task-filter-nav .task-bottom-panel .filterInput.task-date-picker {
   margin-left: 0;
@@ -219,7 +219,7 @@
 }
 .task-details h2 {
   font-size: 17px;
-  color: var(--hh-text-color-soft2);
+  color: var(--bs-tertiary-color);
   font-weight: 300;
   margin-top: 0;
 }
@@ -278,7 +278,7 @@
   border-left: 0 !important;
 }
 .closed-task-list-view li:hover {
-  background-color: var(--hh-background-color-warning) !important;
+  background-color: var(--bs-warning-bg-subtle) !important;
   border-left: 0 !important;
 }
 
@@ -305,14 +305,14 @@
 #task-space-menu {
   background: none;
   padding: 0 0 8px 0;
-  border-bottom: 1px solid var(--hh-background3);
+  border-bottom: 1px solid var(--hh-border-color-strong);
 }
 #task-space-menu li a {
   background: none;
   border-top: 0 !important;
   border-left: 0 !important;
   border-bottom: 0 !important;
-  border-right: 1px solid var(--hh-background4);
+  border-right: 1px solid var(--bs-tertiary-color);
   border-radius: 0;
   padding: 3px 8px;
 }
@@ -330,7 +330,7 @@
   background: none;
   border: none;
   box-shadow: none;
-  color: var(--primary) !important;
+  color: var(--bs-primary) !important;
   font-weight: 600;
   font-size: 13px;
 }
@@ -346,7 +346,7 @@
   margin-left: 22px;
 }
 .task-list .fa-bars {
-  color: var(--hh-text-color-soft2);
+  color: var(--bs-tertiary-color);
 }
 .task-list .task-list-title-bar.collapsable {
   cursor: pointer;
@@ -365,8 +365,8 @@
 }
 
 .task-list .pagination-container {
-  background-color: var(--hh-background-color-secondary);
-  border-bottom: 1px solid var(--background3);
+  background-color: var(--bs-tertiary-bg);
+  border-bottom: 1px solid var(--hh-border-color-strong);
   border-radius: 4px;
 }
 .task-list .pagination-container li {
@@ -395,7 +395,7 @@
   display: none;
 }
 .task-list-container .task-list-title-bar > div:hover, .task-list-container .task-list-title-bar > div:focus-within {
-  background: var(--hh-background-color-page);
+  background: var(--bs-secondary-bg);
   border-radius: 4px;
 }
 .task-list-container .task-list-title-bar > div:hover .task-moving-handler, .task-list-container .task-list-title-bar > div:focus-within .task-moving-handler {
@@ -420,7 +420,7 @@
 .task-list-edit.fa:focus-visible,
 .task-list-edit:focus-visible .fa {
   outline: none;
-  box-shadow: 0 0 0 2px var(--accent);
+  box-shadow: 0 0 0 2px var(--bs-accent);
 }
 
 .toggleTaskDetails[role=button] {
@@ -428,11 +428,11 @@
 }
 .toggleTaskDetails[role=button]:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px var(--accent);
+  box-shadow: 0 0 0 2px var(--bs-accent);
 }
 
 .task-list-title-bar {
-  border-bottom: 1px solid var(--hh-background3);
+  border-bottom: 1px solid var(--hh-border-color-strong);
   padding: 10px 0;
   margin: 0 10px;
 }
@@ -451,33 +451,33 @@
 
 .task-list-li {
   margin-bottom: 8px;
-  background: var(--hh-background-color-main);
+  background: var(--bs-body-bg);
   border-radius: 4px;
-  border: 1px solid var(--background3);
+  border: 1px solid var(--hh-border-color-strong);
 }
 .task-list-li .closed-task-lists-container {
-  background: var(--hh-background-color-secondary);
+  background: var(--bs-tertiary-bg);
 }
 .task-list-li .task-toggled-color {
   color: #21A1B3;
 }
 .task-list-li.task-list-li-collapsed .task-toggled-color {
-  color: var(--hh-text-color-highlight);
+  color: var(--bs-emphasis-color);
 }
 .task-list-li.task-list-li-collapsed .task-list-title-bar {
   border-bottom: none;
 }
 
 .ui-sortable-helper {
-  background-color: var(--hh-background-color-main);
-  border: 1px solid var(--background3);
+  background-color: var(--bs-body-bg);
+  border: 1px solid var(--hh-border-color-strong);
 }
 
 .task-checklist ul {
   margin-left: 10px;
 }
 .task-checklist .task-item:hover {
-  background: var(--hh-background-color-main);
+  background: var(--bs-body-bg);
 }
 .task-checklist .task-item-content {
   margin-left: 8px;

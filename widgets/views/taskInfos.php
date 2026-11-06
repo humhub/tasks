@@ -13,7 +13,7 @@ use humhub\modules\tasks\widgets\TaskUserList;
 
 /* @var $task Task */
 
-$color = $task->getColor('var(--accent)');
+$color = $task->getColor('var(--bs-accent)');
 ?>
 <div class="task-infos">
     <?= TaskInfoBox::widget([

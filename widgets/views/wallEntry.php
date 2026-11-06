@@ -15,7 +15,7 @@ use humhub\modules\tasks\widgets\TaskPercentageBar;
 /* @var $this View */
 /* @var $task Task */
 
-$color = 'var(--text-color-main)';
+$color = 'var(--bs-body-color)';
 ?>
 <div class="wall-entry-task task">
 

@@ -35,7 +35,7 @@ class TaskInfoBox extends Widget
         parent::init();
 
         if (!$this->iconColor) {
-            $this->iconColor = 'var(--accent)';
+            $this->iconColor = 'var(--bs-accent)';
         }
     }
 

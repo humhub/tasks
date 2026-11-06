@@ -24,7 +24,7 @@ $participantStyle = 'display:inline-block;';
             <?= TaskContextMenu::widget(['task' => $task]) ?>
         </div>
         <div class="task-list-item-title">
-            <strong><?= Icon::get('tasks')->color($task->getColor('var(--accent)'))?> <?= Html::encode($task->title) ?></strong>
+            <strong><?= Icon::get('tasks')->color($task->getColor('var(--bs-accent)'))?> <?= Html::encode($task->title) ?></strong>
         </div>
     </div>
 

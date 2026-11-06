@@ -97,7 +97,7 @@ $taskContainer = $contentContainer === null ? $task->content->container : null;
                 <?= TaskUserList::widget([
                     'users' => $taskResponsibleUsers,
                     'size' => 32,
-                    'style' => 'border:2px solid var(--accent)',
+                    'style' => 'border:2px solid var(--bs-accent)',
                     'type' => Task::USER_RESPONSIBLE,
                 ]) ?>
             </div>
