@@ -3,6 +3,7 @@ Changelog
 
 1.11.0 (Unreleased)
 -------------------
+- Enh: Dark mode: hard-coded greys and light backgrounds became colour tokens of the core (humhub/humhub#8710)
 - Enh: Colour tokens of the core 1.20 instead of the deprecated ones (humhub/humhub#8707)
 - Enh: Compatibility with the core picker that replaces Select2 (humhub/humhub#8677)
 - Enh: Replaced the Bootstrap 3 classes removed from the core (humhub/humhub#8696)

@@ -82,7 +82,7 @@
   color: var(--bs-accent);
 }
 .task-overview #filter-tasks-list .hh-list .task-users, .task-overview #filter-tasks-list .hh-list .task-progress {
-  border-right: 1px solid #eee;
+  border-right: 1px solid var(--bs-secondary-bg);
   padding-right: 8px;
   margin: 4px 8px 4px 0;
 }
@@ -103,7 +103,7 @@
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
   border-radius: 4px;
   padding: 8px;
-  color: #555;
+  color: var(--bs-body-color);
   font-size: 13px;
 }
 .task-overview #filter-tasks-list .hh-list .nav-pills .dropdown-menu li a {
@@ -144,7 +144,7 @@
   display: block;
   font-size: 13px;
   font-weight: bold;
-  color: #555;
+  color: var(--bs-body-color);
 }
 .task-overview #task-filter-nav {
   background: var(--bs-body-bg);
@@ -289,12 +289,12 @@
   padding: 20px;
 }
 .task-list-header h4 {
-  color: #555;
+  color: var(--bs-body-color);
   font-weight: 600;
   margin-top: 0;
 }
 .task-list-header .form-text, .task-list-header .form-text:hover {
-  color: #555 !important;
+  color: var(--bs-body-color) !important;
   font-size: 13px;
 }
 
@@ -320,7 +320,7 @@
   padding-left: 0;
 }
 #task-space-menu li.active a {
-  color: #21A1B3;
+  color: var(--bs-accent);
 }
 
 #toggle-lists {
@@ -459,7 +459,7 @@
   background: var(--bs-tertiary-bg);
 }
 .task-list-li .task-toggled-color {
-  color: #21A1B3;
+  color: var(--bs-accent);
 }
 .task-list-li.task-list-li-collapsed .task-toggled-color {
   color: var(--bs-emphasis-color);
@@ -487,8 +487,8 @@
   font-style: italic;
 }
 .task-checklist label.item-finished input[type=checkbox]:checked {
-  border-color: #bdbdbd;
-  background: #bdbdbd;
+  border-color: var(--bs-tertiary-color);
+  background: var(--bs-tertiary-color);
 }
 
 #task-container .task-list-task-details {
@@ -503,10 +503,10 @@
   margin: 0 10px;
 }
 .task-list-items .task-list-item {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--bs-border-color);
 }
 .task-list-items .task-list-item .task-list-task-details {
-  border-top: 1px dashed #ddd;
+  border-top: 1px dashed var(--bs-border-color);
 }
 .task-list-items .task-list-item .task-list-task-details .wall-entry-controls, .task-list-items .task-list-item .task-list-task-details .wall-entry-controls a {
   margin-top: 0;
@@ -519,7 +519,7 @@
   margin: 0 -10px;
 }
 .task-list-items .task-list-item .task-list-task-title-bar .fa.fa-arrows, .task-list-items .task-list-item .task-list-task-title-bar .fa.fa-ellipsis-v {
-  color: #21A1B3;
+  color: var(--bs-accent);
 }
 .task-list-items .task-list-item .task-list-task-title-bar .toggleTaskDetails {
   font-size: 13px;
@@ -531,7 +531,7 @@
   opacity: 0;
 }
 .task-list-items .task-list-item .task-list-task-title-bar > div:hover, .task-list-items .task-list-item .task-list-task-title-bar > div:focus-within {
-  background: #F0F0F0;
+  background: var(--bs-secondary-bg);
   border-radius: 4px;
 }
 .task-list-items .task-list-item .task-list-task-title-bar > div:hover .task-moving-handler, .task-list-items .task-list-item .task-list-task-title-bar > div:focus-within .task-moving-handler {
@@ -544,7 +544,7 @@
   margin-left: 10px;
 }
 .task-list-items .task-list-item .task-list-task-title-bar.highlighter {
-  background-color: #fff8e0;
+  background-color: var(--bs-highlight-bg);
   border-radius: 4px;
   padding: 5px;
   margin-top: 5px;
@@ -559,27 +559,27 @@
 .task-list-items .task-list-task-completed-show-more {
   text-align: center;
   padding: 5px;
-  background-color: #f7f7f7;
+  background-color: var(--bs-tertiary-bg);
 }
 
 .tasks-completed {
   min-height: 0 !important;
 }
 .tasks-completed .task-list-item:first-child {
-  border-top: 1px solid #ddd;
+  border-top: 1px solid var(--bs-border-color);
 }
 
 .task-list-state-highlight {
   height: 60px !important;
   line-height: 1.2em;
-  background-color: #fff8e0;
+  background-color: var(--bs-highlight-bg);
   margin: 10px 0;
 }
 
 .task-state-highlight {
   height: 30px;
   line-height: 1.2em;
-  background-color: #fff8e0;
+  background-color: var(--bs-highlight-bg);
 }
 
 .task-list-color {
@@ -595,7 +595,7 @@
 .task-controls {
   font-size: 12px;
   margin-right: 10px;
-  border-right: 1px solid #eee;
+  border-right: 1px solid var(--bs-secondary-bg);
   padding-right: 10px;
 }
 .task-controls .dropdown-toggle {
@@ -622,11 +622,11 @@
 }
 
 .task-controls a {
-  color: #999;
+  color: var(--bs-tertiary-color);
 }
 
 .task-controls a:hover {
-  color: #3b4854;
+  color: var(--bs-emphasis-color);
 }
 
 .task-empty-list-alert {

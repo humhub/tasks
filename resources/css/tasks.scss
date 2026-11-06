@@ -5,8 +5,8 @@
  *
  */
 
-$tasks-text-color: #555;
-$tasks-info-color: #21A1B3;
+$tasks-text-color: var(--bs-body-color);
+$tasks-info-color: var(--bs-accent);
 
 #task-assignment-info {
     margin: 5px 0 0;
@@ -106,7 +106,7 @@ $tasks-info-color: #21A1B3;
                 }
             }
             .task-users, .task-progress {
-                border-right: 1px solid #eee;
+                border-right: 1px solid var(--bs-secondary-bg);
                 padding-right: 8px;
                 margin: 4px 8px 4px 0;
             }
@@ -628,8 +628,8 @@ $tasks-info-color: #21A1B3;
         font-style: italic;
 
         input[type=checkbox]:checked {
-            border-color: #bdbdbd;
-            background: #bdbdbd;
+            border-color: var(--bs-tertiary-color);
+            background: var(--bs-tertiary-color);
         }
     }
 }
@@ -650,7 +650,7 @@ $tasks-info-color: #21A1B3;
 
     .task-list-item {
         .task-list-task-details {
-            border-top: 1px dashed #ddd;
+            border-top: 1px dashed var(--bs-border-color);
 
             .wall-entry-controls, .wall-entry-controls a {
                 margin-top: 0;
@@ -685,7 +685,7 @@ $tasks-info-color: #21A1B3;
                 }
 
                 &:hover, &:focus-within {
-                    background: #F0F0F0;
+                    background: var(--bs-secondary-bg);
                     border-radius: 4px;
 
                     .task-moving-handler {
@@ -704,7 +704,7 @@ $tasks-info-color: #21A1B3;
         }
 
         .task-list-task-title-bar.highlighter {
-            background-color: #fff8e0;
+            background-color: var(--bs-highlight-bg);
             border-radius: 4px;
             padding: 5px;
             margin-top: 5px;
@@ -715,7 +715,7 @@ $tasks-info-color: #21A1B3;
             }
         }
 
-        border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid var(--bs-border-color);
     }
 
     .task-list-item:last-child {
@@ -725,7 +725,7 @@ $tasks-info-color: #21A1B3;
     .task-list-task-completed-show-more {
         text-align: center;
         padding: 5px;
-        background-color: #f7f7f7;
+        background-color: var(--bs-tertiary-bg);
     }
 
 
@@ -735,21 +735,21 @@ $tasks-info-color: #21A1B3;
     min-height: 0 !important;
 
     .task-list-item:first-child {
-        border-top: 1px solid #ddd;
+        border-top: 1px solid var(--bs-border-color);
     }
 }
 
 .task-list-state-highlight {
     height: 60px !important;
     line-height: 1.2em;
-    background-color: #fff8e0;
+    background-color: var(--bs-highlight-bg);
     margin: 10px 0;
 }
 
 .task-state-highlight {
     height: 30px;
     line-height: 1.2em;
-    background-color: #fff8e0
+    background-color: var(--bs-highlight-bg)
 }
 
 .task-list-color {
@@ -765,7 +765,7 @@ $tasks-info-color: #21A1B3;
 .task-controls {
     font-size: 12px;
     margin-right: 10px;
-    border-right: 1px solid #eee;
+    border-right: 1px solid var(--bs-secondary-bg);
     padding-right: 10px;
 
     .dropdown-toggle {
@@ -796,11 +796,11 @@ $tasks-info-color: #21A1B3;
 }
 
 .task-controls a {
-    color: #999;
+    color: var(--bs-tertiary-color);
 }
 
 .task-controls a:hover {
-    color: #3b4854;
+    color: var(--bs-emphasis-color);
 }
 
 .task-empty-list-alert {
