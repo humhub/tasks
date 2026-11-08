@@ -414,21 +414,9 @@
   margin: -2px;
   border-radius: 4px;
 }
-.task-moving-handler.fa:focus-visible, .task-moving-handler:focus-visible .fa,
-.task-list-toggle.fa:focus-visible,
-.task-list-toggle:focus-visible .fa,
-.task-list-edit.fa:focus-visible,
-.task-list-edit:focus-visible .fa {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--bs-accent);
-}
 
 .toggleTaskDetails[role=button] {
   border-radius: 4px;
-}
-.toggleTaskDetails[role=button]:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--bs-accent);
 }
 
 .task-list-title-bar {
