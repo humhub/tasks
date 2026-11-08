@@ -3,6 +3,7 @@ Changelog
 
 1.11.0 (Unreleased)
 -------------------
+- Fix: The dropdown toggle of the change-status button has an accessible name (humhub/humhub#8721)
 - Enh: The keyboard focus ring of the core instead of own rings on the list and task controls (humhub/humhub#8719)
 - Enh: Dark mode: hard-coded greys and light backgrounds became colour tokens of the core (humhub/humhub#8710)
 - Enh: Colour tokens of the core 1.20 instead of the deprecated ones (humhub/humhub#8707)

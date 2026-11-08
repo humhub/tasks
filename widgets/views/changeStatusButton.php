@@ -18,7 +18,7 @@ use humhub\widgets\bootstrap\Link;
 
     <?php if(!empty($proceedConfig) || !empty($revertConfig)) : ?>
         <?= Button::primary()
-            ->options(['data-bs-toggle' => 'dropdown', 'aria-haspopup' => 'true', 'aria-expanded' => 'false'])
+            ->options(['data-bs-toggle' => 'dropdown', 'aria-haspopup' => 'true', 'aria-expanded' => 'false', 'aria-label' => Yii::t('TasksModule.base', 'Change status')])
             ->cssClass('dropdown-toggle')->sm()
             ->loader(false) ?>
         <ul class="dropdown-menu">
