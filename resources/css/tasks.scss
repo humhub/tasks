@@ -534,11 +534,11 @@ $tasks-info-color: var(--bs-accent);
     }
 }
 
-// Keyboard focus affordance for the icon-only controls (list/task reordering
-// handle and the expand/collapse toggle) that act as buttons but aren't
-// natively focusable elements. The padding + negative margin gives the
-// focus ring some breathing room around the small glyph without shifting
-// the surrounding layout (the negative margin cancels the padding out).
+// The icon-only controls (list/task reordering handle and the expand/collapse
+// toggle) act as buttons but aren't natively focusable elements. The padding +
+// negative margin gives the core's focus ring some breathing room around the
+// small glyph without shifting the surrounding layout (the negative margin
+// cancels the padding out).
 .task-moving-handler,
 .task-list-toggle,
 .task-list-edit {
@@ -547,17 +547,9 @@ $tasks-info-color: var(--bs-accent);
         margin: -2px;
         border-radius: 4px;
     }
-    &.fa:focus-visible, &:focus-visible .fa {
-        outline: none;
-        box-shadow: 0 0 0 2px var(--bs-accent);
-    }
 }
 .toggleTaskDetails[role="button"] {
     border-radius: 4px;
-    &:focus-visible {
-        outline: none;
-        box-shadow: 0 0 0 2px var(--bs-accent);
-    }
 }
 
 .task-list-title-bar {
