@@ -167,6 +167,7 @@ return [
     '{userName} requests you to review Task {task} in space {spaceName}.' => '{userName} vás žiada o kontrolu úlohy {task} v priestore {spaceName}.',
     '{userName} started working on Task {task} in space {spaceName}.' => '{userName} začal pracovať na úlohe {task} v priestore {spaceName}.',
     'Assignments' => '',
+    'Change status' => '',
     'Deadline' => '',
     'Deadline today' => '',
     'List: {list}' => '',

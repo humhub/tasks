@@ -149,6 +149,7 @@ return [
     'Assigned users' => '',
     'Assignments' => '',
     'Attachments' => '',
+    'Change status' => '',
     'Checkpoints' => '',
     'Choose if you want the module to appear in the main navigation.' => '',
     'Completed lists' => '',

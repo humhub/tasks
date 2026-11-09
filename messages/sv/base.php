@@ -168,6 +168,7 @@ return [
     '{userName} requests you to review Task {task} in space {spaceName}.' => '{userName} begär att du ska granska uppgiften {task} i nätverket {spaceName}.',
     '{userName} started working on Task {task} in space {spaceName}.' => '{userName} började arbeta på uppgiften {task} i nätverket {spaceName}.',
     'Assignments' => '',
+    'Change status' => '',
     'Deadline today' => '',
     'List: {list}' => '',
     'Reorder task list. Use the up and down arrow keys while focused to move.' => '',

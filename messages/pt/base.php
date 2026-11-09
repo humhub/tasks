@@ -159,6 +159,7 @@ return [
     '{userName} started working on Task {task} in space {spaceName}.' => '{userName} começou a trabalhar na tarefa {task} no espaço {spaceName}.',
     'Add checkpoints to the task to highlight the individual steps required to complete it.' => '',
     'Assignments' => '',
+    'Change status' => '',
     'Configure the Tasks module to meet your specific requirements and needs. You can define individual settings and for instance decide whether a widget is displayed.' => '',
     'Deadline today' => '',
     'If empty any user can complete the task.' => '',

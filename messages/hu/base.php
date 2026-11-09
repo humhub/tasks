@@ -168,6 +168,7 @@ return [
     '{userName} requests you to review Task {task} in space {spaceName}.' => '{userName} arra kér, hogy ellenőrizd a {task} feladatot a {spaceName} közösségben.',
     '{userName} started working on Task {task} in space {spaceName}.' => '{userName} dolgozni kezdett a {task} feladaton a {spaceName} közösségben.',
     'Assignments' => '',
+    'Change status' => '',
     'Deadline today' => '',
     'List: {list}' => '',
     'Reorder task list. Use the up and down arrow keys while focused to move.' => '',

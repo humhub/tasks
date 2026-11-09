@@ -169,6 +169,7 @@ return [
     '{userName} requests you to review Task {task} in space {spaceName}.' => '{userName} vous demande de vérifier la tâche {task} dans l\'espace {spaceName}.',
     '{userName} started working on Task {task} in space {spaceName}.' => '{userName} a commencé à travailler sur la tâche {task} dans l\'espace {spaceName}.',
     'Assignments' => '',
+    'Change status' => '',
     'Deadline today' => '',
     'List: {list}' => '',
     'Reorder task list. Use the up and down arrow keys while focused to move.' => '',

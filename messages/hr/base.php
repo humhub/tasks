@@ -141,6 +141,7 @@ return [
     'At least 1 Hour before' => '',
     'At least 2 Hours before' => '',
     'Attachments' => '',
+    'Change status' => '',
     'Checkpoints' => '',
     'Choose if you want the module to appear in the main navigation.' => '',
     'Completed lists' => '',

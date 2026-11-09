@@ -168,6 +168,7 @@ return [
     '{userName} requests you to review Task {task} in space {spaceName}.' => '{userName} richiede di revisionare l\'attività {task} nello spazio {spaceName}.',
     '{userName} started working on Task {task} in space {spaceName}.' => '{userName} inizitato l\'attività {task} nello spazio {spaceName}.',
     'Assignments' => '',
+    'Change status' => '',
     'Deadline today' => '',
     'List: {list}' => '',
     'Reorder task list. Use the up and down arrow keys while focused to move.' => '',

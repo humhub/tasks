@@ -84,6 +84,7 @@ return [
     'At least 1 Hour before' => '',
     'At least 2 Hours before' => '',
     'Attachments' => '',
+    'Change status' => '',
     'Checklist Items' => '',
     'Checklist:' => '',
     'Checkpoints' => '',

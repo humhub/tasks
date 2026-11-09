@@ -168,6 +168,7 @@ return [
     '{userName} requests you to review Task {task} in space {spaceName}.' => '{userName} は、スペース {spaceName} のタスク {task} を確認するように要求しています。',
     '{userName} started working on Task {task} in space {spaceName}.' => '{userName} は、スペース {spaceName} でタスク {task} の作業を開始しました。',
     'Assignments' => '',
+    'Change status' => '',
     'Deadline today' => '',
     'List: {list}' => '',
     'Reorder task list. Use the up and down arrow keys while focused to move.' => '',

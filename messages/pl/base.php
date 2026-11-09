@@ -171,6 +171,7 @@ return [
     '{userName} requests a deadline extension for task {task} in space {spaceName}.' => '{userName} prosi o uzupełnienie terminów w zadaniu {task} w strefie {spaceName}.',
     '{userName} requests you to review Task {task} in space {spaceName}.' => '{userName} prosi Cię o przegląd zadania {task} w przestrzeni {spaceName}.',
     '{userName} started working on Task {task} in space {spaceName}.' => '{userName} rozpoczął/ęła pracę nad zadaniem {task} w strefie {spaceName}.',
+    'Change status' => '',
     'Deadline today' => '',
     'List: {list}' => '',
     'Reorder task list. Use the up and down arrow keys while focused to move.' => '',
