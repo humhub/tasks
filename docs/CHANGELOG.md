@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.10.4 (Unreleased)
+-------------------
+- Fix: Encode task list title in task search results
+- Fix: Check task visibility on reloading an entry of the global task overview
+- Fix: Show only task lists with visible tasks in the global task overview filter
+
 1.10.3 (October 13, 2026)
 -------------------------
 - Fix #256: Allow task creation via REST API and list button for users with "Manage All Content" permission
