@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.9.9 (Unreleased)
-------------------
+1.9.9 (November 10, 2026)
+-------------------------
 - Fix: Encode task list title in task search results
 - Fix: Check task visibility on reloading an entry of the global task overview
 - Fix: Show only task lists with visible tasks in the global task overview filter
