@@ -111,45 +111,45 @@ class TaskReminder extends ActiveRecord
         $modifiedEnd = clone $dateTime;
 
         switch ($this->remind_mode) {
-            case self::REMIND_ONE_HOUR :
+            case self::REMIND_ONE_HOUR:
                 $modifiedStart = $modifiedStart->modify('-2 hours');
                 $modifiedEnd = $modifiedEnd->modify('-1 hour');
                 break;
-            case self::REMIND_TWO_HOURS :
+            case self::REMIND_TWO_HOURS:
                 $modifiedStart = $modifiedStart->modify('-3 hours');
                 $modifiedEnd = $modifiedEnd->modify('-2 hours');
                 break;
-            case self::REMIND_ONE_DAY :
+            case self::REMIND_ONE_DAY:
                 $modifiedStart = $modifiedStart->modify('-1 day');
                 $modifiedStart = $modifiedStart->setTime('00', '00', '00');
                 $modifiedEnd = $modifiedEnd->modify('-1 day');
                 $modifiedEnd = $modifiedEnd->setTime('23', '59', '59');
                 break;
-            case self::REMIND_TWO_DAYS :
+            case self::REMIND_TWO_DAYS:
                 $modifiedStart = $modifiedStart->modify('-2 days');
                 $modifiedStart = $modifiedStart->setTime('00', '00', '00');
                 $modifiedEnd = $modifiedEnd->modify('-2 days');
                 $modifiedEnd = $modifiedEnd->setTime('23', '59', '59');
                 break;
-            case self::REMIND_ONE_WEEK :
+            case self::REMIND_ONE_WEEK:
                 $modifiedStart = $modifiedStart->modify('-1 week');
                 $modifiedStart = $modifiedStart->setTime('00', '00', '00');
                 $modifiedEnd = $modifiedEnd->modify('-1 week');
                 $modifiedEnd = $modifiedEnd->setTime('23', '59', '59');
                 break;
-            case self::REMIND_TWO_WEEKS :
+            case self::REMIND_TWO_WEEKS:
                 $modifiedStart = $modifiedStart->modify('-2 weeks');
                 $modifiedStart = $modifiedStart->setTime('00', '00', '00');
                 $modifiedEnd = $modifiedEnd->modify('-2 weeks');
                 $modifiedEnd = $modifiedEnd->setTime('23', '59', '59');
                 break;
-            case self::REMIND_THREE_WEEKS :
+            case self::REMIND_THREE_WEEKS:
                 $modifiedStart = $modifiedStart->modify('-3 weeks');
                 $modifiedStart = $modifiedStart->setTime('00', '00', '00');
                 $modifiedEnd = $modifiedEnd->modify('-3 weeks');
                 $modifiedEnd = $modifiedEnd->setTime('23', '59', '59');
                 break;
-            case self::REMIND_ONE_MONTH :
+            case self::REMIND_ONE_MONTH:
                 $modifiedStart = $modifiedStart->modify('-1 month');
                 $modifiedStart = $modifiedStart->setTime('00', '00', '00');
                 $modifiedEnd = $modifiedEnd->modify('-1 month');
