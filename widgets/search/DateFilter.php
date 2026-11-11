@@ -9,7 +9,7 @@
 
 namespace humhub\modules\tasks\widgets\search;
 
-use humhub\modules\ui\filter\widgets\FilterInput;
+use humhub\widgets\filter\FilterInput;
 use humhub\helpers\Html;
 
 class DateFilter extends FilterInput

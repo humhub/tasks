@@ -10,6 +10,7 @@ Changelog
 - Enh: Compatibility with the core picker that replaces Select2 (humhub/humhub#8677)
 - Enh: Replaced the Bootstrap 3 classes removed from the core (humhub/humhub#8696)
 - Enh: Compatibility with the notification API of the core 1.20 (humhub/humhub#8576)
+- Fix: The task search page used the deprecated filter widgets of the core and failed to render on 1.20
 
 1.10.4 (November 10, 2026)
 --------------------------

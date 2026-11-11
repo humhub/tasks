@@ -104,6 +104,17 @@ class TaskListCest
         $I->waitForText('My First Task', 10, '.tasks-completed');
     }
 
+    public function testSearchPage(AcceptanceTester $I)
+    {
+        $I->amAdmin();
+        $I->wantToTest('the task search page with its filters');
+        $I->enableModule(1, 'tasks');
+
+        $I->amOnSpace1('/tasks/search');
+        $I->waitForElement('#task-filter-nav', 10);
+        $I->see('Title');
+    }
+
     private function enableProfileModule(AcceptanceTester $I)
     {
         $I->amOnRoute(Url::toRoute(['/user/account/edit-modules', 'moduleId' => 'tasks']));

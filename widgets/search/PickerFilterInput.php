@@ -8,7 +8,7 @@
 
 namespace humhub\modules\tasks\widgets\search;
 
-class PickerFilterInput extends \humhub\modules\ui\filter\widgets\PickerFilterInput
+class PickerFilterInput extends \humhub\widgets\filter\PickerFilterInput
 {
     /**
      * @inheritdoc

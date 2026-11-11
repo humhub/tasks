@@ -8,7 +8,7 @@
 
 namespace humhub\modules\tasks\widgets\search;
 
-class DropdownFilterInput extends \humhub\modules\ui\filter\widgets\DropdownFilterInput
+class DropdownFilterInput extends \humhub\widgets\filter\DropdownFilterInput
 {
     /**
      * @inheritdoc

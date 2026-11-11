@@ -9,7 +9,7 @@
 use humhub\helpers\Html;
 use humhub\modules\admin\widgets\ExportButton;
 use humhub\modules\tasks\widgets\search\TaskFilterNavigation;
-use humhub\modules\ui\filter\widgets\FilterPanel;
+use humhub\widgets\filter\FilterPanel;
 use humhub\modules\tasks\widgets\search\TextFilterInput;
 
 /* @var array $panels */

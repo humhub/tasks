@@ -8,7 +8,7 @@
 
 namespace humhub\modules\tasks\widgets\search;
 
-class CheckboxFilterInput extends \humhub\modules\ui\filter\widgets\CheckboxFilterInput
+class CheckboxFilterInput extends \humhub\widgets\filter\CheckboxFilterInput
 {
     /**
      * @inheritdoc

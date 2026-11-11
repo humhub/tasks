@@ -20,7 +20,7 @@ use humhub\modules\tasks\models\forms\TaskFilter;
 use humhub\modules\tasks\models\lists\TaskList;
 use humhub\modules\tasks\models\state\TaskState;
 use humhub\modules\tasks\models\Task;
-use humhub\modules\ui\filter\widgets\FilterNavigation;
+use humhub\widgets\filter\FilterNavigation;
 use humhub\modules\ui\form\widgets\MultiSelect;
 use Yii;
 
