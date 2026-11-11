@@ -10,6 +10,11 @@ class m151224_162440_fix_module_id_notifications extends Migration
 {
     public function up()
     {
+        // The column was removed with the notification API of the core 1.20
+        if ($this->db->getTableSchema('notification', true)->getColumn('module') === null) {
+            return;
+        }
+
         $this->update('notification', ['module' => 'tasks'], ['class' => 'humhub\modules\tasks\notifications\Assigned']);
         $this->update('notification', ['module' => 'tasks'], ['class' => 'humhub\modules\tasks\notifications\Finished']);
     }
