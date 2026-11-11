@@ -19,6 +19,7 @@ use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\forms\TaskFilter;
 use humhub\modules\tasks\models\lists\TaskList;
 use humhub\modules\tasks\models\state\TaskState;
+use humhub\modules\tasks\models\Task;
 use humhub\modules\ui\filter\widgets\FilterNavigation;
 use humhub\modules\ui\form\widgets\MultiSelect;
 use Yii;
@@ -208,6 +209,9 @@ class TaskFilterNavigation extends FilterNavigation
 
         if ($this->filter->contentContainer instanceof ContentContainerActiveRecord) {
             $taskLists->andWhere(['content_tag.contentcontainer_id' => $this->filter->contentContainer->contentcontainer_id]);
+        } else {
+            // Only offer lists which contain tasks the current user is allowed to see
+            $taskLists->andWhere(['content_tag.id' => Task::find()->readable()->select('task.task_list_id')]);
         }
 
         $this->addFilter([

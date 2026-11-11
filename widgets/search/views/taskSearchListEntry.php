@@ -53,7 +53,7 @@ $taskContainer = $contentContainer === null ? $task->content->container : null;
             <div class="task-item-info flex-nowrap">
                 <?php if ($task->task_list_id) : ?>
                     <div data-bs-title="<?= Html::encode(Yii::t('TasksModule.base', 'List: {list}', ['list' => $task->list->title])) ?>" data-bs-toggle="tooltip">
-                        <?= Icon::get('list-ul') . ' ' . $task->list->title ?>
+                        <?= Icon::get('list-ul') . ' ' . Html::encode($task->list->title) ?>
                     </div>
                 <?php endif; ?>
 
@@ -73,7 +73,7 @@ $taskContainer = $contentContainer === null ? $task->content->container : null;
 
                 <?php if ($task->scheduling) : ?>
                     <div data-bs-title="<?= Html::encode($task->schedule->getFormattedDateTime()) ?>" data-bs-toggle="tooltip">
-                        <?= Icon::get('clock-o')->tooltip('123') . ' '
+                        <?= Icon::get('clock-o') . ' '
                             . ($task->all_day
                                 ? Yii::$app->formatter->asDate($task->schedule->getEndDateTime(), 'short')
                                 : Yii::$app->formatter->asDatetime($task->schedule->getEndDateTime(), 'short'));

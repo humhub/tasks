@@ -51,7 +51,7 @@ class GlobalController extends AbstractTaskController
 
     public function actionReloadFilterTask(int $id)
     {
-        $task = Task::findOne($id);
+        $task = Task::find()->readable()->andWhere(['task.id' => $id])->one();
         if (!$task) {
             throw new NotFoundHttpException('Task not found!');
         }

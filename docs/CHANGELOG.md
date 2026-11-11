@@ -11,6 +11,12 @@ Changelog
 - Enh: Replaced the Bootstrap 3 classes removed from the core (humhub/humhub#8696)
 - Enh: Compatibility with the notification API of the core 1.20 (humhub/humhub#8576)
 
+1.10.4 (November 10, 2026)
+--------------------------
+- Fix: Encode task list title in task search results
+- Fix: Check task visibility on reloading an entry of the global task overview
+- Fix: Show only task lists with visible tasks in the global task overview filter
+
 1.10.3 (October 13, 2026)
 -------------------------
 - Fix #256: Allow task creation via REST API and list button for users with "Manage All Content" permission
