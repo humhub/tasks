@@ -13,7 +13,6 @@ use humhub\commands\IntegrityController;
 use humhub\helpers\ControllerHelper;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\dashboard\widgets\Sidebar as DashboardSidebar;
-use humhub\modules\notification\models\Notification;
 use humhub\modules\rest\Module as RestModule;
 use humhub\modules\space\widgets\Menu as SpaceMenu;
 use humhub\modules\space\widgets\Sidebar as SpaceSidebar;
@@ -293,10 +292,7 @@ class Events
                         $user->delete();
                     }
 
-                    $notifications = Notification::find()->where(['source_class' => Task::className(), 'source_pk' => $task->id, 'space_id' => $event->space->id])->all();
-                    foreach ($notifications as $notification) {
-                        $notification->delete();
-                    }
+                    $task->deleteOldNotifications(null, $event->user);
                 }
             }
         } catch (\Throwable $e) {

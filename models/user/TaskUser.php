@@ -104,11 +104,11 @@ class TaskUser extends ActiveRecord
         }
 
         if ($this->user_type === Task::USER_ASSIGNED) {
-            AssignedNotification::instance()->about($source)->delete($target);
-            AssignedNotification::instance()->from($from)->about($source)->send($target);
+            AssignedNotification::revoke(source: $source, user: $target);
+            AssignedNotification::send($target, source: $source, originator: $from);
         } elseif ($this->user_type === Task::USER_RESPONSIBLE) {
-            AddResponsibleNotification::instance()->about($source)->delete($target);
-            AddResponsibleNotification::instance()->from($from)->about($source)->send($target);
+            AddResponsibleNotification::revoke(source: $source, user: $target);
+            AddResponsibleNotification::send($target, source: $source, originator: $from);
         }
     }
 

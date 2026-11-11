@@ -237,8 +237,8 @@ class TaskScheduling extends Component
     public function sendExtensionRequest()
     {
         if ($this->task->hasTaskResponsible()) {
-            $this->task->deleteOldNotifications(ExtensionRequestNotification::className());
-            ExtensionRequestNotification::instance()->from(Yii::$app->user->getIdentity())->about($this->task)->sendBulk($this->task->taskResponsibleUsers);
+            $this->task->deleteOldNotifications(ExtensionRequestNotification::class);
+            ExtensionRequestNotification::send($this->task->taskResponsibleUsers, source: $this->task, originator: Yii::$app->user->getIdentity());
         }
     }
 
@@ -278,14 +278,14 @@ class TaskScheduling extends Component
             return;
         }
         // remove old notifications
-        $this->task->deleteOldNotifications(ChangedDateTimeNotification::className());
+        $this->task->deleteOldNotifications(ChangedDateTimeNotification::class);
 
         if (!empty($this->taskAssignedUsers)) {
-            ChangedDateTimeNotification::instance()->from(Yii::$app->user->getIdentity())->about($this->task)->sendBulk($this->task->filterResponsibleAssigned());
+            ChangedDateTimeNotification::send($this->task->filterResponsibleAssigned(), source: $this->task, originator: Yii::$app->user->getIdentity());
         }
 
         if (!empty($this->taskResponsibleUsers)) {
-            ChangedDateTimeNotification::instance()->from(Yii::$app->user->getIdentity())->about($this->task)->sendBulk($this->taskResponsibleUsers);
+            ChangedDateTimeNotification::send($this->taskResponsibleUsers, source: $this->task, originator: Yii::$app->user->getIdentity());
         }
     }
 

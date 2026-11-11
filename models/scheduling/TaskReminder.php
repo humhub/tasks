@@ -12,7 +12,6 @@ namespace humhub\modules\tasks\models\scheduling;
 use Yii;
 use DateTime;
 use humhub\components\ActiveRecord;
-use humhub\modules\notification\models\Notification;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\notifications\RemindEnd;
 use humhub\modules\tasks\notifications\RemindStart;
@@ -168,7 +167,7 @@ class TaskReminder extends ActiveRecord
     public function remindUserOfStart()
     {
         $this->deleteOldReminder();
-        RemindStart::instance()->from($this->task->content->createdBy)->about($this->task)->sendBulk($this->task->users);
+        RemindStart::send($this->task->users, source: $this->task, originator: $this->task->content->createdBy, notifyOriginator: true, dedupe: false);
     }
 
     /**
@@ -177,21 +176,13 @@ class TaskReminder extends ActiveRecord
     public function remindUserOfEnd()
     {
         $this->deleteOldReminder();
-        RemindEnd::instance()->from($this->task->content->createdBy)->about($this->task)->sendBulk($this->task->users);
+        RemindEnd::send($this->task->users, source: $this->task, originator: $this->task->content->createdBy, notifyOriginator: true, dedupe: false);
     }
 
     public function deleteOldReminder()
     {
-        // delete old reminder
-        $startNotifications = Notification::find()->where(['class' => RemindStart::class, 'source_class' => Task::class, 'source_pk' => $this->task->id, 'space_id' => $this->task->content->container->id])->all();
-        foreach ($startNotifications as $notification) {
-            $notification->delete();
-        }
-
-        $endNotifications = Notification::find()->where(['class' => RemindEnd::class, 'source_class' => Task::class, 'source_pk' => $this->task->id, 'space_id' => $this->task->content->container->id])->all();
-        foreach ($endNotifications as $notification) {
-            $notification->delete();
-        }
+        RemindStart::revoke(source: $this->task);
+        RemindEnd::revoke(source: $this->task);
     }
 
     public function handleRemind(DateTime $now)

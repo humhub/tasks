@@ -83,16 +83,16 @@ class CompletedState extends TaskState
 
         if ($this->task->review) {
             if ($this->task->hasTaskAssigned()) {
-                ReviewSuccessNotification::instance()->from($user)->about($this->task)->sendBulk($this->task->filterResponsibleAssigned());
+                ReviewSuccessNotification::send($this->task->filterResponsibleAssigned(), source: $this->task, originator: $user, dedupe: false);
             }
 
             if ($this->task->hasTaskResponsible()) {
-                ReviewSuccessNotification::instance()->from($user)->about($this->task)->sendBulk($this->task->taskResponsibleUsers);
+                ReviewSuccessNotification::send($this->task->taskResponsibleUsers, source: $this->task, originator: $user, dedupe: false);
             }
             ActivityManager::dispatch(TaskReviewedActivity::class, $this->task, $user);
         } else {
             if ($this->task->hasTaskResponsible()) {
-                TaskCompletedNotification::instance()->from($user)->about($this->task)->sendBulk($this->task->taskResponsibleUsers);
+                TaskCompletedNotification::send($this->task->taskResponsibleUsers, source: $this->task, originator: $user, dedupe: false);
             }
 
             ActivityManager::dispatch(TaskCompletedActivity::class, $this->task, $user);

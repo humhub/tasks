@@ -56,7 +56,7 @@ class PendingState extends TaskState
         $this->task->deleteOldNotifications();
         $user = Yii::$app->user->getIdentity();
 
-        TaskResetNotification::instance()->from($user)->about($this->task)->sendBulk($this->task->users);
+        TaskResetNotification::send($this->task->users, source: $this->task, originator: $user);
         ActivityManager::dispatch(TaskResetActivity::class, $this->task, $user);
     }
 

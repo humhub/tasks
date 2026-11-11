@@ -65,7 +65,7 @@ class PendingReviewState extends TaskState
         if ($this->task->review && $this->task->hasTaskResponsible()) {
             // remove old notifications
             $this->task->deleteOldNotifications(PendingReviewNotification::class);
-            PendingReviewNotification::instance()->from(Yii::$app->user->getIdentity())->about($this->task)->sendBulk($this->task->taskResponsibleUsers);
+            PendingReviewNotification::send($this->task->taskResponsibleUsers, source: $this->task, originator: Yii::$app->user->getIdentity());
         }
     }
 }

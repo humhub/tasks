@@ -2,71 +2,37 @@
 
 /**
  * @link https://www.humhub.org/
- * @copyright Copyright (c) 2018 HumHub GmbH & Co. KG
+ * @copyright Copyright (c) HumHub GmbH & Co. KG
  * @license https://www.humhub.com/licences
- *
  */
 
 namespace humhub\modules\tasks\notifications;
 
-use humhub\helpers\Html;
-use humhub\modules\notification\components\BaseNotification;
+use humhub\modules\notification\components\NotificationCategory;
 use humhub\modules\tasks\models\Task;
 use Yii;
 
 /**
- * Notifies an admin about reported content
- *
- * @since 0.5
+ * The start of a task is near.
  */
-class RemindStart extends BaseNotification
+final class RemindStart extends AbstractTaskNotification
 {
-    /**
-     * @inheritdoc
-     */
-    public $suppressSendToOriginator = false;
-
-    /**
-     * @inheritdoc
-     */
-    public $moduleId = 'tasks';
-
-    /**
-     * @inheritdoc
-     */
-    public $viewName = 'remind';
-
-    /**
-     * @var Task
-     */
-    public $source;
-
-    /**
-     * @inheritdoc
-     */
-    public function category()
+    public static function category(): NotificationCategory
     {
-        return new TaskReminderCategory();
+        return self::reminderCategory();
     }
 
-    public function html()
+    protected function getMessage(array $params): string
     {
-        return Yii::t('TasksModule.base', 'Task {task} in space {spaceName} starts at {dateTime}.', [
-            '{task}' => Html::tag('strong', Html::encode($this->getContentInfo($this->source, false))),
-            '{spaceName}' => Html::tag('strong', Html::encode($this->source->content->container->displayName)),
-            '{dateTime}' => Html::encode($this->source->schedule->getFormattedStartDateTime()),
-        ]);
+        return Yii::t('TasksModule.base', 'Task {task} in space {spaceName} starts at {dateTime}.', self::sentenceParams($params));
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getMailSubject()
+    protected function getMessageParams(): array
     {
-        return Yii::t('TasksModule.base', 'Task {task} in space {spaceName} starts at {dateTime}.', [
-            '{task}' => Html::encode($this->getContentInfo($this->source, false)),
-            '{spaceName}' => Html::encode($this->source->content->container->displayName),
-            '{dateTime}' => Html::encode($this->source->schedule->getFormattedStartDateTime()),
-        ]);
+        $task = $this->sourceRecord;
+
+        return parent::getMessageParams() + [
+            'dateTime' => $task instanceof Task ? (string) $task->schedule->getFormattedStartDateTime() : '',
+        ];
     }
 }

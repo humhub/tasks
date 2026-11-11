@@ -14,7 +14,19 @@ use humhub\modules\content\components\ActiveQueryContent;
 use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\content\components\ContentContainerPermissionManager;
-use humhub\modules\notification\models\Notification;
+use humhub\modules\tasks\notifications\AbstractTaskNotification;
+use humhub\modules\tasks\notifications\AddResponsibleNotification;
+use humhub\modules\tasks\notifications\AssignedNotification;
+use humhub\modules\tasks\notifications\ChangedDateTimeNotification;
+use humhub\modules\tasks\notifications\ExtensionRequestNotification;
+use humhub\modules\tasks\notifications\InProgressNotification;
+use humhub\modules\tasks\notifications\PendingReviewNotification;
+use humhub\modules\tasks\notifications\RemindEnd;
+use humhub\modules\tasks\notifications\RemindStart;
+use humhub\modules\tasks\notifications\ReviewRejectedNotification;
+use humhub\modules\tasks\notifications\ReviewSuccessNotification;
+use humhub\modules\tasks\notifications\TaskCompletedNotification;
+use humhub\modules\tasks\notifications\TaskResetNotification;
 use humhub\modules\space\models\Space;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\checklist\TaskCheckList;
@@ -84,6 +96,24 @@ class Task extends ContentActiveRecord
     public $selectedReminders;
     public $newItems;
     public $editItems;
+
+    /**
+     * The notifications about a task, see {@see deleteOldNotifications()}.
+     */
+    public const NOTIFICATIONS = [
+        AddResponsibleNotification::class,
+        AssignedNotification::class,
+        ChangedDateTimeNotification::class,
+        ExtensionRequestNotification::class,
+        InProgressNotification::class,
+        PendingReviewNotification::class,
+        RemindEnd::class,
+        RemindStart::class,
+        ReviewRejectedNotification::class,
+        ReviewSuccessNotification::class,
+        TaskCompletedNotification::class,
+        TaskResetNotification::class,
+    ];
 
     /**
      * Status
@@ -854,20 +884,17 @@ class Task extends ContentActiveRecord
         return $filteredAssigned;
     }
 
-    public function deleteOldNotifications($notificationClassName = null)
+    /**
+     * Deletes the notifications about this task of the given class, or of all classes of the module,
+     * optionally only those sent to the given recipient.
+     *
+     * @param class-string<AbstractTaskNotification>|null $notificationClassName
+     * @param User|null $user only the notifications of this recipient
+     */
+    public function deleteOldNotifications($notificationClassName = null, ?User $user = null)
     {
-        if (!$notificationClassName) {
-            // delete all old notifications - used for reset
-            $notifications = Notification::find()->where(['source_class' => self::class, 'source_pk' => $this->id, 'space_id' => $this->content->container->id])->all();
-            foreach ($notifications as $notification) {
-                $notification->delete();
-            }
-        } else {
-            // delete specific old notifications
-            $notifications = Notification::find()->where(['class' => $notificationClassName, 'source_class' => self::class, 'source_pk' => $this->id, 'space_id' => $this->content->container->id])->all();
-            foreach ($notifications as $notification) {
-                $notification->delete();
-            }
+        foreach ($notificationClassName ? [$notificationClassName] : self::NOTIFICATIONS as $class) {
+            $class::revoke(source: $this, user: $user);
         }
     }
 
@@ -1075,18 +1102,6 @@ class Task extends ContentActiveRecord
     public function moveItemIndex($itemId, $newIndex)
     {
         $this->checklist->moveItemIndex($itemId, $newIndex);
-    }
-
-    /**
-     * @throws \Exception
-     * @throws \yii\db\StaleObjectException
-     */
-    public function beforeRemoveUser()
-    {
-        $notifications = Notification::find()->where(['source_class' => self::className(), 'source_pk' => $this->id, 'space_id' => $this->content->contentContainer->id])->all();
-        foreach ($notifications as $notification) {
-            $notification->delete();
-        }
     }
 
     /**

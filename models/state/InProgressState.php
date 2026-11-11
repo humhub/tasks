@@ -64,7 +64,7 @@ class InProgressState extends TaskState
         $user = Yii::$app->user->getIdentity();
 
         if ($this->task->hasTaskResponsible()) {
-            InProgressNotification::instance()->from($user)->about($this->task)->sendBulk($this->task->taskResponsibleUsers);
+            InProgressNotification::send($this->task->taskResponsibleUsers, source: $this->task, originator: $user, dedupe: false);
         }
 
         ActivityManager::dispatch(TaskStartActivity::class, $this->task, $user);
@@ -79,7 +79,7 @@ class InProgressState extends TaskState
     {
         if ($this->task->review && $this->task->hasTaskAssigned()) {
             $this->task->deleteOldNotifications(ReviewRejectedNotification::class);
-            ReviewRejectedNotification::instance()->from(Yii::$app->user->getIdentity())->about($this->task)->sendBulk($this->task->filterResponsibleAssigned());
+            ReviewRejectedNotification::send($this->task->filterResponsibleAssigned(), source: $this->task, originator: Yii::$app->user->getIdentity());
         } else {
             $this->notifyInProgress();
         }
