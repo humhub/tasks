@@ -9,7 +9,7 @@
 $value = is_array($value) ? $value : [$value];
 
 use humhub\helpers\Html;
-use humhub\modules\ui\icon\widgets\Icon;
+use humhub\widgets\Icon;
 ?>
 
 <div class="task-info <?= $cssClass ?>">

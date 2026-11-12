@@ -8,7 +8,7 @@
 
 use humhub\helpers\Html;
 use humhub\modules\tasks\widgets\AddItemsInput;
-use humhub\modules\ui\icon\widgets\Icon;
+use humhub\widgets\Icon;
 
 /* @var $form \humhub\widgets\form\ActiveForm */
 /* @var $taskForm \humhub\modules\tasks\models\forms\TaskForm */
@@ -23,7 +23,7 @@ use humhub\modules\ui\icon\widgets\Icon;
                 'class' => 'form-control task_item_old_input',
                 'placeholder' => Yii::t('TasksModule.base', 'Edit item (empty field will be removed)...')]) ?>
             <div class="input-group-text" style="cursor:pointer;" data-action-click="removeTaskItem">
-                <?= Icon::get('trash') ?>
+                <?= Icon::get('trash-filled') ?>
             </div>
         </div>
     </div>

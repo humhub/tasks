@@ -23,9 +23,9 @@ $cssClass = $right ? 'float-end' : '';
 <?php elseif ($task->status == Task::STATUS_PENDING_REVIEW) : ?>
     <?= Badge::warning(Yii::t('TasksModule.base', 'Pending Review'))->cssClass($cssClass)->icon('eye') ?>
 <?php elseif ($task->status == Task::STATUS_COMPLETED  && $includeCompleted) : ?>
-    <?= Badge::success(Yii::t('TasksModule.base', 'Completed'))->cssClass($cssClass)->icon('check-square') ?>
+    <?= Badge::success(Yii::t('TasksModule.base', 'Completed'))->cssClass($cssClass)->icon('square-check-filled') ?>
 <?php endif; ?>
 
 <?php if ($task->isOverdue()) : ?>
-    <?= Badge::danger(Yii::t('TasksModule.base', 'Overdue'))->id('taskDeadlineStatus')->cssClass($cssClass . $right ? ' me-1"' : '')->icon('exclamation-triangle') ?>
+    <?= Badge::danger(Yii::t('TasksModule.base', 'Overdue'))->id('taskDeadlineStatus')->cssClass($cssClass . $right ? ' me-1"' : '')->icon('alert-triangle') ?>
 <?php endif; ?>

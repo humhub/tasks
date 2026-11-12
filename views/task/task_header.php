@@ -10,7 +10,7 @@ use humhub\helpers\Html;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\widgets\TaskBadge;
 use humhub\modules\tasks\widgets\TaskContextMenu;
-use humhub\modules\ui\icon\widgets\Icon;
+use humhub\widgets\Icon;
 use humhub\widgets\bootstrap\Badge;
 
 /* @var $task Task */
@@ -24,7 +24,7 @@ $participantStyle = 'display:inline-block;';
             <?= TaskContextMenu::widget(['task' => $task]) ?>
         </div>
         <div class="task-list-item-title">
-            <strong><?= Icon::get('tasks')->color($task->getColor('var(--bs-accent)'))?> <?= Html::encode($task->title) ?></strong>
+            <strong><?= Icon::get('list-check')->color($task->getColor('var(--hh-accent-fg)'))?> <?= Html::encode($task->title) ?></strong>
         </div>
     </div>
 
@@ -47,7 +47,7 @@ $participantStyle = 'display:inline-block;';
                         &middot;
                         <span class="text-muted">
                         <?php if ($task->scheduling) : ?>
-                            <?= Icon::get('clock-o')->tooltip($task->schedule->getFormattedStartDateTime()
+                            <?= Icon::get('clock')->tooltip($task->schedule->getFormattedStartDateTime()
                                 . ' - ' . $task->schedule->getFormattedEndDateTime()) ?>
                         <?php endif; ?>
 

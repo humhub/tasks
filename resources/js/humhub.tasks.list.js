@@ -157,8 +157,8 @@ humhub.module('task.list', function (module, require, $) {
             this.$.find('.task-list-items.ui-sortable:hidden').siblings('.task-list-title-bar').click();
         }
         $('#toggle-lists').find('i')
-            .removeClass(collapse ? 'fa-toggle-on' : 'fa-toggle-off')
-            .addClass(collapse ? 'fa-toggle-off' : 'fa-toggle-on');
+            .removeClass(collapse ? 'ti-toggle-right' : 'ti-toggle-left')
+            .addClass(collapse ? 'ti-toggle-left' : 'ti-toggle-right');
         toggler.data(collapse ? 'title-collapse' : 'title-expand', toggler.text());
         toggler.html(toggler.html().replace(/(<\/i> ).+$/, '$1' + toggler.data(collapse ? 'title-expand' : 'title-collapse')));
     };
@@ -203,8 +203,8 @@ humhub.module('task.list', function (module, require, $) {
 
         var $items = this.getItemsRoot();
 
-        var downIcon =  'fa-caret-up';
-        var upIcon ='fa-caret-down';
+        var downIcon =  'ti-caret-up-filled';
+        var upIcon ='ti-caret-down-filled';
         var willExpand = !$items.is(':visible');
 
         if($items.is(':visible')) {

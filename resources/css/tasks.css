@@ -79,7 +79,7 @@
   margin-right: 10px;
 }
 .task-overview #filter-tasks-list .hh-list .task-item-info .text-accent {
-  color: var(--bs-accent);
+  color: var(--hh-accent-fg);
 }
 .task-overview #filter-tasks-list .hh-list .task-users, .task-overview #filter-tasks-list .hh-list .task-progress {
   border-right: 1px solid var(--bs-secondary-bg);
@@ -184,17 +184,17 @@
 .task-overview #task-filter-nav .task-bottom-panel .filterInput {
   margin: 5px;
 }
-.task-overview #task-filter-nav .task-bottom-panel .filterInput[data-filter-type=checkbox] .fa {
+.task-overview #task-filter-nav .task-bottom-panel .filterInput[data-filter-type=checkbox] .ti {
   width: 18px;
   height: 18px;
   margin: 0 4px -4px -5px;
-  border: 2px solid var(--hh-border-color-strong);
+  border: 2px solid var(--bs-border-color);
   border-radius: 4px;
 }
-.task-overview #task-filter-nav .task-bottom-panel .filterInput[data-filter-type=checkbox] .fa:before {
+.task-overview #task-filter-nav .task-bottom-panel .filterInput[data-filter-type=checkbox] .ti:before {
   content: "";
 }
-.task-overview #task-filter-nav .task-bottom-panel .filterInput[data-filter-type=checkbox] .fa.fa-check-square-o {
+.task-overview #task-filter-nav .task-bottom-panel .filterInput[data-filter-type=checkbox] .ti.ti-square-check {
   border-color: var(--bs-accent);
   background: var(--bs-accent);
 }
@@ -305,7 +305,7 @@
 #task-space-menu {
   background: none;
   padding: 0 0 8px 0;
-  border-bottom: 1px solid var(--hh-border-color-strong);
+  border-bottom: 1px solid var(--bs-border-color);
 }
 #task-space-menu li a {
   background: none;
@@ -320,7 +320,7 @@
   padding-left: 0;
 }
 #task-space-menu li.active a {
-  color: var(--bs-accent);
+  color: var(--hh-accent-fg);
 }
 
 #toggle-lists {
@@ -334,7 +334,7 @@
   font-weight: 600;
   font-size: 13px;
 }
-#toggle-lists .fa {
+#toggle-lists .ti {
   font-size: 22px;
   vertical-align: middle;
   margin: -3px 6px 0 0;
@@ -345,7 +345,7 @@
   line-height: 16px;
   margin-left: 22px;
 }
-.task-list .fa-bars {
+.task-list .ti-menu-2 {
   color: var(--bs-tertiary-color);
 }
 .task-list .task-list-title-bar.collapsable {
@@ -366,7 +366,7 @@
 
 .task-list .pagination-container {
   background-color: var(--bs-tertiary-bg);
-  border-bottom: 1px solid var(--hh-border-color-strong);
+  border-bottom: 1px solid var(--bs-border-color);
   border-radius: 4px;
 }
 .task-list .pagination-container li {
@@ -405,11 +405,11 @@
   display: inline-block;
 }
 
-.task-moving-handler.fa, .task-moving-handler .fa,
-.task-list-toggle.fa,
-.task-list-toggle .fa,
-.task-list-edit.fa,
-.task-list-edit .fa {
+.task-moving-handler.ti, .task-moving-handler .ti,
+.task-list-toggle.ti,
+.task-list-toggle .ti,
+.task-list-edit.ti,
+.task-list-edit .ti {
   padding: 2px;
   margin: -2px;
   border-radius: 4px;
@@ -420,7 +420,7 @@
 }
 
 .task-list-title-bar {
-  border-bottom: 1px solid var(--hh-border-color-strong);
+  border-bottom: 1px solid var(--bs-border-color);
   padding: 10px 0;
   margin: 0 10px;
 }
@@ -441,13 +441,13 @@
   margin-bottom: 8px;
   background: var(--bs-body-bg);
   border-radius: 4px;
-  border: 1px solid var(--hh-border-color-strong);
+  border: 1px solid var(--bs-border-color);
 }
 .task-list-li .closed-task-lists-container {
   background: var(--bs-tertiary-bg);
 }
 .task-list-li .task-toggled-color {
-  color: var(--bs-accent);
+  color: var(--hh-accent-fg);
 }
 .task-list-li.task-list-li-collapsed .task-toggled-color {
   color: var(--bs-emphasis-color);
@@ -458,7 +458,7 @@
 
 .ui-sortable-helper {
   background-color: var(--bs-body-bg);
-  border: 1px solid var(--hh-border-color-strong);
+  border: 1px solid var(--bs-border-color);
 }
 
 .task-checklist ul {
@@ -506,8 +506,8 @@
   padding: 10px 0;
   margin: 0 -10px;
 }
-.task-list-items .task-list-item .task-list-task-title-bar .fa.fa-arrows, .task-list-items .task-list-item .task-list-task-title-bar .fa.fa-ellipsis-v {
-  color: var(--bs-accent);
+.task-list-items .task-list-item .task-list-task-title-bar .ti.ti-arrows-move, .task-list-items .task-list-item .task-list-task-title-bar .ti.ti-dots-vertical {
+  color: var(--hh-accent-fg);
 }
 .task-list-items .task-list-item .task-list-task-title-bar .toggleTaskDetails {
   font-size: 13px;
@@ -604,7 +604,7 @@
   position: static;
 }
 
-.task-controls .fa {
+.task-controls .ti {
   font-size: 14px;
   margin-top: 4px;
 }

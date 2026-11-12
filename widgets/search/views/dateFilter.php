@@ -7,7 +7,7 @@
  */
 
 use humhub\helpers\Html;
-use humhub\modules\ui\form\widgets\DatePicker;
+use humhub\widgets\form\DatePicker;
 
 /* @var $this \humhub\components\View */
 ?>

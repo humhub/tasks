@@ -19,7 +19,7 @@ use humhub\helpers\Html;
         <div class="float-end task-controls end">
             <?= Link::to()
                 ->tooltip(Yii::t('TasksModule.base', 'Delete'))
-                ->icon('trash')
+                ->icon('trash-filled')
                 ->right()->sm()
                 ->action('deleteList', TaskListUrl::deleteTaskList($taskList))
                 ->loader(false)

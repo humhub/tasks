@@ -7,7 +7,7 @@
  */
 
 use humhub\modules\tasks\models\Task;
-use humhub\modules\ui\icon\widgets\Icon;
+use humhub\widgets\Icon;
 
 /** @var $task Task **/
 /** @var $this \humhub\components\View **/
@@ -22,9 +22,9 @@ use humhub\modules\ui\icon\widgets\Icon;
 <?php elseif ($task->status == Task::STATUS_PENDING_REVIEW && in_array(TASK::STATUS_PENDING_REVIEW, $include)) : ?>
     <?= Icon::get('eye')->class('text-primary')->tooltip(Yii::t('TasksModule.base', 'Pending Review')) ?>
 <?php elseif ($task->status == Task::STATUS_COMPLETED && in_array(TASK::STATUS_COMPLETED, $include)) : ?>
-    <?= Icon::get('check-square')->class('text-success')->tooltip(Yii::t('TasksModule.base', 'Completed')) ?>
+    <?= Icon::get('square-check-filled')->class('text-success')->tooltip(Yii::t('TasksModule.base', 'Completed')) ?>
 <?php endif; ?>
 
 <?php if ($includeOverdue && $task->isOverdue()) : ?>
-    <?= Icon::get('exclamation-triangle')->class('text-danger')->tooltip(Yii::t('TasksModule.base', 'Overdue')) ?>
+    <?= Icon::get('alert-triangle')->class('text-danger')->tooltip(Yii::t('TasksModule.base', 'Overdue')) ?>
 <?php endif; ?>
