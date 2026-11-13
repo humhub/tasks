@@ -6,7 +6,7 @@
  *
  */
 
-use humhub\modules\ui\icon\widgets\Icon;
+use humhub\widgets\Icon;
 
 /* @var $name String */
 ?>

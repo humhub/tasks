@@ -11,7 +11,7 @@ namespace humhub\modules\tasks\widgets;
 use humhub\modules\content\widgets\WallEntryControls;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\Task;
-use humhub\modules\ui\menu\MenuLink;
+use humhub\widgets\menu\MenuLink;
 use Yii;
 
 /**
@@ -83,7 +83,7 @@ class TaskContextMenu extends WallEntryControls
             $this->addEntry(new MenuLink([
                 'label' => Yii::t('TasksModule.base', 'Delete'),
                 'url' => '#',
-                'icon' => 'trash',
+                'icon' => 'trash-filled',
                 'sortOrder' => 300,
                 'htmlOptions' => [
                     'data-action-click' => 'task.deleteTaskFromContext',

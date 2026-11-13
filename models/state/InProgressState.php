@@ -28,7 +28,7 @@ class InProgressState extends TaskState
             ],
             Task::STATUS_COMPLETED => [
                 'label' =>  Yii::t('TasksModule.base', 'Finish Task'),
-                'icon' => 'check-square-o',
+                'icon' => 'square-check',
             ],
         ];
     }
@@ -36,7 +36,7 @@ class InProgressState extends TaskState
     protected function revertConfig($user = null)
     {
         return [
-            Task::STATUS_PENDING => ['label' => Yii::t('TasksModule.base', 'Reset Task'), 'icon' => 'undo'],
+            Task::STATUS_PENDING => ['label' => Yii::t('TasksModule.base', 'Reset Task'), 'icon' => 'arrow-back-up'],
         ];
     }
 

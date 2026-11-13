@@ -18,7 +18,7 @@ class PendingState extends TaskState
         return [
             Task::STATUS_IN_PROGRESS => [
                 'label' => Yii::t('TasksModule.base', 'Begin Task'),
-                'icon' => 'play',
+                'icon' => 'player-play-filled',
             ],
             Task::STATUS_PENDING_REVIEW => [
                 'label' => Yii::t('TasksModule.base', 'Ready For Review'),
@@ -26,7 +26,7 @@ class PendingState extends TaskState
             ],
             Task::STATUS_COMPLETED => [
                 'label' =>  Yii::t('TasksModule.base', 'Finish Task'),
-                'icon' => 'check-square-o',
+                'icon' => 'square-check',
             ],
         ];
     }

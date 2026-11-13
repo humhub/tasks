@@ -25,7 +25,7 @@ use humhub\modules\tasks\models\scheduling\TaskReminder;
 use humhub\modules\tasks\models\Task;
 use humhub\modules\tasks\Module;
 use humhub\modules\topic\models\Topic;
-use humhub\modules\ui\form\interfaces\TabbedFormModel;
+use humhub\interfaces\TabbedFormModel;
 use Yii;
 use yii\base\Model;
 use yii\web\HttpException;

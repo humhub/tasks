@@ -13,7 +13,7 @@ use humhub\modules\tasks\widgets\TaskUserList;
 
 /* @var $task Task */
 
-$color = $task->getColor('var(--bs-accent)');
+$color = $task->getColor('var(--hh-accent-fg)');
 ?>
 <div class="task-infos">
     <?= TaskInfoBox::widget([
@@ -27,7 +27,7 @@ $color = $task->getColor('var(--bs-accent)');
         <?= TaskInfoBox::widget([
             'title' => Yii::t('TasksModule.base', 'Responsible'),
             'value' => TaskUserList::widget(['users' => $task->taskResponsibleUsers, 'type' => Task::USER_RESPONSIBLE]),
-            'icon' => 'user',
+            'icon' => 'user-filled',
             'cssClass' => 'task-info-responsible',
         ]) ?>
     <?php endif ?>
@@ -49,7 +49,7 @@ $color = $task->getColor('var(--bs-accent)');
             . Html::tag('span', $task->schedule->getFormattedDateTime(), [
                 'class' => $task->schedule->isOverdue() ? 'text-danger' : '',
             ]),
-        'icon' => 'clock-o',
+        'icon' => 'clock',
         'cssClass' => 'task-info-scheduling',
     ]) : '' ?>
 </div>

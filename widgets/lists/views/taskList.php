@@ -10,7 +10,7 @@ use humhub\helpers\Html;
 use humhub\modules\tasks\helpers\TaskListUrl;
 use humhub\modules\tasks\models\lists\TaskList;
 use humhub\modules\tasks\widgets\lists\TaskListItem;
-use humhub\modules\ui\icon\widgets\Icon;
+use humhub\widgets\Icon;
 use humhub\widgets\bootstrap\Button;
 use humhub\widgets\bootstrap\Link;
 
@@ -39,7 +39,7 @@ use humhub\widgets\bootstrap\Link;
         <div>
 
         <?php if ($canSort) : ?>
-            <?= Icon::get('arrows', ['htmlOptions' => [
+            <?= Icon::get('arrows-move', ['htmlOptions' => [
                 'class' => 'task-moving-handler',
                 'role' => 'button',
                 'tabindex' => '0',
@@ -47,7 +47,7 @@ use humhub\widgets\bootstrap\Link;
                 'aria-label' => Yii::t('TasksModule.base', 'Reorder task list. Use the up and down arrow keys while focused to move.'),
             ]]) ?>
         <?php else: ?>
-            <?= Icon::get('tasks') ?>
+            <?= Icon::get('list-check') ?>
         <?php endif ?>
 
         <span class="task-list-title-text">
@@ -61,7 +61,7 @@ use humhub\widgets\bootstrap\Link;
                 ->cssClass('task-list-edit task-toggled-color')
                 ->tooltip(Yii::t('TasksModule.base', 'Edit list'))
                 ->visible($canManage) ?>
-            <?= Link::to()->icon('trash')->sm()
+            <?= Link::to()->icon('trash-filled')->sm()
                 ->action('deleteList', TaskListUrl::deleteTaskList($list))->loader(false)
                 ->cssClass('task-list-edit task-toggled-color')
                 ->tooltip(Yii::t('TasksModule.base', 'Delete list'))
@@ -80,7 +80,7 @@ use humhub\widgets\bootstrap\Link;
                 ->visible($canCreate)
                 ->tooltip(Yii::t('TasksModule.base', 'Add task')) ?>
 
-            <?= Icon::get('caret-up', ['htmlOptions' => [
+            <?= Icon::get('caret-up-filled', ['htmlOptions' => [
                 'class' => 'task-list-toggle toggleItems ms-4',
                 'role' => 'button',
                 'tabindex' => '0',

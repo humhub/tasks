@@ -8,7 +8,7 @@
 
 use humhub\modules\content\widgets\stream\StreamEntryWidget;
 use humhub\modules\content\widgets\stream\WallStreamEntryOptions;
-use humhub\modules\stream\assets\StreamAsset;
+use humhub\modules\content\assets\StreamAsset;
 use humhub\modules\tasks\models\Task;
 
 /* @var $task Task */

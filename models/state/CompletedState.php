@@ -34,7 +34,7 @@ class CompletedState extends TaskState
             ],
             Task::STATUS_PENDING => [
                 'label' => Yii::t('TasksModule.base', 'Reset Task'),
-                'icon' => 'undo',
+                'icon' => 'arrow-back-up',
             ],
         ];
     }

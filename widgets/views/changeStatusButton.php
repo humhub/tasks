@@ -46,7 +46,7 @@ use humhub\widgets\bootstrap\Link;
                 <?php endif ?>
                 <li>
                     <?= Link::to(Yii::t('TasksModule.base', 'Request extension'))
-                        ->icon('calendar-o')
+                        ->icon('calendar')
                         ->link(TaskUrl::requestExtension($task)) ?>
                 </li>
             <?php endif ?>

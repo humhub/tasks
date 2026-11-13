@@ -11,7 +11,7 @@ namespace humhub\modules\tasks\widgets;
 use humhub\components\Widget;
 use humhub\helpers\Html;
 use humhub\modules\tasks\models\Task;
-use humhub\modules\ui\icon\widgets\Icon;
+use humhub\widgets\Icon;
 use Yii;
 
 class TaskStatus extends Widget

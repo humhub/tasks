@@ -6,10 +6,10 @@
  *
  */
 
-use humhub\modules\ui\form\widgets\MultiSelect;
-use humhub\modules\ui\form\widgets\TimePicker;
+use humhub\widgets\form\MultiSelect;
+use humhub\widgets\form\TimePicker;
 use humhub\widgets\TimeZoneDropdownAddition;
-use humhub\modules\ui\form\widgets\DatePicker;
+use humhub\widgets\form\DatePicker;
 use yii\helpers\ArrayHelper;
 
 /* @var $form \humhub\widgets\form\ActiveForm */

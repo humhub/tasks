@@ -14,7 +14,7 @@ use humhub\modules\tasks\widgets\lists\TaskListDetails;
 use humhub\modules\tasks\widgets\TaskBadge;
 use humhub\modules\tasks\widgets\TaskContextMenu;
 use humhub\modules\tasks\widgets\TaskUserList;
-use humhub\modules\ui\icon\widgets\Icon;
+use humhub\widgets\Icon;
 
 /* @var $this View */
 /* @var $task Task */
@@ -32,7 +32,7 @@ $checkUrl = $task->state->getCheckUrl();
         <div class="task-list-item-title flex-grow-1">
 
              <?php if ($canManage && !$task->isCompleted()) : ?>
-                <?= Icon::get('arrows', ['htmlOptions' => [
+                <?= Icon::get('arrows-move', ['htmlOptions' => [
                     'class' => 'task-moving-handler',
                     'role' => 'button',
                     'tabindex' => '0',
@@ -91,7 +91,7 @@ $checkUrl = $task->state->getCheckUrl();
             ?>
             <div class="task-controls toggleTaskDetails d-none d-sm-block" role="button" tabindex="0"
                  aria-label="<?= Html::encode($schedulingTitle . ' - ' . Yii::t('TasksModule.base', 'Show task details')) ?>">
-                <?= Icon::get('clock-o')->tooltip($schedulingTitle)->class($schedulingColor) ?>
+                <?= Icon::get('clock')->tooltip($schedulingTitle)->class($schedulingColor) ?>
             </div>
         <?php endif; ?>
 
@@ -100,7 +100,7 @@ $checkUrl = $task->state->getCheckUrl();
              role="button" tabindex="0"
              aria-label="<?= Html::encode(Yii::t('TasksModule.base', '{count,plural,=0{No comments} =1{# comment} other{# comments}} - Show task details', ['count' => $commentCount])) ?>"
              style="<?= (!$task->content->canEdit()) ? 'border-right:0;margin-right:0' : '' ?>">
-            <?= Icon::get('comment-o') ?> <?= $commentCount; ?>
+            <?= Icon::get('message-circle') ?> <?= $commentCount; ?>
         </div>
 
         <div class="task-controls end">

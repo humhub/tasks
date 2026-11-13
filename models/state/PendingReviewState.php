@@ -17,7 +17,7 @@ class PendingReviewState extends TaskState
         return [
             Task::STATUS_COMPLETED => [
                 'label' => Yii::t('TasksModule.base', 'Accept Task'),
-                'icon' => 'check-square-o',
+                'icon' => 'square-check',
             ],
         ];
     }
@@ -27,7 +27,7 @@ class PendingReviewState extends TaskState
         return [
             Task::STATUS_IN_PROGRESS => [
                 'label' => Yii::t('TasksModule.base', 'Reject Task'),
-                'icon' => 'times-circle-o',
+                'icon' => 'circle-x',
             ],
         ];
     }

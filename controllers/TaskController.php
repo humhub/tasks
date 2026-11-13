@@ -2,7 +2,7 @@
 
 namespace humhub\modules\tasks\controllers;
 
-use humhub\modules\stream\actions\StreamEntryResponse;
+use humhub\modules\content\actions\StreamEntryResponse;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\widgets\TaskDetails;
 use humhub\modules\user\models\User;

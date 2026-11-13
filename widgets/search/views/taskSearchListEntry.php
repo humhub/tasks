@@ -16,7 +16,7 @@ use humhub\modules\tasks\widgets\TaskContextMenu;
 use humhub\modules\tasks\widgets\TaskPercentageBar;
 use humhub\modules\tasks\widgets\TaskStatus;
 use humhub\modules\tasks\widgets\TaskUserList;
-use humhub\modules\ui\icon\widgets\Icon;
+use humhub\widgets\Icon;
 use humhub\modules\user\models\User;
 use humhub\modules\user\widgets\Image as UserImage;
 use humhub\widgets\bootstrap\Link;
@@ -53,27 +53,27 @@ $taskContainer = $contentContainer === null ? $task->content->container : null;
             <div class="task-item-info flex-nowrap">
                 <?php if ($task->task_list_id) : ?>
                     <div data-bs-title="<?= Html::encode(Yii::t('TasksModule.base', 'List: {list}', ['list' => $task->list->title])) ?>" data-bs-toggle="tooltip">
-                        <?= Icon::get('list-ul') . ' ' . Html::encode($task->list->title) ?>
+                        <?= Icon::get('list') . ' ' . Html::encode($task->list->title) ?>
                     </div>
                 <?php endif; ?>
 
                 <?php if ($taskContainer instanceof Space) : ?>
                     <div>
                         <?= Link::to($taskContainer->displayName, $taskContainer->getUrl())
-                            ->icon('dot-circle-o')
+                            ->icon('circle-dot')
                             ->tooltip(Yii::t('TasksModule.base', 'Space : {space}', ['space' => $taskContainer->displayName])) ?>
                     </div>
                 <?php elseif ($taskContainer instanceof User) : ?>
                     <div>
                         <?= Link::to($taskContainer->displayName, $taskContainer->getUrl())
-                            ->icon('user')
+                            ->icon('user-filled')
                             ->tooltip(Yii::t('TasksModule.base', 'User : {user}', ['user' => $taskContainer->displayName])) ?>
                     </div>
                 <?php endif; ?>
 
                 <?php if ($task->scheduling) : ?>
                     <div data-bs-title="<?= Html::encode($task->schedule->getFormattedDateTime()) ?>" data-bs-toggle="tooltip">
-                        <?= Icon::get('clock-o') . ' '
+                        <?= Icon::get('clock') . ' '
                             . ($task->all_day
                                 ? Yii::$app->formatter->asDate($task->schedule->getEndDateTime(), 'short')
                                 : Yii::$app->formatter->asDatetime($task->schedule->getEndDateTime(), 'short'));

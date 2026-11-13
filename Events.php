@@ -28,7 +28,7 @@ use humhub\modules\tasks\models\scheduling\TaskReminder;
 use humhub\modules\tasks\models\user\TaskUser;
 use humhub\modules\tasks\integration\calendar\TaskCalendar;
 use humhub\modules\tasks\widgets\MyTasks;
-use humhub\modules\ui\menu\MenuLink;
+use humhub\widgets\menu\MenuLink;
 use humhub\modules\user\models\User;
 use humhub\modules\user\widgets\ProfileMenu;
 use humhub\widgets\TopMenu;
@@ -60,7 +60,7 @@ class Events
             $menu->addEntry(new MenuLink([
                 'label' => Yii::t('TasksModule.base', 'Tasks'),
                 'id' => 'tasks-global',
-                'icon' => 'tasks',
+                'icon' => 'list-check',
                 'url' => TaskUrl::globalView(),
                 'sortOrder' => $module->settings->get('menuSortOrder', 500),
                 'isActive' => ControllerHelper::isActivePath('tasks', 'global'),
@@ -158,7 +158,7 @@ class Events
                 $menu->addEntry(new MenuLink([
                     'label' => Yii::t('TasksModule.base', 'Tasks'),
                     'url' => TaskListUrl::taskListRoot($menu->space),
-                    'icon' => 'tasks',
+                    'icon' => 'list-check',
                     'isActive' => ControllerHelper::isActivePath('tasks'),
                 ]));
             }
@@ -177,7 +177,7 @@ class Events
                 $menu->addEntry(new MenuLink([
                     'label' => Yii::t('TasksModule.base', 'Tasks'),
                     'url' => TaskListUrl::taskListRoot($menu->user),
-                    'icon' => 'tasks',
+                    'icon' => 'list-check',
                     'isActive' => ControllerHelper::isActivePath('tasks'),
                 ]));
             }

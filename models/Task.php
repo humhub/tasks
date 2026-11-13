@@ -257,7 +257,7 @@ class Task extends ContentActiveRecord
      */
     public function getIcon()
     {
-        return 'tasks';
+        return 'list-check';
     }
 
     /**
@@ -916,7 +916,7 @@ class Task extends ContentActiveRecord
     public function getBadge()
     {
         if ($this->schedule->isOverdue()) {
-            return Badge::danger(Yii::t('TasksModule.base', 'Overdue'))->icon('exclamation-triangle')->cssClass(['class' => 'me-1'])->right();
+            return Badge::danger(Yii::t('TasksModule.base', 'Overdue'))->icon('alert-triangle')->cssClass(['class' => 'me-1'])->right();
         }
 
         return null;
@@ -1083,17 +1083,17 @@ class Task extends ContentActiveRecord
                 $labels[] = Badge::accent(Yii::t('TasksModule.base', 'In Progress'))->icon('edit')->sortOrder(350);
                 break;
             case self::STATUS_PENDING_REVIEW:
-                $labels[] = Badge::warning(Yii::t('TasksModule.base', 'Pending Review'))->icon('exclamation-triangle')->sortOrder(350);
+                $labels[] = Badge::warning(Yii::t('TasksModule.base', 'Pending Review'))->icon('alert-triangle')->sortOrder(350);
                 break;
             case self::STATUS_COMPLETED:
-                $labels[] = Badge::success(Yii::t('TasksModule.base', 'Completed'))->icon('check-square')->sortOrder(350);
+                $labels[] = Badge::success(Yii::t('TasksModule.base', 'Completed'))->icon('square-check-filled')->sortOrder(350);
                 break;
             default:
                 break;
         }
 
         if ($this->schedule->isOverdue()) {
-            $labels[] = Badge::danger(Yii::t('TasksModule.base', 'Overdue'))->icon('exclamation-triangle')->sortOrder(360);
+            $labels[] = Badge::danger(Yii::t('TasksModule.base', 'Overdue'))->icon('alert-triangle')->sortOrder(360);
         }
 
         return parent::getLabels($labels, $includeContentName);
