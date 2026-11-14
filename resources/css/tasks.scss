@@ -60,13 +60,13 @@ $tasks-info-color: var(--hh-accent-fg);
 
     .panel-heading {
         .updated {
-            color: var(--bs-tertiary-color);
+            color: var(--bs-secondary-color);
             font-size: 11px;
             font-weight: bold;
         }
 
         .author a {
-            color: var(--bs-tertiary-color);
+            color: var(--bs-secondary-color);
             font-size: 11px;
         }
     }
@@ -156,7 +156,7 @@ $tasks-info-color: var(--hh-accent-fg);
 
         .summary, .empty {
             font-size: 12px;
-            color: var(--bs-tertiary-color);
+            color: var(--bs-secondary-color);
             padding-left: 10px;
         }
 
@@ -279,7 +279,7 @@ $tasks-info-color: var(--hh-accent-fg);
 
     h2 {
         font-size: 17px;
-        color: var(--bs-tertiary-color);
+        color: var(--bs-secondary-color);
         font-weight: 300;
         margin-top: 0;
     }
@@ -405,7 +405,7 @@ $tasks-info-color: var(--hh-accent-fg);
             border-top: 0 !important;
             border-left: 0 !important;
             border-bottom: 0 !important;
-            border-right: 1px solid var(--bs-tertiary-color);
+            border-right: 1px solid var(--bs-border-color);
             border-radius: 0;
             padding: 3px 8px;
         }
@@ -451,7 +451,7 @@ $tasks-info-color: var(--hh-accent-fg);
     }
 
     .ti-menu-2 {
-        color: var(--bs-tertiary-color);
+        color: var(--bs-secondary-color);
     }
 
     .task-list-title-bar.collapsable {
@@ -620,8 +620,8 @@ $tasks-info-color: var(--hh-accent-fg);
         font-style: italic;
 
         input[type=checkbox]:checked {
-            border-color: var(--bs-tertiary-color);
-            background: var(--bs-tertiary-color);
+            border-color: var(--hh-input-border-color);
+            background: var(--hh-input-border-color);
         }
     }
 }
@@ -788,7 +788,7 @@ $tasks-info-color: var(--hh-accent-fg);
 }
 
 .task-controls a {
-    color: var(--bs-tertiary-color);
+    color: var(--bs-secondary-color);
 }
 
 .task-controls a:hover {

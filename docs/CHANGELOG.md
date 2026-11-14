@@ -3,6 +3,7 @@ Changelog
 
 1.11.0 (Unreleased)
 -------------------
+- Fix: Meta texts, icons and summaries take the muted text colour instead of the disabled grey, a finished item's checkbox reaches 3:1 (humhub/humhub#8752)
 - Fix: The dropdown toggle of the change-status button has an accessible name (humhub/humhub#8721)
 - Enh: The keyboard focus ring of the core instead of own rings on the list and task controls (humhub/humhub#8719)
 - Enh: Dark mode: hard-coded greys and light backgrounds became colour tokens of the core (humhub/humhub#8710)
