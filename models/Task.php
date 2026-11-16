@@ -9,7 +9,7 @@
 
 namespace humhub\modules\tasks\models;
 
-use Colors\RandomColor;
+use humhub\helpers\ScssHelper;
 use humhub\modules\content\components\ActiveQueryContent;
 use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\content\components\ContentContainerActiveRecord;
@@ -1144,7 +1144,7 @@ class Task extends ContentActiveRecord
         }
 
         $taskList = new TaskList($this->content->container);
-        $taskList->color = RandomColor::one(['luminosity' => 'dark']);
+        $taskList->color = ScssHelper::getRandomColor();
         $taskList->name = $this->task_list_id;
         if (!$taskList->save()) {
             return false;
