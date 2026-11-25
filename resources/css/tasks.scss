@@ -9,28 +9,28 @@ $tasks-text-color: var(--bs-body-color);
 $tasks-info-color: var(--hh-accent-fg);
 
 #task-assignment-info {
-    margin: 5px 0 0;
+    margin: .25rem 0 0;
 }
 
 
 #task-container {
 
     .task-head {
-        padding-left: 5px;
+        padding-left: .25rem;
     }
 
-    .panel-heading {
+    .card-header {
         background-color: var(--bs-tertiary-bg);
 
         .task-header-panel {
-            padding-right: 10px;
+            padding-right: .5rem;
             float: left;
 
             border-right: 2px solid var(--bs-secondary-bg);
-            padding-left: 10px;
+            padding-left: .5rem;
 
             strong {
-                font-size: 13px;
+                font-size: var(--hh-font-size-meta);
             }
         }
 
@@ -47,27 +47,26 @@ $tasks-info-color: var(--hh-accent-fg);
         }
 
         .task-change-state-button {
-            margin-top: 20px;
+            margin-top: 1rem;
         }
 
         .assigned-anyone {
-            font-size: 14px;
             font-style: italic;
             margin: 2px;
             color: var(--bs-secondary-color);
         }
     }
 
-    .panel-heading {
+    .card-header {
         .updated {
             color: var(--bs-secondary-color);
-            font-size: 11px;
-            font-weight: bold;
+            font-size: var(--hh-font-size-meta);
+            font-weight: 600;
         }
 
         .author a {
             color: var(--bs-secondary-color);
-            font-size: 11px;
+            font-size: var(--hh-font-size-meta);
         }
     }
 }
@@ -75,19 +74,19 @@ $tasks-info-color: var(--hh-accent-fg);
 .task-overview {
 
     #filter-tasks-list {
-        margin-top: 15px;
+        margin-top: 1rem;
 
         .empty {
-            margin: 15px 0;
+            margin: 1rem 0;
         }
 
         .hh-list {
             margin-bottom: 0;
 
             > div {
-                margin-bottom: 6px;
+                margin-bottom: .25rem;
                 .d-flex > div {
-                    margin-right: 8px;
+                    margin-right: .5rem;
                     &:last-child {
                         margin-right: 0;
                     }
@@ -96,10 +95,9 @@ $tasks-info-color: var(--hh-accent-fg);
             .task-item-info {
                 display: flex;
                 flex-wrap: wrap !important;
-                font-size: 95%;
                 > div {
                     text-wrap: nowrap;
-                    margin-right: 10px;
+                    margin-right: .5rem;
                 }
                 .text-accent {
                     color: var(--hh-accent-fg);
@@ -107,17 +105,17 @@ $tasks-info-color: var(--hh-accent-fg);
             }
             .task-users, .task-progress {
                 border-right: 1px solid var(--bs-secondary-bg);
-                padding-right: 8px;
-                margin: 4px 8px 4px 0;
+                padding-right: .5rem;
+                margin: .25rem .5rem .25rem 0;
             }
             .task-progress {
                 width: 50px;
-                padding-top: 9px;
+                padding-top: .5rem;
             }
             .nav-pills.preferences {
                 position: relative;
                 right: 0;
-                top: 8px;
+                top: .5rem;
             }
 
             > div:not(.pagination-container):last-of-type {
@@ -127,10 +125,10 @@ $tasks-info-color: var(--hh-accent-fg);
             > div:not(.pagination-container), .empty {
                 background: var(--bs-body-bg);
                 box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
-                border-radius: 4px;
-                padding: 8px;
+                border-radius: var(--bs-border-radius-sm);
+                padding: .5rem;
                 color: $tasks-text-color;
-                font-size: 13px;
+                font-size: var(--hh-font-size-meta);
             }
 
             .nav-pills .dropdown-menu li a {
@@ -141,7 +139,7 @@ $tasks-info-color: var(--hh-accent-fg);
 
     .filter-list > li {
         cursor: pointer;
-        margin-bottom: 4px;
+        margin-bottom: .25rem;
         &:last-child {
             border-bottom: 0;
         }
@@ -155,9 +153,9 @@ $tasks-info-color: var(--hh-accent-fg);
         }
 
         .summary, .empty {
-            font-size: 12px;
+            font-size: var(--hh-font-size-meta);
             color: var(--bs-secondary-color);
-            padding-left: 10px;
+            padding-left: .5rem;
         }
 
         .pagination {
@@ -182,16 +180,16 @@ $tasks-info-color: var(--hh-accent-fg);
 
     label {
         display: block;
-        font-size: 13px;
-        font-weight: bold;
+        font-size: var(--hh-font-size-meta);
+        font-weight: 600;
         color: $tasks-text-color;
     }
 
     #task-filter-nav {
         background: var(--bs-body-bg);
-        border-radius: 4px;
+        border-radius: var(--bs-border-radius-sm);
         box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
-        padding: 20px;
+        padding: 1rem;
 
         .filter-list a {
             white-space: nowrap;
@@ -201,7 +199,7 @@ $tasks-info-color: var(--hh-accent-fg);
             margin: 0;
 
             .filterInput {
-                font-size: 13px;
+                font-size: var(--hh-font-size-meta);
             }
 
             ul.filter-list > li {
@@ -218,7 +216,7 @@ $tasks-info-color: var(--hh-accent-fg);
             border: none;
             ul.filter-list > li {
                 input[type=text], .picker-host {
-                    margin: 5px 5px 10px 0;
+                    margin: .25rem .25rem .5rem 0;
                 }
             }
         }
@@ -233,14 +231,14 @@ $tasks-info-color: var(--hh-accent-fg);
 
         .task-bottom-panel {
             .filterInput {
-                margin: 5px;
+                margin: .25rem;
 
                 &[data-filter-type=checkbox] .ti {
                     width: 18px;
                     height: 18px;
-                    margin: 0 4px -4px -5px;
+                    margin: 0 .25rem -.25rem -.25rem;
                     border: 2px solid var(--bs-border-color);
-                    border-radius: 4px;
+                    border-radius: var(--bs-border-radius-sm);
 
                     &:before {
                         content: "";
@@ -273,19 +271,19 @@ $tasks-info-color: var(--hh-accent-fg);
 
 .task-details {
     h1 {
-        font-size: 22px;
-        margin-bottom: 5px;
+        font-size: 1.375rem;
+        margin-bottom: .25rem;
     }
 
     h2 {
-        font-size: 17px;
+        font-size: var(--hh-font-size-title-lg);
         color: var(--bs-secondary-color);
-        font-weight: 300;
+        font-weight: 400;
         margin-top: 0;
     }
 
     h1.task-item-title {
-        font-size: 20px;
+        font-size: 1.25rem;
     }
 }
 
@@ -305,7 +303,7 @@ $tasks-info-color: var(--hh-accent-fg);
 .task-info {
     flex: 1;
     display: inline-block;
-    padding: 0 10px 10px 0;
+    padding: 0 .5rem .5rem 0;
     white-space: nowrap;
     &.task-info-id {
         flex: 0.5;
@@ -313,17 +311,17 @@ $tasks-info-color: var(--hh-accent-fg);
 
     > strong {
         display: block;
-        margin-bottom: 5px;
+        margin-bottom: .25rem;
     }
 
     .task-info-text {
-        font-size: 13px;
+        font-size: var(--hh-font-size-meta);
     }
 
     div {
         font-style: italic;
         padding-bottom: 2px;
-        font-size: 13px;
+        font-size: var(--hh-font-size-meta);
     }
 }
 
@@ -370,10 +368,10 @@ $tasks-info-color: var(--hh-accent-fg);
 }
 
 .task-list-header {
-    margin-bottom: 30px;
+    margin-bottom: 1.5rem;
 
     .panel-body {
-        padding: 20px;
+        padding: 1rem;
     }
 
     h4 {
@@ -385,18 +383,18 @@ $tasks-info-color: var(--hh-accent-fg);
     .form-text {
         &, &:hover {
             color: $tasks-text-color !important;
-            font-size: 13px;
+            font-size: var(--hh-font-size-meta);
         }
     }
 }
 
 .task-list-tabs {
-    margin-bottom: 12px;
+    margin-bottom: .5rem;
 }
 
 #task-space-menu {
     background: none;
-    padding: 0 0 8px 0;
+    padding: 0 0 .5rem 0;
     border-bottom: 1px solid var(--bs-border-color);
 
     li {
@@ -407,7 +405,7 @@ $tasks-info-color: var(--hh-accent-fg);
             border-bottom: 0 !important;
             border-right: 1px solid var(--bs-border-color);
             border-radius: 0;
-            padding: 3px 8px;
+            padding: .25rem .5rem;
         }
 
         &:first-child {
@@ -425,7 +423,7 @@ $tasks-info-color: var(--hh-accent-fg);
 }
 
 #toggle-lists {
-    padding: 1px 16px 0 0;
+    padding: 1px 1rem 0 0;
 
     &, &:hover, &:active {
         background: none;
@@ -433,21 +431,21 @@ $tasks-info-color: var(--hh-accent-fg);
         box-shadow: none;
         color: var(--bs-primary) !important;
         font-weight: 600;
-        font-size: 13px;
+        font-size: var(--hh-font-size-meta);
     }
 
     .ti {
-        font-size: 22px;
+        font-size: 1.375rem;
         vertical-align: middle;
-        margin: -3px 6px 0 0;
+        margin: -3px .25rem 0 0;
     }
 }
 
 .task-list {
     .toggleItems {
-        font-size: 22px;
+        font-size: 1.375rem;
         line-height: 16px;
-        margin-left: 22px;
+        margin-left: 1.5rem;
     }
 
     .ti-menu-2 {
@@ -459,13 +457,13 @@ $tasks-info-color: var(--hh-accent-fg);
     }
 
     .task-list-title-bar > i:first-of-type, .task-list-item-title > i:first-of-type {
-        margin-right: 10px;
+        margin-right: .5rem;
     }
 }
 
 .task-list .empty, .closed-task-list-view .empty {
-    padding: 15px 10px;
-    font-size: 13px;
+    padding: 1rem .5rem;
+    font-size: var(--hh-font-size-meta);
 }
 
 .closed-task-lists-container {
@@ -479,7 +477,7 @@ $tasks-info-color: var(--hh-accent-fg);
 .task-list .pagination-container {
     background-color: var(--bs-tertiary-bg);
     border-bottom: 1px solid var(--bs-border-color);
-    border-radius: 4px;
+    border-radius: var(--bs-border-radius-sm);
 
     li {
         border: 0 !important;
@@ -493,15 +491,15 @@ $tasks-info-color: var(--hh-accent-fg);
 // LIST VIEW
 .task-list-container {
     border-left: 3px solid;
-    border-radius: 4px;
-    padding: 0 10px 0 7px;
+    border-radius: var(--bs-border-radius-sm);
+    padding: 0 .5rem 0 calc(.5rem - 3px);
 
     .task-list-task-title-bar, .task-moving-handler:hover {
         cursor: pointer;
     }
 
     .task-list-title-bar > div {
-        margin: 0 -10px;
+        margin: 0 -.5rem;
 
         // The moving handle is the first focusable control in this row, so
         // it has to stay part of the layout (opacity, not display:none) to
@@ -517,11 +515,11 @@ $tasks-info-color: var(--hh-accent-fg);
             display: none;
         }
 
-        padding: 7px 10px;
+        padding: .5rem;
 
         &:hover, &:focus-within {
             background: var(--bs-secondary-bg);
-            border-radius: 4px;
+            border-radius: var(--bs-border-radius-sm);
 
             .task-moving-handler {
                 opacity: 1;
@@ -545,25 +543,24 @@ $tasks-info-color: var(--hh-accent-fg);
     &.ti, .ti {
         padding: 2px;
         margin: -2px;
-        border-radius: 4px;
+        border-radius: var(--bs-border-radius-sm);
     }
 }
 .toggleTaskDetails[role="button"] {
-    border-radius: 4px;
+    border-radius: var(--bs-border-radius-sm);
 }
 
 .task-list-title-bar {
     border-bottom: 1px solid var(--bs-border-color);
-    padding: 10px 0;
-    margin: 0 10px;
+    padding: .5rem 0;
+    margin: 0 .5rem;
 
     button {
-        margin-left: 5px;
+        margin-left: .25rem;
     }
 
     .task-list-title-text {
         font-weight: 600;
-        font-size: 14px;
     }
 }
 
@@ -573,9 +570,9 @@ $tasks-info-color: var(--hh-accent-fg);
 }
 
 .task-list-li {
-    margin-bottom: 8px;
+    margin-bottom: .5rem;
     background: var(--bs-body-bg);
-    border-radius: 4px;
+    border-radius: var(--bs-border-radius-sm);
     border: 1px solid var(--bs-border-color);
 
     .closed-task-lists-container {
@@ -604,7 +601,7 @@ $tasks-info-color: var(--hh-accent-fg);
 
 .task-checklist {
     ul {
-        margin-left: 10px;
+        margin-left: .5rem;
     }
 
     .task-item:hover {
@@ -612,7 +609,7 @@ $tasks-info-color: var(--hh-accent-fg);
     }
 
     .task-item-content {
-        margin-left: 8px;
+        margin-left: .5rem;
     }
 
     label.item-finished {
@@ -638,7 +635,7 @@ $tasks-info-color: var(--hh-accent-fg);
 
 .task-list-items {
     min-height: 20px;
-    margin: 0 10px;
+    margin: 0 .5rem;
 
     .task-list-item {
         .task-list-task-details {
@@ -649,13 +646,13 @@ $tasks-info-color: var(--hh-accent-fg);
             }
 
             .task-details-body {
-                margin: 10px 0;
+                margin: .5rem 0;
             }
         }
 
         .task-list-task-title-bar {
-            padding: 10px 0;
-            margin: 0 -10px;
+            padding: .5rem 0;
+            margin: 0 -.5rem;
 
             .ti {
                 &.ti-arrows-move, &.ti-dots-vertical {
@@ -664,11 +661,11 @@ $tasks-info-color: var(--hh-accent-fg);
             }
 
             .toggleTaskDetails {
-                font-size: 13px;
+                font-size: var(--hh-font-size-meta);
             }
 
             > div {
-                padding: 3px 10px;
+                padding: .25rem .5rem;
 
                 .task-moving-handler {
                     // Hidden until hover/focus, but kept in the layout (not display:none)
@@ -678,7 +675,7 @@ $tasks-info-color: var(--hh-accent-fg);
 
                 &:hover, &:focus-within {
                     background: var(--bs-secondary-bg);
-                    border-radius: 4px;
+                    border-radius: var(--bs-border-radius-sm);
 
                     .task-moving-handler {
                         opacity: 1;
@@ -688,22 +685,22 @@ $tasks-info-color: var(--hh-accent-fg);
         }
 
         .task-list-task-details {
-            padding: 15px 0;
+            padding: 1rem 0;
         }
 
         .task-list-item-title .label {
-            margin-left: 10px;
+            margin-left: .5rem;
         }
 
         .task-list-task-title-bar.highlighter {
             background-color: var(--bs-highlight-bg);
-            border-radius: 4px;
-            padding: 5px;
-            margin-top: 5px;
-            margin-bottom: 5px;
+            border-radius: var(--bs-border-radius-sm);
+            padding: .25rem;
+            margin-top: .25rem;
+            margin-bottom: .25rem;
 
             > div {
-                padding: 3px 5px;
+                padding: .25rem;
             }
         }
 
@@ -716,7 +713,7 @@ $tasks-info-color: var(--hh-accent-fg);
 
     .task-list-task-completed-show-more {
         text-align: center;
-        padding: 5px;
+        padding: .25rem;
         background-color: var(--bs-tertiary-bg);
     }
 
@@ -735,7 +732,7 @@ $tasks-info-color: var(--hh-accent-fg);
     height: 60px !important;
     line-height: 1.2em;
     background-color: var(--bs-highlight-bg);
-    margin: 10px 0;
+    margin: .5rem 0;
 }
 
 .task-state-highlight {
@@ -748,17 +745,17 @@ $tasks-info-color: var(--hh-accent-fg);
     display: inline-block;
     width: 1.2em;
     height: 1.2em;
-    border-radius: 4px;
+    border-radius: var(--bs-border-radius-sm);
     margin: -2px 2px 0 0;
     vertical-align: middle;
     box-shadow: 0.2px 0.2px 1px;
 }
 
 .task-controls {
-    font-size: 12px;
-    margin-right: 10px;
+    font-size: var(--hh-font-size-meta);
+    margin-right: .5rem;
     border-right: 1px solid var(--bs-secondary-bg);
-    padding-right: 10px;
+    padding-right: .5rem;
 
     .dropdown-toggle {
         width: 20px;
@@ -771,7 +768,7 @@ $tasks-info-color: var(--hh-accent-fg);
 }
 
 .task-controls.end {
-    font-size: 12px;
+    font-size: var(--hh-font-size-meta);
     margin-right: 0;
     border-right: none;
     padding-right: 0;
@@ -783,8 +780,8 @@ $tasks-info-color: var(--hh-accent-fg);
 
 
 .task-controls .ti {
-    font-size: 14px;
-    margin-top: 4px;
+    font-size: var(--bs-body-font-size);
+    margin-top: .25rem;
 }
 
 .task-controls a {
@@ -796,7 +793,7 @@ $tasks-info-color: var(--hh-accent-fg);
 }
 
 .task-empty-list-alert {
-    margin-bottom: 10px;
+    margin-bottom: .5rem;
 }
 
 #task-form .ProseMirror-menubar-wrapper {
@@ -808,6 +805,6 @@ $tasks-info-color: var(--hh-accent-fg);
 }
 
 .wall-entry-task h1 {
-    font-size: 14px;
-    font-weight: 500;
+    font-size: var(--bs-body-font-size);
+    font-weight: 600;
 }

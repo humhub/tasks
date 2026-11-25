@@ -6,23 +6,22 @@
  *
  */
 
-use humhub\widgets\PanelMenu;
 use humhub\helpers\Html;
 use humhub\libs\Helpers;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\widgets\Icon;
+use humhub\widgets\SidebarCard;
 
 /* @var $taskEntries \humhub\modules\tasks\models\Task[] */
 
 ?>
-<div class="panel task-upcoming-snippet" id="task-my-tasks-snippet">
-    <?= PanelMenu::widget(['id' => 'task-my-tasks-snippet']) ?>
-    <div class="panel-heading">
-        <?= Icon::get('list-check') ?> <?= Yii::t('TasksModule.base', '<strong>Your</strong> tasks'); ?>
-        <small><a style="font-size:0.9em;color:var(--bs-info)" href="<?=  TaskUrl::globalView() ?>">(<?= Yii::t('TasksModule.base', 'view all'); ?>)</a></small>
-    </div>
-
-    <div class="panel-body" style="padding:0px">
+<?php SidebarCard::begin([
+    'title' => Icon::get('list-check') . ' ' . Yii::t('TasksModule.base', '<strong>Your</strong> tasks') . ' '
+        . Html::tag('small', Html::a('(' . Yii::t('TasksModule.base', 'view all') . ')', TaskUrl::globalView(), ['style' => 'font-size:0.9em;color:var(--bs-info)'])),
+    'encodeTitle' => false,
+    'options' => ['id' => 'task-my-tasks-snippet', 'class' => 'task-upcoming-snippet'],
+    'bodyOptions' => ['class' => 'p-0'],
+]) ?>
         <div class="hh-list">
             <?php foreach ($taskEntries as $entry) : ?>
                 <a class="d-flex" href="<?= $entry->getUrl() ?>">
@@ -43,6 +42,4 @@ use humhub\widgets\Icon;
             <?php endforeach; ?>
 
         </div>
-    </div>
-
-</div>
+<?php SidebarCard::end() ?>

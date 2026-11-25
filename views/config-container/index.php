@@ -8,11 +8,11 @@ use humhub\widgets\form\ActiveForm;
 /* @var $model ConfigureContainerForm */
 ?>
 
-<div class="panel panel-default">
+<div class="card content-card">
 
-    <div class="panel-heading"><?= Yii::t('TasksModule.base', '<strong>Tasks</strong> module configuration') ?></div>
+    <div class="card-header"><div class="card-title"><?= Yii::t('TasksModule.base', '<strong>Tasks</strong> module configuration') ?></div></div>
 
-    <div class="panel-body">
+    <div class="card-body">
         <?php $form = ActiveForm::begin(['id' => 'configure-form']) ?>
 
         <?= $form->field($model, 'contentHiddenDefault')->widget(ContentHiddenCheckbox::class, [

@@ -3,6 +3,7 @@ Changelog
 
 1.11.0 (Unreleased)
 -------------------
+- Enh: Cards instead of Bootstrap 3 panels, "Your tasks" as `SidebarCard`, sizes in rem and the text styles of the core 1.20 (humhub/humhub#8777)
 - Enh: A new task list gets a colour white text is readable on, from the core instead of `mistic100/randomcolor` (humhub/humhub#8757)
 - Fix: Meta texts, icons and summaries take the muted text colour instead of the disabled grey, a finished item's checkbox reaches 3:1 (humhub/humhub#8752)
 - Fix: The dropdown toggle of the change-status button has an accessible name (humhub/humhub#8721)

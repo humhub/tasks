@@ -34,7 +34,7 @@ class TaskDetails extends Widget
     {
         return [
             'id' => 'task-container',
-            'class' => 'panel panel-default task-details',
+            'class' => 'card content-card task-details',
             'data-reload-url' => TaskUrl::reloadTask($this->task),
             'data-ui-widget' => 'task.list.Task',
             'data-ui-init' => true,

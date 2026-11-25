@@ -17,7 +17,7 @@ use humhub\modules\tasks\widgets\lists\TaskListDetails;
 <?= Html::beginTag('div', $options) ?>
     <?= $this->render('@tasks/views/task/task_header', ['task' => $task]) ?>
 
-    <div class="panel-body task-list-items">
+    <div class="card-body task-list-items">
         <div class="cleafix task-list-item">
             <?= TaskListDetails::widget(['task' => $task]) ?>
         </div>

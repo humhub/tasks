@@ -12,9 +12,9 @@ use humhub\widgets\Icon;
 Assets::register($this);
 ?>
 <div class="container">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <?= Icon::get('list-check') ?> <?= Yii::t('TasksModule.base', '<strong>Task</strong> Overview'); ?>
+    <div class="card content-card">
+        <div class="card-header">
+            <div class="card-title"><?= Icon::get('list-check') ?> <?= Yii::t('TasksModule.base', '<strong>Task</strong> Overview'); ?></div>
         </div>
     </div>
 
