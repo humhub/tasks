@@ -10,15 +10,16 @@ use humhub\helpers\Html;
 use humhub\libs\Helpers;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\widgets\Icon;
+use humhub\widgets\menu\MenuLink;
 use humhub\widgets\SidebarCard;
 
 /* @var $taskEntries \humhub\modules\tasks\models\Task[] */
 
 ?>
 <?php SidebarCard::begin([
-    'title' => Icon::get('list-check') . ' ' . Yii::t('TasksModule.base', '<strong>Your</strong> tasks') . ' '
-        . Html::tag('small', Html::a('(' . Yii::t('TasksModule.base', 'view all') . ')', TaskUrl::globalView(), ['style' => 'font-size:0.9em;color:var(--bs-info)'])),
+    'title' => Icon::get('list-check') . ' ' . Yii::t('TasksModule.base', '<strong>Your</strong> tasks'),
     'encodeTitle' => false,
+    'menu' => [new MenuLink(['label' => Yii::t('TasksModule.base', 'Overview'), 'url' => TaskUrl::globalView(), 'icon' => 'list-check'])],
     'options' => ['id' => 'task-my-tasks-snippet', 'class' => 'task-upcoming-snippet'],
     'bodyOptions' => ['class' => 'p-0'],
 ]) ?>
