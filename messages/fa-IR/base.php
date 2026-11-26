@@ -49,7 +49,6 @@ return [
     'Title' => 'عنوان',
     'Unsorted' => 'نامرتب',
     'You have insufficient permissions to perform that operation!' => 'شما  مجاز به انجام عملیات نیستید!',
-    'view all' => 'نمایش همه',
     '1 Day before' => '',
     '1 Month before' => '',
     '1 Week before' => '',

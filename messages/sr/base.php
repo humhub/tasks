@@ -108,7 +108,6 @@ return [
     'Today' => 'Danas',
     'Unsorted' => 'Nesortirano',
     'You have insufficient permissions to perform that operation!' => 'Nemate ovlaštenje za sprovođenje ove operacije!',
-    'view all' => 'vidi sve',
     '{displayName} is assigned to this task' => '{displayName} je dodat u ovaj zadatak',
     '{displayName} is responsible for this task' => '{displayName} je odgovoran/a za ovaj zadatak',
     '{userName} assigned you as responsible person in task {task} from space {spaceName}.' => 'Korisnik {userName} dodijelio vas je kao odgovornu osobu u zadatku {task} iz prostora {spaceName}.',

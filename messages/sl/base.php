@@ -165,7 +165,6 @@ return [
     'Unsorted' => '',
     'User : {user}' => '',
     'You have insufficient permissions to perform that operation!' => '',
-    'view all' => '',
     '{count,plural,=0{No comments} =1{# comment} other{# comments}} - Show task details' => '',
     '{count,plural,=1{# day} other{# days}} remaining' => '',
     '{displayName} completed task "{contentTitle}".' => '',

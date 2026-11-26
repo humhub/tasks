@@ -125,7 +125,6 @@ return [
     'Today' => 'วันนี้',
     'Unsorted' => 'ไม่เรียงลำดับเรียงลำดับ',
     'You have insufficient permissions to perform that operation!' => 'คุณมีสิทธิ์ไม่เพียงพอที่จะดำเนินการดังกล่าว',
-    'view all' => 'ดูทั้งหมด',
     '{count,plural,=1{# day} other{# days}} remaining' => '{count,plural,=1{# day} other{# days}} เหลือ',
     '{displayName} is assigned to this task' => '{displayName} ถูกกำหนดให้กับงานนี้',
     '{displayName} is responsible for this task' => '{displayName} รับผิดชอบงานนี้',

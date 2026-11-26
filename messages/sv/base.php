@@ -150,7 +150,6 @@ return [
     'Today' => 'I dag',
     'Unsorted' => 'Osorterade',
     'You have insufficient permissions to perform that operation!' => 'Du har inte tillräckliga rättigheter för att uföra den åtgärden!',
-    'view all' => 'se alla',
     '{count,plural,=1{# day} other{# days}} remaining' => '{count,plural,=1{# day} other{# days}} remaining',
     '{displayName} is assigned to this task' => '{displayName} är tilldelad uppgiften',
     '{displayName} is responsible for this task' => '{displayName} är ansvarig för uppgiften',

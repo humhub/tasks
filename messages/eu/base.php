@@ -165,7 +165,6 @@ return [
     'Toggle task list' => '',
     'Unsorted' => '',
     'User : {user}' => '',
-    'view all' => '',
     '{count,plural,=0{No comments} =1{# comment} other{# comments}} - Show task details' => '',
     '{count,plural,=1{# day} other{# days}} remaining' => '',
     '{displayName} completed task "{contentTitle}".' => '',

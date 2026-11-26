@@ -150,7 +150,6 @@ return [
     'Today' => 'Ma',
     'Unsorted' => 'Nincs rendezve',
     'You have insufficient permissions to perform that operation!' => 'Nem rendelkezel elegendő jogosultsággal a művelet elvégzéséhez!',
-    'view all' => 'mindent mutat',
     '{count,plural,=1{# day} other{# days}} remaining' => '{count} nap maradt',
     '{displayName} is assigned to this task' => '{displayName} ki lett jelölve erre a feladatra',
     '{displayName} is responsible for this task' => '{displayName} a felelős ezért a feladatért',

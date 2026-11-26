@@ -122,7 +122,6 @@ return [
     'Today' => 'Днес',
     'Unsorted' => 'Несортиран',
     'You have insufficient permissions to perform that operation!' => 'Нямате достатъчно разрешения за извършване на тази операция!',
-    'view all' => 'виж всички',
     '{count,plural,=1{# day} other{# days}} remaining' => '{count,plural,=1{# ден остава} other{# дни остават}}',
     '{displayName} is assigned to this task' => 'Тази задача е възложена на {displayName}',
     '{displayName} is responsible for this task' => 'Отговорника по задачата е {displayName}',

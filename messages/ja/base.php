@@ -150,7 +150,6 @@ return [
     'Today' => '今日',
     'Unsorted' => '未分類',
     'You have insufficient permissions to perform that operation!' => 'あなたはその操作を実行するための十分な権限を持っている！',
-    'view all' => '全て見る',
     '{count,plural,=1{# day} other{# days}} remaining' => '{count,plural,=1{# day} other{# days}}日残っています',
     '{displayName} is assigned to this task' => '{displayName} がこのタスクに割り当てられています',
     '{displayName} is responsible for this task' => '{displayName} がこのタスクを担当しています',

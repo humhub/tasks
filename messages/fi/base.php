@@ -121,7 +121,6 @@ return [
     'Today' => 'Tänään',
     'Unsorted' => 'Lajittelemattomat',
     'You have insufficient permissions to perform that operation!' => 'Sinulla ei ole riittävästi oikeuksia suorittaa tätä toimintoa!',
-    'view all' => 'näytä kaikki',
     '{count,plural,=1{# day} other{# days}} remaining' => '{count,plural,=1{# päivä} other{# päivää}} jäljellä',
     '{displayName} is assigned to this task' => '{displayName} on määrätty tähän tehtävään',
     '{displayName} is responsible for this task' => '{displayName} vastuussa tästä tehtävästä',

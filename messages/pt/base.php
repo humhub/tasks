@@ -140,7 +140,6 @@ return [
     'Today' => 'Hoje',
     'Unsorted' => 'Desordenada',
     'You have insufficient permissions to perform that operation!' => 'Não tens permissões suficientes para executar essa operação!',
-    'view all' => 'ver tudo',
     '{count,plural,=1{# day} other{# days}} remaining' => '{count,plural,=1{Falta # dia} other{Faltam # dias}}',
     '{displayName} is assigned to this task' => '{displayName} está designado para esta tarefa',
     '{displayName} is responsible for this task' => '{displayName} é responsável por esta tarefa',

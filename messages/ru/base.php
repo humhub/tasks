@@ -144,7 +144,6 @@ return [
     'Today' => 'Сегодня',
     'Unsorted' => 'Не отсортированный',
     'You have insufficient permissions to perform that operation!' => 'Вы должны иметь доступ на выполнение этой операции!',
-    'view all' => 'просмотреть все',
     '{count,plural,=1{# day} other{# days}} remaining' => '{count,plural,=1{# день} other{# дней}} осталось',
     '{displayName} is assigned to this task' => '{displayName} назначен для этой задачи',
     '{displayName} is responsible for this task' => '{displayName} ответственный за эту задачу',

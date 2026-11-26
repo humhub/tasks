@@ -169,7 +169,6 @@ return [
     'Title of your task list' => '',
     'Toggle task list' => '',
     'User : {user}' => '',
-    'view all' => '',
     '{count,plural,=0{No comments} =1{# comment} other{# comments}} - Show task details' => '',
     '{displayName} completed task "{contentTitle}".' => '',
     '{displayName} is task creator' => '',

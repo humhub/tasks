@@ -149,7 +149,6 @@ return [
     'Today' => 'Dnes',
     'Unsorted' => 'Netriedené',
     'You have insufficient permissions to perform that operation!' => 'Nemáte dostatočné povolenia na vykonanie tejto operácie!',
-    'view all' => 'zobraziť všetky',
     '{count,plural,=1{# day} other{# days}} remaining' => 'Zostáva {count,plural,=1{# deň} =2{# dni} =3{# dni} =4{# dni} other{# dní}}',
     '{displayName} is assigned to this task' => 'K tejto úlohe je priradený {displayName}',
     '{displayName} is responsible for this task' => 'Za túto úlohu je zodpovedný {displayName}',
