@@ -18,7 +18,6 @@ use DateTimeZone;
 use humhub\libs\DbDateValidator;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\content\models\Content;
-use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\space\models\Space;
 use humhub\modules\tasks\helpers\TaskUrl;
 use humhub\modules\tasks\models\scheduling\TaskReminder;
@@ -344,7 +343,6 @@ class TaskForm extends Model implements TabbedFormModel
         $this->reloadListId = $this->getListIdsToReload();
 
         if ($this->task->save()) {
-            RichText::postProcess($this->task->description, $this->task);
             // Required for attached files
             $this->task->fileManager->attach(Yii::$app->request->post('fileList'));
             // Save topics
