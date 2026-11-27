@@ -15,6 +15,7 @@ Changelog
 - Enh: Compatibility with the notification API of the core 1.20 (humhub/humhub#8576)
 - Fix: The task search page used the deprecated filter widgets of the core and failed to render on 1.20
 - Enh: Tabler icons, new namespaces of `Icon`, form widgets, `MenuLink` and stream classes, `--hh-accent-fg` as text colour
+- Fix: A mention in a new task sends the mention only, the description is processed while the task is saved
 
 1.10.4 (November 10, 2026)
 --------------------------

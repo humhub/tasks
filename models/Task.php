@@ -14,6 +14,7 @@ use humhub\modules\content\components\ActiveQueryContent;
 use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\content\components\ContentContainerPermissionManager;
+use humhub\modules\content\widgets\richtext\RichText;
 use humhub\modules\tasks\notifications\AbstractTaskNotification;
 use humhub\modules\tasks\notifications\AddResponsibleNotification;
 use humhub\modules\tasks\notifications\AssignedNotification;
@@ -454,6 +455,10 @@ class Task extends ContentActiveRecord
     public function afterSave($insert, $changedAttributes)
     {
         parent::afterSave($insert, $changedAttributes);
+
+        // Must run while saving, not after the form saved the task: a mention created later is
+        // notified on its own, on top of the "created" notification.
+        RichText::postProcess($this->description, $this, 'description');
 
         if ($this->scenario === self::SCENARIO_EDIT) {
             $oldTaskUsers = $this->taskUsers;
